@@ -30,13 +30,6 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-        'db2' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=ejiajie2external.mysql.rds.aliyuncs.com;dbname=ameituan',
-            'username' => 'sq_ejiajie',
-            'password' => 'dudu1020',
-            'charset' => 'utf8',
-        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

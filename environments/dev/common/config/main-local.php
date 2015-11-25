@@ -3,10 +3,16 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=pop',
             'username' => 'root',
-            'password' => '',
+            'password' => 'root1234',
             'charset' => 'utf8',
+            'tablePrefix' => 'pop_',
+            'enableSchemaCache' => true,
+            // Duration of schema cache.
+            'schemaCacheDuration' => 3600,
+            // Name of the cache component used to store schema information
+            'schemaCache' => 'cache',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
