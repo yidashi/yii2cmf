@@ -50,7 +50,7 @@ return [
     ],
     'modules' => [
         'admin' => [
-            'class' => 'mdm\admin\Module'
+            'class' => 'mdm\admin\Module',
         ],
 
         'datecontrol' => [

@@ -57,8 +57,36 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+        <div class="col-xs-2">
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav">
+                    <?php foreach (mdm\admin\components\MenuHelper::getAssignedMenu(\Yii::$app->user->id) as $key=>$group) : ?>
+                        <li>
+                            <?php if(!empty($group['items'])): ?>
+                                <a href="#collapse<?= $key ?>" data-toggle="collapse" aria-expanded="false"> <?= $group['label']?><span class="glyphicon glyphicon-menu-down pull-right"></span></a>
+                            <?php else: ?>
+                                <a href="<?= \yii\helpers\Url::toRoute($group['url']) ?>"> <?= $group['label']?></a>
+                            <?php endif; ?>
+                            <ul class="nav nav-second-level collapse" id="collapse<?= $key ?>">
+                                <?php if(!empty($group['items'])): ?>
+                                    <?php foreach ($group['items'] as $menu) : ?>
+                                        <li>
+                                            <a href="<?= \yii\helpers\Url::toRoute($menu['url']) ?>"> <?= $menu['label']?></a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-10">
+            <?= Alert::widget() ?>
         <?= $content ?>
+        </div>
     </div>
 </div>
 
