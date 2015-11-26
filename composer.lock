@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c73d4f1e55f2c56740a03fc8485a177f",
-    "content-hash": "ed1ee6fdaf3e6aee583f9f4d6a87ac3f",
+    "hash": "a4dc43c84e61dc94e3b5de597dbbc625",
+    "content-hash": "04c0da867d26bcdf6e00f6a7d4c175c0",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -223,7 +223,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/cebe/markdown/54a2c49de31cc44e864ebf0500a35ef21d0010b2.zip",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
                 "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
                 "shasum": ""
             },
@@ -283,7 +283,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/chrisboulton/php-resque/0549d6c88a4aed934655b7c03b6153349d6c3ad0.zip",
+                "url": "https://api.github.com/repos/chrisboulton/php-resque/zipball/0549d6c88a4aed934655b7c03b6153349d6c3ad0",
                 "reference": "0549d6c88a4aed934655b7c03b6153349d6c3ad0",
                 "shasum": ""
             },
@@ -326,7 +326,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/ezyang/htmlpurifier/6f389f0f25b90d0b495308efcfa073981177f0fd.zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6f389f0f25b90d0b495308efcfa073981177f0fd",
                 "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
                 "shasum": ""
             },
@@ -370,7 +370,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/mpdf/6ab0ae3a82673e514f168c8e6da02289e6d95f2c.zip",
+                "url": "https://api.github.com/repos/kartik-v/mpdf/zipball/6ab0ae3a82673e514f168c8e6da02289e6d95f2c",
                 "reference": "6ab0ae3a82673e514f168c8e6da02289e6d95f2c",
                 "shasum": ""
             },
@@ -413,7 +413,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-detail-view/6ae616b4c78c34150f6dafcd31989d98bbfea6c7.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/6ae616b4c78c34150f6dafcd31989d98bbfea6c7",
                 "reference": "6ae616b4c78c34150f6dafcd31989d98bbfea6c7",
                 "shasum": ""
             },
@@ -461,7 +461,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-grid/913fde8fbe41bf998d53a88d0443e25e1e696194.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/913fde8fbe41bf998d53a88d0443e25e1e696194",
                 "reference": "913fde8fbe41bf998d53a88d0443e25e1e696194",
                 "shasum": ""
             },
@@ -505,7 +505,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-helpers/84b9e77aad937d2662934e2664d0190a7c332dd3.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/84b9e77aad937d2662934e2664d0190a7c332dd3",
                 "reference": "84b9e77aad937d2662934e2664d0190a7c332dd3",
                 "shasum": ""
             },
@@ -551,7 +551,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-krajee-base/c0adff9d9762f4fd3bf0e7cd0000fcab0bf00f19.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/c0adff9d9762f4fd3bf0e7cd0000fcab0bf00f19",
                 "reference": "c0adff9d9762f4fd3bf0e7cd0000fcab0bf00f19",
                 "shasum": ""
             },
@@ -597,7 +597,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-mpdf/4599a1d95d7e0afb3279322e302717b7e4f52dd3.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/4599a1d95d7e0afb3279322e302717b7e4f52dd3",
                 "reference": "4599a1d95d7e0afb3279322e302717b7e4f52dd3",
                 "shasum": ""
             },
@@ -644,7 +644,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-widget-datepicker/368b181ef658c05707fe41dd16eee4d9ffd9da38.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/368b181ef658c05707fe41dd16eee4d9ffd9da38",
                 "reference": "368b181ef658c05707fe41dd16eee4d9ffd9da38",
                 "shasum": ""
             },
@@ -693,7 +693,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/kartik-v/yii2-widget-datetimepicker/2ad71f7a8f4fdd03b999c4f50257f42b2c1b74fe.zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datetimepicker/zipball/2ad71f7a8f4fdd03b999c4f50257f42b2c1b74fe",
                 "reference": "2ad71f7a8f4fdd03b999c4f50257f42b2c1b74fe",
                 "shasum": ""
             },
@@ -733,6 +733,55 @@
             "time": "2015-11-04 18:46:05"
         },
         {
+            "name": "kartik-v/yii2-widget-sidenav",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-sidenav.git",
+                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-sidenav/zipball/02ee4f142d7dfbb316f878e538cc7b946f4502d2",
+                "reference": "02ee4f142d7dfbb316f878e538cc7b946f4502d2",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\sidenav\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced side navigation menu styled for bootstrap (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-sidenav",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "jquery",
+                "menu",
+                "navigation",
+                "plugin",
+                "sidenav",
+                "widget",
+                "yii2"
+            ],
+            "time": "2014-11-09 08:07:23"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.1",
             "source": {
@@ -742,7 +791,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/0697e6aa65c83edf97bb0f23d8763f94e3f11421.zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
                 "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
                 "shasum": ""
             },
@@ -795,7 +844,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-framework/f42b2eb80f61992438661b01d0d74c6738e2ff38.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "shasum": ""
             },
@@ -883,7 +932,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-bootstrap/1464f93834b1d5edb1f5625f7ffd6c3723fa4923.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
                 "reference": "1464f93834b1d5edb1f5625f7ffd6c3723fa4923",
                 "shasum": ""
             },
@@ -933,7 +982,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-composer/ca8d23707ae47d20b0454e4b135c156f6da6d7be.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/ca8d23707ae47d20b0454e4b135c156f6da6d7be",
                 "reference": "ca8d23707ae47d20b0454e4b135c156f6da6d7be",
                 "shasum": ""
             },
@@ -980,7 +1029,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-swiftmailer/4ec435a89e30b203cea99770910fb5499cb3627a.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/4ec435a89e30b203cea99770910fb5499cb3627a",
                 "reference": "4ec435a89e30b203cea99770910fb5499cb3627a",
                 "shasum": ""
             },
@@ -1059,7 +1108,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/fzaninotto/Faker/d0190b156bcca848d401fb80f31f504f37141c8d.zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/d0190b156bcca848d401fb80f31f504f37141c8d",
                 "reference": "d0190b156bcca848d401fb80f31f504f37141c8d",
                 "shasum": ""
             },
@@ -1111,7 +1160,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/phpspec/php-diff/30e103d19519fe678ae64a60d77884ef3d71b28a.zip",
+                "url": "https://api.github.com/repos/phpspec/php-diff/zipball/30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "reference": "30e103d19519fe678ae64a60d77884ef3d71b28a",
                 "shasum": ""
             },
@@ -1145,7 +1194,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-codeception/de5007e7a99359597abbfe1c88dca3ce620061c5.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/de5007e7a99359597abbfe1c88dca3ce620061c5",
                 "reference": "de5007e7a99359597abbfe1c88dca3ce620061c5",
                 "shasum": ""
             },
@@ -1190,7 +1239,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-debug/1b302e67521d46feb2413d9d96ca94ed82b39b0e.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/1b302e67521d46feb2413d9d96ca94ed82b39b0e",
                 "reference": "1b302e67521d46feb2413d9d96ca94ed82b39b0e",
                 "shasum": ""
             },
@@ -1237,7 +1286,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-faker/b88ca69ee226a3610b2c26c026c3203d7ac50f6c.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
                 "reference": "b88ca69ee226a3610b2c26c026c3203d7ac50f6c",
                 "shasum": ""
             },
@@ -1284,7 +1333,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "http://packagist.phpcomposer.com/files/yiisoft/yii2-gii/e5a023e8779bd774194842ec1b8fb4917cf04007.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/e5a023e8779bd774194842ec1b8fb4917cf04007",
                 "reference": "e5a023e8779bd774194842ec1b8fb4917cf04007",
                 "shasum": ""
             },
