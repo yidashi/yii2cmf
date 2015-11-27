@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => '采集示例站',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -28,6 +29,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'i18n'=>[
+            'translations' => [
+                'app'=>[
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@frontend/messages',
+                    'forceTranslation' => true
+                ]
+            ]
+        ]
     ],
     'params' => $params,
 ];

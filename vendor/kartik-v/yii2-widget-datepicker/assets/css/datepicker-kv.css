@@ -1,0 +1,42 @@
+/*!
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
+ * @package yii2-widgets
+ * @subpackage yii2-widget-datepicker
+ * @version 1.3.3
+ *
+ * Custom styling for Datepicker
+ * Built for Yii Framework 2.0
+ * Author: Kartik Visweswaran
+ * Year: 2015
+ * For more Yii related demos visit http://demos.krajee.com
+ */
+.datepicker {
+	z-index: 1151 !important;
+}
+
+.input-group.date.disabled  .input-group-addon .glyphicon {
+    cursor: not-allowed;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: .65;
+}
+
+.input-group.date .input-group-addon  {
+    cursor: default;
+}
+
+.input-group.date .kv-date-remove, .input-group.date .kv-date-calendar,
+.input-group.date .kv-date-remove, .input-group.date .kv-date-calendar,
+.input-group.input-daterange .kv-date-remove, .input-group.input-daterange .kv-date-calendar,
+.input-group.input-daterange .kv-date-remove, .input-group.input-daterange .kv-date-calendar {
+    cursor: pointer;
+}
+
+.input-group.input-daterange .input-group-addon {
+    border-left: 1px solid #ccc;
+}
+
+.input-group.input-daterange .input-group-addon:last-child {
+    border-right: 1px solid #ccc;
+}

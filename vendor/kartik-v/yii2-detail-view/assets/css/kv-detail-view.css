@@ -1,0 +1,130 @@
+/*!
+ * @package   yii2-detail-view
+ * @author    Kartik Visweswaran <kartikv2@gmail.com>
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
+ * @version   1.7.3
+ *
+ * Styles for yii2-detail-view extension 
+ * 
+ * Author: Kartik Visweswaran
+ * Copyright: 2014 - 2015, Kartik Visweswaran, Krajee.com
+ * For more JQuery plugins visit http://plugins.krajee.com
+ * For more Yii related demos visit http://demos.krajee.com
+ */
+.kv-form-attribute .help-block {
+    margin-bottom: -15px;
+}
+
+.kv-edit-mode .kv-edit-hidden,
+.kv-view-mode .kv-view-hidden {
+    display: none;
+}
+
+.kv-edit-mode .kv-view-hidden,
+.kv-view-mode .kv-edit-hidden {
+    display: table-row;
+}
+
+.kv-detail-loading {
+    opacity: 0.3;
+    background: #ffffff url('../img/loading.gif') top 15px right 15px no-repeat;
+}
+
+.kv-detail-loading  * {
+    background: transparent !important;
+}
+
+.kv-detail-loading td {
+    border-color: #efefef !important;
+}
+.kv-edit-mode .kv-detail-view {
+    overflow-y: hidden;
+}
+
+.kv-form-attribute .row {
+    margin-bottom: -5px;
+}
+
+.kv-edit-mode table {
+    overflow:hidden;
+}
+
+.kv-child-table {
+    width: 100%;
+}
+
+.kv-child-table-row, .kv-child-table-row > td {
+    vertical-align: middle;
+    padding: 0!important;
+    margin: 0!important;
+}
+
+.kv-child-table-cell {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.kv-child-table td, .kv-child-table th {
+    margin: 0;
+    padding: 8px;
+    background: transparent;   
+}
+
+.kv-child-table-row th {
+    border-left: 1px #ddd solid;
+    border-right: 1px #ddd solid;
+}
+
+.kv-action-btn {
+    margin:0 2px;
+    padding:0 5px;
+    background:none;
+    border:none;
+    font-size: 16px;
+}
+
+.kv-action-btn:focus {
+    outline: 0;
+}
+
+.panel-primary .kv-action-btn {
+    color:#d9edf7;
+}
+
+.panel-primary .kv-action-btn:hover {
+    color:#c4e3f3;
+}
+
+.panel-info .kv-action-btn {
+    color:#31708f;
+}
+
+.panel-info .kv-action-btn:hover {
+    color:#245269;
+}
+
+.panel-warning .kv-action-btn {
+    color:#8a6d3b;
+}
+
+.panel-warning .kv-action-btn:hover {
+    color:#66512c;
+}
+
+.panel-danger .kv-action-btn {
+    color:#a94442;
+}
+
+.panel-danger .kv-action-btn:hover {
+    color:#843534;
+}
+
+.panel-success .kv-action-btn {
+    color:#3c763d;
+}
+
+.panel-success .kv-action-btn:hover {
+    color:#2b542c;
+}

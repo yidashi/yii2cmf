@@ -1,0 +1,21 @@
+{
+    "name": "kartik-v/mpdf",
+    "type": "library",
+    "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support. This is a fork of the official mPDF library.",
+    "keywords": ["php", "pdf", "utf-8"],
+    "homepage": "http://www.mpdf1.com/mpdf/index.php",
+    "license": ["GPL-1.0+"],
+    "authors": [
+        {
+            "name": "Ian N Back "
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=4.3.10",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "classmap": ["mpdf.php", "classes"]
+    }
+}

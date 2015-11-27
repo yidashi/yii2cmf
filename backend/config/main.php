@@ -76,6 +76,7 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
+            'gii/*'
         ]
     ],
     'params' => $params,
