@@ -8,6 +8,6 @@ $this->params['breadcrumbs'][] = $title;
 ?>
 <div class="site-index">
     <h1><?= $title ?></h1>
-    <div><?= $created_at ?></div>
+    <div><?= date('Y-m-d H:i', $created_at) ?></div>
     <?= $content ?>
 </div>

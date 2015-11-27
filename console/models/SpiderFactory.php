@@ -11,7 +11,7 @@ use yii\web\NotFoundHttpException;
 class SpiderFactory {
     public static function create($name)
     {
-        $className = '\console\models\spider\\'.ucfirst(strtolower($name)).'Spider';
+        $className = '\console\models\spider\\'.ucfirst(strtolower($name));
         if(!class_exists($className)){
             throw new NotFoundHttpException($className.' Class not found');
         }

@@ -11,6 +11,7 @@ namespace frontend\controllers;
 use common\models\Article;
 use yii\data\Pagination;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller{
     public function actionList()
@@ -30,6 +31,9 @@ class ArticleController extends Controller{
     public function actionView($id)
     {
         $content = Article::find()->where(['id'=>$id])->asArray()->one();
+        if(empty($content)){
+            throw new NotFoundHttpException('not found');
+        }
         return $this->render('view', $content);
     }
 } 

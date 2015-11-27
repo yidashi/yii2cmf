@@ -46,6 +46,12 @@ return [
                     'forceTranslation' => true
                 ]
             ]
+        ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ]
         ]
     ],
     'modules' => [
