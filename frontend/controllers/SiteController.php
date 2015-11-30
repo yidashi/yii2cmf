@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Article;
+use frontend\components\ThemeBehavior;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;

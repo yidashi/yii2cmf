@@ -5,7 +5,6 @@ $params = array_merge(
     require(__DIR__ . '/params.php'),
     require(__DIR__ . '/params-local.php')
 );
-
 return [
     'id' => 'app-frontend',
     'name' => '采集示例站',
@@ -43,7 +42,20 @@ return [
             'showScriptName' => false,
             'rules' => [
             ]
-        ]
+        ],
+        'view' => [
+            /*'theme' => [
+                'basePath' => '@app/themes/basic',
+                'baseUrl' => '@web/themes/basic',
+                'pathMap' => [
+                    '@app/views' => [
+                        '@app/themes/special',
+                        '@app/themes/basic',
+                    ]
+                ],
+            ],*/
+            'as ThemeBehavior' => \frontend\components\ThemeBehavior::className()
+        ],
     ],
     'params' => $params,
 ];
