@@ -14,8 +14,44 @@ use yii\web\Controller;
 class TestController extends Controller{
     public function actionIndex()
     {
-        $result = (new Query())->from('{{%order}}')->where(['partner_oid'=>'2614311','partner_id'=>1])->select('partner_oid')->createCommand()->queryScalar();
-        print_r($result);
+        $arr = [35,20,55,79,63,15,19,88];
+        print_r($this->bubbleSort($arr));
         die;
+    }
+
+    public function quickSort($arr)
+    {
+        $len = count($arr);
+        if($len<=0){
+            return $arr;
+        }
+        $base = $arr[0];
+        $left = [];
+        $right = [];
+        for($i=1;$i<$len;$i++){
+            if($arr[$i]>$base){
+                array_push($right,$arr[$i]);
+            }elseif($arr[$i]<$base){
+                array_push($left,$arr[$i]);
+            }
+        }
+        return array_merge($this->quickSort($left),[$base],$this->quickSort($right));
+    }
+    public function bubbleSort($arr)
+    {
+        $len = count($arr);
+        if($len<=0){
+            return $arr;
+        }
+        for($i=1;$i<$len;$i++){
+            for($j=0;$j<$len-$i;$j++){
+                if($arr[$j]>$arr[$j+1]){
+                    $tmp = $arr[$j];
+                    $arr[$j] = $arr[$j+1];
+                    $arr[$j+1] = $tmp;
+                }
+            }
+        }
+        return $arr;
     }
 } 

@@ -44,7 +44,7 @@ return [
             ]
         ],
         'view' => [
-            /*'theme' => [
+            'theme' => [
                 'basePath' => '@app/themes/basic',
                 'baseUrl' => '@web/themes/basic',
                 'pathMap' => [
@@ -53,8 +53,8 @@ return [
                         '@app/themes/basic',
                     ]
                 ],
-            ],*/
-            'as ThemeBehavior' => \frontend\components\ThemeBehavior::className()
+            ],
+//            'as ThemeBehavior' => \frontend\components\ThemeBehavior::className()
         ],
     ],
     'params' => $params,
