@@ -37,10 +37,10 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => '首页', 'url' => ['/site/index']],
     ];
-    foreach((new \frontend\models\Nav)->lists() as $nav){
-        $menuItems[] = ['label' => $nav['title'], 'url' => [$nav['route']]];
+    foreach(\common\models\Category::find()->all() as $nav){
+        $menuItems[] = ['label' => $nav['title'], 'url' => ['article/index','cid'=>$nav['id']]];
     }
-    if (Yii::$app->user->isGuest) {
+    /*if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
         $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
@@ -49,9 +49,9 @@ AppAsset::register($this);
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
-    }
+    }*/
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
     NavBar::end();

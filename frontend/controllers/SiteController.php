@@ -74,7 +74,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news = Article::find()->orderBy('created_at desc')->limit(10)->all();
+        $news = Article::find()->orderBy('created_at desc')->limit(40)->all();
         return $this->render('index', ['news'=>$news]);
     }
 

@@ -2,12 +2,12 @@
 namespace console\models\spider;
 
 use common\models\Article;
-use common\models\ArticleTag;
+use common\models\Category;
 use common\models\Gather;
 use common\models\Spider;
-use common\models\Tag;
 use yii\base\Exception;
 use Goutte\Client;
+use yii\db\Query;
 
 Abstract class SpiderAbstract{
     private $_url;
@@ -66,7 +66,7 @@ Abstract class SpiderAbstract{
      * @param $url
      * @return bool
      */
-    protected function isGathered($url){
+    public function isGathered($url){
         $gather = Gather::find()->where(['url'=>md5(trim($url)),'res'=>1])->one();
         return $gather?1:0;
     }
@@ -78,8 +78,8 @@ Abstract class SpiderAbstract{
      * @param $className
      * @param string $publishTime
      */
-    public function enqueue($category,$url,$className,$publishTime=''){
-        \Resque::enqueue('article_spider', 'console\models\ArticleJob',['category'=>$category,'url'=>$url,'className'=>$className,'publishTime'=>$publishTime]);
+    public function enqueue($category,$url,$cover,$className,$publishTime=''){
+        \Resque::enqueue('article_spider', 'console\models\ArticleJob',['category'=>$category,'url'=>$url,'className'=>$className,'publishTime'=>$publishTime, 'cover'=>$cover]);
     }
 
     /**
@@ -95,9 +95,9 @@ Abstract class SpiderAbstract{
             $crawler->filter($this->config['page_dom'])->each(function ($node) use($pageUrl,$category) {
                 if($node){
                     try{
-                        $this->_url[] = $this->config['domain'].trim($node->attr('href'));
+                        $this->_url[] = strpos($node->attr('href'), '/') === 0 ? $this->config['domain']. '/' . trim($node->attr('href')) : $pageUrl . trim($node->attr('href'));
                     }catch(\Exception $e){
-                        $this->addLog($pageUrl,$category,false,$e->getMessage());
+                        $this->addLog($pageUrl,$category,0,$e->getMessage());
                     }
                 }
             });
@@ -120,12 +120,13 @@ Abstract class SpiderAbstract{
                 try{
                     if($node){
                         $u = strpos(trim($node->attr('href')), 'http') === false ? $this->config['domain'] . trim($node->attr('href')) : trim($node->attr('href'));
+                        $cover = strpos($node->filter('img')->attr('src'), 'http') === false ? $this->config['domain'] . $node->filter('img')->attr('src') : $node->filter('img')->attr('src');
                         if(!$this->isGathered($u)){
-                            $this->enqueue($category,$u,$this->config['name']);
+                            $this->enqueue($category,$u,$cover, $this->config['name']);
                         }
                     }
                 }catch(\Exception $e){
-                    $this->addLog($url,$category,false, $e->getMessage());
+                    $this->addLog($url,$category,0, $e->getMessage());
                 }
             }
         });
@@ -144,14 +145,20 @@ Abstract class SpiderAbstract{
             $title = $crawler->filter($this->config['title_dom']);
             $time = $crawler->filter($this->config['time_dom']);
             $con = $crawler->filter($this->config['content_dom']);
-            if($title && $time){
+            if($title && $con){
                 $title = trim($title->text());
-                $content = $con->html();
+//                只要需要的内容
+                preg_match('#([\s\S]*?)<div class=\"jiathis_style_32x32\"#', $con->html(), $match);
+                $content = $match[1];
+//                图片全路径
+                $content = preg_replace('#<img([\s\S]+?)src=\"(.*?)\"#', '<img$1src="' . $this->config['domain'] . '$2"', $content);
+//                去除链接
+                $content = preg_replace('#<a([\s\S]+?)>(.*)?</a>#', '$2', $content);
                 $time = strtotime($time->text()) > 0 ? strtotime($time->text()) : time();
                 return json_encode(['title'=>$title,'content'=>$content,'time'=>$time]);
             }
         }catch(\Exception $e){
-            $this->addLog($url,$category,false,$e->getMessage());
+            $this->addLog($url,$category,0,$e->getMessage());
         }
         return '';
     }
@@ -163,33 +170,25 @@ Abstract class SpiderAbstract{
      * @param $tag
      * @return bool
      */
-    public static function insert($title,$content,$publish_at,$tag=''){
+    public static function insert($title,$content,$publish_at,$category='',$cover=''){
         //插入标签（搜索的分类）
+
+        $category_id = (new Query())->from('{{%category}}')->where(['title'=>$category])->select('id')->scalar();
+        if(!$category_id){
+            $cateModel = new Category();
+            $cateModel->title = $category;
+            $category_id = (int) $cateModel->save();
+        }
         $article = new Article();
         $article->title = $title;
         $article->content = $content;
         $article->author = 'yidashi';
         $article->status = 1;
+        $article->category = $category;
+        $article->category_id = $category_id;
+        $article->cover = $cover;
         $article->created_at = $publish_at;
-        $article->updated_at = $publish_at;
         $res = $article->save(false);
-        /*if($tag){
-            try{
-                $tagModel = Tag::find()->where(['name'=>$tag])->one();
-                if(!$tagModel){
-                    $tagModel = new Tag();
-                    $tagModel->name = $tag;
-                    $tagModel->article_count = 0;
-                    $tagModel->save(false);
-                }
-                $articleTag = new ArticleTag();
-                $articleTag->article_id = $article->id;
-                $articleTag->tag_id = $tagModel->id;
-                $articleTag->save(false);
-            }catch(\Exception $e){
-                echo $e->getMessage().PHP_EOL;
-            }
-        }*/
         return $res?1:0;
     }
 

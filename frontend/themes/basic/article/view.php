@@ -2,12 +2,14 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '内容';
-$this->params['breadcrumbs'][] = ['label' => '列表','url' => ['article/list']];
+$this->title = $title;
+$this->params['breadcrumbs'][] = ['label' => $category,'url' => ['article/' . $category_id]];
 $this->params['breadcrumbs'][] = $title;
 ?>
 <div class="site-index">
-    <h1><?= $title ?></h1>
-    <div><?= date('Y-m-d H:i', $created_at) ?></div>
-    <?= $content ?>
+    <div class="view-title ">
+        <h1><?= $title ?></h1>
+        <div class="clearfix"><span class="pull-right"><?= date('Y-m-d H:i', $created_at) ?></span></div>
+    </div>
+    <div class="view-content"><?= $content ?></div>
 </div>

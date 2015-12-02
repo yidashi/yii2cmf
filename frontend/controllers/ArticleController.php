@@ -9,23 +9,27 @@ namespace frontend\controllers;
 
 
 use common\models\Article;
+use common\models\Category;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller{
-    public function actionList()
+    public function actionIndex($cid=0)
     {
-        $query = Article::find();
+        $category = Category::find()->where(['id'=>$cid])->select('title')->scalar();
+        $query = Article::find()->andFilterWhere(['category_id'=>$cid]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)
+            ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->all();
 
-        return $this->render('list', [
+        return $this->render('index', [
             'models' => $models,
             'pages' => $pages,
+            'category' => $category
         ]);
     }
     public function actionView($id)

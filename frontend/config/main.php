@@ -7,7 +7,7 @@ $params = array_merge(
 );
 return [
     'id' => 'app-frontend',
-    'name' => '采集示例站',
+    'name' => '饮水思源',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -41,6 +41,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'article/<cid:\d+>' => 'article/index'
             ]
         ],
         'view' => [
