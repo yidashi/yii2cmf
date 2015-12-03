@@ -40,12 +40,12 @@ AppAsset::register($this);
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['article/index','cid'=>$nav['id']]];
     }
-    $menuItems[] = ['label' => '投稿', 'url' => ['article/create']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
     $rightMenuItems = [];
+    $rightMenuItems[] = ['label' => '投稿', 'url' => ['article/create']];
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];

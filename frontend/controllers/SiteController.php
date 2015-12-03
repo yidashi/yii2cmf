@@ -74,7 +74,12 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news = Article::find()->where(['status'=>Article::STATUS_ACTIVE])->orderBy('created_at desc')->limit(40)->all();
+        $news = Article::find()
+            ->where(['status'=>Article::STATUS_ACTIVE])
+            ->andWhere(['<>', 'category_id', 5])
+            ->orderBy('created_at desc')
+            ->limit(40)
+            ->all();
         return $this->render('index', ['news'=>$news]);
     }
 

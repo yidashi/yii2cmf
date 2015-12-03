@@ -31,8 +31,6 @@ class Article extends \common\models\Article
             [['content'], 'string'],
             [['status', 'category_id'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
-//            ['category', 'default', Category::find()->where(['id'=>$this->category_id])->select('title')->scalar()],
-            // 若 "from" 和 "to" 为空，则分别给他们分配自今天起，3 天后和 6 天后的日期。
             [['category'], 'default', 'value' => function ($model, $attribute) {
                 return Category::find()->where(['id'=>$model->category_id])->select('title')->scalar();
             }],
