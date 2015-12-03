@@ -19,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Article extends \yii\db\ActiveRecord
 {
+    CONST STATUS_ACTIVE = 1;
+    CONST STATUS_INIT = 0;
     /**
      * @inheritdoc
      */
@@ -55,6 +57,8 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'status' => Yii::t('app', 'Status'),
             'cover' => Yii::t('app', 'Cover'),
+            'category_id'=>'分类',
+            'category'=>'分类'
         ];
     }
     /**

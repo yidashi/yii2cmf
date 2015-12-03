@@ -3,5 +3,5 @@
 ```
 php yii migrate
 QUEUE=* php yii queue/run &
-php yii article/run neihan
+php yii article/run tiejiong
 ```

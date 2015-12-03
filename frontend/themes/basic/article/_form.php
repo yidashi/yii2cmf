@@ -1,0 +1,33 @@
+<?php
+/**
+ * author: yidashi
+ * Date: 2015/12/3
+ * Time: 10:59
+ */
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model common\models\Article */
+/* @var $form yii\widgets\ActiveForm */
+?>
+
+<div class="config-form">
+    <?php $form = ActiveForm::begin(); ?>
+
+
+    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
+
+    <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor',[]); ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('投稿', ['class' => 'btn btn-success']) ?>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+</div>

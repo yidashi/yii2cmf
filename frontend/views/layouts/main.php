@@ -40,23 +40,28 @@ AppAsset::register($this);
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['article/index','cid'=>$nav['id']]];
     }
-    /*if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
-        ];
-    }*/
+    $menuItems[] = ['label' => '投稿', 'url' => ['article/create']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
+    $rightMenuItems = [];
+    if (Yii::$app->user->isGuest) {
+        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
+        $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+    } else {
+        $rightMenuItems[] = [
+            'label' => '退出 (' . Yii::$app->user->identity->username . ')',
+            'url' => ['/site/logout'],
+            'linkOptions' => ['data-method' => 'post']
+        ];
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $rightMenuItems,
+    ]);
     NavBar::end();
     ?>
-
     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],

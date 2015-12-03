@@ -1864,5 +1864,40 @@
             "faker",
             "yii2"
         ]
+    },
+    {
+        "name": "kucha/ueditor",
+        "version": "1.2",
+        "version_normalized": "1.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/BigKuCha/yii2-ueditor-widget.git",
+            "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "http://packagist.phpcomposer.com/files/BigKuCha/yii2-ueditor-widget/b41439ee0c69efc800a53087c20d8bfcea0f9507.zip",
+            "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507",
+            "shasum": ""
+        },
+        "time": "2015-02-06 02:01:30",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "kucha\\ueditor\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "null"
+        ],
+        "authors": [
+            {
+                "name": "BigKuCha",
+                "email": "nevermore1989@vip.qq.com"
+            }
+        ],
+        "description": "desc"
     }
 ]

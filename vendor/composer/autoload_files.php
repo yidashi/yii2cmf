@@ -6,9 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'a8cfe5b9bcdcb70aedd57bac556e3cf1' => $vendorDir . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
-    'b12accd861ed682ce314297046b7e8de' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
-    '025bea19df83471e989e01acafc2c4ae' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
-    '01b872096dad055849387e42d41a176d' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
-    'fa32ece6c8db8a379982ca0b929df511' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
+    '2cffec82183ee1cea088009cef9a6fc3' => $vendorDir . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+    'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
+    'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
+    '2c102faa651ef8ea5874edb585946bce' => $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
+    '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
 );
