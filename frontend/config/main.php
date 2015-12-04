@@ -41,7 +41,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'article/<cid:\d+>' => 'article/index'
+//                'article/<cid:\d+>' => 'article/index'
+                [
+                    'pattern'=>'lizhi',
+                    'route'=>'article/index',
+                    'defaults'=>['cid'=>1]
+                ]
             ]
         ],
         'view' => [
@@ -57,6 +62,17 @@ return [
             ],
 //            'as ThemeBehavior' => \frontend\components\ThemeBehavior::className()
         ],
+        'authClientCollection' => [
+            'class' => 'yii\authclient\Collection',
+            'clients' => [
+                'qq' => [
+                    'class' => 'yii\authclient\clients\QqOAuth',
+                    'clientId' => '101054140',
+                    'clientSecret' => '24c1a55bf6f1637297b09f0501b59da1',
+              ],
+                // etc.
+            ],
+        ]
     ],
     'params' => $params,
 ];

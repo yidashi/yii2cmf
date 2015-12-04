@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0b163fa7d6692c49518fc7bdf039e96e",
-    "content-hash": "11fe885c9a645ec6c4abcf597de804a2",
+    "hash": "c593e155ca2ef699687062f5619c6016",
+    "content-hash": "55ff2e572aab67c9b11392d34ad1e3f6",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1033,6 +1033,39 @@
             ],
             "description": "desc",
             "time": "2015-02-06 02:01:30"
+        },
+        {
+            "name": "npm-asset/bootstrap-markdown",
+            "version": "2.9.0",
+            "dist": {
+                "type": "tar",
+                "url": "http://registry.npmjs.org/bootstrap-markdown/-/bootstrap-markdown-2.9.0.tgz",
+                "reference": null,
+                "shasum": "15151c1a18498c9a44c0fc86d8b619abc37e868d"
+            },
+            "type": "npm-asset-library",
+            "extra": {
+                "npm-asset-bugs": {
+                    "url": "https://github.com/toopay/bootstrap-markdown/issues"
+                },
+                "npm-asset-directories": [],
+                "npm-asset-repository": {
+                    "type": "git",
+                    "url": "git+https://github.com/toopay/bootstrap-markdown.git"
+                },
+                "npm-asset-scripts": []
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A bootstrap plugin for markdown editing",
+            "homepage": "https://github.com/toopay/bootstrap-markdown",
+            "keywords": [
+                "bootstrap",
+                "editor",
+                "markdown",
+                "twitter"
+            ]
         },
         {
             "name": "psr/http-message",

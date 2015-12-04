@@ -27,7 +27,9 @@
         "kartik-v/yii2-widget-sidenav": "*",
         "fabpot/goutte": "^3.1",
         "kucha/ueditor": "*",
-        "yiisoft/yii2-authclient": "^2.0"
+        "yiisoft/yii2-authclient": "^2.0",
+        "npm-asset/bootstrap-markdown": "~2.7",
+        "npm-asset/markdown": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

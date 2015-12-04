@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this yii\web\View */
 
 $this->title = $title;
@@ -12,4 +11,12 @@ $this->params['breadcrumbs'][] = $title;
         <div class="clearfix"><span class="pull-right"><?= date('Y-m-d H:i', $created_at) ?></span></div>
     </div>
     <div class="view-content"><?= $content ?></div>
+    <h4>评论</h4>
+    <div class="col-4">
+        <?=\common\widgets\markdown\Markdown::widget([
+            'name'=>'content',
+            'value'=>'',
+            'options'=>['style'=>'height:200px;']
+        ])?>
+    </div>
 </div>

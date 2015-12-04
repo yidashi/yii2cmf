@@ -138,4 +138,13 @@ return array (
       '@yii/authclient' => $vendorDir . '/yiisoft/yii2-authclient',
     ),
   ),
+  'ijackua/yii2-lepture-markdown-editor-widget' => 
+  array (
+    'name' => 'ijackua/yii2-lepture-markdown-editor-widget',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@ijackua/lepture' => $vendorDir . '/ijackua/yii2-lepture-markdown-editor-widget',
+    ),
+  ),
 );

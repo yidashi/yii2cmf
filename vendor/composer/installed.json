@@ -1949,5 +1949,61 @@
             "oauth",
             "yii2"
         ]
+    },
+    {
+        "name": "npm-asset/bootstrap-markdown",
+        "version": "2.9.0",
+        "version_normalized": "2.9.0.0",
+        "dist": {
+            "type": "tar",
+            "url": "http://registry.npmjs.org/bootstrap-markdown/-/bootstrap-markdown-2.9.0.tgz",
+            "reference": null,
+            "shasum": "15151c1a18498c9a44c0fc86d8b619abc37e868d"
+        },
+        "type": "npm-asset-library",
+        "extra": {
+            "npm-asset-bugs": {
+                "url": "https://github.com/toopay/bootstrap-markdown/issues"
+            },
+            "npm-asset-directories": [],
+            "npm-asset-repository": {
+                "type": "git",
+                "url": "git+https://github.com/toopay/bootstrap-markdown.git"
+            },
+            "npm-asset-scripts": []
+        },
+        "installation-source": "dist",
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "A bootstrap plugin for markdown editing",
+        "homepage": "https://github.com/toopay/bootstrap-markdown",
+        "keywords": [
+            "bootstrap",
+            "editor",
+            "markdown",
+            "twitter"
+        ]
+    },
+    {
+        "name": "npm-asset/abbrev",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "git+ssh://git@github.com/isaacs/abbrev-js.git",
+            "reference": "a19cb746c0a21cfd00dcac29f4b98c62b3d2956d"
+        },
+        "type": "npm-asset-library",
+        "extra": {
+            "npm-asset-main": "./lib/abbrev.js",
+            "npm-asset-scripts": {
+                "test": "node lib/abbrev.js"
+            }
+        },
+        "installation-source": "source",
+        "authors": [
+            "Isaac Z. Schlueter <i@izs.me>"
+        ]
     }
 ]
