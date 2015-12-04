@@ -147,13 +147,10 @@ Abstract class SpiderAbstract{
             $con = $crawler->filter($this->config['content_dom']);
             if($title && $con){
                 $title = trim($title->text());
-//                只要需要的内容
-                preg_match('#([\s\S]*?)<div class=\"jiathis_style_32x32\"#', $con->html(), $match);
-                $content = $match[1];
-//                图片全路径
-                $content = preg_replace('#<img([\s\S]+?)src=\"(.*?)\"#', '<img$1src="' . $this->config['domain'] . '$2"', $content);
-//                去除链接
-                $content = preg_replace('#<a([\s\S]+?)>(.*)?</a>#', '$2', $content);
+                $content = $con->html();
+                if(method_exists($this,'filterContent')){
+                    $content = $this->filterContent($content);
+                }
                 $time = strtotime($time->text()) > 0 ? strtotime($time->text()) : time();
                 return json_encode(['title'=>$title,'content'=>$content,'time'=>$time]);
             }
@@ -162,6 +159,7 @@ Abstract class SpiderAbstract{
         }
         return '';
     }
+
     /**
      * 将文章插入数据库
      * @param $title

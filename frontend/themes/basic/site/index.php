@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->name;
+$this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261166107']);
 ?>
 <div class="site-index">
     <h2>今日最新</h2>

@@ -26,7 +26,8 @@
         "chrisboulton/php-resque": "*",
         "kartik-v/yii2-widget-sidenav": "*",
         "fabpot/goutte": "^3.1",
-        "kucha/ueditor": "*"
+        "kucha/ueditor": "*",
+        "yiisoft/yii2-authclient": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

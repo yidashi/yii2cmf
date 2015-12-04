@@ -76,7 +76,7 @@ class SiteController extends Controller
     {
         $news = Article::find()
             ->where(['status'=>Article::STATUS_ACTIVE])
-            ->andWhere(['<>', 'category_id', 5])
+            ->andWhere(['<>', 'category', '两性'])
             ->orderBy('created_at desc')
             ->limit(40)
             ->all();
