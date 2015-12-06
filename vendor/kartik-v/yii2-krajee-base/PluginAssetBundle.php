@@ -4,7 +4,7 @@
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.7.7
+ * @version   1.7.9
  */
 
 namespace kartik\base;
@@ -26,4 +26,3 @@ class PluginAssetBundle extends AssetBundle
         'yii\bootstrap\BootstrapPluginAsset'
     ];
 }
-    

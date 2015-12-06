@@ -4,7 +4,7 @@
  * @package   yii2-grid
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   3.0.7
+ * @version   3.0.8
  */
 
 namespace kartik\grid;
@@ -22,10 +22,10 @@ use yii\widgets\Pjax;
 use kartik\base\Config;
 
 /**
- * Enhances the Yii GridView widget with various options to include Bootstrap
- * specific styling enhancements. Also allows to simply disable Bootstrap styling
- * by setting `bootstrap` to false. Includes an extended data column for column
- * specific enhancements.
+ * Enhances the Yii GridView widget with various options to include Bootstrap specific styling enhancements. Also
+ * allows to simply disable Bootstrap styling by setting `bootstrap` to false. Includes an extended data column for
+ * column specific enhancements.
+ *
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since  1.0
@@ -127,8 +127,14 @@ class GridView extends \yii\grid\GridView
     const TARGET_BLANK = '_blank';
 
     /**
+     * @var string the panel prefix
+     */
+    public $panelPrefix = 'panel panel-';
+
+    /**
      * @var string the template for rendering the grid within a bootstrap styled panel.
      * The following special variables are recognized and will be replaced:
+     * - {prefix}, string the CSS prefix name as set in panelPrefix. Defaults to `panel panel-`.
      * - {type}, string the panel type that will append the bootstrap contextual CSS.
      * - {panelHeading}, string, which will render the panel heading block.
      * - {panelBefore}, string, which will render the panel before block.
@@ -141,7 +147,7 @@ class GridView extends \yii\grid\GridView
      * - {export}, string, which will render the [[$export]] menu button content.
      */
     public $panelTemplate = <<< HTML
-<div class="panel {type}">
+<div class="{prefix}{type}">
     {panelHeading}
     {panelBefore}
     {items}
@@ -283,7 +289,7 @@ HTML;
      *          - {export}, string which will render the [[$export]] menu button content.
      *          - {toggleData}, string which will render the button to toggle between page data and all data.
      *      - options: the HTML attributes for the button group div container. By default the
-     *        CSS class `btn-group` will be attached to this container.
+     *        CSS class `btn-group` will be attached to this container if no class is set.
      */
     public $toolbar = [
         '{toggleData}',
@@ -291,23 +297,19 @@ HTML;
     ];
 
     /**
-     * Tags to replace in the rendered layout. Enter this as `$key => $value` pairs, where:
+     * @var array tags to replace in the rendered layout. Enter this as `$key => $value` pairs, where:
      * - $key: string, defines the flag.
-     * - $value: string|Closure, the value that will be replaced. You can set it as a callback
-     *   function to return a string of the signature:
-     *      function ($widget) { return 'custom'; }
+     * - $value: string|Closure, the value that will be replaced. You can set it as a callback function to return a
+     *     string of the signature: `function ($widget) { return 'custom'; }`. For example:
      *
-     * For example:
-     * ['{flag}' => '<span class="glyphicon glyphicon-asterisk"></span']
+     *     `['{flag}' => '<span class="glyphicon glyphicon-asterisk"></span']`
      *
-     * @var array
      */
     public $replaceTags = [];
 
     /**
-     * @var string the default data column class if the class name is not
-     * explicitly specified when configuring a data column.
-     * Defaults to 'kartik\grid\DataColumn'.
+     * @var string the default data column class if the class name is not explicitly specified when configuring a data
+     *     column. Defaults to 'kartik\grid\DataColumn'.
      */
     public $dataColumnClass = 'kartik\grid\DataColumn';
 
@@ -327,23 +329,21 @@ HTML;
     public $tableOptions = [];
 
     /**
-     * @var boolean whether the grid view will be rendered within a pjax container.
-     * Defaults to `false`. If set to `true`, the entire GridView widget will be parsed
-     * via Pjax and auto-rendered inside a yii\widgets\Pjax widget container. If set to
-     * `false` pjax will be disabled and none of the pjax settings will be applied.
+     * @var boolean whether the grid view will be rendered within a pjax container. Defaults to `false`. If set to
+     *     `true`, the entire GridView widget will be parsed via Pjax and auto-rendered inside a yii\widgets\Pjax
+     *     widget container. If set to `false` pjax will be disabled and none of the pjax settings will be applied.
      */
     public $pjax = false;
 
     /**
-     * @var array the pjax settings for the widget. This will be considered only when
-     * [[pjax]] is set to true. The following settings are recognized:
-     * - `neverTimeout`: boolean, whether the pjax request should never timeout. Defaults to `true`.
-     *    The pjax:timeout event will be configured to disable timing out of pjax requests for the pjax
-     *    container.
+     * @var array the pjax settings for the widget. This will be considered only when [[pjax]] is set to true. The
+     *     following settings are recognized:
+     * - `neverTimeout`: boolean, whether the pjax request should never timeout. Defaults to `true`. The pjax:timeout
+     *     event will be configured to disable timing out of pjax requests for the pjax container.
      * - `options`: array, the options for the [[yii\widgets\Pjax]] widget.
-     * - `loadingCssClass`: boolean/string, the CSS class to be applied to the grid when loading via pjax.
-     *    If set to `false` - no css class will be applied. If it is empty, null, or set to `true`, will
-     *    default to `kv-grid-loading`.
+     * - `loadingCssClass`: boolean/string, the CSS class to be applied to the grid when loading via pjax. If set to
+     *     `false` - no css class will be applied. If it is empty, null, or set to `true`, will default to
+     *     `kv-grid-loading`.
      * - `beforeGrid`: string, any content to be embedded within pjax container before the Grid widget.
      * - `afterGrid`: string, any content to be embedded within pjax container after the Grid widget.
      */
@@ -355,10 +355,10 @@ HTML;
     public $resizableColumns = true;
 
     /**
-     * @var boolean the resizableColumns plugin options
+     * @var array the resizableColumns plugin options
      */
     public $resizableColumnsOptions = ['resizeFromBody' => false];
-    
+
     /**
      * @var boolean whether to store resized column state using local storage persistence
      * (supported by most modern browsers). Defaults to `false`.
@@ -366,8 +366,8 @@ HTML;
     public $persistResize = false;
 
     /**
-     * @var string resizable unique storage prefix to append to the grid id. If empty or not set
-     * it will default to Yii::$app->user->id.
+     * @var string resizable unique storage prefix to append to the grid id. If empty or not set it will default to
+     *     Yii::$app->user->id.
      */
     public $resizeStorageKey;
 
@@ -377,38 +377,37 @@ HTML;
     public $bootstrap = true;
 
     /**
-     * @var boolean whether the grid table will have a `bordered` style.
-     * Applicable only if `bootstrap` is `true`. Defaults to `true`.
+     * @var boolean whether the grid table will have a `bordered` style. Applicable only if `bootstrap` is `true`.
+     *     Defaults to `true`.
      */
     public $bordered = true;
 
     /**
-     * @var boolean whether the grid table will have a `striped` style.
-     * Applicable only if `bootstrap` is `true`. Defaults to `true`.
+     * @var boolean whether the grid table will have a `striped` style. Applicable only if `bootstrap` is `true`.
+     *     Defaults to `true`.
      */
     public $striped = true;
 
     /**
-     * @var boolean whether the grid table will have a `condensed` style.
-     * Applicable only if `bootstrap` is `true`. Defaults to `false`.
+     * @var boolean whether the grid table will have a `condensed` style. Applicable only if `bootstrap` is `true`.
+     *     Defaults to `false`.
      */
     public $condensed = false;
 
     /**
-     * @var boolean whether the grid table will have a `responsive` style.
-     * Applicable only if `bootstrap` is `true`. Defaults to `true`.
+     * @var boolean whether the grid table will have a `responsive` style. Applicable only if `bootstrap` is `true`.
+     *     Defaults to `true`.
      */
     public $responsive = true;
 
     /**
-     * @var boolean whether the grid table will automatically wrap to fit
-     * columns for smaller display sizes.
+     * @var boolean whether the grid table will automatically wrap to fit columns for smaller display sizes.
      */
     public $responsiveWrap = true;
 
     /**
-     * @var boolean whether the grid table will highlight row on `hover`.
-     * Applicable only if `bootstrap` is `true`. Defaults to `false`.
+     * @var boolean whether the grid table will highlight row on `hover`. Applicable only if `bootstrap` is `true`.
+     *     Defaults to `false`.
      */
     public $hover = false;
 
@@ -419,41 +418,60 @@ HTML;
     public $floatHeader = false;
 
     /**
-     * @var array the plugin options for the floatThead plugin that would render
-     * the floating/sticky table header behavior. The default offset from the
-     * top of the window where the floating header will 'stick' when scrolling down
-     * is set to `50` assuming a fixed bootstrap navbar on top. You can set this to 0
-     * or any javascript function/expression.
-     * @see http://mkoryak.github.io/floatThead#options
+     * @var boolean whether the table header will float and sticks around as you scroll within a container. If
+     *     `responsive` is true then this is auto set to `true`. Defaults to `false`.
      */
-    public $floatHeaderOptions = ['scrollingTop' => 50];
+    public $floatOverflowContainer = false;
 
     /**
-     * @var array the panel settings. If this is set, the grid widget
-     * will be embedded in a bootstrap panel. Applicable only if `bootstrap`
-     * is `true`. The following array keys are supported:
-     * - `type`: string, the panel contextual type (one of the TYPE constants,
-     *    if not set will default to `default` or `self::TYPE_DEFAULT`),
+     * @var array the plugin options for the floatThead plugin that would render the floating/sticky table header
+     *     behavior. The default offset from the top of the window where the floating header will 'stick' when
+     *     scrolling down is set to `50` assuming a fixed bootstrap navbar on top. You can set this to 0 or any
+     *     javascript function/expression.
+     * @see http://mkoryak.github.io/floatThead#options
+     */
+    public $floatHeaderOptions = ['top' => 50];
+
+    /**
+     * @var boolean whether pretty perfect scrollbars using perfect scrollbar plugin is to be used. Defaults to
+     *     `false`. If this is set to true, the `floatOverflowContainer` property will be auto set to `true`, if
+     *     `floatHeader` is `true`.
+     *
+     * @see https://github.com/noraesae/perfect-scrollbar
+     */
+    public $perfectScrollbar = false;
+
+    /**
+     * @var array the plugin options for the perfect scrollbar plugin.
+     *
+     * @see https://github.com/noraesae/perfect-scrollbar
+     */
+    public $perfectScrollbarOptions = [];
+
+    /**
+     * @var array the panel settings. If this is set, the grid widget will be embedded in a bootstrap panel. Applicable
+     *     only if `bootstrap` is `true`. The following array keys are supported:
+     * - `type`: string, the panel contextual type (one of the TYPE constants, if not set will default to `default` or
+     *     `self::TYPE_DEFAULT`),
      * - `heading`: string|false, the panel heading. If set to false, will not be displayed.
-     * - `headingOptions`: array, HTML attributes for the panel heading container.
-     *    Defaults to `['class'=>'panel-heading']`.
+     * - `headingOptions`: array, HTML attributes for the panel heading container. Defaults to
+     *     `['class'=>'panel-heading']`.
      * - `footer`: string|boolean, the panel footer. If set to false will not be displayed.
-     * - `footerOptions`: array, HTML attributes for the panel footer container.
-     *    Defaults to `['class'=>'panel-footer']`.
-     * - 'before': string|boolean, content to be placed before/above the grid table (after the header).
-     *   To not display this section, set this to `false`.
-     * - `beforeOptions`: array, HTML attributes for the `before` text. If the
-     *   `class` is not set, it will default to `kv-panel-before`.
-     * - 'after': string|boolean, any content to be placed after/below the grid table (before the footer).
-     *   To not display this section, set this to `false`.
-     * - `afterOptions`: array, HTML attributes for the `after` text. If the
-     *   `class` is not set, it will default to `kv-panel-after`.
+     * - `footerOptions`: array, HTML attributes for the panel footer container. Defaults to
+     *     `['class'=>'panel-footer']`.
+     * - 'before': string|boolean, content to be placed before/above the grid table (after the header). To not display
+     *     this section, set this to `false`.
+     * - `beforeOptions`: array, HTML attributes for the `before` text. If the `class` is not set, it will default to
+     *     `kv-panel-before`.
+     * - 'after': string|boolean, any content to be placed after/below the grid table (before the footer). To not
+     *     display this section, set this to `false`.
+     * - `afterOptions`: array, HTML attributes for the `after` text. If the `class` is not set, it will default to
+     *     `kv-panel-after`.
      */
     public $panel = [];
 
     /**
-     * @var boolean whether to show the page summary row for the table. This will
-     * be displayed above the footer.
+     * @var boolean whether to show the page summary row for the table. This will be displayed above the footer.
      */
     public $showPageSummary = false;
 
@@ -463,21 +481,46 @@ HTML;
     public $pageSummaryRowOptions = ['class' => 'kv-page-summary warning'];
 
     /**
+     * @var string the default pagination that will be read by toggle data. Should be one of 'page' or 'all'.
+     * If not set to 'all', it will always defaults to 'page'.
+     */
+    public $defaultPagination = 'page';
+
+    /**
      * @var boolean whether to enable toggling of grid data. Defaults to `true`.
      */
     public $toggleData = true;
 
     /**
-     * @var array the settings for the toggle data button for the toggle data type. This will be setup as
-     * an associative array of $type => $options, where $type can be:
-     * - 'all': for showing all grid data
-     * - 'page': for showing first page data
-     * and $options is the HTML attributes for the button. The following special options are recognized:
-     * - icon: string the glyphicon suffix name. If not set or empty will not be displayed.
-     * - label: string the label for the button.
+     * @var array the settings for the toggle data button for the toggle data type. This will be setup as an
+     *     associative array of $key => $value pairs, where $key can be:
+     * - 'maxCount': integer|boolean, the maximum number of records uptil which the toggle button will be rendered. If the
+     *     dataProvider records exceed this setting, the toggleButton will not be displayed. Defaults to `10000` if
+     *     not set. If you set this to `true`, the toggle button will always be displayed. If you set this to `false the 
+     *     toggle button will not be displayed (similar to `toggleData` setting).
+     * - 'minCount': integer|boolean, the minimum number of records beyond which a confirmation message will be displayed
+     *     when toggling all records. If the dataProvider record count exceeds this setting, a confirmation message will be
+     *     alerted to the user. Defaults to `500` if not set. If you set this to `true`, the confirmation message will
+     *     always be displayed. If set to `false` no confirmation message will be displayed.
+     * - 'confirmMsg': string, the confirmation message for the toggle data when `minCount` threshold is exceeded.
+     *     Defaults to `'There are {totalCount} records. Are you sure you want to display them all?'`.
+     * - 'all': array, configuration for showing all grid data and the value is the HTML attributes for the button.
+     *   (refer `page` for understanding the default options).
+     * - 'page': array, configuration for showing first page data and $options is the HTML attributes for the button.
+     *    The following special options are recognized:
+     *     - icon: string the glyphicon suffix name. If not set or empty will not be displayed.
+     *     - label: string the label for the button.
      *
-     * This defaults to the following setting:
+     *      This defaults to the following setting:
+     *      ```
      *      [
+     *          'maxCount' => 10000,
+     *          'minCount' => 1000
+     *          'confirmMsg' => Yii::t(
+     *              'kvgrid',
+     *              'There are {totalCount} records. Are you sure you want to display them all?',
+     *              ['totalCount' => number_format($this->dataProvider->getTotalCount())]
+     *          ),
      *          'all' => [
      *              'icon' => 'resize-full',
      *              'label' => 'All',
@@ -491,18 +534,19 @@ HTML;
      *              'title' => 'Show first page data'
      *          ],
      *      ]
+     *      ```
      */
     public $toggleDataOptions = [];
 
     /**
-     * @var array the HTML attributes for the toggle data button group container. By default
-     * this will always have the `class = btn-group` automatically added.
+     * @var array the HTML attributes for the toggle data button group container. By default this will always have the
+     *     `class = btn-group` automatically added, if no class is set.
      */
     public $toggleDataContainer = [];
 
     /**
-     * @var array the HTML attributes for the export button group container. By default
-     * this will always have the `class = btn-group` automatically added.
+     * @var array the HTML attributes for the export button group container. By default this will always have the
+     *     `class = btn-group` automatically added, if no class is set.
      */
     public $exportContainer = [];
 
@@ -512,10 +556,9 @@ HTML;
      *     set:
      * - icon: string,the glyphicon suffix to be displayed before the export menu label. If not set or is an empty
      *     string, this will not be displayed. Defaults to 'export'.
-     * - label: string,the export menu label (this is not HTML encoded). Defaults to ''.
-     * - showConfirmAlert: boolean, whether to show a confirmation alert dialog before download. This
-     *   confirmation dialog will notify user about the type of exported file for download
-     *   and to disable popup blockers. Defaults to `true`.
+     * - label: string,the export menu label (this is not HTML encoded). Defaults to ''. - showConfirmAlert: boolean,
+     *     whether to show a confirmation alert dialog before download. This confirmation dialog will notify user about
+     *     the type of exported file for download and to disable popup blockers. Defaults to `true`.
      * - target: string, the target for submitting the export form, which will trigger
      *   the download of the exported file. Must be one of the `TARGET_` constants.
      *   Defaults to `GridView::TARGET_POPUP`.
@@ -586,24 +629,22 @@ HTML;
      *     grid.
      *     - JSON:
      *          - colHeads: array, the column heading names to be output in the json file. If not set, it will be
-     *     autogenerated as
-     *             "col-{i}", where {i} is the column index. If `slugColHeads` is set to `true`, the extension will
-     *     attempt to autogenerate column heads based on table column heading, whereever possible.
+     *            autogenerated as "col-{i}", where {i} is the column index. If `slugColHeads` is set to `true`, the
+     *            extension will attempt to autogenerate column heads based on table column heading, whereever possible.
      *          - slugColHeads: boolean, whether to auto-generate column identifiers as slugs based on the table column
-     *     heading name. If the table column heading contains characters which cannot be slugified, then the extension
-     *     will autogenerate the column name as "col-{i}".
-     *          - jsonReplacer`: array|JsExpression, the JSON replacer property - can be an array or a JS function
-     *     created using JsExpression. Refer the [JSON
-     *     documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_native_JSON#The_replacer_parameter
-     *     for details on setting this property.
-     *          - indentSpace: int, pretty print json output and indent by number of spaces specified. Defaults to `4`.
+     *            heading name. If the table column heading contains characters which cannot be slugified, then the
+     *            extension will autogenerate the column name as "col-{i}".
+     *       - jsonReplacer`: array|JsExpression, the JSON replacer property - can be an array or a JS function created
+     *         using JsExpression. Refer the [JSON documentation]
+     *         (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_native_JSON#The_replacer_parameter
+     *          for details on setting this property.
+     *       - indentSpace: int, pretty print json output and indent by number of spaces specified. Defaults to `4`.
      */
     public $exportConfig = [];
 
     /**
-     * @var array, conversion of defined patterns in the grid cells as a preprocessing before
-     * the gridview is formatted for export. Each array row must consist of the following
-     * two keys:
+     * @var array, conversion of defined patterns in the grid cells as a preprocessing before the gridview is formatted
+     *     for export. Each array row must consist of the following two keys:
      * - `from`: string, is the pattern to search for in each grid column's cells
      * - `to`: string, is the string to replace the pattern in the grid column cells
      * This defaults to
@@ -618,15 +659,14 @@ HTML;
 
     /**
      * @var boolean, applicable for EXCEL export content only. This determines whether the exported EXCEL cell data
-     * will be automatically guessed and formatted based on `DataColumn::format` property. You can override this 
-     * behavior and change the auto-derived format mask by setting `DataColumn::xlFormat`.
+     *     will be automatically guessed and formatted based on `DataColumn::format` property. You can override this
+     *     behavior and change the auto-derived format mask by setting `DataColumn::xlFormat`.
      */
     public $autoXlFormat = false;
 
     /**
-     * @var array|boolean the HTML attributes for the grid container. The grid table items
-     * will be wrapped in a `div` container with the configured HTML attributes. The ID for
-     * the container will be auto generated.
+     * @var array|boolean the HTML attributes for the grid container. The grid table items will be wrapped in a `div`
+     *     container with the configured HTML attributes. The ID for the container will be auto generated.
      */
     public $containerOptions = [];
 
@@ -646,6 +686,11 @@ HTML;
     protected $_toggleDataKey;
 
     /**
+     * @var string HTML attribute identifier for the toggle button
+     */
+    protected $_toggleButtonId;
+
+    /**
      * @var bool whether the current mode is showing all data
      */
     protected $_isShowAll = false;
@@ -653,22 +698,22 @@ HTML;
     /**
      * Parses export configuration and returns the merged defaults
      *
+     * @param array $exportConfig
+     * @param array $defaultExportConfig
+     *
      * @return array
      */
     protected static function parseExportConfig($exportConfig, $defaultExportConfig)
     {
-        $config = $exportConfig;
         if (is_array($exportConfig) && !empty($exportConfig)) {
             foreach ($exportConfig as $format => $setting) {
                 $setup = is_array($exportConfig[$format]) ? $exportConfig[$format] : [];
                 $exportConfig[$format] = empty($setup) ? $defaultExportConfig[$format] :
                     array_replace_recursive($defaultExportConfig[$format], $setup);
             }
-            $config = $exportConfig;
-        } else {
-            $config = $defaultExportConfig;
+            return $exportConfig;
         }
-        return $config;
+        return $defaultExportConfig;
     }
 
     /**
@@ -685,10 +730,12 @@ HTML;
             return;
         }
         $this->_toggleDataKey = '_tog' . hash('crc32', $this->options['id']);
-        $this->_isShowAll = ArrayHelper::getValue($_GET, $this->_toggleDataKey, 'page') === 'all';
+        $this->_isShowAll = ArrayHelper::getValue($_GET, $this->_toggleDataKey, $this->defaultPagination) === 'all';
         if ($this->_isShowAll) {
+            /** @noinspection PhpUndefinedFieldInspection */
             $this->dataProvider->pagination = false;
         }
+        $this->_toggleButtonId = $this->options['id'] . '-togdata-' . ($this->_isShowAll ? 'all' : 'page');
         parent::init();
     }
 
@@ -701,11 +748,11 @@ HTML;
         $this->initToggleData();
         $this->initExport();
         if ($this->export !== false && isset($this->exportConfig[self::PDF])) {
-            \kartik\base\Config::checkDependency(
+            Config::checkDependency(
                 'mpdf\Pdf',
                 'yii2-mpdf',
                 "for PDF export functionality. To include PDF export, follow the install steps below. If you do not " .
-                "need PDF export functionality, do not include 'PDF' as a format in the 'export' property. You can ".
+                "need PDF export functionality, do not include 'PDF' as a format in the 'export' property. You can " .
                 "otherwise set 'export' to 'false' to disable all export functionality"
             );
         }
@@ -732,6 +779,7 @@ HTML;
             return null;
         }
         $cells = [];
+        /** @var DataColumn $column */
         foreach ($this->columns as $column) {
             $cells[] = $column->renderPageSummaryCell();
         }
@@ -763,11 +811,14 @@ HTML;
         if (!$this->toggleData) {
             return '';
         }
-
+        $maxCount = ArrayHelper::getValue($this->toggleDataOptions, 'maxCount', false);
+        if ($maxCount !== true && (!$maxCount || (int) $maxCount <= $this->dataProvider->getTotalCount())) {
+            return '';
+        }
         $tag = $this->_isShowAll ? 'page' : 'all';
         $label = ArrayHelper::remove($this->toggleDataOptions[$tag], 'label', '');
         $url = Url::current([$this->_toggleDataKey => $tag]);
-        Html::addCssClass($this->toggleDataContainer, 'btn-group');
+        static::initCss($this->toggleDataContainer, 'btn-group');
         return Html::tag('div', Html::a($label, $url, $this->toggleDataOptions[$tag]), $this->toggleDataContainer);
     }
 
@@ -794,15 +845,11 @@ HTML;
         }
         $encoding = ArrayHelper::getValue($this->export, 'encoding', 'utf-8');
         $target = ArrayHelper::getValue($this->export, 'target', self::TARGET_POPUP);
-        $form = Html::beginForm(
-                $action,
-                'post',
-                [
-                    'class' => 'kv-export-form',
-                    'style' => 'display:none',
-                    'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target
-                ]
-            ) . "\n" .
+        $form = Html::beginForm($action, 'post', [
+                'class' => 'kv-export-form',
+                'style' => 'display:none',
+                'target' => ($target == self::TARGET_POPUP) ? 'kvDownloadDialog' : $target
+            ]) . "\n" .
             Html::hiddenInput('export_filetype') . "\n" .
             Html::hiddenInput('export_filename') . "\n" .
             Html::hiddenInput('export_mime') . "\n" .
@@ -814,11 +861,8 @@ HTML;
         foreach ($this->exportConfig as $format => $setting) {
             $iconOptions = ArrayHelper::getValue($setting, 'iconOptions', []);
             Html::addCssClass($iconOptions, $iconPrefix . $setting['icon']);
-            $label = (empty($setting['icon']) || $setting['icon'] == '') ? $setting['label'] : Html::tag(
-                    'i',
-                    '',
-                    $iconOptions
-                ) . ' ' . $setting['label'];
+            $label = (empty($setting['icon']) || $setting['icon'] == '') ? $setting['label'] :
+                Html::tag('i', '', $iconOptions) . ' ' . $setting['label'];
             $items[] = [
                 'label' => $label,
                 'url' => '#',
@@ -852,7 +896,7 @@ HTML;
     {
         $cells = [];
         foreach ($this->columns as $index => $column) {
-            /* @var $column Column */
+            /* @var DataColumn $column */
             if ($this->resizableColumns && $this->persistResize) {
                 $column->headerOptions['data-resizable-column-id'] = "kv-col-{$index}";
             }
@@ -926,16 +970,12 @@ HTML;
             $this->export
         );
         if (!isset($this->export['header'])) {
-            $this->export['header'] = '<li role="presentation" class="dropdown-header">' . Yii::t(
-                    'kvgrid',
-                    'Export Page Data'
-                ) . '</li>';
+            $this->export['header'] = '<li role="presentation" class="dropdown-header">' .
+                Yii::t('kvgrid', 'Export Page Data') . '</li>';
         }
         if (!isset($this->export['headerAll'])) {
-            $this->export['headerAll'] = '<li role="presentation" class="dropdown-header">' . Yii::t(
-                    'kvgrid',
-                    'Export All Data'
-                ) . '</li>';
+            $this->export['headerAll'] = '<li role="presentation" class="dropdown-header">' .
+                Yii::t('kvgrid', 'Export All Data') . '</li>';
         }
         if (!isset($this->export['fontAwesome'])) {
             $this->export['fontAwesome'] = false;
@@ -1120,6 +1160,13 @@ HTML;
             return;
         }
         $defaultOptions = [
+            'maxCount' => 10000,
+            'minCount' => 500,
+            'confirmMsg' => Yii::t(
+                'kvgrid',
+                'There are {totalCount} records. Are you sure you want to display them all?',
+                ['totalCount' => number_format($this->dataProvider->getTotalCount())]
+            ),
             'all' => [
                 'icon' => 'resize-full',
                 'label' => Yii::t('kvgrid', 'All'),
@@ -1133,14 +1180,10 @@ HTML;
                 'title' => Yii::t('kvgrid', 'Show first page data')
             ],
         ];
-        if (empty($this->toggleDataOptions['page'])) {
-            $this->toggleDataOptions['page'] = $defaultOptions['page'];
-        }
-        if (empty($this->toggleDataOptions['all'])) {
-            $this->toggleDataOptions['all'] = $defaultOptions['all'];
-        }
+        $this->toggleDataOptions = ArrayHelper::merge($defaultOptions, $this->toggleDataOptions);
         $tag = $this->_isShowAll ? 'page' : 'all';
         $options = $this->toggleDataOptions[$tag];
+        $this->toggleDataOptions[$tag]['id'] = $this->_toggleButtonId;
         $icon = ArrayHelper::remove($this->toggleDataOptions[$tag], 'icon', '');
         $label = !isset($options['label']) ? $defaultOptions[$tag]['label'] : $options['label'];
         if (!empty($icon)) {
@@ -1174,6 +1217,15 @@ HTML;
         }
         if ($this->condensed) {
             Html::addCssClass($this->tableOptions, 'table-condensed');
+        }
+        if ($this->floatHeader) {
+            if ($this->perfectScrollbar) {
+                $this->floatOverflowContainer = true;
+            }
+            if ($this->floatOverflowContainer) {
+                $this->responsive = false;
+                Html::addCssClass($this->containerOptions, 'kv-grid-wrapper');
+            }
         }
         if ($this->responsive) {
             Html::addCssClass($this->containerOptions, 'table-responsive');
@@ -1285,6 +1337,19 @@ HTML;
     }
 
     /**
+     * Sets a default css value if not set
+     *
+     * @param array  $options
+     * @param string $css
+     */
+    protected static function initCss(&$options, $css)
+    {
+        if (!isset($options['class'])) {
+            $options['class'] = $css;
+        }
+    }
+
+    /**
      * Sets the grid layout based on the template and panel settings
      */
     protected function renderPanel()
@@ -1292,7 +1357,7 @@ HTML;
         if (!$this->bootstrap || !is_array($this->panel) || empty($this->panel)) {
             return;
         }
-        $type = 'panel-' . ArrayHelper::getValue($this->panel, 'type', 'default');
+        $type = ArrayHelper::getValue($this->panel, 'type', 'default');
         $heading = ArrayHelper::getValue($this->panel, 'heading', '');
         $footer = ArrayHelper::getValue($this->panel, 'footer', '');
         $before = ArrayHelper::getValue($this->panel, 'before', '');
@@ -1307,22 +1372,22 @@ HTML;
         $panelFooter = '';
 
         if ($heading !== false) {
-            Html::addCssClass($headingOptions, 'panel-heading');
+            static::initCss($headingOptions, 'panel-heading');
             $content = strtr($this->panelHeadingTemplate, ['{heading}' => $heading]);
             $panelHeading = Html::tag('div', $content, $headingOptions);
         }
         if ($footer !== false) {
-            Html::addCssClass($footerOptions, 'panel-footer');
+            static::initCss($footerOptions, 'panel-footer');
             $content = strtr($this->panelFooterTemplate, ['{footer}' => $footer]);
             $panelFooter = Html::tag('div', $content, $footerOptions);
         }
         if ($before !== false) {
-            Html::addCssClass($beforeOptions, 'kv-panel-before');
+            static::initCss($beforeOptions, 'kv-panel-before');
             $content = strtr($this->panelBeforeTemplate, ['{before}' => $before]);
             $panelBefore = Html::tag('div', $content, $beforeOptions);
         }
         if ($after !== false) {
-            Html::addCssClass($afterOptions, 'kv-panel-after');
+            static::initCss($afterOptions, 'kv-panel-after');
             $content = strtr($this->panelAfterTemplate, ['{after}' => $after]);
             $panelAfter = Html::tag('div', $content, $afterOptions);
         }
@@ -1330,6 +1395,7 @@ HTML;
             $this->panelTemplate,
             [
                 '{panelHeading}' => $panelHeading,
+                '{prefix}' => $this->panelPrefix,
                 '{type}' => $type,
                 '{panelFooter}' => $panelFooter,
                 '{panelBefore}' => $panelBefore,
@@ -1356,7 +1422,7 @@ HTML;
             if (is_array($item)) {
                 $content = ArrayHelper::getValue($item, 'content', '');
                 $options = ArrayHelper::getValue($item, 'options', []);
-                Html::addCssClass($options, 'btn-group');
+                static::initCss($options, 'btn-group');
                 $toolbar .= Html::tag('div', $content, $options);
             } else {
                 $toolbar .= "\n{$item}";
@@ -1380,7 +1446,6 @@ HTML;
         if (is_string($data)) {
             return $data;
         }
-
         $rows = '';
         if (is_array($data)) {
             foreach ($data as $row) {
@@ -1393,12 +1458,34 @@ HTML;
                     $colOptions = ArrayHelper::getValue($col, 'options', []);
                     $colContent = ArrayHelper::getValue($col, 'content', '');
                     $tag = ArrayHelper::getValue($col, 'tag', 'th');
-                    $rows .= "\t" . Html::tag('th', $colContent, $colOptions) . "\n";
+                    $rows .= "\t" . Html::tag($tag, $colContent, $colOptions) . "\n";
                 }
                 $rows .= Html::endTag('tr') . "\n";
             }
         }
         return $rows;
+    }
+
+    /**
+     * Generate toggle data validation client script
+     *
+     * @return string
+     */
+    protected function getToggleDataScript()
+    {
+        $tag = $this->_isShowAll ? 'page' : 'all';
+        if (!$this->toggleData || $tag !== 'all') {
+            return '';
+        }
+        $minCount = ArrayHelper::getValue($this->toggleDataOptions, 'minCount', 0);
+        if ($minCount !== true && (!$minCount || $minCount <= $this->dataProvider->getTotalCount())) {
+            return '';
+        }
+        $event = $this->pjax ? 'pjax:click' : 'click';
+        $msg = $this->toggleDataOptions['confirmMsg'];
+        return "\$('#{$this->_toggleButtonId}').on('{$event}',function(e){
+            if(!window.confirm('{$msg}')){e.preventDefault();}
+        });";
     }
 
     /**
@@ -1446,29 +1533,40 @@ HTML;
             }
         }
         if ($this->resizableColumns) {
-            $rcDefaults=[];
+            $rcDefaults = [];
             if ($this->persistResize) {
                 GridResizeStoreAsset::register($view);
             } else {
-                $rcDefaults=['store'=>null];
+                $rcDefaults = ['store' => null];
             }
-            $rcOptions=Json::encode(ArrayHelper::merge($rcDefaults, $this->resizableColumnsOptions));
+            $rcOptions = Json::encode(ArrayHelper::merge($rcDefaults, $this->resizableColumnsOptions));
             $contId = $this->containerOptions['id'];
             GridResizeColumnsAsset::register($view);
-            $script .= "$('#{$contId}').resizableColumns({$rcOptions});";
+            $script .= "$('#{$contId}').resizableColumns('destroy').resizableColumns({$rcOptions});";
         }
+        $container = "\$('#{$this->containerOptions['id']}')";
         if ($this->floatHeader) {
             GridFloatHeadAsset::register($view);
-            $this->floatHeaderOptions = ArrayHelper::merge(
-                [
-                    'floatTableClass' => 'kv-table-float',
-                    'floatContainerClass' => 'kv-thead-float'
-                ],
-                $this->floatHeaderOptions
-            );
+            // fix floating header for IE browser when using group grid functionality
+            $skipCss = '.kv-grid-group-row,.kv-group-header,.kv-group-footer'; // skip these CSS for IE
+            $js = 'function($table){return $table.find("tbody tr:not(' . $skipCss . '):visible:first>*");}';
+            $opts = [
+                'floatTableClass' => 'kv-table-float',
+                'floatContainerClass' => 'kv-thead-float',
+                'getSizingRow' => new JsExpression($js),
+            ];
+            if ($this->floatOverflowContainer) {
+                $opts['scrollContainer'] = new JsExpression("function(){return {$container};}");
+            }
+            $this->floatHeaderOptions = ArrayHelper::merge($opts, $this->floatHeaderOptions);
             $opts = Json::encode($this->floatHeaderOptions);
             $script .= "$('#{$gridId} .kv-grid-table:first').floatThead({$opts});";
         }
+        if ($this->perfectScrollbar) {
+            GridPerfectScrollbarAsset::register($view);
+            $script .= "{$container}.perfectScrollbar(" . Json::encode($this->perfectScrollbarOptions) . ");";
+        }
+        $script .= $this->getToggleDataScript();
         $this->_gridClientFunc = 'kvGridInit_' . hash('crc32', $script);
         $this->options['data-krajee-grid'] = $this->_gridClientFunc;
         $view->registerJs("var {$this->_gridClientFunc}=function(){\n{$script}\n};\n{$this->_gridClientFunc}();");

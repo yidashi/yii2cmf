@@ -4,7 +4,7 @@
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.7.7
+ * @version   1.7.9
  */
 
 namespace kartik\base;
@@ -23,73 +23,82 @@ use yii\helpers\ArrayHelper;
 class Html5Input extends InputWidget
 {
     /**
-     * @var array the special inputs which need captions
-     */
-    private static $_specialInputs = [
-        'color',
-        'range'
-    ];
-    /**
      * @var string the HTML 5 input type
      */
     public $type;
+
     /**
      * @var string the width in 'px' or '%' of the HTML5 input container
      */
     public $width;
+
     /**
      * @var array the HTML attributes for the widget container
      */
     public $containerOptions = [];
+
     /**
      * @var array the HTML attributes for the HTML-5 input.
      */
     public $html5Options = [];
+
     /**
      * @var array the HTML attributes for the HTML-5 input container
      */
     public $html5Container = [];
+
     /**
      * @var string|boolean the message shown for unsupported browser. If set to false
      * will not be displayed
      */
     public $noSupport;
+
     /**
      * @var string array the HTML attributes for container displaying unsupported browser message
      */
     public $noSupportOptions = [];
+
     /**
      * @var string one of the SIZE modifiers 'lg', 'md', 'sm', 'xs'
      */
     public $size;
+
     /**
      * @var array the addon content
-     * - prepend: array/string the prepend addon content. If set as an array, the
-     *   following options can be set:
+     * - prepend: array/string the prepend addon content. If set as an array, the following options can be set:
      *   - content: string the prepend addon content
      *   - asButton: boolean whether the addon is a button
      *   - options: array the HTML attributes for the prepend addon
-     * - append: array/string the append addon content. If set as an array, the
-     *   following options can be set:
+     * - append: array/string the append addon content. If set as an array, the following options can be set:
      *   - content: string the append addon content
      *   - asButton: boolean whether the addon is a button
      *   - options: array the HTML attributes for the append addon
-     * - preCaption: array/string the addon content placed before the caption. If
-     *   set as an array, the following options can be set:
+     * - preCaption: array/string the addon content placed before the caption. If set as an array, the following
+     *     options can be set:
      *   - content: string the append addon content
      *   - asButton: boolean whether the addon is a button
      *   - options: array the HTML attributes for the append addon     */
     public $addon = [];
 
     /**
-     * Runs the widget
+     * @var array the special inputs which need captions
      */
-    public function init()
+    private static $_specialInputs = [
+        'color',
+        'range'
+    ];
+
+    /**
+     * @inheritdoc
+     */
+    public function run()
     {
-        parent::init();
         $this->initInput();
     }
 
+    /**
+     * Initializes the input
+     */
     protected function initInput()
     {
         $this->initDisability($this->html5Options);
@@ -117,7 +126,7 @@ class Html5Input extends InputWidget
         $input = 'jQuery("#' . $this->html5Options['id'] . '")';
         $js = "{$caption}.on('change',function(){{$input}.val(this.value)});\n" .
             "{$input}.on('input change',function(e){{$caption}.val(this.value);if(e.type=='change'){{$caption}.trigger('change');}});";
-        $view->registerJs($js);
+        $this->registerWidgetJs($js);
     }
 
     /**
@@ -146,8 +155,11 @@ class Html5Input extends InputWidget
             $message = '';
         } else {
             $noSupport = !empty($this->noSupport) ? $this->noSupport :
-                Yii::t('app', 'It is recommended you use an upgraded browser to display the {type} control properly.',
-                    ['type' => $this->type]);
+                Yii::t(
+                    'kvbase',
+                    'It is recommended you use an upgraded browser to display the {type} control properly.',
+                    ['type' => $this->type]
+                );
             $message = "\n<br>" . Html::tag('div', $noSupport, $this->noSupportOptions);
         }
         return "<!--[if lt IE 10]>\n{$caption}{$message}\n<![endif]--><![if gt IE 9]>\n{$content}\n<![endif]>";
