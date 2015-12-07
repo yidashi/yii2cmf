@@ -1704,64 +1704,6 @@
         ]
     },
     {
-        "name": "symfony/polyfill-mbstring",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/0b6a8940385311a24e060ec1fe35680e17c74497",
-            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "time": "2015-11-04 20:28:58",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
         "name": "symfony/dom-crawler",
         "version": "v3.0.0",
         "version_normalized": "3.0.0.0",
@@ -2054,72 +1996,6 @@
         ]
     },
     {
-        "name": "npm-asset/abbrev",
-        "version": "v1.0.0",
-        "version_normalized": "1.0.0.0",
-        "source": {
-            "type": "git",
-            "url": "git+ssh://git@github.com/isaacs/abbrev-js.git",
-            "reference": "a19cb746c0a21cfd00dcac29f4b98c62b3d2956d"
-        },
-        "type": "npm-asset-library",
-        "extra": {
-            "npm-asset-main": "./lib/abbrev.js",
-            "npm-asset-scripts": {
-                "test": "node lib/abbrev.js"
-            }
-        },
-        "installation-source": "source",
-        "authors": [
-            "Isaac Z. Schlueter <i@izs.me>"
-        ]
-    },
-    {
-        "name": "npm-asset/nopt",
-        "version": "2.1.2",
-        "version_normalized": "2.1.2.0",
-        "dist": {
-            "type": "tar",
-            "url": "http://registry.npmjs.org/nopt/-/nopt-2.1.2.tgz",
-            "reference": null,
-            "shasum": "6cccd977b80132a07731d6e8ce58c2c8303cf9af"
-        },
-        "require": {
-            "npm-asset/abbrev": "1"
-        },
-        "bin": {
-            "nopt": "./bin/nopt.js"
-        },
-        "type": "npm-asset-library",
-        "extra": {
-            "npm-asset-bugs": {
-                "url": "https://github.com/isaacs/nopt/issues"
-            },
-            "npm-asset-main": "lib/nopt.js",
-            "npm-asset-directories": [],
-            "npm-asset-repository": {
-                "type": "git",
-                "url": "http://github.com/isaacs/nopt"
-            },
-            "npm-asset-scripts": {
-                "test": "node lib/nopt.js"
-            }
-        },
-        "installation-source": "dist",
-        "license": {
-            "type": "MIT",
-            "url": "https://github.com/isaacs/nopt/raw/master/LICENSE"
-        },
-        "authors": [
-            {
-                "name": "Isaac Z. Schlueter",
-                "email": "i@izs.me",
-                "url": "http://blog.izs.me/"
-            }
-        ],
-        "description": "Option parsing for Node, supporting types, shorthands, etc. Used by npm."
-    },
-    {
         "name": "npm-asset/markdown",
         "version": "0.5.0",
         "version_normalized": "0.5.0.0",
@@ -2175,6 +2051,64 @@
             "ast",
             "markdown",
             "text processing"
+        ]
+    },
+    {
+        "name": "symfony/polyfill-mbstring",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/polyfill-mbstring.git",
+            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "http://packagist.phpcomposer.com/files/symfony/polyfill-mbstring/0b6a8940385311a24e060ec1fe35680e17c74497.zip",
+            "reference": "0b6a8940385311a24e060ec1fe35680e17c74497",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "time": "2015-11-04 20:28:58",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Polyfill\\Mbstring\\": ""
+            },
+            "files": [
+                "bootstrap.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony polyfill for the Mbstring extension",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "compatibility",
+            "mbstring",
+            "polyfill",
+            "portable",
+            "shim"
         ]
     }
 ]

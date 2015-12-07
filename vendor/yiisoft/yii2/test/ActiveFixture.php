@@ -97,7 +97,6 @@ class ActiveFixture extends BaseActiveFixture
         if ($this->dataFile === null) {
             $class = new \ReflectionClass($this);
             $dataFile = dirname($class->getFileName()) . '/data/' . $this->getTableSchema()->fullName . '.php';
-
             return is_file($dataFile) ? require($dataFile) : [];
         } else {
             return parent::getData();

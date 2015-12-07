@@ -45,17 +45,17 @@ class SignupCest
         $I->wantTo('ensure that signup works');
 
         $signupPage = SignupPage::openBy($I);
-        $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
+        $I->see('注册', 'h1');
+//        $I->see('Please fill out the following fields to signup:');
 
         $I->amGoingTo('submit signup form with no data');
 
         $signupPage->submit([]);
 
         $I->expectTo('see validation errors');
-        $I->see('Username cannot be blank.', '.help-block');
-        $I->see('Email cannot be blank.', '.help-block');
-        $I->see('Password cannot be blank.', '.help-block');
+        $I->see('用户名不能为空。', '.help-block');
+        $I->see('邮箱不能为空。', '.help-block');
+        $I->see('密码不能为空。', '.help-block');
 
         $I->amGoingTo('submit signup form with not correct email');
         $signupPage->submit([
@@ -67,7 +67,7 @@ class SignupCest
         $I->expectTo('see that email address is wrong');
         $I->dontSee('Username cannot be blank.', '.help-block');
         $I->dontSee('Password cannot be blank.', '.help-block');
-        $I->see('Email is not a valid email address.', '.help-block');
+        $I->see('邮箱不是有效的邮箱地址。', '.help-block');
 
         $I->amGoingTo('submit signup form with correct email');
         $signupPage->submit([
@@ -77,6 +77,6 @@ class SignupCest
         ]);
 
         $I->expectTo('see that user logged in');
-        $I->seeLink('Logout (tester)');
+        $I->seeLink('退出 (tester)');
     }
 }
