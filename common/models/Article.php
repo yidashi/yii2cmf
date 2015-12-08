@@ -35,10 +35,15 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'author', 'created_at', 'updated_at', 'status'], 'required'],
+            [['title', 'content'], 'required'],
             [['content'], 'string'],
-            [['created_at', 'updated_at', 'status', 'category_id'], 'integer'],
-            [['title', 'category'], 'string', 'max' => 50],
+            [['status', 'category_id'], 'integer'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
+            [['category'], 'default', 'value' => function ($model, $attribute) {
+                return Category::find()->where(['id'=>$model->category_id])->select('title')->scalar();
+            }],
+            [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover'], 'string', 'max' => 255]
         ];
     }
@@ -50,13 +55,13 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'content' => Yii::t('app', 'Content'),
-            'author' => Yii::t('app', 'Author'),
+            'title' => '标题',
+            'content' => '内容',
+            'author' => '作者',
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
             'status' => Yii::t('app', 'Status'),
-            'cover' => Yii::t('app', 'Cover'),
+            'cover' => '封面',
             'category_id'=>'分类',
             'category'=>'分类'
         ];

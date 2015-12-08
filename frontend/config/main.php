@@ -42,11 +42,11 @@ return [
             'showScriptName' => false,
             'rules' => [
 //                'article/<cid:\d+>' => 'article/index'
-                [
+                /*[
                     'pattern'=>'lizhi',
                     'route'=>'article/index',
                     'defaults'=>['cid'=>1]
-                ]
+                ]*/
             ]
         ],
         'view' => [

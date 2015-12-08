@@ -12,7 +12,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -59,9 +58,9 @@ return [
             'class' => 'mdm\admin\Module',
         ],
 
-        'datecontrol' => [
+        /*'datecontrol' => [
             'class' => '\kartik\datecontrol\Module'
-        ],
+        ],*/
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
             // enter optional module parameters below - only if you need to
@@ -82,7 +81,7 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            'gii/*'
+            '*'
         ]
     ],
     'params' => $params,
