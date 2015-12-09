@@ -40,14 +40,15 @@ class Article extends \yii\db\ActiveRecord
             [['status', 'category_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
-            [['category'], 'default', 'value' => function ($model, $attribute) {
-                return Category::find()->where(['id'=>$model->category_id])->select('title')->scalar();
-            }],
+            [['category'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover'], 'string', 'max' => 255]
         ];
     }
-
+    public function setCategory($attribute, $params)
+    {
+        $this->category = Category::find()->where(['id'=>$this->category_id])->select('title')->scalar();
+    }
     /**
      * @inheritdoc
      */

@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
 
-    <?= $form->field($model, 'cover')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'cover')->widget('common\widgets\webuploader\Webuploader') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

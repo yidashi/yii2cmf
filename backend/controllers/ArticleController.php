@@ -25,7 +25,19 @@ class ArticleController extends Controller
             ],
         ];
     }
-
+    public function actions()
+    {
+        return [
+            'upload' => [
+                'class' => 'kucha\ueditor\UEditorAction',
+                'config' => [
+                    'imageFieldName' => 'file',
+                    "imageUrlPrefix"  => \Yii::getAlias('@web') . '/',//图片访问路径前缀
+                    "imagePathFormat" => "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}" //上传保存路径
+                ],
+            ]
+        ];
+    }
     /**
      * Lists all Article models.
      * @return mixed
