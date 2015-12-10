@@ -94,8 +94,8 @@ class SiteController extends Controller
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
-                        'username' => $attributes['login'],
-                        'email' => $attributes['email'],
+                        'username' => $attributes['username'],
+                        'email' => $attributes['username'] . '@51siyuan.cn',
                         'password' => $password,
                     ]);
                     $user->generateAuthKey();

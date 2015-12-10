@@ -54,6 +54,7 @@ class QqOAuth extends OAuth2
         $openid =  $this->api('oauth2.0/me', 'GET');
         $qquser = $this->api("user/get_user_info", 'GET', ['oauth_consumer_key'=>$openid['client_id'], 'openid'=>$openid['openid']]);
         $qquser['id']=$openid['openid'];
+        $qquser['username']=$openid['nickname'];
         return $qquser;
     }
 
