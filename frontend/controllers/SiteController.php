@@ -2,6 +2,8 @@
 namespace frontend\controllers;
 
 use common\models\Article;
+use common\models\Auth;
+use common\models\User;
 use frontend\components\ThemeBehavior;
 use Yii;
 use common\models\LoginForm;
