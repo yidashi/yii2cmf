@@ -76,16 +76,12 @@ class SiteController extends Controller
     public function onAuthSuccess($client)
     {
         $attributes = $client->getUserAttributes();
-        if(empty($attributes)){
-            $auth = null;
-        }else{
-            /* @var $auth Auth */
-            $auth = Auth::find()->where([
-                'source' => $client->getId(),
-                'source_id' => $attributes['id'],
-            ])->one();
-        }
-        
+        /* @var $auth Auth */
+        $auth = Auth::find()->where([
+            'source' => $client->getId(),
+            'source_id' => $attributes['id'],
+        ])->one();
+
         if (Yii::$app->user->isGuest) {
             if ($auth) { // login
                 $user = $auth->user;
