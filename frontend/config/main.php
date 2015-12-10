@@ -67,8 +67,8 @@ return [
             'clients' => [
                 'qq' => [
                     'class' => 'yii\authclient\clients\QqOAuth',
-                    'clientId' => '101054140',
-                    'clientSecret' => '24c1a55bf6f1637297b09f0501b59da1',
+                    'clientId' => '101277194',
+                    'clientSecret' => '11ce53c8fb7daadcc246805727bb6fdb',
               ],
                 // etc.
             ],
