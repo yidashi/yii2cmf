@@ -46,4 +46,8 @@ class Auth extends \yii\db\ActiveRecord
             'source_id' => 'Source ID',
         ];
     }
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['user_id' => 'id']);
+    }
 }
