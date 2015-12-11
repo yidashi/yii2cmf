@@ -23,7 +23,7 @@ class Markdown extends yii\base\Widget{
     public function run(){
         MarkdownAsset::register($this->view);
         $this->view->registerJs('
-            var markdown=$("#markdown-textarea").markdown({autofocus:true,language:"zh"});
+            var markdown=$("#markdown-textarea").markdown({autofocus:false,language:"zh"});
         ');
         if(isset($this->model) && isset($this->attribute)){
             return Html::activeTextarea($this->model,$this->attribute,$this->options);
