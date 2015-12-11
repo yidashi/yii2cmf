@@ -41,7 +41,7 @@
     background-position: 0 -306px;
 }
 .auth-icon.QQ {
-    background: url(qq.png) no-repeat;
+    background: url(qq.png) no-repeat;background-size: 32px 32px;
 }
 .auth-icon.live {
     background-position: 0 -372px;
