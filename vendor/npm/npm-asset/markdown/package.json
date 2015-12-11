@@ -1,0 +1,6 @@
+{ "name" : "abbrev-js"
+, "version" : "1.0.0"
+, "author" : "Isaac Z. Schlueter <i@izs.me>"
+, "main" : "./lib/abbrev.js"
+, "scripts" : { "test" : "node lib/abbrev.js" }
+}
