@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 
+use common\models\Comment;
 use frontend\models\Article;
 use common\models\Category;
 use yii\data\Pagination;
@@ -65,11 +66,24 @@ class ArticleController extends Controller{
     }
     public function actionView($id)
     {
-        $content = Article::find()->where(['id'=>$id,'status'=>Article::STATUS_ACTIVE])->asArray()->one();
-        if(empty($content)){
+        $model = Article::find()->where(['id'=>$id,'status'=>Article::STATUS_ACTIVE])->one();
+        if($model === null){
             throw new NotFoundHttpException('not found');
         }
-        return $this->render('view', $content);
+        $commentModel = new Comment();
+        $commentQuery = Comment::find()->where(['article_id'=>$id]);
+        $countCommentQuery = clone $commentQuery;
+        $pages = new Pagination(['totalCount' => $countCommentQuery->count()]);
+        $commentModels = $commentQuery->offset($pages->offset)
+            ->orderBy('created_at desc')
+            ->limit($pages->limit)
+            ->all();
+        return $this->render('view', [
+            'model' => $model,
+            'commentModel' => $commentModel,
+            'commentModels' => $commentModels,
+            'pages' => $pages,
+        ]);
     }
     public function actionCreate()
     {

@@ -7,27 +7,23 @@
 namespace common\widgets\markdown;
 use yii;
 use yii\helpers\Html;
-class Markdown extends yii\base\Widget{
-    public $model;
-    public $attribute;
-    public $name;
-    public $value;
+class Markdown extends yii\widgets\InputWidget{
     public $language;
-    public $options;
     public function init(){
         $this->options['id']='markdown-textarea';
         if(!$this->language){
             $this->language='en';
         }
+        parent::init();
     }
     public function run(){
         MarkdownAsset::register($this->view);
         $this->view->registerJs('
             var markdown=$("#markdown-textarea").markdown({autofocus:false,language:"zh"});
         ');
-        if(isset($this->model) && isset($this->attribute)){
+        if($this->hasModel()){
             return Html::activeTextarea($this->model,$this->attribute,$this->options);
-        }elseif(isset($this->name) && isset($this->value)){
+        }else{
             return Html::textarea($this->name,$this->value,$this->options);
         }
     }

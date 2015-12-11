@@ -35,7 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '首页', 'url' => ['/site/index']],
+        ['label' => '首页', 'url' => ['/']],
     ];
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['article/index','cid'=>$nav['id']]];
@@ -51,9 +51,19 @@ AppAsset::register($this);
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
-            'label' => '退出 (' . Yii::$app->user->identity->username . ')',
-            'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
+            'label' => Yii::$app->user->identity->username,
+            'url' => ['/user/index'],
+            'items' => [
+                [
+                    'label'=>'设置',
+                    'url'=>['/usr/settings']
+                ],
+                [
+                    'label' => '退出',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']
+                ]
+            ]
         ];
     }
     echo Nav::widget([
