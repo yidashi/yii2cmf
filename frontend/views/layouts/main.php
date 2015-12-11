@@ -78,7 +78,7 @@ AppAsset::register($this);
 <!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
     </div>
 </footer>
-
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=53223522" charset="UTF-8"></script>
 <?php $this->endBody() ?>
 </body>
 </html>
