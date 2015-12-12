@@ -57,5 +57,16 @@ $this->params['breadcrumbs'][] = $model->title;
         <div class="well">您需要登录后才可以评论。<?=Html::a('登录',['site/login'])?> | <?=Html::a('立即注册', ['site/signup'])?></div>
     <?php endif; ?>
 </div>
-<div class="col-lg-3"></div>
+<div class="col-lg-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            热门<?=$model->category?>
+        </div>
+            <ul class="list-group">
+                <?php foreach($hots as $item):?>
+                <li class="list-group-item"><?=Html::a($item->title,['/article/view','id'=>$item->id])?></li>
+                <?php endforeach;?>
+            </ul>
+    </div>
+</div>
 

@@ -78,11 +78,13 @@ class ArticleController extends Controller{
             ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->all();
+        $hots = Article::find()->where(['category_id'=>$model->category_id])->limit(10)->orderBy('comment desc')->all();
         return $this->render('view', [
             'model' => $model,
             'commentModel' => $commentModel,
             'commentModels' => $commentModels,
             'pages' => $pages,
+            'hots' => $hots
         ]);
     }
     public function actionCreate()

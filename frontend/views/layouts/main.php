@@ -38,14 +38,15 @@ AppAsset::register($this);
         ['label' => '首页', 'url' => ['/']],
     ];
     foreach(\common\models\Category::find()->all() as $nav){
-        $menuItems[] = ['label' => $nav['title'], 'url' => ['article/index','cid'=>$nav['id']]];
+        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cid'=>$nav['id']]];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
     $rightMenuItems = [];
-    $rightMenuItems[] = ['label' => '投稿', 'url' => ['article/create']];
+    $rightMenuItems[] = ['label' => '下载', 'url' => ['/download']];
+    $rightMenuItems[] = ['label' => '投稿', 'url' => ['/article/create']];
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
