@@ -29,7 +29,7 @@ class Article extends \common\models\Article
         return [
             [['title', 'content', 'author'], 'required'],
             [['content'], 'string'],
-            [['status', 'category_id'], 'integer'],
+            [['status', 'category_id', 'comment'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
             [['category'], 'default', 'value' => function ($model, $attribute) {
                 return Category::find()->where(['id'=>$model->category_id])->select('title')->scalar();

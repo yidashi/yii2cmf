@@ -56,4 +56,9 @@ class Comment extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
         ];
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id'=>'user_id']);
+    }
 }

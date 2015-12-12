@@ -29,7 +29,8 @@
         "kucha/ueditor": "*",
         "yiisoft/yii2-authclient": "^2.0",
         "npm-asset/bootstrap-markdown": "~2.7",
-        "npm-asset/markdown": "*"
+        "npm-asset/markdown": "*",
+        "npm-asset/font-awesome":"*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
