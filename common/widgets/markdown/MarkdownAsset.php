@@ -13,6 +13,7 @@ class MarkdownAsset extends AssetBundle{
     ];
     public $js = [
         'js/bootstrap-markdown.js',
+        'locale/bootstrap-markdown.zh.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

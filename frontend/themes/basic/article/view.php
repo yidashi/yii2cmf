@@ -18,29 +18,31 @@ $this->params['breadcrumbs'][] = $model->title;
         <span class="vote"><a class="up" href="/vote?type=extension&amp;action=up&amp;id=601" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=extension&amp;action=down&amp;id=601" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
     </div>
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
-    <h4>共 <span class="text-danger"><?=$model->comment?></span> 条评论</h4>
-    <div class="col-4">
-        <ul class="media-list">
-            <?php foreach($commentModels as $item):?>
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <div class="media-heading"><a href=""><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
-                    <div class="media-content"><?= $item->content?></div>
-                    <div class="media-action">
-                        <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="/vote?type=comment&amp;action=up&amp;id=1946" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=comment&amp;action=down&amp;id=1946" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
+    <div id="comments">
+        <h4>共 <span class="text-danger"><?=$model->comment?></span> 条评论</h4>
+        <div class="col-4">
+            <ul class="media-list">
+                <?php foreach($commentModels as $item):?>
+                <li class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt="...">
+                        </a>
                     </div>
-                </div>
-            </li>
-            <?php endforeach;?>
-        </ul>
-        <?= \yii\widgets\LinkPager::widget([
-            'pagination' => $pages,
-        ]); ?>
+                    <div class="media-body">
+                        <div class="media-heading"><a href=""><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
+                        <div class="media-content"><?= $item->content?></div>
+                        <div class="media-action">
+                            <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="/vote?type=comment&amp;action=up&amp;id=1946" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=comment&amp;action=down&amp;id=1946" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach;?>
+            </ul>
+            <?= \yii\widgets\LinkPager::widget([
+                'pagination' => $pages,
+            ]); ?>
+        </div>
     </div>
     <h4>发表评论</h4>
     <?php if(!Yii::$app->user->isGuest): ?>
@@ -52,7 +54,7 @@ $this->params['breadcrumbs'][] = $model->title;
         </div>
         <?php \yii\widgets\ActiveForm::end(); ?>
     <?php else: ?>
-        请先登录
+        <div class="well">您需要登录后才可以评论。<?=Html::a('登录',['site/login'])?> | <?=Html::a('立即注册', ['site/signup'])?></div>
     <?php endif; ?>
 </div>
 <div class="col-lg-3"></div>
