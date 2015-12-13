@@ -71,3 +71,9 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
 </div>
 <?= \common\widgets\danmu\Danmu::widget(['id'=>$model->id]);?>
+<?php $this->registerJs(<<<js
+    $(function(){
+        $('.view-content iframe').addClass('embed-responsive-item').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
+    });
+js
+);
