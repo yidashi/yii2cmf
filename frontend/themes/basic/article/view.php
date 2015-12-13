@@ -54,6 +54,12 @@ $this->params['breadcrumbs'][] = $model->title;
             <?= Html::submitButton('提交',['class'=>'btn btn-primary']) ?>
         </div>
         <?php \yii\widgets\ActiveForm::end(); ?>
+        <?php $form = \yii\widgets\ActiveForm::begin(['action'=>\yii\helpers\Url::toRoute('comment/create'), 'options'=>['class'=>'reply-form hidden']]); ?>
+        <?=$form->field($commentModel, 'parent_id')->hiddenInput()?>
+        <?=$form->field($commentModel, 'content')->textarea()?>
+        <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-primary">回复</button>                </div>
+        <?php \yii\widgets\ActiveForm::end(); ?>
     <?php else: ?>
         <div class="well">您需要登录后才可以评论。<?=Html::a('登录',['site/login'])?> | <?=Html::a('立即注册', ['site/signup'])?></div>
     <?php endif; ?>

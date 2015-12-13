@@ -35,4 +35,42 @@ $(function(){
         });
         return false;
     });
+    //详细页收藏
+    $('.favourites a').on('click', function() {
+        var a = $(this);
+        var span = $(this).find('span');
+        var em = $(this).find('em');
+        $.ajax({
+            url: a.attr('href'),
+            dataType: 'json',
+            success: function(data) {
+                if(data.action == 'create') {
+                    span.attr('class', 'fa fa-star');
+                    a.attr('data-original-title', '您已收藏').tooltip('show').attr('data-original-title', '取消收藏');
+                } else {
+                    span.attr('class', 'fa fa-star-o');
+                    a.attr('data-original-title', '您已取消收藏').tooltip('show').attr('data-original-title', '收藏');
+                }
+                em.html(data.count);
+            },
+            error: function (XMLHttpRequest, textStatus) {
+                $('#modal').modal({ remote: '/yii/frontend/web/site/login'});
+                //this.abort();
+            }
+        });
+        return false;
+    });
+    //回复
+    $(".reply-btn").click(function(){
+        $(".reply-form").removeClass("hidden");
+        if($(this).parent().attr("class")=="media-action") {
+            $(".reply-form").appendTo($(this).parent());
+            $(".reply-form").find("textarea").val("");
+        } else {
+            $(".reply-form").appendTo($(this).parents("li").find(".media-action"));
+            $(".reply-form").find("textarea").val("@"+$(this).parents(".media-heading").find("a").html()+" ");
+        }
+        $(".reply-form").find(".parent_id").val($(this).parents("li").attr("data-key"));
+        return false;
+    });
 });
