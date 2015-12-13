@@ -69,4 +69,4 @@ $this->params['breadcrumbs'][] = $model->title;
             </ul>
     </div>
 </div>
-
+<?= \common\widgets\danmu\Danmu::widget(['id'=>$model->id]);?>

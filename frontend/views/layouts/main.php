@@ -45,7 +45,7 @@ AppAsset::register($this);
         'items' => $menuItems,
     ]);
     $rightMenuItems = [];
-    $rightMenuItems[] = ['label' => '下载', 'url' => ['/download']];
+//    $rightMenuItems[] = ['label' => '下载', 'url' => ['/download']];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/article/create']];
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
