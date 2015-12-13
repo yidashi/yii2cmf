@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <span class="vote"><a class="up" href="/vote?type=extension&amp;action=up&amp;id=601" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=extension&amp;action=down&amp;id=601" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
     </div>
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
+    <?= \common\widgets\share\Share::widget()?>
     <div id="comments">
         <h4>共 <span class="text-danger"><?=$model->comment?></span> 条评论</h4>
         <div class="col-4">

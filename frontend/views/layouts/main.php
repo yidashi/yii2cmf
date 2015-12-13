@@ -89,6 +89,7 @@ AppAsset::register($this);
 <!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
     </div>
 </footer>
+<a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=53223522" charset="UTF-8"></script>
 <?php $this->endBody() ?>
 </body>
