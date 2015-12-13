@@ -92,7 +92,7 @@ a.desc:after {
 
 a:hover{text-decoration: none;}
 .article-title{-webkit-line-clamp:2;display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;height:50px;line-height: 25px;font-size: 16px}
-.view-title{border-bottom: 1px solid #F2F2F2;  padding-bottom: 5px;margin-bottom: 30px;}
+.view-title{border-bottom: 1px solid #F2F2F2;  padding-bottom: 5px;margin-bottom: 10px;}
 .view-content img{max-width: 95%;display: block;margin:0 auto;}
 
 /* 整体样式 */

@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <span class="views"><span class="fa fa-eye"></span> 118次浏览</span>
         <span class="comments"><a href="#comments"><span class="fa fa-comments-o"></span> <?=$model->comment?>条评论</a></span>
         <span class="favourites"><a href="/favourite?type=extension&amp;id=601" title="" data-toggle="tooltip" data-original-title="收藏"><span class="fa fa-star-o"></span> <em>0</em></a></span>
-        <span class="vote"><a class="up" href="/vote?type=extension&amp;action=up&amp;id=601" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=extension&amp;action=down&amp;id=601" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
+        <span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['digg/up','id'=>$model->id, 'type'=>'article'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="<?=\yii\helpers\Url::to(['digg/down','id'=>$model->id, 'type'=>'article'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
     </div>
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
     <?= \common\widgets\share\Share::widget()?>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $model->title;
                         <div class="media-heading"><a href=""><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
                         <div class="media-content"><?= $item->content?></div>
                         <div class="media-action">
-                            <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="/vote?type=comment&amp;action=up&amp;id=1946" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="/vote?type=comment&amp;action=down&amp;id=1946" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
+                            <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['digg/up','id'=>$item->id, 'type'=>'comment'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="<?=\yii\helpers\Url::to(['digg/up','id'=>$item->id, 'type'=>'comment'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
                         </div>
                     </div>
                 </li>

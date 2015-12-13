@@ -11,22 +11,23 @@ namespace frontend\controllers;
 use common\models\Comment;
 use frontend\models\Article;
 use yii\web\Controller;
+use yii\web\Response;
 
 class DiggController extends Controller{
-    public function actionCreate()
+    public function actionUp()
     {
-        $model = new Comment();
-        $model->load(\Yii::$app->request->post());
-        $model->user_id = \Yii::$app->user->id;
-        $returnUrl = \Yii::$app->request->getReferrer();
-        if ($model->save()) {
-            $article = Article::findOne($model->article_id);
-            $article->comment += 1;
-            $article->save();
-            \Yii::$app->session->setFlash('success', '评论成功！');
-        } else {
-            \Yii::$app->session->setFlash('error', '评论失败！');
-        }
-        return $this->redirect($returnUrl);
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'up'=> 1,
+            'down' => 2
+        ];
+    }
+    public function actionDown()
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'up'=> 1,
+            'down' => 2
+        ];
     }
 } 
