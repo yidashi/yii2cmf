@@ -160,6 +160,13 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         } else {
+            $returnUrl = Yii::$app->request->getReferrer();
+            Yii::$app->user->setReturnUrl($returnUrl);
+            if(Yii::$app->request->isAjax){
+                return $this->renderAjax('login', [
+                    'model' => $model,
+                ]);
+            }
             return $this->render('login', [
                 'model' => $model,
             ]);

@@ -29,7 +29,9 @@ $(function(){
                 a.attr('data-original-title', '您已' + title).tooltip('show').attr('data-original-title', title);
             },
             error: function (XMLHttpRequest, textStatus) {
-                $('#modal').modal({ remote: '/yii/frontend/web/site/login'});
+                if(XMLHttpRequest.status == 403){
+                    $('#modal').modal({ remote: XMLHttpRequest.responseJSON.message});
+                }
                 //this.abort();
             }
         });
@@ -54,7 +56,9 @@ $(function(){
                 em.html(data.count);
             },
             error: function (XMLHttpRequest, textStatus) {
-                $('#modal').modal({ remote: '/yii/frontend/web/site/login'});
+                if(XMLHttpRequest.status == 403){
+                    $('#modal').modal({ remote: XMLHttpRequest.responseJSON.message});
+                }
                 //this.abort();
             }
         });
