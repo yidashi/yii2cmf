@@ -1,5 +1,9 @@
 <?php
 /* @var $this yii\web\View */
+/* @var $commentModel common\models\Comment */
+/* @var $hots common\models\Article */
+/* @var $commentModels common\models\Comment */
+/* @var $pages yii\data\Pagination */
 use yii\helpers\Html;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category,'url' => ['/article/index', 'cid' => $model->category_id]];
@@ -24,7 +28,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <div class="col-4">
             <ul class="media-list">
                 <?php foreach($commentModels as $item):?>
-                <li class="media">
+                <li class="media" data-key="<?=$item->id?>">
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt="...">
@@ -33,6 +37,20 @@ $this->params['breadcrumbs'][] = $model->title;
                     <div class="media-body">
                         <div class="media-heading"><a href=""><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
                         <div class="media-content"><?= $item->content?></div>
+                        <?php foreach($item->sons as $son):?>
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="/user/index/1.html" rel="author" title=""><img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt=""></a>
+                            </div>
+                            <div class="media-body">
+                                <div class="media-heading">
+                                    <a href="/user/index/1.html" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
+                                    <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
+                                </div>
+                                <div class="media-content"><?= $son->content?></div>
+                            </div>
+                        </div>
+                        <?php endforeach;?>
                         <div class="media-action">
                             <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['digg/up','id'=>$item->id, 'type'=>'comment'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em>0</em></a><a class="down" href="<?=\yii\helpers\Url::to(['digg/up','id'=>$item->id, 'type'=>'comment'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em>0</em></a></span>
                         </div>
@@ -54,11 +72,14 @@ $this->params['breadcrumbs'][] = $model->title;
             <?= Html::submitButton('提交',['class'=>'btn btn-primary']) ?>
         </div>
         <?php \yii\widgets\ActiveForm::end(); ?>
+        <!--回复-->
         <?php $form = \yii\widgets\ActiveForm::begin(['action'=>\yii\helpers\Url::toRoute('comment/create'), 'options'=>['class'=>'reply-form hidden']]); ?>
-        <?=$form->field($commentModel, 'parent_id')->hiddenInput()?>
-        <?=$form->field($commentModel, 'content')->textarea()?>
+        <?= Html::hiddenInput(Html::getInputName($commentModel,'article_id'), $model->id) ?>
+        <?= Html::hiddenInput(Html::getInputName($commentModel,'parent_id'), 0, ['class'=>'parent_id']) ?>
+        <?=$form->field($commentModel, 'content')->label(false)->textarea()?>
         <div class="form-group">
-                <button type="submit" class="btn btn-sm btn-primary">回复</button>                </div>
+            <button type="submit" class="btn btn-sm btn-primary">回复</button>
+        </div>
         <?php \yii\widgets\ActiveForm::end(); ?>
     <?php else: ?>
         <div class="well">您需要登录后才可以评论。<?=Html::a('登录',['site/login'])?> | <?=Html::a('立即注册', ['site/signup'])?></div>
@@ -69,11 +90,13 @@ $this->params['breadcrumbs'][] = $model->title;
         <div class="panel-heading">
             热门<?=$model->category?>
         </div>
-            <ul class="list-group">
+        <div class="panel-body">
+            <ul class="post-list">
                 <?php foreach($hots as $item):?>
-                <li class="list-group-item"><?=Html::a($item->title,['/article/view','id'=>$item->id])?></li>
+                <li><?=Html::a($item->title,['/article/view','id'=>$item->id])?></li>
                 <?php endforeach;?>
             </ul>
+        </div>
     </div>
 </div>
 <?= \common\widgets\danmu\Danmu::widget(['id'=>$model->id]);?>

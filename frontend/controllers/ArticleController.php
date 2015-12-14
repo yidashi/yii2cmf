@@ -71,7 +71,7 @@ class ArticleController extends Controller{
             throw new NotFoundHttpException('not found');
         }
         $commentModel = new Comment();
-        $commentQuery = Comment::find()->where(['article_id'=>$id]);
+        $commentQuery = Comment::find()->where(['article_id'=>$id, 'parent_id'=>0]);
         $countCommentQuery = clone $commentQuery;
         $pages = new Pagination(['totalCount' => $countCommentQuery->count()]);
         $commentModels = $commentQuery->offset($pages->offset)

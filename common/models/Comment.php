@@ -30,7 +30,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['article_id', 'user_id', 'content'], 'required'],
-            [['article_id', 'user_id'], 'integer'],
+            [['article_id', 'user_id', 'parent_id'], 'integer'],
             [['content'], 'string']
         ];
     }
@@ -44,7 +44,7 @@ class Comment extends \yii\db\ActiveRecord
             'id' => 'ID',
             'article_id' => 'Article ID',
             'user_id' => 'User ID',
-            'content' => '内容',
+            'content' => '内容'
         ];
     }
     /**
@@ -60,5 +60,10 @@ class Comment extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id'=>'user_id']);
+    }
+
+    public function getSons()
+    {
+        return $this->hasMany(Comment::className(), ['parent_id'=>'id']);
     }
 }
