@@ -29,10 +29,11 @@ $(function(){
                 a.attr('data-original-title', '您已' + title).tooltip('show').attr('data-original-title', title);
             },
             error: function (XMLHttpRequest, textStatus) {
-                if(XMLHttpRequest.status == 403){
-                    $('#modal').modal({ remote: XMLHttpRequest.responseJSON.message});
+                if(XMLHttpRequest.status == 302){
+                    $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
-                //this.abort();
+                this.abort();
+
             }
         });
         return false;

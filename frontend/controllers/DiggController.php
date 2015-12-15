@@ -14,14 +14,31 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\Response;
+use yii\filters\AccessControl;
 
 class DiggController extends Controller{
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['up', 'down'],
+                'rules' => [
+                    [
+                        'actions' => ['up', 'down'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionUp()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        if(\Yii::$app->user->isGuest){
-            throw new ForbiddenHttpException(Url::to(['site/login']));
-        }
         return [
             'up'=> 1,
             'down' => 2

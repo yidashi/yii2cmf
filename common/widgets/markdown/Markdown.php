@@ -12,14 +12,14 @@ class Markdown extends yii\widgets\InputWidget{
     public function init(){
         $this->options['id']='markdown-textarea';
         if(!$this->language){
-            $this->language='en';
+            $this->language='zh';
         }
         parent::init();
     }
     public function run(){
-        MarkdownAsset::register($this->view);
+        MarkdownAsset::register($this->view)->js[] = 'js/locale/bootstrap-markdown.' . $this->language . '.js';
         $this->view->registerJs('
-            var markdown=$("#markdown-textarea").markdown({autofocus:false,language:"zh"});
+            var markdown=$("#markdown-textarea").markdown({autofocus:false,language:"' . $this->language . '"});
         ');
         if($this->hasModel()){
             return Html::activeTextarea($this->model,$this->attribute,$this->options);

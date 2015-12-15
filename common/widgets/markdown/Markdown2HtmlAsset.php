@@ -7,11 +7,11 @@
 namespace common\widgets\markdown;
 use yii\web\AssetBundle;
 class Markdown2HtmlAsset extends AssetBundle{
-    public $sourcePath='@npm/markdown';
+    public $sourcePath='@common/widgets/markdown/assets';
     public $css = [
     ];
     public $js = [
-        'lib/markdown.js',
+        'js/markdown.js',
     ];
     public $depends = [
     ];
