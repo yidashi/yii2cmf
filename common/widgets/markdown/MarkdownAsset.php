@@ -7,13 +7,13 @@
 namespace common\widgets\markdown;
 use yii\web\AssetBundle;
 class MarkdownAsset extends AssetBundle{
-    public $sourcePath='@npm/bootstrap-markdown';
+    public $language;
+    public $sourcePath='@common/widgets/markdown/assets';
     public $css = [
         'css/bootstrap-markdown.min.css',
     ];
     public $js = [
         'js/bootstrap-markdown.js',
-        'locale/bootstrap-markdown.zh.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
