@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "777d9f26e6bea7febdede017ef4fd45c",
-    "content-hash": "ea93d0ff5746c72ae290e4e7b51a993c",
+    "hash": "d49bded79ee6a35ec7f03518374351a9",
+    "content-hash": "0279a6da6596de4aaea25e4c58d3bfac",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1360,16 +1360,16 @@
         },
         {
             "name": "yidashi/yii2-boostrap-markdown",
-            "version": "v1.0.1",
+            "version": "v1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
-                "reference": "9f107f2db03dba441db2260d0cd78110fad51454"
+                "reference": "e7f32497ce7a65bfa66c3680d9047cae3f8391bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/9f107f2db03dba441db2260d0cd78110fad51454",
-                "reference": "9f107f2db03dba441db2260d0cd78110fad51454",
+                "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/e7f32497ce7a65bfa66c3680d9047cae3f8391bd",
+                "reference": "e7f32497ce7a65bfa66c3680d9047cae3f8391bd",
                 "shasum": ""
             },
             "require": {
@@ -1383,7 +1383,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-boostrap-markdown",
-            "time": "2015-12-15 09:32:06"
+            "time": "2015-12-15 10:24:21"
         },
         {
             "name": "yiisoft/yii2",

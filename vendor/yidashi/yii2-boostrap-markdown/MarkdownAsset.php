@@ -8,7 +8,6 @@ namespace yidashi\markdown;
 use yii\web\AssetBundle;
 class MarkdownAsset extends AssetBundle{
     public $language;
-    public $sourcePath='@common/widgets/markdown/assets';
     public $css = [
         'css/bootstrap-markdown.min.css',
     ];
@@ -20,4 +19,9 @@ class MarkdownAsset extends AssetBundle{
         'yii\bootstrap\BootstrapAsset',
         'common\widgets\markdown\Markdown2HtmlAsset',
     ];
+    public function init()
+    {
+        $this->sourcePath = __DIR__ . '/assets';
+        parent::init();
+    }
 }
