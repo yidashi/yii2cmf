@@ -2176,5 +2176,34 @@
             }
         ],
         "description": "Option parsing for Node, supporting types, shorthands, etc. Used by npm."
+    },
+    {
+        "name": "yidashi/yii2-boostrap-markdown",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
+            "reference": "df1bc5a3f27acb2a56c4ecf35880a30ef5e2edc6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/df1bc5a3f27acb2a56c4ecf35880a30ef5e2edc6",
+            "reference": "df1bc5a3f27acb2a56c4ecf35880a30ef5e2edc6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2015-12-15 09:13:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yidashi\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-boostrap-markdown"
     }
 ]
