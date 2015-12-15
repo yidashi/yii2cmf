@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $model->title;
     <h4>发表评论</h4>
     <?php if(!Yii::$app->user->isGuest): ?>
         <?php $form = \yii\widgets\ActiveForm::begin(['action'=>\yii\helpers\Url::toRoute('comment/create')]); ?>
-        <?= $form->field($commentModel, 'content')->label(false)->widget('\common\widgets\markdown\Markdown',['options'=>['style'=>'height:200px;']]); ?>
+        <?= $form->field($commentModel, 'content')->label(false)->widget('\yidashi\markdown\Markdown',['options'=>['style'=>'height:200px;']]); ?>
         <?= Html::hiddenInput(Html::getInputName($commentModel,'article_id'), $model->id) ?>
         <div class="form-group">
             <?= Html::submitButton('提交',['class'=>'btn btn-primary']) ?>
