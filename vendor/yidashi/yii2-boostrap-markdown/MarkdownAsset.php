@@ -17,7 +17,7 @@ class MarkdownAsset extends AssetBundle{
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'common\widgets\markdown\Markdown2HtmlAsset',
+        'yidashi\markdown\Markdown2HtmlAsset',
     ];
     public function init()
     {

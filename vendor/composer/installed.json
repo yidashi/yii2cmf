@@ -2046,18 +2046,18 @@
         "source": {
             "type": "git",
             "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
-            "reference": "e7f32497ce7a65bfa66c3680d9047cae3f8391bd"
+            "reference": "156c87428b4177662656a0443674cb21b0875af6"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/e7f32497ce7a65bfa66c3680d9047cae3f8391bd",
-            "reference": "e7f32497ce7a65bfa66c3680d9047cae3f8391bd",
+            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/156c87428b4177662656a0443674cb21b0875af6",
+            "reference": "156c87428b4177662656a0443674cb21b0875af6",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4.0"
         },
-        "time": "2015-12-15 10:24:21",
+        "time": "2015-12-15 10:32:15",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
