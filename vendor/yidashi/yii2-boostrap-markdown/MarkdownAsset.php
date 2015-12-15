@@ -4,7 +4,7 @@
  * Date: 2015/12/4
  * Time: 17:18
  */
-namespace yii\markdown;
+namespace yidashi\markdown;
 use yii\web\AssetBundle;
 class MarkdownAsset extends AssetBundle{
     public $language;

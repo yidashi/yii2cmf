@@ -4,7 +4,7 @@
  * Date: 2015/12/4
  * Time: 17:32
  */
-namespace yii\markdown;
+namespace yidashi\markdown;
 use yii\web\AssetBundle;
 class Markdown2HtmlAsset extends AssetBundle{
     public $sourcePath='@common/widgets/markdown/assets';

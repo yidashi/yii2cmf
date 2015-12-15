@@ -4,7 +4,7 @@
  * Date: 2015/12/4
  * Time: 17:15
  */
-namespace yii\markdown;
+namespace yidashi\markdown;
 use yii;
 use yii\helpers\Html;
 class Markdown extends yii\widgets\InputWidget{
