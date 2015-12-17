@@ -4,9 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5eb3ade92cb1e66ec906d509a0d6db9a",
-    "content-hash": "717de402f2555b4b1b1b9dc4912a75e2",
+    "hash": "7cbc86be352024bf34ddf9e362dc9522",
+    "content-hash": "5a1fa07eec6318228f1539d3231cfc2b",
     "packages": [
+        {
+            "name": "aferrandini/phpqrcode",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aferrandini/PHPQRCode.git",
+                "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aferrandini/PHPQRCode/zipball/3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
+                "reference": "3c1c0454d43710ab5bbe19a51ad4cb41c22e3d46",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPQRCode": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ariel Ferrandini",
+                    "email": "arielferrandini@gmail.com",
+                    "homepage": "http://www.ferrandini.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHPQRCode porting and changed for PHP 5.3 compatibility",
+            "homepage": "https://github.com/aferrandini/PHPQRCode",
+            "keywords": [
+                "barcode",
+                "php",
+                "qrcode"
+            ],
+            "time": "2013-07-08 09:39:08"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.5",
@@ -717,16 +761,16 @@
         },
         {
             "name": "kartik-v/yii2-helpers",
-            "version": "v1.3.3",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-helpers.git",
-                "reference": "84b9e77aad937d2662934e2664d0190a7c332dd3"
+                "reference": "f16003c8c9cfdaa50b4c9574cae9f0310946696c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/84b9e77aad937d2662934e2664d0190a7c332dd3",
-                "reference": "84b9e77aad937d2662934e2664d0190a7c332dd3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/f16003c8c9cfdaa50b4c9574cae9f0310946696c",
+                "reference": "f16003c8c9cfdaa50b4c9574cae9f0310946696c",
                 "shasum": ""
             },
             "require": {
@@ -759,20 +803,20 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2015-10-22 14:01:06"
+            "time": "2015-12-12 18:47:11"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
-            "version": "v1.7.9",
+            "version": "v1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "6f10fd0a0bfccd729764c65fa65eb4ccf2cbade9"
+                "reference": "602e7203680642ac4a2a5f9355316eaa9939b6ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/6f10fd0a0bfccd729764c65fa65eb4ccf2cbade9",
-                "reference": "6f10fd0a0bfccd729764c65fa65eb4ccf2cbade9",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/602e7203680642ac4a2a5f9355316eaa9939b6ff",
+                "reference": "602e7203680642ac4a2a5f9355316eaa9939b6ff",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +849,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-11-25 07:03:35"
+            "time": "2015-12-11 19:01:49"
         },
         {
             "name": "kartik-v/yii2-mpdf",
@@ -1386,33 +1430,6 @@
             "time": "2015-12-15 10:32:15"
         },
         {
-            "name": "yidashi/yii2-phpqrcode",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidashi/phpqrcode.git",
-                "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/phpqrcode/zipball/bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
-                "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "yii2-phpqrcode",
-            "time": "2015-12-17 12:36:25"
-        },
-        {
             "name": "yiisoft/yii2",
             "version": "2.0.6",
             "source": {
@@ -1775,25 +1792,6 @@
                 "fixtures"
             ],
             "time": "2015-05-29 06:29:14"
-        },
-        {
-            "name": "npm-asset/abbrev",
-            "version": "v1.0.0",
-            "source": {
-                "type": "git",
-                "url": "git+ssh://git@github.com/isaacs/abbrev-js.git",
-                "reference": "a19cb746c0a21cfd00dcac29f4b98c62b3d2956d"
-            },
-            "type": "npm-asset-library",
-            "extra": {
-                "npm-asset-main": "./lib/abbrev.js",
-                "npm-asset-scripts": {
-                    "test": "node lib/abbrev.js"
-                }
-            },
-            "authors": [
-                "Isaac Z. Schlueter <i@izs.me>"
-            ]
         },
         {
             "name": "phpspec/php-diff",

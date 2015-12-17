@@ -29,7 +29,7 @@
         "kucha/ueditor": "*",
        "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yiisoft/yii2-authclient": "^2.0",
-        "yidashi/yii2-phpqrcode": "*"
+        "aferrandini/PHPQRCode": "1.0.1"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

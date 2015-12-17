@@ -1,6 +1,12 @@
 Change Log: `yii2-krajee-base`
 ==============================
 
+## Version 1.8.0
+
+**Date:** 11-Dec-2015
+
+- (bug #49): Correct module and sub-module validation in `Config::getModule`.
+
 ## Version 1.7.9
 
 **Date:** 25-Nov-2015

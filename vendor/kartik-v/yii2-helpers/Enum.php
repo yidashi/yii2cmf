@@ -3,13 +3,14 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
  * @package yii2-helpers
- * @version 1.3.3
+ * @version 1.3.5
  */
 
 namespace kartik\helpers;
 
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\helpers\Inflector;
 
 /**
  * Collection of useful helper functions for Yii Applications
@@ -18,9 +19,11 @@ use yii\base\InvalidConfigException;
  * @since 1.0
  *
  */
-class Enum extends \yii\helpers\Inflector
+class Enum extends Inflector
 {
-    /* time intervals in seconds */
+    /**
+     * @var array time intervals in seconds
+     */
     public static $intervals = [
         'year' => 31556926,
         'month' => 2629744,
@@ -34,18 +37,17 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Check if a variable is empty or not set.
      *
-     * @param reference $var variable to perform the check
+     * @param mixed $var variable to perform the check
      *
      * @return boolean
      */
-    public static function isEmpty(&$var)
+    public static function isEmpty($var)
     {
-        return is_array($var) ? empty($var) : (!isset($var) || (strlen($var) == 0));
+        return !isset($var) ? true : (is_array($var) ? empty($var) : ($var === null || $var === ''));
     }
 
     /**
-     * Check if a value exists in the array. This method is faster
-     * in performance than the built in PHP in_array method.
+     * Check if a value exists in the array. This method is faster in performance than the built in PHP in_array method.
      *
      * @param string $needle the value to search
      * @param array  $haystack the array to scan
@@ -60,11 +62,16 @@ class Enum extends \yii\helpers\Inflector
 
     /**
      * Properize a string for possessive punctuation.
-     * e.g.
-     *     properize("Chris"); //returns Chris'
-     *     properize("David"); //returns David's
      *
      * @param string $string input string
+     *
+     * Example:
+     * ~~~
+     * properize("Chris"); //returns Chris'
+     * properize("David"); //returns David's
+     * ~~~
+     *
+     * @return string
      */
     public static function properize($string)
     {
@@ -75,19 +82,23 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Get time elapsed (Facebook Style)
      *
+     * @param string $fromTime start date time
+     * @param bool   $human if true returns an approximate human friendly output. If set to `false`, will attempt an
+     *     exact conversion of time intervals.
+     * @param string $toTime end date time (defaults to current system time)
+     * @param string $append the string to append for the converted elapsed time. Defaults to ' ago'.
+     *
      * Example Output(s):
      *     10 hours ago
-     *
-     * @param string  $fromTime start date time
-     * @param boolean $human if true returns an approximate human friendly output. If set to `false`,
-     * will attempt an exact conversion of time intervals.
-     * @param string  $toTime end date time (defaults to current system time)
-     * @param string  $append the string to append for the converted elapsed time. Defaults to ' ago'.
      *
      * @return string
      */
     public static function timeElapsed($fromTime = null, $human = true, $toTime = null, $append = null)
     {
+        static::initI18N();
+        if ($append === null) {
+            $append = ' ' . Yii::t('kvenum', 'ago');
+        }
         if ($fromTime != null) {
             $fromTime = strtotime($fromTime);
             $toTime = ($toTime == null) ? time() : (int)$toTime;
@@ -98,16 +109,16 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Get time interval (Facebook Style)
      *
+     * @param int    $interval time interval in seconds
+     * @param string $append the string to append for the converted elapsed time. Defaults to ' ago'.
+     * @param bool   $human if true returns an approximate human friendly output. If set to `false`, will attempt an
+     *     exact conversion of time intervals.
+     *
      * Example Output(s):
      *     10 hours ago
      *
-     * @param int     $interval time interval in seconds
-     * @param string  $append the string to append for the converted elapsed time. Defaults to ' ago'.
-     * @param boolean $human if true returns an approximate human friendly output. If set to `false`,
-     * will attempt an exact conversion of time intervals.
-     *
      * @return string
-     */    
+     */
     public static function timeInterval($interval, $append = null, $human = true)
     {
         static::initI18N();
@@ -121,33 +132,30 @@ class Enum extends \yii\helpers\Inflector
             if ($interval <= 0) {
                 $elapsed = Yii::t('kvenum', 'a moment ago');
             } elseif ($interval < 60) {
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one second} other{# seconds}}',
-                        ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one second} other{# seconds}}', [ 'n' => $interval]);
             } elseif ($interval >= 60 && $interval < $intervals['hour']) {
                 $interval = floor($interval / $intervals['minute']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one minute} other{# minutes}}',
-                        ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one minute} other{# minutes}}', ['n' => $interval]);
             } elseif ($interval >= $intervals['hour'] && $interval < $intervals['day']) {
                 $interval = floor($interval / $intervals['hour']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one hour} other{# hours}}', ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one hour} other{# hours}}', ['n' => $interval]);
             } elseif ($interval >= $intervals['day'] && $interval < $intervals['week']) {
                 $interval = floor($interval / $intervals['day']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one day} other{# days}}', ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one day} other{# days}}', ['n' => $interval]);
             } elseif ($interval >= $intervals['week'] && $interval < $intervals['month']) {
                 $interval = floor($interval / $intervals['week']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one week} other{# weeks}}', ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one week} other{# weeks}}', ['n' => $interval]);
             } elseif ($interval >= $intervals['month'] && $interval < $intervals['year']) {
                 $interval = floor($interval / $intervals['month']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one month} other{# months}}',
-                        ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one month} other{# months}}', ['n' => $interval]);
             } elseif ($interval >= $intervals['year']) {
                 $interval = floor($interval / $intervals['year']);
-                $elapsed = Yii::t('kvenum', '{n, plural, one{one year} other{# years}}', ['n' => $interval]) . $append;
+                $elapsed = Yii::t('kvenum', '{n, plural, one{one year} other{# years}}', ['n' => $interval]);
             }
         } else {
-            $elapsed = static::time2String($interval, $intervals) . $append;
+            $elapsed = static::time2String($interval, $intervals);
         }
-        return $elapsed;
+        return $elapsed . $append;
     }
 
     /**
@@ -159,7 +167,7 @@ class Enum extends \yii\helpers\Inflector
             return;
         }
         Yii::setAlias("@kvenum", __DIR__);
-        Yii::$app->i18n->translations['kvenum'] = [
+        Yii::$app->i18n->translations['kvenum*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'basePath' => "@kvenum/messages",
             'forceTranslation' => true
@@ -172,17 +180,17 @@ class Enum extends \yii\helpers\Inflector
      * Example Output:
      *    1 year 5 months 3 days ago
      *
-     * @param integer $timeline elapsed number of seconds
-     * @param array   $intervals configuration of time intervals in seconds
+     * @param int   $time elapsed number of seconds
+     * @param array $intervals configuration of time intervals in seconds
      *
      * @return string
      */
-    protected static function time2String($timeline, $intervals)
+    protected static function time2String($time, $intervals)
     {
         $output = '';
-        foreach ($intervals AS $name => $seconds) {
-            $num = floor($timeline / $seconds);
-            $timeline -= ($num * $seconds);
+        foreach ($intervals as $name => $seconds) {
+            $num = floor($time / $seconds);
+            $time -= ($num * $seconds);
             if ($num > 0) {
                 $output .= $num . ' ' . $name . (($num > 1) ? 's' : '') . ' ';
             }
@@ -191,68 +199,7 @@ class Enum extends \yii\helpers\Inflector
     }
 
     /**
-     * Get time remaining (Facebook Style)
-     *
-     * Example Output(s):
-     *     10 hours to go
-     *
-     * @param string  $futureTime future date time
-     * @param boolean $human if true returns an approximate human friendly output
-     * If set to false will attempt an exact conversion of time intervals.
-     * @param string  $currentTime current date time (defaults to current system time)
-     * @param string  $append the string to append for the converted elapsed time
-     * (default: 'until the deadline')
-     *
-     * @return string
-     */
-    public static function timeRemaining(
-        $futureTime = null,
-        $human = true,
-        $currentTime = null,
-        $append = ' until the deadline'
-    ) {
-        $remaining = '';
-        if ($futureTime != null) {
-            $futureTime = strtotime($futureTime);
-            $currentTime = ($currentTime == null) ? time() : (int)$currentTime;
-            $diff = $futureTime - $currentTime;
-            $intervals = static::$intervals;
-
-            if ($human) {
-                // now we just find the difference
-                if ($diff <= 0) {
-                    $remaining = 'a moment to go';
-                } elseif ($diff < 60) {
-                    $remaining = $diff == 1 ? $diff . ' second to go' : $diff . ' seconds' . $append;
-                } elseif ($diff >= 60 && $diff < $intervals['hour']) {
-                    $diff = floor($diff / $intervals['minute']);
-                    $remaining = $diff == 1 ? $diff . ' minute to go' : $diff . ' minutes' . $append;
-                } elseif ($diff >= $intervals['hour'] && $diff < $intervals['day']) {
-                    $diff = floor($diff / $intervals['hour']);
-                    $remaining = $diff == 1 ? $diff . ' hour to go' : $diff . ' hours' . $append;
-                } elseif ($diff >= $intervals['day'] && $diff < $intervals['week']) {
-                    $diff = floor($diff / $intervals['day']);
-                    $remaining = $diff == 1 ? $diff . ' day to go' : $diff . ' days' . $append;
-                } elseif ($diff >= $intervals['week'] && $diff < $intervals['month']) {
-                    $diff = floor($diff / $intervals['week']);
-                    $remaining = $diff == 1 ? $diff . ' week to go' : $diff . ' weeks to go';
-                } elseif ($diff >= $intervals['month'] && $diff < $intervals['year']) {
-                    $diff = floor($diff / $intervals['month']);
-                    $remaining = $diff == 1 ? $diff . ' month to go' : $diff . ' months' . $append;
-                } elseif ($diff >= $intervals['year']) {
-                    $diff = floor($diff / $intervals['year']);
-                    $remaining = $diff == 1 ? $diff . ' year to go' : $diff . ' years' . $append;
-                }
-            } else {
-                $remaining = static::time2String($diff, $intervals) . $append;
-            }
-        }
-        return $remaining;
-    }
-
-    /**
-     * Format and convert "bytes" to its
-     * optimal higher metric unit
+     * Format and convert "bytes" to its optimal higher metric unit
      *
      * @param double  $bytes number of bytes
      * @param integer $precision the number of decimal places to round off
@@ -273,8 +220,7 @@ class Enum extends \yii\helpers\Inflector
     }
 
     /**
-     * Number to words conversion. Returns the number
-     * converted as an anglicized string.
+     * Number to words conversion. Returns the number converted as an anglicized string.
      *
      * @param double $num the source number
      *
@@ -283,33 +229,29 @@ class Enum extends \yii\helpers\Inflector
     public static function numToWords($num)
     {
         $num = (int)$num; // make sure it's an integer
-
         if ($num < 0) {
             return Yii::t('kvenum', 'minus') . ' ' . static::convertTri(-$num, 0);
         }
-
         if ($num == 0) {
             return Yii::t('kvenum', 'zero');
         }
-
         return static::convertTri($num, 0);
     }
 
     /**
-     * Recursive function used in number to words conversion.
-     * Converts three digits per pass.
+     * Recursive function used in number to words conversion. Converts three digits per pass.
      *
      * @param double $num the source number
-     * @param double $tri the three digits converted per pass.
+     * @param int    $tri the three digits converted per pass.
      *
      * @return string
      */
     protected static function convertTri($num, $tri)
     {
-        // chunk the number, ...rxyy
-        $r = (int)($num / 1000);
-        $x = ($num / 100) % 10;
-        $y = $num % 100;
+        // chunk the number ...xyz
+        $x = (int)($num / 1000);
+        $y = ($num / 100) % 10;
+        $z = $num % 100;
 
         // init the output string
         $str = "";
@@ -318,29 +260,20 @@ class Enum extends \yii\helpers\Inflector
         $triplets = static::triplets();
 
         // do hundreds
-        if ($x > 0) {
-            $str = $ones[$x] . ' ' . Yii::t('kvenum', 'hundred');
+        if ($y > 0) {
+            $str = $ones[$y] . ' ' . Yii::t('kvenum', 'hundred');
         }
 
         // do ones and tens
-        if ($y < 20) {
-            $str .= $ones[$y];
-        } else {
-            $str .= $tens[(int)($y / 10)] . $ones[$y % 10];
-        }
+        $str .= $z < 20 ? $ones[$z] : $tens[(int)($z / 10)] . $ones[$z % 10];
 
-        // add triplet modifier only if there
-        // is some output to be modified...
+        // add triplet modifier only if there is some output to be modified...
         if ($str != "") {
             $str .= $triplets[$tri];
         }
 
-        // continue recursing?
-        if ($r > 0) {
-            return static::convertTri($r, $tri + 1) . $str;
-        } else {
-            return $str;
-        }
+        // recursively process until valid thousands digit found
+        return $x > 0 ? static::convertTri($x, $tri + 1) . $str : $str;
     }
 
     /**
@@ -491,13 +424,13 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Generate a month or day array list for Gregorian calendar
      *
-     * @param string  $unit whether 'day' or 'month'
-     * @param boolean $abbr whether to return abbreviated day or month
-     * @param boolean $start the first day or month to set. Defaults to `1`.
-     * @param string  $case whether 'upper', lower', or null. If null, then
-     * the initcap case will be used.
+     * @param string $unit whether 'day' or 'month'
+     * @param bool   $abbr whether to return abbreviated day or month
+     * @param int    $start the first day or month to set. Defaults to `1`.
+     * @param string $case whether 'upper', lower', or null. If null, then the initcap case will be used.
      *
      * @return array list of days or months
+     * @throws InvalidConfigException
      */
     protected static function genCalList($unit = 'day', $abbr = false, $start = 1, $case = null)
     {
@@ -530,10 +463,9 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Generate a month array list for Gregorian calendar
      *
-     * @param boolean $abbr whether to return abbreviated month
-     * @param boolean $start the first month to set. Defaults to `1` for `January`.
-     * @param string  $case whether 'upper', lower', or null. If null, then
-     * the initcap case will be used.
+     * @param bool   $abbr whether to return abbreviated month
+     * @param int    $start the first month to set. Defaults to `1` for `January`.
+     * @param string $case whether 'upper', lower', or null. If null, then the initcap case will be used.
      *
      * @return array list of months
      */
@@ -545,10 +477,9 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Generate a day array list for Gregorian calendar
      *
-     * @param boolean $abbr whether to return abbreviated day
-     * @param boolean $start the first day to set. Defaults to `1` for `Sunday`.
-     * @param string  $case whether 'upper', lower', or null. If null, then
-     * the initcap case will be used.
+     * @param bool   $abbr whether to return abbreviated day
+     * @param int    $start the first day to set. Defaults to `1` for `Sunday`.
+     * @param string $case whether 'upper', lower', or null. If null, then the initcap case will be used.
      *
      * @return array list of days
      */
@@ -560,11 +491,11 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Generate a date picker array list for Gregorian Calendar.
      *
-     * @param integer $from the start day, defaults to 1
-     * @param integer $to the end day, defaults to 31
-     * @param integer $interval the date interval, defaults to 1.
-     * @param integer $intervalFromZero whether to start incrementing intervals from zero if $from = 1.
-     * @param integer $showLast whether to show the last date (set in $to) even if it does not match interval.
+     * @param int  $from the start day, defaults to 1
+     * @param int  $to the end day, defaults to 31
+     * @param int  $interval the date interval, defaults to 1.
+     * @param bool $intervalFromZero whether to start incrementing intervals from zero if $from = 1.
+     * @param bool $showLast whether to show the last date (set in $to) even if it does not match interval.
      *
      * @return array
      * @throws InvalidConfigException
@@ -661,16 +592,16 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Convert a PHP array to HTML table
      *
-     * @param array   $array the associative array to be converted
-     * @param boolean $transpose whether to show keys as rows instead of columns.
-     * This parameter should be used only for a single dimensional associative array.
-     * If used for a multidimensional array, the sub array will be imploded as text.
-     * @param boolean $recursive whether to recursively generate tables for multi-dimensional arrays
-     * @param boolean $typeHint whether to show the data type as a hint
-     * @param string  $null the content to display for blank cells
-     * @param array   $tableOptions the HTML attributes for the table
-     * @param array   $keyOptions the HTML attributes for the array key
-     * @param array   $valueOptions the HTML attributes for the array value
+     * @param array  $array the associative array to be converted
+     * @param bool   $transpose whether to show keys as rows instead of columns. This parameter should be used only for
+     *     a single dimensional associative array. If used for a multidimensional array, the sub array will be imploded
+     *     as text.
+     * @param bool   $recursive whether to recursively generate tables for multi-dimensional arrays
+     * @param bool   $typeHint whether to show the data type as a hint
+     * @param string $null the content to display for blank cells
+     * @param array  $tableOptions the HTML attributes for the table
+     * @param array  $keyOptions the HTML attributes for the array key
+     * @param array  $valueOptions the HTML attributes for the array value
      *
      * @return string|boolean
      */
@@ -734,7 +665,7 @@ class Enum extends \yii\helpers\Inflector
 
                 if ($recursive === true && is_array($cell) && !empty($cell)) {
                     // Recursive mode
-                    $table .= "\n" . array2table($cell, true, true) . "\n";
+                    $table .= "\n" . static::array2table($cell, true, true) . "\n";
                 } else {
                     if (!is_null($cell) && is_bool($cell)) {
                         $val = $cell ? 'true' : 'false';
@@ -776,8 +707,8 @@ class Enum extends \yii\helpers\Inflector
             return 'NULL';
         } elseif (is_bool($var)) {
             return 'boolean';
-        } elseif (is_float($var) || (is_numeric(str_replace(',', '', $var)) && strpos($var,
-                    '.') > 0 && is_float((float)str_replace(',', '', $var)))
+        } elseif (is_float($var) || (is_numeric(str_replace(',', '', $var)) && strpos($var, '.') > 0 &&
+                is_float((float)str_replace(',', '', $var)))
         ) {
             return 'float';
         } elseif (is_int($var) || (is_numeric($var) && is_int((int)$var))) {
@@ -812,8 +743,11 @@ class Enum extends \yii\helpers\Inflector
             if (array_key_exists($key, $_SERVER) === true) {
                 foreach (array_map('trim', explode(',', $_SERVER[$key])) as $ip) {
                     if ($filterLocal) {
-                        $checkFilter = filter_var($ip, FILTER_VALIDATE_IP,
-                            FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+                        $checkFilter = filter_var(
+                            $ip,
+                            FILTER_VALIDATE_IP,
+                            FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+                        );
                         if ($checkFilter !== false) {
                             return $ip;
                         }
@@ -921,8 +855,8 @@ class Enum extends \yii\helpers\Inflector
     /**
      * Returns browser version
      *
-     * @param string  $agent
-     * @param browser $code
+     * @param string $agent the user agent string
+     * @param string $code the browser string
      *
      * @return float
      */

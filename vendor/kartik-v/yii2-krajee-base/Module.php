@@ -4,7 +4,7 @@
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.7.9
+ * @version   1.8.0
  */
 
 namespace kartik\base;
@@ -13,7 +13,7 @@ namespace kartik\base;
  * Base module class for Krajee extensions
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
- * @since 1.7.9
+ * @since 1.8.0
  */
 class Module extends \yii\base\Module
 {

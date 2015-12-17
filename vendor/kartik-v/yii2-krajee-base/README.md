@@ -15,7 +15,7 @@ This is a base library with set of foundation classes and components used by all
 To ensure a leaner code base / foundation component for use in all Krajee extensions (e.g. yii2-widgets, yii2-datecontrol, yii2-grid, yii2-dynagrid etc.). This should allow most developers to plug and play components only they need, without needing the complete suite of widgets. For example, this mitigates [this issue](https://github.com/kartik-v/yii2-grid/issues/123). 
 
 ## Latest Release
-The latest version of the extension is v1.7.9. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-krajee-base/blob/master/CHANGE.md) for details.
+The latest version of the extension is v1.8.0. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-krajee-base/blob/master/CHANGE.md) for details.
 
 ## Extension Classes
 

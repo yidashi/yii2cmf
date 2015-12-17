@@ -48,15 +48,6 @@ return array (
       '@kartik/datetime' => $vendorDir . '/kartik-v/yii2-widget-datetimepicker',
     ),
   ),
-  'kartik-v/yii2-helpers' => 
-  array (
-    'name' => 'kartik-v/yii2-helpers',
-    'version' => '1.3.3.0',
-    'alias' => 
-    array (
-      '@kartik/helpers' => $vendorDir . '/kartik-v/yii2-helpers',
-    ),
-  ),
   'kartik-v/yii2-detail-view' => 
   array (
     'name' => 'kartik-v/yii2-detail-view',
@@ -129,15 +120,6 @@ return array (
       '@ijackua/lepture' => $vendorDir . '/ijackua/yii2-lepture-markdown-editor-widget',
     ),
   ),
-  'kartik-v/yii2-krajee-base' => 
-  array (
-    'name' => 'kartik-v/yii2-krajee-base',
-    'version' => '1.7.9.0',
-    'alias' => 
-    array (
-      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
-    ),
-  ),
   'kartik-v/yii2-grid' => 
   array (
     'name' => 'kartik-v/yii2-grid',
@@ -145,6 +127,24 @@ return array (
     'alias' => 
     array (
       '@kartik/grid' => $vendorDir . '/kartik-v/yii2-grid',
+    ),
+  ),
+  'kartik-v/yii2-krajee-base' => 
+  array (
+    'name' => 'kartik-v/yii2-krajee-base',
+    'version' => '1.8.0.0',
+    'alias' => 
+    array (
+      '@kartik/base' => $vendorDir . '/kartik-v/yii2-krajee-base',
+    ),
+  ),
+  'kartik-v/yii2-helpers' => 
+  array (
+    'name' => 'kartik-v/yii2-helpers',
+    'version' => '1.3.5.0',
+    'alias' => 
+    array (
+      '@kartik/helpers' => $vendorDir . '/kartik-v/yii2-helpers',
     ),
   ),
 );

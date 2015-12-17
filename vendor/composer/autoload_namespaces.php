@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Resque' => array($vendorDir . '/chrisboulton/php-resque/lib'),
+    'PHPQRCode' => array($vendorDir . '/aferrandini/phpqrcode/lib'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
 );

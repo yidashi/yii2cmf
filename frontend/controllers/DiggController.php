@@ -52,4 +52,12 @@ class DiggController extends Controller{
             'down' => 2
         ];
     }
+    public function actionTest()
+    {
+        $QR = "/tmp/qrcode.png";
+        \PHPQRCode\QRcode::png("Test", $QR, 'L', 4, 2);
+        $QR = imagecreatefromstring(file_get_contents($QR));
+        header('Content-type:image/png');
+        echo imagepng($QR);;die;
+    }
 } 
