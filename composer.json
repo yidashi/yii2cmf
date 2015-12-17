@@ -28,7 +28,8 @@
         "fabpot/goutte": "^3.1",
         "kucha/ueditor": "*",
        "yidashi/yii2-boostrap-markdown": "1.0.2",
-        "yiisoft/yii2-authclient": "^2.0"
+        "yiisoft/yii2-authclient": "^2.0",
+        "yidashi/yii2-phpqrcode": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

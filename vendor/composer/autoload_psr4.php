@@ -36,4 +36,5 @@ return array(
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Goutte\\' => array($vendorDir . '/fabpot/goutte/Goutte'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
+    '' => array($vendorDir . '/yidashi/yii2-phpqrcode'),
 );

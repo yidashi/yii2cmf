@@ -2067,5 +2067,34 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "description": "yii2-boostrap-markdown"
+    },
+    {
+        "name": "yidashi/yii2-phpqrcode",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/phpqrcode.git",
+            "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/phpqrcode/zipball/bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
+            "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2015-12-17 12:36:25",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-phpqrcode"
     }
 ]

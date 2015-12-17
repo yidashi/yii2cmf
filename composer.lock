@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d49bded79ee6a35ec7f03518374351a9",
-    "content-hash": "0279a6da6596de4aaea25e4c58d3bfac",
+    "hash": "5eb3ade92cb1e66ec906d509a0d6db9a",
+    "content-hash": "717de402f2555b4b1b1b9dc4912a75e2",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1384,6 +1384,33 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-boostrap-markdown",
             "time": "2015-12-15 10:32:15"
+        },
+        {
+            "name": "yidashi/yii2-phpqrcode",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidashi/phpqrcode.git",
+                "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidashi/phpqrcode/zipball/bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
+                "reference": "bb56635f8b56ad334e1cc9ac9d2f4d6751a9b3bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "yii2-phpqrcode",
+            "time": "2015-12-17 12:36:25"
         },
         {
             "name": "yiisoft/yii2",
