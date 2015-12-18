@@ -11,9 +11,9 @@ namespace frontend\controllers;
 use yii\web\Controller;
 
 class QrcodeController extends Controller{
-    public function actionIndex($text)
+    public function actionIndex($text,$size)
     {
-        $QR = \PHPQRCode\QRcode::png($text, false, 'L', 5, 2);
-        echo $QR;DIE;
+        $QR = \PHPQRCode\QRcode::png($text, false, 'L', $size, 2);
+        echo $QR;die;
     }
 } 
