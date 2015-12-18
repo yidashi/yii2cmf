@@ -46,7 +46,7 @@ class Webuploader extends InputWidget{
         $this->view->registerJs(<<<JS
 var uploader = WebUploader.create({
         auto: true,
-        fileVal: 'file',
+        fileVal: 'upfile',
         // swf文件路径
         swf: '{$swfPath}/Uploader.swf',
 
@@ -80,7 +80,7 @@ uploader.on( 'uploadProgress', function( file, percentage ) {
 uploader.on( 'uploadSuccess', function( file, data ) {
     $( '#'+file.id ).find('p.state').text('上传成功').fadeOut();
     $( '#{$this->options['boxId']} .webuploader-pick' ).html('<img src="{$web}/'+data.url+'" width="{$this->options['previewWidth']}" height="{$this->options['previewHeight']}"/>');
-    $( '#{$this->options['id']}' ).val(data.url);
+    $( '#{$this->options['id']}' ).val("{$web}/" + data.url);
 });
 JS
         );

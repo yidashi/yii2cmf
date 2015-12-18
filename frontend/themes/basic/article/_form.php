@@ -22,6 +22,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
 
+    <?= $form->field($model, 'cover')->widget('common\widgets\webuploader\Webuploader') ?>
+
     <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor',[]); ?>
 
     <div class="form-group">
