@@ -30,7 +30,7 @@
         "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yiisoft/yii2-authclient": "^2.0",
         "aferrandini/PHPQRCode": "1.0.1",
-        "yidashi/yii2-webuploader": "1.0.2"
+        "yidashi/yii2-webuploader": "1.0.3"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -65,7 +65,7 @@ var uploader = WebUploader.create({
             extensions: 'gif,jpg,jpeg,bmp,png',
             mimeTypes: 'image/*'
         },
-        
+
         // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
         resize: false
     });
@@ -88,8 +88,8 @@ uploader.on( 'uploadProgress', function( file, percentage ) {
 // 完成上传完了，成功或者失败，先删除进度条。
 uploader.on( 'uploadSuccess', function( file, data ) {
     $( '#'+file.id ).find('p.state').text('上传成功').fadeOut();
-    $( '#{$this->options['boxId']} .webuploader-pick' ).html('<img src="{$web}/'+data.url+'" width="{$this->options['previewWidth']}" height="{$this->options['previewHeight']}"/>');
-    $( '#{$this->options['id']}' ).val("{$web}/" + data.url);
+    $( '#{$this->options['boxId']} .webuploader-pick' ).html('<img src="{$web}'+data.url+'" width="{$this->options['previewWidth']}" height="{$this->options['previewHeight']}"/>');
+    $( '#{$this->options['id']}' ).val("{$web}" + data.url);
     $( '#{$this->options['boxId']} .webuploader-pick' ).siblings('div').width("{$this->options['previewWidth']}").height("{$this->options['previewHeight']}");
 });
 JS

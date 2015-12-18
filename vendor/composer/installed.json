@@ -2095,23 +2095,23 @@
     },
     {
         "name": "yidashi/yii2-webuploader",
-        "version": "v1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "v1.0.3",
+        "version_normalized": "1.0.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yidashi/yii2-webuploader.git",
-            "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc"
+            "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/63811f926f7a3b2298b5a5b404b667493857ecbc",
-            "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc",
+            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/07f2647fcab799ecd163f01883bd6892c0c105c1",
+            "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4.0"
         },
-        "time": "2015-12-18 10:19:46",
+        "time": "2015-12-18 10:38:42",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
