@@ -2092,5 +2092,34 @@
             "php",
             "qrcode"
         ]
+    },
+    {
+        "name": "yidashi/yii2-webuploader",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/yii2-webuploader.git",
+            "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/63811f926f7a3b2298b5a5b404b667493857ecbc",
+            "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2015-12-18 10:19:46",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yidashi\\webuploader\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-webuploader"
     }
 ]

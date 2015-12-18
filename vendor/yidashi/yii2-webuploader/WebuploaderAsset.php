@@ -4,10 +4,9 @@
  * Date: 2015/12/4
  * Time: 17:18
  */
-namespace common\widgets\webuploader;
+namespace yidashi\webuploader;
 use yii\web\AssetBundle;
 class WebuploaderAsset extends AssetBundle{
-    public $sourcePath='@common/widgets/webuploader/assets';
     public $css = [
         'webuploader.css',
     ];
@@ -17,4 +16,9 @@ class WebuploaderAsset extends AssetBundle{
     public $depends = [
         'yii\web\YiiAsset',
     ];
+    public function init()
+    {
+        $this->sourcePath = __DIR__ . '/assets';
+        parent::init();
+    }
 }

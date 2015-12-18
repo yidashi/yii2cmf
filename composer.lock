@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cbc86be352024bf34ddf9e362dc9522",
-    "content-hash": "5a1fa07eec6318228f1539d3231cfc2b",
+    "hash": "2173058f302d1b588875772fdba8719f",
+    "content-hash": "278d4da9c023b00bb34360434424b3a9",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1428,6 +1428,33 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-boostrap-markdown",
             "time": "2015-12-15 10:32:15"
+        },
+        {
+            "name": "yidashi/yii2-webuploader",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidashi/yii2-webuploader.git",
+                "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/63811f926f7a3b2298b5a5b404b667493857ecbc",
+                "reference": "63811f926f7a3b2298b5a5b404b667493857ecbc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yidashi\\webuploader\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "yii2-webuploader",
+            "time": "2015-12-18 10:19:46"
         },
         {
             "name": "yiisoft/yii2",

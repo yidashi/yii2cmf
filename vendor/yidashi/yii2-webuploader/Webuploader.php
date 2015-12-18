@@ -5,9 +5,8 @@
  * Time: 10:11
  */
 
-namespace common\widgets\webuploader;
+namespace yidashi\webuploader;
 
-use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -16,6 +15,7 @@ use yii\widgets\InputWidget;
 class Webuploader extends InputWidget{
     //默认配置
     protected $_options;
+    public $server;
     public function init()
     {
         parent::init();
@@ -28,9 +28,9 @@ class Webuploader extends InputWidget{
         $this->registerClientJs();
         $content = $this->model[$this->attribute] ? Html::img(\Yii::getAlias('@web') . '/' . $this->model[$this->attribute], ['width'=>$this->options['previewWidth'],'height'=>$this->options['previewHeight']]) : '选择文件';
         if($this->hasModel()){
-            return Html::tag('div', $content, ['id'=>'picker']) . Html::activeHiddenInput($this->model, $this->attribute);
+            return Html::tag('div', $content, ['id'=>$this->options['boxId']]) . Html::activeHiddenInput($this->model, $this->attribute);
         }else{
-            return Html::tag('div', $content, ['id'=>'picker']) . Html::hiddenInput($this->name, $this->value);
+            return Html::tag('div', $content, ['id'=>$this->options['boxId']]) . Html::hiddenInput($this->name, $this->value);
         }
     }
 
@@ -41,7 +41,7 @@ class Webuploader extends InputWidget{
     {
         WebuploaderAsset::register($this->view);
         $web = \Yii::getAlias('@web');
-        $server = Url::to(['article/upload','action'=>'uploadimage']);
+        $server = $this->server ?: Url::to(['webupload']);
         $swfPath = \Yii::getAlias('@common/widgets/webuploader/assets');
         $this->view->registerJs(<<<JS
 var uploader = WebUploader.create({
@@ -55,8 +55,17 @@ var uploader = WebUploader.create({
 
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        pick: '#{$this->options['boxId']}',
+        pick: {
+            id:'#{$this->options['boxId']}',
+            innerHTML:'<div>选择文件</div>'
+        },
 
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        
         // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
         resize: false
     });
@@ -81,6 +90,7 @@ uploader.on( 'uploadSuccess', function( file, data ) {
     $( '#'+file.id ).find('p.state').text('上传成功').fadeOut();
     $( '#{$this->options['boxId']} .webuploader-pick' ).html('<img src="{$web}/'+data.url+'" width="{$this->options['previewWidth']}" height="{$this->options['previewHeight']}"/>');
     $( '#{$this->options['id']}' ).val("{$web}/" + data.url);
+    $( '#{$this->options['boxId']} .webuploader-pick' ).siblings('div').width("{$this->options['previewWidth']}").height("{$this->options['previewHeight']}");
 });
 JS
         );

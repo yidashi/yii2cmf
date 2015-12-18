@@ -15,6 +15,7 @@ return array(
     'yii\\bootstrap\\' => array($vendorDir . '/yiisoft/yii2-bootstrap'),
     'yii\\authclient\\' => array($vendorDir . '/yiisoft/yii2-authclient'),
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
+    'yidashi\\webuploader\\' => array($vendorDir . '/yidashi/yii2-webuploader'),
     'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'kartik\\sidenav\\' => array($vendorDir . '/kartik-v/yii2-widget-sidenav'),
