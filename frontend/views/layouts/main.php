@@ -74,7 +74,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
     <div class="container">
-        <?php if(strncmp(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== 0): ?>
+        <?php if(strcmp(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== 0): ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
