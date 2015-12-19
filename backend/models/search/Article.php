@@ -41,7 +41,7 @@ class Article extends ArticleModel
      */
     public function search($params)
     {
-        $query = ArticleModel::find();
+        $query = ArticleModel::find()->orderBy('id desc');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
