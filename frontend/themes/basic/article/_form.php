@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor',[]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('投稿', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('投稿', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

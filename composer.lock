@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f48a8f1c09575b6dfe97654c97499439",
-    "content-hash": "d22a57384cb3be09886c4731e3a88a10",
+    "hash": "393c807b6c34a84d651f22ec630b4d19",
+    "content-hash": "febed3de6c7c07748024006e55412956",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1431,16 +1431,16 @@
         },
         {
             "name": "yidashi/yii2-webuploader",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1"
+                "reference": "18079dafc6365afd53d49f8642afa128397d34fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/07f2647fcab799ecd163f01883bd6892c0c105c1",
-                "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/18079dafc6365afd53d49f8642afa128397d34fd",
+                "reference": "18079dafc6365afd53d49f8642afa128397d34fd",
                 "shasum": ""
             },
             "require": {
@@ -1454,7 +1454,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-webuploader",
-            "time": "2015-12-18 10:38:42"
+            "time": "2015-12-20 03:48:55"
         },
         {
             "name": "yiisoft/yii2",
@@ -1688,6 +1688,54 @@
                 "yii2"
             ],
             "time": "2015-03-01 06:22:44"
+        },
+        {
+            "name": "yiisoft/yii2-redis",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-redis.git",
+                "reference": "af2c2f91cd61c201c537d18f9c2338258c821918"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-redis/zipball/af2c2f91cd61c201c537d18f9c2338258c821918",
+                "reference": "af2c2f91cd61c201c537d18f9c2338258c821918",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\redis\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Carsten Brandt",
+                    "email": "mail@cebe.cc"
+                }
+            ],
+            "description": "Redis Cache, Session and ActiveRecord for the Yii framework",
+            "keywords": [
+                "active-record",
+                "cache",
+                "redis",
+                "session",
+                "yii2"
+            ],
+            "time": "2015-05-10 22:10:19"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",

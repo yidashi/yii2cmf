@@ -20,6 +20,7 @@ class Webuploader extends InputWidget{
     {
         parent::init();
         $this->options['boxId'] = isset($this->options['boxId']) ? $this->options['boxId'] : 'picker';
+        $this->options['innerHTML'] = isset($this->options['innerHTML']) ? $this->options['innerHTML'] :'<button class="btn btn-primary">选择文件</button>';
         $this->options['previewWidth'] = isset($this->options['previewWidth']) ? $this->options['previewWidth'] : '250';
         $this->options['previewHeight'] = isset($this->options['previewHeight']) ? $this->options['previewHeight'] : '150';
     }
@@ -57,7 +58,7 @@ var uploader = WebUploader.create({
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
         pick: {
             id:'#{$this->options['boxId']}',
-            innerHTML:'<div>选择文件</div>'
+            innerHTML:'{$this->options['innerHTML']}'
         },
 
         accept: {

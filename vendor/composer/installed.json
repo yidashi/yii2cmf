@@ -2095,23 +2095,23 @@
     },
     {
         "name": "yidashi/yii2-webuploader",
-        "version": "v1.0.3",
-        "version_normalized": "1.0.3.0",
+        "version": "v1.0.4",
+        "version_normalized": "1.0.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/yidashi/yii2-webuploader.git",
-            "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1"
+            "reference": "18079dafc6365afd53d49f8642afa128397d34fd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/07f2647fcab799ecd163f01883bd6892c0c105c1",
-            "reference": "07f2647fcab799ecd163f01883bd6892c0c105c1",
+            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/18079dafc6365afd53d49f8642afa128397d34fd",
+            "reference": "18079dafc6365afd53d49f8642afa128397d34fd",
             "shasum": ""
         },
         "require": {
             "php": ">=5.4.0"
         },
-        "time": "2015-12-18 10:38:42",
+        "time": "2015-12-20 03:48:55",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -2121,5 +2121,55 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "description": "yii2-webuploader"
+    },
+    {
+        "name": "yiisoft/yii2-redis",
+        "version": "2.0.4",
+        "version_normalized": "2.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-redis.git",
+            "reference": "af2c2f91cd61c201c537d18f9c2338258c821918"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-redis/zipball/af2c2f91cd61c201c537d18f9c2338258c821918",
+            "reference": "af2c2f91cd61c201c537d18f9c2338258c821918",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": ">=2.0.4"
+        },
+        "time": "2015-05-10 22:10:19",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\redis\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Carsten Brandt",
+                "email": "mail@cebe.cc"
+            }
+        ],
+        "description": "Redis Cache, Session and ActiveRecord for the Yii framework",
+        "keywords": [
+            "active-record",
+            "cache",
+            "redis",
+            "session",
+            "yii2"
+        ]
     }
 ]

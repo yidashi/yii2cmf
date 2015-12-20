@@ -17,14 +17,18 @@ $this->params['breadcrumbs'][] = $model->title;
     <div class="action">
         <span class="user"><a href="/user/31325"><span class="fa fa-user"></span> <?= $model->author?></a></span>
         <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $model->created_at) ?></span>
-        <span class="views"><span class="fa fa-eye"></span> 118次浏览</span>
+        <span class="views"><span class="fa fa-eye"></span> <?= $model->view?>次浏览</span>
         <span class="comments"><a href="#comments"><span class="fa fa-comments-o"></span> <?=$model->comment?>条评论</a></span>
         <span class="favourites"><a href="/favourite?type=extension&amp;id=601" title="" data-toggle="tooltip" data-original-title="收藏"><span class="fa fa-star-o"></span> <em>0</em></a></span>
         <span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em><?=$model->up?></em></a><a class="down" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em><?=$model->down?></em></a></span>
     </div>
     <?php endif; ?>
+    <!--内容-->
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
+    <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
+    <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
+    <!--评论-->
     <div id="comments">
         <h4>共 <span class="text-danger"><?=$model->comment?></span> 条评论</h4>
         <div class="col-4">
