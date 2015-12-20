@@ -1,6 +1,7 @@
 <?php
 namespace console\controllers;
 
+use common\models\Article;
 use console\models\SpiderFactory;
 use yii\console\Controller;
 
@@ -16,5 +17,25 @@ class ArticleController extends Controller{
     public function actionRun($name = null){
         $spider = SpiderFactory::create($name);
         $spider->process();
+    }
+
+    /**
+     * redis保存文章浏览数,定时同步到数据表
+     * `crontab -e`
+     * `0 2 * * * yii article/sync-view`
+     */
+    public function actionSyncView()
+    {
+        $redis= \Yii::$app->redis;
+        $keys = $redis->keys('article:view:*');
+        foreach($keys as $v=>$key){
+            $id = join('', array_slice(explode(':', $key),-1));
+            $article = Article::find()->where(['id'=>$id])->one();
+            $view = $redis->get($key);
+            if($article->view < $view){
+                $article->view = $redis->get($key);
+                $article->save(false);
+            }
+        }
     }
 }

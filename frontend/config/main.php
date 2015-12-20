@@ -41,6 +41,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<id:\d+>' => 'article/view'
 //                'article/<cid:\d+>' => 'article/index'
                 /*[
                     'pattern'=>'lizhi',
