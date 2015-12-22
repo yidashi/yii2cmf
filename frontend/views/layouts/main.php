@@ -89,7 +89,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
 
-<!--        <p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
+        <p class="pull-right">京ICP备15065774号</p>
     </div>
 </footer>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
