@@ -7,7 +7,7 @@ class Jianshu extends SpiderAbstract{
 //        preg_match('#([\s\S]*?)<div class=\"jiathis_style_32x32\"#', $content, $match);
 //        $content = $match[1];
 //                图片全路径
-        $content = preg_replace('#<img([\s\S]+?)src=\"(.*?)\?.*?\"[\s\S]*?>[\s\S]*?<div class=\"image-caption\">.*?</div>#', '', $content);
+        $content = preg_replace('#<img([\s\S]+?)src=\"(.*?)\?.*?\"[\s\S]*?>[\s\S]*?(<div class=\"image-caption\">.*?</div>)?#', '', $content);
 //                去除链接
         $content = preg_replace('#<a([\s\S]+?)>(.*)?</a>#', '$2', $content);
         return $content;
