@@ -25,7 +25,10 @@ $this->params['breadcrumbs'][] = $model->title;
     <?php endif; ?>
     <!--内容-->
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
-    <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
+    <?php if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false):?>
+        <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
+    <?php endif;?>
+
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
     <!--评论-->
