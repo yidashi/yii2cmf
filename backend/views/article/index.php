@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'category',
+            'status:boolean',
             // 'author',
             // 'created_at',
             // 'updated_at',

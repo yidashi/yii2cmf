@@ -118,12 +118,15 @@ Abstract class SpiderAbstract{
         $crawler->filter($this->config['list_dom'])->each(function ($node) use($category,$url) {
             if($node){
                 try{
-                    if($node){
-                        $u = strpos(trim($node->attr('href')), 'http') === false ? $this->config['domain'] . trim($node->attr('href')) : trim($node->attr('href'));
-                        $cover = strpos($node->filter('img')->attr('src'), 'http') === false ? $this->config['domain'] . $node->filter('img')->attr('src') : $node->filter('img')->attr('src');
-                        if(!$this->isGathered($u)){
-                            $this->enqueue($category,$u,$cover, $this->config['name']);
-                        }
+                    $u = strpos(trim($node->attr('href')), 'http') === false ? $this->config['domain'] . trim($node->attr('href')) : trim($node->attr('href'));
+                    if(method_exists($this,'getCover')){
+                        $cover = $this->getCover($node);
+                    }else{
+                        $cover = '';
+                    }
+                    echo $this->isGathered($u);
+                    if(!$this->isGathered($u)){
+                        $this->enqueue($category,$u,$cover, $this->config['name']);
                     }
                 }catch(\Exception $e){
                     $this->addLog($url,$category,0, $e->getMessage());
@@ -180,7 +183,7 @@ Abstract class SpiderAbstract{
         $article = new Article();
         $article->title = $title;
         $article->content = $content;
-        $article->author = 'yidashi';
+        $article->author = '匿名';
         $article->status = 1;
         $article->category = $category;
         $article->category_id = $category_id;

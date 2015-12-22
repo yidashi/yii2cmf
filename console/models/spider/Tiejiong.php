@@ -12,4 +12,9 @@ class Tiejiong extends SpiderAbstract{
         $content = preg_replace('#<a([\s\S]+?)>(.*)?</a>#', '$2', $content);
         return $content;
     }
+    protected function getCover($listNode)
+    {
+        $cover = strpos($listNode->filter('img')->attr('src'), 'http') === false ? $this->config['domain'] . $listNode->filter('img')->attr('src') : $listNode->filter('img')->attr('src');
+        return  $cover;
+    }
 }

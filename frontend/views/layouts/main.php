@@ -38,7 +38,7 @@ AppAsset::register($this);
         ['label' => '首页', 'url' => ['/']],
     ];
     foreach(\common\models\Category::find()->all() as $nav){
-        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cid'=>$nav['id']]];
+        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article','cid'=>$nav['id']]];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
