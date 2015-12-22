@@ -30,7 +30,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['article_id', 'user_id', 'content'], 'required'],
-            [['article_id', 'user_id', 'parent_id'], 'integer'],
+            [['article_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
             [['content'], 'string']
         ];
     }
@@ -44,7 +44,9 @@ class Comment extends \yii\db\ActiveRecord
             'id' => 'ID',
             'article_id' => 'Article ID',
             'user_id' => 'User ID',
-            'content' => '内容'
+            'content' => '内容',
+            'up' => '顶',
+            'down' => '踩'
         ];
     }
     /**

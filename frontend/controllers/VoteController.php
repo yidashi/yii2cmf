@@ -43,11 +43,15 @@ class VoteController extends Controller{
         $id = \Yii::$app->request->get('id');
         $type = \Yii::$app->request->get('type','article');
         $action = \Yii::$app->request->get('action','up');
-        $article = Article::find()->where(['id'=>$id])->select('id,up,down')->one();
+        if($type == 'article'){
+            $model = Article::find()->where(['id'=>$id])->select('id,up,down')->one();
+        }else{
+            $model = Comment::find()->where(['id'=>$id])->select('id,up,down')->one();
+        }
         $vote = Vote::find()->where(['type_id'=>$id, 'type'=>$type, 'action'=>$action, 'user_id'=>$userId])->one();
         if(empty($vote)){
-            $article->$action += 1;
-            $article->save(false);
+            $model->$action += 1;
+            $model->save(false);
             $vote = new Vote();
             $params = [
                 'type'=>$type,
@@ -60,8 +64,8 @@ class VoteController extends Controller{
 
         }
         return [
-            'up'=> $article->up,
-            'down' => $article->down
+            'up'=> $model->up,
+            'down' => $model->down
         ];
     }
 }
