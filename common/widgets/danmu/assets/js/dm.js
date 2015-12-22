@@ -49,7 +49,7 @@ function start(article_id, list_url){
   }
 
   // Get article_id
-  var article_id = getParameterByName('id');
+/*  var article_id = getParameterByName('id');
   if(typeof(art_id) != 'undefined'){
     article_id = art_id
   }
@@ -58,7 +58,7 @@ function start(article_id, list_url){
     jlog('can not find article id, set art_id=`public_room`');
     article_id = 'public_room';
   }
-  jlog('art_id=' + article_id);
+  jlog('art_id=' + article_id);*/
 
   var opt = {
      art_id : article_id,

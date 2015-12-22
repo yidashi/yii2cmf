@@ -63,7 +63,8 @@ class CommentController extends Controller{
         $models = $query->offset($pages->offset)
             ->orderBy('created_at desc')
             ->limit($pages->limit)
-            ->with('user')->asArray()
+            ->with('user')
+            ->asArray()
             ->all();
         $hasNext = 0;
         if ($page < $pages->pageCount) {
