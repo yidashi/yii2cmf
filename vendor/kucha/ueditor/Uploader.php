@@ -277,7 +277,7 @@ class Uploader
         }
 
         $ext = $this->getFileExt();
-        return \Yii::getAlias('@static') . '/' . $format . $ext;
+        return $format . $ext;
     }
 
     /**
