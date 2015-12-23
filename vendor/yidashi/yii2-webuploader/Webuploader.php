@@ -41,7 +41,7 @@ class Webuploader extends InputWidget{
     private function registerClientJs()
     {
         WebuploaderAsset::register($this->view);
-        $web = \Yii::getAlias('@web');
+        $web = \Yii::getAlias('@static');
         $server = $this->server ?: Url::to(['webupload']);
         $swfPath = \Yii::getAlias('@common/widgets/webuploader/assets');
         $this->view->registerJs(<<<JS

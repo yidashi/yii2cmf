@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
@@ -34,7 +35,8 @@ class ArticleController extends Controller
                     "imageUrlPrefix"  => \Yii::getAlias('@web') . '/',//图片访问路径前缀
                     "imagePathFormat" => "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}" //上传保存路径
                 ],
-            ]
+            ],
+            'webupload' => WebuploaderAction::className()
         ];
     }
     /**
