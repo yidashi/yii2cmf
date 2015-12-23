@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->widget('yidashi\markdown\Markdown',['options'=>['style'=>'height:500px']]) ?>
+    <?= $form->field($model, 'content')->widget('kucha\ueditor\UEditor',['options'=>['style'=>'height:500px']]) ?>
 
     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
 
