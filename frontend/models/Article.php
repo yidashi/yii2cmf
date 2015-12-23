@@ -31,10 +31,19 @@ class Article extends \common\models\Article
             [['content'], 'string'],
             [['status', 'category_id', 'comment'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
-            [['category'], 'default', 'value' => function ($model, $attribute) {
-                return Category::find()->where(['id'=>$model->category_id])->select('title')->scalar();
-            }],
-            [['author', 'cover'], 'string', 'max' => 255]
+            [['category'], 'setCategory'],
+            [['author', 'cover', 'desc'], 'string', 'max' => 255]
         ];
     }
+    public function setCategory($attribute, $params)
+    {
+        $this->category = Category::find()->where(['id'=>$this->category_id])->select('title')->scalar();
+    }
+    public function setDesc($attribute, $params)
+    {
+        if(empty($this->desc)){
+            $this->desc = mb_substr(strip_tags($this->content),0,150);
+        }
+    }
+
 }
