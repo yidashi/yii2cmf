@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = $model->title;
     });
 js
 );
-if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false) {
+if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
     $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
     $this->registerJs(<<<js
 wx.onMenuShareAppMessage({
