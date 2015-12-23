@@ -50,19 +50,6 @@ return [
                 ]*/
             ]
         ],
-        'view' => [
-            'theme' => [
-                'basePath' => '@app/themes/basic',
-                'baseUrl' => '@web/themes/basic',
-                'pathMap' => [
-                    '@app/views' => [
-                        '@app/themes/special',
-                        '@app/themes/basic',
-                    ]
-                ],
-            ],
-//            'as ThemeBehavior' => \frontend\components\ThemeBehavior::className()
-        ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
@@ -75,5 +62,6 @@ return [
             ],
         ]
     ],
+    'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
     'params' => $params,
 ];

@@ -10,4 +10,5 @@ return array(
     'PHPQRCode' => array($vendorDir . '/aferrandini/phpqrcode/lib'),
     'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Diff' => array($vendorDir . '/phpspec/php-diff/lib'),
+    'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );

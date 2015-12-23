@@ -44,6 +44,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
+    echo '<form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+        <input type="text" class="form-control" placeholder="搜索">
+        </div><button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
+      </form>';
     $rightMenuItems = [];
 //    $rightMenuItems[] = ['label' => '下载', 'url' => ['/download']];
     $rightMenuItems[] = ['label' => '反馈', 'url' => ['/suggest/create']];

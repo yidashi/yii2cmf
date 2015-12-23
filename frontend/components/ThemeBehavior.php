@@ -8,29 +8,26 @@
 namespace frontend\components;
 
 
-use yii\base\Behavior;
+use Detection\MobileDetect;
+use yii\base\ActionFilter;
 
-class ThemeBehavior extends Behavior{
-    public function init()
+class ThemeBehavior extends ActionFilter
+{
+    public function beforeAction()
     {
-        parent::init();
-        $this->_setTheme();
-    }
-    private function _setTheme()
-    {
-        $config = [
+        $device = new MobileDetect();
+        $theme = [
             'class' => 'yii\base\Theme',
             'basePath' => '@app/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
                 '@app/views' => [
-                    '@app/themes/special',
+                    '@app/themes/' . ($device->isMobile() ? 'mobile' : 'special'),
                     '@app/themes/basic',
                 ]
             ],
         ];
-        $theme =  \Yii::createObject($config);
-        print_r($this->owner);die;
-        print_r($theme);
+        \Yii::$app->getView()->theme = \Yii::createObject($theme);
+        return true;
     }
 }

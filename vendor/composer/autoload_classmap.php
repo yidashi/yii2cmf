@@ -14,6 +14,7 @@ return array(
     'CGIFLZW' => $vendorDir . '/kartik-v/mpdf/classes/gif.php',
     'INDIC' => $vendorDir . '/kartik-v/mpdf/classes/indic.php',
     'MYANMAR' => $vendorDir . '/kartik-v/mpdf/classes/myanmar.php',
+    'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
     'OTLdump' => $vendorDir . '/kartik-v/mpdf/classes/otl_dump.php',
     'PDFBarcode' => $vendorDir . '/kartik-v/mpdf/classes/barcode.php',
     'SEA' => $vendorDir . '/kartik-v/mpdf/classes/sea.php',
