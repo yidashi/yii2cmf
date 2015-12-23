@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $category;
             <?php foreach($models as $item):?>
                 <div class="col-sm-6 col-md-3 article-item">
                     <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
-                        <img src="<?= $item['cover']?:'http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png'?>" alt="<?= $item['title']?>" width="200" height="145">
+                        <img onerror="this.src='http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png'" src="<?= $item['cover']?:'http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png'?>" alt="<?= $item['title']?>" width="200" height="145">
                         <h3 class="article-title"><?= $item['title']?></h3>
                     </a>
                 </div>
