@@ -277,7 +277,7 @@ class Uploader
         }
 
         $ext = $this->getFileExt();
-        return $format . $ext;
+        return \Yii::getAlias('@static') . '/' . $format . $ext;
     }
 
     /**
@@ -296,8 +296,7 @@ class Uploader
     private function getFilePath()
     {
         $fullname = $this->fullName;
-//        $rootPath = $_SERVER['DOCUMENT_ROOT'];
-        $rootPath = \Yii::getAlias('@webroot');
+        $rootPath = \Yii::getAlias('@staticroot');
         if (substr($fullname, 0, 1) != '/') {
             $fullname = '/' . $fullname;
         }
