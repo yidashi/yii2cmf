@@ -171,7 +171,7 @@ Abstract class SpiderAbstract{
      * @param $tag
      * @return bool
      */
-    public static function insert($title,$content,$publish_at,$category='',$cover=''){
+    public function insert($title,$content,$publish_at,$category='',$cover=''){
         //插入标签（搜索的分类）
 
         $category_id = (new Query())->from('{{%category}}')->where(['title'=>$category])->select('id')->scalar();
@@ -184,6 +184,7 @@ Abstract class SpiderAbstract{
         $article->title = $title;
         $article->content = $content;
         $article->author = '匿名';
+        $article->source = $this->config['domain'];
         $article->status = 1;
         $article->category = $category;
         $article->category_id = $category_id;
