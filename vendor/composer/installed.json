@@ -2227,5 +2227,57 @@
             "mobile detector",
             "php mobile detect"
         ]
+    },
+    {
+        "name": "yiisoft/yii2-sphinx",
+        "version": "2.0.5",
+        "version_normalized": "2.0.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yiisoft/yii2-sphinx.git",
+            "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-sphinx/zipball/5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+            "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+            "shasum": ""
+        },
+        "require": {
+            "ext-pdo": "*",
+            "ext-pdo_mysql": "*",
+            "yiisoft/yii2": ">=2.0.4"
+        },
+        "time": "2015-09-23 17:31:03",
+        "type": "yii2-extension",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yii\\sphinx\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Paul Klimov",
+                "email": "klimov.paul@gmail.com"
+            }
+        ],
+        "description": "Sphinx full text search engine extension for the Yii framework",
+        "keywords": [
+            "active-record",
+            "fulltext",
+            "search",
+            "sphinx",
+            "yii2"
+        ]
     }
 ]

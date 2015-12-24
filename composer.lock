@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ede3d06558860156be749e00df72e026",
-    "content-hash": "cfbb598737df922f13741c5003632a86",
+    "hash": "c75eeb2b9e67a7dcdf3b71ea78ebebcc",
+    "content-hash": "475f2f6fd9c6ca4d3e55210a0bb4a031",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1790,6 +1790,56 @@
                 "yii2"
             ],
             "time": "2015-05-10 22:10:19"
+        },
+        {
+            "name": "yiisoft/yii2-sphinx",
+            "version": "2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yiisoft/yii2-sphinx.git",
+                "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-sphinx/zipball/5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+                "reference": "5ab9be322138ec76ddfd06ad77df1a5590816ed9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "ext-pdo_mysql": "*",
+                "yiisoft/yii2": ">=2.0.4"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "yii\\sphinx\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul Klimov",
+                    "email": "klimov.paul@gmail.com"
+                }
+            ],
+            "description": "Sphinx full text search engine extension for the Yii framework",
+            "keywords": [
+                "active-record",
+                "fulltext",
+                "search",
+                "sphinx",
+                "yii2"
+            ],
+            "time": "2015-09-23 17:31:03"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
