@@ -52,7 +52,6 @@ AppAsset::register($this);
         </div><button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
       </form>';*/
     $rightMenuItems = [];
-    $rightMenuItems[] = ['label' => '圣诞', 'url' => ['/page/index' , 'view' => 'christmas']];
     $rightMenuItems[] = ['label' => '反馈', 'url' => ['/suggest/create']];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/article/create']];
     if (Yii::$app->user->isGuest) {

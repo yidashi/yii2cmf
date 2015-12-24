@@ -13,7 +13,7 @@ use yii\base\ActionFilter;
 
 class ThemeBehavior extends ActionFilter
 {
-    public function beforeAction()
+    public function beforeAction($action)
     {
         $device = new MobileDetect();
         $theme = [
