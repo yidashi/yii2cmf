@@ -109,12 +109,48 @@ js
 );
 if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
-    $model->desc = empty($model->desc) ? mb_substr(strip_tags($model->content),0,150) : $model->desc;
+    $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
+    $appId = 'wx2d5c95252ba671cf';
+    $appSecret = 'af6059c4d91063fb73a0f9b51f0a34d4';
+    $ticket = 'sM4AOVdWfPE4DxkXGEs8VEYtwC-CDl_BoB4wjSx80xkv5kJJZ0D-WV3_aLcQAaXg-bItwELnrDSt6YJEET5wmA';
+    $nonceStr = 'hehe';
+    $timestamp = time();
+    $params = [
+        'noncestr' => $nonceStr,
+        'timestamp' => $timestamp,
+        'jsapi_ticket' => $ticket,
+        'url' => Yii::$app->request->absoluteUrl
+    ];
+    ksort($params);
+    $signature = '';
+    foreach($params as $key=>$param){
+        $signature .= $key . '=' . $param . '&';
+    }
+    $signature = rtrim($signature, '&');
     $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
     $this->registerJs(<<<js
+wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: '{$appId}', // 必填，公众号的唯一标识
+    timestamp: '{$timestamp}', // 必填，生成签名的时间戳
+    nonceStr: '{$nonceStr}', // 必填，生成签名的随机串
+    signature: '{$signature}',// 必填，签名，见附录1
+    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+});
 wx.onMenuShareAppMessage({
     title: '{$model->title}', // 分享标题
     desc: '{$model->desc}', // 分享描述
+    link: location.href, // 分享链接
+    imgUrl: '{$coverUrl}', // 分享图标
+    success: function () {
+        // 用户确认分享后执行的回调函数
+    },
+    cancel: function () {
+        // 用户取消分享后执行的回调函数
+    }
+});
+wx.onMenuShareTimeline({
+    title: '{$model->title}', // 分享标题
     link: location.href, // 分享链接
     imgUrl: '{$coverUrl}', // 分享图标
     success: function () {
