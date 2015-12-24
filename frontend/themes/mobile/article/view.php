@@ -107,15 +107,18 @@ $this->params['breadcrumbs'][] = $model->title;
     });
 js
 );
-if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
+if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
     $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
     $appId = 'wx2d5c95252ba671cf';
     $appSecret = 'af6059c4d91063fb73a0f9b51f0a34d4';
-    $accessTokenRes = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}');
-    echo $accessTokenRes;die;
-    $accessToken = \yii\helpers\Json::decode($accessTokenRes)['access_token'];
-    $ticketRes = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi');
+    $accessToken = Yii::$app->cache->get('wxAccessToken');
+    if($accessToken === false) {
+        $accessTokenRes = file_get_contents("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}");
+        $accessToken = \yii\helpers\Json::decode($accessTokenRes)['access_token'];
+        Yii::$app->cache->set('wxAccessToken', $accessToken);
+    }
+    $ticketRes = file_get_contents("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi");
     $ticket = \yii\helpers\Json::decode($ticketRes)['ticket'];
     $nonceStr = 'hehe';
     $timestamp = time();
