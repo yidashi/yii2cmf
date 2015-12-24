@@ -32,7 +32,8 @@
         "aferrandini/PHPQRCode": "1.0.1",
         "yidashi/yii2-webuploader": "1.0.4",
         "yiisoft/yii2-redis": "*",
-        "mobiledetect/mobiledetectlib": "^2.8"
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "yiisoft/yii2-sphinx": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
