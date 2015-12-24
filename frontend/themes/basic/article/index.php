@@ -36,7 +36,19 @@ $this->params['breadcrumbs'][] = $category;
             </div>
         <?php endforeach;?>
     </div>
+    <?php if(!(new \Detection\MobileDetect())->isMobile()): ?>
     <?= \yii\widgets\LinkPager::widget([
         'pagination' => $pages,
     ]); ?>
+    <?php else:?>
+    <?= \yii\widgets\LinkPager::widget([
+        'pagination' => $pages,
+        'nextPageLabel' => '下一页',
+        'prevPageLabel' => '上一页',
+        'maxButtonCount' => 0,
+        'prevPageCssClass' => 'previous',
+        'nextPageCssClass' => 'next',
+        'options' => ['class' => 'pager']
+    ]); ?>
+    <?php endif;?>
 </div>

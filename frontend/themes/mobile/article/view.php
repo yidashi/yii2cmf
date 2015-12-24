@@ -60,10 +60,7 @@ $this->params['breadcrumbs'][] = $model->title;
                 <?php endforeach;?>
             </ul>
             <?= \yii\widgets\LinkPager::widget([
-                'pagination' => $pages,
-                'nextPageLabel' => '下一页',
-                'prevPageLabel' => '下一页',
-                '$maxButtonCount' => 0
+                'pagination' => $pages
             ]); ?>
         </div>
     </div>
