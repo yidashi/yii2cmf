@@ -114,6 +114,14 @@ AppAsset::register($this);
 <?php if(YII_ENV_PROD): ?>
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=53223522" charset="UTF-8"></script>
 <?php endif; ?>
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
 <?php $this->endBody() ?>
 </body>
 </html>
