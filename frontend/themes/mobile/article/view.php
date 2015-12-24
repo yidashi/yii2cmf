@@ -126,7 +126,7 @@ if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !==
     foreach($params as $key=>$param){
         $signature .= $key . '=' . $param . '&';
     }
-    $signature = rtrim($signature, '&');
+    $signature = sha1(rtrim($signature, '&'));
     $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
     $this->registerJs(<<<js
 wx.config({
