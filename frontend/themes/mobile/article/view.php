@@ -108,13 +108,15 @@ $this->params['breadcrumbs'][] = $model->title;
 js
 );
 if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
+    $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
+    $model->desc = empty($model->desc) ? mb_substr(strip_tags($model->content),0,150) : $model->desc;
     $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
     $this->registerJs(<<<js
 wx.onMenuShareAppMessage({
     title: '{$model->title}', // 分享标题
     desc: '{$model->desc}', // 分享描述
     link: location.href, // 分享链接
-    imgUrl: '{$model->cover}', // 分享图标
+    imgUrl: '{$coverUrl}', // 分享图标
     success: function () {
         // 用户确认分享后执行的回调函数
     },
