@@ -137,28 +137,30 @@ wx.config({
     signature: '{$signature}',// 必填，签名，见附录1
     jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 });
-wx.onMenuShareAppMessage({
-    title: '{$model->title}', // 分享标题
-    desc: '{$model->desc}', // 分享描述
-    link: location.href, // 分享链接
-    imgUrl: '{$coverUrl}', // 分享图标
-    success: function () {
-        // 用户确认分享后执行的回调函数
-    },
-    cancel: function () {
-        // 用户取消分享后执行的回调函数
-    }
-});
-wx.onMenuShareTimeline({
-    title: '{$model->title}', // 分享标题
-    link: location.href, // 分享链接
-    imgUrl: '{$coverUrl}', // 分享图标
-    success: function () {
-        // 用户确认分享后执行的回调函数
-    },
-    cancel: function () {
-        // 用户取消分享后执行的回调函数
-    }
+wx.ready(function(){
+    wx.onMenuShareAppMessage({
+        title: '{$model->title}', // 分享标题
+        desc: '{$model->desc}', // 分享描述
+        link: location.href, // 分享链接
+        imgUrl: '{$coverUrl}', // 分享图标
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+    wx.onMenuShareTimeline({
+        title: '{$model->title}', // 分享标题
+        link: location.href, // 分享链接
+        imgUrl: '{$coverUrl}', // 分享图标
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
 });
 js
     );
