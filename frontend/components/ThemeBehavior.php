@@ -22,7 +22,7 @@ class ThemeBehavior extends ActionFilter
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
                 '@app/views' => [
-                    '@app/themes/' . (!$device->isMobile() ? 'mobile' : 'special'),
+                    '@app/themes/' . ($device->isMobile() ? 'mobile' : 'special'),
                     '@app/themes/basic',
                 ]
             ],

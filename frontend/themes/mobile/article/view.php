@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = $model->title;
     });
 js
 );
-if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false) {
+if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
     $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
     $appId = 'wx2d5c95252ba671cf';
