@@ -112,7 +112,10 @@ if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !==
     $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
     $appId = 'wx2d5c95252ba671cf';
     $appSecret = 'af6059c4d91063fb73a0f9b51f0a34d4';
-    $ticket = 'sM4AOVdWfPE4DxkXGEs8VEYtwC-CDl_BoB4wjSx80xkv5kJJZ0D-WV3_aLcQAaXg-bItwELnrDSt6YJEET5wmA';
+    $accessTokenRes = file_get_contents('https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}');
+    $accessToken = \yii\helpers\Json::decode($accessTokenRes)['access_token'];
+    $ticketRes = file_get_contents('https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi');
+    $ticket = \yii\helpers\Json::decode($ticketRes)['ticket'];
     $nonceStr = 'hehe';
     $timestamp = time();
     $params = [
