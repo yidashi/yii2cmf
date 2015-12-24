@@ -16,9 +16,13 @@ class Jianshu extends SpiderAbstract{
     {
         $cover = strpos($listNode->parents('li')->filter('img')->attr('src'), 'http') === false ? $this->config['domain'] . $listNode->parents('li')->filter('img')->attr('src') : $listNode->parents('li')->filter('img')->attr('src');
         $coverCon = file_get_contents($cover);
-        $coverPath = \Yii::getAlias('@staticroot') . '/';
-        $coverFile = 'upload/image/' . date('Ymd') . '/' . time().mt_rand(100000,999999) . '.jpg';
-        file_put_contents($coverPath . $coverFile,$coverCon);
-        return  $coverFile;
+        $coverRootPath = \Yii::getAlias('@staticroot') . '/';
+        $coverFilePath = 'upload/image/' . date('Ymd') . '/';
+        $coverFileName = time().mt_rand(100000,999999) . '.jpg';
+        if(!is_dir($coverRootPath . $coverFilePath)){
+            mkdir($coverRootPath . $coverFilePath);
+        }
+        file_put_contents($coverRootPath . $coverFilePath . $coverFileName,$coverCon);
+        return  $coverFilePath . $coverFileName;
     }
 }
