@@ -25,9 +25,8 @@ $this->params['breadcrumbs'][] = $model->title;
     <?php endif; ?>
     <!--内容-->
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
-    <?php if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false):?>
-        <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
-    <?php endif;?>
+    <?php if(!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
+    <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
 
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
@@ -115,22 +114,4 @@ $this->params['breadcrumbs'][] = $model->title;
     });
 js
 );
-if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
-    $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
-    $this->registerJs(<<<js
-wx.onMenuShareAppMessage({
-    title: '{$model->title}', // 分享标题
-    desc: '{$model->desc}', // 分享描述
-    link: location.href, // 分享链接
-    imgUrl: '{$model->cover}', // 分享图标
-    success: function () {
-        // 用户确认分享后执行的回调函数
-    },
-    cancel: function () {
-        // 用户取消分享后执行的回调函数
-    }
-});
-js
-);
-}
 ?>
