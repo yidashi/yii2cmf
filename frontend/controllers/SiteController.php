@@ -139,6 +139,7 @@ class SiteController extends Controller
         $news = Article::find()
             ->where(['status'=>Article::STATUS_ACTIVE])
             ->andWhere(['<>', 'category', '两性'])
+            ->andWhere(['<>','cover',''])
             ->orderBy('created_at desc')
             ->limit(40)
             ->all();

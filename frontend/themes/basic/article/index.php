@@ -6,8 +6,7 @@ $this->title = $category . '_' . Yii::$app->name;
 $this->params['breadcrumbs'][] = $category;
 ?>
 <div class="site-index">
-    <div class="row">
-        <div class="article-list">
+        <!--<div class="article-list">
             <?php foreach($models as $item):?>
                 <div class="col-sm-6 col-md-3 article-item">
                     <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
@@ -16,7 +15,26 @@ $this->params['breadcrumbs'][] = $category;
                     </a>
                 </div>
             <?php endforeach;?>
-        </div>
+        </div>-->
+    <div class="article-list">
+        <?php foreach($models as $item):?>
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>"><?= $item['title']?></a></h4>
+                    <div class="media-content">
+                        <span class="views"><span class="fa fa-eye"></span>浏览 <?= $item->view?></span>
+                        <span class="comments"><span class="fa fa-comments-o"></span>评论 <?=$item->comment?></span>
+                    </div>
+                </div>
+                <?php if(!empty($item['cover'])):?>
+                <div class="media-right">
+                    <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
+                        <img class="media-object" src="<?=strpos($item['cover'], 'http://') === false ? (Yii::getAlias('@static') . '/' . $item['cover']) : $item['cover']?>" alt="<?= $item['title']?>" style="width:64px;height:64px;" onerror="$(this).parents('.media-right').remove()">
+                    </a>
+                </div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach;?>
     </div>
     <?= \yii\widgets\LinkPager::widget([
         'pagination' => $pages,
