@@ -46,11 +46,11 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
-    echo '<form class="navbar-form navbar-left" role="search">
+    /*echo '<form class="navbar-form navbar-left" role="search">
         <div class="form-group">
         <input type="text" class="form-control" placeholder="搜索">
         </div><button type="submit" class="btn btn-default"><span class="fa fa-search"></span></button>
-      </form>';
+      </form>';*/
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '圣诞', 'url' => ['/page/index' , 'view' => 'christmas']];
     $rightMenuItems[] = ['label' => '反馈', 'url' => ['/suggest/create']];
