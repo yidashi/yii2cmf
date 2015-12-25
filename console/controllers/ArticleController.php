@@ -31,6 +31,10 @@ class ArticleController extends Controller{
         foreach($keys as $v=>$key){
             $id = join('', array_slice(explode(':', $key),-1));
             $article = Article::find()->where(['id'=>$id])->one();
+            if(empty($article)){
+                $redis->del($v);
+                continue;
+            }
             $view = $redis->get($key);
             if($article->view < $view){
                 $article->view = $redis->get($key);
