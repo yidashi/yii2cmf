@@ -27,26 +27,29 @@ Abstract class SpiderAbstract{
         $className = strtolower(get_class($this));
         // 去除命名空间
         $spiderName = join('', array_slice(explode('\\', $className), -1));
-        $spider = Spider::find()->where(['name'=>$spiderName])->one();
-        if(empty($spider)){
-            throw new Exception('不存在目标网站');
+        $this->config = \Yii::$app->cache->get($spiderName . 'Config');
+        if($this->config === false){
+            $spider = Spider::find()->where(['name'=>$spiderName])->one();
+            if(empty($spider)){
+                throw new Exception('不存在目标网站');
+            }
+            $this->config = [];
+            $category = [];
+            $targetCategory = explode(',', $spider->target_category);
+            $targetCategoryUrl = explode(',', $spider->target_category_url);
+            foreach($targetCategory as $k=>$cate){
+                $category[$cate] = $targetCategoryUrl[$k];
+            }
+            $this->config['category'] = $category;
+            $this->config['name'] = $spider->name;
+            $this->config['title'] = $spider->title;
+            $this->config['domain'] = $spider->domain;
+            $this->config['page_dom'] = $spider->page_dom;
+            $this->config['list_dom'] = $spider->list_dom;
+            $this->config['title_dom'] = $spider->title_dom;
+            $this->config['time_dom'] = $spider->time_dom;
+            $this->config['content_dom'] = $spider->content_dom;
         }
-        $this->config = [];
-        $category = [];
-        $targetCategory = explode(',', $spider->target_category);
-        $targetCategoryUrl = explode(',', $spider->target_category_url);
-        foreach($targetCategory as $k=>$cate){
-            $category[$cate] = $targetCategoryUrl[$k];
-        }
-        $this->config['category'] = $category;
-        $this->config['name'] = $spider->name;
-        $this->config['title'] = $spider->title;
-        $this->config['domain'] = $spider->domain;
-        $this->config['page_dom'] = $spider->page_dom;
-        $this->config['list_dom'] = $spider->list_dom;
-        $this->config['title_dom'] = $spider->title_dom;
-        $this->config['time_dom'] = $spider->time_dom;
-        $this->config['content_dom'] = $spider->content_dom;
     }
     /**
      * 采集执行函数,调用 getPages ，获取所有分页 ；然后调用 urls ，获取每页文章的文章url，并将他们存入队列

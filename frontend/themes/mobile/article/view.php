@@ -110,17 +110,12 @@ js
 if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
     $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
-    $appId = 'wx2d5c95252ba671cf';
-    $appSecret = 'af6059c4d91063fb73a0f9b51f0a34d4';
-    $accessToken = Yii::$app->cache->get('wxAccessToken');
-    if($accessToken === false) {
-        $accessTokenRes = file_get_contents("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appId}&secret={$appSecret}");
-        $accessToken = \yii\helpers\Json::decode($accessTokenRes)['access_token'];
-        Yii::$app->cache->set('wxAccessToken', $accessToken);
-    }
-    $ticketRes = file_get_contents("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$accessToken}&type=jsapi");
-    $ticket = \yii\helpers\Json::decode($ticketRes)['ticket'];
-    $nonceStr = 'hehe';
+    $appId = Yii::$app->params['wxAppId'];
+    $appSecret = Yii::$app->params['wxAppSecret'];
+    $weixin = new \common\models\Weixin();
+    $accessToken = $weixin->getAccessToken($appId, $appSecret);
+    $ticket = $weixin->getTicket($accessToken);
+    $nonceStr = Yii::$app->params['wxNonceStr'];
     $timestamp = time();
     $params = [
         'noncestr' => $nonceStr,
@@ -128,12 +123,7 @@ if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !==
         'jsapi_ticket' => $ticket,
         'url' => Yii::$app->request->absoluteUrl
     ];
-    ksort($params);
-    $signature = '';
-    foreach($params as $key=>$param){
-        $signature .= $key . '=' . $param . '&';
-    }
-    $signature = sha1(rtrim($signature, '&'));
+    $signature = $weixin->sign($params);
     $this->registerJsFile('http://res.wx.qq.com/open/js/jweixin-1.0.0.js');
     $this->registerJs(<<<js
 wx.config({
