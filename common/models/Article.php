@@ -37,7 +37,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['title', 'content'], 'required'],
             [['content'], 'string'],
-            [['status', 'category_id'], 'integer'],
+            [['status', 'category_id', 'view', 'up', 'down'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category'], 'setCategory'],
