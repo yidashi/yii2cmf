@@ -20,14 +20,19 @@ class Webuploader extends InputWidget{
     {
         parent::init();
         $this->options['boxId'] = isset($this->options['boxId']) ? $this->options['boxId'] : 'picker';
-        $this->options['innerHTML'] = isset($this->options['innerHTML']) ? $this->options['innerHTML'] :'<button class="btn btn-primary">选择文件</button>';
+        $this->options['innerHTML'] = isset($this->options['innerHTML']) ? $this->options['innerHTML'] : '<button class="btn btn-primary">选择文件</button>';
         $this->options['previewWidth'] = isset($this->options['previewWidth']) ? $this->options['previewWidth'] : '250';
         $this->options['previewHeight'] = isset($this->options['previewHeight']) ? $this->options['previewHeight'] : '150';
     }
     public function run()
     {
         $this->registerClientJs();
-        $content = $this->model[$this->attribute] ? Html::img(\Yii::getAlias('@web') . '/' . $this->model[$this->attribute], ['width'=>$this->options['previewWidth'],'height'=>$this->options['previewHeight']]) : '选择文件';
+        $content = $this->model[$this->attribute] ?
+            Html::img(
+                strpos($this->model[$this->attribute], 'http:') === false ? (\Yii::getAlias('@static') . '/' . $this->model[$this->attribute]) : $this->model[$this->attribute],
+                ['width'=>$this->options['previewWidth'],'height'=>$this->options['previewHeight']]
+            ) :
+            $this->options['innerHTML'];
         if($this->hasModel()){
             return Html::tag('div', $content, ['id'=>$this->options['boxId']]) . Html::activeHiddenInput($this->model, $this->attribute);
         }else{
@@ -56,10 +61,7 @@ var uploader = WebUploader.create({
 
         // 选择文件的按钮。可选。
         // 内部根据当前运行是创建，可能是input元素，也可能是flash.
-        pick: {
-            id:'#{$this->options['boxId']}',
-            innerHTML:'{$this->options['innerHTML']}'
-        },
+        pick: '#{$this->options['boxId']}',
 
         accept: {
             title: 'Images',

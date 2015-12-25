@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = '微信热文精选,微信文章,微信分享,微信美文收录,微信公众号和热门文章,微信大全,微信朋友圈好文章_' . Yii::$app->name;
+$this->title = Yii::$app->params['seoTitle'] . '_' . Yii::$app->name;
 $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261166107']);
 ?>
 <div class="site-index">

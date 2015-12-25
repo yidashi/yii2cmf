@@ -14,40 +14,8 @@ use common\models\Category;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\AccessControl;
+
 class ArticleController extends Controller{
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['create'],
-                'rules' => [
-                    [
-                        'actions' => ['create'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-        ];
-    }
-    public function actions()
-    {
-        return [
-            'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    "imageUrlPrefix"  => \Yii::getAlias('@static') . '/',//图片访问路径前缀
-                    "imagePathFormat" => "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}" //上传保存路径
-                ],
-            ],
-            'webupload' => 'yidashi\webuploader\WebuploaderAction'
-        ];
-    }
     public function actionIndex($cid=0)
     {
         $category = Category::find()->where(['id'=>$cid])->select('title')->scalar();
@@ -89,18 +57,5 @@ class ArticleController extends Controller{
             'pages' => $pages,
             'hots' => $hots
         ]);
-    }
-    public function actionCreate()
-    {
-        $model = new Article();
-
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
-            return $this->redirect(['create']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
     }
 } 

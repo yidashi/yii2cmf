@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = $category . '_' . Yii::$app->name;
+$this->title = Yii::$app->params['seoTitle'] . '_' . $category . '_' . Yii::$app->name;
 $this->params['breadcrumbs'][] = $category;
 ?>
 <div class="site-index">

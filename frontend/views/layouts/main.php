@@ -53,18 +53,21 @@ AppAsset::register($this);
       </form>';*/
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '反馈', 'url' => ['/suggest/create']];
-    $rightMenuItems[] = ['label' => '投稿', 'url' => ['/article/create']];
+    $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
             'label' => Yii::$app->user->identity->username,
-            'url' => ['/user/index'],
             'items' => [
                 [
-                    'label'=>'设置',
-                    'url'=>['/usr/settings']
+                    'label'=>'我的主页',
+                    'url'=>['/my/settings']
+                ],
+                [
+                    'label' => '我的投稿',
+                    'url' => ['/my/article-list']
                 ],
                 [
                     'label' => '退出',
