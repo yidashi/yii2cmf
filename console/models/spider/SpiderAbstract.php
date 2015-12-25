@@ -49,6 +49,7 @@ Abstract class SpiderAbstract{
             $this->config['title_dom'] = $spider->title_dom;
             $this->config['time_dom'] = $spider->time_dom;
             $this->config['content_dom'] = $spider->content_dom;
+            \Yii::$app->cache->set($spiderName . 'Config', $this->config);
         }
     }
     /**
