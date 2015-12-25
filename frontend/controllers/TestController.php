@@ -8,7 +8,9 @@
 namespace frontend\controllers;
 
 
+use common\models\Category;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class TestController extends Controller{
@@ -53,5 +55,12 @@ class TestController extends Controller{
             }
         }
         return $arr;
+    }
+
+    public function actionTest()
+    {
+        $list = Category::find()->select('id,title')->asArray()->all();
+        $list = ArrayHelper::map($list, 'id', 'title');
+        print_r($list);
     }
 } 

@@ -36,9 +36,12 @@ class ArticleController extends Controller{
                 continue;
             }
             $view = $redis->get($key);
+            // 更新浏览数
             if($article->view < $view){
                 $article->view = $redis->get($key);
                 $article->save(false);
+            }else{
+                $redis->set($v, $article->view);
             }
         }
     }

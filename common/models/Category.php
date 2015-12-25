@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -51,5 +52,28 @@ class Category extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
         ];
+    }
+
+    public function lists()
+    {
+        $list = Yii::$app->cache->get('categoryList');
+        if($list === false){
+            $list = static::find()->select('id,title')->asArray()->all();
+            $list = ArrayHelper::map($list, 'id', 'title');
+            Yii::$app->cache->set('categoryList', $list);
+        }
+        return $list;
+    }
+
+    public function getCategoryNameById($id)
+    {
+        $list= $this->lists();
+        return isset($list[$id]) ? $list[$id] : null;
+    }
+
+    public function getCategoryIdByName($name)
+    {
+        $list= $this->lists();
+        return array_search($name, $list);
     }
 }

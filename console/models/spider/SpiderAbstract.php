@@ -169,20 +169,20 @@ Abstract class SpiderAbstract{
 
     /**
      * 将文章插入数据库
-     * @param $title
-     * @param $content
-     * @param $publish_at
-     * @param $tag
-     * @return bool
+     * @param $title 标题
+     * @param $content 内容
+     * @param $publish_at 发布时间
+     * @param string $category 分类名
+     * @param string $cover 封面
+     * @return int
      */
     public function insert($title,$content,$publish_at,$category='',$cover=''){
         //插入标签（搜索的分类）
-
-        $category_id = (new Query())->from('{{%category}}')->where(['title'=>$category])->select('id')->scalar();
-        if(!$category_id){
+        $categoryId = (new Category())->getCategoryIdByName($category);
+        if(!$categoryId){
             $cateModel = new Category();
             $cateModel->title = $category;
-            $category_id = (int) $cateModel->save();
+            $categoryId = (int) $cateModel->save();
         }
         $article = new Article();
         $article->title = $title;
@@ -191,7 +191,7 @@ Abstract class SpiderAbstract{
         $article->source = $this->config['domain'];
         $article->status = 1;
         $article->category = $category;
-        $article->category_id = $category_id;
+        $article->category_id = $categoryId;
         $article->cover = $cover;
         $article->created_at = $publish_at;
         $res = $article->save(false);
