@@ -84,7 +84,7 @@ class MyController extends Controller
         }
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
-            return $this->redirect(['update-article']);
+            return $this->redirect(['update-article', 'id'=>$id]);
         } else {
             return $this->render('update-article', [
                 'model' => $model
