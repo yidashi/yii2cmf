@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $category;
                 <div class="media-body">
                     <h4 class="media-heading"><a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>"><?= $item['title']?></a></h4>
                     <div class="media-content">
-                        <span class="views"><span class="fa fa-eye"></span>浏览 <?= Yii::$app->redis->get('article:view:' . $item->id)?></span>
+                        <span class="views"><span class="fa fa-eye"></span>浏览 <?= $item->view?></span>
                         <span class="comments"><span class="fa fa-comments-o"></span>评论 <?=$item->comment?></span>
                     </div>
                 </div>
