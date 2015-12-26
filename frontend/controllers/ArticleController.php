@@ -39,8 +39,14 @@ class ArticleController extends Controller{
         if($model === null){
             throw new NotFoundHttpException('not found');
         }
-        \Yii::$app->redis->incr('article:view:' . $id);
-        $model->view = \Yii::$app->redis->get('article:view:' . $id);
+        $redis = \Yii::$app->redis;
+        $rkey = 'article:view:' . $id;
+        if($redis->exists($rkey)) {
+            $redis->incr($rkey);
+        }else{
+            $redis->set($rkey, mt_rand('50,888'));
+        }
+        $model->view = $redis->get('article:view:' . $id);
         $commentModel = new Comment();
         $commentQuery = Comment::find()->where(['article_id'=>$id, 'parent_id'=>0]);
         $countCommentQuery = clone $commentQuery;

@@ -41,13 +41,12 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<id:\d+>' => 'article/view'
-//                'article/<cid:\d+>' => 'article/index'
-                /*[
+                '<id:\d+>' => 'article/view',
+                [
                     'pattern'=>'lizhi',
-                    'route'=>'article/index',
+                    'route'=>'/article',
                     'defaults'=>['cid'=>1]
-                ]*/
+                ],
             ]
         ],
         'authClientCollection' => [
@@ -63,5 +62,21 @@ return [
         ]
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
+    'on beforeRequest' => function($event) {
+        $db = \Yii::$app->db;
+        $list = $db->cache(function($db){
+            return \common\models\Category::find()->select('id,name')->asArray()->all();
+        }, 60*60*24);
+        $rules = [];
+        foreach($list as $item) {
+            $rules[] = [
+                'pattern'=>$item['name'],
+                'route'=>'/article',
+                'defaults'=>['cid'=>$item['id']]
+            ];
+        }
+        Yii::$app->UrlManager->addRules($rules);
+
+    },
     'params' => $params,
 ];
