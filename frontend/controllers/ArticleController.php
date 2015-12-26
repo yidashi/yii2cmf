@@ -29,6 +29,8 @@ class ArticleController extends Controller{
         foreach ($models as &$model) {
             if(\Yii::$app->redis->get('article:view:' . $model->id) == 0 && $model->created_at >= 60*60*3){
                 \Yii::$app->redis->set('article:view:' . $model->id, mt_rand(50,888));
+            }else{
+                \Yii::$app->redis->set('article:view:' . $model->id, 0);
             }
             $model->view = \Yii::$app->redis->get('article:view:' . $model->id);
         }
