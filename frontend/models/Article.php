@@ -4,7 +4,6 @@ namespace frontend\models;
 
 use common\models\Category;
 use Yii;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -30,7 +29,7 @@ class Article extends \common\models\Article
             [['title', 'content', 'author'], 'required'],
             [['content'], 'string'],
             [['status', 'category_id', 'comment', 'user_id'], 'integer'],
-            ['user_id','default',Yii::$app->user->id],
+            ['user_id','default','value' => Yii::$app->user->id],
             [['title', 'category'], 'string', 'max' => 50],
             [['category'], 'setCategory'],
             [['author', 'cover', 'desc'], 'string', 'max' => 255]

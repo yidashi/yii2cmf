@@ -9,7 +9,7 @@
 namespace frontend\controllers;
 
 
-use common\models\Article;
+use frontend\models\Article;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\filters\AccessControl;
