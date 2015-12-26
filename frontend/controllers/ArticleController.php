@@ -44,7 +44,7 @@ class ArticleController extends Controller{
         if($redis->exists($rkey)) {
             $redis->incr($rkey);
         }else{
-            $redis->set($rkey, mt_rand('50,888'));
+            $redis->set($rkey, mt_rand(50,888));
         }
         $model->view = $redis->get('article:view:' . $id);
         $commentModel = new Comment();
