@@ -29,7 +29,8 @@ class Article extends \common\models\Article
         return [
             [['title', 'content', 'author'], 'required'],
             [['content'], 'string'],
-            [['status', 'category_id', 'comment'], 'integer'],
+            [['status', 'category_id', 'comment', 'user_id'], 'integer'],
+            ['user_id','default',Yii::$app->user->id],
             [['title', 'category'], 'string', 'max' => 50],
             [['category'], 'setCategory'],
             [['author', 'cover', 'desc'], 'string', 'max' => 255]

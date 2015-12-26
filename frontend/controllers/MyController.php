@@ -25,10 +25,8 @@ class MyController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create'],
                 'rules' => [
                     [
-                        'actions' => ['create-article'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
