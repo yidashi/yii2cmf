@@ -180,18 +180,16 @@ Abstract class SpiderAbstract{
         //插入标签（搜索的分类）
         $categoryId = (new Category())->getCategoryIdByName($category);
         if(!$categoryId){
-            $cateModel = new Category();
-            $cateModel->title = $category;
-            $categoryId = (int) $cateModel->save();
+            throw new Exception('该分类不存在');
         }
         $article = new Article();
         $article->title = $title;
         $article->content = $content;
         $article->author = '匿名';
-        $article->source = $this->config['domain'];
         $article->status = 1;
         $article->category = $category;
         $article->category_id = $categoryId;
+        $article->source = $this->config['domain'];
         $article->cover = $cover;
         $article->created_at = $publish_at;
         $res = $article->save(false);
