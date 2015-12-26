@@ -70,7 +70,7 @@ class MyController extends Controller
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
-            return $this->redirect(['create']);
+            return $this->redirect(['create-article']);
         } else {
             return $this->render('create-article', [
                 'model' => $model,
@@ -84,8 +84,13 @@ class MyController extends Controller
         if(empty($model)) {
             throw new NotFoundHttpException('文章不存在!');
         }
-        return $this->render('update-article', [
-           'model' => $model
-        ]);
+        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
+            \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
+            return $this->redirect(['update-article']);
+        } else {
+            return $this->render('update-article', [
+                'model' => $model
+            ]);
+        }
     }
 }
