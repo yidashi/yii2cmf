@@ -26,7 +26,6 @@ class ArticleController extends Controller{
             ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->all();
-
         return $this->render('index', [
             'models' => $models,
             'pages' => $pages,
