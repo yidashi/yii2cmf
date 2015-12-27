@@ -13,17 +13,14 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => ['class' => 'form-inline']
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'content') ?>
-
-    <?= $form->field($model, 'category') ?>
-
-    <?= $form->field($model, 'category_id') ?>
+    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
 
     <?php // echo $form->field($model, 'author') ?>
 
@@ -31,14 +28,12 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
-    <?php // echo $form->field($model, 'status') ?>
+    <?php  echo $form->field($model, 'status')->dropDownList(['待审核','正常']) ?>
 
     <?php // echo $form->field($model, 'cover') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
-    </div>
+    <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
+    <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
 
     <?php ActiveForm::end(); ?>
 

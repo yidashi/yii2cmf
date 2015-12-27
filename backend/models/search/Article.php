@@ -54,12 +54,9 @@ class Article extends ArticleModel
             // $query->where('0=1');
             return $dataProvider;
         }
-
         $query->andFilterWhere([
             'id' => $this->id,
             'category_id' => $this->category_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'status' => $this->status,
         ]);
 

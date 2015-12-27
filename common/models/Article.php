@@ -61,7 +61,7 @@ class Article extends \yii\db\ActiveRecord
             'author' => '作者',
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
-            'status' => Yii::t('app', 'Status'),
+            'status' => '状态',
             'cover' => '封面',
             'category_id'=>'分类',
             'category'=>'分类'
