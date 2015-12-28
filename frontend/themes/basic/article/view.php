@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $model->title;
 </div>
 <?= \common\widgets\danmu\Danmu::widget(['id'=>$model->id]);?>
 <?php
-$this->registerJsFile('@web/js/jquery.lazyload.min.js');
+$this->registerJsFile('@web/js/jquery.lazyload.min.js',['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJs(<<<js
     $(function(){
         $('.view-content iframe').addClass('embed-responsive-item').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
