@@ -101,9 +101,12 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
 </div>
 <?= \common\widgets\danmu\Danmu::widget(['id'=>$model->id]);?>
-<?php $this->registerJs(<<<js
+<?php
+$this->registerJsFile('@web/js/jquery.lazyload.min.js');
+$this->registerJs(<<<js
     $(function(){
         $('.view-content iframe').addClass('embed-responsive-item').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
+        $("img.lazy").show().lazyload({effect: "fadeIn"});
     });
 js
 );
