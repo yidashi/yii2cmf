@@ -23,6 +23,7 @@ class ArticleController extends Controller{
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)
+            ->select('id,title,view,up,down,created_at,user_id,desc')
             ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->all();
