@@ -109,8 +109,6 @@ AppAsset::register($this);
 </div>
 <a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
 <?php if(YII_ENV_PROD): ?>
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=53223522" charset="UTF-8"></script>
-<?php endif; ?>
 <script>
     (function(){
         var bp = document.createElement('script');
@@ -119,6 +117,17 @@ AppAsset::register($this);
         s.parentNode.insertBefore(bp, s);
     })();
 </script>
+<!--百度统计-->
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?70a5fd220c5efb308f934681ea41aa0a";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<?php endif; ?>
 <?php $this->endBody() ?>
 </body>
 </html>

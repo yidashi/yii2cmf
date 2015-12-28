@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\behaviors\PushBehavior;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -80,6 +81,7 @@ class Article extends \yii\db\ActiveRecord
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false,
             ],
+            PushBehavior::className()
         ];
     }
 }
