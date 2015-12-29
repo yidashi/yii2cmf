@@ -192,6 +192,7 @@ Abstract class SpiderAbstract{
         $article->source = $this->config['domain'];
         $article->cover = $cover;
         $article->created_at = $publish_at;
+        $article->user_id = 0;
         $res = $article->save(false);
         return $res?1:0;
     }
