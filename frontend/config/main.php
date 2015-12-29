@@ -41,12 +41,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<id:\d+>' => 'article/view',
-                [
-                    'pattern'=>'lizhi',
-                    'route'=>'/article',
-                    'defaults'=>['cid'=>1]
-                ],
+                '<id:\d+>' => 'article/view'
             ]
         ],
         'authClientCollection' => [
