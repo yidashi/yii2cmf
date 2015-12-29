@@ -4,6 +4,7 @@ namespace frontend\models;
 
 use common\models\Category;
 use Yii;
+use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -43,6 +44,23 @@ class Article extends \common\models\Article
         if(empty($this->desc)){
             $this->desc = mb_substr(strip_tags($this->content),0,150);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [
+                [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false,
+                ]
+            ]
+        );
     }
 
 }
