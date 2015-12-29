@@ -139,7 +139,7 @@ class SiteController extends Controller
             ->where(['status'=>Article::STATUS_ACTIVE])
             ->andWhere(['<>', 'category', '两性'])
             ->andWhere(['<>','cover',''])
-            ->select('id,title,view,up,down,created_at,user_id,desc')
+            ->select('id,title,cover,view,up,down,created_at,user_id,desc')
             ->orderBy('created_at desc')
             ->limit(40)
             ->all();
