@@ -43,7 +43,7 @@ class Resque
 	 *                      a nested array of servers with host/port pairs.
 	 * @param int $database
 	 */
-	public static function setBackend($server, $database = 0)
+	public static function setBackend($server = '127.0.0.1:6379', $database = 0)
 	{
 		self::$redisServer   = $server;
 		self::$redisDatabase = $database;

@@ -19,13 +19,9 @@ class ArticleJob{
             $content = $res['content'];
             $time = $res['time'];
             $time = $publishTime?:$time;
-            try{
-                if(!$spider->isGathered($url)){
-                    $result = $spider->insert($title,$content,$time,$category,$cover);
-                    $spider->addLog($url,$category,$result,$title);
-                }
-            }catch(\Exception $e){
-                echo $e->getMessage().PHP_EOL;
+            if(!$spider->isGathered($url)){
+                $result = $spider->insert($title,$content,$time,$category,$cover);
+                $spider->addLog($url,$category,$result,$title);
             }
         }
 
