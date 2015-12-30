@@ -45,6 +45,5 @@ class PushBehavior extends Behavior
         );
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
-        echo $result;die;
     }
 } 
