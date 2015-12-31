@@ -119,6 +119,8 @@ h3 { font-size: 18px; }
 h4 { font-size: 16px; }
 pre { background: #F0F0F0; }
 .hidden{display:none!important;}
+.mb15{margin-bottom: 15px;}
+.carousel-inner img{width:100%;height:200px!important;}
 /* 主导航开始 */
 /*.wrap { min-height: 100%; height: auto; margin: 0 auto -240px; padding: 0 0 240px; }
 .wrap > .container { padding: 70px 10px 0; }

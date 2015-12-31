@@ -10,7 +10,9 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\base\Event;
 use yii\base\InvalidParamException;
+use yii\db\ActiveQuery;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -135,17 +137,26 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         $news = Article::find()
-            ->where(['status'=>Article::STATUS_ACTIVE])
+            ->where(['status' => Article::STATUS_ACTIVE])
             ->andWhere(['<>', 'category', '两性'])
             ->andWhere(['<>','cover',''])
             ->select('id,title,cover,view,up,down,created_at,user_id,desc')
-            ->orderBy('created_at desc')
+            ->orderBy(['id' => SORT_DESC])
             ->limit(40)
             ->all();
-        return $this->render('index', ['news'=>$news]);
+        $recommend = Article::find()
+            ->where(['status' => Article::STATUS_ACTIVE])
+            ->andWhere(['between', 'created_at', strtotime(date('Y-m-d')), time()])
+            ->orderBy(['view' => SORT_DESC, 'id' => SORT_DESC])
+            ->limit(3)
+            ->all();
+        return $this->render('index', [
+            'news' => $news,
+            'recommend' => $recommend
+        ]);
     }
-
     /**
      * Logs in a user.
      *
