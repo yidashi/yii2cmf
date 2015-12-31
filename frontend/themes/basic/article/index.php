@@ -20,7 +20,9 @@ $this->params['breadcrumbs'][] = $category;
         <?php foreach($models as $item):?>
             <div class="media">
                 <div class="media-body">
-                    <h4 class="media-heading"><a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>"><?= $item['title']?></a></h4>
+                    <h4 class="media-heading">
+                        <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank"><?= $item['title']?></a>
+                    </h4>
                     <div class="media-content">
                         <span class="views"><span class="fa fa-eye"></span>浏览 <?= $item->view?></span>
                         <span class="comments"><span class="fa fa-comments-o"></span>评论 <?=$item->comment?></span>
@@ -28,7 +30,7 @@ $this->params['breadcrumbs'][] = $category;
                 </div>
                 <?php if(!empty($item['cover'])):?>
                 <div class="media-right">
-                    <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
+                    <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank">
                         <img class="media-object" src="<?=strpos($item['cover'], 'http://') === false ? (Yii::getAlias('@static') . '/' . $item['cover']) : $item['cover']?>" alt="<?= $item['title']?>" style="width:64px;height:64px;" onerror="$(this).parents('.media-right').remove()">
                     </a>
                 </div>
