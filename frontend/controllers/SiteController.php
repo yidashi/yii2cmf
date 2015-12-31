@@ -146,14 +146,19 @@ class SiteController extends Controller
             ->orderBy(['id' => SORT_DESC])
             ->limit(40)
             ->all();
+        $slider = Article::find()
+            ->where(['status' => Article::STATUS_ACTIVE])
+            ->orderBy(['view' => SORT_DESC])
+            ->limit(5)
+            ->all();
         $recommend = Article::find()
             ->where(['status' => Article::STATUS_ACTIVE])
-            ->andWhere(['between', 'created_at', strtotime(date('Y-m-d')), time()])
-            ->orderBy(['view' => SORT_DESC, 'id' => SORT_DESC])
-            ->limit(3)
+            ->orderBy(['comment' => SORT_DESC])
+            ->limit(10)
             ->all();
         return $this->render('index', [
             'news' => $news,
+            'slider' => $slider,
             'recommend' => $recommend
         ]);
     }
