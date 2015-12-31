@@ -8,8 +8,8 @@
 namespace common\behaviors;
 
 
+use common\models\Article;
 use yii\base\Behavior;
-use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
 class PushBehavior extends Behavior
@@ -18,7 +18,7 @@ class PushBehavior extends Behavior
     {
         if (YII_ENV_PROD) {
             return [
-                ActiveRecord::EVENT_AFTER_INSERT => [$this,'pushBaidu']
+                Article::EVENT_AFTER_INSERT => [$this,'pushBaidu']
             ];
         }
         return [];
@@ -45,5 +45,6 @@ class PushBehavior extends Behavior
         );
         curl_setopt_array($ch, $options);
         $result = curl_exec($ch);
+        echo $result;
     }
 } 
