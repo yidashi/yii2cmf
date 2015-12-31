@@ -47,7 +47,7 @@ $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261
             <h2>今日最新</h2>
             <?php foreach($news as $item):?>
             <div class="col-sm-6 col-md-3 article-item">
-                <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
+                <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank">
                     <img onerror="this.src='http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png'" src="<?= $item['cover']?>" alt="<?= $item['title']?>" width="200" height="145">
                 <h3 class="article-title"><?= $item['title']?></h3>
                 </a>

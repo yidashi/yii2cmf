@@ -20,6 +20,7 @@ class Jianshu extends SpiderAbstract{
             mkdir($coverRootPath . $coverFilePath);
         }
         file_put_contents($coverRootPath . $coverFilePath . $coverFileName,$coverCon);
+        @chmod($coverRootPath . $coverFilePath, 0777);
         return  $coverFilePath . $coverFileName;
     }
 }
