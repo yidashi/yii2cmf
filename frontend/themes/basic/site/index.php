@@ -34,7 +34,7 @@ $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261
         </div>
         <div class="row mb15">
             <div class="article-list">
-                <h2>今日最新</h2>
+                <div class="page-header"><h2>今日最新</h2></div>
                 <?php foreach($news as $item):?>
                     <div class="col-md-4 article-item">
                         <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank">
@@ -49,23 +49,24 @@ $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261
         </div>
     </div>
     <div class="col-md-4">
-            <div class="article-list">
-                <?php foreach($recommend as $item):?>
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>">
-                                <img class="media-object" src="<?= $item->cover?>" alt="<?= $item->title?>" width="160" height=80">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">
-                                <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>"><?= $item->title?></a>
-                            </h4>
-                            <div class="media-action"><?= date('Y-m-d', $item->created_at) ?></div>
-                        </div>
+        <div class="page-header"><h2>今日最热</h2></div>
+        <div class="article-list">
+            <?php foreach($recommend as $item):?>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank">
+                            <img class="media-object" src="<?= $item->cover?>" alt="<?= $item->title?>" width="160" height=80">
+                        </a>
                     </div>
-                <?php endforeach;?>
-            </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item['id']])?>" target="_blank"><?= $item->title?></a>
+                        </h4>
+                        <div class="media-action"><?= date('Y-m-d', $item->created_at) ?></div>
+                    </div>
+                </div>
+            <?php endforeach;?>
+        </div>
     </div>
 </div>
 <?php $this->registerJs("$('.carousel').carousel();")?>
