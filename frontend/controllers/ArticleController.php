@@ -27,16 +27,6 @@ class ArticleController extends Controller{
             ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->all();
-        foreach ($models as &$model) {
-            if(\Yii::$app->redis->get('article:view:' . $model->id) == 0){
-                if($model->created_at < time() - 60*60*3) {
-                    \Yii::$app->redis->set('article:view:' . $model->id, mt_rand(50,888));
-                }else {
-                    \Yii::$app->redis->set('article:view:' . $model->id, 0);
-                }
-            }
-            $model->view = \Yii::$app->redis->get('article:view:' . $model->id);
-        }
         return $this->render('index', [
             'models' => $models,
             'pages' => $pages,
@@ -49,18 +39,8 @@ class ArticleController extends Controller{
         if($model === null){
             throw new NotFoundHttpException('not found');
         }
-        $redis = \Yii::$app->redis;
-        $rkey = 'article:view:' . $id;
-        if($redis->exists($rkey)) {
-            $redis->incr($rkey);
-        }else{
-            if($model->view == 0 && $model->created_at < time() - 60*60*3) {
-                $redis->set($rkey, mt_rand(50,888));
-            }else {
-                $redis->set($rkey, $model->view);
-            }
-        }
-        $model->view = $redis->get('article:view:' . $id);
+        // 浏览量变化
+        $model->addView();
         $commentModel = new Comment();
         $commentQuery = Comment::find()->where(['article_id'=>$id, 'parent_id'=>0]);
         $countCommentQuery = clone $commentQuery;

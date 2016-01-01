@@ -2,8 +2,8 @@
 
 namespace common\models;
 
+use common\behaviors\AfterFindArticleBehavior;
 use common\behaviors\PushBehavior;
-use common\behaviors\ShowCoverBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -77,7 +77,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
             PushBehavior::className(),
-            ShowCoverBehavior::className()
+            AfterFindArticleBehavior::className()
         ];
     }
 }

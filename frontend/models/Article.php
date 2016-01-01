@@ -62,5 +62,17 @@ class Article extends \common\models\Article
             ]
         );
     }
+    public function addView()
+    {
+        $redis = \Yii::$app->redis;
+        $rkey = 'article:view:' . $this->id;
+        $rview = $redis->get($rkey);
+        if (!empty($rview) && $rview >= 20) {
+            $this->save(false);
+            $redis->set($rkey, 1);
+        } else {
+            $redis->incr($rkey);
+        }
+    }
 
 }
