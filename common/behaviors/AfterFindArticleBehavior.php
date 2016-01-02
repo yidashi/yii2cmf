@@ -30,9 +30,9 @@ class AfterFindArticleBehavior extends Behavior
         $model->cover = $cover;
         $redis = \Yii::$app->redis;
         $rkey = 'article:view:' . $model->id;
-        if ($model->view == 0 && $model->created_at < time() - 60*60*3) {
-            $redis->set($rkey, mt_rand(50,8888));
-        }
+//        if ($model->view == 0 && $model->created_at < time() - 60*60*3) {
+//            $redis->set($rkey, mt_rand(50,8888));
+//        }
         $model->view += $redis->get('article:view:' . $model->id);
         $event->sender = $model;
     }
