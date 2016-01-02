@@ -51,6 +51,14 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+            [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['sitemap'],
+                'duration' => 60*60,
+                'variations' => [
+                    \Yii::$app->language,
+                ],
+            ],
         ];
     }
 
@@ -303,5 +311,19 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionSitemap()
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        \Yii::$container->set('yii\web\XmlResponseFormatter', ['rootTag' => 'urlset', 'itemTag' => 'url']);
+        $urls = [];
+        $models = Article::find()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
+        foreach($models as $model){
+            $url = [];
+            $url['loc'] = 'http://www.51siyuan.cn/' . $model->id;
+            $urls[] = $url;
+        }
+        return $urls;
     }
 }
