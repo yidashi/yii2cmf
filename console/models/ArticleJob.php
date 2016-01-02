@@ -19,10 +19,10 @@ class ArticleJob{
             $content = $res['content'];
             $time = $res['time'];
             $time = $publishTime?:$time;
-            if(!$spider->isGathered($url)){
+//            if(!$spider->isGathered($url)){
                 $result = $spider->insert($title,$content,$time,$category,$cover);
                 $spider->addLog($url,$category,$result,$title);
-            }
+//            }
         }
 
     }
