@@ -145,7 +145,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
         $news = Article::find()
             ->where(['status' => Article::STATUS_ACTIVE])
             ->andWhere(['<>', 'category', '两性'])

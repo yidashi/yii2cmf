@@ -41,7 +41,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<id:\d+>' => 'article/view'
+                '<id:\d+>' => 'article/view',
+//                'v<version:\d+>/<controller:\S+>/<action:\S+>' => '<controller>/<action>'
             ]
         ],
         'authClientCollection' => [
@@ -65,13 +66,12 @@ return [
         $rules = [];
         foreach($list as $item) {
             $rules[] = [
-                'pattern' => '<cate>/<page:\d+>',
+                'pattern' => '<cate>',
                 'route' => 'article/index',
-                'defaults' => ['page' => 1]
             ];
         }
         Yii::$app->UrlManager->addRules($rules);
 
     },
-    'params' => $params,
+    'params' => $params
 ];
