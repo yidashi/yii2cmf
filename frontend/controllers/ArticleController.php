@@ -16,10 +16,13 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller{
-    public function actionIndex($cid=0)
+    public function actionIndex($cate)
     {
-        $category = Category::find()->where(['id'=>$cid])->select('title')->scalar();
-        $query = Article::find()->where(['status'=>Article::STATUS_ACTIVE])->andFilterWhere(['category_id'=>$cid]);
+        $category = Category::find()->where(['name'=>$cate])->one();
+        if(empty($category)) {
+            throw new NotFoundHttpException();
+        }
+        $query = Article::find()->where(['status'=>Article::STATUS_ACTIVE])->andFilterWhere(['category_id'=>$category->id]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)

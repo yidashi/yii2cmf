@@ -65,9 +65,9 @@ return [
         $rules = [];
         foreach($list as $item) {
             $rules[] = [
-                'pattern'=>$item['name'],
-                'route'=>'/article',
-                'defaults'=>['cid'=>$item['id']]
+                'pattern' => '<cate>/<page:\d+>',
+                'route' => 'article/index',
+                'defaults' => ['page' => 1]
             ];
         }
         Yii::$app->UrlManager->addRules($rules);
