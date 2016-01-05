@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(array_merge([''=>'全部'],\common\models\Category::find()->select('title')->indexBy('id')->column())) ?>
 
     <?php // echo $form->field($model, 'author') ?>
 
@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_at') ?>
 
-    <?php  echo $form->field($model, 'status')->dropDownList(['待审核','正常']) ?>
+    <?php  echo $form->field($model, 'status')->dropDownList([ ''=>'全部', '待审核','正常',]) ?>
 
     <?php // echo $form->field($model, 'cover') ?>
 
