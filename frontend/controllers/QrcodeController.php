@@ -10,7 +10,8 @@ namespace frontend\controllers;
 
 use yii\web\Controller;
 
-class QrcodeController extends Controller{
+class QrcodeController extends Controller
+{
     public function actionIndex($text, $size=5, $logo=false)
     {
         $tmpFileName = '/tmp/qrcode.png';

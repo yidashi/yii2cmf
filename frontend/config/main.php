@@ -65,11 +65,10 @@ return [
         }, 60*60*24);
         $rules = [];
         foreach($list as $item) {
-            $rules[] = [
-                'pattern' => '<cate>',
-                'route' => 'article/index',
-            ];
+            $cate[] = $item['name'];
         }
+        $cate = join('|', $cate);
+        $rules['<cate:(' . $cate . ')>'] = 'article/index';
         Yii::$app->UrlManager->addRules($rules);
 
     },
