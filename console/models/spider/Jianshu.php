@@ -17,7 +17,7 @@ class Jianshu extends SpiderAbstract{
         $coverFilePath = 'upload/image/' . date('Ymd') . '/';
         $coverFileName = time().mt_rand(100000,999999) . '.jpg';
         if(!is_dir($coverRootPath . $coverFilePath)){
-            mkdir($coverRootPath . $coverFilePath);
+            mkdir($coverRootPath . $coverFilePath, 0777, true);
         }
         file_put_contents($coverRootPath . $coverFilePath . $coverFileName,$coverCon);
         @chmod($coverRootPath . $coverFilePath, 0777);
