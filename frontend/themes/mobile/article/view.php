@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em><?=$model->up?></em></a><a class="down" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em><?=$model->down?></em></a></span>
     </div>
     <!--内容-->
-    <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
+    <div class="view-content"><?= \yii\helpers\Markdown::process($model->data->content) ?></div>
     <?php if(!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
