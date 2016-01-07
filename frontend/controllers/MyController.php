@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 
 
+use common\models\ArticleData;
 use frontend\models\Article;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -65,30 +66,46 @@ class MyController extends Controller
     public function actionCreateArticle()
     {
         $model = new Article();
-
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
-            return $this->redirect(['create-article']);
-        } else {
-            return $this->render('create-article', [
-                'model' => $model,
-            ]);
+        $dataModel = new ArticleData();
+        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post())) {
+            $isValid = $model->validate();
+            if ($isValid) {
+                $model->save(false);
+                $dataModel->id = $model->id;
+                $isValid = $dataModel->validate();
+                if($isValid) {
+                    $dataModel->save(false);
+                    \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
+                    return $this->redirect(['create-article']);
+                }
+            }
         }
+        return $this->render('create-article', [
+            'model' => $model,
+            'dataModel' => $dataModel
+        ]);
     }
     public function actionUpdateArticle($id)
     {
         $userId = \Yii::$app->user->id;
         $model = Article::find()->where(['id'=>$id, 'user_id' => $userId])->one();
-        if(empty($model)) {
+        $dataModel = ArticleData::find()->where(['id'=>$id])->one();
+        if (!isset($model,$dataModel)) {
             throw new NotFoundHttpException('文章不存在!');
         }
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
-            return $this->redirect(['update-article', 'id'=>$id]);
-        } else {
-            return $this->render('update-article', [
-                'model' => $model
-            ]);
+        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post())) {
+            $isValid = $model->validate();
+            $isValid = $dataModel->validate() && $isValid;
+            if ($isValid) {
+                $model->save(false);
+                $dataModel->save(false);
+                \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
+                return $this->redirect(['update-article', 'id'=>$id]);
+            }
         }
+        return $this->render('update-article', [
+            'model' => $model,
+            'dataModel' => $dataModel
+        ]);
     }
 }

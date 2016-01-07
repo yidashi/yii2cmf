@@ -37,12 +37,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
-            [['content'], 'string'],
+            [['title'], 'required'],
             [['status', 'category_id', 'view', 'up', 'down', 'user_id'], 'integer'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
-            [['category'], 'setCategory'],
+            [['category_id'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover'], 'string', 'max' => 255]
         ];
@@ -59,7 +58,6 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'title' => '标题',
-            'content' => '内容',
             'author' => '作者',
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -80,4 +78,9 @@ class Article extends \yii\db\ActiveRecord
             AfterFindArticleBehavior::className()
         ];
     }
+
+    /*public function hasOne()
+    {
+        return [];
+    }*/
 }

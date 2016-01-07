@@ -27,25 +27,17 @@ class Article extends \common\models\Article
     public function rules()
     {
         return [
-            [['title', 'content', 'author'], 'required'],
-            [['content'], 'string'],
+            [['title', 'author'], 'required'],
             [['status', 'category_id', 'comment', 'user_id'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
-            [['category'], 'setCategory'],
-            [['author', 'cover', 'desc'], 'string', 'max' => 255]
+            [['category_id'], 'setCategory'],
+            [['author', 'cover', 'desc'], 'string', 'max' => 255],
         ];
     }
     public function setCategory($attribute, $params)
     {
         $this->category = Category::find()->where(['id'=>$this->category_id])->select('title')->scalar();
     }
-    public function setDesc($attribute, $params)
-    {
-        if(empty($this->desc)){
-            $this->desc = mb_substr(strip_tags($this->content),0,150);
-        }
-    }
-
     /**
      * @return array
      */
@@ -62,6 +54,10 @@ class Article extends \common\models\Article
             ]
         );
     }
+
+    /**
+     * 增加浏览量
+     */
     public function addView()
     {
         $redis = \Yii::$app->redis;
