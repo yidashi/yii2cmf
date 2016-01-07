@@ -36,9 +36,7 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => '首页', 'url' => ['/']],
-    ];
+    $menuItems = [];
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cate'=>$nav['name']]];
     }
