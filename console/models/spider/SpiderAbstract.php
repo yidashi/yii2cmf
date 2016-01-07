@@ -2,6 +2,7 @@
 namespace console\models\spider;
 
 use common\models\Article;
+use common\models\ArticleData;
 use common\models\Category;
 use common\models\Gather;
 use common\models\Spider;
@@ -184,7 +185,6 @@ Abstract class SpiderAbstract{
         }
         $article = new Article();
         $article->title = $title;
-        $article->content = $content;
         $article->author = '匿名';
         $article->status = 1;
         $article->category = $category;
@@ -194,6 +194,12 @@ Abstract class SpiderAbstract{
         $article->created_at = $publish_at;
         $article->user_id = 0;
         $res = $article->save(false);
+        if ($res) {
+            $articleData = new ArticleData();
+            $articleData->id = $article->id;
+            $articleData->content = $content;
+            $res = $articleData->save(false);
+        }
         return $res?1:0;
     }
 
