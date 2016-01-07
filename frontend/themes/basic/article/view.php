@@ -6,7 +6,7 @@
 /* @var $pages yii\data\Pagination */
 use yii\helpers\Html;
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => $model->category,'url' => ['/article', 'cid' => $model->category_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->category,'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('name')->scalar()]];
 $this->params['breadcrumbs'][] = $model->title;
 ?>
 <div class="col-lg-9">
