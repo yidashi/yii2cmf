@@ -13,6 +13,7 @@ use frontend\models\ContactForm;
 use yii\base\Event;
 use yii\base\InvalidParamException;
 use yii\db\ActiveQuery;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -320,7 +321,7 @@ class SiteController extends Controller
         $models = Article::find()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
         foreach($models as $model){
             $url = [];
-            $url['loc'] = 'http://www.51siyuan.cn/' . $model->id;
+            $url['loc'] = Url::to(['article/view', 'id' => $model->id], true);
             $urls[] = $url;
         }
         return $urls;
