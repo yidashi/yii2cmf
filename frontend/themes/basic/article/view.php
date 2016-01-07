@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
     <?php endif; ?>
     <!--内容-->
-    <div class="view-content"><?= \yii\helpers\Markdown::process($model->content) ?></div>
+    <div class="view-content"><?= \yii\helpers\HtmlPurifier::process($model->content) ?></div>
     <?php if(!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
     <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text'=>Yii::$app->request->absoluteUrl])) ?></div>
 
