@@ -32,7 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute'=>'content',
-                'value'=>\yii\helpers\Markdown::process($model->content),
+                'label' => '内容',
+                'value'=>\yii\helpers\Markdown::process($model->data->content),
                 'format'=>'raw'
             ],
             'category',

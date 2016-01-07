@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\ArticleData;
 use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\models\Article;
@@ -73,13 +74,23 @@ class ArticleController extends Controller
     public function actionCreate()
     {
         $model = new Article();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $dataModel = new ArticleData();
+        if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
+            $isValid = $model->validate();
+            if($isValid) {
+                $model->save(false);
+                $dataModel->id = $model->id;
+                $isValid = $dataModel->validate();
+                if($isValid) {
+                    $dataModel->save(false);
+                    return $this->redirect(['index']);
+                }
+            }
         }
+        return $this->render('create', [
+            'model' => $model,
+            'dataModel' => $dataModel
+        ]);
     }
 
     /**
@@ -91,14 +102,20 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+        $dataModel = ArticleData::findOne($id);
+        if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
+            $isValid = $model->validate();
+            $isValid = $dataModel->validate() && $isValid;
+            if($isValid) {
+                $model->save(false);
+                $dataModel->save(false);
+                return $this->redirect(['index']);
+            }
         }
+        return $this->render('update', [
+            'model' => $model,
+            'dataModel' => $dataModel
+        ]);
     }
 
     /**
