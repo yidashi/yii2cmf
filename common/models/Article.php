@@ -79,7 +79,7 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getContent()
+    public function getData()
     {
         return $this->hasOne(ArticleData::className(), ['id' => 'id']);
     }
