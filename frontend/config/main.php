@@ -42,6 +42,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '<id:\d+>' => 'article/view',
+                'suffix' => '.html'
 //                'v<version:\d+>/<controller:\S+>/<action:\S+>' => '<controller>/<action>'
             ]
         ],
