@@ -112,7 +112,7 @@ js
 );
 if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
-    $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->content)),0,150) : $model->desc;
+    $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->data->content)),0,150) : $model->desc;
     $appId = Yii::$app->params['wxAppId'];
     $appSecret = Yii::$app->params['wxAppSecret'];
     $weixin = new \common\models\Weixin();
