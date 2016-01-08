@@ -110,7 +110,7 @@ $this->registerJs(<<<js
     });
 js
 );
-if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') !== false) {
+if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger22222') !== false) {
     $coverUrl = Yii::getAlias('@static') . '/' . $model->cover;
     $model->desc = empty($model->desc) ? mb_substr(trim(strip_tags($model->data->content)),0,150) : $model->desc;
     $appId = Yii::$app->params['wxAppId'];
