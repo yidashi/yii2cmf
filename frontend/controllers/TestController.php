@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class TestController extends Controller{
+    public $enableCsrfValidation = false;
     public function actionIndex()
     {
         $arr = [35,20,55,79,63,15,19,88];
@@ -59,8 +60,9 @@ class TestController extends Controller{
 
     public function actionTest()
     {
-        $list = Category::find()->select('id,title')->asArray()->all();
-        $list = ArrayHelper::map($list, 'id', 'title');
-        print_r($list);
+
+        $request = \Yii::$app->request;
+        $params = $request->getBodyParams();
+        print_r($params);die;
     }
 } 

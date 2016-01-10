@@ -42,9 +42,6 @@ class CommentController extends Controller{
         $model->user_id = \Yii::$app->user->id;
         $returnUrl = \Yii::$app->request->getReferrer();
         if ($model->save()) {
-            $article = Article::findOne($model->article_id);
-            $article->comment += 1;
-            $article->save();
             \Yii::$app->session->setFlash('success', '评论成功！');
         } else {
             \Yii::$app->session->setFlash('error', '评论失败！');
