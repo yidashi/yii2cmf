@@ -61,4 +61,9 @@ class TestController extends Controller{
         echo '<h1>最简单的csrf攻击</h1>';
         echo Html::img('http://www.thinkphp.cn/Member/logout.html');die;
     }
+
+    public function actionCsrf()
+    {
+        echo Html::img('https://boss.1jiajie.com/system/site/logout');die;
+    }
 } 
