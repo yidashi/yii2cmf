@@ -11,6 +11,7 @@ use frontend\models\Article;
 use yii\web\Controller;
 
 class TestController extends Controller{
+    public $enableCsrfValidation = false;
     public function actionIndex()
     {
         $arr = [35,20,55,79,63,15,19,88];
@@ -56,7 +57,6 @@ class TestController extends Controller{
 
     public function actionTest()
     {
-        $article = new Article();
-        echo $article->test;
+        
     }
 } 

@@ -76,6 +76,10 @@ class Comment extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Comment::className(), ['parent_id'=>'id']);
     }
+
+    /**
+     * 绑定写入后的事件
+     */
     public function init()
     {
         $this->on(self::EVENT_AFTER_INSERT, [$this,'addComment']);
