@@ -59,13 +59,40 @@ class Comment extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 获取发表评论的用户信息
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id'=>'user_id']);
     }
 
+    /**
+     * 获取所有子评论
+     * @return \yii\db\ActiveQuery
+     */
     public function getSons()
     {
         return $this->hasMany(Comment::className(), ['parent_id'=>'id']);
+    }
+    public function init()
+    {
+        $this->on(self::EVENT_AFTER_INSERT, [$this,'addComment']);
+    }
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_INSERT
+        ];
+    }
+
+    /**
+     * 更新文章评论计数器
+     */
+    public function addComment()
+    {
+        $article = Article::find()->where(['id' => $this->article_id])->one();
+        $article->updateCounters(['comment' => 1]);
     }
 }

@@ -71,7 +71,6 @@ return [
         $cate = join('|', $cate);
         $rules['<cate:(' . $cate . ')>'] = 'article/index';
         Yii::$app->UrlManager->addRules($rules);
-
     },
     'params' => $params
 ];

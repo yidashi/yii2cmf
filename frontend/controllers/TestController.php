@@ -7,10 +7,7 @@
 
 namespace frontend\controllers;
 
-
-use common\models\Category;
-use yii\db\Query;
-use yii\helpers\ArrayHelper;
+use frontend\models\Article;
 use yii\web\Controller;
 
 class TestController extends Controller{
@@ -59,8 +56,7 @@ class TestController extends Controller{
 
     public function actionTest()
     {
-        $list = Category::find()->select('id,title')->asArray()->all();
-        $list = ArrayHelper::map($list, 'id', 'title');
-        print_r($list);
+        $article = new Article();
+        echo $article->test;
     }
 } 

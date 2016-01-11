@@ -20,7 +20,6 @@ use yii\behaviors\BlameableBehavior;
  */
 class Article extends \common\models\Article
 {
-
     /**
      * @inheritdoc
      */
