@@ -29,20 +29,21 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => \common\models\Config::get('SITE_NAME') . '管理后台',
         'brandUrl' => Yii::$app->homeUrl,
+        'innerContainerOptions' => ['class' => 'container-fluid'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']]
+        ['label' => '首页', 'url' => ['/site/index']]
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => '退出 (' . Yii::$app->user->identity->username . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];
@@ -55,9 +56,6 @@ AppAsset::register($this);
     ?>
 
     <div class="container-fluid">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
         <div class="col-xs-2">
             <?= SideNav::widget([
             'type' => SideNav::TYPE_DEFAULT,
@@ -65,6 +63,9 @@ AppAsset::register($this);
             ]);?>
         </div>
         <div class="col-xs-10">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
             <?= Alert::widget() ?>
         <?= $content ?>
         </div>

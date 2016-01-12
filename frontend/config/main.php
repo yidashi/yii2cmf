@@ -7,7 +7,6 @@ $params = array_merge(
 );
 return [
     'id' => 'app-frontend',
-    'name' => '饮水思源',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -43,7 +42,6 @@ return [
             'suffix' => '.html',
             'rules' => [
                 '<id:\d+>' => 'article/view',
-//                'v<version:\d+>/<controller:\S+>/<action:\S+>' => '<controller>/<action>'
             ]
         ],
         'authClientCollection' => [
