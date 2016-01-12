@@ -90,8 +90,8 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">免责声明</a></div>
-            <div class="col-lg-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">关于我们</a></div>
+            <div class="col-sm-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">免责声明</a></div>
+            <div class="col-sm-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">关于我们</a></div>
         </div>
     </div>
     <hr/>

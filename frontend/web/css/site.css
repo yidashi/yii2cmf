@@ -14,20 +14,6 @@ body {
     padding: 70px 15px 20px;
 }
 
-.footer {
-    /*height: 60px;*/
-    color:#9d9d9d;
-    background-color: #222;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-}
-.footer a{color:#999;}
-.footer a:hover { color: #fff; }
-.footer hr {
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #333;
-    margin: 10px 0;
-}
 .jumbotron {
     text-align: center;
     background-color: transparent;
@@ -135,13 +121,13 @@ pre { background: #F0F0F0; }
 /* 主导航结束 */
 
 /* 页面底部开始 */
-/*.footer { padding-bottom: 10px; background: #222; color: #9D9D9D; }
+.footer { padding-top: 20px; background: #fff; color: #9D9D9D; border-top: 1px solid #ddd;}
 .footer li { line-height: 1.8em; }
 .footer a { color: #999; }
-.footer a:hover { color: #fff; }
-.footer hr { border-top: 1px solid #000; border-bottom: 1px solid #333; margin: 10px 0;}
+.footer a:hover { color: #222; }
+.footer hr { border-top: 1px dashed #fff; border-bottom: 1px dashed #fff; margin: 5px 0;}
 .footer dt { font-weight: normal; }
-.footer dt i { font-size: 2em; vertical-align: -5px; }*/
+.footer dt i { font-size: 2em; vertical-align: -5px; }
 /* 页面底部结束 */
 
 /* 页面标题开始 */
