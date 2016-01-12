@@ -89,6 +89,14 @@ class Config extends \yii\db\ActiveRecord
                     ]
                 ];
                 break;
+            case 5:
+                $inputType = [
+                    'name' => 'textarea',
+                    'params' => [
+                        ['rows' => 5]
+                    ]
+                ];
+                break;
         }
         return $inputType;
     }

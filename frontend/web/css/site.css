@@ -11,7 +11,7 @@ body {
 }
 
 .wrap > .container {
-    padding: 70px 15px 20px;
+    padding: 10px 15px 10px;
 }
 
 .jumbotron {
@@ -110,14 +110,10 @@ pre { background: #F0F0F0; }
 .carousel-inner img{position:absolute;width:100%!important;height:100%!important;left:0;top:0}
 
 /* 主导航开始 */
-/*.wrap { min-height: 100%; height: auto; margin: 0 auto -240px; padding: 0 0 240px; }
-.wrap > .container { padding: 70px 10px 0; }
-.navbar-brand { padding-top: 0; padding-right: 0; }
-.navbar-right > li:first-child > a { position: relative; }
-.navbar-right > li > a.avatar { padding-top: 10px; padding-bottom: 0; }
-.navbar-right > li > a.avatar img { border-radius: 4px; border: #ccc solid 1px; width: 32px; height: 32px; }
-.navbar-right > li .badge { background: #D8582B; padding: 2px 4px; font-size: 10px; font-weight: normal; position: absolute; top: 10px; left: 25px; }
-.navbar-right .dropdown-menu .divider { margin: 5px 0; }*/
+.header{height:200px;}
+.header-content{padding-top:100px;}
+.header h1{margin:0;}
+.header h1 a{color:#fff;}
 /* 主导航结束 */
 
 /* 页面底部开始 */

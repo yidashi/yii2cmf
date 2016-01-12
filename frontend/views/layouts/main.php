@@ -29,17 +29,26 @@ AppAsset::register($this);
 
 <div class="wrap">
     <header class="header" style="background:url(<?= \common\models\Config::get('PAGE_TOP_BG')?>) no-repeat;background-size: cover;">
-        <h1><?= Html::a(Yii::$app->name, Yii::$app->homeUrl)?></h1>
+        <div class="container">
+            <div class="header-content">
+                <h1 class="pull-left"><?= Html::a(\common\models\Config::get('SITE_NAME'), Yii::$app->homeUrl)?></h1>
+                <form role="search" class="form-inline pull-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="搜索">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
+            </div>
+        </div>
     </header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-inverse navbar-static-top',
         ],
     ]);
     $menuItems = [];
+    $menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl];
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cate'=>$nav['name']]];
     }
@@ -80,11 +89,9 @@ AppAsset::register($this);
     NavBar::end();
     ?>
     <div class="container">
-        <?php if(stripos(Yii::$app->request->headers->get('User-Agent'), 'MicroMessenger') === false): ?>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?php endif; ?>
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
@@ -99,8 +106,8 @@ AppAsset::register($this);
     </div>
     <hr/>
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
-        <p class="pull-right"><?= Yii::$app->params['icp']?></p>
+        <p class="pull-left">&copy; <?= \common\models\Config::get('SITE_NAME') . ' ' . date('Y') ?></p>
+        <p class="pull-right"><?= \common\models\Config::get('SITE_ICP')?></p>
     </div>
 </footer>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -109,25 +116,8 @@ AppAsset::register($this);
     </div>
 </div>
 <a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
-<?php if(YII_ENV_PROD): ?>
-<script>
-    (function(){
-        var bp = document.createElement('script');
-        bp.src = '//push.zhanzhang.baidu.com/push.js';
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-<!--百度统计-->
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?70a5fd220c5efb308f934681ea41aa0a";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+<?php if(YII_ENV_PROD):?>
+<?= \common\models\Config::get('FOOTER')?>
 <?php endif; ?>
 <?php $this->endBody() ?>
 </body>
