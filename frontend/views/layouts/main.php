@@ -28,6 +28,9 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+    <header class="header" style="background:url(<?= \common\models\Config::get('PAGE_TOP_BG')?>) no-repeat;background-size: cover;">
+        <h1><?= Html::a(Yii::$app->name, Yii::$app->homeUrl)?></h1>
+    </header>
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,

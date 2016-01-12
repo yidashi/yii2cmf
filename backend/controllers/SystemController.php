@@ -9,11 +9,18 @@ namespace backend\controllers;
 
 
 use common\models\Config;
+use yidashi\webuploader\WebuploaderAction;
 use yii\base\Model;
 use yii\web\Controller;
 
 class SystemController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'webupload' => WebuploaderAction::className()
+        ];
+    }
     public function actionConfig()
     {
         $configs = Config::find()->indexBy('id')->all();

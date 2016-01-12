@@ -80,6 +80,15 @@ class Config extends \yii\db\ActiveRecord
                         'items' => $this->parseExtra($this->extra)
                     ]
                 ];
+                break;
+            case 4:
+                $inputType = [
+                    'name' => 'widget',
+                    'params' => [
+                        '\yidashi\webuploader\Webuploader'
+                    ]
+                ];
+                break;
         }
         return $inputType;
     }
