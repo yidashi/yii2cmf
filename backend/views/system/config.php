@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 $this->title = '网站设置';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
 

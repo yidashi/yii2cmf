@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $model common\models\Article */
 /* @var $dataModel common\models\ArticleData */
 
-$this->title = 'Update Article: ' . ' ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
+$this->title = '更新文章: ' . ' ' . $model->title;
+$this->params['breadcrumbs'][] = ['label' => '文章', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>

@@ -117,6 +117,7 @@ AppAsset::register($this);
 </div>
 <a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
 <?php if(YII_ENV_PROD):?>
+<!--页脚-->
 <?= \common\models\Config::get('FOOTER')?>
 <?php endif; ?>
 <?php $this->endBody() ?>

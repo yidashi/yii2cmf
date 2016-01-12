@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = \common\models\Config::get('SITE_NAME') . '管理后台';
+$this->title = '控制面板';
 ?>
 <div class="site-index">
 

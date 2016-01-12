@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel backend\models\search\Article */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Articles';
+$this->title = '文章';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
