@@ -234,16 +234,6 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
-    /**
      * Signs user up.
      *
      * @return mixed
@@ -313,6 +303,10 @@ class SiteController extends Controller
         ]);
     }
 
+    /**
+     * 网站地图，百度搜索引擎爬虫用
+     * @return array
+     */
     public function actionSitemap()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;

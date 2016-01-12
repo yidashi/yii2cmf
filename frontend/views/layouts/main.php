@@ -52,12 +52,14 @@ AppAsset::register($this);
     foreach(\common\models\Category::find()->all() as $nav){
         $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cate'=>$nav['name']]];
     }
+    foreach(\common\models\Nav::find()->all() as $nav){
+        $menuItems[] = ['label' => $nav['title'], 'url' => [$nav['route']]];
+    }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
     ]);
     $rightMenuItems = [];
-    $rightMenuItems[] = ['label' => '反馈', 'url' => ['/suggest/create']];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
@@ -66,10 +68,6 @@ AppAsset::register($this);
         $rightMenuItems[] = [
             'label' => Yii::$app->user->identity->username,
             'items' => [
-                [
-                    'label'=>'我的主页',
-                    'url'=>['/my/settings']
-                ],
                 [
                     'label' => '我的投稿',
                     'url' => ['/my/article-list']
@@ -100,8 +98,10 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">免责声明</a></div>
-            <div class="col-sm-6"><a href="<?= \yii\helpers\Url::to(['/site/about'])?>">关于我们</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=1'])?>" target="_blank">免责声明</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=2'])?>" target="_blank">关于我们</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/suggest/create'])?>" target="_blank">问题反馈</a></div>
+            <div class="col-sm-3"><a href="https://github.com/yidashi/yii" target="_blank">获取源码</a></div>
         </div>
     </div>
     <hr/>

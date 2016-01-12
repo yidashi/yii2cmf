@@ -56,10 +56,6 @@ return [
         'admin' => [
             'class' => 'mdm\admin\Module',
         ],
-
-        /*'datecontrol' => [
-            'class' => '\kartik\datecontrol\Module'
-        ],*/
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
             // enter optional module parameters below - only if you need to
