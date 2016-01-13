@@ -9,7 +9,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
-use kartik\sidenav\SideNav;
+//use kartik\sidenav\SideNav;
+use common\widgets\SideNav;
 
 AppAsset::register($this);
 ?>
@@ -57,9 +58,21 @@ AppAsset::register($this);
 
     <div class="container-fluid">
         <div class="col-xs-2">
-            <?= SideNav::widget([
-            'type' => SideNav::TYPE_DEFAULT,
-            'items' => \mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id)
+            <?php
+//            print_r(\mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id));die;
+            $items = \mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id);
+            foreach($items as $key => $item) {
+                foreach($item['items'] as $k => $i) {
+                    if (\yii\helpers\Url::toRoute($i['url']) == Yii::$app->request->url) {
+                        $items[$key]['items'][$k]['active'] = true;
+                    }else{
+                        $items[$key]['items'][$k]['active'] = false;
+                    }
+                }
+            }
+            echo SideNav::widget([
+//                'type' => SideNav::TYPE_DEFAULT,
+                'items' => $items
             ]);?>
         </div>
         <div class="col-xs-10">

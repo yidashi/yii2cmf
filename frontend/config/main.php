@@ -53,7 +53,7 @@ return [
               ],
                 // etc.
             ],
-        ]
+        ],
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
     'on beforeRequest' => function($event) {

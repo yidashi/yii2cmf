@@ -8,29 +8,21 @@ $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261
 <div class="site-index">
     <div class="col-md-8">
         <div class="row mb15">
-            <div id="carousel-example-generic" class="carousel" data-ride="carousel">
-                <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <?php foreach($slider as $k => $item): ?>
-                    <li data-target="#carousel-example-generic" data-slide-to="<?=$k ?>" <?php if($k == 0): ?>class="active"<?php endif; ?>></li>
-                    <?php endforeach; ?>
-                </ol>
-
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
-                    <?php foreach($slider as $k => $item): ?>
-                    <div class="item<?php if($k == 0){echo ' active';}?>">
-                        <a href="<?= \yii\helpers\Url::toRoute(['article/view','id'=>$item->id])?>" target="_blank">
-                            <img src="<?= $item->cover?>" alt="<?= $item->title?>">
-                            <div class="carousel-caption">
-                                <h3><?= $item->title?></h3>
-                                <p><?= $item->desc?></p>
-                            </div>
-                        </a>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
+            <?php
+            $items = [];
+            foreach($slider as $k => $item) {
+                $items[$k]['content'] = \yii\helpers\Html::a(
+                    \yii\helpers\Html::img($item->cover),
+                    \yii\helpers\Url::toRoute(['article/view','id'=>$item->id]),
+                    ['target' => '_blank']
+                );
+                $items[$k]['caption'] = '<h3>' . $item->title . '</h3><p>' . $item->desc . '</p>';
+            }
+            echo \yii\bootstrap\Carousel::widget([
+                'items' => $items,
+                'controls' => false
+            ]);
+            ?>
         </div>
         <div class="row mb15">
             <div class="article-list">
@@ -69,4 +61,3 @@ $this->registerMetaTag(['property' => 'qc:admins', 'content' => '376655717261261
         </div>
     </div>
 </div>
-<?php $this->registerJs("$('.carousel').carousel();")?>
