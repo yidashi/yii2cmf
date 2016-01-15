@@ -38,6 +38,7 @@ class ArticleController extends Controller{
             $view = $redis->get($key);
             // 更新浏览数
             $article->updateCounters(['view' => $view]);
+            $redis->del($v);
         }
     }
 }
