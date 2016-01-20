@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\Category */
 
 $this->title = '添加分类';
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '分类', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-create">

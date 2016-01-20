@@ -5,7 +5,7 @@ namespace backend\controllers;
 use common\models\ArticleData;
 use yidashi\webuploader\WebuploaderAction;
 use Yii;
-use common\models\logic\Article;
+use common\logic\Article;
 use backend\models\search\Article as ArticleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
