@@ -15,4 +15,7 @@ return [
             'database' => 0,
         ],
     ],
+    'aliases' => [
+        '@common/logic' => '@common/models/logic'
+    ]
 ];

@@ -6,7 +6,7 @@
  * Time: 下午8:51
  */
 
-namespace common\models\logic;
+namespace common\logic;
 
 
 use yii\behaviors\BlameableBehavior;

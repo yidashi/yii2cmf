@@ -40,8 +40,11 @@ class Category extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title')
+            'id' => 'ID',
+            'title' => '名字',
+            'name' => '标识',
+            'pid' => '上级名字',
+            'created_at' => '创建时间'
         ];
     }
     /**
@@ -54,7 +57,11 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
-    public function lists()
+    public function getPtitle()
+    {
+        return static::find()->select('title')->where(['id' => $this->pid])->scalar();
+    }
+    public static function lists()
     {
         $list = Yii::$app->cache->get('categoryList');
         if($list === false){
@@ -65,6 +72,10 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
+    public static function getDropDownlist()
+    {
+        return array_merge(['无'], self::lists());
+    }
     public function getCategoryNameById($id)
     {
         $list= $this->lists();

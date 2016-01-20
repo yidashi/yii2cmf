@@ -62,11 +62,13 @@ AppAsset::register($this);
 //            print_r(\mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id));die;
             $items = \mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id);
             foreach($items as $key => $item) {
-                foreach($item['items'] as $k => $i) {
-                    if (\yii\helpers\Url::toRoute($i['url']) == Yii::$app->request->url) {
-                        $items[$key]['items'][$k]['active'] = true;
-                    }else{
-                        $items[$key]['items'][$k]['active'] = false;
+                if(!empty($item['items'])) {
+                    foreach($item['items'] as $k => $i) {
+                        if (\yii\helpers\Url::toRoute($i['url']) == Yii::$app->request->url) {
+                            $items[$key]['items'][$k]['active'] = true;
+                        }else{
+                            $items[$key]['items'][$k]['active'] = false;
+                        }
                     }
                 }
             }
