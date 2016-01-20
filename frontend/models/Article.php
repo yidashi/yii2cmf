@@ -54,6 +54,13 @@ class Article extends \common\models\Article
         );
     }
 
+    public function getTrueView()
+    {
+        $redis = \Yii::$app->redis;
+        $rkey = 'article:view:' . $this->id;
+        $rview = $redis->get($rkey);
+        return intval($this->view + $rview);
+    }
     /**
      * 增加浏览量
      */
