@@ -8,7 +8,6 @@ use yii\helpers\Html;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category,'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('name')->scalar()]];
 $this->params['breadcrumbs'][] = $model->title;
-if($this->beginCache('frontendArticleView-' . $model->id)) :
 ?>
 <div class="col-lg-9">
     <div class="view-title">
@@ -17,7 +16,7 @@ if($this->beginCache('frontendArticleView-' . $model->id)) :
     <div class="action">
         <span class="user"><a href="/user/31325"><span class="fa fa-user"></span> <?= $model->author?></a></span>
         <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $model->created_at) ?></span>
-        <span class="views"><span class="fa fa-eye"></span> <?= $this->renderDynamic('return $model->trueview;')?>次浏览</span>
+        <span class="views"><span class="fa fa-eye"></span> <?= $model->trueview?>次浏览</span>
         <span class="comments"><a href="#comments"><span class="fa fa-comments-o"></span> <?=$model->comment?>条评论</a></span>
         <span class="favourites"><a href="/favourite?type=extension&amp;id=601" title="" data-toggle="tooltip" data-original-title="收藏"><span class="fa fa-star-o"></span> <em>0</em></a></span>
         <span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em><?=$model->up?></em></a><a class="down" href="<?=\yii\helpers\Url::to(['/vote','id'=>$model->id, 'type'=>'article', 'action'=>'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em><?=$model->down?></em></a></span>
@@ -116,6 +115,4 @@ $this->registerJs(<<<js
     });
 js
 );
-$this->endCache();
-endif;
 ?>
