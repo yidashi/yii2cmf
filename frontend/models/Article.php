@@ -63,7 +63,7 @@ class Article extends \common\models\Article
         $rkey = 'article:view:' . $this->id;
         $rview = $redis->get($rkey);
         if (!empty($rview) && $rview >= 20) {
-            $this->save(false);
+            $this->updateCounters(['view' => $rview]);
             $redis->set($rkey, 1);
         } else {
             $redis->incr($rkey);
