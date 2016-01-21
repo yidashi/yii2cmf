@@ -63,6 +63,7 @@ class Article extends \common\models\Article
         $rkey = 'article:view:' . $this->id;
         $rview = $redis->get($rkey);
         if (!empty($rview) && $rview >= 20) {
+            // 每次查出来的时候就已经修改过view的值了,这里只需要保存!
             $this->save(false);
             $redis->set($rkey, 1);
         } else {

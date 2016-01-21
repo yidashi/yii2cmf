@@ -32,17 +32,13 @@ class ArticleController extends Controller{
             $id = join('', array_slice(explode(':', $key),-1));
             $article = Article::find()->where(['id'=>$id])->one();
             if(empty($article)){
-                $redis->del($v);
+                $redis->del($key);
                 continue;
             }
             $view = $redis->get($key);
             // 更新浏览数
-            if($article->view < $view){
-                $article->view = $redis->get($key);
-                $article->save(false);
-            }else{
-                $redis->set($v, $article->view);
-            }
+            $article->updateCounters(['view' => $view]);
+            $redis->del($key);
         }
     }
 }

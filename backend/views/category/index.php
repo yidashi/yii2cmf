@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
+$this->title = '分类';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -14,20 +14,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('添加分类', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'title',
-            'pid',
-            'created_at',
-            'updated_at',
-            // 'name',
+            [
+                'attribute' => 'ptitle',
+                'label' => '上级名字'
+            ],
+            'created_at:datetime',
+             'name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

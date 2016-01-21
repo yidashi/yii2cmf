@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * CaetgoryController implements the CRUD actions for Category model.
  */
-class CaetgoryController extends Controller
+class CategoryController extends Controller
 {
     public function behaviors()
     {

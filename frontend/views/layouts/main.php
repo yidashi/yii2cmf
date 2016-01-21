@@ -34,7 +34,7 @@ AppAsset::register($this);
                 <h1 class="pull-left"><?= Html::a(\common\models\Config::get('SITE_NAME'), Yii::$app->homeUrl)?></h1>
                 <form role="search" class="form-inline pull-right">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="搜索">
+                        <input type="text" class="form-control" placeholder="搜索" id="bdcsMain">
                     </div>
                     <button type="submit" class="btn btn-default">搜索</button>
                 </form>

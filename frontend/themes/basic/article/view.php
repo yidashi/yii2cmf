@@ -8,7 +8,6 @@ use yii\helpers\Html;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category,'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('name')->scalar()]];
 $this->params['breadcrumbs'][] = $model->title;
-if($this->beginCache('frontendArticleView-' . $model->id)) :
 ?>
 <div class="col-lg-9">
     <div class="view-title">
@@ -116,6 +115,4 @@ $this->registerJs(<<<js
     });
 js
 );
-$this->endCache();
-endif;
 ?>
