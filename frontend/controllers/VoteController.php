@@ -43,21 +43,16 @@ class VoteController extends Controller{
         $id = \Yii::$app->request->get('id');
         $type = \Yii::$app->request->get('type','article');
         $action = \Yii::$app->request->get('action','up');
-        if($type == 'article'){
-            $model = Article::find()->where(['id'=>$id])->select('id,up,down')->one();
-        }else{
-            $model = Comment::find()->where(['id'=>$id])->select('id,up,down')->one();
-        }
-        $vote = Vote::find()->where(['type_id'=>$id, 'type'=>$type, 'action'=>$action, 'user_id'=>$userId])->one();
+        $model = $this->findMOdel($id, $type);
+        $vote = Vote::find()->where(['type_id'=>$id, 'type'=>$type, 'action'=>$action, 'user_id'=>$userId])->one();//根据条件添加组合唯一索引来防止高并发重复插入
         if(empty($vote)){
-            $model->$action += 1;
-            $model->save(false);
+            $model->updateCounters([$action => 1]);
             $vote = new Vote();
             $params = [
-                'type'=>$type,
-                'action'=>$action,
-                'type_id'=>$id,
-                'user_id'=>$userId
+                'type' => $type,
+                'action' => $action,
+                'type_id' => $id,
+                'user_id' => $userId
             ];
             $vote->attributes = $params;
             $vote->save();
@@ -67,5 +62,15 @@ class VoteController extends Controller{
             'up'=> $model->up,
             'down' => $model->down
         ];
+    }
+
+    private function findMOdel($id, $type)
+    {
+        if($type == 'article'){
+            $model = Article::find()->where(['id'=>$id])->select('id,up,down')->one();
+        }else{
+            $model = Comment::find()->where(['id'=>$id])->select('id,up,down')->one();
+        }
+        return $model;
     }
 }

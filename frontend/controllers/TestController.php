@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use frontend\models\Article;
 use yii\helpers\Html;
+use yii\validators\RequiredValidator;
 use yii\web\Controller;
 
 class TestController extends Controller{
@@ -62,8 +63,18 @@ class TestController extends Controller{
         echo Html::img('http://www.thinkphp.cn/Member/logout.html');die;
     }
 
-    public function actionCsrf()
+    public function actionValidate()
     {
-        echo Html::img('https://boss.1jiajie.com/system/site/logout');die;
+        $rule =[
+            [['id', 'title'], 'required']
+        ];
+        $id = '';
+        $validator = new RequiredValidator();
+        if ($validator->validate($id, $error)) {
+            echo 'Email is valid.';
+        } else {
+            echo $error;
+        }
+        die;
     }
 } 
