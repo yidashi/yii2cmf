@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c75eeb2b9e67a7dcdf3b71ea78ebebcc",
-    "content-hash": "475f2f6fd9c6ca4d3e55210a0bb4a031",
+    "hash": "e1e05d1895c9dacef3789a57b4ee91b4",
+    "content-hash": "c27ce8ab0a8f48c04a37667925046012",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1482,6 +1482,33 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-boostrap-markdown",
             "time": "2015-12-15 10:32:15"
+        },
+        {
+            "name": "yidashi/yii2-sidenav",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidashi/yii2-sidenav.git",
+                "reference": "269d33f3f93097eba864c5c33b90764f97935c31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidashi/yii2-sidenav/zipball/269d33f3f93097eba864c5c33b90764f97935c31",
+                "reference": "269d33f3f93097eba864c5c33b90764f97935c31",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yidashi\\sidenav\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "yii2-sidenav",
+            "time": "2016-01-20 08:27:01"
         },
         {
             "name": "yidashi/yii2-webuploader",

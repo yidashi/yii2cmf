@@ -1,0 +1,12 @@
+{
+    "name": "yidashi/yii2-sidenav",
+    "description": "yii2-sidenav",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "yidashi\\sidenav\\": ""
+        }
+    }
+}

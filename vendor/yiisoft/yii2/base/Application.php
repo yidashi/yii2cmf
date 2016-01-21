@@ -453,8 +453,8 @@ abstract class Application extends Module
     {
         $this->_vendorPath = Yii::getAlias($path);
         Yii::setAlias('@vendor', $this->_vendorPath);
-        Yii::setAlias('@bower', $this->_vendorPath . DIRECTORY_SEPARATOR . 'bower/bower-asset');
-        Yii::setAlias('@npm', $this->_vendorPath . DIRECTORY_SEPARATOR . 'npm/npm-asset');
+        Yii::setAlias('@bower', $this->_vendorPath . DIRECTORY_SEPARATOR . 'bower');
+        Yii::setAlias('@npm', $this->_vendorPath . DIRECTORY_SEPARATOR . 'npm');
     }
 
     /**

@@ -10,7 +10,9 @@ use yii\widgets\ActiveForm;
 
 <div class="article-search">
 
-    <?php $form = ActiveForm::begin([
+    <?php
+    Yii::$container->set(\yii\widgets\ActiveField::className(), ['template' => "{label}\n{input}\n{hint}"]);
+    $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
         'options' => ['class' => 'form-inline']
@@ -34,6 +36,7 @@ use yii\widgets\ActiveForm;
 
     <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
     <?= Html::resetButton('Reset', ['class' => 'btn btn-default']) ?>
+    <div class="error-summary hide"><ul></ul></div>
 
     <?php ActiveForm::end(); ?>
 
