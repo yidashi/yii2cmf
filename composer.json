@@ -33,7 +33,8 @@
         "yiisoft/yii2-sphinx": "^2.0",
         "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yidashi/yii2-webuploader": "1.0.4",
-        "yidashi/yii2-sidenav": "1.0.1"
+        "yidashi/yii2-sidenav": "1.0.1",
+        "dektrium/yii2-user": "0.9.*@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

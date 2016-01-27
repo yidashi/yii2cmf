@@ -22,7 +22,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList([0=>'待审核', 1=> '正常']) ?>
 
-
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
