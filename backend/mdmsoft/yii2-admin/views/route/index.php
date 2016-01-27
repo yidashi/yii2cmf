@@ -5,7 +5,7 @@ use mdm\admin\AdminAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-/**
+/*
  * @var yii\web\View $this
  */
 $this->title = Yii::t('rbac-admin', 'Routes');
@@ -69,4 +69,3 @@ yii.admin.searchRoute('avaliable', 0, true);
 yii.admin.searchRoute('assigned', 0, true);
 JS;
 $this->registerJs($js);
-

@@ -21,9 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             [
                 'attribute' => 'type',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return $model->getTypeList()[$model->type];
-                }
+                },
             ],
             'value',
             ['class' => 'yii\grid\ActionColumn'],

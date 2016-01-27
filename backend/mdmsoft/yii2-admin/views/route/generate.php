@@ -4,7 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
-/**
+
+/*
  * @var yii\web\View $this
  */
 
@@ -32,9 +33,9 @@ echo GridView::widget([
         [
             'class' => 'yii\\grid\\DataColumn',
             'attribute' => 'name',
-        ]
-    ]
+        ],
+    ],
 ]);
-echo Html::submitButton(Yii::t('rbac-admin', 'Append'), ['name' => 'Submit','class' => 'btn btn-primary']);
+echo Html::submitButton(Yii::t('rbac-admin', 'Append'), ['name' => 'Submit', 'class' => 'btn btn-primary']);
 echo Html::endForm();
 ?>

@@ -19,11 +19,11 @@ $this->params['nav-items'] = $menus;
         <div id="manager-menu" class="list-group">
             <?php
             foreach ($menus as $menu) {
-                $label = Html::tag('i', '', ['class' => 'glyphicon glyphicon-chevron-right pull-right']) .
+                $label = Html::tag('i', '', ['class' => 'glyphicon glyphicon-chevron-right pull-right']).
                     Html::tag('span', Html::encode($menu['label']), []);
                 $active = $menu['active'] ? ' active' : '';
                 echo Html::a($label, $menu['url'], [
-                    'class' => 'list-group-item' . $active,
+                    'class' => 'list-group-item'.$active,
                 ]);
             }
             ?>
@@ -35,7 +35,7 @@ $this->params['nav-items'] = $menus;
 </div>
 <?php
 list(, $url) = Yii::$app->assetManager->publish('@mdm/admin/assets');
-$this->registerCssFile($url . '/list-item.css');
+$this->registerCssFile($url.'/list-item.css');
 ?>
 
 <?php $this->endContent(); ?>

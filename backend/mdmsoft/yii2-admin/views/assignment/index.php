@@ -29,28 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template'=>'{view} {update}',
+                'template' => '{view} {update}',
                 'buttons' => [
-                    'update' =>function($url, $model){
+                    'update' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
                         '/user/update',
-                        'id'=>$model->id
+                        'id' => $model->id,
                         ], [
                             'title' => Yii::t('yii', 'Update'),
                             'aria-label' => Yii::t('yii', 'Update'),
                             'data-pjax' => '0',
                         ]);
                     },
-                    'view' =>function($url, $model){
+                    'view' => function ($url, $model) {
                         return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
                         'view',
-                        'id'=>$model->id
+                        'id' => $model->id,
                         ], [
                             'title' => Yii::t('rbac-admin', 'Assigned'),
                             'aria-label' => Yii::t('rbac-admin', 'Assigned'),
                             'data-pjax' => '0',
                         ]);
-                    }
+                    },
                 ],
             ],
         ],

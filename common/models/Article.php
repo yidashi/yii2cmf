@@ -10,21 +10,21 @@ use yii\behaviors\TimestampBehavior;
 /**
  * This is the model class for table "{{%article}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $title
  * @property string $content
  * @property string $author
- * @property integer $created_at
- * @property integer $updated_at
- * @property integer $status
+ * @property int $created_at
+ * @property int $updated_at
+ * @property int $status
  * @property string $cover
  */
 class Article extends \yii\db\ActiveRecord
 {
-    CONST STATUS_ACTIVE = 1;
-    CONST STATUS_INIT = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_INIT = 0;
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -32,7 +32,7 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -43,15 +43,15 @@ class Article extends \yii\db\ActiveRecord
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category_id'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
-            [['author', 'cover'], 'string', 'max' => 255]
+            [['author', 'cover'], 'string', 'max' => 255],
         ];
     }
     public function setCategory($attribute, $params)
     {
-        $this->category = Category::find()->where(['id'=>$this->category_id])->select('title')->scalar();
+        $this->category = Category::find()->where(['id' => $this->category_id])->select('title')->scalar();
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -63,19 +63,19 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('app', 'Updated At'),
             'status' => '状态',
             'cover' => '封面',
-            'category_id'=>'分类',
-            'category'=>'分类'
+            'category_id' => '分类',
+            'category' => '分类',
         ];
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
             PushBehavior::className(),
-            AfterFindArticleBehavior::className()
+            AfterFindArticleBehavior::className(),
         ];
     }
 

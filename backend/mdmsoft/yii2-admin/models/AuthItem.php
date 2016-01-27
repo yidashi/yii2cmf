@@ -10,14 +10,14 @@ use yii\helpers\Json;
  * This is the model class for table "tbl_auth_item".
  *
  * @property string $name
- * @property integer $type
+ * @property int $type
  * @property string $description
  * @property string $ruleName
  * @property string $data
- *
  * @property Item $item
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class AuthItem extends \yii\base\Model
@@ -34,7 +34,8 @@ class AuthItem extends \yii\base\Model
     private $_item;
 
     /**
-     * Initialize object
+     * Initialize object.
+     *
      * @param Item  $item
      * @param array $config
      */
@@ -52,21 +53,21 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['ruleName'], 'in',
                 'range' => array_keys(Yii::$app->authManager->getRules()),
-                'message' => 'Rule not exists'],
+                'message' => 'Rule not exists', ],
             [['name', 'type'], 'required'],
-            [['name'], 'unique', 'when' => function() {
+            [['name'], 'unique', 'when' => function () {
                 return $this->isNewRecord || ($this->_item->name != $this->name);
             }],
             [['type'], 'integer'],
             [['description', 'data', 'ruleName'], 'default'],
-            [['name'], 'string', 'max' => 64]
+            [['name'], 'string', 'max' => 64],
         ];
     }
 
@@ -85,7 +86,7 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -100,7 +101,8 @@ class AuthItem extends \yii\base\Model
 
     /**
      * Check if is new record.
-     * @return boolean
+     *
+     * @return bool
      */
     public function getIsNewRecord()
     {
@@ -108,8 +110,10 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * Find role
+     * Find role.
+     *
      * @param string $id
+     *
      * @return null|\self
      */
     public static function find($id)
@@ -119,12 +123,13 @@ class AuthItem extends \yii\base\Model
             return new self($item);
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Save role to [[\yii\rbac\authManager]]
-     * @return boolean
+     * Save role to [[\yii\rbac\authManager]].
+     *
+     * @return bool
      */
     public function save()
     {
@@ -158,7 +163,8 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * Get item
+     * Get item.
+     *
      * @return Item
      */
     public function getItem()
@@ -167,15 +173,17 @@ class AuthItem extends \yii\base\Model
     }
 
     /**
-     * Get type name
-     * @param  mixed $type
+     * Get type name.
+     *
+     * @param mixed $type
+     *
      * @return string|array
      */
     public static function getTypeName($type = null)
     {
         $result = [
             Item::TYPE_PERMISSION => 'Permission',
-            Item::TYPE_ROLE => 'Role'
+            Item::TYPE_ROLE => 'Role',
         ];
         if ($type === null) {
             return $result;

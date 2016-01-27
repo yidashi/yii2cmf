@@ -9,15 +9,15 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "{{%article}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $title
- * @property integer $created_at
- * @property integer $updated_at
+ * @property int $created_at
+ * @property int $updated_at
  */
 class Category extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -25,18 +25,18 @@ class Category extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['title', 'name'], 'required'],
-            ['pid', 'integer']
+            ['pid', 'integer'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -45,11 +45,11 @@ class Category extends \yii\db\ActiveRecord
             'title' => '名字',
             'name' => '标识',
             'pid' => '上级名字',
-            'created_at' => '创建时间'
+            'created_at' => '创建时间',
         ];
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -65,11 +65,12 @@ class Category extends \yii\db\ActiveRecord
     public static function lists()
     {
         $list = Yii::$app->cache->get('categoryList');
-        if($list === false){
+        if ($list === false) {
             $list = static::find()->select('id,title')->asArray()->all();
             $list = ArrayHelper::map($list, 'id', 'title');
             Yii::$app->cache->set('categoryList', $list);
         }
+
         return $list;
     }
 
@@ -79,13 +80,15 @@ class Category extends \yii\db\ActiveRecord
     }
     public function getCategoryNameById($id)
     {
-        $list= $this->lists();
+        $list = $this->lists();
+
         return isset($list[$id]) ? $list[$id] : null;
     }
 
     public function getCategoryIdByName($name)
     {
-        $list= $this->lists();
+        $list = $this->lists();
+
         return array_search($name, $list);
     }
 }

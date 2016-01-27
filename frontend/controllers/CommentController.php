@@ -2,22 +2,20 @@
 /**
  * author: yidashi
  * Date: 2015/12/11
- * Time: 16:58
+ * Time: 16:58.
  */
-
 namespace frontend\controllers;
 
-
 use common\models\Comment;
-use frontend\models\Article;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 
-class CommentController extends Controller{
+class CommentController extends Controller
+{
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -46,15 +44,17 @@ class CommentController extends Controller{
         } else {
             \Yii::$app->session->setFlash('error', '评论失败！');
         }
+
         return $this->redirect($returnUrl);
     }
     // 图文弹幕
-    public function actionDm(){
+    public function actionDm()
+    {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $article_id = \Yii::$app->request->post('article_id');
         $time = \Yii::$app->request->post('time');
         $page = \Yii::$app->request->post('page');
-        $query = Comment::find()->where(['article_id'=>$article_id]);
+        $query = Comment::find()->where(['article_id' => $article_id]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)
@@ -67,10 +67,11 @@ class CommentController extends Controller{
         if ($page < $pages->pageCount) {
             $hasNext = 1;
         }
+
         return [
             'list' => $models,
             'hasNext' => $hasNext,
-            'time' => $time
+            'time' => $time,
         ];
     }
-} 
+}

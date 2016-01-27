@@ -1,5 +1,7 @@
 <?php
-namespace console\models\spider;
-class Neihan extends SpiderAbstract{
 
+namespace console\models\spider;
+
+class Neihan extends SpiderAbstract
+{
 }

@@ -37,7 +37,7 @@ $I->expectTo('see that user is logged');
 $I->seeLink('Logout (erau)');
 $I->dontSeeLink('Login');
 $I->dontSeeLink('Signup');
-/** Uncomment if using WebDriver
+/* Uncomment if using WebDriver
  * $I->click('Logout (erau)');
  * $I->dontSeeLink('Logout (erau)');
  * $I->seeLink('Login');

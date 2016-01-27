@@ -18,9 +18,9 @@ use mdm\admin\AutocompleteAsset;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
 
-    <?= $form->field($model, 'parent_name')->textInput(['id'=>'parent_name']) ?>
+    <?= $form->field($model, 'parent_name')->textInput(['id' => 'parent_name']) ?>
 
-    <?= $form->field($model, 'route')->textInput(['id'=>'route']) ?>
+    <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
 
     <?= $form->field($model, 'order')->input('number') ?>
 
@@ -37,11 +37,11 @@ use mdm\admin\AutocompleteAsset;
 AutocompleteAsset::register($this);
 
 $options1 = Json::htmlEncode([
-    'source' => Menu::find()->select(['name'])->column()
+    'source' => Menu::find()->select(['name'])->column(),
 ]);
 $this->registerJs("$('#parent_name').autocomplete($options1);");
 
 $options2 = Json::htmlEncode([
-    'source' => Menu::getSavedRoutes()
+    'source' => Menu::getSavedRoutes(),
 ]);
 $this->registerJs("$('#route').autocomplete($options2);");

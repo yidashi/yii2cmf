@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "{{%spider}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $title
  * @property string $domain
@@ -19,7 +19,7 @@ use Yii;
 class Spider extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -27,7 +27,7 @@ class Spider extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -36,12 +36,12 @@ class Spider extends \yii\db\ActiveRecord
             [['name'], 'string', 'max' => 20],
             [['title'], 'string', 'max' => 50],
             [['domain', 'page_dom', 'list_dom', 'target_category', 'target_category_url'], 'string', 'max' => 255],
-            [['name'], 'unique']
+            [['name'], 'unique'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

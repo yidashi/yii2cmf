@@ -18,14 +18,14 @@ use mdm\admin\AutocompleteAsset;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
-    <?= $form->field($model, 'ruleName')->textInput(['id'=>'rule-name']) ?>
+    <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule-name']) ?>
 
     <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
 
     <div class="form-group">
         <?php
         echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), [
-            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary',])
+            'class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary', ])
         ?>
     </div>
 
@@ -35,6 +35,6 @@ use mdm\admin\AutocompleteAsset;
 AutocompleteAsset::register($this);
 
 $options = Json::htmlEncode([
-    'source' => array_keys(Yii::$app->authManager->getRules())
+    'source' => array_keys(Yii::$app->authManager->getRules()),
 ]);
 $this->registerJs("$('#rule-name').autocomplete($options);");

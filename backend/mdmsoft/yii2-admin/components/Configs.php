@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Configs
- * Used for configure some value. To set config you can use [[\yii\base\Application::$params]]
+ * Used for configure some value. To set config you can use [[\yii\base\Application::$params]].
  * 
  * ~~~
  * return [
@@ -31,6 +31,7 @@ use yii\helpers\ArrayHelper;
  * ~~~
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class Configs extends \yii\base\Object
@@ -46,7 +47,7 @@ class Configs extends \yii\base\Object
     public $cache = 'cache';
 
     /**
-     * @var integer Cache duration. Default to a month.
+     * @var int Cache duration. Default to a month.
      */
     public $cacheDuration = 2592000;
 
@@ -54,14 +55,14 @@ class Configs extends \yii\base\Object
      * @var string Menu table name.
      */
     public $menuTable = '{{%menu}}';
-    
+
     /**
      * @var self Instance of self
      */
     private static $_instance;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -83,7 +84,8 @@ class Configs extends \yii\base\Object
     }
 
     /**
-     * Create instance of self
+     * Create instance of self.
+     *
      * @return static
      */
     public static function instance()

@@ -63,4 +63,3 @@ yii.admin.searchAssignmet('avaliable', true);
 yii.admin.searchAssignmet('assigned', true);
 JS;
 $this->registerJs($js);
-

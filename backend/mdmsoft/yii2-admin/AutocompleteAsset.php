@@ -3,27 +3,28 @@
 namespace mdm\admin;
 
 /**
- * AutocompleteAsset
+ * AutocompleteAsset.
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class AutocompleteAsset extends \yii\web\AssetBundle
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $sourcePath = '@mdm/admin/assets';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $css = [
         'jquery-ui.css',
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public $js = [
         'jquery-ui.js',

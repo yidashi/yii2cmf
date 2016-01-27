@@ -8,17 +8,17 @@ use mdm\admin\components\Configs;
 /**
  * This is the model class for table "menu".
  *
- * @property integer $id Menu id(autoincrement)
+ * @property int $id Menu id(autoincrement)
  * @property string $name Menu name
- * @property integer $parent Menu parent
+ * @property int $parent Menu parent
  * @property string $route Route for this menu
- * @property integer $order Menu order
+ * @property int $order Menu order
  * @property string $data Extra information for this menu
- *
  * @property Menu $menuParent Menu parent
  * @property Menu[] $menus Menu children
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class Menu extends \yii\db\ActiveRecord
@@ -26,7 +26,7 @@ class Menu extends \yii\db\ActiveRecord
     public $parent_name;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -34,7 +34,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDb()
     {
@@ -46,7 +46,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -55,12 +55,12 @@ class Menu extends \yii\db\ActiveRecord
             [['parent_name'], 'filterParent'],
             [['parent_name'], 'in',
                 'range' => static::find()->select(['name'])->column(),
-                'message' => 'Menu "{value}" not found.'],
+                'message' => 'Menu "{value}" not found.', ],
             [['parent', 'route', 'data', 'order'], 'default'],
             [['order'], 'integer'],
             [['route'], 'in',
                 'range' => static::getSavedRoutes(),
-                'message' => 'Route "{value}" not found.']
+                'message' => 'Route "{value}" not found.', ],
         ];
     }
 
@@ -87,7 +87,7 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -103,25 +103,28 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get menu parent
+     * Get menu parent.
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenuParent()
     {
-        return $this->hasOne(Menu::className(), ['id' => 'parent']);
+        return $this->hasOne(self::className(), ['id' => 'parent']);
     }
 
     /**
-     * Get menu children
+     * Get menu children.
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getMenus()
     {
-        return $this->hasMany(Menu::className(), ['parent' => 'id']);
+        return $this->hasMany(self::className(), ['parent' => 'id']);
     }
 
     /**
      * Get saved routes.
+     *
      * @return array
      */
     public static function getSavedRoutes()

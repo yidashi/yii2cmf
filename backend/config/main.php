@@ -1,9 +1,10 @@
 <?php
+
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require(__DIR__.'/../../common/config/params.php'),
+    require(__DIR__.'/../../common/config/params-local.php'),
+    require(__DIR__.'/params.php'),
+    require(__DIR__.'/params-local.php')
 );
 
 return [
@@ -31,32 +32,32 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'i18n'=>[
+        'i18n' => [
             'translations' => [
-                'app'=>[
+                'app' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@backend/messages',
-                    'forceTranslation' => true
+                    'forceTranslation' => true,
                 ],
-                'kvgrid'=>[
+                'kvgrid' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@kvgrid/messages',
-                    'forceTranslation' => true
-                ]
-            ]
+                    'forceTranslation' => true,
+                ],
+            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-            ]
-        ]
+            ],
+        ],
     ],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module',
             // enter optional module parameters below - only if you need to
             // use your own export download action or custom translation
@@ -65,19 +66,19 @@ return [
             'i18n' => [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@kvgrid/messages',
-                'forceTranslation' => true
-            ]
+                'forceTranslation' => true,
+            ],
         ],
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/mdmsoft/yii2-admin',
-        '@kvgrid' =>'@vendor/kartik-v/yii2-grid'
+        '@kvgrid' => '@vendor/kartik-v/yii2-grid',
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-            '*'
-        ]
+            '*',
+        ],
     ],
     'params' => $params,
 ];

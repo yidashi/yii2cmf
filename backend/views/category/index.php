@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             [
                 'attribute' => 'ptitle',
-                'label' => '上级名字'
+                'label' => '上级名字',
             ],
             'created_at:datetime',
              'name',

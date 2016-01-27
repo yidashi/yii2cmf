@@ -4,9 +4,10 @@
  * Created by PhpStorm.
  * User: yidashi
  * Date: 15/12/13
- * Time: 上午10:51
+ * Time: 上午10:51.
  */
 namespace common\widgets\danmu;
+
 use yii\helpers\Url;
 
 class Danmu extends \yii\base\Widget

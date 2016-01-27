@@ -9,11 +9,10 @@ use common\models\LoginForm;
 use tests\codeception\common\fixtures\UserFixture;
 
 /**
- * Login form test
+ * Login form test.
  */
 class LoginFormTest extends DbTestCase
 {
-
     use Specify;
 
     public function setUp()
@@ -65,7 +64,6 @@ class LoginFormTest extends DbTestCase
 
     public function testLoginCorrect()
     {
-
         $model = new LoginForm([
             'username' => 'bayer.hudson',
             'password' => 'password_0',
@@ -79,14 +77,14 @@ class LoginFormTest extends DbTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fixtures()
     {
         return [
             'user' => [
                 'class' => UserFixture::className(),
-                'dataFile' => '@tests/codeception/common/unit/fixtures/data/models/user.php'
+                'dataFile' => '@tests/codeception/common/unit/fixtures/data/models/user.php',
             ],
         ];
     }

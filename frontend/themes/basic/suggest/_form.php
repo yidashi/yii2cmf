@@ -2,7 +2,7 @@
 /**
  * author: yidashi
  * Date: 2015/12/3
- * Time: 10:59
+ * Time: 10:59.
  */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 <div class="config-form">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows'=>15]); ?>
+    <?= $form->field($model, 'content')->textarea(['rows' => 15]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>

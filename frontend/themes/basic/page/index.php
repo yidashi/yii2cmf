@@ -2,7 +2,7 @@
 /**
  * author: yidashi
  * Date: 2016/1/12
- * Time: 17:05
+ * Time: 17:05.
  */
 ?>
 <div class="page-header text-center">

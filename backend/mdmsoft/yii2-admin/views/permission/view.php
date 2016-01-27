@@ -88,4 +88,3 @@ yii.admin.searchRole('avaliable', true);
 yii.admin.searchRole('assigned', true);
 JS;
 $this->registerJs($js);
-

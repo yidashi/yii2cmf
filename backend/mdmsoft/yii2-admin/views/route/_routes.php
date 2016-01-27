@@ -16,7 +16,7 @@ echo Html::beginForm();
 echo GridView::widget([
     'dataProvider' => new ArrayDataProvider([
         'id' => $type == 1 ? 'new' : 'exists',
-        'allModels' => $data
+        'allModels' => $data,
         ]),
     'columns' => [
         [
@@ -24,7 +24,7 @@ echo GridView::widget([
             'checkboxOptions' => function ($model) use ($type) {
             return [
                 'value' => ArrayHelper::getValue($model, 'name'),
-                'checked' => $type == 1 ? true : !ArrayHelper::getValue($model, 'exists', false)
+                'checked' => $type == 1 ? true : !ArrayHelper::getValue($model, 'exists', false),
             ];
         },
         ],
@@ -33,12 +33,12 @@ echo GridView::widget([
             'attribute' => 'name',
             'contentOptions' => function ($model) {
             return ArrayHelper::getValue($model, 'exists', true) ? [] : ['style' => 'text-decoration: line-through;'];
-        }
-        ]
-    ]
+        },
+        ],
+    ],
 ]);
 echo Html::submitButton($type == 1 ? 'Append' : 'Delete', [
     'name' => 'Submit',
     'value' => $type == 1 ? 'New' : 'Del',
-    'class' => 'btn btn-primary']);
+    'class' => 'btn btn-primary', ]);
 echo Html::endForm();

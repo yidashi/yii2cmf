@@ -8,7 +8,7 @@ use mdm\admin\models\Menu;
 
 /**
  * MenuHelper used to generate menu depend of user role.
- * Usage
+ * Usage.
  * 
  * ~~~
  * use mdm\admin\components\MenuHelper;
@@ -37,6 +37,7 @@ use mdm\admin\models\Menu;
  * ~~~
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class MenuHelper
@@ -45,10 +46,11 @@ class MenuHelper
 
     /**
      * Use to get assigned menu of user.
-     * @param mixed $userId
-     * @param integer $root
+     *
+     * @param mixed    $userId
+     * @param int      $root
      * @param \Closure $callback use to reformat output.
-     * callback should have format like
+     *                           callback should have format like
      * 
      * ~~~
      * function ($menu) {
@@ -61,7 +63,8 @@ class MenuHelper
      *    ]
      * }
      * ~~~
-     * @param boolean  $refresh
+     * @param bool $refresh
+     *
      * @return array
      */
     public static function getAssignedMenu($userId, $root = null, $callback = null, $refresh = false)
@@ -103,7 +106,7 @@ class MenuHelper
                 if (strpos($route, $prefix) !== 0) {
                     if (substr($route, -1) === '/') {
                         $prefix = $route;
-                        $filter1[] = $route . '%';
+                        $filter1[] = $route.'%';
                     } else {
                         $filter2[] = $route;
                     }
@@ -123,7 +126,7 @@ class MenuHelper
             $assigned = static::requiredParent($assigned, $menus);
             if ($cache !== null) {
                 $cache->set($key, $assigned, $config->cacheDuration, new TagDependency([
-                    'tags' => self::CACHE_TAG
+                    'tags' => self::CACHE_TAG,
                 ]));
             }
         }
@@ -133,7 +136,7 @@ class MenuHelper
             $result = static::normalizeMenu($assigned, $menus, $callback, $root);
             if ($cache !== null && $callback === null) {
                 $cache->set($key, $result, $config->cacheDuration, new TagDependency([
-                    'tags' => self::CACHE_TAG
+                    'tags' => self::CACHE_TAG,
                 ]));
             }
         }
@@ -143,14 +146,16 @@ class MenuHelper
 
     /**
      * Ensure all item menu has parent.
-     * @param  array $assigned
-     * @param  array $menus
+     *
+     * @param array $assigned
+     * @param array $menus
+     *
      * @return array
      */
     private static function requiredParent($assigned, &$menus)
     {
         $l = count($assigned);
-        for ($i = 0; $i < $l; $i++) {
+        for ($i = 0; $i < $l; ++$i) {
             $id = $assigned[$i];
             $parent_id = $menus[$id]['parent'];
             if ($parent_id !== null && !in_array($parent_id, $assigned)) {
@@ -162,8 +167,10 @@ class MenuHelper
     }
 
     /**
-     * Parse route
-     * @param  string $route
+     * Parse route.
+     *
+     * @param string $route
+     *
      * @return mixed
      */
     public static function parseRoute($route)
@@ -185,11 +192,13 @@ class MenuHelper
     }
 
     /**
-     * Normalize menu
-     * @param  array $assigned
-     * @param  array $menus
-     * @param  Closure $callback
-     * @param  integer $parent
+     * Normalize menu.
+     *
+     * @param array   $assigned
+     * @param array   $menus
+     * @param Closure $callback
+     * @param int     $parent
+     *
      * @return array
      */
     private static function normalizeMenu(&$assigned, &$menus, $callback, $parent = null)

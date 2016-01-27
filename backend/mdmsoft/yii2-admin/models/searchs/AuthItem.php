@@ -11,11 +11,11 @@ use yii\rbac\Item;
  * AuthItemSearch represents the model behind the search form about AuthItem.
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class AuthItem extends Model
 {
-
     const TYPE_ROUTE = 101;
 
     public $name;
@@ -25,18 +25,18 @@ class AuthItem extends Model
     public $data;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['name', 'description',], 'safe'],
+            [['name', 'description'], 'safe'],
             [['type'], 'integer'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -51,8 +51,10 @@ class AuthItem extends Model
     }
 
     /**
-     * Search authitem
+     * Search authitem.
+     *
      * @param array $params
+     *
      * @return \yii\data\ActiveDataProvider|\yii\data\ArrayDataProvider
      */
     public function search($params)
@@ -81,7 +83,7 @@ class AuthItem extends Model
             $search = strtolower(trim($this->name));
             $desc = strtolower(trim($this->description));
             $items = array_filter($items, function ($item) use ($search, $desc) {
-                return (empty($search) || strpos(strtolower($item->name), $search) !== false) && ( empty($desc) || strpos(strtolower($item->description), $desc) !== false);
+                return (empty($search) || strpos(strtolower($item->name), $search) !== false) && (empty($desc) || strpos(strtolower($item->description), $desc) !== false);
             });
         }
 
@@ -89,5 +91,4 @@ class AuthItem extends Model
             'allModels' => $items,
         ]);
     }
-
 }

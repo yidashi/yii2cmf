@@ -3,16 +3,16 @@
 namespace mdm\admin\controllers;
 
 /**
- * DefaultController
+ * DefaultController.
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class DefaultController extends \yii\web\Controller
 {
-
     /**
-     * Action index
+     * Action index.
      */
     public function actionIndex()
     {

@@ -6,7 +6,7 @@ use mdm\admin\AdminAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-/**
+/*
  * @var yii\web\View $this
  * @var mdm\admin\models\AuthItem $model
  */
@@ -88,4 +88,3 @@ yii.admin.searchRole('avaliable', true);
 yii.admin.searchRole('assigned', true);
 JS;
 $this->registerJs($js);
-
