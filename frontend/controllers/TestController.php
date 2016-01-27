@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use frontend\models\Article;
+use yii\base\DynamicModel;
 use yii\helpers\Html;
 use yii\validators\RequiredValidator;
 use yii\web\Controller;
@@ -63,18 +64,20 @@ class TestController extends Controller{
         echo Html::img('http://www.thinkphp.cn/Member/logout.html');die;
     }
 
-    public function actionValidate()
+    public function actionValidate($name, $email)
     {
-        $rule =[
-            [['id', 'title'], 'required']
-        ];
-        $id = '';
-        $validator = new RequiredValidator();
-        if ($validator->validate($id, $error)) {
-            echo 'Email is valid.';
+        $model = new DynamicModel(compact('name', 'email'));
+        $model->addRule('email', 'email');
+        $model->validate();
+        if ($model->hasErrors()) {
+            // validation fails
+            print_r($model->errors);
         } else {
-            echo $error;
+            // validation succeeds
         }
-        die;
     }
-} 
+    public function actionFormat()
+    {
+        echo \Yii::$app->formatter->format('2016-01-24 6:28:00', 'relativeTime');
+    }
+}
