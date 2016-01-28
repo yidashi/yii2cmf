@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use common\models\Article;
@@ -10,22 +11,22 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-use yii\base\Event;
 use yii\base\InvalidParamException;
-use yii\db\ActiveQuery;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
- * Site controller
+ * Site controller.
  */
 class SiteController extends Controller
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -55,7 +56,7 @@ class SiteController extends Controller
             [
                 'class' => 'yii\filters\PageCache',
                 'only' => ['sitemap'],
-                'duration' => 60*60,
+                'duration' => 60 * 60,
                 'variations' => [
                     \Yii::$app->language,
                 ],
@@ -64,7 +65,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function actions()
     {
@@ -105,7 +106,7 @@ class SiteController extends Controller
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
                         'username' => $attributes['username'],
-                        'email' => $attributes['username'] . '@51siyuan.cn',
+                        'email' => $attributes['username'].'@51siyuan.cn',
                         'password' => $password,
                     ]);
                     $user->generateAuthKey();
@@ -115,7 +116,7 @@ class SiteController extends Controller
                         $auth = new Auth([
                             'user_id' => $user->id,
                             'source' => $client->getId(),
-                            'source_id' => (string)$attributes['id'],
+                            'source_id' => (string) $attributes['id'],
                         ]);
                         if ($auth->save()) {
                             $transaction->commit();
@@ -149,7 +150,7 @@ class SiteController extends Controller
         $news = Article::find()
             ->where(['status' => Article::STATUS_ACTIVE])
             ->andWhere(['<>', 'category', '两性'])
-            ->andWhere(['<>','cover',''])
+            ->andWhere(['<>', 'cover', ''])
             ->select('id,title,cover,view,up,down,created_at,user_id,desc')
             ->orderBy(['id' => SORT_DESC])
             ->limit(40)
@@ -164,10 +165,11 @@ class SiteController extends Controller
             ->orderBy(['comment' => SORT_DESC])
             ->limit(10)
             ->all();
+
         return $this->render('index', [
             'news' => $news,
             'slider' => $slider,
-            'recommend' => $recommend
+            'recommend' => $recommend,
         ]);
     }
     /**
@@ -187,11 +189,12 @@ class SiteController extends Controller
         } else {
             $returnUrl = Yii::$app->request->getReferrer();
             Yii::$app->user->setReturnUrl($returnUrl);
-            if(Yii::$app->request->isAjax){
+            if (Yii::$app->request->isAjax) {
                 return $this->renderAjax('login', [
                     'model' => $model,
                 ]);
             }
+
             return $this->render('login', [
                 'model' => $model,
             ]);
@@ -242,6 +245,11 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+
+                return ActiveForm::validate($model);
+            }
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
                     return $this->goHome();
@@ -281,7 +289,9 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
+     *
      * @return mixed
+     *
      * @throws BadRequestHttpException
      */
     public function actionResetPassword($token)
@@ -304,7 +314,8 @@ class SiteController extends Controller
     }
 
     /**
-     * 网站地图，百度搜索引擎爬虫用
+     * 网站地图，百度搜索引擎爬虫用.
+     *
      * @return array
      */
     public function actionSitemap()
@@ -313,11 +324,12 @@ class SiteController extends Controller
         \Yii::$container->set('yii\web\XmlResponseFormatter', ['rootTag' => 'urlset', 'itemTag' => 'url']);
         $urls = [];
         $models = Article::find()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
-        foreach($models as $model){
+        foreach ($models as $model) {
             $url = [];
             $url['loc'] = Url::to(['article/view', 'id' => $model->id], true);
             $urls[] = $url;
         }
+
         return $urls;
     }
 }

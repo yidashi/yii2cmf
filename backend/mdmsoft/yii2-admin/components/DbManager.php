@@ -29,6 +29,7 @@ use yii\caching\TagDependency;
  * [[\yii\rbac\DbManager::$itemChildTable]] and [[\yii\rbac\DbManager::$assignmentTable]].
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class DbManager extends \yii\rbac\DbManager
@@ -38,7 +39,7 @@ class DbManager extends \yii\rbac\DbManager
     const PART_RULES = 'mdm.admin.rules';
 
     /**
-     * @var boolean Enable caching
+     * @var bool Enable caching
      */
     public $enableCaching = false;
 
@@ -48,36 +49,36 @@ class DbManager extends \yii\rbac\DbManager
     public $cache = 'cache';
 
     /**
-     * @var integer Cache duration
+     * @var int Cache duration
      */
     public $cacheDuration = 0;
 
     /**
      * @var Item[]
-     * itemName => item
+     *             itemName => item
      */
     private $_items;
 
     /**
      * @var array
-     * itemName => childName[]
+     *            itemName => childName[]
      */
     private $_children;
 
     /**
      * @var array
-     * userId => itemName[]
+     *            userId => itemName[]
      */
     private $_assignments = [];
 
     /**
      * @var Rule[]
-     * ruleName => rule
+     *             ruleName => rule
      */
     private $_rules;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function init()
     {
@@ -91,7 +92,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function checkAccess($userId, $permissionName, $params = [])
     {
@@ -104,7 +105,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAssignments($userId)
     {
@@ -114,7 +115,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function checkAccessRecursive($user, $itemName, $params, $assignments)
     {
@@ -144,7 +145,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function addChild($parent, $child)
     {
@@ -159,13 +160,13 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeChild($parent, $child)
     {
         $result = parent::removeChild($parent, $child);
         if ($this->_children !== null) {
-            $query = (new Query)
+            $query = (new Query())
                 ->select('child')
                 ->from($this->itemChildTable)
                 ->where(['parent' => $parent->name]);
@@ -177,7 +178,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function hasChild($parent, $child)
     {
@@ -187,7 +188,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function assign($role, $userId)
     {
@@ -196,22 +197,24 @@ class DbManager extends \yii\rbac\DbManager
         if (isset($this->_assignments[$userId])) {
             $this->_assignments[$userId][$role->name] = $assignment;
         }
+
         return $assignment;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function revoke($role, $userId)
     {
         $result = parent::revoke($role, $userId);
 
         unset($this->_assignments[$userId]);
+
         return $result;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function revokeAll($userId)
     {
@@ -227,7 +230,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAssignment($roleName, $userId)
     {
@@ -237,11 +240,11 @@ class DbManager extends \yii\rbac\DbManager
             return $this->_items[$roleName];
         }
 
-        return null;
+        return;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getItems($type)
     {
@@ -259,7 +262,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeItem($item)
     {
@@ -273,7 +276,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getItem($name)
     {
@@ -283,7 +286,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function updateRule($name, $rule)
     {
@@ -303,7 +306,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRule($name)
     {
@@ -313,7 +316,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRules()
     {
@@ -323,7 +326,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getRolesByUser($userId)
     {
@@ -339,7 +342,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPermissionsByRole($roleName)
     {
@@ -361,16 +364,17 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getChildrenList()
     {
         $this->loadChildren();
+
         return $this->_children;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getPermissionsByUser($userId)
     {
@@ -396,7 +400,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getChildren($name)
     {
@@ -413,7 +417,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeAll()
     {
@@ -430,7 +434,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function removeAllItems($type)
     {
@@ -443,7 +447,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeAllRules()
     {
@@ -456,7 +460,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeAllAssignments()
     {
@@ -465,7 +469,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function removeRule($rule)
     {
@@ -482,7 +486,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function addRule($rule)
     {
@@ -497,7 +501,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function updateItem($name, $item)
     {
@@ -515,7 +519,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function addItem($item)
     {
@@ -530,7 +534,8 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * Invalidate cache
+     * Invalidate cache.
+     *
      * @param string $parts
      */
     private function invalidate($parts)
@@ -541,8 +546,10 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * Build key cache
+     * Build key cache.
+     *
      * @param string $part
+     *
      * @return mixed
      */
     private function buildKey($part)
@@ -551,8 +558,10 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * Get data from cache
+     * Get data from cache.
+     *
      * @param string $part
+     *
      * @return mixed
      */
     private function getFromCache($part)
@@ -565,15 +574,16 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * Save data to cache
+     * Save data to cache.
+     *
      * @param string $part
-     * @param mixed $data
+     * @param mixed  $data
      */
     private function saveToCache($part, $data)
     {
         if ($this->enableCaching) {
             $this->cache->set($this->buildKey($part), $data, $this->cacheDuration, new TagDependency([
-                'tags' => $part
+                'tags' => $part,
             ]));
         }
     }
@@ -586,7 +596,7 @@ class DbManager extends \yii\rbac\DbManager
     {
         $part = self::PART_ITEMS;
         if ($this->_items === null && ($this->_items = $this->getFromCache($part)) === false) {
-            $query = (new Query)->from($this->itemTable);
+            $query = (new Query())->from($this->itemTable);
 
             $this->_items = [];
             foreach ($query->all($this->db) as $row) {
@@ -605,7 +615,7 @@ class DbManager extends \yii\rbac\DbManager
         $this->loadItems();
         $part = self::PART_CHILDREN;
         if ($this->_children === null && ($this->_children = $this->getFromCache($part)) === false) {
-            $query = (new Query)->from($this->itemChildTable);
+            $query = (new Query())->from($this->itemChildTable);
 
             $this->_children = [];
             foreach ($query->all($this->db) as $row) {
@@ -625,7 +635,7 @@ class DbManager extends \yii\rbac\DbManager
     {
         $part = self::PART_RULES;
         if ($this->_rules === null && ($this->_rules = $this->getFromCache($part)) === false) {
-            $query = (new Query)->from($this->ruleTable);
+            $query = (new Query())->from($this->ruleTable);
 
             $this->_rules = [];
             foreach ($query->all($this->db) as $row) {
@@ -645,7 +655,7 @@ class DbManager extends \yii\rbac\DbManager
     private function loadAssignments($userId)
     {
         if (!isset($this->_assignments[$userId]) && !empty($userId)) {
-            $query = (new Query)
+            $query = (new Query())
                 ->from($this->assignmentTable)
                 ->where(['user_id' => (string) $userId]);
 
@@ -661,7 +671,7 @@ class DbManager extends \yii\rbac\DbManager
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function removeChildren($parent)
     {

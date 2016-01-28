@@ -1,6 +1,5 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
 
 class m130524_201442_init extends Migration
@@ -13,7 +12,7 @@ class m130524_201442_init extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $sql = file_get_contents(__DIR__ . '/init.sql');
+        $sql = file_get_contents(__DIR__.'/init.sql');
         $this->execute($sql);
     }
 

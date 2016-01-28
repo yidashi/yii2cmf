@@ -1,6 +1,6 @@
 <?php
 /**
- * Application configuration shared by all applications acceptance tests
+ * Application configuration shared by all applications acceptance tests.
  */
 return [
 

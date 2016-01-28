@@ -2,23 +2,23 @@
 /**
  * author: yidashi
  * Date: 2015/11/17
- * Time: 14:34
+ * Time: 14:34.
  */
-
 namespace console\controllers;
 
 use yii\console\Controller;
 
-class QueueController extends Controller{
+class QueueController extends Controller
+{
     public function actionRun()
     {
         $QUEUE = getenv('QUEUE');
-        if(empty($QUEUE)) {
+        if (empty($QUEUE)) {
             die("Set QUEUE env var containing the list of queues to work.\n");
         }
 
         $REDIS_BACKEND = getenv('REDIS_BACKEND');
-        if(!empty($REDIS_BACKEND)) {
+        if (!empty($REDIS_BACKEND)) {
             \Resque::setBackend($REDIS_BACKEND);
         }
 
@@ -26,16 +26,15 @@ class QueueController extends Controller{
         $LOGGING = getenv('LOGGING');
         $VERBOSE = getenv('VERBOSE');
         $VVERBOSE = getenv('VVERBOSE');
-        if(!empty($LOGGING) || !empty($VERBOSE)) {
+        if (!empty($LOGGING) || !empty($VERBOSE)) {
             $logLevel = \Resque_Worker::LOG_NORMAL;
-        }
-        else if(!empty($VVERBOSE)) {
+        } elseif (!empty($VVERBOSE)) {
             $logLevel = \Resque_Worker::LOG_VERBOSE;
         }
 
         $APP_INCLUDE = getenv('APP_INCLUDE');
-        if($APP_INCLUDE) {
-            if(!file_exists($APP_INCLUDE)) {
+        if ($APP_INCLUDE) {
+            if (!file_exists($APP_INCLUDE)) {
                 die('APP_INCLUDE ('.$APP_INCLUDE.") does not exist.\n");
             }
 
@@ -44,24 +43,24 @@ class QueueController extends Controller{
 
         $interval = 5;
         $INTERVAL = getenv('INTERVAL');
-        if(!empty($INTERVAL)) {
+        if (!empty($INTERVAL)) {
             $interval = $INTERVAL;
         }
 
         $count = 1;
         $COUNT = getenv('COUNT');
-        if(!empty($COUNT) && $COUNT > 1) {
+        if (!empty($COUNT) && $COUNT > 1) {
             $count = $COUNT;
         }
 
-        if($count > 1) {
-            for($i = 0; $i < $count; ++$i) {
+        if ($count > 1) {
+            for ($i = 0; $i < $count; ++$i) {
                 $pid = pcntl_fork();
-                if($pid == -1) {
-                    die("Could not fork worker ".$i."\n");
+                if ($pid == -1) {
+                    die('Could not fork worker '.$i."\n");
                 }
                 // Child, start the worker
-                else if(!$pid) {
+                elseif (!$pid) {
                     $queues = explode(',', $QUEUE);
                     $worker = new \Resque_Worker($queues);
                     $worker->logLevel = $logLevel;
@@ -80,11 +79,11 @@ class QueueController extends Controller{
             $PIDFILE = getenv('PIDFILE');
             if ($PIDFILE) {
                 file_put_contents($PIDFILE, getmypid()) or
-                die('Could not write PID information to ' . $PIDFILE);
+                die('Could not write PID information to '.$PIDFILE);
             }
 
             fwrite(STDOUT, '*** Starting worker '.$worker."\n");
             $worker->work($interval);
         }
     }
-} 
+}

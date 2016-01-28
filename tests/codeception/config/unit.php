@@ -1,6 +1,6 @@
 <?php
 /**
- * Application configuration shared by all applications unit tests
+ * Application configuration shared by all applications unit tests.
  */
 return [
 

@@ -2,19 +2,17 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%nav}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $title
  * @property string $route
  */
 class Nav extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -22,18 +20,18 @@ class Nav extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['title', 'route'], 'required'],
-            [['title', 'route'], 'string', 'max' => 255]
+            [['title', 'route'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

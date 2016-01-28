@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/**
+/*
  * @var yii\web\View $this
  * @var mdm\admin\models\AuthItem $model
  */

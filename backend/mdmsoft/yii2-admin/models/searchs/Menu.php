@@ -2,7 +2,6 @@
 
 namespace mdm\admin\models\searchs;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use mdm\admin\models\Menu as MenuModel;
@@ -11,13 +10,13 @@ use mdm\admin\models\Menu as MenuModel;
  * Menu represents the model behind the search form about [[\mdm\admin\models\Menu]].
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class Menu extends MenuModel
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -28,7 +27,7 @@ class Menu extends MenuModel
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -37,20 +36,22 @@ class Menu extends MenuModel
     }
 
     /**
-     * Searching menu
-     * @param  array $params
+     * Searching menu.
+     *
+     * @param array $params
+     *
      * @return \yii\data\ActiveDataProvider
      */
     public function search($params)
     {
         $query = MenuModel::find()
-            ->from(MenuModel::tableName() . ' t')
+            ->from(MenuModel::tableName().' t')
             ->joinWith(['menuParent' => function ($q) {
-            $q->from(MenuModel::tableName() . ' parent');
+            $q->from(MenuModel::tableName().' parent');
         }]);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
         ]);
 
         $sort = $dataProvider->getSort();

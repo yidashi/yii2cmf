@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "{{%gather}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $name
  * @property string $category
  * @property string $url
@@ -18,7 +18,7 @@ use Yii;
 class Gather extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -26,18 +26,18 @@ class Gather extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['name', 'category', 'url', 'url_org', 'res', 'result'], 'required'],
-            [['name', 'category', 'url', 'url_org', 'res', 'result'], 'string', 'max' => 255]
+            [['name', 'category', 'url', 'url_org', 'res', 'result'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

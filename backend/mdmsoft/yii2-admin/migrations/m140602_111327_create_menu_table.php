@@ -4,16 +4,16 @@ use yii\db\Schema;
 use mdm\admin\components\Configs;
 
 /**
- * Migration table of table_menu
+ * Migration table of table_menu.
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class m140602_111327_create_menu_table extends \yii\db\Migration
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function safeUp()
     {
@@ -25,9 +25,9 @@ class m140602_111327_create_menu_table extends \yii\db\Migration
 
         $this->createTable($menuTable, [
             'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING . '(128) NOT NULL',
-            'parent' => Schema::TYPE_INTEGER. ' NULL',
-            'route' => Schema::TYPE_STRING . '(256)',
+            'name' => Schema::TYPE_STRING.'(128) NOT NULL',
+            'parent' => Schema::TYPE_INTEGER.' NULL',
+            'route' => Schema::TYPE_STRING.'(256)',
             'order' => Schema::TYPE_INTEGER,
             'data' => Schema::TYPE_TEXT,
             "FOREIGN KEY (parent) REFERENCES {$menuTable}(id) ON DELETE SET NULL ON UPDATE CASCADE",
@@ -35,7 +35,7 @@ class m140602_111327_create_menu_table extends \yii\db\Migration
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function safeDown()
     {

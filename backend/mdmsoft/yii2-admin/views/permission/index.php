@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     Pjax::begin([
-        'enablePushState'=>false,
+        'enablePushState' => false,
     ]);
     echo GridView::widget([
         'dataProvider' => $dataProvider,
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'description',
                 'label' => Yii::t('rbac-admin', 'Description'),
             ],
-            ['class' => 'yii\grid\ActionColumn',],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]);
     Pjax::end();

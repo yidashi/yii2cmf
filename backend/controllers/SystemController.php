@@ -2,11 +2,9 @@
 /**
  * author: yidashi
  * Date: 2016/1/11
- * Time: 17:59
+ * Time: 17:59.
  */
-
 namespace backend\controllers;
-
 
 use common\models\Config;
 use yidashi\webuploader\WebuploaderAction;
@@ -18,7 +16,7 @@ class SystemController extends Controller
     public function actions()
     {
         return [
-            'webupload' => WebuploaderAction::className()
+            'webupload' => WebuploaderAction::className(),
         ];
     }
     public function actionConfig()
@@ -29,9 +27,10 @@ class SystemController extends Controller
             foreach ($configs as $config) {
                 $config->save(false);
             }
+
             return $this->redirect('config');
         }
 
         return $this->render('config', ['configs' => $configs]);
     }
-} 
+}

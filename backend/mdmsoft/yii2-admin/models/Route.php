@@ -1,9 +1,12 @@
 <?php
+
 namespace mdm\admin\models;
+
 /**
- * Route
+ * Route.
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class Route extends \yii\base\Model
@@ -14,12 +17,12 @@ class Route extends \yii\base\Model
     public $route;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return[
-            [['route'],'safe'],
+            [['route'], 'safe'],
         ];
     }
 }

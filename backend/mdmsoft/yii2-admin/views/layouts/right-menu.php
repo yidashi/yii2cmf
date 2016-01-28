@@ -25,7 +25,7 @@ $this->params['nav-items'] = $menus;
                 $label = Html::tag('span', Html::encode($menu['label']), []);
                 $active = $menu['active'] ? ' active' : '';
                 echo Html::a($label, $menu['url'], [
-                    'class' => 'list-group-item' . $active,
+                    'class' => 'list-group-item'.$active,
                 ]);
             }
             ?>

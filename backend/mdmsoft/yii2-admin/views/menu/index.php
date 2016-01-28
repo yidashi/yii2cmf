@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'menuParent.name',
                 'filter' => Html::activeTextInput($searchModel, 'parent_name', [
-                    'class' => 'form-control', 'id' => null
+                    'class' => 'form-control', 'id' => null,
                 ]),
                 'label' => Yii::t('rbac-admin', 'Parent'),
             ],

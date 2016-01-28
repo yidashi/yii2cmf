@@ -2,20 +2,18 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%page}}".
  *
- * @property integer $id
- * @property integer $use_layout
+ * @property int $id
+ * @property int $use_layout
  * @property string $content
  * @property string $title
  */
 class Page extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -23,7 +21,7 @@ class Page extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -31,12 +29,12 @@ class Page extends \yii\db\ActiveRecord
             [['content', 'title'], 'required'],
             [['content'], 'string'],
             [['use_layout'], 'in', 'range' => [0, 1]],
-            [['title'], 'string', 'max' => 50]
+            [['title'], 'string', 'max' => 50],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

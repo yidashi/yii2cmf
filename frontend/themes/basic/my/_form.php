@@ -2,7 +2,7 @@
 /**
  * author: yidashi
  * Date: 2015/12/3
- * Time: 10:59
+ * Time: 10:59.
  */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;

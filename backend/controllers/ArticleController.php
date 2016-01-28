@@ -33,21 +33,23 @@ class ArticleController extends Controller
             'upload' => [
                 'class' => 'kucha\ueditor\UEditorAction',
                 'config' => [
-                    "imageUrlPrefix"  => \Yii::getAlias('@static') . '/',//图片访问路径前缀
-                    "imagePathFormat" => "upload/image/{yyyy}{mm}{dd}/{time}{rand:6}" //上传保存路径
+                    'imageUrlPrefix' => \Yii::getAlias('@static').'/', //图片访问路径前缀
+                    'imagePathFormat' => 'upload/image/{yyyy}{mm}{dd}/{time}{rand:6}', //上传保存路径
                 ],
             ],
-            'webupload' => WebuploaderAction::className()
+            'webupload' => WebuploaderAction::className(),
         ];
     }
     /**
      * Lists all Article models.
+     *
      * @return mixed
      */
     public function actionIndex()
     {
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -56,7 +58,9 @@ class ArticleController extends Controller
 
     /**
      * Displays a single Article model.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionView($id)
@@ -69,6 +73,7 @@ class ArticleController extends Controller
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     *
      * @return mixed
      */
     public function actionCreate()
@@ -77,26 +82,30 @@ class ArticleController extends Controller
         $dataModel = new ArticleData();
         if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
             $isValid = $model->validate();
-            if($isValid) {
+            if ($isValid) {
                 $model->save(false);
                 $dataModel->id = $model->id;
                 $isValid = $dataModel->validate();
-                if($isValid) {
+                if ($isValid) {
                     $dataModel->save(false);
+
                     return $this->redirect(['index']);
                 }
             }
         }
+
         return $this->render('create', [
             'model' => $model,
-            'dataModel' => $dataModel
+            'dataModel' => $dataModel,
         ]);
     }
 
     /**
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionUpdate($id)
@@ -106,22 +115,26 @@ class ArticleController extends Controller
         if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
             $isValid = $model->validate();
             $isValid = $dataModel->validate() && $isValid;
-            if($isValid) {
+            if ($isValid) {
                 $model->save(false);
                 $dataModel->save(false);
+
                 return $this->redirect(['index']);
             }
         }
+
         return $this->render('update', [
             'model' => $model,
-            'dataModel' => $dataModel
+            'dataModel' => $dataModel,
         ]);
     }
 
     /**
      * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return mixed
      */
     public function actionDelete($id)
@@ -134,8 +147,11 @@ class ArticleController extends Controller
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     *
+     * @param int $id
+     *
      * @return Article the loaded model
+     *
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

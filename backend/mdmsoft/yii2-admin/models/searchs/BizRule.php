@@ -9,9 +9,10 @@ use mdm\admin\models\BizRule as MBizRule;
 use mdm\admin\components\RouteRule;
 
 /**
- * Description of BizRule
+ * Description of BizRule.
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class BizRule extends Model
@@ -24,12 +25,12 @@ class BizRule extends Model
     public function rules()
     {
         return [
-            [['name'], 'safe']
+            [['name'], 'safe'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -39,8 +40,10 @@ class BizRule extends Model
     }
 
     /**
-     * Search BizRule
+     * Search BizRule.
+     *
      * @param array $params
+     *
      * @return \yii\data\ActiveDataProvider|\yii\data\ArrayDataProvider
      */
     public function search($params)

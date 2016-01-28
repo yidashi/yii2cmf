@@ -3,7 +3,7 @@
 namespace tests\codeception\frontend\unit;
 
 /**
- * @inheritdoc
+ * {@inheritdoc}
  */
 class TestCase extends \yii\codeception\TestCase
 {

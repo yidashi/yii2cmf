@@ -26,6 +26,7 @@ use yii\di\Instance;
  * @property User $user
  * 
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class AccessControl extends \yii\base\ActionFilter
@@ -41,7 +42,8 @@ class AccessControl extends \yii\base\ActionFilter
     public $allowActions = [];
 
     /**
-     * Get user
+     * Get user.
+     *
      * @return User
      */
     public function getUser()
@@ -49,11 +51,13 @@ class AccessControl extends \yii\base\ActionFilter
         if (!$this->_user instanceof User) {
             $this->_user = Instance::ensure($this->_user, User::className());
         }
+
         return $this->_user;
     }
 
     /**
-     * Set user
+     * Set user.
+     *
      * @param User|string $user
      */
     public function setUser($user)
@@ -62,18 +66,18 @@ class AccessControl extends \yii\base\ActionFilter
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function beforeAction($action)
     {
         $actionId = $action->getUniqueId();
         $user = $this->getUser();
-        if ($user->can('/' . $actionId)) {
+        if ($user->can('/'.$actionId)) {
             return true;
         }
         $obj = $action->controller;
         do {
-            if ($user->can('/' . ltrim($obj->getUniqueId() . '/*', '/'))) {
+            if ($user->can('/'.ltrim($obj->getUniqueId().'/*', '/'))) {
                 return true;
             }
             $obj = $obj->module;
@@ -85,7 +89,9 @@ class AccessControl extends \yii\base\ActionFilter
      * Denies the access of the user.
      * The default implementation will redirect the user to the login page if he is a guest;
      * if the user is already logged, a 403 HTTP exception will be thrown.
-     * @param  yii\web\User $user the current user
+     *
+     * @param yii\web\User $user the current user
+     *
      * @throws yii\web\ForbiddenHttpException if the user is already logged in.
      */
     protected function denyAccess($user)
@@ -98,7 +104,7 @@ class AccessControl extends \yii\base\ActionFilter
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function isActive($action)
     {
@@ -116,7 +122,7 @@ class AccessControl extends \yii\base\ActionFilter
             // convert action uniqueId into an ID relative to the module
             $mid = $this->owner->getUniqueId();
             $id = $uniqueId;
-            if ($mid !== '' && strpos($id, $mid . '/') === 0) {
+            if ($mid !== '' && strpos($id, $mid.'/') === 0) {
                 $id = substr($id, strlen($mid) + 1);
             }
         } else {
@@ -125,7 +131,7 @@ class AccessControl extends \yii\base\ActionFilter
 
         foreach ($this->allowActions as $route) {
             if (substr($route, -1) === '*') {
-                $route = rtrim($route, "*");
+                $route = rtrim($route, '*');
                 if ($route === '' || strpos($id, $route) === 0) {
                     return false;
                 }

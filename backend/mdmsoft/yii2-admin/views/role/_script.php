@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+
 ?>
 <script type="text/javascript">
 <?php $this->beginBlock('JS_END') ?>
@@ -29,8 +30,8 @@ use yii\helpers\Url;
             action: function () {
                 var action = $(this).data('action');
                 var params = $((action == 'assign' ? '#avaliable' : '#assigned')+', .role-search').serialize();
-                var urlAssign = '<?= Url::toRoute(['assign', 'id' => $name,'action'=>'assign']) ?>';
-                var urlDelete = '<?= Url::toRoute(['assign', 'id' => $name,'action'=>'delete']) ?>';
+                var urlAssign = '<?= Url::toRoute(['assign', 'id' => $name, 'action' => 'assign']) ?>';
+                var urlDelete = '<?= Url::toRoute(['assign', 'id' => $name, 'action' => 'delete']) ?>';
                 $.post(action=='assign'?urlAssign : urlDelete,
                 params,function (r) {
                     $('#avaliable').html(r[0]);

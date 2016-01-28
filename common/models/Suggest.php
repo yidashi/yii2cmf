@@ -2,19 +2,18 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%suggest}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $content
  */
 class Suggest extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -22,18 +21,18 @@ class Suggest extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['content'], 'required'],
-            [['content'], 'string']
+            [['content'], 'string'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -43,7 +42,7 @@ class Suggest extends \yii\db\ActiveRecord
         ];
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {

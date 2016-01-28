@@ -6,9 +6,10 @@ use yii\rbac\Rule;
 use Yii;
 
 /**
- * BizRule
+ * BizRule.
  *
  * @author Misbahul D Munir <misbahuldmunir@gmail.com>
+ *
  * @since 1.0
  */
 class BizRule extends \yii\base\Model
@@ -19,12 +20,12 @@ class BizRule extends \yii\base\Model
     public $name;
 
     /**
-     * @var integer UNIX timestamp representing the rule creation time
+     * @var int UNIX timestamp representing the rule creation time
      */
     public $createdAt;
 
     /**
-     * @var integer UNIX timestamp representing the rule updating time
+     * @var int UNIX timestamp representing the rule updating time
      */
     public $updatedAt;
 
@@ -39,9 +40,10 @@ class BizRule extends \yii\base\Model
     private $_item;
 
     /**
-     * Initilaize object
+     * Initilaize object.
+     *
      * @param \yii\rbac\Rule $item
-     * @param array $config
+     * @param array          $config
      */
     public function __construct($item, $config = [])
     {
@@ -54,19 +56,19 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['name', 'className'], 'required'],
             [['className'], 'string'],
-            [['className'], 'classExists']
+            [['className'], 'classExists'],
         ];
     }
 
     /**
-     * Validate class exists
+     * Validate class exists.
      */
     public function classExists()
     {
@@ -76,7 +78,7 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -88,7 +90,8 @@ class BizRule extends \yii\base\Model
 
     /**
      * Check if new record.
-     * @return boolean
+     *
+     * @return bool
      */
     public function getIsNewRecord()
     {
@@ -96,8 +99,10 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * Find model by id
+     * Find model by id.
+     *
      * @param type $id
+     *
      * @return null|static
      */
     public static function find($id)
@@ -107,12 +112,13 @@ class BizRule extends \yii\base\Model
             return new static($item);
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Save model to authManager
-     * @return boolean
+     * Save model to authManager.
+     *
+     * @return bool
      */
     public function save()
     {
@@ -141,7 +147,8 @@ class BizRule extends \yii\base\Model
     }
 
     /**
-     * Get item
+     * Get item.
+     *
      * @return Item
      */
     public function getItem()

@@ -75,13 +75,13 @@ class PasswordResetRequestFormTest extends DbTestCase
         return [
             'user' => [
                 'class' => UserFixture::className(),
-                'dataFile' => '@tests/codeception/frontend/unit/fixtures/data/models/user.php'
+                'dataFile' => '@tests/codeception/frontend/unit/fixtures/data/models/user.php',
             ],
         ];
     }
 
     private function getMessageFile()
     {
-        return Yii::getAlias(Yii::$app->mailer->fileTransportPath) . '/testing_message.eml';
+        return Yii::getAlias(Yii::$app->mailer->fileTransportPath).'/testing_message.eml';
     }
 }

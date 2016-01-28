@@ -1,8 +1,9 @@
 <?php
+
 return [
-    'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'runtimePath' => dirname(dirname(__DIR__)) . '/runtime',
-    'timezone'=>'PRC',
+    'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
+    'runtimePath' => dirname(dirname(__DIR__)).'/runtime',
+    'timezone' => 'PRC',
     'language' => 'zh-CN',
     'components' => [
         'cache' => [
@@ -16,6 +17,6 @@ return [
         ],
     ],
     'aliases' => [
-        '@common/logic' => '@common/models/logic'
-    ]
+        '@common/logic' => '@common/models/logic',
+    ],
 ];

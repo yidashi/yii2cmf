@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             [
                 'attribute' => 'use_layout',
-                'value' => function($model) {
+                'value' => function ($model) {
                     return ['不使用', '使用'][$model->use_layout];
-                }
+                },
             ],
             'title',
 

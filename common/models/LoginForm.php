@@ -1,11 +1,12 @@
 <?php
+
 namespace common\models;
 
 use Yii;
 use yii\base\Model;
 
 /**
- * Login form
+ * Login form.
  */
 class LoginForm extends Model
 {
@@ -15,9 +16,8 @@ class LoginForm extends Model
     public $verifyCode;
     private $_user;
 
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -35,7 +35,7 @@ class LoginForm extends Model
         return [
             'username' => '用户名',
             'password' => '密码',
-            'rememberMe' => '记住我'
+            'rememberMe' => '记住我',
         ];
     }
     /**
@@ -43,7 +43,7 @@ class LoginForm extends Model
      * This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @param array  $params    the additional name-value pairs given in the rule
      */
     public function validatePassword($attribute, $params)
     {
@@ -58,7 +58,7 @@ class LoginForm extends Model
     /**
      * Logs in a user using the provided username and password.
      *
-     * @return boolean whether the user is logged in successfully
+     * @return bool whether the user is logged in successfully
      */
     public function login()
     {
@@ -70,7 +70,7 @@ class LoginForm extends Model
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[username]].
      *
      * @return User|null
      */

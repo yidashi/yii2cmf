@@ -49,10 +49,10 @@ AppAsset::register($this);
     ]);
     $menuItems = [];
     $menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl];
-    foreach(\common\models\Category::find()->all() as $nav){
-        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index','cate'=>$nav['name']]];
+    foreach (\common\models\Category::find()->all() as $nav) {
+        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
     }
-    foreach(\common\models\Nav::find()->all() as $nav){
+    foreach (\common\models\Nav::find()->all() as $nav) {
         $menuItems[] = ['label' => $nav['title'], 'url' => [$nav['route']]];
     }
     echo Nav::widget([
@@ -62,7 +62,7 @@ AppAsset::register($this);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
     if (Yii::$app->user->isGuest) {
-        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options'=>['class'=>'pull-right']];
+        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options' => ['class' => 'pull-right']];
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
@@ -70,14 +70,14 @@ AppAsset::register($this);
             'items' => [
                 [
                     'label' => '我的投稿',
-                    'url' => ['/my/article-list']
+                    'url' => ['/my/article-list'],
                 ],
                 [
                     'label' => '退出',
                     'url' => ['/site/logout'],
-                    'linkOptions' => ['data-method' => 'post']
-                ]
-            ]
+                    'linkOptions' => ['data-method' => 'post'],
+                ],
+            ],
         ];
     }
     echo Nav::widget([
@@ -106,7 +106,7 @@ AppAsset::register($this);
     </div>
     <hr/>
     <div class="container">
-        <p class="pull-left">&copy; <?= \common\models\Config::get('SITE_NAME') . ' ' . date('Y') ?></p>
+        <p class="pull-left">&copy; <?= \common\models\Config::get('SITE_NAME').' '.date('Y') ?></p>
         <p class="pull-right"><?= \common\models\Config::get('SITE_ICP')?></p>
     </div>
 </footer>
@@ -116,7 +116,7 @@ AppAsset::register($this);
     </div>
 </div>
 <a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
-<?php if(YII_ENV_PROD):?>
+<?php if (YII_ENV_PROD):?>
 <!--页脚-->
 <?= \common\models\Config::get('FOOTER')?>
 <?php endif; ?>

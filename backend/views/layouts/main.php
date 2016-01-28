@@ -20,7 +20,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title . '-' .\common\models\Config::get('SITE_NAME') . '管理后台') ?></title>
+    <title><?= Html::encode($this->title.'-'.\common\models\Config::get('SITE_NAME').'管理后台') ?></title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => \common\models\Config::get('SITE_NAME') . '管理后台',
+        'brandLabel' => \common\models\Config::get('SITE_NAME').'管理后台',
         'brandUrl' => Yii::$app->homeUrl,
         'innerContainerOptions' => ['class' => 'container-fluid'],
         'options' => [
@@ -37,15 +37,15 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => '首页', 'url' => ['/site/index']]
+        ['label' => '首页', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
     } else {
         $menuItems[] = [
-            'label' => '退出 (' . Yii::$app->user->identity->username . ')',
+            'label' => '退出 ('.Yii::$app->user->identity->username.')',
             'url' => ['/site/logout'],
-            'linkOptions' => ['data-method' => 'post']
+            'linkOptions' => ['data-method' => 'post'],
         ];
     }
     echo Nav::widget([

@@ -65,5 +65,5 @@ return [
     'Menu' => '菜单',
     'Help' => '帮助',
     'Application' => '应用',
-    'Create User' => '创建新用户'
+    'Create User' => '创建新用户',
 ];

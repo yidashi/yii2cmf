@@ -2,21 +2,20 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%comment}}".
  *
- * @property integer $id
- * @property integer $article_id
- * @property integer $user_id
+ * @property int $id
+ * @property int $article_id
+ * @property int $user_id
  * @property string $content
  */
 class Comment extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -24,19 +23,19 @@ class Comment extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['article_id', 'user_id', 'content'], 'required'],
             [['article_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
-            [['content'], 'string']
+            [['content'], 'string'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -46,11 +45,11 @@ class Comment extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'content' => '内容',
             'up' => '顶',
-            'down' => '踩'
+            'down' => '踩',
         ];
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
@@ -60,39 +59,41 @@ class Comment extends \yii\db\ActiveRecord
     }
 
     /**
-     * 获取发表评论的用户信息
+     * 获取发表评论的用户信息.
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id'=>'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
-     * 获取所有子评论
+     * 获取所有子评论.
+     *
      * @return \yii\db\ActiveQuery
      */
     public function getSons()
     {
-        return $this->hasMany(Comment::className(), ['parent_id'=>'id']);
+        return $this->hasMany(self::className(), ['parent_id' => 'id']);
     }
 
     /**
-     * 绑定写入后的事件
+     * 绑定写入后的事件.
      */
     public function init()
     {
-        $this->on(self::EVENT_AFTER_INSERT, [$this,'addComment']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'addComment']);
     }
     public function transactions()
     {
         return [
-            self::SCENARIO_DEFAULT => self::OP_INSERT
+            self::SCENARIO_DEFAULT => self::OP_INSERT,
         ];
     }
 
     /**
-     * 更新文章评论计数器
+     * 更新文章评论计数器.
      */
     public function addComment()
     {

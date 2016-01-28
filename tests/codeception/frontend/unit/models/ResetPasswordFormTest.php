@@ -8,7 +8,6 @@ use frontend\models\ResetPasswordForm;
 
 class ResetPasswordFormTest extends DbTestCase
 {
-
     /**
      * @expectedException \yii\base\InvalidParamException
      */
@@ -36,7 +35,7 @@ class ResetPasswordFormTest extends DbTestCase
         return [
             'user' => [
                 'class' => UserFixture::className(),
-                'dataFile' => '@tests/codeception/frontend/unit/fixtures/data/models/user.php'
+                'dataFile' => '@tests/codeception/frontend/unit/fixtures/data/models/user.php',
             ],
         ];
     }

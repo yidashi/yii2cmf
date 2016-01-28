@@ -3,7 +3,7 @@
 namespace tests\codeception\frontend\unit;
 
 /**
- * @inheritdoc
+ * {@inheritdoc}
  */
 class DbTestCase extends \yii\codeception\DbTestCase
 {

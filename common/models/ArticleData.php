@@ -2,18 +2,16 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%article_data}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $content
  */
 class ArticleData extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -21,19 +19,19 @@ class ArticleData extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
             [['id', 'content'], 'required'],
             [['id'], 'integer'],
-            [['content'], 'string']
+            [['content'], 'string'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {

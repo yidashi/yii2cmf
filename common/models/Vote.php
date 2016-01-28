@@ -2,22 +2,21 @@
 
 namespace common\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%vote}}".
  *
- * @property integer $id
+ * @property int $id
  * @property string $type
- * @property integer $user_id
- * @property integer $created_at
- * @property integer $updated_at
+ * @property int $user_id
+ * @property int $created_at
+ * @property int $updated_at
  */
 class Vote extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -25,20 +24,20 @@ class Vote extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['type', 'user_id','type_id'], 'required'],
+            [['type', 'user_id', 'type_id'], 'required'],
             [['user_id', 'type_id'], 'integer'],
-            [['type','action'], 'string', 'max' => 20],
-            ['action','in','range'=>['up','down']]
+            [['type', 'action'], 'string', 'max' => 20],
+            ['action', 'in', 'range' => ['up', 'down']],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
@@ -51,7 +50,7 @@ class Vote extends \yii\db\ActiveRecord
         ];
     }
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function behaviors()
     {
