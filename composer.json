@@ -34,7 +34,8 @@
         "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yidashi/yii2-webuploader": "1.0.4",
         "yidashi/yii2-sidenav": "1.0.1",
-        "dektrium/yii2-user": "0.9.*@dev"
+        "dektrium/yii2-user": "0.9.*@dev",
+        "dmstr/yii2-adminlte-asset": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -24,6 +24,21 @@ return [
                 ],
             ],
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
+    ],
+    'modules' => [
+        'v1' => [
+            'basePath' => '@api/modules/v1',
+            'class' => api\modules\v1\Module::className()
+        ],
+        'v2' => [
+            'basePath' => '@api/modules/v2',
+        ],
     ],
     'params' => $params
 ];

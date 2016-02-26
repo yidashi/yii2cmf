@@ -2,15 +2,13 @@
 
 namespace api\common\controllers;
 
+use common\logic\Article;
 use yii\rest\Controller;
 
 class SiteController extends Controller
 {
     public function actionIndex()
     {
-        return [
-            'code' => 1,
-            'msg' => 'success'
-        ];
+        return Article::find()->limit(1)->one();
     }
 }
