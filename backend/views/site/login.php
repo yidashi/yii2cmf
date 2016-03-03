@@ -7,25 +7,53 @@ use yii\bootstrap\ActiveForm;
 /* @var $model \common\models\LoginForm */
 
 $this->title = '登录';
+
+$fieldOptions1 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-envelope form-control-feedback'></span>"
+];
+
+$fieldOptions2 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
+];
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><?= $this->title ?></h3>
-                </div>
-                <div class="panel-body">
-                    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                    <fieldset>
-                        <?= $form->field($model, 'username') ?>
-                        <?= $form->field($model, 'password')->passwordInput() ?>
-                        <?= $form->field($model, 'rememberMe')->checkbox() ?>
-                        <?= Html::submitButton('登录', ['class' => 'btn btn-lg btn-success btn-block', 'name' => 'login-button']) ?>
-                    </fieldset>
-                    <?php ActiveForm::end(); ?>
-                </div>
-            </div>
-        </div>
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#"><b><?=Yii::$app->name?></b></a>
     </div>
-</div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">登录</p>
+
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
+
+        <?= $form
+            ->field($model, 'username', $fieldOptions1)
+            ->label(false)
+            ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
+
+        <?= $form
+            ->field($model, 'password', $fieldOptions2)
+            ->label(false)
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <?= $form->field($model, 'rememberMe')->checkbox() ?>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-4">
+                <?= Html::submitButton('登录', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']) ?>
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+        <?php ActiveForm::end(); ?>
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div><!-- /.login-box -->
