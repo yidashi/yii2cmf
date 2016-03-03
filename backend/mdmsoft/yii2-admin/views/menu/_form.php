@@ -22,6 +22,8 @@ use mdm\admin\AutocompleteAsset;
 
     <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
 
+    <?= $form->field($model, 'icon')->textInput(['id' => 'icon']) ?>
+
     <?= $form->field($model, 'order')->input('number') ?>
 
     <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>

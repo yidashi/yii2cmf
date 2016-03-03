@@ -15,7 +15,8 @@ class AdminLteAsset extends AssetBundle
         'css/AdminLTE.min.css',
     ];
     public $js = [
-        'js/app.min.js'
+        'js/app.min.js',
+        'slimScroll/jquery.slimscroll.min.js'
     ];
     public $depends = [
         'rmrevin\yii\fontawesome\AssetBundle',

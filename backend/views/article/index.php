@@ -11,27 +11,29 @@ $this->title = '文章';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
+    <div class="box box-success">
+        <div class="box-header"><h2 class="box-title">文章搜索</h2></div>
+        <div class="box-body"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
+    </div>
+    <div class="box box-success">
+        <div class="box-header"><h2 class="box-title">文章列表</h2></div>
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    'id',
+                    'title',
+                    'category',
+                    'status:boolean',
+                    // 'author',
+                    // 'created_at',
+                    // 'updated_at',
+                    // 'status',
+                    // 'cover',
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            'id',
-            'title',
-            'category',
-            'status:boolean',
-            // 'author',
-            // 'created_at',
-            // 'updated_at',
-            // 'status',
-            // 'cover',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

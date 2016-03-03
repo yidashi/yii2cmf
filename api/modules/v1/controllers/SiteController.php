@@ -11,7 +11,6 @@ namespace api\modules\v1\controllers;
 
 use api\modules\v1\models\Article;
 use yii\data\ActiveDataProvider;
-use yii\rest\Controller;
 
 class SiteController extends Controller
 {

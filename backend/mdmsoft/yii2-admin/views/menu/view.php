@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'menuParent.name:text:Parent',
             'name',
             'route',
+            'icon',
             'order',
         ],
     ]) ?>

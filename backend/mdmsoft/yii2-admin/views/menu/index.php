@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('rbac-admin', 'Parent'),
             ],
             'route',
+            'icon',
             'order',
             ['class' => 'yii\grid\ActionColumn'],
         ],

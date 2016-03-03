@@ -66,4 +66,5 @@ return [
     'Help' => '帮助',
     'Application' => '应用',
     'Create User' => '创建新用户',
+    'Icon' => '图标'
 ];

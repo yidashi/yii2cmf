@@ -118,7 +118,6 @@ class ArticleController extends Controller
             if ($isValid) {
                 $model->save(false);
                 $dataModel->save(false);
-
                 return $this->redirect(['index']);
             }
         }

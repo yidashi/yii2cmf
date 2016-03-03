@@ -52,13 +52,6 @@ return [
             'rules' => [
             ],
         ],
-        'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
-                ],
-            ],
-        ],
         'assetManager' => [
             'bundles' => [
                 'dmstr\web\AdminLteAsset' => [
@@ -83,10 +76,14 @@ return [
                 'forceTranslation' => true,
             ],
         ],
+        'database' => [
+            'class' => 'database\Module'
+        ]
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/mdmsoft/yii2-admin',
         '@kvgrid' => '@vendor/kartik-v/yii2-grid',
+        '@database' => '@backend/database'
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
