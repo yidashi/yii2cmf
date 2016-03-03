@@ -144,7 +144,6 @@ class ImportController extends Controller
     public function actionDel()
     {
         $time = \Yii::$app->request->post('time');
-        $time = '';
         if($time){
             $name  = date('Ymd-His', $time) . '-*.sql*';
             $path  = realpath(\Yii::$app->controller->module->params['DATA_BACKUP_PATH']) . DIRECTORY_SEPARATOR . $name;
