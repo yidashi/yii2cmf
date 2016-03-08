@@ -31,7 +31,10 @@ class ArticleController extends Controller
     {
         $query = Article::find();
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'sort' => [
+                'id' => SORT_DESC
+            ]
         ]);
         return $dataProvider;
     }
