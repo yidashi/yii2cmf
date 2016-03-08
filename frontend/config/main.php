@@ -12,7 +12,6 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        'frontend\components\AccessLog'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
