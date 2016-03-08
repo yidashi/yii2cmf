@@ -33,7 +33,9 @@ class ArticleController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'id' => SORT_DESC
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
             ]
         ]);
         return $dataProvider;
