@@ -39,7 +39,7 @@ class ArticleController extends Controller
     {
         $article = Article::find()->where(['id' => $id])->with('data')->asArray()->one();
         $article['data']['content'] = \yii\helpers\Markdown::process($article['data']['content']);
-        $css = Url::to(\Yii::getAlias('@web'), true) . '/article.css';
+        $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
         $html = <<<CONTENT
 <div class="view-title">
         <h1>{$article['title']}</h1>
