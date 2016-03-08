@@ -11,15 +11,17 @@ namespace api\modules\v1\controllers;
 
 use api\modules\v1\models\Article;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 
 class ArticleController extends Controller
 {
     public function actionIndex()
     {
         $topStories = Article::find()->orderBy(['view' => SORT_DESC])->limit(5)->asArray()->all();
-        $stories = Article::find()->orderBy(['created_at' => SORT_DESC, 'title' => SORT_ASC])->limit(10)->asArray()->all();
+        $stories = Article::find()->orderBy(['id' => SORT_DESC])->limit(10)->asArray()->all();
         return [
             'date' => date('Ymd'),
+            'lastId' => $stories[9]['id'],
             'stories' => $stories,
             'top_stories' => $topStories
         ];
@@ -28,26 +30,28 @@ class ArticleController extends Controller
     public function actionList()
     {
         $query = Article::find();
-        $provider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'created_at' => SORT_DESC,
-                    'title' => SORT_ASC,
-                ]
-            ],
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
         ]);
-        return [
-            'date' => date('Ymd'),
-            'stories' => $provider->getModels(),
-        ];
+        return $dataProvider;
     }
     public function actionView($id = 0)
     {
         $article = Article::find()->where(['id' => $id])->with('data')->asArray()->one();
+        $article['data']['content'] = \yii\helpers\Markdown::process($article['data']['content']);
+        $css = Url::to(\Yii::getAlias('@web'), true) . '/article.css';
+        $html = <<<CONTENT
+<div class="view-title">
+        <h1>{$article['title']}</h1>
+    </div>
+    <div class="action">
+        <span class="user">{$article['author']}</span>
+        <span class="views">{$article['view']}次浏览</span>
+    </div>
+    <div class="view-content">{$article['data']['content']}</div>
+CONTENT;
+        $article['css'] = $css;
+        $article['html'] = $html;
         return $article;
     }
 }

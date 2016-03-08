@@ -1,0 +1,13 @@
+h1,h2,h3,h4,div,p,ul,li,ol{margin:0;padding:0}
+h1 { font-size: 22px; }
+h2 { font-size: 20px; }
+h3 { font-size: 18px; }
+h4 { font-size: 16px; }
+.view-title{border-bottom: 1px solid #F2F2F2;  padding-bottom: 5px;margin-bottom: 10px;}
+.view-content img{max-width: 95%!important;display: block;margin:0 auto!important;}
+.view-content{font-size:16px!important;}
+.action { border-bottom: #eee solid 1px; padding-bottom: 10px; margin-bottom: 20px; color: #999; }
+.action a { color: #999; text-decoration: none; }
+.action em {font-style: normal;}
+.action .user, .action .time, .action .views, .action .favourites, .action .comments, .action .answers, .action .replies { margin-right:15px; }
+.action .money { float: right; }
