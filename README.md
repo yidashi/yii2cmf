@@ -14,7 +14,7 @@ php yii article/run tiejiong
 
 前台地址: `/frontend/web/index.php`
 
-后台地址: `/backend/web/index.php` demo 帐号`hehe` 密码`123456`
+后台地址: `/backend/web/index.php` demo 帐号`hehe` 密码`111111`
 
 demo地址 `www.51siyuan.cn`
 
