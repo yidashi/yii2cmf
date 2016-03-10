@@ -62,6 +62,7 @@ class Article extends \yii\db\ActiveRecord
             'author' => '作者',
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'deleted_at' => '删除时间',
             'status' => '状态',
             'cover' => '封面',
             'category_id' => '分类',
@@ -89,5 +90,10 @@ class Article extends \yii\db\ActiveRecord
     public static function find()
     {
         return parent::find()->andWhere(['deleted_at' => 0]);
+    }
+
+    public static function withTrashed()
+    {
+        return parent::find();
     }
 }

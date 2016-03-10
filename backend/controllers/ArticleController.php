@@ -7,6 +7,7 @@ use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\logic\Article;
 use backend\models\search\Article as ArticleSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,6 +57,16 @@ class ArticleController extends Controller
         ]);
     }
 
+    public function actionTrash()
+    {
+        $query = \common\models\Article::withTrashed()->where(['>', 'deleted_at', 0]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query
+        ]);
+        return $this->render('trash',[
+            'dataProvider' => $dataProvider
+        ]);
+    }
     /**
      * Displays a single Article model.
      *
@@ -143,6 +154,12 @@ class ArticleController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionHardDelete($id)
+    {
+        $model = Article::withTrashed()->where(['id' => $id])->one();
+        $model->hardDelete();
+        return $this->redirect(['trash']);
+    }
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
