@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\behaviors\AfterFindArticleBehavior;
 use common\behaviors\PushBehavior;
+use common\behaviors\SoftDeleteBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -76,11 +77,17 @@ class Article extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
             PushBehavior::className(),
             AfterFindArticleBehavior::className(),
+            SoftDeleteBehavior::className()
         ];
     }
 
     public function getData()
     {
         return $this->hasOne(ArticleData::className(), ['id' => 'id']);
+    }
+
+    public static function find()
+    {
+        return parent::find()->andWhere(['deleted_at' => 0]);
     }
 }
