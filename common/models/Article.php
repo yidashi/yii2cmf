@@ -40,6 +40,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['status', 'category_id', 'view', 'up', 'down', 'user_id'], 'integer'],
+            [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category_id'], 'setCategory'],
@@ -51,6 +52,8 @@ class Article extends \yii\db\ActiveRecord
     {
         $this->category = Category::find()->where(['id' => $this->category_id])->select('title')->scalar();
     }
+
+
     /**
      * {@inheritdoc}
      */

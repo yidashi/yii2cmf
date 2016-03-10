@@ -16,6 +16,13 @@ return [
             'port' => 6379,
             'database' => 0,
         ],
+        'formatter' => [
+            'dateFormat' => 'yyyy-MM-dd',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'CNY',
+        ],
     ],
     'aliases' => [
         '@common/logic' => '@common/models/logic',

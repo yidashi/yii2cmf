@@ -92,5 +92,8 @@ return [
             '*',
         ],
     ],
+    'on beforeRequest' => function($event) {
+        \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_UPDATE, ['backend\components\AdminLog', 'write']);
+    },
     'params' => $params,
 ];

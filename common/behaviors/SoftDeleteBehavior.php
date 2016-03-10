@@ -21,6 +21,7 @@ use yii\db\Expression;
 class SoftDeleteBehavior extends Behavior
 {
     public $deletedAttribute = 'deleted_at';
+    public $value;
     public function events()
     {
         return [

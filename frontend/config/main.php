@@ -15,10 +15,10 @@ return [
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-/*        'user' => [
-            'identityClass' => 'dektrium\user\models\User',
+        'user' => [
+            'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-        ],*/
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -64,12 +64,6 @@ return [
               ],
                 // etc.
             ],
-        ],
-    ],
-    'modules' => [
-        'user' => [
-            'class' => 'dektrium\user\Module',
-            'admins' => ['hehe'],
         ],
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
