@@ -31,7 +31,7 @@ class AdminLog extends \yii\db\ActiveRecord
     {
         return [
             [['description'], 'string'],
-            [['user_id'], 'integer'],
+            [['user_id', 'ip'], 'integer'],
             [['route'], 'string', 'max' => 255]
         ];
     }
@@ -47,6 +47,7 @@ class AdminLog extends \yii\db\ActiveRecord
             'description' => '详情',
             'created_at' => '操作时间',
             'user_id' => '操作人',
+            'ip' => '操作人ip'
         ];
     }
 

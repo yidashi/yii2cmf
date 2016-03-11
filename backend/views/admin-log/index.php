@@ -24,7 +24,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return \common\models\User::findOne($model->user_id)->username;
                 }
             ],
-
+            [
+                'attribute' => 'ip',
+                'value' => function($model) {
+                    return long2ip($model->ip);
+                }
+            ],
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view}'

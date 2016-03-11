@@ -23,6 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'user_id',
                 'value' => \common\models\User::findOne($model->user_id)->username
             ],
+            [
+                'attribute' => 'ip',
+                'value' => long2ip($model->ip)
+            ]
         ],
     ]) ?>
 
