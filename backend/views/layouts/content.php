@@ -30,7 +30,7 @@ use dmstr\widgets\Alert;
     </section>
 
     <section class="content">
-        <?= Alert::widget() ?>
+        <?= \common\widgets\AlertPlus::widget()?>
         <?= $content ?>
     </section>
 </div>

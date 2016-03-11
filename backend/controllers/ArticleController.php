@@ -8,9 +8,11 @@ use Yii;
 use common\logic\Article;
 use backend\models\search\Article as ArticleSearch;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -59,13 +61,54 @@ class ArticleController extends Controller
 
     public function actionTrash()
     {
-        $query = \common\models\Article::withTrashed()->where(['>', 'deleted_at', 0]);
+        $query = \common\models\Article::trashed();
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
         return $this->render('trash',[
             'dataProvider' => $dataProvider
         ]);
+    }
+
+    /**
+     * 还原
+     * @return array
+     * @throws NotFoundHttpException
+     */
+    public function actionReduction()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = Yii::$app->request->post('id');
+        $model = Article::trashed()->andWhere(['id' => $id])->one();
+        if(!$model) {
+            throw new NotFoundHttpException('文章不存在!');
+        }
+        $model->deleted_at = 0;
+        $model->save(false);
+        return [
+            'code' => 0,
+            'message' => '操作成功'
+        ];
+    }
+
+    /**
+     * 彻底删除
+     * @param $id
+     * @return Response
+     */
+    public function actionHardDelete()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = Yii::$app->request->post('id');
+        $model = Article::trashed()->andWhere(['id' => $id])->one();
+        if(!$model) {
+            throw new NotFoundHttpException('文章不存在!');
+        }
+        $model->hardDelete();
+        return [
+            'code' => 0,
+            'message' => '操作成功'
+        ];
     }
     /**
      * Displays a single Article model.
@@ -129,6 +172,7 @@ class ArticleController extends Controller
             if ($isValid) {
                 $model->save(false);
                 $dataModel->save(false);
+                Yii::$app->session->setFlash('success', '操作成功');
                 return $this->redirect(['index']);
             }
         }
@@ -154,12 +198,7 @@ class ArticleController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionHardDelete($id)
-    {
-        $model = Article::withTrashed()->where(['id' => $id])->one();
-        $model->hardDelete();
-        return $this->redirect(['trash']);
-    }
+
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

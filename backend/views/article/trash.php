@@ -31,10 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{update} {delete}',
                         'buttons' => [
                             'update' => function($url, $model) {
-                                return '还原';
+                                return Html::a('还原',['reduction'], [
+                                    'data-ajax' => 1,
+                                    'data-method' => 'post',
+                                    'data-params' => ['id' => $model->id],
+                                ]);
                             },
                             'delete' => function($url, $model) {
-                                return Html::a('清除',['hard-delete', 'id' => $model->id]);
+                                return Html::a('清除',['hard-delete'], [
+                                    'data-params' => ['id' => $model->id],
+                                    'data-method' => 'post',
+                                    'data-ajax' => 1,
+                                ]);
                             }
                         ]
                     ],

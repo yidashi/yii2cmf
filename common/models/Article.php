@@ -90,11 +90,28 @@ class Article extends \yii\db\ActiveRecord
         return $this->hasOne(ArticleData::className(), ['id' => 'id']);
     }
 
+    /**
+     * 不包含软删除的
+     * @return $this
+     */
     public static function find()
     {
-        return parent::find()->andWhere(['deleted_at' => 0]);
+        return parent::find()->where(['deleted_at' => 0]);
     }
 
+    /**
+     * 只有软删除的
+     * @return \yii\db\ActiveQuery
+     */
+    public static function trashed()
+    {
+        return parent::find()->where(['>', 'deleted_at', 0]);
+    }
+
+    /**
+     * 所有的
+     * @return \yii\db\ActiveQuery
+     */
     public static function withTrashed()
     {
         return parent::find();

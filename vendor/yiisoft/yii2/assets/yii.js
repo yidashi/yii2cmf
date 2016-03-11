@@ -148,7 +148,35 @@ yii = (function ($) {
                 $form = $e.closest('form'),
                 action = $e.attr('href'),
                 params = $e.data('params');
-
+                isAjax = $e.data('ajax');
+                isRefresh = !$e.data('norefresh');
+            if (isAjax) {
+                $.ajax({
+                    url:action,
+                    method:method,
+                    data:params,
+                    dataType:'json',
+                    success:function(res) {
+                        $('#top-alert').addClass('alert-success').slideDown();
+                        $('.alert-content').text(res.message);
+                        setTimeout(function(){
+                            if (isRefresh) {
+                                location.reload();
+                            } else {
+                                $('#top-alert').find('button').click();
+                            }
+                        }, 1500)
+                    },
+                    error:function(error) {
+                        $('#top-alert').addClass('alert-error').slideDown();
+                        $('.alert-content').text(error.message);
+                        setTimeout(function(){
+                            $('#top-alert').find('button').click();
+                        },1500);
+                    }
+                });
+                return;
+            }
             if (method === undefined) {
                 if (action && action != '#') {
                     window.location = action;
@@ -264,7 +292,10 @@ yii = (function ($) {
         $(document).ajaxComplete(function (event, xhr, settings) {
             var url = xhr.getResponseHeader('X-Redirect');
             if (url) {
-                window.location = url;
+                setTimeout(function(){
+                    window.location = url;
+                }, 1500)
+
             }
         });
     }
