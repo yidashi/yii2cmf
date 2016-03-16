@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use common\models\ArticleData;
 use frontend\models\Article;
+use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -49,14 +50,17 @@ class MyController extends Controller
     public function actionArticleList()
     {
         $userId = \Yii::$app->user->id;
-        $query = Article::find()->where(['user_id' => $userId]);
-        $countQuery = clone $query;
-        $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
-            ->orderBy('id desc')
-            ->limit($pages->limit)
-            ->all();
-
+        $query = Article::withUnactive()->andWhere(['user_id' => $userId]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+        $pages = $dataProvider->getPagination();
+        $models = $dataProvider->getModels();
         return $this->render('article-list', [
             'models' => $models,
             'pages' => $pages,
@@ -89,7 +93,7 @@ class MyController extends Controller
     public function actionUpdateArticle($id)
     {
         $userId = \Yii::$app->user->id;
-        $model = Article::find()->where(['id' => $id, 'user_id' => $userId])->one();
+        $model = Article::withUnactive()->where(['id' => $id, 'user_id' => $userId])->one();
         $dataModel = ArticleData::find()->where(['id' => $id])->one();
         if (!isset($model, $dataModel)) {
             throw new NotFoundHttpException('文章不存在!');

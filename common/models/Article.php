@@ -50,7 +50,7 @@ class Article extends \yii\db\ActiveRecord
     }
     public function setCategory($attribute, $params)
     {
-        $this->category = Category::find()->where(['id' => $this->category_id])->select('title')->scalar();
+        $this->category = Category::find()->where(['id' => $this->$attribute])->select('title')->scalar();
     }
 
 
@@ -115,5 +115,29 @@ class Article extends \yii\db\ActiveRecord
     public static function withTrashed()
     {
         return parent::find();
+    }
+
+    /**
+     * @return array事务关联删除
+     */
+    public function transactions()
+    {
+        return [
+            self::SCENARIO_DEFAULT => self::OP_DELETE,
+        ];
+    }
+
+    /**
+     * 绑定写入后的事件.
+     */
+    public function init()
+    {
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'deleteContent']);
+    }
+
+    public function deleteContent($event)
+    {
+        $content = ArticleData::findOne(['id' => $event->sender->id]);
+        $content->delete();
     }
 }
