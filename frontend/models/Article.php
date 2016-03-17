@@ -55,26 +55,13 @@ class Article extends \common\models\Article
     public static function hots($categoryId, $size = 10)
     {
         return self::find()
-            ->andWhere(['category_id' => $categoryId])
+            ->where(['category_id' => $categoryId])
+            ->active()
             ->limit($size)
             ->orderBy('view desc')
             ->all();
     }
 
-    /**
-     * @return mixed不包括未审核通过和已删除的
-     */
-    public static function find()
-    {
-        return parent::find()->where(['deleted_at' => 0, 'status' => self::STATUS_ACTIVE]);
-    }
-    /**
-     * @return mixed包括未审核通过的
-     */
-    public static function withUnactive()
-    {
-        return parent::find()->where(['deleted_at' => 0]);
-    }
     /**
      * 增加浏览量.
      */

@@ -96,29 +96,12 @@ class Article extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return parent::find()->where(['deleted_at' => 0]);
+        return Yii::createObject(ArticleQuery::className(), [get_called_class()]);
     }
 
     /**
-     * 只有软删除的
-     * @return \yii\db\ActiveQuery
-     */
-    public static function trashed()
-    {
-        return parent::find()->where(['>', 'deleted_at', 0]);
-    }
-
-    /**
-     * 所有的
-     * @return \yii\db\ActiveQuery
-     */
-    public static function withTrashed()
-    {
-        return parent::find();
-    }
-
-    /**
-     * @return array事务关联删除
+     * 事务关联删除
+     * @return array
      */
     public function transactions()
     {
@@ -138,6 +121,8 @@ class Article extends \yii\db\ActiveRecord
     public function deleteContent($event)
     {
         $content = ArticleData::findOne(['id' => $event->sender->id]);
-        $content->delete();
+        if ($content) {
+            $content->delete();
+        }
     }
 }

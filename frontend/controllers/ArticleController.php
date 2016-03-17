@@ -21,7 +21,7 @@ class ArticleController extends Controller
         if (empty($category)) {
             throw new NotFoundHttpException();
         }
-        $query = Article::find()->andFilterWhere(['category_id' => $category->id]);
+        $query = Article::find()->active()->andFilterWhere(['category_id' => $category->id]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -47,7 +47,7 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
-        $model = Article::find()->andWhere(['id' => $id])->one();
+        $model = Article::find()->where(['id' => $id])->active()->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }

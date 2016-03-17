@@ -61,9 +61,14 @@ class ArticleController extends Controller
 
     public function actionTrash()
     {
-        $query = \common\models\Article::trashed();
+        $query = \common\models\Article::find()->trashed();
         $dataProvider = new ActiveDataProvider([
-            'query' => $query
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
         ]);
         return $this->render('trash',[
             'dataProvider' => $dataProvider
@@ -79,7 +84,7 @@ class ArticleController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->post('id');
-        $model = Article::trashed()->andWhere(['id' => $id])->one();
+        $model = Article::find()->where(['id' => $id])->trashed()->one();
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }
@@ -100,11 +105,11 @@ class ArticleController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->post('id');
-        $model = Article::trashed()->andWhere(['id' => $id])->one();
+        $model = Article::find()->where(['id' => $id])->trashed()->one();
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }
-        $model->hardDelete();
+        $model->delete();
         return [
             'code' => 0,
             'message' => '操作成功'
@@ -193,7 +198,7 @@ class ArticleController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id)->softDelete();
 
         return $this->redirect(['index']);
     }
@@ -211,7 +216,7 @@ class ArticleController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Article::findOne($id)) !== null) {
+        if (($model = Article::find()->where(['id' => $id])->normal()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

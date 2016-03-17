@@ -22,12 +22,6 @@ class SoftDeleteBehavior extends Behavior
 {
     public $deletedAttribute = 'deleted_at';
     public $value;
-    public function events()
-    {
-        return [
-            BaseActiveRecord::EVENT_BEFORE_DELETE => 'softDelete',
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -40,16 +34,9 @@ class SoftDeleteBehavior extends Behavior
             return $this->value !== null ? call_user_func($this->value, $event) : time();
         }
     }
-    public function softDelete($event)
+    public function softDelete()
     {
-        $event->sender->setAttribute($this->deletedAttribute, $this->getValue(null));
-        $event->sender->save(false);
-        $event->isValid = false;
-    }
-
-    public function hardDelete()
-    {
-        $this->owner->off(BaseActiveRecord::EVENT_BEFORE_DELETE, [$this,'softDelete']);
-        return $this->owner->delete();
+        $this->owner->setAttribute($this->deletedAttribute, $this->getValue(null));
+        return $this->owner->save(false);
     }
 }

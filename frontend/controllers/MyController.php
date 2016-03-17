@@ -50,7 +50,7 @@ class MyController extends Controller
     public function actionArticleList()
     {
         $userId = \Yii::$app->user->id;
-        $query = Article::withUnactive()->andWhere(['user_id' => $userId]);
+        $query = Article::find()->where(['user_id' => $userId])->normal();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [

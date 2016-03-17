@@ -148,7 +148,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $news = Article::find()
-            ->where(['status' => Article::STATUS_ACTIVE])
+            ->active()
             ->andWhere(['<>', 'category', '两性'])
             ->andWhere(['<>', 'cover', ''])
             ->select('id,title,cover,view,up,down,created_at,user_id,desc')
@@ -156,12 +156,12 @@ class SiteController extends Controller
             ->limit(40)
             ->all();
         $slider = Article::find()
-            ->where(['status' => Article::STATUS_ACTIVE])
+            ->active()
             ->orderBy(['view' => SORT_DESC])
             ->limit(5)
             ->all();
         $recommend = Article::find()
-            ->where(['status' => Article::STATUS_ACTIVE])
+            ->active()
             ->orderBy(['comment' => SORT_DESC])
             ->limit(10)
             ->all();
