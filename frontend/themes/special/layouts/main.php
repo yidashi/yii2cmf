@@ -53,7 +53,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
     }
     foreach (\common\models\Nav::find()->all() as $nav) {
-        $menuItems[] = ['label' => $nav['title'], 'url' => [$nav['route']]];
+        $menuItems[] = ['label' => $nav['title'], 'url' => $nav['route']];
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
