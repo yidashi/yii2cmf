@@ -7,6 +7,7 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
+use common\models\Tag;
 use frontend\models\Article;
 use common\models\Category;
 use yii\data\ActiveDataProvider;
@@ -15,11 +16,14 @@ use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller
 {
+    /**
+     * 分类文章列表
+     */
     public function actionIndex($cate)
     {
         $category = Category::find()->andWhere(['name' => $cate])->one();
         if (empty($category)) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException('分类不存在');
         }
         $query = Article::find()->active()->andFilterWhere(['category_id' => $category->id]);
         $dataProvider = new ActiveDataProvider([
@@ -32,13 +36,45 @@ class ArticleController extends Controller
         ]);
         $pages = $dataProvider->getPagination();
         $models = $dataProvider->getModels();
+        // 热门标签
+        $hotTags = Tag::find()->orderBy('article desc')->all();
         return $this->render('index', [
             'models' => $models,
             'pages' => $pages,
             'category' => $category,
+            'hotTags' => $hotTags
         ]);
     }
 
+    /**
+     * 标签文章列表
+     */
+    public function actionTag($name)
+    {
+        $tag = Tag::find()->where(['name' => $name])->one();
+        if (empty($tag)) {
+            throw new NotFoundHttpException('标签不存在');
+        }
+        $query = $tag->getArticles();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+        $pages = $dataProvider->getPagination();
+        $models = $dataProvider->getModels();
+        // 热门标签
+        $hotTags = Tag::find()->orderBy('article desc')->all();
+        return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages,
+            'tag' => $tag,
+            'hotTags' => $hotTags
+        ]);
+    }
     /**
      * 文章详情
      * @param $id

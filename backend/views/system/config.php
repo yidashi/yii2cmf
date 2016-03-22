@@ -11,8 +11,6 @@ $this->title = '网站设置';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php
     $form = ActiveForm::begin();
 

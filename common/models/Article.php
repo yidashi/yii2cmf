@@ -85,11 +85,6 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getData()
-    {
-        return $this->hasOne(ArticleData::className(), ['id' => 'id']);
-    }
-
     /**
      * 不包含软删除的
      * @return $this
@@ -124,5 +119,16 @@ class Article extends \yii\db\ActiveRecord
         if ($content) {
             $content->delete();
         }
+    }
+
+    public function getData()
+    {
+        return $this->hasOne(ArticleData::className(), ['id' => 'id']);
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
+            ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
 }
