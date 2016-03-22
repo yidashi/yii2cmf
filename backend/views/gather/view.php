@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Category */
+/* @var $model common\models\Gather */
 
-$this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '分类', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Gathers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-view">
+<div class="gather-view">
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -27,11 +27,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'title',
-            'pid',
-            'created_at',
-            'updated_at',
             'name',
+            'category',
+            'url:url',
+            'url_org:url',
+            'res',
+            'result',
         ],
     ]) ?>
 

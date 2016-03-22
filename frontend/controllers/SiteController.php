@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Article;
+use frontend\models\Article;
 use common\models\Auth;
 use common\models\User;
 use Yii;
@@ -149,9 +149,7 @@ class SiteController extends Controller
     {
         $news = Article::find()
             ->active()
-            ->andWhere(['<>', 'category', '两性'])
             ->andWhere(['<>', 'cover', ''])
-            ->select('id,title,cover,view,up,down,created_at,user_id,desc')
             ->orderBy(['id' => SORT_DESC])
             ->limit(40)
             ->all();

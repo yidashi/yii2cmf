@@ -3,16 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Category;
+use common\models\Gather;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CaetgoryController implements the CRUD actions for Category model.
+ * GatherController implements the CRUD actions for Gather model.
  */
-class CategoryController extends Controller
+class GatherController extends Controller
 {
     public function behaviors()
     {
@@ -27,14 +27,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
-     *
+     * Lists all Gather models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Category::find(),
+            'query' => Gather::find(),
         ]);
 
         return $this->render('index', [
@@ -43,10 +42,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Displays a single Category model.
-     *
-     * @param int $id
-     *
+     * Displays a single Gather model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -57,14 +54,13 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new Gather model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     *
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new Gather();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -76,11 +72,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing Gather model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -97,11 +91,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing Gather model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -112,18 +104,15 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the Gather model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param int $id
-     *
-     * @return Category the loaded model
-     *
+     * @param integer $id
+     * @return Gather the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = Gather::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

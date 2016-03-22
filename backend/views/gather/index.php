@@ -6,22 +6,27 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '导航 (前台)';
+$this->title = 'Gathers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nav-index">
+<div class="gather-index">
 
     <p>
-        <?= Html::a('创建导航', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Gather', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'title',
-            'route',
+            'name',
+            'category',
+            'url:url',
+            'url_org:url',
+            // 'res',
+            // 'result',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

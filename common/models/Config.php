@@ -99,13 +99,15 @@ class Config extends \yii\db\ActiveRecord
 
         return $inputType;
     }
-    public static function get($name)
+    public static function get($name, $default = '')
     {
         $config = static::getDb()->cache(function ($db) use ($name) {
             return static::find()->where(['name' => $name])->one();
         }, 60);
         if (!empty($config)) {
             return self::_parse($config->type, $config->value);
+        } else {
+            return $default;
         }
     }
 

@@ -9,15 +9,17 @@ use common\models\Gather;
 use common\models\Spider;
 use yii\base\Exception;
 use Goutte\Client;
+use yii\base\Object;
 
-abstract class SpiderAbstract
+class SpiderAbstract extends Object
 {
+    public $spiderName = '';
     private $_url;
     protected $config;
     /**
      * 构造方法，初始化采集网站属性.
      */
-    public function __construct()
+    public function init()
     {
         $this->setConfig();
     }
@@ -27,12 +29,14 @@ abstract class SpiderAbstract
     }
     protected function setConfig()
     {
-        $className = strtolower(get_class($this));
-        // 去除命名空间
-        $spiderName = implode('', array_slice(explode('\\', $className), -1));
-        $this->config = \Yii::$app->cache->get($spiderName.'Config');
+        if (empty($this->spiderName)) {
+            $className = strtolower(get_class($this));
+            // 去除命名空间
+            $this->spiderName = implode('', array_slice(explode('\\', $className), -1));
+        }
+        $this->config = \Yii::$app->cache->get($this->spiderName.'Config');
         if ($this->config === false) {
-            $spider = Spider::find()->where(['name' => $spiderName])->one();
+            $spider = Spider::find()->where(['name' => $this->spiderName])->one();
             if (empty($spider)) {
                 throw new Exception('不存在目标网站');
             }
@@ -52,7 +56,7 @@ abstract class SpiderAbstract
             $this->config['title_dom'] = $spider->title_dom;
             $this->config['time_dom'] = $spider->time_dom;
             $this->config['content_dom'] = $spider->content_dom;
-            \Yii::$app->cache->set($spiderName.'Config', $this->config);
+            \Yii::$app->cache->set($this->spiderName.'Config', $this->config);
         }
     }
     /**
@@ -111,7 +115,7 @@ abstract class SpiderAbstract
             $crawler->filter($this->config['page_dom'])->each(function ($node) use ($pageUrl,$category) {
                 if ($node) {
                     try {
-                        $this->_url[] = strpos($node->attr('href'), '/') === 0 ? $this->config['domain'].'/'.trim($node->attr('href')) : $pageUrl.trim($node->attr('href'));
+                        $this->_url[] = strpos($node->attr('href'), '/') === 0 ? $this->config['domain']. trim($node->attr('href')) : $pageUrl.trim($node->attr('href'));
                     } catch (\Exception $e) {
                         $this->addLog($pageUrl, $category, 0, $e->getMessage());
                     }

@@ -131,4 +131,25 @@ class Article extends \yii\db\ActiveRecord
         return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
             ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
+
+    public function getTrueView()
+    {
+        return $this->view + \Yii::$app->cache->get('article:view:' . $this->id);
+    }
+    /**
+     * 增加浏览量
+     */
+    public function addView()
+    {
+        $cache = \Yii::$app->cache;
+        $key = 'article:view:'.$this->id;
+        $view = $cache->get($key);
+        if ($view !== false && $view >= 20) {
+            $this->view = $this->view + $view;
+            $this->save(false);
+            $cache->delete($key);
+        } else {
+            $cache->set($key, 1);
+        }
+    }
 }

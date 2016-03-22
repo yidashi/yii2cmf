@@ -2,14 +2,15 @@
 
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $model common\models\Category */
 
-$this->title = '添加分类';
-$this->params['breadcrumbs'][] = ['label' => '分类', 'url' => ['index']];
+/* @var $this yii\web\View */
+/* @var $model common\models\Gather */
+
+$this->title = 'Create Gather';
+$this->params['breadcrumbs'][] = ['label' => 'Gathers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-create">
+<div class="gather-create">
 
     <?= $this->render('_form', [
         'model' => $model,

@@ -6,6 +6,7 @@
  */
 namespace frontend\components;
 
+use common\models\Config;
 use Detection\MobileDetect;
 use yii\base\ActionFilter;
 use yii\web\View;
@@ -14,13 +15,14 @@ class ThemeBehavior extends ActionFilter
 {
     public function beforeAction($action)
     {
-        $device = new MobileDetect();
+        $isMobile = (new MobileDetect())->isMobile();
+        $themeName = Config::get('THEME_NAME', 'basic');
         $theme = [
             'basePath' => '@app/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
                 '@app/views' => [
-                    '@app/themes/'.($device->isMobile() ? 'mobile' : 'special'),
+                    '@app/themes/'.($isMobile ? 'mobile' : $themeName),
                     '@app/themes/basic',
                 ],
             ],
