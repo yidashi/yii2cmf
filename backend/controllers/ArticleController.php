@@ -8,7 +8,6 @@ use Yii;
 use common\logic\Article;
 use backend\models\search\Article as ArticleSearch;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -59,6 +58,11 @@ class ArticleController extends Controller
         ]);
     }
 
+    /**
+     * 回收站列表
+     *
+     * @return mixed
+     */
     public function actionTrash()
     {
         $query = \common\models\Article::find()->trashed();

@@ -8,6 +8,7 @@ namespace frontend\components;
 
 use Detection\MobileDetect;
 use yii\base\ActionFilter;
+use yii\web\View;
 
 class ThemeBehavior extends ActionFilter
 {
@@ -15,7 +16,6 @@ class ThemeBehavior extends ActionFilter
     {
         $device = new MobileDetect();
         $theme = [
-            'class' => 'yii\base\Theme',
             'basePath' => '@app/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
@@ -25,8 +25,7 @@ class ThemeBehavior extends ActionFilter
                 ],
             ],
         ];
-        \Yii::$app->getView()->theme = \Yii::createObject($theme);
-
+        \Yii::$container->set(View::className(),['theme' => $theme]);
         return true;
     }
 }

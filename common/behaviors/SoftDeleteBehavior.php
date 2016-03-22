@@ -14,7 +14,7 @@ use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
 /**
- * 把默认删除改成软删除,彻底删除用hardDelete方法
+ * 添加该行为可以附加软删除功能（不真的删除,只是改变deletedAttribute值）
  * Class SoftDeleteBehavior
  * @package common\behaviors
  */

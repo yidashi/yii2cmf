@@ -29,7 +29,7 @@ class Config extends \yii\db\ActiveRecord
         return [
             [['name', 'value', 'desc', 'type'], 'required'],
             [['name'], 'string', 'max' => 20],
-            ['type', 'in', 'range' => array_keys(self::get('CONFIG_TYPE_LIST'))],
+            ['type', 'in', 'range' => array_keys(self::getTypeList())],
             [['value', 'desc', 'extra'], 'string'],
         ];
     }
@@ -49,7 +49,7 @@ class Config extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getTypeList()
+    public static function getTypeList()
     {
         return self::get('CONFIG_TYPE_LIST');
     }
@@ -107,8 +107,6 @@ class Config extends \yii\db\ActiveRecord
         if (!empty($config)) {
             return self::_parse($config->type, $config->value);
         }
-
-        return;
     }
 
     private static function _parse($type, $value)

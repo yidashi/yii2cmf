@@ -114,7 +114,8 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $model->scenario = 'resetPassword';
         if($model->load(Yii::$app->request->post()) && $model->resetPassword()){
-            return $this->redirect(['/site/logout']);
+            Yii::$app->user->logout();
+            return $this->goHome();
         }
         return $this->render('reset-password', [
             'model' => $model
