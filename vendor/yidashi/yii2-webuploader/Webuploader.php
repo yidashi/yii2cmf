@@ -53,7 +53,7 @@ class Webuploader extends InputWidget{
         $this->view->registerJs(<<<JS
 var uploader = WebUploader.create({
         auto: true,
-        fileVal: 'upfile',
+        fileVal: 'webUploaderFile',
         // swf文件路径
         swf: '{$swfPath}/Uploader.swf',
 
