@@ -80,7 +80,6 @@ class Article extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
             PushBehavior::className(),
-            AfterFindArticleBehavior::className(),
             SoftDeleteBehavior::className()
         ];
     }
@@ -135,6 +134,11 @@ class Article extends \yii\db\ActiveRecord
     public function getTrueView()
     {
         return $this->view + \Yii::$app->cache->get('article:view:' . $this->id);
+    }
+
+    public function getAbsoluteCover()
+    {
+        return $this->cover ? (strpos($this->cover, 'http://') === false ? (\Yii::getAlias('@static').'/' . $this->cover) : $this->cover) : 'http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png';
     }
     /**
      * 增加浏览量

@@ -11,7 +11,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
             $items = [];
             foreach ($slider as $k => $item) {
                 $items[$k]['content'] = \yii\helpers\Html::a(
-                    \yii\helpers\Html::img($item->cover),
+                    \yii\helpers\Html::img($item->absoluteCover),
                     \yii\helpers\Url::toRoute(['article/view', 'id' => $item->id]),
                     ['target' => '_blank']
                 );
@@ -30,7 +30,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                     <div class="col-md-4 article-item">
                         <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>" target="_blank">
                             <div class="article-img-wrap">
-                                <img src="<?= $item->cover?>" alt="<?= $item->title?>">
+                                <img src="<?= $item->absoluteCover?>" alt="<?= $item->title?>">
                             </div>
                             <h3 class="article-title"><?= $item['title']?></h3>
                         </a>
@@ -46,7 +46,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                 <div class="media">
                     <div class="media-left">
                         <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>" target="_blank">
-                            <img class="media-object" src="<?= $item->cover?>" alt="<?= $item->title?>" width="160" height=80">
+                            <img class="media-object" src="<?= $item->absoluteCover?>" alt="<?= $item->title?>" width="160" height=80">
                         </a>
                     </div>
                     <div class="media-body">
