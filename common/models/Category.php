@@ -47,6 +47,7 @@ class Category extends \yii\db\ActiveRecord
             'pid' => '上级分类',
             'ptitle' => '上级分类',
             'description' => '分类介绍',
+            'article' => '文章数',
             'created_at' => '创建时间',
         ];
     }
