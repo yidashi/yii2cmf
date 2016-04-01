@@ -24,6 +24,8 @@ class Article extends \yii\db\ActiveRecord
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INIT = 0;
+
+    private $_tagNames;
     /**
      * {@inheritdoc}
      */
@@ -38,7 +40,7 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'category_id'], 'required'],
             [['status', 'category_id', 'view', 'up', 'down', 'user_id'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -46,6 +48,7 @@ class Article extends \yii\db\ActiveRecord
             [['category_id'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover'], 'string', 'max' => 255],
+            ['tagNames', 'safe']
         ];
     }
     public function setCategory($attribute, $params)
@@ -70,8 +73,16 @@ class Article extends \yii\db\ActiveRecord
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',
+            'tagNames' => '标签'
         ];
     }
+    public function attributeHints()
+    {
+        return [
+            'tagNames' => '（空格分隔多个标签）'
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -131,6 +142,7 @@ class Article extends \yii\db\ActiveRecord
             ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
 
+
     public function getTrueView()
     {
         return $this->view + \Yii::$app->cache->get('article:view:' . $this->id);
@@ -155,5 +167,47 @@ class Article extends \yii\db\ActiveRecord
         } else {
             $cache->set($key, 1);
         }
+    }
+    public function getTagNames()
+    {
+        $tags = $this->tags;
+        if (!empty($tags)) {
+            $tagNames = [];
+            foreach($tags as $tag) {
+                $tagNames[] = $tag->name;
+            }
+            $tagNames = join(' ', $tagNames);
+        } else {
+            $tagNames = '';
+        }
+        return $tagNames;
+    }
+
+    public function setTagNames($value)
+    {
+        $this->_tagNames = $value;
+        return $this->_tagNames;
+    }
+    public function setTags()
+    {
+        // 先清除文章所有标签
+        ArticleTag::deleteAll(['article_id' => $this->id]);
+        // 更新原标签文章数
+        $oldTags = explode(' ', $this->tagNames);
+        Tag::updateAllCounters(['article' => -1], ['name' => $oldTags]);
+        $tags = explode(' ', $this->_tagNames);
+        foreach($tags as $tag) {
+            $tagModel = Tag::findOne(['name' => $tag]);
+            if (empty($tagModel)) {
+                $tagModel = new Tag();
+                $tagModel->name = $tag;
+                $tagModel->save();
+            }
+            $articleTag = new ArticleTag();
+            $articleTag->article_id = $this->id;
+            $articleTag->tag_id = $tagModel->id;
+            $articleTag->save();
+        }
+        Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
     }
 }

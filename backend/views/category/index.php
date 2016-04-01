@@ -14,22 +14,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('添加分类', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
+                    'id',
+                    'title',
+                    'ptitle',
+                    'created_at:datetime',
+                     'name',
 
-            'id',
-            'title',
-            [
-                'attribute' => 'ptitle',
-                'label' => '上级名字',
-            ],
-            'created_at:datetime',
-             'name',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

@@ -12,21 +12,26 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-log-view">
 
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'route',
             'description:ntext',
-            'created_at:datetime',
-            [
-                'attribute' => 'user_id',
-                'value' => \common\models\User::findOne($model->user_id)->username
-            ],
-            [
-                'attribute' => 'ip',
-                'value' => long2ip($model->ip)
-            ]
+            'created_at',
+            'user_id',
+            'ip',
         ],
     ]) ?>
 

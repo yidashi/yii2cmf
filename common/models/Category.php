@@ -42,9 +42,11 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => '名字',
+            'title' => '分类名',
             'name' => '标识',
-            'pid' => '上级名字',
+            'pid' => '上级分类',
+            'ptitle' => '上级分类',
+            'description' => '分类介绍',
             'created_at' => '创建时间',
         ];
     }
@@ -78,6 +80,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return array_merge(['无'], self::lists());
     }
+
     public function getCategoryNameById($id)
     {
         $list = $this->lists();

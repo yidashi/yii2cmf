@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\ArticleData;
+use common\models\ArticleTag;
 use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\logic\Article;
@@ -145,13 +146,15 @@ class ArticleController extends Controller
         $dataModel = new ArticleData();
         if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
             $isValid = $model->validate();
+
             if ($isValid) {
                 $model->save(false);
+//                echo '<pre>' . print_r($model, true) . '</pre>';die;
+                $model->setTags();
                 $dataModel->id = $model->id;
                 $isValid = $dataModel->validate();
                 if ($isValid) {
                     $dataModel->save(false);
-
                     return $this->redirect(['index']);
                 }
             }
@@ -159,7 +162,7 @@ class ArticleController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'dataModel' => $dataModel,
+            'dataModel' => $dataModel
         ]);
     }
 
@@ -180,6 +183,7 @@ class ArticleController extends Controller
             $isValid = $dataModel->validate() && $isValid;
             if ($isValid) {
                 $model->save(false);
+                $model->setTags();
                 $dataModel->save(false);
                 Yii::$app->session->setFlash('success', '操作成功');
                 return $this->redirect(['index']);
