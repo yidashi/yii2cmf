@@ -11,5 +11,6 @@ return [
     'Create' => '创建',
     'Update' => '更新',
     'Search' => '搜索',
-    'Reset' => '重置'
+    'Reset' => '重置',
+    'Users' => '用户'
 ];

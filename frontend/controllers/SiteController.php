@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Category;
 use frontend\models\Article;
 use common\models\Auth;
 use common\models\User;
@@ -12,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -163,11 +165,21 @@ class SiteController extends Controller
             ->orderBy(['comment' => SORT_DESC])
             ->limit(10)
             ->all();
-
+        $dataProvider = new ActiveDataProvider([
+            'query' => Article::find()->active(),
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+        $categorys = Category::find()->all();
         return $this->render('index', [
             'news' => $news,
             'slider' => $slider,
             'recommend' => $recommend,
+            'dataProvider' => $dataProvider,
+            'categorys' => $categorys,
         ]);
     }
     /**

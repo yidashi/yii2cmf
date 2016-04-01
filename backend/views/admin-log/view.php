@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model common\models\AdminLog */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Admin Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '操作日志', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-log-view">
