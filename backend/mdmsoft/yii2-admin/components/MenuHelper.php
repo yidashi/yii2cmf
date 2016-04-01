@@ -2,7 +2,6 @@
 
 namespace mdm\admin\components;
 
-use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\caching\TagDependency;
 use mdm\admin\models\Menu;
@@ -216,7 +215,7 @@ class MenuHelper
                     $item = [
                         'label' => $menu['name'],
                         'url' => static::parseRoute($menu['route']),
-                        'icon' => $menu['icon'] ? FA::icon($menu['icon']) : Fa::icon('angle-right')
+                        'icon' => $menu['icon']
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];

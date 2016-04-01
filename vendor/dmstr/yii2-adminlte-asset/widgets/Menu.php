@@ -1,5 +1,6 @@
 <?php
 namespace dmstr\widgets;
+use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -30,11 +31,11 @@ class Menu extends \yii\widgets\Menu
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
+                '{icon}' => FA::icon($item['icon']),
             ] : [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => null,
+                '{icon}' => FA::icon('angle-left'),
             ];
             return strtr($template, $replace);
         } else {
