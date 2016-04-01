@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('rbac-admin', 'Parent'),
             ],
             'route',
-            'icon',
+            [
+                'attribute' => 'icon',
+                'value' => function($model) {
+                    return \rmrevin\yii\fontawesome\FA::icon($model->icon);
+                },
+                'format' => 'raw'
+            ],
             'order',
             ['class' => 'yii\grid\ActionColumn'],
         ],

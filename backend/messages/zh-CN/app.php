@@ -8,4 +8,8 @@ return [
     'ID' => 'ID',
     'Created At' => '创建时间',
     'Updated At' => '更新时间',
+    'Create' => '创建',
+    'Update' => '更新',
+    'Search' => '搜索',
+    'Reset' => '重置'
 ];

@@ -4,6 +4,7 @@ namespace mdm\admin\models;
 
 use Yii;
 use mdm\admin\components\Configs;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "menu".
@@ -101,6 +102,13 @@ class Menu extends \yii\db\ActiveRecord
             'icon' => Yii::t('rbac-admin', 'Icon'),
             'order' => Yii::t('rbac-admin', 'Order'),
             'data' => Yii::t('rbac-admin', 'Data'),
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'icon' => '（参考' . Html::a('icon list', ['/site/demo', 'view' => 'icons'], ['target' => '_blank']). ',只需要fa-后边的字符,不填默认箭头）'
         ];
     }
 
