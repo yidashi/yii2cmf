@@ -111,7 +111,7 @@ class Article extends \yii\db\ActiveRecord
     public function transactions()
     {
         return [
-            self::SCENARIO_DEFAULT => self::OP_DELETE,
+            self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
 
@@ -121,14 +121,26 @@ class Article extends \yii\db\ActiveRecord
     public function init()
     {
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'deleteContent']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'updateCategory']);
     }
 
+    /**
+     * 删除文章内容
+     */
     public function deleteContent($event)
     {
         $content = ArticleData::findOne(['id' => $event->sender->id]);
         if ($content) {
             $content->delete();
         }
+    }
+
+    /**
+     * 更新分类文章数
+     */
+    public function updateCategory($event)
+    {
+        Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
     }
 
     public function getData()
