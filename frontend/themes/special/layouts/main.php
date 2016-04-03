@@ -98,10 +98,10 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=1'])?>" target="_blank">免责声明</a></div>
-            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=2'])?>" target="_blank">关于我们</a></div>
-            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/suggest/create'])?>" target="_blank">问题反馈</a></div>
-            <div class="col-sm-3"><a href="https://github.com/yidashi/yii" target="_blank">获取源码</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=1'])?>">免责声明</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/page?id=2'])?>">关于我们</a></div>
+            <div class="col-sm-3"><a href="<?= \yii\helpers\Url::to(['/suggest/create'])?>">问题反馈</a></div>
+            <div class="col-sm-3"><a href="https://github.com/yidashi/yii">获取源码</a></div>
         </div>
     </div>
     <hr/>
