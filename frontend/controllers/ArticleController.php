@@ -7,7 +7,7 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
-use common\models\Tag;
+use frontend\models\Tag;
 use frontend\models\Article;
 use common\models\Category;
 use yii\data\ActiveDataProvider;
@@ -37,7 +37,7 @@ class ArticleController extends Controller
         $pages = $dataProvider->getPagination();
         $models = $dataProvider->getModels();
         // 热门标签
-        $hotTags = Tag::find()->orderBy('article desc')->all();
+        $hotTags = Tag::hot();
         return $this->render('index', [
             'models' => $models,
             'pages' => $pages,

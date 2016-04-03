@@ -85,7 +85,8 @@ a.desc:after {
 a:hover{text-decoration: none;}
 .article-list .media{padding-top:15px;border-top:1px dashed #d9d9d9;}
 .article-list .media:first-child{padding-top:0;border-top:0;}
-.article-list .media-content{margin-top:10px;color:#999;}
+.article-list .media-content{margin-top:10px;color:#666;}
+.article-list .media-action{margin-top:5px;color:#999;}
 .article-item .article-img-wrap{position:relative;width:100%;padding-top:50%;}
 .article-item img{position:absolute;left:0;top:0;width:100%;height:100%;}
 .article-title{text-align:center;-webkit-line-clamp:2;display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;height:50px;line-height: 25px;font-size: 16px}

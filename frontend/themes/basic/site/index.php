@@ -14,8 +14,8 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                         <h4 class="media-heading">
                             <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>" target="_blank"><?= $item['title']?></a>
                         </h4>
-                        <div class="media-content">
-                            <div class="description"><?= $item['desc']?></div>
+                        <div class="media-content"><?= $item['desc'] ?></div>
+                        <div class="media-action">
                             <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                             <span class="comments"><?= \common\helpers\Html::icon('comments-o')?> 评论 <?=$item->comment?></span>
                         </div>
@@ -35,6 +35,18 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                 <?php foreach ($categorys as $item):?>
                     <li><a href="<?= \yii\helpers\Url::to(['/' . $item->name])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
                 <?php endforeach;?>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h5>热门标签</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="tag-list list-inline">
+                    <?php foreach($hotTags as $tag): ?>
+                        <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>

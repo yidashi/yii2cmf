@@ -29,6 +29,9 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '正常']) ?>
         </div>
         <div class="tab-pane" id="tab_2">
+
+            <?= $form->field($model, 'desc')->textarea()?>
+
             <?= $form->field($model, 'tagNames')->textInput()?>
         </div>
         <div class="form-group">

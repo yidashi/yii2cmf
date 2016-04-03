@@ -6,6 +6,7 @@ use common\models\Category;
 use frontend\models\Article;
 use common\models\Auth;
 use common\models\User;
+use frontend\models\Tag;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -174,12 +175,14 @@ class SiteController extends Controller
             ]
         ]);
         $categorys = Category::find()->all();
+        $hotTags = Tag::hot();
         return $this->render('index', [
             'news' => $news,
             'slider' => $slider,
             'recommend' => $recommend,
             'dataProvider' => $dataProvider,
             'categorys' => $categorys,
+            'hotTags' => $hotTags
         ]);
     }
     /**

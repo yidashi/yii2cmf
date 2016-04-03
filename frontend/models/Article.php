@@ -52,6 +52,7 @@ class Article extends \common\models\Article
             ]
         );
     }
+
     public static function hots($categoryId, $size = 10)
     {
         return self::find()

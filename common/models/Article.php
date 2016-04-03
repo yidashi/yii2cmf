@@ -7,6 +7,8 @@ use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Markdown;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -48,7 +50,7 @@ class Article extends \yii\db\ActiveRecord
             [['category_id'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover'], 'string', 'max' => 255],
-            ['tagNames', 'safe']
+            [['desc', 'tagNames'], 'safe']
         ];
     }
     public function setCategory($attribute, $params)
@@ -73,6 +75,7 @@ class Article extends \yii\db\ActiveRecord
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',
+            'desc' => '摘要',
             'tagNames' => '标签'
         ];
     }
@@ -121,7 +124,7 @@ class Article extends \yii\db\ActiveRecord
     public function init()
     {
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'deleteContent']);
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'updateCategory']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterInsertInternal']);
     }
 
     /**
@@ -136,9 +139,9 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * 更新分类文章数
+     * 发布新文章后（更新分类文章数)
      */
-    public function updateCategory($event)
+    public function afterInsertInternal($event)
     {
         Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
     }
@@ -207,19 +210,21 @@ class Article extends \yii\db\ActiveRecord
         // 更新原标签文章数
         $oldTags = explode(' ', $this->tagNames);
         Tag::updateAllCounters(['article' => -1], ['name' => $oldTags]);
-        $tags = explode(' ', $this->_tagNames);
-        foreach($tags as $tag) {
-            $tagModel = Tag::findOne(['name' => $tag]);
-            if (empty($tagModel)) {
-                $tagModel = new Tag();
-                $tagModel->name = $tag;
-                $tagModel->save();
+        if (!empty($this->_tagNames)) {
+            $tags = explode(' ', $this->_tagNames);
+            foreach($tags as $tag) {
+                $tagModel = Tag::findOne(['name' => $tag]);
+                if (empty($tagModel)) {
+                    $tagModel = new Tag();
+                    $tagModel->name = $tag;
+                    $tagModel->save();
+                }
+                $articleTag = new ArticleTag();
+                $articleTag->article_id = $this->id;
+                $articleTag->tag_id = $tagModel->id;
+                $articleTag->save();
             }
-            $articleTag = new ArticleTag();
-            $articleTag->article_id = $this->id;
-            $articleTag->tag_id = $tagModel->id;
-            $articleTag->save();
+            Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
         }
-        Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
     }
 }
