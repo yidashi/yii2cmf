@@ -68,6 +68,6 @@ class ArticleData extends \yii\db\ActiveRecord
      */
     private function generateDesc($content)
     {
-        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content))), 150);
+        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 150);
     }
 }
