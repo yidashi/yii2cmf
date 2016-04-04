@@ -82,6 +82,7 @@ class Article extends \yii\db\ActiveRecord
     public function attributeHints()
     {
         return [
+            'desc' => '（默认截取内容前150个字符）',
             'tagNames' => '（空格分隔多个标签）'
         ];
     }
@@ -124,6 +125,8 @@ class Article extends \yii\db\ActiveRecord
     public function init()
     {
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'deleteContent']);
+        $this->on(SoftDeleteBehavior::EVENT_AFTER_SOFT_DELETE, [$this, 'afterSoftDeleteInternal']);
+        $this->on(SoftDeleteBehavior::EVENT_AFTER_REDUCTION, [$this, 'afterReductionInternal']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterInsertInternal']);
     }
 
@@ -137,7 +140,20 @@ class Article extends \yii\db\ActiveRecord
             $content->delete();
         }
     }
-
+    /**
+     * 软删除文章后（更新分类文章数)
+     */
+    public function afterSoftDeleteInternal($event)
+    {
+        Category::updateAllCounters(['article' => -1], ['id' => $event->sender->category_id]);
+    }
+    /**
+     * 软删除文章还原后（更新分类文章数)
+     */
+    public function afterReductionInternal($event)
+    {
+        Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
+    }
     /**
      * 发布新文章后（更新分类文章数)
      */

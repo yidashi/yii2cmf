@@ -12,7 +12,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                 <div class="media">
                     <div class="media-body">
                         <h4 class="media-heading">
-                            <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>" target="_blank"><?= $item['title']?></a>
+                            <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">

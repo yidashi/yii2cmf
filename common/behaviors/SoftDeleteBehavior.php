@@ -22,7 +22,8 @@ class SoftDeleteBehavior extends Behavior
 {
     public $deletedAttribute = 'deleted_at';
     public $value;
-
+    const EVENT_AFTER_SOFT_DELETE = 'afterSoftDelete';
+    const EVENT_AFTER_REDUCTION = 'afterReduction';
     /**
      * @inheritdoc
      */
@@ -34,9 +35,30 @@ class SoftDeleteBehavior extends Behavior
             return $this->value !== null ? call_user_func($this->value, $event) : time();
         }
     }
+
+    /**
+     * 软删除
+     */
     public function softDelete()
     {
         $this->owner->setAttribute($this->deletedAttribute, $this->getValue(null));
-        return $this->owner->save(false);
+        if ($this->owner->save(false)) {
+            $this->owner->trigger(self::EVENT_AFTER_SOFT_DELETE);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 还原
+     */
+    public function reduction()
+    {
+        $this->owner->setAttribute($this->deletedAttribute, 0);
+        if ($this->owner->save(false)) {
+            $this->owner->trigger(self::EVENT_AFTER_REDUCTION);
+            return true;
+        }
+        return false;
     }
 }

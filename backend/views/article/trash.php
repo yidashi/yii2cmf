@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'status:boolean',
                     // 'author',
                     // 'created_at',
-                     'deleted_at:date',
+                     'deleted_at:datetime',
                     // 'status',
                     // 'cover',
 

@@ -93,8 +93,7 @@ class ArticleController extends Controller
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }
-        $model->deleted_at = 0;
-        $model->save(false);
+        $model->reduction();
         return [
             'code' => 0,
             'message' => '操作成功'

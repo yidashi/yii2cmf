@@ -45,10 +45,11 @@ class Category extends \yii\db\ActiveRecord
             'title' => '分类名',
             'name' => '标识',
             'pid' => '上级分类',
-            'ptitle' => '上级分类',
+            'ptitle' => '上级分类', // 非表字段,方便后台显示
             'description' => '分类介绍',
-            'article' => '文章数',
+            'article' => '文章数', //冗余字段,方便查询
             'created_at' => '创建时间',
+            'created_at' => '更新时间',
         ];
     }
     /**
@@ -61,6 +62,9 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * 获取分类名
+     */
     public function getPtitle()
     {
         return static::find()->select('title')->where(['id' => $this->pid])->scalar();
@@ -77,6 +81,9 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
+    /**
+     * 分类名下拉列表
+     */
     public static function getDropDownlist()
     {
         return array_merge(['无'], self::lists());
