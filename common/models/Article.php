@@ -128,6 +128,7 @@ class Article extends \yii\db\ActiveRecord
         $this->on(SoftDeleteBehavior::EVENT_AFTER_SOFT_DELETE, [$this, 'afterSoftDeleteInternal']);
         $this->on(SoftDeleteBehavior::EVENT_AFTER_REDUCTION, [$this, 'afterReductionInternal']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterInsertInternal']);
+        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'afterUpdateInternal']);
     }
 
     /**
@@ -161,7 +162,16 @@ class Article extends \yii\db\ActiveRecord
     {
         Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
     }
-
+    /**
+     * 修改文章后（如果修改了分类,更新分类文章数)
+     */
+    public function afterUpdateInternal($event) {
+        $changedAttributes = $event->changedAttributes;
+        if (isset($changedAttributes['category_id'])) {
+            Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
+            Category::updateAllCounters(['article' => -1], ['id' => $changedAttributes['category_id']]);
+        }
+    }
     public function getData()
     {
         return $this->hasOne(ArticleData::className(), ['id' => 'id']);
@@ -173,12 +183,17 @@ class Article extends \yii\db\ActiveRecord
             ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
 
-
+    /**
+     * 真实浏览量
+     */
     public function getTrueView()
     {
         return $this->view + \Yii::$app->cache->get('article:view:' . $this->id);
     }
 
+    /**
+     * 封面绝对地址
+     */
     public function getAbsoluteCover()
     {
         return $this->cover ? (strpos($this->cover, 'http://') === false ? (\Yii::getAlias('@static').'/' . $this->cover) : $this->cover) : 'http://www.tiejiong.com/uploads/allimg/c151206/14493S94614C0-4Ic7.png';
