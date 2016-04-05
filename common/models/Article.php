@@ -191,10 +191,14 @@ class Article extends \yii\db\ActiveRecord
         $cache = \Yii::$app->cache;
         $key = 'article:view:'.$this->id;
         $view = $cache->get($key);
-        if ($view !== false && $view >= 20) {
-            $this->view = $this->view + $view;
-            $this->save(false);
-            $cache->delete($key);
+        if ($view !== false) {
+            if ($view >= 20) {
+                $this->view = $this->view + $view;
+                $this->save(false);
+                $cache->delete($key);
+            } else {
+                $cache->set($key, ++$view);
+            }
         } else {
             $cache->set($key, 1);
         }
