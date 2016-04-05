@@ -31,7 +31,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'name'], 'required'],
-            ['pid', 'integer'],
+            [['pid', 'is_nav'], 'integer'],
         ];
     }
 
@@ -48,8 +48,9 @@ class Category extends \yii\db\ActiveRecord
             'ptitle' => '上级分类', // 非表字段,方便后台显示
             'description' => '分类介绍',
             'article' => '文章数', //冗余字段,方便查询
+            'is_nav' => '是否显示在导航栏',
             'created_at' => '创建时间',
-            'created_at' => '更新时间',
+            'updated_at' => '更新时间',
         ];
     }
     /**

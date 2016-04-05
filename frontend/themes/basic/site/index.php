@@ -51,14 +51,14 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                 </ul>
             </div>
         </div>
-        <div class="panel panel-success">
+        <div class="panel panel-danger">
             <div class="panel-heading">
                 <h5>获取源码</h5>
             </div>
             <div class="panel-body">
-                <ul class="tag-list list-inline">
-                    <li><a href="https://github.com/yidashi/yii">github</a></li>
-                    <li><a href="">coding</a></li>
+                <ul class="post-list">
+                    <li><a href="https://github.com/yidashi/yii" target="_blank">github</a></li>
+                    <li><a href="https://coding.net/u/yidashi/p/yii/git" target="_blank">coding</a></li>
                 </ul>
             </div>
         </div>

@@ -29,7 +29,7 @@ class Page extends \yii\db\ActiveRecord
             [['content', 'title'], 'required'],
             [['content'], 'string'],
             [['use_layout'], 'in', 'range' => [0, 1]],
-            [['title'], 'string', 'max' => 50],
+            [['title', 'name'], 'string', 'max' => 50],
         ];
     }
 
@@ -43,6 +43,7 @@ class Page extends \yii\db\ActiveRecord
             'use_layout' => '是否使用布局',
             'content' => '内容',
             'title' => '标题',
+            'name' => '标识'
         ];
     }
 }

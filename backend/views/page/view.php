@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'use_layout',
             'content:ntext',
             'title',
+            'name'
         ],
     ]) ?>
 

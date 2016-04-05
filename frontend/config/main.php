@@ -67,18 +67,6 @@ return [
         ],
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
-    'on beforeRequest' => function ($event) {
-        $db = \Yii::$app->db;
-        $list = $db->cache(function ($db) {
-            return \common\models\Category::find()->select('id,name')->asArray()->all();
-        }, 60 * 60 * 24);
-        $rules = [];
-        foreach ($list as $item) {
-            $cate[] = $item['name'];
-        }
-        $cate = implode('|', $cate);
-        $rules['<cate:('.$cate.')>'] = 'article/index';
-        Yii::$app->UrlManager->addRules($rules);
-    },
+    'as RouteBehavior' => \frontend\components\RouteBehavior::className(),
     'params' => $params,
 ];

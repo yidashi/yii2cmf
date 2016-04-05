@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'ptitle',
                     'name',
                     'article',
+                    'is_nav:boolean',
                     'created_at:datetime',
 
 
