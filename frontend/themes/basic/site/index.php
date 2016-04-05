@@ -16,6 +16,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">
+                            <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
                             <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                             <span class="comments"><?= \common\helpers\Html::icon('comments-o')?> 评论 <?=$item->comment?></span>
                         </div>
