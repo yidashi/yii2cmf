@@ -16,7 +16,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">
-                            <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
+                            <span class="time"><?= \common\helpers\Html::icon('clock-o')?> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
                             <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                             <span class="comments"><?= \common\helpers\Html::icon('comments-o')?> 评论 <?=$item->comment?></span>
                         </div>
@@ -48,6 +48,17 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                     <?php foreach($hotTags as $tag): ?>
                         <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
                     <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h5>获取源码</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="tag-list list-inline">
+                    <li><a href="https://github.com/yidashi/yii">github</a></li>
+                    <li><a href="">coding</a></li>
                 </ul>
             </div>
         </div>
