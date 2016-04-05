@@ -15,7 +15,7 @@ if(isset($category)) {
             <div class="media">
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>" target="_blank"><?= $item['title']?></a>
+                        <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
                     </h4>
                     <div class="media-action">
                         <span class="views"><span class="fa fa-eye"></span> 浏览 <?= $item->trueView?></span>

@@ -82,6 +82,10 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+div.required label.control-label:after {
+    content: " *";
+    color: red;
+}
 a:hover{text-decoration: none;}
 .article-list .media{padding-top:15px;border-top:1px dashed #d9d9d9;}
 .article-list .media:first-child{padding-top:0;border-top:0;}

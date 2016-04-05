@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 
-    <?= $form->field($dataModel, 'content')->widget('kucha\ueditor\UEditor'); ?>
+    <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px;']]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('投稿', ['class' => 'btn btn-primary']) ?>
