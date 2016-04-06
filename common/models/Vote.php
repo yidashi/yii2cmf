@@ -61,6 +61,6 @@ class Vote extends \yii\db\ActiveRecord
 
     public function getArticle()
     {
-        return $this->hasOne(Article::className(), ['id' => 'type_id'])->active();
+        return $this->hasOne(Article::className(), ['id' => 'type_id']);
     }
 }

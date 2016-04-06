@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($dataProvider->getModels() as $key => $item):?>
     <li>
         <a href="<?=\yii\helpers\Url::to(['/article/view', 'id' => $item->article->id])?>"><?=$item->article->title?></a>
-        </li>
+    </li>
     <?php endforeach;?>
 </ul>
 <?= \yii\widgets\LinkPager::widget([
