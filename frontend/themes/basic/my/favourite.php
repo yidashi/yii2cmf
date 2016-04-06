@@ -13,7 +13,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($dataProvider->getModels() as $key => $item):?>
     <li>
         <a href="<?=\yii\helpers\Url::to(['/article/view', 'id' => $item->article->id])?>"><?=$item->article->title?></a>
-        </li>
+        <?= \common\helpers\Html::a('取消', ['/favourite'], [
+                'data' => [
+                    'method' => 'post',
+                    'ajax' => 1,
+                    'params' => [
+                        'id' => $item->article->id
+                    ],
+                    'confirm' => '确定要取消收藏吗?',
+                ],
+                'class' => 'text-danger pull-right'
+            ])?>
+    </li>
     <?php endforeach;?>
 </ul>
 <?= \yii\widgets\LinkPager::widget([

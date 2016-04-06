@@ -8,6 +8,7 @@ use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\logic\Article;
 use backend\models\search\Article as ArticleSearch;
+use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,7 +96,6 @@ class ArticleController extends Controller
         }
         $model->reduction();
         return [
-            'code' => 0,
             'message' => '操作成功'
         ];
     }
@@ -115,9 +115,18 @@ class ArticleController extends Controller
         }
         $model->delete();
         return [
-            'code' => 0,
             'message' => '操作成功'
         ];
+    }
+    public function actionClear()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if (\common\models\Article::deleteAll(['>', 'deleted_at', 0]) !== false) {
+            return [
+                'message' => '操作成功'
+            ];
+        }
+        throw new Exception('操作失败');
     }
     /**
      * Displays a single Article model.

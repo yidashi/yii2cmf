@@ -45,14 +45,14 @@ class FavouriteController extends \yii\web\Controller
             $article->updateCounters(['favourite' => 1]);
             return [
                 'action' => 'create',
-                'count' => $article->favourite
+                'count' => $article->favourite,
             ];
         } else {
             $favourite->delete();
             $article->updateCounters(['favourite' => -1]);
             return [
                 'action' => 'cancel',
-                'count' => $article->favourite
+                'count' => $article->favourite,
             ];
         }
     }

@@ -56,6 +56,12 @@ return [
             'bundles' => [
                 'dmstr\web\AdminLteAsset' => [
                     'skin' => 'skin-green',
+                    'depends' => [
+                        'rmrevin\yii\fontawesome\AssetBundle',
+                        'common\assets\YiiAsset',
+                        'yii\bootstrap\BootstrapAsset',
+                        'yii\bootstrap\BootstrapPluginAsset',
+                    ]
                 ],
             ],
         ]

@@ -11,6 +11,15 @@ $this->title = '回收站';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
+    <p>
+        <?= Html::a('清空回收站', ['clear'], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'ajax' => 1,
+                'confirm' => '确定要清空吗?',
+            ]
+        ]) ?>
+    </p>
     <div class="box box-success">
         <div class="box-body">
             <?= GridView::widget([
