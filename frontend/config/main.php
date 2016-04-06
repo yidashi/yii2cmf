@@ -40,13 +40,6 @@ return [
                 ],
             ],
         ],
-        'formatter' => [
-            'dateFormat' => 'yyyy-MM-dd',
-            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
-            'decimalSeparator' => ',',
-            'thousandSeparator' => ' ',
-            'currencyCode' => 'CNY',
-        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

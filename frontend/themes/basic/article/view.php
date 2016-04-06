@@ -27,6 +27,12 @@ $this->params['breadcrumbs'][] = $model->title;
                 'data-original-title' => '收藏'
             ])?>
         </span>
+        <span><a href="" data-toggle="modal" data-target="#rewardModal"><?= Html::icon('cny')?> 打赏作者</a></span>
+        <?php \yii\bootstrap\Modal::begin(['id' => 'rewardModal', 'header' => '您的支持将鼓励作者继续创作'])?>
+            <?php $form = \yii\widgets\ActiveForm::begin()?>
+                <?= $form->field($rewardModel, 'money')->textInput()?>
+            <?php \yii\widgets\ActiveForm::end()?>
+        <?php \yii\bootstrap\Modal::end()?>
         <span class="vote">
             <a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
             <a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>

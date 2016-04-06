@@ -89,8 +89,7 @@ return [
     'aliases' => [
         '@mdm/admin' => '@backend/mdmsoft/yii2-admin',
         '@kvgrid' => '@vendor/kartik-v/yii2-grid',
-        '@database' => '@backend/database',
-        '@callmez/wechat' => '@backend/yii2-wechat-master'
+        '@database' => '@backend/database'
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

@@ -552,3 +552,32 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-03-22 18:07:19
+DROP TABLE IF EXISTS `pop_page`;
+CREATE TABLE `pop_page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `use_layout` tinyint(1) NOT NULL DEFAULT '1' COMMENT '0:不使用1:使用',
+  `content` text NOT NULL COMMENT '内容',
+  `title` varchar(50) NOT NULL COMMENT '标题',
+  `name` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='单页';
+
+DROP TABLE IF EXISTS `pop_favourite`;
+CREATE TABLE `pop_favourite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `article_id` int(11) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `pop_reward`;
+CREATE TABLE `pop_reward` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `money` int(11) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
