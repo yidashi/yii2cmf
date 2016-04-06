@@ -20,9 +20,9 @@ $(function(){
             url: a.attr('href'),
             dataType: 'json',
             success: function(data) {
-                a.parent().find('.up span').attr('class', 'fa fa-thumbs-o-up');
-                a.parent().find('.down span').attr('class', 'fa fa-thumbs-o-down');
-                a.find('span').attr('class', a.find('span').attr('class').replace('o-', ''));
+                a.parent().find('.up i').attr('class', 'fa fa-thumbs-o-up');
+                a.parent().find('.down i').attr('class', 'fa fa-thumbs-o-down');
+                a.find('i').attr('class', a.find('i').attr('class').replace('o-', ''));
                 a.parent().find('.up em').html(data.up);
                 a.parent().find('.down em').html(data.down);
                 a.attr('data-original-title');
@@ -41,7 +41,7 @@ $(function(){
     //详细页收藏
     $('.favourites a').on('click', function() {
         var a = $(this);
-        var span = a.find('span');
+        var i = a.find('i');
         var em = a.find('em');
         var params = a.data('params');
         $.ajax({
@@ -51,10 +51,10 @@ $(function(){
             dataType: 'json',
             success: function(data) {
                 if(data.action == 'create') {
-                    span.attr('class', 'fa fa-star');
+                    i.attr('class', 'fa fa-star');
                     a.attr('data-original-title', '您已收藏').tooltip('show').attr('data-original-title', '取消收藏');
                 } else {
-                    span.attr('class', 'fa fa-star-o');
+                    i.attr('class', 'fa fa-star-o');
                     a.attr('data-original-title', '您已取消收藏').tooltip('show').attr('data-original-title', '收藏');
                 }
                 em.html(data.count);

@@ -56,4 +56,9 @@ class Favourite extends \yii\db\ActiveRecord
             ]
         ];
     }
+
+    public function getArticle()
+    {
+        return $this->hasOne(Article::className(), ['id' => 'article_id'])->active();
+    }
 }

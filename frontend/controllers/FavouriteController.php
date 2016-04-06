@@ -32,7 +32,7 @@ class FavouriteController extends \yii\web\Controller
         if (empty($articleId)) {
             throw new InvalidParamException('参数不合法');
         }
-        $article = Article::find()->normal()->one();
+        $article = Article::find()->where(['id' => $articleId])->normal()->one();
         if (empty($article)) {
             throw new NotFoundHttpException('文章不存在');
         }
@@ -42,13 +42,17 @@ class FavouriteController extends \yii\web\Controller
             $favourite->user_id = \Yii::$app->user->id;
             $favourite->article_id = $articleId;
             $favourite->save();
+            $article->updateCounters(['favourite' => 1]);
             return [
-                'action' => 'create'
+                'action' => 'create',
+                'count' => $article->favourite
             ];
         } else {
             $favourite->delete();
+            $article->updateCounters(['favourite' => -1]);
             return [
-                'action' => 'cancel'
+                'action' => 'cancel',
+                'count' => $article->favourite
             ];
         }
     }

@@ -5,7 +5,7 @@
  * Date: 15/12/25
  * Time: 下午8:57.
  */
-$this->title = '我顶过的';
+$this->title = '我收藏的';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php if ($dataProvider) :?>

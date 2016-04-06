@@ -4,7 +4,7 @@
 /* @var $hots common\models\Article */
 /* @var $commentModels common\models\Comment */
 /* @var $pages yii\data\Pagination */
-use yii\helpers\Html;
+use common\helpers\Html;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('name')->scalar()]];
@@ -18,8 +18,8 @@ $this->params['breadcrumbs'][] = $model->title;
         <span class="user"><a href="/user/31325"><span class="fa fa-user"></span> <?= $model->author?></a></span>
         <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $model->created_at) ?></span>
         <span class="views"><span class="fa fa-eye"></span> <?= $model->trueView?>次浏览</span>
-        <span class="comments"><a href="#comments"><span class="fa fa-comments-o"></span> <?=$model->comment?>条评论</a></span>
-        <span class="favourites"><?= Html::a('<span class="fa fa-star-o"></span> <em>0</em>', ['/favourite'], [
+        <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?=$model->comment?>条评论</a></span>
+        <span class="favourites"><?= Html::a(Html::icon($model->isFavourite ? 'star' : 'star-o') . ' <em>' . $model->favourite . '</em>', ['/favourite'], [
                 'data-params' => [
                     'id' => $model->id
                 ],
@@ -27,7 +27,9 @@ $this->params['breadcrumbs'][] = $model->title;
                 'data-original-title' => '收藏'
             ])?>
         </span>
-        <span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><span class="fa fa-thumbs-o-up"></span> <em><?=$model->up?></em></a><a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><span class="fa fa-thumbs-o-down"></span> <em><?=$model->down?></em></a></span>
+        <span class="vote">
+            <a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
+            <a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>

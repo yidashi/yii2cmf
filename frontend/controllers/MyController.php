@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\ArticleData;
+use common\models\Favourite;
 use common\models\Vote;
 use frontend\models\Article;
 use yii\data\ActiveDataProvider;
@@ -121,7 +122,7 @@ class MyController extends Controller
     {
         $userId = \Yii::$app->user->id;
         $dataProvider = new ActiveDataProvider([
-            'query' => Vote::find()->where(['type' => 'article', 'user_id' => $userId]),
+            'query' => Vote::find()->where(['type' => 'article', 'user_id' => $userId, 'action' => 'up']),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC
@@ -129,6 +130,22 @@ class MyController extends Controller
             ]
         ]);
         return $this->render('up', [
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
+    public function actionFavourite()
+    {
+        $userId = \Yii::$app->user->id;
+        $dataProvider = new ActiveDataProvider([
+            'query' => Favourite::find()->where(['user_id' => $userId]),
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+        return $this->render('favourite', [
             'dataProvider' => $dataProvider
         ]);
     }

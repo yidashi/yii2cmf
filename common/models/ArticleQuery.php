@@ -15,7 +15,6 @@ class ArticleQuery extends ActiveQuery
 {
     /**
      * 已被删除的
-     * @return $this
      */
     public function trashed()
     {
@@ -24,6 +23,7 @@ class ArticleQuery extends ActiveQuery
 
     /**
      * 不包括删除的
+     * @return $this the query object itself
      */
     public function normal()
     {
@@ -32,7 +32,6 @@ class ArticleQuery extends ActiveQuery
 
     /**
      * 未删除且审核通过的
-     * @return $this
      */
     public function active()
     {

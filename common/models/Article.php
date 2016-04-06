@@ -2,13 +2,11 @@
 
 namespace common\models;
 
-use common\behaviors\AfterFindArticleBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\Markdown;
-use yii\helpers\StringHelper;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -100,8 +98,8 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * 不包含软删除的
-     * @return $this
+     * @inheritdoc
+     * @return ActiveQuery the newly created [[ActiveQuery]] instance.
      */
     public static function find()
     {
@@ -261,5 +259,41 @@ class Article extends \yii\db\ActiveRecord
             }
             Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
         }
+    }
+
+    public function getIsFavourite()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $userId = Yii::$app->user->id;
+            $favourite = Favourite::find()->where(['article_id' => $this->id, 'user_id' => $userId])->one();
+            if ($favourite) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getIsUp()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $userId = Yii::$app->user->id;
+            $up = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'up'])->one();
+            if ($up) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getIsDown()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $userId = Yii::$app->user->id;
+            $down = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'down'])->one();
+            if ($down) {
+                return true;
+            }
+        }
+        return false;
     }
 }
