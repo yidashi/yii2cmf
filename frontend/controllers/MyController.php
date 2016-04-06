@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\ArticleData;
+use common\models\Vote;
 use frontend\models\Article;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
@@ -93,7 +94,7 @@ class MyController extends Controller
     public function actionUpdateArticle($id)
     {
         $userId = \Yii::$app->user->id;
-        $model = Article::withUnactive()->where(['id' => $id, 'user_id' => $userId])->one();
+        $model = Article::find()->normal()->where(['id' => $id, 'user_id' => $userId])->one();
         $dataModel = ArticleData::find()->where(['id' => $id])->one();
         if (!isset($model, $dataModel)) {
             throw new NotFoundHttpException('文章不存在!');
@@ -113,6 +114,22 @@ class MyController extends Controller
         return $this->render('update-article', [
             'model' => $model,
             'dataModel' => $dataModel,
+        ]);
+    }
+
+    public function actionUp()
+    {
+        $userId = \Yii::$app->user->id;
+        $dataProvider = new ActiveDataProvider([
+            'query' => Vote::find()->where(['type' => 'article', 'user_id' => $userId]),
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+        ]);
+        return $this->render('up', [
+            'dataProvider' => $dataProvider
         ]);
     }
 }

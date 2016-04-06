@@ -41,10 +41,13 @@ $(function(){
     //详细页收藏
     $('.favourites a').on('click', function() {
         var a = $(this);
-        var span = $(this).find('span');
-        var em = $(this).find('em');
+        var span = a.find('span');
+        var em = a.find('em');
+        var params = a.data('params');
         $.ajax({
             url: a.attr('href'),
+            type:'post',
+            data:params,
             dataType: 'json',
             success: function(data) {
                 if(data.action == 'create') {
@@ -57,10 +60,10 @@ $(function(){
                 em.html(data.count);
             },
             error: function (XMLHttpRequest, textStatus) {
-                if(XMLHttpRequest.status == 403){
-                    $('#modal').modal({ remote: XMLHttpRequest.responseJSON.message});
+                if(XMLHttpRequest.status == 302){
+                    $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
-                //this.abort();
+                this.abort();
             }
         });
         return false;

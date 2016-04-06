@@ -60,6 +60,14 @@ AppAsset::register($this);
                     'url' => ['/my/article-list'],
                 ],
                 [
+                    'label' => '我顶过的',
+                    'url' => ['/my/up'],
+                ],
+                [
+                    'label' => '我收藏的',
+                    'url' => ['/my/favourite'],
+                ],
+                [
                     'label' => '退出',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post'],

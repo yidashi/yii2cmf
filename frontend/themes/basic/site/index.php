@@ -1,5 +1,6 @@
 <?php
 
+use common\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
@@ -18,7 +19,7 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                         <div class="media-action">
                             <span class="time"><?= \common\helpers\Html::icon('clock-o')?> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
                             <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
-                            <span class="comments"><?= \common\helpers\Html::icon('comments-o')?> 评论 <?=$item->comment?></span>
+                            <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
                         </div>
                     </div>
                 </div>

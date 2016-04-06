@@ -58,4 +58,9 @@ class Vote extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
         ];
     }
+
+    public function getArticle()
+    {
+        return $this->hasOne(Article::className(), ['id' => 'type_id']);
+    }
 }

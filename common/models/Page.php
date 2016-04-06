@@ -26,7 +26,7 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'title'], 'required'],
+            [['content', 'title', 'name'], 'required'],
             [['content'], 'string'],
             [['use_layout'], 'in', 'range' => [0, 1]],
             [['title', 'name'], 'string', 'max' => 50],
@@ -44,6 +44,13 @@ class Page extends \yii\db\ActiveRecord
             'content' => '内容',
             'title' => '标题',
             'name' => '标识'
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'name' => '（影响url）'
         ];
     }
 }

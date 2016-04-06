@@ -51,7 +51,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '<id:\d+>' => 'article/view',
+                [
+                    'pattern' => '<id:\d+>',
+                    'route' => 'article/view',
+                    'suffix' => '.html'
+                ]
             ],
         ],
         'authClientCollection' => [

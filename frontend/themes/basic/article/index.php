@@ -1,5 +1,7 @@
 <?php
 
+use common\helpers\Html;
+
 /* @var $this yii\web\View */
 if(isset($category)) {
     $this->title = Yii::$app->params['seoTitle'].'_'.$category->title.'_'.Yii::$app->name;
@@ -18,8 +20,8 @@ if(isset($category)) {
                         <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
                     </h4>
                     <div class="media-action">
-                        <span class="views"><span class="fa fa-eye"></span> 浏览 <?= $item->trueView?></span>
-                        <span class="comments"><span class="fa fa-comments-o"></span> 评论 <?=$item->comment?></span>
+                        <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
+                        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
                     </div>
                 </div>
             </div>

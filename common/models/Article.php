@@ -208,7 +208,7 @@ class Article extends \yii\db\ActiveRecord
         $view = $cache->get($key);
         if ($view !== false) {
             if ($view >= 20) {
-                $this->view = $this->view + $view;
+                $this->view = $this->view + $view + 1;
                 $this->save(false);
                 $cache->delete($key);
             } else {
