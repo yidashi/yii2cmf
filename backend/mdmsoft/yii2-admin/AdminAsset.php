@@ -24,6 +24,6 @@ class AdminAsset extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'common\assets\YiiAsset',
+        'yii\web\YiiAsset',
     ];
 }

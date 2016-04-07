@@ -29,7 +29,7 @@ class RewardForm extends Model
     public function attributeLabels()
     {
         return [
-            'money' => '打赏金额',
+            'money' => '金额',
             'comment' => '留言'
         ];
     }

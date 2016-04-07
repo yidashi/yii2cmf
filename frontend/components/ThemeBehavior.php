@@ -18,12 +18,12 @@ class ThemeBehavior extends ActionFilter
         $isMobile = (new MobileDetect())->isMobile();
         $themeName = Config::get('THEME_NAME', 'basic');
         $theme = [
-            'basePath' => '@app/themes/basic',
+            'basePath' => '@frontend/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
-                '@app/views' => [
-                    '@app/themes/'.($isMobile ? 'mobile' : $themeName),
-                    '@app/themes/basic',
+                '@frontend/views' => [
+                    '@frontend/themes/'.($isMobile ? 'mobile' : $themeName),
+                    '@frontend/themes/basic',
                 ],
             ],
         ];

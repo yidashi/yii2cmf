@@ -23,6 +23,13 @@ return [
             'thousandSeparator' => ' ',
             'currencyCode' => 'CNY',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\YiiAsset' => [
+                    'sourcePath' => '@common/assets',
+                ],
+            ],
+        ]
     ],
     'aliases' => [
         '@common/logic' => '@common/models/logic',

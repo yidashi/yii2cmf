@@ -15,9 +15,9 @@ $this->params['breadcrumbs'][] = $model->title;
         <h1><?= $model->title ?></h1>
     </div>
     <div class="action">
-        <span class="user"><a href="/user/31325"><span class="fa fa-user"></span> <?= $model->author?></a></span>
-        <span class="time"><span class="fa fa-clock-o"></span> <?= date('Y-m-d H:i', $model->created_at) ?></span>
-        <span class="views"><span class="fa fa-eye"></span> <?= $model->trueView?>次浏览</span>
+        <span class="user"><a href="/user/31325"><?= Html::icon('user')?> <?= $model->author?></a></span>
+        <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d H:i', $model->created_at) ?></span>
+        <span class="views"><?= Html::icon('eye')?> <?= $model->trueView?>次浏览</span>
         <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?=$model->comment?>条评论</a></span>
         <span class="favourites"><?= Html::a(Html::icon($model->isFavourite ? 'star' : 'star-o') . ' <em>' . $model->favourite . '</em>', ['/favourite'], [
                 'data-params' => [
@@ -28,9 +28,16 @@ $this->params['breadcrumbs'][] = $model->title;
             ])?>
         </span>
         <span><a href="" data-toggle="modal" data-target="#rewardModal"><?= Html::icon('cny')?> 打赏作者</a></span>
-        <?php \yii\bootstrap\Modal::begin(['id' => 'rewardModal', 'header' => '您的支持将鼓励作者继续创作'])?>
-            <?php $form = \yii\widgets\ActiveForm::begin()?>
-                <?= $form->field($rewardModel, 'money')->textInput()?>
+        <?php \yii\bootstrap\Modal::begin([
+            'id' => 'rewardModal',
+            'header' => '<h2>您的支持将鼓励作者继续创作</h2>',
+            'footer' => Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) . Html::button('确认支付', ['class' => 'btn btn-primary'])
+        ])?>
+            <?php $form = \yii\widgets\ActiveForm::begin(['action' => ['reward/index']])?>
+                <?= $form->field($rewardModel, 'article_id')->hiddenInput()->label(false) ?>
+                <?= $form->field($rewardModel, 'money')?>
+                <?= $form->field($rewardModel, 'comment')?>
+                <p>使用支付宝支付</p>
             <?php \yii\widgets\ActiveForm::end()?>
         <?php \yii\bootstrap\Modal::end()?>
         <span class="vote">
