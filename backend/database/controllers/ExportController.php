@@ -2,6 +2,7 @@
 
 namespace database\controllers;
 use database\models\Database;
+use yii\base\Exception;
 use yii\data\ArrayDataProvider;
 use yii\data\SqlDataProvider;
 use yii\web\Controller;
@@ -38,36 +39,23 @@ class ExportController extends Controller
 
                 if($list){
                     return [
-                        'status' => 1,
-                        'info' => '数据表优化完成'
+                        'message' => '数据表优化完成'
                     ];
                 } else {
-                    return [
-                        'status' => 0,
-                        'info' => '数据表优化出错请重试!'
-                    ];
+                    throw new Exception('数据表优化出错请重试!');
                 }
             } else {
                 $list = $Db->createCommand("OPTIMIZE TABLE `{$tables}`")->queryAll();
                 if($list){
-                    \Yii::$app->session->setFlash('success', "数据表'{$tables}'优化完成！");
-                    $this->redirect(['index']);
-                    /*return [
-                        'status' => 1,
-                        'info' => "数据表'{$tables}'优化完成！"
-                    ];*/
-                } else {
                     return [
-                        'status' => 0,
-                        'info' => "数据表'{$tables}'优化出错请重试！"
+                        'message' => "数据表'{$tables}'优化完成！"
                     ];
+                } else {
+                    throw new Exception("数据表'{$tables}'优化出错请重试！");
                 }
             }
         } else {
-            return [
-                'status' => 0,
-                'info' => '请指定要优化的表'
-            ];
+            throw new Exception('请指定要优化的表');
         }
     }
 
@@ -75,29 +63,34 @@ class ExportController extends Controller
      * 修复表
      * @param  String $tables 表名
      */
-    public function repair($tables = null)
+    public function actionRepair($tables = null)
     {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
         if($tables) {
-            $Db   = Db::getInstance();
+            $Db   = \Yii::$app->db;
             if(is_array($tables)){
                 $tables = implode('`,`', $tables);
-                $list = $Db->query("REPAIR TABLE `{$tables}`");
+                $list = $Db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
 
                 if($list){
-                    $this->success("数据表修复完成！");
+                    return [
+                        'message' => "数据表修复完成！"
+                    ];
                 } else {
-                    $this->error("数据表修复出错请重试！");
+                    throw new Exception('数据表修复出错请重试');
                 }
             } else {
-                $list = $Db->query("REPAIR TABLE `{$tables}`");
+                $list = $Db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
                 if($list){
-                    $this->success("数据表'{$tables}'修复完成！");
+                    return [
+                        'message' => "数据表'{$tables}'修复完成！"
+                    ];
                 } else {
-                    $this->error("数据表'{$tables}'修复出错请重试！");
+                    throw new Exception("数据表'{$tables}'修复出错请重试！");
                 }
             }
         } else {
-            $this->error("请指定要修复的表！");
+            throw new Exception("请指定要修复的表");
         }
     }
 

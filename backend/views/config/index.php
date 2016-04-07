@@ -14,20 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('创建新配置', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            'id',
-            'name',
-            [
-                'attribute' => 'type',
-                'value' => function ($model) {
-                    return $model->getTypeList()[$model->type];
-                },
-            ],
-            'value',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    'id',
+                    'name',
+                    [
+                        'attribute' => 'type',
+                        'value' => function ($model) {
+                            return $model->getTypeList()[$model->type];
+                        },
+                    ],
+                    'value',
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>

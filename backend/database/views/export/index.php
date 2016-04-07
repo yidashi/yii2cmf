@@ -40,12 +40,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'a' => function ($url, $model, $key) {
                         return Html::a('优化表',
-                            ['export/optimize', 'tables' => $model['name']]
+                            ['export/optimize', 'tables' => $model['name']],
+                            [
+                                'data' => [
+                                    'ajax' => 1,
+                                    'method' => 'get'
+                                ]
+                            ]
                         );
                     },
                     'b' => function ($url, $model, $key) {
                         return Html::a('修复表',
-                            ['export/index']
+                            ['export/repair', 'tables' => $model['name']],
+                            [
+                                'data' => [
+                                    'ajax' => 1,
+                                    'method' => 'get'
+                                ]
+                            ]
                         );
                     }
                 ]

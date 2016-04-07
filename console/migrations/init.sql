@@ -92,16 +92,6 @@ CREATE TABLE `pop_article_tag` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pop_article_tag`
---
-
-LOCK TABLES `pop_article_tag` WRITE;
-/*!40000 ALTER TABLE `pop_article_tag` DISABLE KEYS */;
-INSERT INTO `pop_article_tag` VALUES (4643,1),(4643,2),(4644,1),(4645,1),(4646,1),(4647,1),(4648,1),(4649,1);
-/*!40000 ALTER TABLE `pop_article_tag` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pop_auth`
 --
 
@@ -116,16 +106,6 @@ CREATE TABLE `pop_auth` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pop_auth`
---
-
-LOCK TABLES `pop_auth` WRITE;
-/*!40000 ALTER TABLE `pop_auth` DISABLE KEYS */;
-INSERT INTO `pop_auth` VALUES (1,2,'qq','CFC79CFBB4667EB6C0A7E93C759A3328'),(2,3,'qq','CD19C8890B58E67EA555C2852FA96247'),(3,4,'qq','65ED6B1845CE7EF9BAAFA7228A63403D'),(4,5,'qq','CCAA5434AB96B17C3260F648C895442D');
-/*!40000 ALTER TABLE `pop_auth` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pop_auth_assignment`
@@ -261,7 +241,7 @@ CREATE TABLE `pop_category` (
 
 LOCK TABLES `pop_category` WRITE;
 /*!40000 ALTER TABLE `pop_category` DISABLE KEYS */;
-INSERT INTO `pop_category` VALUES (1,'励志',0,1449050838,1449050838,'lizhi'),(2,'美文',0,1449050838,1449050838,'meiwen'),(3,'健康',0,1449050838,1449050838,'jiankang'),(4,'野史',0,1449067684,1449067684,'yeshi'),(5,'搞笑',0,1449068001,1449068001,'gaoxiao'),(6,'两性',0,1449129937,1449129937,'liangxing'),(7,'亲子',0,1449129937,1449129937,'qinzi'),(9,'汽车',0,1450609214,1450609214,'qiche'),(10,'测试',0,0,0,'ceshi');
+INSERT INTO `pop_category` VALUES (1,'默认',0,1449050838,1449050838,'moren');
 /*!40000 ALTER TABLE `pop_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,16 +267,6 @@ CREATE TABLE `pop_comment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `pop_comment`
---
-
-LOCK TABLES `pop_comment` WRITE;
-/*!40000 ALTER TABLE `pop_comment` DISABLE KEYS */;
-INSERT INTO `pop_comment` VALUES (1,1,3228,'hehe',1449837393,1449837393,0,0,0),(2,1,3212,'jjjj',1449839506,1449839506,0,0,0),(3,2,2816,'真吓人呀',1449988976,1449988976,0,0,0),(4,1,2816,'真的假的啊！！！',1449990175,1449990175,0,0,0),(5,1,6291,'咋都没人评价',1451571848,1451571848,0,0,0),(6,1,6274,'哈哈',1451571868,1451571868,0,0,0),(7,1,5888,'喝喝',1452402150,1452402150,0,0,0),(8,1,5120,'111',1458096406,1458096406,0,0,0),(9,1,5120,'111',1458096409,1458096409,0,0,0),(10,1,5120,'111',1458096412,1458096412,0,0,0),(11,1,5120,'111',1458096418,1458096418,0,0,0),(12,1,5120,'111',1458096422,1458096422,0,0,0),(13,1,5120,'111',1458096428,1458096428,0,0,0),(14,1,5120,'111',1458096431,1458096431,0,0,0),(15,1,5120,'111',1458096434,1458096434,0,0,0),(16,1,5120,'111',1458096438,1458096438,0,0,0),(17,1,5120,'111',1458096444,1458096444,0,0,0),(18,1,5120,'111',1458096447,1458096447,0,0,0);
-/*!40000 ALTER TABLE `pop_comment` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `pop_config`
 --
 
@@ -312,15 +282,12 @@ CREATE TABLE `pop_config` (
   `type` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pop_config`
---
-
 LOCK TABLES `pop_config` WRITE;
-/*!40000 ALTER TABLE `pop_config` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pop_comment` DISABLE KEYS */;
+INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST',"1:字符\n2:数组\n3:枚举\n4:图\n5:多行字符串",'','配置类型列表',2),(2,'THEME_NAME','basic',"basic\nspecial",'主题名',3);
+/*!40000 ALTER TABLE `pop_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -387,16 +354,6 @@ CREATE TABLE `pop_nav` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pop_nav`
---
-
-LOCK TABLES `pop_nav` WRITE;
-/*!40000 ALTER TABLE `pop_nav` DISABLE KEYS */;
-INSERT INTO `pop_nav` VALUES (1,'励志','article/1'),(2,'美文','article/2');
-/*!40000 ALTER TABLE `pop_nav` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pop_spider`
@@ -472,15 +429,6 @@ CREATE TABLE `pop_tag` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `pop_tag`
---
-
-LOCK TABLES `pop_tag` WRITE;
-/*!40000 ALTER TABLE `pop_tag` DISABLE KEYS */;
-INSERT INTO `pop_tag` VALUES (1,'hehe',3),(2,'haha',1),(3,'xixi',0);
-/*!40000 ALTER TABLE `pop_tag` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `pop_user`
@@ -530,28 +478,7 @@ CREATE TABLE `pop_vote` (
   `type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `pop_vote`
---
-
-LOCK TABLES `pop_vote` WRITE;
-/*!40000 ALTER TABLE `pop_vote` DISABLE KEYS */;
-INSERT INTO `pop_vote` VALUES (1,'article',2,1452402739,1452402739,'up',5888);
-/*!40000 ALTER TABLE `pop_vote` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2016-03-22 18:07:19
 DROP TABLE IF EXISTS `pop_page`;
 CREATE TABLE `pop_page` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

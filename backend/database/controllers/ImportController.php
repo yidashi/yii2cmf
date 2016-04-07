@@ -10,6 +10,7 @@ namespace database\controllers;
 
 
 use database\models\Database;
+use yii\base\Exception;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\Response;
@@ -143,21 +144,19 @@ class ImportController extends Controller
     }
     public function actionDel()
     {
+        \Yii::$app->response->format = 'json';
         $time = \Yii::$app->request->post('time');
         if($time){
             $name  = date('Ymd-His', $time) . '-*.sql*';
             $path  = realpath(\Yii::$app->controller->module->params['DATA_BACKUP_PATH']) . DIRECTORY_SEPARATOR . $name;
             array_map("unlink", glob($path));
             if(count(glob($path))){
-                \Yii::$app->session->setFlash('error', '备份文件删除失败，请检查权限!');
-                $this->redirect('index');
+                throw new Exception('备份文件删除失败，请检查权限!');
             } else {
-                \Yii::$app->session->setFlash('success', '备份文件删除成功!');
-                $this->redirect('index');
+                return ['message' => '备份文件删除成功!'];
             }
         } else {
-            \Yii::$app->session->setFlash('error', '参数错误!');
-            $this->redirect('index');
+            throw new Exception('参数错误!');
         }
     }
 }

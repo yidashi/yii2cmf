@@ -45,6 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['del'],
                             [
                                 'data-method' => 'post',
+                                'data-ajax' => 1,
                                 'data-params' => ['time' => $model['time']],
                                 'data-confirm' => '删除后不能恢复,确定要删除吗?'
                             ]

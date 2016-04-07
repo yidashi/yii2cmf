@@ -166,7 +166,7 @@ yii = (function ($) {
                             if (isRefresh) {
                                 location.reload();
                             } else {
-                                $('#top-alert').find('button').click();
+                                $('#top-alert').slideUp();
                             }
                         }, 1500)
                     },
@@ -177,7 +177,7 @@ yii = (function ($) {
                         $('#top-alert').addClass('alert-error').slideDown();
                         $('.alert-content').text(error.responseJSON.message);
                         setTimeout(function(){
-                            $('#top-alert').find('button').click();
+                            $('#top-alert').slideUp();
                         },1500);
                     }
                 });
