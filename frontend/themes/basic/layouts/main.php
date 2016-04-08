@@ -3,12 +3,11 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use yii\helpers\Html;
+use common\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
-use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -53,22 +52,29 @@ AppAsset::register($this);
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
-            'label' => Yii::$app->user->identity->username,
+            'label' => Html::img(Yii::$app->user->identity->profile->avatar, ['width' => 32, 'height' => 32]),
+            'linkOptions' => [
+                'class' => 'avatar'
+            ],
             'items' => [
                 [
-                    'label' => '我的投稿',
+                    'label' => Html::icon('user') . ' 个人信息',
+                    'url' => ['/my/profile'],
+                ],
+                [
+                    'label' => Html::icon('book') . ' 我的投稿',
                     'url' => ['/my/article-list'],
                 ],
                 [
-                    'label' => '我顶过的',
+                    'label' => Html::icon('thumbs-up') . ' 我顶过的',
                     'url' => ['/my/up'],
                 ],
                 [
-                    'label' => '我收藏的',
+                    'label' => Html::icon('star') . ' 我收藏的',
                     'url' => ['/my/favourite'],
                 ],
                 [
-                    'label' => '退出',
+                    'label' => Html::icon('sign-out') . ' 退出',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post'],
                 ],
@@ -78,6 +84,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $rightMenuItems,
+        'encodeLabels' => false
     ]);
     NavBar::end();
     ?>
@@ -110,7 +117,8 @@ AppAsset::register($this);
         <div class="modal-content"></div>
     </div>
 </div>
-<a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
+<!--回到顶部-->
+<?= \common\widgets\Scroll\Scroll::widget()?>
 <?php if (YII_ENV_PROD):?>
 <!--页脚-->
 <?= \common\models\Config::get('FOOTER')?>

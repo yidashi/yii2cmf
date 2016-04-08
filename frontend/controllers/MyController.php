@@ -9,6 +9,7 @@ namespace frontend\controllers;
 
 use common\models\ArticleData;
 use common\models\Favourite;
+use common\models\Profile;
 use common\models\Vote;
 use frontend\models\Article;
 use yii\data\ActiveDataProvider;
@@ -148,5 +149,18 @@ class MyController extends Controller
         return $this->render('favourite', [
             'dataProvider' => $dataProvider
         ]);
+    }
+
+    public function actionProfile()
+    {
+        $userId = \Yii::$app->user->id;
+        $profile = Profile::find()->where(['id' => $userId])->one();
+        if ($profile->load(\Yii::$app->request->post()) && $profile->save()) {
+            return $this->redirect(['profile']);
+        } else {
+            return $this->render('profile', [
+                'model' => $profile
+            ]);
+        }
     }
 }

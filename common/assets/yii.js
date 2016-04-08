@@ -147,9 +147,9 @@ yii = (function ($) {
             var method = $e.data('method'),
                 $form = $e.closest('form'),
                 action = $e.attr('href'),
-                params = $e.data('params');
-            isAjax = $e.data('ajax');
-            isRefresh = !$e.data('norefresh');
+                params = $e.data('params'),
+                isAjax = $e.data('ajax'),
+                isRefresh = !$e.data('norefresh');
             if (isAjax) {
                 $.ajax({
                     url:action,

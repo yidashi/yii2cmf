@@ -5,7 +5,7 @@
  * Date: 16/3/16
  * Time: 上午10:31
  */
-use yii\helpers\Html;
+use common\helpers\Html;
 ?>
 <!--评论-->
 <div id="comments">
@@ -15,21 +15,21 @@ use yii\helpers\Html;
             <?php foreach ($commentModels as $item):?>
                 <li class="media" data-key="<?=$item->id?>">
                     <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt="...">
+                        <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $item->user_id])?>">
+                            <img class="media-object" src="<?= $item->profile->avatar?>" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <div class="media-heading"><a href=""><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
+                        <div class="media-heading"><a href="<?= \yii\helpers\Url::to(['/user', 'id' => $item->user_id])?>"><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
                         <div class="media-content"><?= $item->content?></div>
                         <?php foreach ($item->sons as $son):?>
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="/user/index/1.html" rel="author" title=""><img class="media-object" src="http://www.yiichina.com/uploads/avatar/000/03/21/32_avatar_small.jpg" alt=""></a>
+                                    <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" title=""><img class="media-object" src="<?= $son->profile->avatar?>" alt=""></a>
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <a href="/user/index/1.html" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
+                                        <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
                                         <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
                                     </div>
                                     <div class="media-content"><?= $son->content?></div>
@@ -49,12 +49,16 @@ use yii\helpers\Html;
     </div>
 </div>
 <h4>发表评论</h4>
-<?php if (!Yii::$app->user->isGuest): ?>
+
     <?php $form = \yii\widgets\ActiveForm::begin(['action' => \yii\helpers\Url::toRoute('comment/create')]); ?>
     <?= $form->field($commentModel, 'content')->label(false)->widget('\yidashi\markdown\Markdown', ['options' => ['style' => 'height:200px;']]); ?>
     <?= Html::hiddenInput(Html::getInputName($commentModel, 'article_id'), $model->id) ?>
     <div class="form-group">
+        <?php if (!Yii::$app->user->isGuest): ?>
         <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
+        <?php else: ?>
+            <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
+        <?php endif; ?>
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
     <!--回复-->
@@ -63,9 +67,10 @@ use yii\helpers\Html;
     <?= Html::hiddenInput(Html::getInputName($commentModel, 'parent_id'), 0, ['class' => 'parent_id']) ?>
     <?=$form->field($commentModel, 'content')->label(false)->textarea()?>
     <div class="form-group">
-        <button type="submit" class="btn btn-sm btn-primary">回复</button>
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <button type="submit" class="btn btn-sm btn-primary">回复</button>
+        <?php else: ?>
+            <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
+        <?php endif; ?>
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
-<?php else: ?>
-    <div class="well">您需要登录后才可以评论。<?=Html::a('登录', ['site/login'])?> | <?=Html::a('立即注册', ['site/signup'])?></div>
-<?php endif; ?>

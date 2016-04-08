@@ -119,6 +119,12 @@ pre { background: #F0F0F0; }
 .header-content{padding-top:100px;}
 .header h1{margin:0;}
 .header h1 a{color:#fff;}
+.navbar-brand { padding-top: 0; padding-right: 0; }
+.navbar-right > li:first-child > a { position: relative; }
+.navbar-right > li > a.avatar { padding-top: 10px; padding-bottom: 0; }
+.navbar-right > li > a.avatar img { border-radius: 50%; border: #ccc solid 1px; width: 32px; height: 32px; }
+.navbar-right > li .badge { background: #D8582B; padding: 2px 4px; font-size: 10px; font-weight: normal; position: absolute; top: 10px; left: 25px; }
+.navbar-right .dropdown-menu .divider { margin: 5px 0; }
 /* 主导航结束 */
 
 /* 页面底部开始 */

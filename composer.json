@@ -33,7 +33,8 @@
         "yiisoft/yii2-sphinx": "^2.0",
         "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yidashi/yii2-webuploader": "1.0.4",
-        "dmstr/yii2-adminlte-asset": "*"
+        "dmstr/yii2-adminlte-asset": "*",
+        "yiisoft/yii2-composer": "2.0.4"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

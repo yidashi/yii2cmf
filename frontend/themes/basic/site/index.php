@@ -3,7 +3,7 @@
 use common\helpers\Html;
 /* @var $this yii\web\View */
 
-$this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
+$this->title = \common\models\Config::get('SEO_SITE_TITLE').'_'.Yii::$app->name;
 ?>
 <div class="site-index">
     <div class="col-md-8">
@@ -17,8 +17,8 @@ $this->title = Yii::$app->params['seoTitle'].'_'.Yii::$app->name;
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">
-                            <span class="time"><?= \common\helpers\Html::icon('clock-o')?> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
-                            <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
+                            <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
+                            <span class="views"><?= Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                             <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
                         </div>
                     </div>

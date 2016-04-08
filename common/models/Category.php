@@ -103,4 +103,9 @@ class Category extends \yii\db\ActiveRecord
 
         return array_search($name, $list);
     }
+
+    public static function tree()
+    {
+
+    }
 }

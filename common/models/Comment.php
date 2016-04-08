@@ -68,6 +68,10 @@ class Comment extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'user_id']);
+    }
     /**
      * 获取所有子评论.
      *
