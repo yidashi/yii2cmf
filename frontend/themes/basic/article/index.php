@@ -4,10 +4,10 @@ use common\helpers\Html;
 
 /* @var $this yii\web\View */
 if(isset($category)) {
-    $this->title = Yii::$app->params['seoTitle'].'_'.$category->title.'_'.Yii::$app->name;
+    $this->title = \common\models\Config::get('SEO_SITE_TITLE').'_'.$category->title.'_'.Yii::$app->name;
     $this->params['breadcrumbs'][] = $category->title;
 } elseif (isset($tag)) {
-    $this->title = Yii::$app->params['seoTitle'].'_'.$tag->name.'_'.Yii::$app->name;
+    $this->title = \common\models\Config::get('SEO_SITE_TITLE').'_'.$tag->name.'_'.Yii::$app->name;
     $this->params['breadcrumbs'][] = $tag->name;
 }
 ?>
