@@ -118,7 +118,7 @@ AppAsset::register($this);
     </div>
 </div>
 <!--回到顶部-->
-<?= \common\widgets\Scroll\Scroll::widget()?>
+<?= \common\widgets\scroll\Scroll::widget()?>
 <?php if (YII_ENV_PROD):?>
 <!--页脚-->
 <?= \common\models\Config::get('FOOTER')?>

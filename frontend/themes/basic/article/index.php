@@ -20,7 +20,7 @@ if(isset($category)) {
                         <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
                     </h4>
                     <div class="media-action">
-                        <span class="views"><?= \common\helpers\Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
+                        <span class="views"><?= Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                         <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
                     </div>
                 </div>

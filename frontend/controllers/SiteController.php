@@ -85,6 +85,7 @@ class SiteController extends Controller
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
+            'webupload' => 'yidashi\webuploader\WebuploaderAction',
         ];
     }
 

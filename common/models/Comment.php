@@ -41,11 +41,14 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'article_id' => 'Article ID',
-            'user_id' => 'User ID',
+            'article_id' => '文章',
+            'user_id' => '评论人',
             'content' => '内容',
             'up' => '顶',
             'down' => '踩',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
+            'parent_id' => '父评论'
         ];
     }
     /**

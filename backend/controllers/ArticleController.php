@@ -41,7 +41,6 @@ class ArticleController extends Controller
                     'imagePathFormat' => 'upload/image/{yyyy}{mm}{dd}/{time}{rand:6}', //上传保存路径
                 ],
             ],
-            'webupload' => WebuploaderAction::className(),
         ];
     }
     /**

@@ -40,6 +40,7 @@ class SiteController extends Controller
             'demo' => [
                 'class' => 'yii\web\ViewAction',
             ],
+            'webupload' => WebuploaderAction::className(),
         ];
     }
 

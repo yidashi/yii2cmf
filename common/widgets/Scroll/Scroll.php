@@ -6,7 +6,7 @@
  * Time: 下午2:07
  */
 
-namespace common\widgets\Scroll;
+namespace common\widgets\scroll;
 
 
 use yii\base\Widget;

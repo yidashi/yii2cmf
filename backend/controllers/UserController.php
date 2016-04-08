@@ -121,4 +121,18 @@ class UserController extends Controller
             'model' => $model
         ]);
     }
+
+    /**
+     * 封禁用户
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionBan()
+    {
+        $id = Yii::$app->request->post('id');
+        $model = $this->findModel($id);
+        $model->status = \common\models\User::STATUS_DELETED;
+        $model->save(false);
+        return $this->goBack();
+    }
 }

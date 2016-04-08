@@ -1,0 +1,51 @@
+<?php
+
+use common\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = '评论';
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="comment-index">
+
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    'id',
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function($model) {
+                            return $model->user->username;
+                        }
+                    ],
+                    'article_id',
+                    'content:ntext',
+                    'created_at:datetime',
+                    // 'updated_at',
+                    // 'parent_id',
+                    // 'up',
+                    // 'down',
+
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {delete} {ban}',
+                        'buttons' => [
+                            'ban' => function($url, $model, $key) {
+                                return Html::a(Html::icon('ban'),
+                                    ['/user/ban'],
+                                    ['title' => '封禁用户', 'data-method' => 'post', 'data-params' => ['id' => $model->user_id]]
+                                );
+                            }
+                        ]
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
+
+</div>
