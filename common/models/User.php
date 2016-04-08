@@ -198,7 +198,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     public function init()
     {
-        $this->on(self::EVENT_AFTER_INSERT, 'afterInsertInternal');
+        $this->on(self::EVENT_AFTER_INSERT, [$this,'afterInsertInternal']);
     }
     public function afterInsertInternal($event)
     {
