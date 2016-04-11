@@ -101,9 +101,11 @@ class Config extends \yii\db\ActiveRecord
     }
     public static function get($name, $default = '')
     {
-        $config = static::getDb()->cache(function ($db) use ($name) {
-            return static::find()->where(['name' => $name])->one();
-        }, 60);
+        $config = \Yii::$app->cache->get([__CLASS__, $name]);
+        if ($config === false) {
+            $config = static::find()->where(['name' => $name])->one();
+            \Yii::$app->cache->set([__CLASS__, $name], $config, 60 * 60);
+        }
         if (!empty($config)) {
             return self::_parse($config->type, $config->value);
         } else {

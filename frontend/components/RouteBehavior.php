@@ -11,6 +11,7 @@ namespace frontend\components;
 
 use yii\base\Behavior;
 use yii\caching\DbDependency;
+use yii\caching\TagDependency;
 use yii\web\Application;
 use Yii;
 
@@ -27,9 +28,11 @@ class RouteBehavior extends Behavior
     {
         $db = \Yii::$app->db;
         // 分类路由
-        $list = $db->cache(function ($db) {
-            return \common\models\Category::find()->select('id,name')->asArray()->all();
-        }, 60 * 60 * 24, new DbDependency(['sql' => 'SELECT id,name FROM {{%category}}']));
+        $list = Yii::$app->cache->get('cateRouteCache');
+        if ($list === false) {
+            $list = \common\models\Category::find()->select('id,name')->asArray()->all();
+            Yii::$app->cache->set('cateRouteCache', $list, 60*60*24, new DbDependency(['sql' => 'SELECT MAX(updated_at) FROM {{%category}}']));
+        }
         $rules = [];
         $cate = [];
         foreach ($list as $item) {
@@ -39,9 +42,11 @@ class RouteBehavior extends Behavior
         $rules['<cate:('.$cate.')>'] = 'article/index';
         Yii::$app->UrlManager->addRules($rules);
         // 单页路由
-        $list = $db->cache(function ($db) {
-            return \common\models\Page::find()->select('id,name')->asArray()->all();
-        }, 60 * 60 * 24, new Depen);
+        $list = Yii::$app->cache->get('pageRouteCache');
+        if ($list === false) {
+            $list = \common\models\Page::find()->select('id,name')->asArray()->all();
+            Yii::$app->cache->set('pageRouteCache', $list, 60*60*24, new DbDependency(['sql' => 'SELECT MAX(updated_at) FROM {{%page}}']));
+        }
         $rules = [];
         $page = [];
         foreach ($list as $item) {

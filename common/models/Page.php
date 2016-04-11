@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -51,6 +52,13 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             'name' => '（影响url）'
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
         ];
     }
 }
