@@ -10,6 +10,7 @@ namespace frontend\components;
 
 
 use yii\base\Behavior;
+use yii\caching\DbDependency;
 use yii\web\Application;
 use Yii;
 
@@ -28,7 +29,7 @@ class RouteBehavior extends Behavior
         // 分类路由
         $list = $db->cache(function ($db) {
             return \common\models\Category::find()->select('id,name')->asArray()->all();
-        }, 60 * 60 * 24);
+        }, 60 * 60 * 24, new DbDependency(['sql' => 'SELECT id,name FROM {{%category}}']));
         $rules = [];
         $cate = [];
         foreach ($list as $item) {
@@ -40,7 +41,7 @@ class RouteBehavior extends Behavior
         // 单页路由
         $list = $db->cache(function ($db) {
             return \common\models\Page::find()->select('id,name')->asArray()->all();
-        }, 60 * 60 * 24);
+        }, 60 * 60 * 24, new Depen);
         $rules = [];
         $page = [];
         foreach ($list as $item) {

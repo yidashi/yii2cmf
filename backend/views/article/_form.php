@@ -32,7 +32,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'desc')->textarea()?>
 
-            <?= $form->field($model, 'tagNames')->textInput()?>
+            <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className()) ?>
         </div>
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -26,6 +26,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px;']]); ?>
 
+    <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className())?>
+
     <div class="form-group">
         <?= Html::submitButton('投稿', ['class' => 'btn btn-primary']) ?>
     </div>

@@ -76,6 +76,7 @@ class MyController extends Controller
             $isValid = $model->validate();
             if ($isValid) {
                 $model->save(false);
+                $model->setTags();
                 $dataModel->id = $model->id;
                 $isValid = $dataModel->validate();
                 if ($isValid) {
@@ -105,6 +106,7 @@ class MyController extends Controller
             $isValid = $dataModel->validate() && $isValid;
             if ($isValid) {
                 $model->save(false);
+                $model->setTags();
                 $dataModel->save(false);
                 \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
 

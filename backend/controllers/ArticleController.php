@@ -156,7 +156,6 @@ class ArticleController extends Controller
 
             if ($isValid) {
                 $model->save(false);
-//                echo '<pre>' . print_r($model, true) . '</pre>';die;
                 $model->setTags();
                 $dataModel->id = $model->id;
                 $isValid = $dataModel->validate();

@@ -30,6 +30,7 @@ class Article extends \common\models\Article
             [['title', 'category'], 'string', 'max' => 50],
             [['category_id'], 'setCategory'],
             [['author', 'cover', 'desc'], 'string', 'max' => 255],
+            ['tagNames', 'safe']
         ];
     }
     public function setCategory($attribute, $params)
