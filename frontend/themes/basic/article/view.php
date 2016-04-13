@@ -27,23 +27,8 @@ $this->params['breadcrumbs'][] = $model->title;
                 'data-original-title' => '收藏'
             ])?>
         </span>
-        <span><a href="" data-toggle="modal" data-target="#rewardModal"><?= Html::icon('cny')?> 打赏作者</a></span>
-        <?php \yii\bootstrap\Modal::begin([
-            'id' => 'rewardModal',
-            'header' => '<h2>您的支持将鼓励作者继续创作</h2>'
-        ])?>
-            <?php $form = \yii\widgets\ActiveForm::begin(['action' => ['/reward/index']])?>
-                <?= $form->field($rewardModel, 'article_id')->hiddenInput()->label(false) ?>
-                <?= $form->field($rewardModel, 'money')?>
-                <?= $form->field($rewardModel, 'comment')?>
-                <p>使用支付宝支付</p>
-                <div class="clearfix">
-                    <div class="pull-right">
-                        <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) . ' ' . Html::submitButton('确认支付', ['class' => 'btn btn-primary'])?>
-                    </div>
-                </div>
-            <?php \yii\widgets\ActiveForm::end()?>
-        <?php \yii\bootstrap\Modal::end()?>
+        <!--   打赏作者     -->
+        <?= \frontend\components\reward\RewardWidget::widget(['articleId' => $model->id])?>
         <span class="vote">
             <a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
             <a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>

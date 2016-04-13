@@ -48,7 +48,8 @@ return [
                     'pattern' => '<id:\d+>',
                     'route' => 'article/view',
                     'suffix' => '.html'
-                ]
+                ],
+                'user/<id:\d>' => '/user'
             ],
         ],
         'authClientCollection' => [

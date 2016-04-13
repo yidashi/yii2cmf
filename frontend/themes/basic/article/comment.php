@@ -32,7 +32,7 @@ use common\helpers\Html;
                                         <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
                                         <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
                                     </div>
-                                    <div class="media-content"><?= $son->content?></div>
+                                    <div class="media-content"><?= \common\helpers\Comment::process($son->content)?></div>
                                 </div>
                             </div>
                         <?php endforeach;?>

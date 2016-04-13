@@ -7,8 +7,6 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
-use common\models\Reward;
-use frontend\models\RewardForm;
 use frontend\models\Tag;
 use frontend\models\Article;
 use common\models\Category;
@@ -109,18 +107,14 @@ class ArticleController extends Controller
         $pages = $commentDataProvider->getPagination();
         // 评论框
         $commentModel = new Comment();
-        //打赏
-        $rewardModel = new RewardForm();
-        $rewardModel->money = '2.00';
-        $rewardModel->article_id = $model->id;
+
         return $this->render('view', [
             'model' => $model,
             'commentModel' => $commentModel,
             'commentModels' => $commentModels,
             'pages' => $pages,
             'hots' => $hots,
-            'commentDataProvider' => $commentDataProvider,
-            'rewardModel' => $rewardModel
+            'commentDataProvider' => $commentDataProvider
         ]);
     }
 }
