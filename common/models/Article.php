@@ -47,7 +47,7 @@ class Article extends \yii\db\ActiveRecord
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category_id'], 'setCategory'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
-            [['author', 'cover'], 'string', 'max' => 255],
+            [['author', 'cover', 'source'], 'string', 'max' => 255],
             [['desc', 'tagNames'], 'safe']
         ];
     }
@@ -73,6 +73,7 @@ class Article extends \yii\db\ActiveRecord
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',
+            'source' => '来源连接',
             'desc' => '摘要',
             'tagNames' => '标签'
         ];

@@ -112,6 +112,7 @@ class ArticleController extends Controller
         //打赏
         $rewardModel = new RewardForm();
         $rewardModel->money = '2.00';
+        $rewardModel->article_id = $model->id;
         return $this->render('view', [
             'model' => $model,
             'commentModel' => $commentModel,

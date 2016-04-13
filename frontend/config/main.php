@@ -24,7 +24,7 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'info'],
                 ],
             ],
         ],
@@ -62,6 +62,13 @@ return [
                 // etc.
             ],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => '@frontend/components/bootstrap/dist'
+                ],
+            ],
+        ]
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\components\RouteBehavior::className(),

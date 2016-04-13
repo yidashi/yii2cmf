@@ -150,39 +150,6 @@ yii = (function ($) {
                 params = $e.data('params'),
                 isAjax = $e.data('ajax'),
                 isRefresh = !$e.data('norefresh');
-            if (isAjax) {
-                $.ajax({
-                    url:action,
-                    method:method,
-                    data:params,
-                    dataType:'json',
-                    success:function(res) {
-                        if (!res.message) {
-                            res.message = '操作成功';
-                        }
-                        $('#top-alert').addClass('alert-success').slideDown();
-                        $('.alert-content').text(res.message);
-                        setTimeout(function(){
-                            if (isRefresh) {
-                                location.reload();
-                            } else {
-                                $('#top-alert').slideUp();
-                            }
-                        }, 1500)
-                    },
-                    error:function(error) {
-                        if (!error.responseJSON.message) {
-                            error.responseJSON.message = '操作失败';
-                        }
-                        $('#top-alert').addClass('alert-error').slideDown();
-                        $('.alert-content').text(error.responseJSON.message);
-                        setTimeout(function(){
-                            $('#top-alert').slideUp();
-                        },1500);
-                    }
-                });
-                return;
-            }
             if (method === undefined) {
                 if (action && action != '#') {
                     window.location = action;
@@ -237,6 +204,39 @@ yii = (function ($) {
                 $form.attr('action', action);
             }
 
+            if (isAjax) {
+                $.ajax({
+                    url:action,
+                    method:method,
+                    data:$form.serialize(),
+                    dataType:'json',
+                    success:function(res) {
+                        if (!res.message) {
+                            res.message = '操作成功';
+                        }
+                        $('#top-alert').addClass('alert-success').slideDown();
+                        $('.alert-content').text(res.message);
+                        setTimeout(function(){
+                            if (isRefresh) {
+                                location.reload();
+                            } else {
+                                $('#top-alert').slideUp();
+                            }
+                        }, 1500)
+                    },
+                    error:function(error) {
+                        if (!error.responseJSON.message) {
+                            error.responseJSON.message = '操作失败';
+                        }
+                        $('#top-alert').addClass('alert-error').slideDown();
+                        $('.alert-content').text(error.responseJSON.message);
+                        setTimeout(function(){
+                            $('#top-alert').slideUp();
+                        },1500);
+                    }
+                });
+                return;
+            }
             $form.trigger('submit');
             $.when($form.data('yiiSubmitFinalizePromise')).then(
                 function () {
