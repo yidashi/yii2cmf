@@ -29,6 +29,15 @@ return [
                     'sourcePath' => '@common/assets',
                 ],
             ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages',
+                    'forceTranslation' => true,
+                ]
+            ],
         ]
     ],
     'aliases' => [

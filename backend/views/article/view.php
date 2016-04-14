@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
             'category',
-            'category_id',
             'author',
             'created_at',
             'updated_at',

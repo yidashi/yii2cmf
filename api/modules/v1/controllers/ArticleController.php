@@ -9,24 +9,13 @@
 namespace api\modules\v1\controllers;
 
 
+use api\common\controllers\Controller;
 use api\modules\v1\models\Article;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
 class ArticleController extends Controller
 {
-    public function actionIndex()
-    {
-        $topStories = Article::find()->orderBy(['view' => SORT_DESC])->limit(5)->asArray()->all();
-        $stories = Article::find()->orderBy(['id' => SORT_DESC])->limit(10)->asArray()->all();
-        return [
-            'date' => date('Ymd'),
-            'lastId' => $stories[9]['id'],
-            'stories' => $stories,
-            'top_stories' => $topStories
-        ];
-    }
-
     public function actionList()
     {
         $query = Article::find();
