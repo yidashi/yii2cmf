@@ -206,4 +206,8 @@ class User extends ActiveRecord implements IdentityInterface
         $profile->id = $event->sender->id;
         $profile->save(false);
     }
+
+    public function getIsAdmin(){
+        return $this->is_admin ? true : false;
+    }
 }

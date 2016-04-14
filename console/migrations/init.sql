@@ -231,8 +231,11 @@ CREATE TABLE `pop_category` (
   `created_at` int(10) NOT NULL,
   `updated_at` int(10) NOT NULL,
   `name` varchar(20) NOT NULL,
+  `description` varchar(1000) NOT NULL DEFAULT '',
+  `article` int(10) NOT NULL DEFAULT '0',
+  `is_nav` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,7 +266,7 @@ CREATE TABLE `pop_comment` (
   `up` int(11) NOT NULL DEFAULT '0',
   `down` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +309,7 @@ CREATE TABLE `pop_gather` (
   `res` tinyint(1) NOT NULL DEFAULT '1',
   `result` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9672 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -352,7 +355,7 @@ CREATE TABLE `pop_nav` (
   `title` varchar(255) NOT NULL COMMENT '名称',
   `route` varchar(255) NOT NULL COMMENT '路由',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,7 +429,7 @@ CREATE TABLE `pop_tag` (
   `name` varchar(100) NOT NULL,
   `article` int(11) NOT NULL DEFAULT '0' COMMENT '具有该标签的文章数（冗余字段）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
@@ -445,10 +448,11 @@ CREATE TABLE `pop_user` (
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '10',
+  `is_admin` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -457,7 +461,7 @@ CREATE TABLE `pop_user` (
 
 LOCK TABLES `pop_user` WRITE;
 /*!40000 ALTER TABLE `pop_user` DISABLE KEYS */;
-INSERT INTO `pop_user` VALUES (1,'hehe','1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs','$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',NULL,'hehe@qq.com',10,1441766741,1458640427);
+INSERT INTO `pop_user` VALUES (1,'hehe','1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs','$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',NULL,'hehe@qq.com',10,1,1441766741,1458640427);
 /*!40000 ALTER TABLE `pop_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -477,7 +481,7 @@ CREATE TABLE `pop_vote` (
   `action` varchar(20) NOT NULL DEFAULT 'up',
   `type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `pop_page`;
 CREATE TABLE `pop_page` (
@@ -487,7 +491,7 @@ CREATE TABLE `pop_page` (
   `title` varchar(50) NOT NULL COMMENT '标题',
   `name` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='单页';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单页';
 
 LOCK TABLES `pop_page` WRITE;
 /*!40000 ALTER TABLE `pop_page` DISABLE KEYS */;
@@ -502,7 +506,7 @@ CREATE TABLE `pop_favourite` (
   `article_id` int(11) NOT NULL,
   `created_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS `pop_reward`;
 CREATE TABLE `pop_reward` (

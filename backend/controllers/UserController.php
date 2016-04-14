@@ -7,6 +7,7 @@ use backend\models\User;
 use backend\controllers\BaseController;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -130,6 +131,9 @@ class UserController extends Controller
     public function actionBan()
     {
         $id = Yii::$app->request->post('id');
+        if (Yii::$app->user->identity->isAdmin) {
+            throw new ForbiddenHttpException('不支持封禁管理员帐号');
+        }
         $model = $this->findModel($id);
         $model->status = \common\models\User::STATUS_DELETED;
         $model->save(false);

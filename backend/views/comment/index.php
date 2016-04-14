@@ -24,13 +24,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                     ],
                     'article_id',
-                    'content:ntext',
+                    [
+                        'attribute' => 'content',
+                        'value' => function($model) {
+                            return \yii\helpers\Markdown::process($model->content);
+                        },
+                        'format' => 'html'
+                    ],
+                     'up',
+                     'down',
                     'created_at:datetime',
-                    // 'updated_at',
-                    // 'parent_id',
-                    // 'up',
-                    // 'down',
-
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'template' => '{view} {delete} {ban}',

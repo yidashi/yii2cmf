@@ -6,6 +6,8 @@
  * Time: 上午10:31
  */
 use common\helpers\Html;
+use yii\helpers\Markdown;
+
 ?>
 <!--评论-->
 <div id="comments">
@@ -21,7 +23,7 @@ use common\helpers\Html;
                     </div>
                     <div class="media-body">
                         <div class="media-heading"><a href="<?= \yii\helpers\Url::to(['/user', 'id' => $item->user_id])?>"><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
-                        <div class="media-content"><?= $item->content?></div>
+                        <div class="media-content"><?= Markdown::process($item->content, 'gfm')?></div>
                         <?php foreach ($item->sons as $son):?>
                             <div class="media">
                                 <div class="media-left">
@@ -32,7 +34,7 @@ use common\helpers\Html;
                                         <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
                                         <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
                                     </div>
-                                    <div class="media-content"><?= \common\helpers\Comment::process($son->content)?></div>
+                                    <div class="media-content"><?= Markdown::process(\common\helpers\Comment::process($son->content))?></div>
                                 </div>
                             </div>
                         <?php endforeach;?>
