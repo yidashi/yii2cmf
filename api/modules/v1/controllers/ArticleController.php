@@ -32,7 +32,7 @@ class ArticleController extends Controller
     public function actionView($id = 0)
     {
         $article = Article::find()->where(['id' => $id])->with('data')->asArray()->one();
-        $article['data']['content'] = \yii\helpers\Markdown::process($article['data']['content']);
+        $article['data']['content'] = \yii\helpers\Markdown::process($article['data']['content'], 'gfm');
         $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
         $html = <<<CONTENT
 <div class="view-title">
