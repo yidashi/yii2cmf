@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "16cfc791efec0829fb9c01c10f4ae4fe",
-    "content-hash": "e706267a32c4e157801c22c0eb0bc4c8",
+    "hash": "c6b57a411ecdf92a420e352c4a215ba2",
+    "content-hash": "5c7d596d6e4771c25a0e124365f5f191",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1661,17 +1661,44 @@
             "time": "2015-12-15 10:32:15"
         },
         {
-            "name": "yidashi/yii2-webuploader",
-            "version": "v1.0.4",
+            "name": "yidashi/yii2-bootstrap-markdown",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "18079dafc6365afd53d49f8642afa128397d34fd"
+                "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
+                "reference": "6bc7f608bfb1a20c4e2002134144f1be648f50d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/99e30f8108830f69fb085e75ae404e6a0080f13d",
-                "reference": "18079dafc6365afd53d49f8642afa128397d34fd",
+                "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/6bc7f608bfb1a20c4e2002134144f1be648f50d2",
+                "reference": "6bc7f608bfb1a20c4e2002134144f1be648f50d2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yidashi\\markdown\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "yii2-bootstrap-markdown",
+            "time": "2016-04-14 06:34:38"
+        },
+        {
+            "name": "yidashi/yii2-webuploader",
+            "version": "v1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidashi/yii2-webuploader.git",
+                "reference": "645ca70759cde01a7ce73b6576614faeeff12793"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/645ca70759cde01a7ce73b6576614faeeff12793",
+                "reference": "645ca70759cde01a7ce73b6576614faeeff12793",
                 "shasum": ""
             },
             "require": {
@@ -1685,7 +1712,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-webuploader",
-            "time": "2015-12-20 03:48:55"
+            "time": "2016-04-14 06:25:42"
         },
         {
             "name": "yiisoft/yii2",

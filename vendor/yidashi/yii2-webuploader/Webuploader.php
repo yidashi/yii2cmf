@@ -19,6 +19,12 @@ class Webuploader extends InputWidget{
     public function init()
     {
         parent::init();
+        \Yii::setAlias('@webuploader', __DIR__);
+        // 初始化@static别名,默认@web/static,最好根据自己的需求提前设置好@static别名
+        $static = \Yii::getAlias('@static', false);
+        if (!$static) {
+            \Yii::setAlias('@static', '@web/static');
+        }
         $this->options['boxId'] = isset($this->options['boxId']) ? $this->options['boxId'] : 'picker';
         $this->options['innerHTML'] = isset($this->options['innerHTML']) ? $this->options['innerHTML'] : '<button class="btn btn-primary">选择文件</button>';
         $this->options['previewWidth'] = isset($this->options['previewWidth']) ? $this->options['previewWidth'] : '250';
@@ -49,7 +55,7 @@ class Webuploader extends InputWidget{
         WebuploaderAsset::register($this->view);
         $web = \Yii::getAlias('@static');
         $server = $this->server ?: Url::to(['/site/webupload']);
-        $swfPath = \Yii::getAlias('@common/widgets/webuploader/assets');
+        $swfPath = \Yii::getAlias('@webuploader/assets');
         $this->view->registerJs(<<<JS
 var uploader = WebUploader.create({
         auto: true,

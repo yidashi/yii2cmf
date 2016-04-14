@@ -49,7 +49,8 @@ return [
                     'route' => 'article/view',
                     'suffix' => '.html'
                 ],
-                'user/<id:\d>' => '/user'
+                'user/<id:\d+>' => '/user',
+                'tag/<name:\S+>' => '/article/tag'
             ],
         ],
         'authClientCollection' => [

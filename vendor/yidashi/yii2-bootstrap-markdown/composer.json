@@ -1,6 +1,6 @@
 {
-    "name": "yidashi/yii2-boostrap-markdown",
-    "description": "yii2-boostrap-markdown",
+    "name": "yidashi/yii2-bootstrap-markdown",
+    "description": "yii2-bootstrap-markdown",
     "require": {
         "php": ">=5.4.0"
     },

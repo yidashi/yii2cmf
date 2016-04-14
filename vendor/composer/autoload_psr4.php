@@ -20,7 +20,7 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'yidashi\\webuploader\\' => array($vendorDir . '/yidashi/yii2-webuploader'),
     'yidashi\\sidenav\\' => array($vendorDir . '/yidashi/yii2-sidenav'),
-    'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown'),
+    'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown', $vendorDir . '/yidashi/yii2-bootstrap-markdown'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'kartik\\mpdf\\' => array($vendorDir . '/kartik-v/yii2-mpdf'),

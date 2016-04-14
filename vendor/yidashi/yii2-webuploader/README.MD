@@ -15,7 +15,7 @@ composer require yidashi/yii2-webuploader:"*"
 ```
 options非必填
 
-使用默认action处理的话controller需要添加
+默认使用site/webuploader处理上传逻辑，siteController需要添加
 ```
 public function actions()
 {

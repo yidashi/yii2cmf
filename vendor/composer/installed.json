@@ -1578,35 +1578,6 @@
         "homepage": "https://symfony.com"
     },
     {
-        "name": "yidashi/yii2-boostrap-markdown",
-        "version": "v1.0.2",
-        "version_normalized": "1.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
-            "reference": "156c87428b4177662656a0443674cb21b0875af6"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/156c87428b4177662656a0443674cb21b0875af6",
-            "reference": "156c87428b4177662656a0443674cb21b0875af6",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "time": "2015-12-15 10:32:15",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yidashi\\markdown\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "description": "yii2-boostrap-markdown"
-    },
-    {
         "name": "kartik-v/yii2-krajee-base",
         "version": "v1.8.0",
         "version_normalized": "1.8.0.0",
@@ -1747,35 +1718,6 @@
             "php",
             "qrcode"
         ]
-    },
-    {
-        "name": "yidashi/yii2-webuploader",
-        "version": "v1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/yidashi/yii2-webuploader.git",
-            "reference": "18079dafc6365afd53d49f8642afa128397d34fd"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/99e30f8108830f69fb085e75ae404e6a0080f13d",
-            "reference": "18079dafc6365afd53d49f8642afa128397d34fd",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4.0"
-        },
-        "time": "2015-12-20 03:48:55",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "yidashi\\webuploader\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "description": "yii2-webuploader"
     },
     {
         "name": "yiisoft/yii2-redis",
@@ -2572,5 +2514,92 @@
             "extension installer",
             "yii2"
         ]
+    },
+    {
+        "name": "yidashi/yii2-webuploader",
+        "version": "v1.0.7",
+        "version_normalized": "1.0.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/yii2-webuploader.git",
+            "reference": "645ca70759cde01a7ce73b6576614faeeff12793"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/645ca70759cde01a7ce73b6576614faeeff12793",
+            "reference": "645ca70759cde01a7ce73b6576614faeeff12793",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2016-04-14 06:25:42",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yidashi\\webuploader\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-webuploader"
+    },
+    {
+        "name": "yidashi/yii2-boostrap-markdown",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
+            "reference": "156c87428b4177662656a0443674cb21b0875af6"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/156c87428b4177662656a0443674cb21b0875af6",
+            "reference": "156c87428b4177662656a0443674cb21b0875af6",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2015-12-15 10:32:15",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yidashi\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-boostrap-markdown"
+    },
+    {
+        "name": "yidashi/yii2-bootstrap-markdown",
+        "version": "v1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
+            "reference": "6bc7f608bfb1a20c4e2002134144f1be648f50d2"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/6bc7f608bfb1a20c4e2002134144f1be648f50d2",
+            "reference": "6bc7f608bfb1a20c4e2002134144f1be648f50d2",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2016-04-14 06:34:38",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "yidashi\\markdown\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "description": "yii2-bootstrap-markdown"
     }
 ]

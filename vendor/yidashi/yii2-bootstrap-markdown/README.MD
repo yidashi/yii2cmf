@@ -14,3 +14,9 @@ composer require yidashi/yii2-bootstrap-markdown:"*"
 <?= $form->field($model,'attributeName')->widget('yidashi\markdown\Markdown',['language' => 'zh']); ?>
 ```
 语言参数language默认就是zh，可以不提供
+
+## 3.解析
+
+```
+<?= yii\helpers\Markdown::process($content, 'gfm')?>
+```

@@ -58,8 +58,8 @@ $this->title = \common\models\Config::get('SEO_SITE_TITLE').'_'.Yii::$app->name;
             </div>
             <div class="panel-body">
                 <ul class="post-list">
-                    <li><a href="https://github.com/yidashi/yii" target="_blank">github</a></li>
-                    <li><a href="https://coding.net/u/yidashi/p/yii/git" target="_blank">coding</a></li>
+                    <li><a href="https://github.com/yidashi/yii2cmf" target="_blank">github</a></li>
+                    <li><a href="https://coding.net/u/yidashi/p/yii2cmf/git" target="_blank">coding</a></li>
                 </ul>
             </div>
         </div>
