@@ -11,3 +11,25 @@ h4 { font-size: 16px; }
 .action em {font-style: normal;}
 .action .user, .action .time, .action .views, .action .favourites, .action .comments, .action .answers, .action .replies { margin-right:15px; }
 .action .money { float: right; }
+p{margin:5px 0}
+pre {
+    font-size: 13px;
+    line-height: 1.42857143;
+    display: block;
+    margin: 0 0 10px;
+    padding: 9.5px;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+}
+pre code {
+    font-size: inherit;
+    padding: 0;
+    white-space: pre-wrap;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+}
