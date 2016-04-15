@@ -2601,5 +2601,57 @@
         },
         "notification-url": "https://packagist.org/downloads/",
         "description": "yii2-bootstrap-markdown"
+    },
+    {
+        "name": "mihaildev/yii2-elfinder",
+        "version": "1.1.3",
+        "version_normalized": "1.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/MihailDev/yii2-elfinder.git",
+            "reference": "64b42572dec94e5c2d0d1630bce8292848a98f4b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/MihailDev/yii2-elfinder/zipball/64b42572dec94e5c2d0d1630bce8292848a98f4b",
+            "reference": "64b42572dec94e5c2d0d1630bce8292848a98f4b",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2-jui": "*"
+        },
+        "time": "2015-07-03 07:08:52",
+        "type": "yii2-extension",
+        "extra": {
+            "asset-installer-paths": {
+                "npm-asset-library": "vendor/npm",
+                "bower-asset-library": "vendor/bower"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "mihaildev\\elfinder\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Mihail",
+                "email": "mihail.kucher@gmail.com",
+                "homepage": "https://github.com/MihailDev",
+                "role": "Developer"
+            }
+        ],
+        "description": "Yii2 ElFinder",
+        "homepage": "https://github.com/MihailDev/yii2-elfinder",
+        "keywords": [
+            "elfinder",
+            "filemanager",
+            "yii"
+        ]
     }
 ]

@@ -10,4 +10,5 @@ return [
     'Title' => '标题',
     'Content' => '内容',
     'Author' => '作者',
+    'Language' => '语言'
 ];

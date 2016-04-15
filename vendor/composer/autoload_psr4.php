@@ -22,6 +22,7 @@ return array(
     'yidashi\\sidenav\\' => array($vendorDir . '/yidashi/yii2-sidenav'),
     'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown', $vendorDir . '/yidashi/yii2-bootstrap-markdown'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
+    'mihaildev\\elfinder\\' => array($vendorDir . '/mihaildev/yii2-elfinder'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),
     'kartik\\mpdf\\' => array($vendorDir . '/kartik-v/yii2-mpdf'),
     'kartik\\helpers\\' => array($vendorDir . '/kartik-v/yii2-helpers'),

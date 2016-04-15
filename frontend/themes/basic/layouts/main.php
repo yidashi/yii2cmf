@@ -48,7 +48,7 @@ AppAsset::register($this);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
     if (Yii::$app->user->isGuest) {
-        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup'], 'options' => ['class' => 'pull-right']];
+        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
@@ -77,10 +77,20 @@ AppAsset::register($this);
                     'label' => Html::icon('sign-out') . ' 退出',
                     'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post'],
-                ],
-            ],
+                ]
+            ]
         ];
     }
+    $rightMenuItems[] = [
+        'label'=>Yii::t('app', 'Language'),
+        'items'=>array_map(function ($code) {
+            return [
+                'label' => Yii::$app->params['availableLocales'][$code],
+                'url' => ['/site/set-locale', 'locale'=>$code],
+                'active' => Yii::$app->language === $code
+            ];
+        }, array_keys(Yii::$app->params['availableLocales']))
+    ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $rightMenuItems,

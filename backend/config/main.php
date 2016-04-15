@@ -12,6 +12,19 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
+    'controllerMap'=>[
+        'file-manager-elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'disabledCommands' => ['netmount'],
+            'roots' => [
+                [
+                    'baseUrl' => '@static',
+                    'basePath' => '@staticroot',
+                    'path'   => '/',
+                ]
+            ]
+        ]
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

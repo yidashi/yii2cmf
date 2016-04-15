@@ -35,7 +35,9 @@ class Profile extends \yii\db\ActiveRecord
             [['money', 'created_at', 'updated_at'], 'required'],
             [['money', 'created_at', 'updated_at', 'gender'], 'integer'],
             [['signature'], 'string', 'max' => 100],
-            [['avatar'], 'string', 'max' => 255]
+            [['avatar'], 'string', 'max' => 255],
+            ['locale', 'default', 'value' => Yii::$app->language],
+            ['locale', 'in', 'range' => array_keys(Yii::$app->params['availableLocales'])],
         ];
     }
 

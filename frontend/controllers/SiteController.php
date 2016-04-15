@@ -86,6 +86,10 @@ class SiteController extends Controller
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
             'webupload' => 'yidashi\webuploader\WebuploaderAction',
+            'set-locale'=>[
+                'class'=>'common\actions\SetLocaleAction',
+                'locales'=>array_keys(Yii::$app->params['availableLocales'])
+            ]
         ];
     }
 

@@ -43,4 +43,8 @@ return [
     'aliases' => [
         '@common/logic' => '@common/models/logic',
     ],
+    'as locale' => [
+        'class' => 'common\behaviors\LocaleBehavior',
+        'enablePreferredLanguage' => true
+    ]
 ];

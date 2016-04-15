@@ -201,4 +201,13 @@ return array (
       '@dmstr' => $vendorDir . '/dmstr/yii2-adminlte-asset',
     ),
   ),
+  'mihaildev/yii2-elfinder' => 
+  array (
+    'name' => 'mihaildev/yii2-elfinder',
+    'version' => '1.1.3.0',
+    'alias' => 
+    array (
+      '@mihaildev/elfinder' => $vendorDir . '/mihaildev/yii2-elfinder',
+    ),
+  ),
 );
