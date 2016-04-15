@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
             <?php //$form->field($dataModel, 'content')->widget('kucha\ueditor\UEditor', ['options' => ['style' => 'height:500px']]) ?>
             <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px']]) ?>
 
-            <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
+            <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
 
             <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 

@@ -82,12 +82,44 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
+    public static function tree()
+    {
+        $list = self::find()->asArray()->all();
+        $tree = self::list2tree($list);
+        return $tree;
+    }
+
+    public static function treeList($tree = [], &$result = [], $deep = 0, $separator = '--')
+    {
+        if (empty($tree)) {
+            $tree = self::tree();
+        }
+        $deep++;
+        foreach($tree as $list) {
+            $list['title'] = str_repeat($separator, $deep-1) . $list['title'];
+            $result[] = $list;
+            if (isset($list['_child'])) {
+                self::treeList($list['_child'], $result, $deep, $separator);
+            }
+        }
+        return $result;
+    }
     /**
      * 分类名下拉列表
      */
-    public static function getDropDownlist()
+    public static function getDropDownlist($tree = [], &$result = [], $deep = 0, $separator = '--')
     {
-        return array_merge(['无'], self::lists());
+        if (empty($tree)) {
+            $tree = self::tree();
+        }
+        $deep++;
+        foreach($tree as $list) {
+            $result[$list['id']] = str_repeat($separator, $deep-1) . $list['title'];
+            if (isset($list['_child'])) {
+                self::getDropDownlist($list['_child'], $result, $deep);
+            }
+        }
+        return ['无'] + $result;
     }
 
     public function getCategoryNameById($id)
@@ -104,8 +136,35 @@ class Category extends \yii\db\ActiveRecord
         return array_search($name, $list);
     }
 
-    public static function tree()
-    {
-
+    /**
+     * 把返回的数据集转换成Tree
+     * @param array $list 要转换的数据集
+     * @param string $pid parent标记字段
+     * @param string $level level标记字段
+     * @return array
+     */
+    public static function list2tree($list, $pk='id', $pid = 'pid', $child = '_child', $root = 0) {
+        // 创建Tree
+        $tree = array();
+        if(is_array($list)) {
+            // 创建基于主键的数组引用
+            $refer = array();
+            foreach ($list as $key => $data) {
+                $refer[$data[$pk]] =& $list[$key];
+            }
+            foreach ($list as $key => $data) {
+                // 判断是否存在parent
+                $parentId =  $data[$pid];
+                if ($root == $parentId) {
+                    $tree[] =& $list[$key];
+                }else{
+                    if (isset($refer[$parentId])) {
+                        $parent =& $refer[$parentId];
+                        $parent[$child][] =& $list[$key];
+                    }
+                }
+            }
+        }
+        return $tree;
     }
 }
