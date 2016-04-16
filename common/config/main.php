@@ -36,7 +36,17 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'forceTranslation' => true,
-                ]
+                ],
+                '*'=> [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/messages',
+                    'fileMap'=>[
+                        'common'=>'common.php',
+                        'backend'=>'backend.php',
+                        'frontend'=>'frontend.php',
+                    ],
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
+                ],
             ],
         ]
     ],

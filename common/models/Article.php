@@ -63,11 +63,11 @@ class Article extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('common', 'ID'),
             'title' => '标题',
             'author' => '作者',
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
             'status' => '状态',
             'cover' => '封面',

@@ -13,7 +13,8 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'avatar')->widget(\yidashi\webuploader\Webuploader::className()) ?>
         <?= $form->field($model, 'money') ?>
-        <?= $form->field($model, 'gender')->dropDownList($model->genderList) ?>
+        <?= $form->field($model, 'gender')->radioList($model->genderList) ?>
+        <?= $form->field($model, 'locale')->dropDownList($model->localeList) ?>
         <?= $form->field($model, 'signature')->textarea() ?>
 
     

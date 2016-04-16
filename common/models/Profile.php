@@ -32,8 +32,7 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['money', 'created_at', 'updated_at'], 'required'],
-            [['money', 'created_at', 'updated_at', 'gender'], 'integer'],
+            [['money', 'gender'], 'integer'],
             [['signature'], 'string', 'max' => 100],
             [['avatar'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
@@ -48,12 +47,13 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'money' => '余额',
-            'created_at' => '创建时间',
-            'updated_at' => '更新时间',
-            'signature' => '个性签名',
-            'avatar' => '头像',
-            'gender' => '性别',
+            'money' => Yii::t('common', 'Money'),
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
+            'signature' => Yii::t('common', 'Signature'),
+            'avatar' => Yii::t('common', 'Avatar'),
+            'gender' => Yii::t('common', 'Gender'),
+            'locale' => Yii::t('common', 'Locale')
         ];
     }
 
@@ -66,6 +66,11 @@ class Profile extends \yii\db\ActiveRecord
 
     public static function getGenderList()
     {
-        return ['男', '女'];
+        return [Yii::t('common', 'Male'), Yii::t('common', 'Famale')];
+    }
+
+    public static function getLocaleList()
+    {
+        return Yii::$app->params['availableLocales'];
     }
 }
