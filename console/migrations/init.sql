@@ -490,6 +490,8 @@ CREATE TABLE `pop_page` (
   `content` text NOT NULL COMMENT '内容',
   `title` varchar(50) NOT NULL COMMENT '标题',
   `name` varchar(50) NOT NULL DEFAULT '',
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='单页';
 
