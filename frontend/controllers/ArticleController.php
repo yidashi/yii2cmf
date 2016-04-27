@@ -25,12 +25,12 @@ class ArticleController extends Controller
         if (empty($category)) {
             throw new NotFoundHttpException('分类不存在');
         }
-        $query = Article::find()->active()->andFilterWhere(['category_id' => $category->id]);
+        $query = Article::find()->published()->andFilterWhere(['category_id' => $category->id]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'id' => SORT_DESC
+                    'published_at' => SORT_DESC
                 ]
             ]
         ]);
@@ -60,7 +60,7 @@ class ArticleController extends Controller
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'id' => SORT_DESC
+                    'published_at' => SORT_DESC
                 ]
             ]
         ]);
@@ -83,7 +83,7 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
-        $model = Article::find()->where(['id' => $id])->active()->one();
+        $model = Article::find()->where(['id' => $id])->published()->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }

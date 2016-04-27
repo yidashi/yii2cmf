@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
+use common\models\query\ArticleQuery;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -43,9 +44,12 @@ class Article extends \yii\db\ActiveRecord
             [['title', 'category_id'], 'required'],
             [['status', 'category_id', 'view', 'up', 'down', 'user_id'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
+            ['published_at', 'default', 'value' => time()],
+            [['published_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category_id'], 'setCategory'],
+            ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category', 'author'], 'string', 'max' => 50],
             [['author', 'cover', 'source'], 'string', 'max' => 255],
             [['desc', 'tagNames'], 'safe']
@@ -69,6 +73,7 @@ class Article extends \yii\db\ActiveRecord
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
+            'published_at' => '发布时间',
             'status' => '状态',
             'cover' => '封面',
             'category_id' => '分类',

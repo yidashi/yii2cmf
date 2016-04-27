@@ -19,22 +19,31 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+            <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
+
             <?php //$form->field($dataModel, 'content')->widget('kucha\ueditor\UEditor', ['options' => ['style' => 'height:500px']]) ?>
             <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px']]) ?>
 
-            <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
-
             <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 
-            <?= $form->field($model, 'status')->dropDownList([0 => '待审核', 1 => '正常']) ?>
+            <?= $form->field($model, 'status')->checkboxList([1 => '激活']) ?>
+
         </div>
         <div class="tab-pane" id="tab_2">
-
+            <?= $form->field($model, 'published_at')->widget(
+                \trntv\yii\datetime\DateTimeWidget::className(),
+                [
+                    'phpDatetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
+                    'phpMomentMapping' => ['yyyy-MM-dd HH:mm:ss' => 'YYYY-MM-DD HH:mm:ss'],
+                    'locale' => 'zh-cn'
+                ]
+            ) ?>
             <?= $form->field($model, 'desc')->textarea()?>
 
             <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className()) ?>
 
             <?= $form->field($model, 'source')->textInput() ?>
+
         </div>
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

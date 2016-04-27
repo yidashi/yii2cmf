@@ -210,4 +210,13 @@ return array (
       '@mihaildev/elfinder' => $vendorDir . '/mihaildev/yii2-elfinder',
     ),
   ),
+  'trntv/yii2-datetime-widget' => 
+  array (
+    'name' => 'trntv/yii2-datetime-widget',
+    'version' => '1.0.4.0',
+    'alias' => 
+    array (
+      '@trntv/yii/datetime' => $vendorDir . '/trntv/yii2-datetime-widget/src',
+    ),
+  ),
 );

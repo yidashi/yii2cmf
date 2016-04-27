@@ -1,0 +1,31 @@
+{
+  "name": "trntv/yii2-datetime-widget",
+  "description": "Date/Time Picker widget for Yii2 framework",
+  "type": "yii2-extension",
+  "keywords": ["yii2","extension","datetime picker","bootstrap","widget"],
+  "license": "GPL-3.0+",
+  "authors": [
+    {
+        "name": "Eugene Terentev",
+        "email": "eugene@terentev.net"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0",
+    "bower-asset/eonasdan-bootstrap-datetimepicker": "~4.0"
+  },
+  "autoload": {
+    "psr-4": {
+        "trntv\\yii\\datetime\\": "src/"
+    }
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "npm-asset-library": "vendor/npm",
+      "bower-asset-library": "vendor/bower"
+    }
+  }
+}

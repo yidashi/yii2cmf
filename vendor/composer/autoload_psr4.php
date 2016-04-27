@@ -21,6 +21,7 @@ return array(
     'yidashi\\webuploader\\' => array($vendorDir . '/yidashi/yii2-webuploader'),
     'yidashi\\sidenav\\' => array($vendorDir . '/yidashi/yii2-sidenav'),
     'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown', $vendorDir . '/yidashi/yii2-bootstrap-markdown'),
+    'trntv\\yii\\datetime\\' => array($vendorDir . '/trntv/yii2-datetime-widget/src'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
     'mihaildev\\elfinder\\' => array($vendorDir . '/mihaildev/yii2-elfinder'),
     'kucha\\ueditor\\' => array($vendorDir . '/kucha/ueditor'),

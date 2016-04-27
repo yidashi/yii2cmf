@@ -26,7 +26,7 @@ class ArticleData extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'content'], 'required'],
+            [['content'], 'required'],
             [['id'], 'integer'],
             [['content'], 'string'],
         ];

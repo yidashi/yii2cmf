@@ -36,7 +36,8 @@
         "dmstr/yii2-adminlte-asset": "*",
         "yiisoft/yii2-composer": "2.0.4",
         "yidashi/yii2-bootstrap-markdown": "^1.0",
-        "mihaildev/yii2-elfinder": "^1.0"
+        "mihaildev/yii2-elfinder": "^1.0",
+        "trntv/yii2-datetime-widget": "^1.0.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

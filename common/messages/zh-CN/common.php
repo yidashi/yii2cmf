@@ -79,5 +79,5 @@ return [
     'Male' => '男',
     'Money' => '余额',
     'Signature' => '个性签名',
-    'Avatar' => '头像'
+    'Avatar' => '头像',
 ];

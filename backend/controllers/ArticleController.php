@@ -155,11 +155,11 @@ class ArticleController extends Controller
             $isValid = $model->validate();
 
             if ($isValid) {
-                $model->save(false);
-                $model->setTags();
-                $dataModel->id = $model->id;
                 $isValid = $dataModel->validate();
                 if ($isValid) {
+                    $model->save(false);
+                    $model->setTags();
+                    $dataModel->id = $model->id;
                     $dataModel->save(false);
                     return $this->redirect(['index']);
                 }
