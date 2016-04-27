@@ -46,6 +46,7 @@ CREATE TABLE `pop_article` (
   `category` varchar(50) NOT NULL COMMENT '分类',
   `category_id` int(11) NOT NULL,
   `author` varchar(100) NOT NULL COMMENT '作者',
+  `published_at` int(10) NOT NULL,
   `created_at` int(10) NOT NULL,
   `updated_at` int(10) NOT NULL,
   `status` tinyint(1) NOT NULL COMMENT '状态',
