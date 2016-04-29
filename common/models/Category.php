@@ -32,6 +32,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['title', 'name'], 'required'],
             [['pid', 'is_nav'], 'integer'],
+            ['is_nav', 'default', 'value' => 0]
         ];
     }
 

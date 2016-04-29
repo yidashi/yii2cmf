@@ -236,7 +236,7 @@ CREATE TABLE `pop_category` (
   `article` int(10) NOT NULL DEFAULT '0',
   `is_nav` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +245,7 @@ CREATE TABLE `pop_category` (
 
 LOCK TABLES `pop_category` WRITE;
 /*!40000 ALTER TABLE `pop_category` DISABLE KEYS */;
-INSERT INTO `pop_category` VALUES (1,'默认',0,1449050838,1449050838,'moren');
+INSERT INTO `pop_category` VALUES (1,'默认',0,1449050838,1449050838,'moren','',0,0);
 /*!40000 ALTER TABLE `pop_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,13 +284,15 @@ CREATE TABLE `pop_config` (
   `extra` varchar(255) NOT NULL DEFAULT '',
   `desc` varchar(255) NOT NULL COMMENT '配置描述',
   `type` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
 LOCK TABLES `pop_config` WRITE;
 /*!40000 ALTER TABLE `pop_comment` DISABLE KEYS */;
-INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST',"1:字符\n2:数组\n3:枚举\n4:图\n5:多行字符串",'','配置类型列表',2),(2,'THEME_NAME','basic',"basic\nspecial",'主题名',3);
+INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST',"1:字符\n2:数组\n3:枚举\n4:图\n5:多行字符串",'','配置类型列表',2,1449050838,1449050838),(2,'THEME_NAME','basic',"basic\nspecial",'主题名',3,1449050838,1449050838),(3,'BACKEND_SKIN','skin-green',"skin-black:skin-black\nskin-blue:skin-blue\nskin-green:skin-green\nskin-purple:skin-purple\nskin-red:skin-red\nskin-yellow:skin-yellow\n",'后台皮肤',3,1449050838,1449050838);
 /*!40000 ALTER TABLE `pop_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -521,3 +523,18 @@ CREATE TABLE `pop_reward` (
   `updated_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `pop_profile`;
+CREATE TABLE `pop_profile` (
+  `id` int(11) NOT NULL,
+  `money` int(11) NOT NULL,
+  `created_at` int(10) NOT NULL,
+  `updated_at` int(10) NOT NULL,
+  `signature` varchar(100) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `avatar` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `gender` tinyint(1) NOT NULL DEFAULT '0',
+  `locale` varchar(32) COLLATE utf8_bin NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `pop_profile` (id,locale) VALUES(1, 'zh-CN');

@@ -45,6 +45,9 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'formatter' => [
+            'booleanFormat' => ['<span class="label label-danger"><i class="fa fa-times"></i></span>', '<span class="label label-success"><i class="fa fa-check"></i></span>']
+        ],
         'i18n' => [
             'translations' => [
                 'app' => [
@@ -65,13 +68,6 @@ return [
             'rules' => [
             ],
         ],
-        'assetManager' => [
-            'bundles' => [
-                'dmstr\web\AdminLteAsset' => [
-                    'skin' => 'skin-green'
-                ],
-            ],
-        ]
     ],
     'modules' => [
         'admin' => [

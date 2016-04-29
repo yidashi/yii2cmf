@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_nav')->dropDownList(['否', '是']) ?>
+    <?= $form->field($model, 'is_nav')->checkboxList([1 => '是']) ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 

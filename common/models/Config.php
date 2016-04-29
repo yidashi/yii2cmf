@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+use yii\behaviors\TimestampBehavior;
+use yii\caching\DbDependency;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -46,6 +48,12 @@ class Config extends \yii\db\ActiveRecord
             'desc' => '配置描述',
             'type' => '配置类型',
             'extra' => '配置项',
+        ];
+    }
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
         ];
     }
 
@@ -104,7 +112,7 @@ class Config extends \yii\db\ActiveRecord
         $config = \Yii::$app->cache->get([__CLASS__, $name]);
         if ($config === false) {
             $config = static::find()->where(['name' => $name])->one();
-            \Yii::$app->cache->set([__CLASS__, $name], $config, 60 * 60);
+            \Yii::$app->cache->set([__CLASS__, $name], $config, 60 * 60, new DbDependency(['sql' => 'SELECT MAX(updated_at) FROM {{%config}}']));
         }
         if (!empty($config)) {
             return self::_parse($config->type, $config->value);
