@@ -1,6 +1,6 @@
 demo地址 `www.51siyuan.cn`
 
-demo后台地址: `hehe.51siyuan.cn`  帐号 `demo` 密码 `111111`
+demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
 ## 现有功能:
 
@@ -29,7 +29,7 @@ php yii migrate  //导入demo初始化数据（如果导入失败，可以到con
 ```
 
 
-前台地址: `/frontend/web/index.php`
+前台地址: `/web/`
 
-后台地址: `/backend/web/index.php` 管理员 帐号 `hehe` 密码 `111111`
+后台地址: `/web/admin/` 管理员 帐号 `hehe` 密码 `111111`
 

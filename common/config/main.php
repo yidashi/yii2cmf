@@ -48,7 +48,8 @@ return [
                     'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
                 ],
             ],
-        ]
+        ],
+        'config' => \common\components\Config::className() //数据库动态配置
     ],
     'aliases' => [
         '@common/logic' => '@common/models/logic',
