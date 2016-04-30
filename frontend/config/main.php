@@ -74,9 +74,9 @@ return [
         'view' => [
             'on beginPage' => function($event){
                 if ($event->sender->title) {
-                    $event->sender->title .= '_' . \Yii::$app->config->get('SEO_SITE_TITLE');
+                    $event->sender->title .= '_' . \Yii::$app->config->get('SITE_NAME');
                 } else {
-                    $event->sender->title = \Yii::$app->config->get('SEO_SITE_TITLE');
+                    $event->sender->title = \Yii::$app->config->get('SITE_NAME');
                 }
             }
         ]

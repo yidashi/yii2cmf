@@ -20,18 +20,18 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => \common\models\Config::get('SEO_SITE_KEYWORDS')]);?>
-    <?php $this->registerMetaTag(['name' => 'description', 'content' => \common\models\Config::get('SEO_SITE_DESCRIPTION')]);?>
+    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->config->get('SEO_SITE_KEYWORDS')]);?>
+    <?php $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);?>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <header class="header" style="background:url(<?= \common\models\Config::get('PAGE_TOP_BG')?>) no-repeat;background-size: cover;">
+    <header class="header" style="background:url(<?= Yii::$app->config->get('PAGE_TOP_BG')?>) no-repeat;background-size: cover;">
         <div class="container">
             <div class="header-content">
-                <h1 class="pull-left"><?= Html::a(\common\models\Config::get('SITE_NAME'), Yii::$app->homeUrl)?></h1>
+                <h1 class="pull-left"><?= Html::a(Yii::$app->config->get('SITE_NAME'), Yii::$app->homeUrl)?></h1>
                 <form role="search" class="form-inline pull-right">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="搜索" id="bdcsMain">
@@ -106,8 +106,8 @@ AppAsset::register($this);
     </div>
     <hr/>
     <div class="container">
-        <p class="pull-left">&copy; <?= \common\models\Config::get('SITE_NAME').' '.date('Y') ?></p>
-        <p class="pull-right"><?= \common\models\Config::get('SITE_ICP')?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
+        <p class="pull-right"><?= Yii::$app->config->get('SITE_ICP')?></p>
     </div>
 </footer>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -118,7 +118,7 @@ AppAsset::register($this);
 <a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>
 <?php if (YII_ENV_PROD):?>
 <!--页脚-->
-<?= \common\models\Config::get('FOOTER')?>
+<?= Yii::$app->config->get('FOOTER')?>
 <?php endif; ?>
 <?php $this->endBody() ?>
 </body>

@@ -16,7 +16,7 @@ class ThemeBehavior extends ActionFilter
     public function beforeAction($action)
     {
         $isMobile = (new MobileDetect())->isMobile();
-        $themeName = Config::get('THEME_NAME', 'basic');
+        $themeName = \Yii::$app->config->get('THEME_NAME', 'basic');
         $theme = [
             'class' => 'yii\base\Theme',
             'basePath' => '@frontend/themes/basic',

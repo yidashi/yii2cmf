@@ -19,8 +19,8 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => \common\models\Config::get('SEO_SITE_KEYWORDS')]);?>
-    <?php $this->registerMetaTag(['name' => 'description', 'content' => \common\models\Config::get('SEO_SITE_DESCRIPTION')]);?>
+    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->config->get('SEO_SITE_KEYWORDS')]);?>
+    <?php $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);?>
     <?php $this->head() ?>
 </head>
 <body>
@@ -118,8 +118,8 @@ AppAsset::register($this);
     </div>
     <hr/>
     <div class="container">
-        <p class="pull-left">&copy; <?= \common\models\Config::get('SITE_NAME').' '.date('Y') ?></p>
-        <p class="pull-right"><?= \common\models\Config::get('SITE_ICP')?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
+        <p class="pull-right"><?= Yii::$app->config->get('SITE_ICP')?></p>
     </div>
 </footer>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -131,7 +131,7 @@ AppAsset::register($this);
 <?= \common\widgets\scroll\Scroll::widget()?>
 <?php if (YII_ENV_PROD):?>
 <!--页脚-->
-<?= \common\models\Config::get('FOOTER')?>
+<?= Yii::$app->config->get('FOOTER')?>
 <?php endif; ?>
 <?php $this->endBody() ?>
 </body>
