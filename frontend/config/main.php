@@ -70,6 +70,15 @@ return [
                     'sourcePath' => '@frontend/components/bootstrap/dist'
                 ],
             ],
+        ],
+        'view' => [
+            'on beginPage' => function($event){
+                if ($event->sender->title) {
+                    $event->sender->title .= '_' . \Yii::$app->config->get('SEO_SITE_TITLE');
+                } else {
+                    $event->sender->title = \Yii::$app->config->get('SEO_SITE_TITLE');
+                }
+            }
         ]
     ],
     'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),

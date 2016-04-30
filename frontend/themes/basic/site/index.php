@@ -3,7 +3,6 @@
 use common\helpers\Html;
 /* @var $this yii\web\View */
 
-$this->title = \common\models\Config::get('SEO_SITE_TITLE').'_'.Yii::$app->name;
 ?>
 <div class="site-index">
     <div class="col-md-8">

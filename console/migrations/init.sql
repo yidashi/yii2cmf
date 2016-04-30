@@ -292,7 +292,7 @@ CREATE TABLE `pop_config` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 LOCK TABLES `pop_config` WRITE;
 /*!40000 ALTER TABLE `pop_config` DISABLE KEYS */;
-INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST',"1:字符\n2:数组\n3:枚举\n4:图\n5:多行字符串",'','配置类型列表',2,1449050838,1449050838),(2,'THEME_NAME','basic',"basic\nspecial",'主题名',3,1449050838,1449050838),(3,'BACKEND_SKIN','skin-green',"skin-black:skin-black\nskin-blue:skin-blue\nskin-green:skin-green\nskin-purple:skin-purple\nskin-red:skin-red\nskin-yellow:skin-yellow\n",'后台皮肤',3,1449050838,1449050838);
+INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST','1:字符\r\n2:数组\r\n3:枚>举\r\n4:图\r\n5:多行字符','','配置类型列表',2,0,1461937892),(3,'SEO_SITE_DESCRIPTION','yiicmf','','meta description',1,0,1461937892),(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords',1,0,1461937892),(5,'SITE_ICP','京ICP备15065774号','','域名备案号',1,0,1461937892),(6,'SITE_NAME','饮水思源','','网站名称',1,0,1461937892),(7,'PAGE_TOP_BG','http://image.51siyuan.cn/upload/image/20160322/1458634036179563.jpg','','头部背景',4,0,1461937892),(8,'FOOTER','','','底部',5,0,1461937892),(9,'THEME_NAME','0','basic\r\nspecial','主题名',3,0,1461937892),(10,'SEO_SITE_TITLE','呵呵','','网>站标题',1,0,1461937892),(11,'BACKEND_SKIN','skin-blue','skin-black:skin-black\r\nskin-blue:skin-blue\r\nskin-green:skin-green\r\nskin-purple:skin-purple\r\nskin-red:skin-red\r\nskin-yellow:skin-yellow','后台皮肤',3,1461931367,1461937892);
 /*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,7 +342,7 @@ CREATE TABLE `pop_menu` (
 
 LOCK TABLES `pop_menu` WRITE;
 /*!40000 ALTER TABLE `pop_menu` DISABLE KEYS */;
-INSERT INTO `pop_menu` VALUES (1,'系统管理',NULL,NULL,2,NULL,'fa-cog'),(2,'菜单管理',1,'/admin/menu/index',NULL,NULL,''),(15,'用户管理',1,'/admin/assignment/index',NULL,NULL,''),(16,'路由管理',1,'/admin/route/index',NULL,NULL,''),(17,'角色管理',1,'/admin/role/index',NULL,NULL,''),(20,'控制面板',NULL,'/site/index',1,NULL,'fa-dashboard'),(21,'文章管理',NULL,NULL,3,NULL,'fa-book'),(22,'文章列表',21,'/article/index',1,NULL,''),(23,'发布文章',21,'/article/create',2,NULL,''),(24,'分类管理',21,'/category/index',3,NULL,''),(25,'数据库备份',NULL,NULL,4,NULL,'fa-book'),(26,'备份',25,'/database/export/index',NULL,NULL,''),(27,'还原',25,'/database/import/index',NULL,NULL,''),(28,'操作记录',1,'/admin-log/index',0,NULL,'');
+INSERT INTO `pop_menu` VALUES (15,'用户管理',33,'/admin/assignment/index',NULL,NULL,''),(16,'路由管理',33,'/admin/route/index',NULL,NULL,''),(17,'角色管理',33,'/admin/role/index',NULL,NULL,''),(22,'文章列表',39,'/article/index',1,NULL,''),(24,'系统管理',NULL,NULL,2,NULL,'cog'),(25,'网站设置',24,'/system/config',1,NULL,''),(26,'配置管理',24,'/config/index',2,NULL,''),(27,'单页管理',39,'/page/index',40,NULL,''),(28,'导航管理',24,'/nav/index',3,NULL,''),(29,'分类管理',39,'/category/index',4,NULL,''),(30,'数据库备份',NULL,NULL,4,NULL,'book'),(31,'备份',30,'/database/export/index',NULL,NULL,''),(32,'还原',30,'/database/import/index',NULL,NULL,''),(33,'权限管理',NULL,NULL,1,NULL,'users'),(34,'菜单管理',33,'/admin/menu/index',NULL,NULL,''),(37,'操作记录',24,'/admin-log/index',NULL,NULL,''),(39,'>内容管理',NULL,NULL,3,NULL,'edit'),(40,'发布文章',39,'/article/create',2,NULL,''),(41,'回收站',39,'/article/trash',3,NULL,''),(42,'评论管理',39,'/comment/index',6,NULL,'');
 /*!40000 ALTER TABLE `pop_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 

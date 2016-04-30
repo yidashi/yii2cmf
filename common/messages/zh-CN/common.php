@@ -80,4 +80,5 @@ return [
     'Money' => '余额',
     'Signature' => '个性签名',
     'Avatar' => '头像',
+    'Profile' => '个人信息'
 ];
