@@ -18,7 +18,7 @@ use yii\helpers\Markdown;
                 <li class="media" data-key="<?=$item->id?>">
                     <div class="media-left">
                         <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $item->user_id])?>">
-                            <img class="media-object" src="<?= $item->profile->avatar?>" alt="...">
+                            <img class="media-object" src="<?= $item->profile->avatarUrl?>" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
@@ -27,7 +27,7 @@ use yii\helpers\Markdown;
                         <?php foreach ($item->sons as $son):?>
                             <div class="media">
                                 <div class="media-left">
-                                    <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" title=""><img class="media-object" src="<?= $son->profile->avatar?>" alt=""></a>
+                                    <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $son->user_id])?>" rel="author" title=""><img class="media-object" src="<?= $son->profile->avatarUrl?>" alt=""></a>
                                 </div>
                                 <div class="media-body">
                                     <div class="media-heading">

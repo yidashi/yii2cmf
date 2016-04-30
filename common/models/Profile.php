@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%profile}}".
@@ -72,5 +73,10 @@ class Profile extends \yii\db\ActiveRecord
     public static function getLocaleList()
     {
         return Yii::$app->params['availableLocales'];
+    }
+
+    public function getAvatarUrl()
+    {
+        return $this->Avatar ?: Url::to('@static/default/avatar.png');
     }
 }
