@@ -64,7 +64,7 @@ DanmuManager.prototype.optimizeImg = function(url){
   if(url.search('sinaimg.cn') > 0){ // Weibo avatar
     return url.replace(/\/50\//, '\/30\/');
   }
-    return 'http://www.yiichina.com/uploads/avatar/000/03/13/25_avatar_small.jpg';
+    return 'http://static.51siyuan.cn/default/avatar.png';
   return url;
 }
 

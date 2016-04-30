@@ -77,6 +77,6 @@ class Profile extends \yii\db\ActiveRecord
 
     public function getAvatarUrl()
     {
-        return $this->Avatar ?: Url::to('@static/default/avatar.png');
+        return $this->avatar ?: Url::to('@static/default/avatar.png');
     }
 }

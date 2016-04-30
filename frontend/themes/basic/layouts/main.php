@@ -52,7 +52,7 @@ AppAsset::register($this);
         $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
-            'label' => Html::img(Yii::$app->user->identity->profile->avatar, ['width' => 32, 'height' => 32]),
+            'label' => Html::img(Yii::$app->user->identity->profile->avatarUrl, ['width' => 32, 'height' => 32]),
             'linkOptions' => [
                 'class' => 'avatar'
             ],
