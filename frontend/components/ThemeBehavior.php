@@ -18,6 +18,7 @@ class ThemeBehavior extends ActionFilter
         $isMobile = (new MobileDetect())->isMobile();
         $themeName = Config::get('THEME_NAME', 'basic');
         $theme = [
+            'class' => 'yii\base\Theme',
             'basePath' => '@frontend/themes/basic',
             'baseUrl' => '@web/themes/basic',
             'pathMap' => [
@@ -27,7 +28,7 @@ class ThemeBehavior extends ActionFilter
                 ],
             ],
         ];
-        \Yii::$container->set(View::className(),['theme' => $theme]);
+        \Yii::$app->view->theme = \Yii::createObject($theme);
         return true;
     }
 }
