@@ -82,7 +82,7 @@ AppAsset::register($this);
         ];
     }
     $rightMenuItems[] = [
-        'label'=>Yii::t('app', 'Language'),
+        'label'=>Yii::t('frontend', 'Language'),
         'items'=>array_map(function ($code) {
             return [
                 'label' => Yii::$app->params['availableLocales'][$code],
