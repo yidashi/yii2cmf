@@ -41,6 +41,7 @@ class Webuploader extends InputWidget{
         }
         $this->options['boxId'] = isset($this->options['boxId']) ? $this->options['boxId'] : 'picker';
         $this->options['innerHTML'] = isset($this->options['innerHTML']) ? $this->options['innerHTML'] : '<button class="btn btn-primary">选择文件</button>';
+        $this->options['innerHTML'] .= '<div id="webuploaderList" class="uploader-list"></div>';
         $this->options['previewWidth'] = isset($this->options['previewWidth']) ? $this->options['previewWidth'] : '250';
         $this->options['previewHeight'] = isset($this->options['previewHeight']) ? $this->options['previewHeight'] : '150';
     }
@@ -93,19 +94,17 @@ var uploader = WebUploader.create({
         // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
         resize: false
     });
+// 文件上传过程中创建进度条实时显示。
 uploader.on( 'uploadProgress', function( file, percentage ) {
-    var li = $( '#'+file.id ),
+    var li = $( '#webuploaderList'),
         percent = li.find('.progress .progress-bar');
 
     // 避免重复创建
     if ( !percent.length ) {
-        percent = $('<div class="progress progress-striped active">' +
-          '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-          '</div>' +
-        '</div>').appendTo( li ).find('.progress-bar');
+        percent = $('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"></div></div>')
+                .appendTo( li )
+                .find('.progress-bar');
     }
-
-    li.find('p.state').text('上传中 '+ (percentage * 100).toFixed(1) + '%');
 
     percent.css( 'width', percentage * 100 + '%' );
 });
@@ -157,22 +156,20 @@ $.get("{$tokenUrl}",function(res) {
             token: res.uptoken
         }
     });
-    uploader.on( 'uploadProgress', function( file, percentage ) {
-        var li = $( '#'+file.id ),
-            percent = li.find('.progress .progress-bar');
+// 文件上传过程中创建进度条实时显示。
+uploader.on( 'uploadProgress', function( file, percentage ) {
+    var li = $( '#webuploaderList'),
+        percent = li.find('.progress .progress-bar');
 
-        // 避免重复创建
-        if ( !percent.length ) {
-            percent = $('<div class="progress progress-striped active">' +
-              '<div class="progress-bar" role="progressbar" style="width: 0%">' +
-              '</div>' +
-            '</div>').appendTo( li ).find('.progress-bar');
-        }
+    // 避免重复创建
+    if ( !percent.length ) {
+        percent = $('<div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar"></div></div>')
+                .appendTo( li )
+                .find('.progress-bar');
+    }
 
-        li.find('p.state').text('上传中 '+ (percentage * 100).toFixed(1) + '%');
-
-        percent.css( 'width', percentage * 100 + '%' );
-    });
+    percent.css( 'width', percentage * 100 + '%' );
+});
     // 完成上传完了，成功或者失败，先删除进度条。
     uploader.on( 'uploadSuccess', function( file, data ) {
         var url = data.key;
