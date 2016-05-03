@@ -1,8 +1,8 @@
 {
-    "name": "yiisoft/yii2-app-advanced",
-    "description": "Yii 2 Advanced Project Template",
-    "keywords": ["yii2", "framework", "advanced", "project template"],
-    "homepage": "http://www.yiiframework.com/",
+    "name": "yii2cmf",
+    "description": "yii2内容管理框架",
+    "keywords": ["yii2", "cmf"],
+    "homepage": "http://www.51siyuan.cn/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
@@ -37,7 +37,8 @@
         "yiisoft/yii2-composer": "2.0.4",
         "yidashi/yii2-bootstrap-markdown": "^1.0",
         "mihaildev/yii2-elfinder": "^1.0",
-        "trntv/yii2-datetime-widget": "^1.0.0"
+        "trntv/yii2-datetime-widget": "^1.0.0",
+        "qiniu/php-sdk": "^7.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

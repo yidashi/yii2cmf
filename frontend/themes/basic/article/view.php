@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $model->title;
             ])?>
         </span>
         <!--   打赏作者     -->
-        <?= \frontend\components\reward\RewardWidget::widget(['articleId' => $model->id])?>
+        <?= \frontend\widgets\reward\RewardWidget::widget(['articleId' => $model->id])?>
         <span class="vote">
             <a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
             <a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>

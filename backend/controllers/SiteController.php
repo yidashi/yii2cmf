@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use yii\web\Controller;
 use common\models\LoginForm;
@@ -40,7 +39,10 @@ class SiteController extends Controller
             'demo' => [
                 'class' => 'yii\web\ViewAction',
             ],
-            'webupload' => WebuploaderAction::className(),
+            'webupload' => [
+                'class' => \yidashi\webuploader\Action::className(),
+                'driver' => isset(Yii::$app->params['webuploader_driver']) ? Yii::$app->params['webuploader_driver'] : 'local',
+            ],
         ];
     }
 

@@ -81,7 +81,7 @@ return [
             }
         ]
     ],
-    'as ThemeBehavior' => \frontend\components\ThemeBehavior::className(),
-    'as RouteBehavior' => \frontend\components\RouteBehavior::className(),
+    'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
+    'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),
     'params' => $params,
 ];
