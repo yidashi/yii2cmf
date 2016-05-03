@@ -15,7 +15,7 @@ use yii\web\UploadedFile;
 
 class Action extends \yii\base\Action
 {
-    public $driver = 'local';
+    public $driver;
     /**
      * @var array
      */
@@ -27,6 +27,9 @@ class Action extends \yii\base\Action
         //close csrf
         Yii::$app->request->enableCsrfValidation = false;
         Yii::$app->response->format = Response::FORMAT_JSON;
+        if (empty($this->driver)) {
+            $this->driver = isset(Yii::$app->params['webuploader_driver']) ? Yii::$app->params['webuploader_driver'] : 'local';
+        }
         parent::init();
     }
 

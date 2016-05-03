@@ -86,14 +86,6 @@ class SiteController extends Controller
                 'successCallback' => [$this, 'onAuthSuccess'],
             ],
             'webupload' => 'yidashi\webuploader\WebuploaderAction',
-            'qiniu' => [
-                'class' => 'common\widgets\qiniu\WebuploaderAction',
-                'config' => [
-                    'bucket' => Yii::$app->config->get('qiniu_bucket'),
-                    'accessKey' => Yii::$app->config->get('qiniu_accessKey'),
-                    'secretKey' => Yii::$app->config->get('qiniu_secretKey')
-                ]
-            ],
             'set-locale'=>[
                 'class'=>'common\actions\SetLocaleAction',
                 'locales'=>array_keys(Yii::$app->params['availableLocales'])

@@ -40,8 +40,7 @@ class SiteController extends Controller
                 'class' => 'yii\web\ViewAction',
             ],
             'webupload' => [
-                'class' => \yidashi\webuploader\Action::className(),
-                'driver' => isset(Yii::$app->params['webuploader_driver']) ? Yii::$app->params['webuploader_driver'] : 'local',
+                'class' => \yidashi\webuploader\Action::className()
             ],
         ];
     }
