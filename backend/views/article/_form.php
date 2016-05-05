@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 
-            <?= $form->field($model, 'status')->checkboxList([1 => '激活']) ?>
+            <?= $form->field($model, 'status')->radioList([1 => '激活']) ?>
 
         </div>
         <div class="tab-pane" id="tab_2">
