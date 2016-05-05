@@ -35,8 +35,17 @@ AppAsset::register($this);
     ]);
     $menuItems = [];
     $menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl];
-    foreach (\common\models\Category::find()->where(['is_nav' => 1])->all() as $nav) {
-        $menuItems[] = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
+    // 暂只支持两级,多了也没意义
+    foreach (\common\models\Category::tree(\common\models\Category::find()->where(['is_nav' => 1])->asArray()->all()) as $nav) {
+        $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
+        if (isset($nav['_child'])) {
+            $secondItems = [];
+            foreach($nav['_child'] as $second) {
+                $secondItems[] = ['label' => $second['title'], 'url' => ['/article/index', 'cate' => $second['name']]];
+            }
+            $firstItem['items'] = $secondItems;
+        }
+        $menuItems[] = $firstItem;
     }
     foreach (\common\models\Nav::find()->all() as $nav) {
         $menuItems[] = ['label' => $nav['title'], 'url' => $nav['route']];

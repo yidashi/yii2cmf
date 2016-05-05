@@ -83,9 +83,11 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
-    public static function tree()
+    public static function tree($list = [])
     {
-        $list = self::find()->asArray()->all();
+        if (empty($list)) {
+            $list = self::find()->asArray()->all();
+        }
         $tree = self::list2tree($list);
         return $tree;
     }
