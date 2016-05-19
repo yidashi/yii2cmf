@@ -45,7 +45,7 @@ class User extends \common\models\User
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios['update'] = ['username', 'email'];
+        $scenarios['update'] = ['username', 'email', 'status'];
         $scenarios['resetPassword'] = ['password'];
         return $scenarios;
     }
