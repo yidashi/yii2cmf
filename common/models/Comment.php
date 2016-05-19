@@ -90,7 +90,8 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function init()
     {
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'addComment']);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'updateComment'], ['comment' => 1]);
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'updateComment'], ['comment' => -1]);
     }
     public function transactions()
     {
@@ -102,9 +103,9 @@ class Comment extends \yii\db\ActiveRecord
     /**
      * 更新文章评论计数器.
      */
-    public function addComment()
+    public function updateComment($event)
     {
         $article = Article::find()->where(['id' => $this->article_id])->one();
-        $article->updateCounters(['comment' => 1]);
+        $article->updateCounters(['comment' => $event->data['comment']]);
     }
 }
