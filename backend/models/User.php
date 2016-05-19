@@ -38,7 +38,7 @@ class User extends \common\models\User
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELTED]]
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]]
 
         ];
     }
