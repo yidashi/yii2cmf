@@ -20,6 +20,8 @@ use yii\db\ActiveQuery;
  * @property int $updated_at
  * @property int $status
  * @property string $cover
+ * @property boolean $isUp read-only
+ * @property boolean $isDown read-only
  */
 class Article extends \yii\db\ActiveRecord
 {

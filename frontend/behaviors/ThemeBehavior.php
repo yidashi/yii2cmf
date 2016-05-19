@@ -6,10 +6,8 @@
  */
 namespace frontend\behaviors;
 
-use common\models\Config;
 use Detection\MobileDetect;
 use yii\base\ActionFilter;
-use yii\web\View;
 
 class ThemeBehavior extends ActionFilter
 {

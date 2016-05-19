@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'use_layout',
                 'value' => function ($model) {
-                    return ['不使用', '使用'][$model->use_layout];
+                    $arr = ['不使用', '使用'];
+                    return $arr[$model->use_layout];
                 },
             ],
             'title',

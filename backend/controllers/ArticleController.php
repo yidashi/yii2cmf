@@ -6,7 +6,7 @@ use common\models\ArticleData;
 use common\models\ArticleTag;
 use yidashi\webuploader\WebuploaderAction;
 use Yii;
-use common\logic\Article;
+use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;

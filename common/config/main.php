@@ -49,7 +49,10 @@ return [
                 ],
             ],
         ],
-        'config' => \common\components\Config::className() //数据库动态配置
+        'config' => \common\components\Config::className(), //数据库动态配置
+        'queue' => [//队列组件化,方便替换
+            'class' => \common\components\Queue::className(),
+        ]
     ],
     'aliases' => [
         '@common/logic' => '@common/models/logic',
