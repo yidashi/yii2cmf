@@ -96,7 +96,7 @@ class Comment extends \yii\db\ActiveRecord
     public function transactions()
     {
         return [
-            self::SCENARIO_DEFAULT => self::OP_INSERT,
+            self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
     }
 
