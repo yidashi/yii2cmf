@@ -31,7 +31,6 @@
         "yiisoft/yii2-redis": "*",
         "mobiledetect/mobiledetectlib": "^2.8",
         "yiisoft/yii2-sphinx": "^2.0",
-        "yidashi/yii2-boostrap-markdown": "1.0.2",
         "yidashi/yii2-webuploader": "*",
         "dmstr/yii2-adminlte-asset": "*",
         "yiisoft/yii2-composer": "2.0.4",
