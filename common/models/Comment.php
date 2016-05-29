@@ -3,6 +3,7 @@
 namespace common\models;
 
 use yii\behaviors\TimestampBehavior;
+use Yii;
 
 /**
  * This is the model class for table "{{%comment}}".
@@ -107,5 +108,29 @@ class Comment extends \yii\db\ActiveRecord
     {
         $article = Article::find()->where(['id' => $this->article_id])->one();
         $article->updateCounters(['comment' => $event->data['comment']]);
+    }
+
+    public function getIsUp()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $userId = Yii::$app->user->id;
+            $up = Vote::find()->where(['type' => 'comment', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'up'])->one();
+            if (!empty($up)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function getIsDown()
+    {
+        if (!Yii::$app->user->isGuest) {
+            $userId = Yii::$app->user->id;
+            $down = Vote::find()->where(['type' => 'comment', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'down'])->one();
+            if (!empty($down)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

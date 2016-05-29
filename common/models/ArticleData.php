@@ -61,6 +61,9 @@ class ArticleData extends \yii\db\ActiveRecord
             $article->desc = $this->generateDesc($event->sender->content);
             $article->save(false);
         }
+        if ($event->name == self::EVENT_AFTER_INSERT) {
+            \Yii::$app->queue->push('*', '\common\models\queue\Subscribe', ['article' => serialize($article)]);
+        }
     }
 
     /**

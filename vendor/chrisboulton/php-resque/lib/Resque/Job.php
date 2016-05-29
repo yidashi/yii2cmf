@@ -142,7 +142,7 @@ class Resque_Job
 		if (!is_null($this->instance)) {
 			return $this->instance;
 		}
-
+//print_r(spl_autoload_functions());die;
 		if(!class_exists($this->payload['class'])) {
 			throw new Resque_Exception(
 				'Could not find job class ' . $this->payload['class'] . '.'
