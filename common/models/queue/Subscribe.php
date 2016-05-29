@@ -22,7 +22,7 @@ class Subscribe
             ->setTo('liujuntaor@qq.com')
             ->setSubject($article->title . '-' . \Yii::$app->config->get('SITE_NAME'))
             ->setTextBody($article->desc)
-            ->setHtmlBody($article->desc . '<a href="http://www.51siyuan.cn/" . $article->id . ".html">阅读全文</a>')
+            ->setHtmlBody($article->desc . '<a href="http://www.51siyuan.cn/' . $article->id . '.html">阅读全文</a>')
             ->send();
     }
 }
