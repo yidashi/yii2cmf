@@ -52,6 +52,22 @@ return [
         'config' => \common\components\Config::className(), //数据库动态配置
         'queue' => [//队列组件化,方便替换
             'class' => \common\components\Queue::className(),
+        ],
+        'log' => [
+            'targets' => [
+                'db'=>[
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['warning', 'error'],
+                    'except'=>['yii\web\HttpException:*', 'yii\i18n\I18N\*'],
+                    'prefix'=>function () {
+                        $url = !Yii::$app->request->isConsoleRequest ? Yii::$app->request->getUrl() : null;
+                        return sprintf('[%s][%s]', Yii::$app->id, $url);
+                    },
+                    'categories' => ['access\*'],
+                    'logVars'=>[],
+                    'logTable'=>'{{%system_log}}'
+                ],
+            ]
         ]
     ],
     'aliases' => [

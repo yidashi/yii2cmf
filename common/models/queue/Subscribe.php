@@ -8,9 +8,6 @@
 
 namespace common\models\queue;
 
-
-use yii\helpers\Html;
-
 class Subscribe
 {
     public function perform()
