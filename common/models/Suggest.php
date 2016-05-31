@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -48,6 +49,21 @@ class Suggest extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false
+            ]
         ];
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getProfile()
+    {
+        return $this->hasOne(Profile::className(), ['id' => 'user_id']);
     }
 }

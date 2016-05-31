@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'name:text:标识',
                     'article:text:文章数',
                     'is_nav:boolean:是否显示导航栏',
+                    'sort',
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],

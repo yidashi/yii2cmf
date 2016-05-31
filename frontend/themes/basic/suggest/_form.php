@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 <div class="config-form">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 15]); ?>
+    <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className()); ?>
 
     <div class="form-group">
         <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>

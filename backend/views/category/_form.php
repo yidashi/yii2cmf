@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'is_nav')->radioList(['否', '是']) ?>
 
+    <?= $form->field($model, 'sort')->textInput() ?>
+
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
     <div class="form-group">

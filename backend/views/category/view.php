@@ -32,6 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at',
             'updated_at',
             'name',
+            'is_nav',
+            'sort'
         ],
     ]) ?>
 

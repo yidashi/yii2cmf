@@ -235,6 +235,7 @@ CREATE TABLE `pop_category` (
   `description` varchar(1000) NOT NULL DEFAULT '',
   `article` int(10) NOT NULL DEFAULT '0',
   `is_nav` tinyint(1) NOT NULL DEFAULT '0',
+  `sort` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
