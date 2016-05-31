@@ -6,9 +6,10 @@
  * Time: 下午4:56
  */
 
-namespace frontend\widgets;
+namespace frontend\widgets\reward;
 
 
+use frontend\models\RewardForm;
 use yii\base\Widget;
 use Yii;
 
@@ -21,7 +22,10 @@ class RewardWidget extends Widget
         if (Yii::$app->user->isGuest) {
             Yii::$app->user->loginRequired();
         } else {
-            $this->render('index');
+            $model = new RewardForm();
+            $model->money = Yii::$app->user->identity->profile->money;
+            $model->article_id = $this->articleId;
+            return $this->render('index', ['model' => $model]);
         }
     }
 }
