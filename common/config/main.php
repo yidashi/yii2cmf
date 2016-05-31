@@ -63,7 +63,6 @@ return [
                         $url = !Yii::$app->request->isConsoleRequest ? Yii::$app->request->getUrl() : null;
                         return sprintf('[%s][%s]', Yii::$app->id, $url);
                     },
-                    'categories' => ['access\*'],
                     'logVars'=>[],
                     'logTable'=>'{{%system_log}}'
                 ],
