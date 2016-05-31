@@ -57,8 +57,8 @@ AppAsset::register($this);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
     if (Yii::$app->user->isGuest) {
-        $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/site/signup']];
-        $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/site/login']];
+        $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
+        $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
             'label' => Html::img(Yii::$app->user->identity->profile->avatarUrl, ['width' => 32, 'height' => 32]),

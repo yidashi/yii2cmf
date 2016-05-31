@@ -17,6 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Login' => '登录',
+    'Signup' => '注册',
     'API access token' => '',
     'Email' => '',
     'Expire At' => '',

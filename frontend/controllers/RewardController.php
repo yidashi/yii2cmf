@@ -2,12 +2,39 @@
 
 namespace frontend\controllers;
 
+use common\models\Reward;
+use frontend\models\RewardForm;
+use Yii;
+use yii\filters\AccessControl;
+
 class RewardController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex()
     {
-        \Yii::$app->session->setFlash('warning', '此功能暂未开放');
-        return $this->redirect(\Yii::$app->request->referrer);
+        $model = new RewardForm();
+        if ($model->load(Yii::$app->request->post()) && $model->reward()) {
+            Yii::$app->session->setFlash('success', '打赏成功');
+            return $this->redirect(Yii::$app->request->referrer);
+        } else {
+            Yii::$app->session->setFlash('error', current($model->firstErrors));
+            return $this->redirect(Yii::$app->request->referrer);
+        }
     }
 
 }

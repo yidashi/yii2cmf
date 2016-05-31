@@ -16,10 +16,9 @@ use common\helpers\Html;
     <?= $form->field($rewardModel, 'article_id')->hiddenInput()->label(false) ?>
     <?= $form->field($rewardModel, 'money')?>
     <?= $form->field($rewardModel, 'comment')?>
-    <p>使用支付宝支付</p>
     <div class="clearfix">
         <div class="pull-right">
-            <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) . ' ' . Html::submitButton('确认支付', ['class' => 'btn btn-primary'])?>
+            <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) . ' ' . Html::submitButton('确认打赏', ['class' => 'btn btn-primary'])?>
         </div>
     </div>
     <?php \yii\widgets\ActiveForm::end()?>

@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "pop_reward".
@@ -21,7 +23,7 @@ class Reward extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_reward';
+        return '{{%reward}}';
     }
 
     /**
@@ -30,8 +32,9 @@ class Reward extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['article_id', 'user_id', 'money', 'created_at', 'updated_at'], 'required'],
-            [['article_id', 'user_id', 'money', 'created_at', 'updated_at'], 'integer']
+            [['article_id', 'money'], 'required'],
+            [['article_id', 'money'], 'integer'],
+            ['money', 'compare', 'operator' => '>', 'compareValue' => 0]
         ];
     }
 
@@ -47,6 +50,18 @@ class Reward extends \yii\db\ActiveRecord
             'money' => 'Money',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false
+            ]
         ];
     }
 }

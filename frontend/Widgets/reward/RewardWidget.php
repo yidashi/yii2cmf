@@ -11,18 +11,25 @@ namespace frontend\widgets\reward;
 
 use yii\base\Widget;
 use frontend\models\RewardForm;
+use Yii;
 
 class RewardWidget extends Widget
 {
+
     public $articleId;
+
     public function run()
     {
-        //打赏
-        $rewardModel = new RewardForm();
-        $rewardModel->money = '2.00';
-        $rewardModel->article_id = $this->articleId;
-        return $this->render('index', [
-            'rewardModel' => $rewardModel
-        ]);
+        if (!Yii::$app->user->isGuest) {
+            //打赏
+            $rewardModel = new RewardForm();
+            $rewardModel->money = Yii::$app->user->identity->profile->money;
+            $rewardModel->article_id = $this->articleId;
+            return $this->render('index', [
+                'rewardModel' => $rewardModel
+            ]);
+        } else {
+            Yii::$app->user->loginRequired();
+        }
     }
 }
