@@ -48,7 +48,7 @@ class SuggestController extends Controller
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', '感谢您的反馈！');
 
-            return $this->redirect(['create']);
+            return $this->redirect(['index']);
         }
     }
 }

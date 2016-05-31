@@ -8,12 +8,18 @@
 
 ?>
 <div class="col-4">
-    <ul class="media-list">
-        <?= \yii\widgets\ListView::widget([
-            'itemView' => '_item',
-            'dataProvider' => $dataProvider
-        ])?>
-    </ul>
+    <?= \yii\widgets\ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '_item',
+        'itemOptions' => [
+            'class' => 'media',
+            'tag' => 'li'
+        ],
+        'options' => [
+            'class' => 'media-list',
+            'tag' => 'ul'
+        ]
+    ])?>
 
     <?= $this->render('create', ['model' => $model]); ?>
 </div>
