@@ -50,7 +50,7 @@ AppAsset::register($this);
     foreach (\common\models\Nav::find()->all() as $nav) {
         $menuItems[] = ['label' => $nav['title'], 'url' => $nav['route']];
     }
-    $menuItems[] = ['label' => '留言', 'url' => ['/suggest']];
+    $menuItems[] = ['label' => '留言', 'url' => ['/suggest/index']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,

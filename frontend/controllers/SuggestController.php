@@ -18,6 +18,7 @@ class SuggestController extends Controller
         return [
             [
                 'class' => AccessControl::className(),
+                'only' => ['create'],
                 'rules' => [
                     [
                         'actions' => ['create'],
