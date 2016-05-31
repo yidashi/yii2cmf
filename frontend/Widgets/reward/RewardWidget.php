@@ -29,6 +29,7 @@ class RewardWidget extends Widget
                 'rewardModel' => $rewardModel
             ]);
         } else {
+            // zhen nima qilepale
             Yii::$app->user->loginRequired();
         }
     }
