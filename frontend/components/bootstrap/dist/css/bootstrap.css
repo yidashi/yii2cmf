@@ -1427,7 +1427,7 @@ body
     font-size: 14px;
     line-height: 1.42857143;
 
-    color: #333;
+    color: #555;
     background-color: #fff;
 }
 input,
@@ -3866,7 +3866,7 @@ select[multiple].input-lg
     margin-top: 5px;
     margin-bottom: 10px;
 
-    color: #737373;
+    color: #959595;
 }
 @media (min-width: 768px)
 {
@@ -6634,7 +6634,7 @@ a.thumbnail.active
 {
     padding: 9px;
 
-    color: #333;
+    color: #555;
 }
 .alert
 {
