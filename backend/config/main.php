@@ -50,11 +50,6 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@backend/messages',
-                    'forceTranslation' => true,
-                ],
                 'kvgrid' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@kvgrid/messages',
