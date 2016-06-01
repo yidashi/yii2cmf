@@ -532,7 +532,7 @@ CREATE TABLE `pop_profile` (
 
 INSERT INTO `pop_profile` (id,locale) VALUES(1, 'zh-CN');
 
-# 签到
+/*签到*/
 DROP TABLE IF EXISTS `pop_sign`;
 CREATE TABLE `pop_sign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

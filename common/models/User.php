@@ -221,7 +221,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getIsSign()
     {
-        return date('Ymd', $this->sign->last_sign_at) == date('Ymd');
+        if (!empty($this->sign)) {
+            return date('Ymd', $this->sign->last_sign_at) == date('Ymd');
+        }
+        return false;
     }
 
     /**
