@@ -4,6 +4,7 @@
 /* @var $content string */
 
 use common\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -70,7 +71,7 @@ AppAsset::register($this);
             'items' => [
                 [
                     'label' => Html::icon('user') . ' 个人信息',
-                    'url' => ['/my/profile'],
+                    'url' => ['/user/index', 'id' => Yii::$app->user->id],
                 ],
                 [
                     'label' => Html::icon('book') . ' 我的投稿',
@@ -121,8 +122,8 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-sm-4"><a href="<?= \yii\helpers\Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a></div>
-            <div class="col-sm-4"><a href="<?= \yii\helpers\Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a></div>
+            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a></div>
+            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a></div>
             <div class="col-sm-4"><a href="https://github.com/yidashi/yii">获取源码</a></div>
         </div>
     </div>

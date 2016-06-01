@@ -9,7 +9,7 @@
 namespace frontend\controllers;
 
 
-use common\models\Profile;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -17,12 +17,12 @@ class UserController extends Controller
 {
     public function actionIndex($id)
     {
-        $profile = Profile::find()->where(['id' => $id])->one();
-        if (empty($profile)) {
+        $user = User::find()->where(['id' => $id])->one();
+        if (empty($user)) {
             throw new NotFoundHttpException('用户不存在!');
         }
         return $this->render('index', [
-            'profile' => $profile
+            'user' => $user
         ]);
     }
 

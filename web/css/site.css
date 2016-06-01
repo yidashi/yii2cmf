@@ -353,23 +353,13 @@ pre { background: #F0F0F0; }
 /* 用户弹出框结束 */
 
 /* 个人主页开始 */
-.board { height: 80px; }
-.board span { width: 33.33%; float: left; text-align: center; border-right: #ddd solid 1px; font-size: 18px; }
-.board span:last-child { border-right: none; }
-.board span em { font-style: normal; font-size: 24px; color: #D8582B; line-height: 1.6em; }
-
-
-.media-profile .media-object { margin-right: 10px; width: 130px; height: 130px; border-radius: 4px; padding: 2px; border: #ddd solid 1px; }
-.media-profile h1 { border-bottom: #eee solid 1px; padding-bottom: 10px; margin-bottom: 15px; }
-.media-profile h1 a { font-size: 12px; }
-.media-profile h1 img { height: 18px; margin-right: 10px; }
-.media-profile h1 small em { font-style: normal; color: #D8582B; }
-.media-profile p { font-size: 12px; color: #666; margin-left: -20px; }
-.media-profile p:last-child { margin-bottom: 0; }
-.media-profile p span { margin-left: 20px; }
-
-.fa-mars { font-weight: bold; color: #3B6FBA; }
-.fa-venus { font-weight: bold; color: #D8582B; }
+.user { text-align: center; padding: 45px 0 0 0; }
+.user .stat { height: 80px; border-top: #eee solid 1px; padding-top: 20px; }
+.user .stat li { width: 33.33%; float: left; text-align: center; font-size: 18px; list-style: none; border-right: #eee solid 1px; }
+.user .stat li h3 { font-size: 18px; margin: 5px 0; color: #D8582B; }
+.user .stat li:last-child { border-right: none; }
+.user-info li { list-style: none; line-height: 2em; }
+.user-info span { color: #666; }
 /* 个人主页结束 */
 
 /* 文档开始 */
@@ -577,3 +567,11 @@ table.emot td {cursor: pointer; border: #eee solid 1px; padding: 2px;}
     filter: alpha(opacity=75);
     z-index: 20140628;
 }
+/* 头像开始 */
+.panel img { width: 40px; height: 40px; padding: 1px; border: #ddd solid 1px; border-radius: 4px; }
+.media-object, .media-user .media-object { width: 48px; height: 48px; padding: 2px; border: #ddd solid 1px; border-radius: 6px; -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, .05); box-shadow: 0px 1px 2px rgba(0, 0, 0, .05); }
+.avatar img, .online img { border-radius: 4px; border: #fff solid 1px; width: 36px; height: 36px; }
+.user img.avatar { width: 120px; height: 120px; border-radius: 50%; }
+.thumbnail a > img.media-object { max-width: 48px; }
+.avatar-list { margin: -7px; }
+.avatar-list li { list-style: none; display: inline-block; padding: 4px; }

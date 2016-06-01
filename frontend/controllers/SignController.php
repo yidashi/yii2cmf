@@ -65,7 +65,7 @@ class SignController extends Controller
             ];
         } else {
             $dataProvider = new ActiveDataProvider([
-                'query' => Sign::findBySql('SELECT * FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") ORDER BY last_sign_at ASC'),
+                'query' => Sign::findBySql('SELECT * FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d")  = "'. date('Ymd') . '" ORDER BY last_sign_at ASC'),
                 'pagination' => [
                     'defaultPageSize' => 100
                 ]

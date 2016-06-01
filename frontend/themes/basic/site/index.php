@@ -36,7 +36,7 @@ use yii\helpers\Url;
             <?php else: ?>
             <a class="btn btn-success disabled" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-check-o"></i> 今日已签到<br>已连续<?= Yii::$app->user->identity->sign->continue_times ?>天</a>
             <?php endif; ?>
-            <a class="btn btn-primary" href="<?= Url::to(['/sign'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d")')->queryScalar() ?>人签到</a>
+            <a class="btn btn-primary" href="<?= Url::to(['/sign'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") = "'. date('Ymd') . '"')->queryScalar() ?>人签到</a>
         </div>
         <div class="panel panel-default">
             <div class="panel-heading"><h2>所有分类</h2></div>

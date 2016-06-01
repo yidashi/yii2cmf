@@ -445,6 +445,8 @@ CREATE TABLE `pop_user` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '10',
   `is_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `login_at` tinyint(1) NOT NULL,
+  `signup_at` tinyint(1) NOT NULL,
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
