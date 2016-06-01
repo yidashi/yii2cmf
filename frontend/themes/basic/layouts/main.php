@@ -50,10 +50,11 @@ AppAsset::register($this);
     foreach (\common\models\Nav::find()->all() as $nav) {
         $menuItems[] = ['label' => $nav['title'], 'url' => $nav['route']];
     }
-    $menuItems[] = ['label' => '留言', 'url' => ['/suggest/index']];
+    $menuItems[] = ['label' => '<i>留言</i>', 'url' => ['/suggest/index']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
+        'encodeLabels' => false
     ]);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
@@ -62,7 +63,7 @@ AppAsset::register($this);
         $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
     } else {
         $rightMenuItems[] = [
-            'label' => Html::img(Yii::$app->user->identity->profile->avatarUrl, ['width' => 32, 'height' => 32]),
+            'label' => Html::img(Yii::$app->user->identity->profile->avatar, ['width' => 32, 'height' => 32]),
             'linkOptions' => [
                 'class' => 'avatar'
             ],

@@ -3,13 +3,20 @@
 use common\helpers\Html;
 
 /* @var $this yii\web\View */
+/* @var $models array */
+/* @var $pages array */
+/* @var $hotTags array */
 if(isset($category)) {
     $this->title = $category->title;
     $this->params['breadcrumbs'][] = $category->title;
+    $this->registerMetaTag(['name' => 'keywords', 'content' => $category->title . ' ' . Yii::$app->config->get('SEO_SITE_KEYWORDS')]);
+    $this->registerMetaTag(['name' => 'description', 'content' => $category->description . ' ' . Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);
 } elseif (isset($tag)) {
     $this->title = $tag->name;
     $this->params['breadcrumbs'][] = $tag->name;
 }
+
+
 ?>
 <div class="col-lg-8">
     <div class="article-list">
