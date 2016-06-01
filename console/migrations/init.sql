@@ -406,6 +406,7 @@ DROP TABLE IF EXISTS `pop_suggest`;
 CREATE TABLE `pop_suggest` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` int(10) NOT NULL,
   `updated_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
@@ -530,3 +531,15 @@ CREATE TABLE `pop_profile` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `pop_profile` (id,locale) VALUES(1, 'zh-CN');
+
+# 签到
+DROP TABLE IF EXISTS `pop_sign`;
+CREATE TABLE `pop_sign` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `last_sign_at` int(10) NOT NULL,
+  `times` int(11) NOT NULL COMMENT '总签到次数',
+  `continue_times` int(11) NOT NULL COMMENT '连续签到次数',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

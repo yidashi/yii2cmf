@@ -1,6 +1,7 @@
 <?php
 
 use common\helpers\Html;
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 ?>
@@ -12,7 +13,7 @@ use common\helpers\Html;
                 <div class="media">
                     <div class="media-body">
                         <h4 class="media-heading">
-                            <a href="<?= \yii\helpers\Url::toRoute(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
+                            <a href="<?= Url::to(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">
@@ -29,12 +30,20 @@ use common\helpers\Html;
         </div>
     </div>
     <div class="col-md-4">
+        <div class="btn-group btn-group-justified">
+            <?php if(!Yii::$app->user->isGuest && !Yii::$app->user->identity->isSign): ?>
+            <a class="btn btn-success btn-registration" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-plus-o"></i> 点此处签到<br>签到有好礼</a>
+            <?php else: ?>
+            <a class="btn btn-success disabled" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-check-o"></i> 今日已签到<br>已连续<?= Yii::$app->user->identity->sign->continue_times ?>天</a>
+            <?php endif; ?>
+            <a class="btn btn-primary" href="<?= Url::to(['/sign'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d")')->queryScalar() ?>人签到</a>
+        </div>
         <div class="panel panel-default">
             <div class="panel-heading"><h2>所有分类</h2></div>
             <div class="panel-body">
                 <ul class="post-list">
                 <?php foreach ($categorys as $item):?>
-                    <li><a href="<?= \yii\helpers\Url::to(['/' . $item->name])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
+                    <li><a href="<?= Url::to(['/' . $item->name])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
                 <?php endforeach;?>
                 </ul>
             </div>
@@ -46,7 +55,7 @@ use common\helpers\Html;
             <div class="panel-body">
                 <ul class="tag-list list-inline">
                     <?php foreach($hotTags as $tag): ?>
-                        <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+                        <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

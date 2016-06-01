@@ -207,7 +207,29 @@ class User extends ActiveRecord implements IdentityInterface
         $profile->save(false);
     }
 
+    /**
+     * 是否管理员用户
+     * @return bool
+     */
     public function getIsAdmin(){
         return $this->is_admin ? true : false;
+    }
+
+    /**
+     * 今天是否已签到
+     * @return bool
+     */
+    public function getIsSign()
+    {
+        return date('Ymd', $this->sign->last_sign_at) == date('Ymd');
+    }
+
+    /**
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSign()
+    {
+        return $this->hasOne(Sign::className(), ['user_id' => 'id']);
     }
 }
