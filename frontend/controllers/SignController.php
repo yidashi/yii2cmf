@@ -11,7 +11,6 @@ namespace frontend\controllers;
 
 use common\models\Sign;
 use yii\data\ActiveDataProvider;
-use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;

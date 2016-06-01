@@ -20,8 +20,8 @@ $this->title = '个人中心';
             <p><?= $user->profile->signature?></p>
             <ul class="stat">
                 <li>余额<h3><?= $user->profile->money ?></h3></li>
-                <li>威望值<h3>120</h3></li>
-                <li>总积分<h3>4365</h3></li>
+                <li>关注<h3>120</h3></li>
+                <li>粉丝<h3>4365</h3></li>
             </ul>
         </div>
     </div>
@@ -33,7 +33,7 @@ $this->title = '个人中心';
     </div>
     <div class="panel-body">
         <ul class="user-info">
-            <li><i class="fa fa-calendar fa-fw"></i> 注册时间：<?= Yii::$app->formatter->asDatetime($user->signup_at) ?></li>
+            <li><i class="fa fa-calendar fa-fw"></i> 注册时间：<?= Yii::$app->formatter->asDatetime($user->created_at) ?></li>
             <li><i class="fa fa-sign-in fa-fw"></i> 最后登录：<?= Yii::$app->formatter->asRelativeTime($user->login_at) ?></li>
 <!--            <li><i class="fa fa-clock-o fa-fw"></i> 在线时长：37小时24分</li>-->
             <li><i class="fa fa-map-marker fa-fw"></i> <?= $user->profile->signature ?></li>

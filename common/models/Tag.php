@@ -42,6 +42,7 @@ class Tag extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '标签名',
+            'article' => '该标签文章数'
         ];
     }
 
@@ -66,5 +67,20 @@ class Tag extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Article::className(), ['id' => 'article_id'])
             ->viaTable('{{%article_tag}}', ['tag_id' => 'id'])->published();
+    }
+
+    public function init()
+    {
+        $this->on(self::EVENT_AFTER_DELETE, [$this, 'afterDeleteInternal']);
+    }
+
+
+    /**
+     * 删除标签后把拥有该标签的文章也取消掉该标签
+     * @param $event
+     */
+    public function afterDeleteInternal($event)
+    {
+        ArticleTag::deleteAll(['tag_id' => $event->sender->id]);
     }
 }
