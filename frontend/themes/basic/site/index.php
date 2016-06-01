@@ -31,7 +31,7 @@ use yii\helpers\Url;
     </div>
     <div class="col-md-4">
         <div class="btn-group btn-group-justified">
-            <?php if(!Yii::$app->user->isGuest && !Yii::$app->user->identity->isSign): ?>
+            <?php if(Yii::$app->user->isGuest || (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isSign)): ?>
             <a class="btn btn-success btn-registration" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-plus-o"></i> 点此处签到<br>签到有好礼</a>
             <?php else: ?>
             <a class="btn btn-success disabled" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-check-o"></i> 今日已签到<br>已连续<?= Yii::$app->user->identity->sign->continue_times ?>天</a>
