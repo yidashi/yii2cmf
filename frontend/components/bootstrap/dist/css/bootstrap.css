@@ -4071,7 +4071,7 @@ fieldset[disabled] a.btn
 .btn-default.focus
 {
     color: #333;
-    border-color: #a6a6a6;
+    border-color: #8c8c8c;
     background-color: #e6e6e6;
 }
 .btn-default:hover
@@ -4145,7 +4145,7 @@ fieldset[disabled] .btn-default.active
 .btn-primary.focus
 {
     color: #fff;
-    border-color: #b04b04;
+    border-color: #7e3603;
     background-color: #e26005;
 }
 .btn-primary:hover
@@ -4219,7 +4219,7 @@ fieldset[disabled] .btn-primary.active
 .btn-success.focus
 {
     color: #fff;
-    border-color: #357935;
+    border-color: #255625;
     background-color: #449d44;
 }
 .btn-success:hover
@@ -4293,7 +4293,7 @@ fieldset[disabled] .btn-success.active
 .btn-info.focus
 {
     color: #fff;
-    border-color: #2390b0;
+    border-color: #1b6d85;
     background-color: #31b0d5;
 }
 .btn-info:hover
@@ -4367,7 +4367,7 @@ fieldset[disabled] .btn-info.active
 .btn-warning.focus
 {
     color: #fff;
-    border-color: #c77c11;
+    border-color: #985f0d;
     background-color: #ec971f;
 }
 .btn-warning:hover
@@ -4441,7 +4441,7 @@ fieldset[disabled] .btn-warning.active
 .btn-danger.focus
 {
     color: #fff;
-    border-color: #a02622;
+    border-color: #761c19;
     background-color: #c9302c;
 }
 .btn-danger:hover
@@ -6222,7 +6222,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus
 }
 .breadcrumb > .active
 {
-    color: #777;
+    color: #a4a4a4;
 }
 .pagination
 {
