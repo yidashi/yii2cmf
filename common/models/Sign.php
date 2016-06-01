@@ -47,4 +47,9 @@ class Sign extends \yii\db\ActiveRecord
             'continue_times' => '连续签到次数',
         ];
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
 }

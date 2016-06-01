@@ -196,6 +196,12 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Profile::className(), ['id' => 'id']);
     }
+
+    public function getAvatar()
+    {
+        return $this->profile->avatar;
+    }
+
     public function init()
     {
         $this->on(self::EVENT_AFTER_INSERT, [$this,'afterInsertInternal']);

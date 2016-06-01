@@ -10,6 +10,8 @@ namespace frontend\controllers;
 
 
 use common\models\Sign;
+use yii\data\ActiveDataProvider;
+use yii\data\SqlDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
@@ -62,8 +64,14 @@ class SignController extends Controller
                 'days' => $sign->continue_times
             ];
         } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Sign::findBySql('SELECT * FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") ORDER BY last_sign_at ASC'),
+                'pagination' => [
+                    'defaultPageSize' => 100
+                ]
+            ]);
             return $this->render('index', [
-
+                'dataProvider' => $dataProvider
             ]);
         }
     }
