@@ -40,6 +40,9 @@ class Suggest extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'content' => '内容',
+            'created_at' => '发表于',
+            'updated_at' => '更新于',
+            'user_id' => '会员'
         ];
     }
     /**

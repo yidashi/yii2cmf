@@ -15,4 +15,6 @@ $this->title = $name;
         <?= nl2br(Html::encode($message)) ?>
     </div>
 
+    <a href="javascript:;" class="btn btn-primary" onclick="history.back()">返回</a>
+    <a href="<?= \yii\helpers\Url::home() ?>" class="btn btn-success">首页</a>
 </div>
