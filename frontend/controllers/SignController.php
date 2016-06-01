@@ -35,30 +35,36 @@ class SignController extends Controller
 
     public function actionIndex()
     {
-        Yii::$app->response->format = 'json';
-        $sign = Sign::find()->where(['user_id' => Yii::$app->user->id])->one();
-        if (empty($sign)) {
-            $sign = new Sign();
-            $sign->last_sign_at = time();
-            $sign->user_id = Yii::$app->user->id;
-            $sign->times = 1;
-            $sign->continue_times = 1;
-            $sign->save();
-        } else {
-            if (date('Ymd', $sign->last_sign_at) != date('Ymd')) {
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = 'json';
+            $sign = Sign::find()->where(['user_id' => Yii::$app->user->id])->one();
+            if (empty($sign)) {
+                $sign = new Sign();
                 $sign->last_sign_at = time();
-                $sign->times += 1;
-                // 如果上次签到是昨天,连续签到
-                if (date('Ymd', $sign->last_sign_at) == date('Ymd', time() - 60 * 60 *24)) {
-                    $sign->continue_times += 1;
-                } else {
-                    $sign->continue_times = 1;
-                }
+                $sign->user_id = Yii::$app->user->id;
+                $sign->times = 1;
+                $sign->continue_times = 1;
                 $sign->save();
+            } else {
+                if (date('Ymd', $sign->last_sign_at) != date('Ymd')) {
+                    $sign->last_sign_at = time();
+                    $sign->times += 1;
+                    // 如果上次签到是昨天,连续签到
+                    if (date('Ymd', $sign->last_sign_at) == date('Ymd', time() - 60 * 60 *24)) {
+                        $sign->continue_times += 1;
+                    } else {
+                        $sign->continue_times = 1;
+                    }
+                    $sign->save();
+                }
             }
+            return [
+                'days' => $sign->continue_times
+            ];
+        } else {
+            return $this->render('index', [
+
+            ]);
         }
-        return [
-            'days' => $sign->continue_times
-        ];
     }
 }
