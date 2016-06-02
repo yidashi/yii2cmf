@@ -69,7 +69,7 @@ AppAsset::register($this);
             'items' => [
                 [
                     'label' => Html::icon('user') . ' 个人信息',
-                    'url' => ['/user/index', 'id' => Yii::$app->user->id],
+                    'url' => ['/user', 'id' => Yii::$app->user->id],
                 ],
                 [
                     'label' => Html::icon('book') . ' 我的投稿',

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <h1><?= $model->title ?></h1>
     </div>
     <div class="action">
-        <span class="user"><a href="<?= Url::to(['/user/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
+        <span class="user"><a href="<?= Url::to(['/user', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
         <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d H:i', $model->created_at) ?></span>
         <span class="views"><?= Html::icon('eye')?> <?= $model->trueView?>次浏览</span>
         <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?=$model->comment?>条评论</a></span>
