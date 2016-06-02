@@ -15,10 +15,10 @@ class HighLightAsset extends AssetBundle
 {
     public $sourcePath = '@frontend/widgets/highlight/assets';
     public $css = [
-        'css/highlight.css',
+        'highlight.css',
     ];
     public $js = [
-        'js/highlight.js',
+        'highlight.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
