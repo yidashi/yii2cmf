@@ -74,9 +74,4 @@ class Profile extends \yii\db\ActiveRecord
     {
         return Yii::$app->params['availableLocales'];
     }
-
-    public function getAvatarUrl()
-    {
-        return $this->avatar ? (strpos($this->avatar, 'http') !== false ? $this->avatar : Url::to('@static/' . $this->avatar)) : Url::to('@static/default/avatar.png');
-    }
 }
