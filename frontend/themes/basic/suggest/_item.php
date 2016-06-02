@@ -6,14 +6,15 @@
  * Time: 下午5:36
  */
 use yii\helpers\Markdown;
+use yii\helpers\Url;
 
 ?>
 <div class="media-left">
-    <a href="<?= \yii\helpers\Url::to(['/user', 'id' => $model->user_id])?>">
+    <a href="<?= Url::to(['/user', 'id' => $model->user_id])?>">
         <img class="media-object" src="<?= $model->profile->avatarUrl?>">
     </a>
 </div>
 <div class="media-body">
-    <div class="media-heading"><a href="<?= \yii\helpers\Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?=date('Y-m-d H:i', $model->created_at)?></div>
+    <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?=date('Y-m-d H:i', $model->created_at)?></div>
     <div class="media-content"><?= Markdown::process($model->content, 'gfm')?></div>
 </div>
