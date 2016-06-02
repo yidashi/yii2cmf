@@ -14,6 +14,8 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
 * 国际化
 
+* 主题、皮肤
+
 * todo
 
 ## 自己本地部署方法:
@@ -23,7 +25,7 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 ```
 php init
 
-mysql -uroot -proot -e 'create database yii;' //（root root分别是你本地的mysql用户和密码，别直接复制。。。创建yii库，默认名字是yii，如果你不想用这个名字或者用已有的数据库，需要修改common/config/main-local.php里相关的数据库配置）
+mysql -uroot -proot -e 'create database yii;' //（root root分别是你本地的mysql用户和密码，创建yii库，默认名字是yii，如果你不想用这个名字或者用已有的数据库，需要修改common/config/main-local.php里相关的数据库配置）
 
 php yii migrate  //导入demo初始化数据（如果导入失败，可以到console/migrations/里找init.sql直接导入）
 ```

@@ -246,7 +246,7 @@ CREATE TABLE `pop_category` (
 
 LOCK TABLES `pop_category` WRITE;
 /*!40000 ALTER TABLE `pop_category` DISABLE KEYS */;
-INSERT INTO `pop_category` VALUES (1,'默认',0,1449050838,1449050838,'moren','',0,0);
+INSERT INTO `pop_category` VALUES (1,'默认',0,1449050838,1449050838,'moren','',0,0,1);
 /*!40000 ALTER TABLE `pop_category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +443,7 @@ CREATE TABLE `pop_user` (
 
 LOCK TABLES `pop_user` WRITE;
 /*!40000 ALTER TABLE `pop_user` DISABLE KEYS */;
-INSERT INTO `pop_user` VALUES (1,'hehe','1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs','$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',NULL,'hehe@qq.com',10,1,1441766741,1458640427);
+INSERT INTO `pop_user` VALUES (1,'hehe','1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs','$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',NULL,'hehe@qq.com',10,1,1441766741,1441766741,1458640427);
 /*!40000 ALTER TABLE `pop_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -516,7 +516,9 @@ CREATE TABLE `pop_profile` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+LOCK TABLES `pop_profile` WRITE;
 INSERT INTO `pop_profile` (id,locale) VALUES(1, 'zh-CN');
+UNLOCK TABLES;
 
 /*签到*/
 DROP TABLE IF EXISTS `pop_sign`;
