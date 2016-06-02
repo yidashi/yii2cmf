@@ -6,6 +6,7 @@ use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use common\models\query\ArticleQuery;
 use Yii;
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 
@@ -101,7 +102,12 @@ class Article extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className(),
             PushBehavior::className(),
-            SoftDeleteBehavior::className()
+            SoftDeleteBehavior::className(),
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false
+            ]
         ];
     }
 
@@ -273,6 +279,10 @@ class Article extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * 当前用户是否收藏
+     * @return bool
+     */
     public function getIsFavourite()
     {
         if (!Yii::$app->user->isGuest) {
@@ -285,6 +295,10 @@ class Article extends \yii\db\ActiveRecord
         return false;
     }
 
+    /**
+     * 当前用户是否顶
+     * @return bool
+     */
     public function getIsUp()
     {
         if (!Yii::$app->user->isGuest) {
@@ -297,6 +311,10 @@ class Article extends \yii\db\ActiveRecord
         return false;
     }
 
+    /**
+     * 当前用户是否踩
+     * @return bool
+     */
     public function getIsDown()
     {
         if (!Yii::$app->user->isGuest) {

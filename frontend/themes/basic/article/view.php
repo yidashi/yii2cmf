@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
 </div>
 <?= \common\widgets\danmu\Danmu::widget(['id' => $model->id]) ?>
-<?= \frontend\widgets\highlight\HighLightWidget::widget() ?>
+<?= \frontend\widgets\prettify\PrettifyWidget::widget() ?>
 <?php
 $this->registerJsFile('@web/js/jquery.lazyload.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJs(<<<js
