@@ -31,18 +31,18 @@ $this->params['breadcrumbs'][] = $model->title;
         <!--   打赏作者     -->
         <?= \frontend\widgets\reward\RewardWidget::widget(['articleId' => $model->id])?>
         <span class="vote">
-            <a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
-            <a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>
+            <a class="up" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
+            <a class="down" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>
-        <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+        <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
         <?php endforeach; ?>
     </ul>
     <!--内容-->
     <div class="view-content"><?= \yii\helpers\Markdown::process($model->data->content, 'gfm') ?></div>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
-    <div class="well">带到手机上看<?= Html::img(\yii\helpers\Url::to(['/qrcode', 'text' => Yii::$app->request->absoluteUrl])) ?></div>
+    <div class="well">带到手机上看<?= Html::img(Url::to(['/qrcode', 'text' => Yii::$app->request->absoluteUrl])) ?></div>
 
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
