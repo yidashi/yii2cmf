@@ -10,7 +10,6 @@ namespace common\helpers;
 
 
 use rmrevin\yii\fontawesome\FA;
-use yii\helpers\Url;
 
 class Html extends \yii\helpers\Html
 {
@@ -21,10 +20,7 @@ class Html extends \yii\helpers\Html
 
     public static function img($src, $options = [])
     {
-        $options['src'] = Url::to($src);
-        if (strpos($options['src'], 'http') === false) {
-            $options['src'] = \Yii::getAlias('@static') . '/' . $options['src'];
-        }
+        $options['src'] = Url::img($src);
         if (!isset($options['alt'])) {
             $options['alt'] = '';
         }

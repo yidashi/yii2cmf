@@ -48,9 +48,6 @@ AppAsset::register($this);
         }
         $menuItems[] = $firstItem;
     }
-    foreach (\common\models\Nav::find()->all() as $nav) {
-        $menuItems[] = ['label' => $nav['title'], 'url' => $nav['route']];
-    }
     $menuItems[] = ['label' => '<i>留言</i>', 'url' => ['/suggest/index']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
