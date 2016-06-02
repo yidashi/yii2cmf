@@ -40,8 +40,11 @@ class VoteController extends Controller
         $id = \Yii::$app->request->get('id');
         $type = \Yii::$app->request->get('type', 'article');
         $action = \Yii::$app->request->get('action', 'up');
+        $actions = ['up', 'down'];
+        array_splice($actions, array_search($action, $actions), 1);
+        $oppositeAction = current($actions);
         $model = $this->findModel($id, $type);
-        $vote = Vote::find()->where(['type_id' => $id, 'type' => $type, 'action' => $action, 'user_id' => $userId])->one();//根据条件添加组合唯一索引来防止高并发重复插入
+        $vote = Vote::find()->where(['type_id' => $id, 'type' => $type, 'user_id' => $userId])->one();
         if (empty($vote)) {
             $model->updateCounters([$action => 1]);
             $vote = new Vote();
@@ -53,6 +56,13 @@ class VoteController extends Controller
             ];
             $vote->attributes = $params;
             $vote->save();
+        } else {
+            // 一篇文章只能持一个态度（顶或者踩,不能同时顶和踩）
+            if ($vote->action != $action) {
+                $vote->action = $action;
+                $vote->save();
+                $model->updateCounters([$action => 1, $oppositeAction => -1]);
+            }
         }
 
         return [
