@@ -189,6 +189,10 @@ class Article extends \yii\db\ActiveRecord
             ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
 
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
     /**
      * 真实浏览量
      */
