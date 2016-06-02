@@ -17,7 +17,7 @@ use yii\helpers\Url;
                         </h4>
                         <div class="media-content"><?= $item['desc'] ?></div>
                         <div class="media-action">
-                            <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d H:i', $item['created_at']) ?></span>
+                            <span class="time"><?= Html::icon('clock-o')?> <?= Yii::$app->formatter->asRelativeTime($item['created_at']) ?></span>
                             <span class="views"><?= Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
                             <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
                         </div>
