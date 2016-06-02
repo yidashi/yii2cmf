@@ -61,13 +61,12 @@ $this->params['breadcrumbs'][] = $model->title;
         </div>
     </div>
 </div>
-<?= \common\widgets\danmu\Danmu::widget(['id' => $model->id]);?>
+<?= \common\widgets\danmu\Danmu::widget(['id' => $model->id]) ?>
+<?= \frontend\widgets\highlight\HighLightWidget::widget() ?>
 <?php
-$this->registerJsFile('@web/js/highlight.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('@web/js/jquery.lazyload.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJs(<<<js
     $(function(){
-        hljs.initHighlightingOnLoad();
         $('.view-content iframe').addClass('embed-responsive-item').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
         $("img.lazy").show().lazyload({effect: "fadeIn"});
     });
