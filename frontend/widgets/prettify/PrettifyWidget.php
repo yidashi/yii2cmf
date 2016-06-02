@@ -16,7 +16,7 @@ class PrettifyWidget extends Widget
     public function run()
     {
         PrettifyAsset::register($this->view);
-        $script = "prettyPrint();";
+        $script = "$('pre').addClass('prettyprint linenums');prettyPrint();";
         $this->view->registerJs($script);
     }
 }
