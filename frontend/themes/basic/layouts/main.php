@@ -49,6 +49,7 @@ AppAsset::register($this);
         $menuItems[] = $firstItem;
     }
     $menuItems[] = ['label' => '<i>留言</i>', 'url' => ['/suggest/index']];
+    $menuItems[] = ['label' => '获取源码', 'url' => ['/page/index', 'name' => 'code']];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => $menuItems,
