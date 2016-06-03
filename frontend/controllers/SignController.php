@@ -48,14 +48,14 @@ class SignController extends Controller
                 $sign->save();
             } else {
                 if (date('Ymd', $sign->last_sign_at) != date('Ymd')) {
-                    $sign->last_sign_at = time();
-                    $sign->times += 1;
                     // 如果上次签到是昨天,连续签到
                     if (date('Ymd', $sign->last_sign_at) == date('Ymd', time() - 60 * 60 *24)) {
                         $sign->continue_times += 1;
                     } else {
                         $sign->continue_times = 1;
                     }
+                    $sign->last_sign_at = time();
+                    $sign->times += 1;
                     $sign->save();
                 }
             }
