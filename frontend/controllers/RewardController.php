@@ -32,7 +32,7 @@ class RewardController extends \yii\web\Controller
             Yii::$app->session->setFlash('success', '打赏成功');
             return $this->redirect(Yii::$app->request->referrer);
         } else {
-            Yii::$app->session->setFlash('error', empty($model->errors) ? '打赏失败' : current($model->firstErrors));
+            Yii::$app->session->setFlash('error', $model->hasErrors() ? current($model->firstErrors) : '打赏失败');
             return $this->redirect(Yii::$app->request->referrer);
         }
     }
