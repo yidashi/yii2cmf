@@ -20,7 +20,7 @@ return array(
     'yii\\' => array($vendorDir . '/yiisoft/yii2'),
     'yidashi\\webuploader\\' => array($vendorDir . '/yidashi/yii2-webuploader'),
     'yidashi\\sidenav\\' => array($vendorDir . '/yidashi/yii2-sidenav'),
-    'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-boostrap-markdown', $vendorDir . '/yidashi/yii2-bootstrap-markdown'),
+    'yidashi\\markdown\\' => array($vendorDir . '/yidashi/yii2-bootstrap-markdown'),
     'trntv\\yii\\datetime\\' => array($vendorDir . '/trntv/yii2-datetime-widget/src'),
     'rmrevin\\yii\\fontawesome\\' => array($vendorDir . '/rmrevin/yii2-fontawesome'),
     'mihaildev\\elfinder\\' => array($vendorDir . '/mihaildev/yii2-elfinder'),
@@ -45,4 +45,5 @@ return array(
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'Goutte\\' => array($vendorDir . '/fabpot/goutte/Goutte'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
+    'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
 );

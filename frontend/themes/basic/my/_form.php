@@ -9,6 +9,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
+/* @var $dataModel common\models\ArticleData */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,8 +18,6 @@ use yii\widgets\ActiveForm;
 
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->select('title')->indexBy('id')->column()) ?>
 

@@ -53,8 +53,8 @@ class Article extends \yii\db\ActiveRecord
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT]],
             [['category_id'], 'setCategory'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
-            [['title', 'category', 'author'], 'string', 'max' => 50],
-            [['author', 'cover', 'source'], 'string', 'max' => 255],
+            [['title', 'category'], 'string', 'max' => 50],
+            [['cover', 'source'], 'string', 'max' => 255],
             [['desc', 'tagNames'], 'safe']
         ];
     }
@@ -72,7 +72,6 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'title' => '标题',
-            'author' => '作者',
             'created_at' => Yii::t('common', 'Created At'),
             'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
@@ -83,7 +82,8 @@ class Article extends \yii\db\ActiveRecord
             'category' => '分类',
             'source' => '来源连接',
             'desc' => '摘要',
-            'tagNames' => '标签'
+            'tagNames' => '标签',
+            'user_id' => '作者'
         ];
     }
     public function attributeHints()
@@ -113,7 +113,7 @@ class Article extends \yii\db\ActiveRecord
 
     /**
      * @inheritdoc
-     * @return ActiveQuery the newly created [[ActiveQuery]] instance.
+     * @return ArticleQuery the newly created [[ActiveQuery]] instance.
      */
     public static function find()
     {
