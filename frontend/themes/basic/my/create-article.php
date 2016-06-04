@@ -9,7 +9,7 @@
 /* @var $model common\models\Article */
 /* @var $dataModel common\models\ArticleData */
 
-$this->title = '投稿_'.Yii::$app->params['seoTitle'].Yii::$app->params['seoSeparator'].Yii::$app->name;
+$this->title = '投稿_'.Yii::$app->config->get('SITE_NAME');
 $this->params['breadcrumbs'][] = '投稿';
 ?>
 <div class="article-create">

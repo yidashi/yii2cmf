@@ -58,13 +58,6 @@ class TestController extends Controller
         return $arr;
     }
 
-    public function actionTest()
-    {
-        echo '<h1>最简单的csrf攻击</h1>';
-        echo Html::img('http://www.thinkphp.cn/Member/logout.html');
-        die;
-    }
-
     public function actionValidate($name, $email)
     {
         $model = new DynamicModel(compact('name', 'email'));
