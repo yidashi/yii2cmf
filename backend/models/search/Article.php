@@ -18,7 +18,7 @@ class Article extends ArticleModel
     {
         return [
             [['id', 'category_id', 'created_at', 'updated_at', 'status'], 'integer'],
-            [['title', 'category', 'author', 'cover'], 'integer'],
+            [['title', 'category', 'cover'], 'integer'],
         ];
     }
 
@@ -66,7 +66,6 @@ class Article extends ArticleModel
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'author', $this->author])
             ->andFilterWhere(['like', 'cover', $this->cover]);
 
         return $dataProvider;
