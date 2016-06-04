@@ -121,7 +121,7 @@ h4 { font-size: 16px; }
 .navbar-brand { padding-top: 0; padding-right: 0; }
 .navbar-right > li:first-child > a { position: relative; }
 .navbar-right > li > a.avatar { padding-top: 10px; padding-bottom: 0; }
-.navbar-right > li > a.avatar img { border-radius: 50%; width: 32px; height: 32px; }
+.navbar-right > li > a.avatar img { border-radius: 50%; border: #ccc solid 1px; width: 32px; height: 32px; }
 .navbar-right > li .badge { background: #D8582B; padding: 2px 4px; font-size: 10px; font-weight: normal; position: absolute; top: 10px; left: 25px; }
 .navbar-right .dropdown-menu .divider { margin: 5px 0; }
 /* 主导航结束 */
@@ -567,9 +567,9 @@ table.emot td {cursor: pointer; border: #eee solid 1px; padding: 2px;}
     z-index: 20140628;
 }
 /* 头像开始 */
-.panel img { width: 40px; height: 40px; padding: 1px; border-radius: 4px; }
+.panel img { width: 40px; height: 40px; padding: 1px; border: #ddd solid 1px; border-radius: 4px; }
 .media-object, .media-user .media-object { width: 48px; height: 48px; padding: 2px; border: #ddd solid 1px; border-radius: 6px; -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, .05); box-shadow: 0px 1px 2px rgba(0, 0, 0, .05); }
-.avatar img, .online img { border-radius: 4px; width: 36px; height: 36px; }
+.avatar img, .online img { border-radius: 4px; border: #fff solid 1px; width: 36px; height: 36px; }
 .user img.avatar { width: 120px; height: 120px; border-radius: 50%; }
 .thumbnail a > img.media-object { max-width: 48px; }
 .avatar-list { margin: -7px; }
