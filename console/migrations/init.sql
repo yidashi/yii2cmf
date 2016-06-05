@@ -530,3 +530,16 @@ CREATE TABLE `pop_sign` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+DROP TABLE IF EXISTS `pop_system_log`;
+CREATE TABLE `pop_system_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `level` int(11) DEFAULT NULL,
+  `category` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `log_time` double DEFAULT NULL,
+  `prefix` text COLLATE utf8_unicode_ci,
+  `message` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `idx_log_level` (`level`),
+  KEY `idx_log_category` (`category`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
