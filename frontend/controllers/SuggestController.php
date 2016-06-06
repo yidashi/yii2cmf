@@ -52,7 +52,8 @@ class SuggestController extends Controller
             \Yii::$app->session->setFlash('success', '感谢您的反馈！');
             return $this->redirect(['index']);
         } else {
-            print_r($model->errors);
+            \Yii::$app->session->setFlash('error', current($model->getFirstErrors()));
+            return $this->redirect(['index']);
         }
     }
 }

@@ -27,7 +27,7 @@ use common\helpers\Html;
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
     <!--回复-->
-    <?php $form = \yii\widgets\ActiveForm::begin(['action' => \common\helpers\Url::toRoute('comment/create'), 'options' => ['class' => 'reply-form hidden']]); ?>
+    <?php $form = \yii\widgets\ActiveForm::begin(['action' => \common\helpers\Url::toRoute('suggest/create'), 'options' => ['class' => 'reply-form hidden']]); ?>
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
     <?= Html::hiddenInput(Html::getInputName($model, 'parent_id'), 0, ['class' => 'parent_id']) ?>
