@@ -6,6 +6,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\Comment;
 use common\models\Suggest;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -33,9 +34,10 @@ class SuggestController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Suggest::find()
+            'query' => Comment::find()->where(['type' => 'suggest']),
         ]);
-        $model = new Suggest();
+        $model = new Comment();
+        $model->type = 'suggest';
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'model' => $model,
@@ -44,7 +46,7 @@ class SuggestController extends Controller
 
     public function actionCreate()
     {
-        $model = new Suggest();
+        $model = new Comment();
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', '感谢您的反馈！');
 
