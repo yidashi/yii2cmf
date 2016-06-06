@@ -11,7 +11,6 @@ use yii\behaviors\BlameableBehavior;
  * @property int $id
  * @property string $title
  * @property string $content
- * @property string $author
  * @property int $created_at
  * @property int $updated_at
  * @property int $status
@@ -25,11 +24,11 @@ class Article extends \common\models\Article
     public function rules()
     {
         return [
-            [['title', 'author'], 'required'],
+            [['title'], 'required'],
             [['status', 'category_id', 'comment', 'user_id'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
             [['category_id'], 'setCategory'],
-            [['author', 'cover', 'desc'], 'string', 'max' => 255],
+            [['cover', 'desc'], 'string', 'max' => 255],
             ['tagNames', 'safe']
         ];
     }
