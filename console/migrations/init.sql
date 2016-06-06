@@ -259,7 +259,8 @@ DROP TABLE IF EXISTS `pop_comment`;
 CREATE TABLE `pop_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `article_id` int(11) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `type_id` int(11) NOT NULL,
   `content` text NOT NULL COMMENT '内容',
   `created_at` int(10) NOT NULL,
   `updated_at` int(10) NOT NULL,
@@ -543,3 +544,13 @@ CREATE TABLE `pop_system_log` (
   KEY `idx_log_level` (`level`),
   KEY `idx_log_category` (`category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+DROP TABLE IF EXISTS `pop_message`;
+CREATE TABLE `pop_message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from_uid` int(11) NOT NULL,
+  `to_uid` int(11) NOT NULL,
+  `content` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `created_at` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

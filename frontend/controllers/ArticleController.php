@@ -93,7 +93,7 @@ class ArticleController extends Controller
         $hots = Article::hots($model->category_id);
         // 评论列表
         $commentDataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->andWhere(['article_id' => $id, 'parent_id' => 0]),
+            'query' => Comment::find()->andWhere(['type' => 'article', 'type_id' => $id, 'parent_id' => 0]),
             'pagination' => [
                 'pageSize' => 10,
             ],

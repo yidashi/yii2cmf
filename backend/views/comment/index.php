@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->user->username;
                         }
                     ],
-                    'article_id',
+                    'type',
+                    'type_id',
                     [
                         'attribute' => 'content',
                         'value' => function($model) {

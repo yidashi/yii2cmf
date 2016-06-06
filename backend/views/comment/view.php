@@ -27,7 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'user_id',
-            'article_id',
+            'type',
+            'type_id',
             'content:ntext',
             'created_at:datetime',
             'updated_at:datetime',
