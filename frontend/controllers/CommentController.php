@@ -54,7 +54,7 @@ class CommentController extends Controller
         $article_id = \Yii::$app->request->post('article_id');
         $time = \Yii::$app->request->post('time');
         $page = \Yii::$app->request->post('page');
-        $query = Comment::find()->where(['article_id' => $article_id]);
+        $query = Comment::find()->where(['type' => 'article', 'type_id' => $article_id]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->offset($pages->offset)
