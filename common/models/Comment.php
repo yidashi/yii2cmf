@@ -29,8 +29,8 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['article_id', 'user_id', 'content'], 'required'],
-            [['article_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
+            [['type', 'type_id', 'user_id', 'content'], 'required'],
+            [['type_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
             [['content'], 'string'],
         ];
     }
@@ -42,7 +42,8 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'article_id' => '文章',
+            'type' => '类型',
+            'type_id' => '目标',
             'user_id' => '评论人',
             'content' => '内容',
             'up' => '顶',
