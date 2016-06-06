@@ -5,6 +5,7 @@
  * Date: 16/5/31
  * Time: 下午5:33
  */
+/* @var $this \yii\web\View */
 
 ?>
 <div class="col-4">
@@ -23,3 +24,4 @@
 
     <?= $this->render('create', ['model' => $model]); ?>
 </div>
+<?= \frontend\widgets\prettify\PrettifyWidget::widget() ?>
