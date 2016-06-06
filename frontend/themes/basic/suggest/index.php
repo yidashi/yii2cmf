@@ -10,9 +10,6 @@
 <div class="col-4">
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
-        'viewParams' => [
-            'commentModel' => $model
-        ],
         'itemView' => '_item',
         'itemOptions' => [
             'class' => 'media',

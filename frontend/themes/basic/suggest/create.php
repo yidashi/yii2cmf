@@ -26,5 +26,18 @@ use common\helpers\Html;
         <?php endif; ?>
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
-
+    <!--回复-->
+    <?php $form = \yii\widgets\ActiveForm::begin(['action' => \common\helpers\Url::toRoute('comment/create'), 'options' => ['class' => 'reply-form hidden']]); ?>
+    <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
+    <?= Html::hiddenInput(Html::getInputName($model, 'parent_id'), 0, ['class' => 'parent_id']) ?>
+    <?=$form->field($model, 'content')->label(false)->textarea()?>
+    <div class="form-group">
+        <?php if (!Yii::$app->user->isGuest): ?>
+            <button type="submit" class="btn btn-sm btn-primary">回复</button>
+        <?php else: ?>
+            <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
+        <?php endif; ?>
+    </div>
+    <?php \yii\widgets\ActiveForm::end(); ?>
 </div>

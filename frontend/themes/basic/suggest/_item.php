@@ -38,17 +38,3 @@ use common\helpers\Html;
         <a class="reply-btn" href="#">回复</a><span class="vote"><a class="up" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'comment', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><i class="fa <?= $model->isUp ? 'fa-thumbs-up' : 'fa-thumbs-o-up' ?>"></i> <em><?=$model->up?></em></a><a class="down" href="<?=\yii\helpers\Url::to(['/vote', 'id' => $model->id, 'type' => 'comment', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><i class="fa <?= $model->isDown ? 'fa-thumbs-down' : 'fa-thumbs-o-down' ?>"></i> <em><?=$model->down?></em></a></span>
     </div>
 </div>
-<!--回复-->
-<?php $form = \yii\widgets\ActiveForm::begin(['action' => Url::toRoute('comment/create'), 'options' => ['class' => 'reply-form hidden']]); ?>
-<?= $form->field($commentModel, 'type')->hiddenInput()->label(false) ?>
-<?= $form->field($commentModel, 'type_id')->hiddenInput()->label(false) ?>
-<?= Html::hiddenInput(Html::getInputName($commentModel, 'parent_id'), 0, ['class' => 'parent_id']) ?>
-<?=$form->field($commentModel, 'content')->label(false)->textarea()?>
-<div class="form-group">
-    <?php if (!Yii::$app->user->isGuest): ?>
-        <button type="submit" class="btn btn-sm btn-primary">回复</button>
-    <?php else: ?>
-        <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
-    <?php endif; ?>
-</div>
-<?php \yii\widgets\ActiveForm::end(); ?>
