@@ -54,6 +54,7 @@ CREATE TABLE `pop_article` (
   `up` int(11) NOT NULL DEFAULT '0',
   `down` int(11) NOT NULL DEFAULT '0',
   `view` int(11) NOT NULL DEFAULT '0',
+  `favourite` int(11) NOT NULL DEFAULT '0',
   `desc` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `source` varchar(50) NOT NULL,

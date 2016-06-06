@@ -16,7 +16,6 @@ use yii\db\ActiveQuery;
  * @property int $id
  * @property string $title
  * @property string $content
- * @property string $author
  * @property int $created_at
  * @property int $updated_at
  * @property int $status
