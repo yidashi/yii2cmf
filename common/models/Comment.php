@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
 
@@ -29,7 +30,7 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'type_id', 'user_id', 'content'], 'required'],
+            [['type', 'type_id', 'content'], 'required'],
             [['type_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
             [['content'], 'string'],
         ];
@@ -60,6 +61,11 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'user_id',
+                'updatedByAttribute' => false
+            ]
         ];
     }
 
@@ -107,8 +113,11 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function updateComment($event)
     {
-        $article = Article::find()->where(['id' => $this->article_id])->one();
-        $article->updateCounters(['comment' => $event->data['comment']]);
+        if ($event->sender->type == 'article') {
+            $article = Article::find()->where(['id' => $this->type_id])->one();
+            $article->updateCounters(['comment' => $event->data['comment']]);
+        }
+
     }
 
     public function getIsUp()

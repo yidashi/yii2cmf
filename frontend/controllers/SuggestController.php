@@ -38,6 +38,7 @@ class SuggestController extends Controller
         ]);
         $model = new Comment();
         $model->type = 'suggest';
+        $model->type_id = 1;
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'model' => $model,
@@ -49,8 +50,9 @@ class SuggestController extends Controller
         $model = new Comment();
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
             \Yii::$app->session->setFlash('success', '感谢您的反馈！');
-
             return $this->redirect(['index']);
+        } else {
+            print_r($model->errors);
         }
     }
 }

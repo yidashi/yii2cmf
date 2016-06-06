@@ -16,6 +16,8 @@ use common\helpers\Html;
 
     <?php $form = \yii\widgets\ActiveForm::begin(['action' => \yii\helpers\Url::toRoute('suggest/create')]); ?>
     <?= $form->field($model, 'content')->label(false)->widget('\yidashi\markdown\Markdown', ['options' => ['style' => 'height:200px;']]); ?>
+    <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
     <div class="form-group">
         <?php if (!Yii::$app->user->isGuest): ?>
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>

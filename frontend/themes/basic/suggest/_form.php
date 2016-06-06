@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className()); ?>
 
-    <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
