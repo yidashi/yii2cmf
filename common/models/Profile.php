@@ -33,7 +33,8 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['money', 'gender'], 'integer'],
+            [['gender'], 'integer'],
+            [['money'], 'integer', 'on' => 'charge'], // 充值场景
             [['signature'], 'string', 'max' => 100],
             [['avatar'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
