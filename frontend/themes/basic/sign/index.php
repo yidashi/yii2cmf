@@ -5,6 +5,9 @@
  * Date: 16/6/1
  * Time: 下午1:43
  */
+
+$this->title = '签到会员';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
     <h2>今日签到会员</h2>
