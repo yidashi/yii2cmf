@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\helpers\Url;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
@@ -124,9 +125,26 @@ class Comment extends \yii\db\ActiveRecord
         // 如果是回复,发站内信,通知什么的
         if ($event->sender->parent_id > 0) {
             $toUid = $event->sender->parent->user_id;
-            $content = 'xxx回复了你的评论';
-            Yii::$app->message->setTo($toUid)
+            $fromUid = $event->sender->user_id;
+            $content = $event->sender->content;
+            switch ($event->sender->type) {
+                case 'article':
+                    $title = '回复了你的评论';
+                    $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
+                    break;
+                case 'suggest':
+                    $title = '回复了你的留言';
+                    $link = Url::to(['/suggest', '#' => 'suggest-' . $event->sender->id]);
+                    break;
+                default:
+                    $title = '';
+                    $link = '';
+            }
+            Yii::$app->message->setFrom($fromUid)
+                ->setTo($toUid)
+                ->setTitle($title)
                 ->setContent($content)
+                ->setLink($link)
                 ->send();
         }
     }

@@ -10,20 +10,20 @@ use common\helpers\Url;
 ?>
 <div class="media-left">
     <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
-        <img class="media-object" src="" alt="">
+        <img class="media-object" src="<?= Url::img($model->fromUser->avatar) ?>" alt="<?= $model->fromUser->username ?>">
     </a>
 </div>
 <div class="media-body">
     <div class="media-heading">
-        <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">yidashi</a>
-        <?= $model->content ?>
+        <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="<?= $model->fromUser->username ?>"><?= $model->fromUser->username ?></a>
+        <?= $model->title ?>
 <!--        <a href="/topic/6134">文档bug</a>-->
     </div>
     <div class="media-content">
-        <p>+10086</p>
+        <p><?= $model->content ?></p>
     </div>
     <div class="media-action">
         <span><?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></span>
-        <span class="pull-right"><a href="/topic/6134">查看</a></span>
+        <span class="pull-right"><a href="<?= $model->link ?>">查看</a></span>
     </div>
 </div>

@@ -17,7 +17,7 @@ use common\helpers\Html;
 </div>
 <div class="media-body">
     <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:Y-m-d H:i') ?></div>
-    <div class="media-content"><?= Markdown::process($model->content, 'gfm')?></div>
+    <div class="media-content" id="suggest-<?= $model->id ?>"><?= Markdown::process($model->content, 'gfm')?></div>
     <?php foreach ($model->sons as $son):?>
         <div class="media">
             <div class="media-left">
@@ -30,7 +30,7 @@ use common\helpers\Html;
                     <a href="<?= Url::to(['/user', 'id' => $son->user_id])?>" rel="author" data-original-title="<?=$son->user->username?>" title=""><?=$son->user->username?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
                     <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
                 </div>
-                <div class="media-content"><?= Markdown::process(\common\helpers\Comment::process($son->content))?></div>
+                <div class="media-content" id="suggest-<?= $son->id ?>"><?= Markdown::process(\common\helpers\Comment::process($son->content))?></div>
             </div>
         </div>
     <?php endforeach;?>

@@ -47,9 +47,21 @@ class Message extends Object
         return $this;
     }
 
+    public function setTitle($title)
+    {
+        $this->messager->title = $title;
+        return $this;
+    }
+
     public function setContent($content)
     {
         $this->messager->content = $content;
+        return $this;
+    }
+
+    public function setLink($link)
+    {
+        $this->messager->link = $link;
         return $this;
     }
 

@@ -83,6 +83,7 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
+        /* @var $model Article|null */
         $model = Article::find()->where(['id' => $id])->published()->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
@@ -107,6 +108,7 @@ class ArticleController extends Controller
         $pages = $commentDataProvider->getPagination();
         // 评论框
         $commentModel = new Comment();
+        $commentModel->type = 'article';
 
         return $this->render('view', [
             'model' => $model,

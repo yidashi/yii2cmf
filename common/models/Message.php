@@ -61,4 +61,13 @@ class Message extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getFromUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'from_uid']);
+    }
+
+    public function getToUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'to_uid']);
+    }
 }
