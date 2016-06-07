@@ -6,6 +6,8 @@ use common\helpers\Url;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
+use yii\helpers\Markdown;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%comment}}".
@@ -126,7 +128,9 @@ class Comment extends \yii\db\ActiveRecord
         if ($event->sender->parent_id > 0) {
             $toUid = $event->sender->parent->user_id;
             $fromUid = $event->sender->user_id;
-            $content = $event->sender->content;
+            $content = $this->generateMsgContent($event->sender->content);
+            $title = '';
+            $link = '';
             switch ($event->sender->type) {
                 case 'article':
                     $title = '回复了你的评论';
@@ -136,9 +140,6 @@ class Comment extends \yii\db\ActiveRecord
                     $title = '回复了你的留言';
                     $link = Url::to(['/suggest', '#' => 'suggest-' . $event->sender->id]);
                     break;
-                default:
-                    $title = '';
-                    $link = '';
             }
             Yii::$app->message->setFrom($fromUid)
                 ->setTo($toUid)
@@ -147,6 +148,11 @@ class Comment extends \yii\db\ActiveRecord
                 ->setLink($link)
                 ->send();
         }
+    }
+
+    private function generateMsgContent($content)
+    {
+        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 50);
     }
 
     public function getIsUp()
