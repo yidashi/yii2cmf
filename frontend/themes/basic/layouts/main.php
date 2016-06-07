@@ -139,7 +139,7 @@ AppAsset::register($this);
         <div class="row">
             <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a></div>
             <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a></div>
-            <div class="col-sm-4"><a href="https://github.com/yidashi/yii">获取源码</a></div>
+            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'code'])?>">获取源码</a></div>
         </div>
     </div>
     <hr/>
