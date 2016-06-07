@@ -12,6 +12,7 @@
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
+        'layout' => "{items}\n{pager}",
         'itemOptions' => [
             'class' => 'media',
             'tag' => 'li'
@@ -24,4 +25,5 @@
 
     <?= $this->render('create', ['model' => $model]); ?>
 </div>
+
 <?= \frontend\widgets\prettify\PrettifyWidget::widget() ?>

@@ -16,7 +16,7 @@ use common\helpers\Html;
     </a>
 </div>
 <div class="media-body">
-    <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?=date('Y-m-d H:i', $model->created_at)?></div>
+    <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:Y-m-d H:i') ?></div>
     <div class="media-content"><?= Markdown::process($model->content, 'gfm')?></div>
     <?php foreach ($model->sons as $son):?>
         <div class="media">
