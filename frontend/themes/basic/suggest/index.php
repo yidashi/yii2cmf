@@ -7,6 +7,8 @@
  */
 /* @var $this \yii\web\View */
 
+$this->title = '留言';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="col-4">
     <?= \yii\widgets\ListView::widget([

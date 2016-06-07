@@ -8,6 +8,8 @@
 /**
  * @var $this \yii\web\View;
  */
+$this->title = '消息';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= \yii\widgets\ListView::widget([
