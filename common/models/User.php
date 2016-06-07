@@ -73,7 +73,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by username.
+     * Finds user by username or email.
      *
      * @param string $username
      *
@@ -81,7 +81,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::find()->where(['or', 'username = "' . $username . '"', 'email = "' . $username . '"'])
+            ->andWhere(['status' => self::STATUS_ACTIVE])
+            ->one();
     }
 
     /**

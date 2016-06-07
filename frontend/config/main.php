@@ -18,6 +18,9 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'on afterLogin' => function($event) {
+                $event->identity->touch('login_at');
+            }
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

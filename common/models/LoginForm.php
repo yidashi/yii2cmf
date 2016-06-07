@@ -33,7 +33,7 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => '用户名',
+            'username' => '用户名/邮箱',
             'password' => '密码',
             'rememberMe' => '记住我',
         ];
@@ -63,10 +63,6 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            Yii::$app->user->on('afterLogin', function($event){
-                $user = $event->identity;
-                $user->touch('login_at');
-            });
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         } else {
             return false;

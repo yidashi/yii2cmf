@@ -15,7 +15,7 @@ use common\helpers\Url;
 </div>
 <div class="media-body">
     <div class="media-heading">
-        <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="<?= $model->fromUser->username ?>"><?= $model->fromUser->username ?></a>
+        <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="<?= $model->fromUser->username ?>" title="<?= $model->fromUser->username ?>"><?= $model->fromUser->username ?></a>
         <?= $model->title ?>
     </div>
     <div class="media-content">
