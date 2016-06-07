@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%message}}".
@@ -29,8 +30,9 @@ class Message extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['from_uid', 'to_uid', 'content', 'created_at'], 'required'],
-            [['from_uid', 'to_uid', 'created_at'], 'integer'],
+            [['to_uid', 'content'], 'required'],
+            [['from_uid', 'to_uid'], 'integer'],
+            [['from_uid'], 'default', 'value' => 0], // 0是系统信息
             [['content'], 'string', 'max' => 1000]
         ];
     }
@@ -48,4 +50,15 @@ class Message extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
         ];
     }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'updatedAtAttribute' => false
+            ]
+        ];
+    }
+
 }

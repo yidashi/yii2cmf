@@ -79,7 +79,8 @@ return [
                     $event->sender->title = \Yii::$app->config->get('SITE_NAME');
                 }
             }
-        ]
+        ],
+        'message' => \frontend\components\Message::className()
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),

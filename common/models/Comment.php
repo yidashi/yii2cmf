@@ -93,6 +93,10 @@ class Comment extends \yii\db\ActiveRecord
         return $this->hasMany(self::className(), ['parent_id' => 'id']);
     }
 
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'parent_id']);
+    }
     /**
      * 绑定写入后的事件.
      */
@@ -109,7 +113,7 @@ class Comment extends \yii\db\ActiveRecord
     }
 
     /**
-     * 更新文章评论计数器.
+     * 更新文章评论计数器等.
      */
     public function updateComment($event)
     {
@@ -117,7 +121,14 @@ class Comment extends \yii\db\ActiveRecord
             $article = Article::find()->where(['id' => $this->type_id])->one();
             $article->updateCounters(['comment' => $event->data['comment']]);
         }
-
+        // 如果是回复,发站内信,通知什么的
+        if ($event->sender->parent_id > 0) {
+            $toUid = $event->sender->parent->user_id;
+            $content = 'xxx回复了你的评论';
+            Yii::$app->message->setTo($toUid)
+                ->setContent($content)
+                ->send();
+        }
     }
 
     public function getIsUp()

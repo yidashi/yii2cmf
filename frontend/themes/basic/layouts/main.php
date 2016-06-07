@@ -57,6 +57,23 @@ AppAsset::register($this);
     ]);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
+    $noticeNums = Yii::$app->message->getNoViewedNums();
+    if ($noticeNums > 0) {
+        $rightMenuItems[] = [
+            'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNums . '</span>',
+            'items' => [
+                [
+                    'label' => $noticeNums . '条新消息',
+                    'url' => ['/notice']
+                ]
+            ]
+        ];
+    } else {
+        $rightMenuItems[] = [
+            'label' => '<i class="fa fa-bell"></i>',
+            'url' => ['/notice']
+        ];
+    }
     if (Yii::$app->user->isGuest) {
         $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
         $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
