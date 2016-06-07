@@ -551,7 +551,9 @@ CREATE TABLE `pop_message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `from_uid` int(11) NOT NULL,
   `to_uid` int(11) NOT NULL,
-  `content` varchar(1000) COLLATE utf8_bin NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `content` varchar(1000) NOT NULL,
   `is_viewed` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` int(10) NOT NULL,
   PRIMARY KEY (`id`)
