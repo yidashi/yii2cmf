@@ -29,9 +29,9 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
     ],
     ```
     
-3. 导入初始化数据 `php yii migrate` 
+4. 导入初始化数据 `php yii migrate` 
 
-4. 收工
+5. 收工
 
     > 前台访问地址: `/web/`
 
