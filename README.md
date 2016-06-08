@@ -6,7 +6,7 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
 进入项目根目录
 
-1. ` php init ` 
+1. ` php init `
 
     > 0回车 yes回车
 
@@ -19,8 +19,7 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
     > 修改`common/config/main-local.php`
     
     ```
-    'db' => [
-        'class' => 'yii\db\Connection',
+    'db' => ['class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=127.0.0.1;dbname=yii', //数据库host和库名
         'username' => 'root', // 数据库用户名
         'password' => 'root1234', // 数据库密码

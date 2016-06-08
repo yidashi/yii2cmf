@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\Category;
-use dektrium\user\Module;
 use frontend\models\Article;
 use common\models\Auth;
 use common\models\User;

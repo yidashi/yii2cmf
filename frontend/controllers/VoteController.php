@@ -10,6 +10,7 @@ use common\models\Comment;
 use common\models\Vote;
 use frontend\models\Article;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\AccessControl;
 
@@ -78,7 +79,9 @@ class VoteController extends Controller
         } else {
             $model = Comment::find()->where(['id' => $id])->select('id,up,down')->one();
         }
-
+        if (empty($model)) {
+            throw new NotFoundHttpException('目标不存在');
+        }
         return $model;
     }
 }
