@@ -6,6 +6,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\User;
 use yii\base\DynamicModel;
 use yii\helpers\Html;
 use yii\web\Controller;
@@ -73,5 +74,17 @@ class TestController extends Controller
     public function actionFormat()
     {
         echo \Yii::$app->formatter->format('2016-01-24 6:28:00', 'relativeTime');
+    }
+
+    public function actionUser()
+    {
+        $user_list = User::find()->all();
+
+        foreach($user_list as $k=>$v){
+            //$data = array();
+            $data = $v->attributes;
+            print_r($data);
+            echo "<br>";
+        }
     }
 }

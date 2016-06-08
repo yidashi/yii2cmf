@@ -35,6 +35,7 @@ return [
             'runtime',
             'web/assets',
             'web/admin/assets',
+            'web/static'
         ],
         'setExecutable' => [
             'yii',
@@ -51,6 +52,7 @@ return [
             'runtime',
             'web/assets',
             'web/admin/assets',
+            'web/static'
         ],
         'setExecutable' => [
             'yii',

@@ -24,7 +24,7 @@ class Article extends \common\models\Article
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'category_id'], 'required'],
             [['status', 'category_id', 'comment', 'user_id'], 'integer'],
             [['title', 'category'], 'string', 'max' => 50],
             [['category_id'], 'setCategory'],

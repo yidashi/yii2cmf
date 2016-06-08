@@ -219,4 +219,13 @@ return array (
       '@trntv/yii/datetime' => $vendorDir . '/trntv/yii2-datetime-widget/src',
     ),
   ),
+  'jamband/yii2-schemadump' => 
+  array (
+    'name' => 'jamband/yii2-schemadump',
+    'version' => '0.9.9.0',
+    'alias' => 
+    array (
+      '@jamband/schemadump' => $vendorDir . '/jamband/yii2-schemadump',
+    ),
+  ),
 );
