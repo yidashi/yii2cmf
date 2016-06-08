@@ -2,6 +2,41 @@ demo地址 `www.51siyuan.cn`
 
 demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
+## 安装:
+
+进入项目根目录
+
+1. ` php init ` 
+
+    > 0回车 yes回车
+
+2. 创建项目所需数据库 `mysql -uroot -proot -e 'create database yii;'`
+
+    > root root分别是你的mysql用户和密码，创建yii库
+
+3. 数据库配置
+
+    > 修改`common/config/main-local.php`
+    
+    ```
+    'db' => [
+        'class' => 'yii\db\Connection',
+        'dsn' => 'mysql:host=127.0.0.1;dbname=yii', //数据库host和库名
+        'username' => 'root', // 数据库用户名
+        'password' => 'root1234', // 数据库密码
+        'charset' => 'utf8',
+        'tablePrefix' => 'pop_', // 表前缀
+    ],
+    ```
+    
+3. 导入初始化数据 `php yii migrate` 
+
+4. 收工
+
+    > 前台访问地址: `/web/`
+
+    > 后台访问地址: `/web/admin/` 管理员 帐号 `hehe` 密码 `111111`
+    
 ## 现有功能:
 
 * rbac权限管理
@@ -18,20 +53,4 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
 * todo
 
-## 自己本地部署方法:
-
-进入项目根目录
-
-```
-php init
-
-mysql -uroot -proot -e 'create database yii;' //（root root分别是你本地的mysql用户和密码，创建yii库，默认名字是yii，如果你不想用这个名字或者用已有的数据库，需要修改common/config/main-local.php里相关的数据库配置）
-
-php yii migrate  //导入demo初始化数据（如果导入失败，可以到console/migrations/里找init.sql直接导入）
-```
-
-
-前台地址: `/web/`
-
-后台地址: `/web/admin/` 管理员 帐号 `hehe` 密码 `111111`
 
