@@ -106,6 +106,7 @@ class Comment extends \yii\db\ActiveRecord
     public function init()
     {
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'updateComment'], ['comment' => 1]);
+        $this->on(self::EVENT_AFTER_INSERT, [$this, 'sendMessage']);
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'updateComment'], ['comment' => -1]);
     }
     public function transactions()
@@ -124,6 +125,10 @@ class Comment extends \yii\db\ActiveRecord
             $article = Article::find()->where(['id' => $this->type_id])->one();
             $article->updateCounters(['comment' => $event->data['comment']]);
         }
+    }
+
+    public function sendMessage($event)
+    {
         // 如果是回复,发站内信,通知什么的
         if ($event->sender->parent_id > 0) {
             $toUid = $event->sender->parent->user_id;
