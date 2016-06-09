@@ -92,7 +92,7 @@ return [
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
-//            '*',
+            'site/logout',
         ],
     ],
     'on beforeRequest' => function($event) {
