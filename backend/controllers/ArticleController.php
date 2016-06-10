@@ -119,11 +119,9 @@ class ArticleController extends Controller
     }
     public function actionClear()
     {
-        Yii::$app->response->format = Response::FORMAT_JSON;
         if (\common\models\Article::deleteAll(['>', 'deleted_at', 0]) !== false) {
-            return [
-                'message' => '操作成功'
-            ];
+            Yii::$app->session->setFlash('success', '操作成功');
+            return $this->redirect('trash');
         }
         throw new Exception('操作失败');
     }
