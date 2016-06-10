@@ -13,10 +13,22 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-index">
     <?php
     $form = ActiveForm::begin();
+    echo \yii\grid\GridView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => '{items}',
+        'columns' => [
+            'desc',
+            [
+                'attribute' => 'value',
+                'value' => function($model, $key, $index) use ($form) {
+                    return call_user_func_array([$form->field($model, "[$index]value")->label(false), $model->inputType['name']], $model->inputType['params']);
+                },
+                'format' => 'raw'
+            ],
+            'name'
+        ]
+    ]);
 
-    foreach ($configs as $index => $config) {
-        echo call_user_func_array([$form->field($config, "[$index]value")->label($config->desc), $config->inputType['name']], $config->inputType['params']);
-    }
     echo Html::submitButton('提交', ['class' => 'btn btn-primary']);
     ActiveForm::end();
     ?>

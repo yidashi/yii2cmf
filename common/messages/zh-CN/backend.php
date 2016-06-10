@@ -164,6 +164,4 @@ return [
     'i18n' => '国际化',
     'i18n Message' => '国际化信息',
     'i18n Source Message' => '国际化源信息',
-    'Search' => '搜索',
-    'Reset' => '重置',
 ];

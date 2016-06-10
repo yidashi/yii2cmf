@@ -9,14 +9,18 @@ namespace backend\controllers;
 use common\models\Config;
 use yidashi\webuploader\WebuploaderAction;
 use yii\base\Model;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class SystemController extends Controller
 {
     public function actionConfig()
     {
-        $configs = Config::find()->indexBy('id')->all();
-
+        $dataProvider = new ActiveDataProvider([
+            'query' => Config::find(),
+            'pagination' => false
+        ]);
+        $configs = $dataProvider->getModels();
         if (Model::loadMultiple($configs, \Yii::$app->request->post()) && Model::validateMultiple($configs)) {
             foreach ($configs as $config) {
                 $config->save(false);
@@ -25,6 +29,6 @@ class SystemController extends Controller
             return $this->redirect('config');
         }
 
-        return $this->render('config', ['configs' => $configs]);
+        return $this->render('config', ['dataProvider' => $dataProvider]);
     }
 }
