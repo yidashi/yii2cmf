@@ -103,8 +103,10 @@ INSERT INTO `pop_auth_item_child` VALUES ('superAdmin','/*');
 /*!40000 ALTER TABLE `pop_auth_item_child` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Dumping data for table `pop_config`
+--
 
-/*!40101 SET character_set_client = @saved_cs_client */;
 LOCK TABLES `pop_config` WRITE;
 /*!40000 ALTER TABLE `pop_config` DISABLE KEYS */;
 INSERT INTO `pop_config` VALUES
@@ -114,8 +116,7 @@ INSERT INTO `pop_config` VALUES
 (5,'SITE_ICP','','','域名备案号',1,0,1461937892),
 (6,'SITE_NAME','饮水思源','','网站名称',1,0,1461937892),
 (7,'FOOTER','','','底部',5,0,1461937892),
-(8,'THEME_NAME','basic','basic:basic\r\nspecial:special','主题名',3,0,1461937892),
-(9,'BACKEND_SKIN','skin-blue','skin-black:skin-black\r\nskin-blue:skin-blue\r\nskin-green:skin-green\r\nskin-purple:skin-purple\r\nskin-red:skin-red\r\nskin-yellow:skin-yellow','后台皮肤',3,1461931367,1461937892);
+(8,'THEME_NAME','basic','basic:basic\r\nspecial:special','主题名',3,0,1461937892),(9,'BACKEND_SKIN','skin-blue','skin-black:skin-black\r\nskin-blue:skin-blue\r\nskin-green:skin-green\r\nskin-purple:skin-purple\r\nskin-red:skin-red\r\nskin-yellow:skin-yellow','后台皮肤',3,1461931367,1461937892);
 /*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,8 +127,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `pop_menu` WRITE;
 /*!40000 ALTER TABLE `pop_menu` DISABLE KEYS */;
-INSERT INTO `pop_menu` VALUES
-(1,'权限管理',NULL,NULL,1,NULL,'users'),
+INSERT INTO `pop_menu` VALUES (1,'权限管理',NULL,NULL,1,NULL,'users'),
 (5,'用户管理',1,'/admin/assignment/index',NULL,NULL,''),
 (6,'路由管理',1,'/admin/route/index',NULL,NULL,''),
 (7,'角色管理',1,'/admin/role/index',NULL,NULL,''),
@@ -148,14 +148,6 @@ INSERT INTO `pop_menu` VALUES
 (19,'还原',4,'/database/import/index',NULL,NULL,'');
 /*!40000 ALTER TABLE `pop_menu` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `pop_spider`
---
-
-
-
-
 
 
 LOCK TABLES `pop_page` WRITE;

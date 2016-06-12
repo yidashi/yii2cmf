@@ -7,7 +7,7 @@ class m130524_201442_init extends Migration
 {
     public $tableOptions;
 
-    public function up()
+    public function safeUp()
     {
         // admin_log
         $this->createTable('{{%admin_log}}', [
@@ -314,17 +314,17 @@ class m130524_201442_init extends Migration
         $this->execute(file_get_contents(__DIR__ .'/init.sql'));
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%admin_log}}');
         $this->dropTable('{{%article}}');
         $this->dropTable('{{%article_data}}');
         $this->dropTable('{{%article_tag}}');
         $this->dropTable('{{%auth}}');
-        $this->dropTable('{{%auth_rule}}');
         $this->dropTable('{{%auth_assignment}}'); // fk: item_name
-        $this->dropTable('{{%auth_item}}'); // fk: rule_name
         $this->dropTable('{{%auth_item_child}}'); // fk: parent, child
+        $this->dropTable('{{%auth_item}}'); // fk: rule_name
+        $this->dropTable('{{%auth_rule}}');
         $this->dropTable('{{%category}}');
         $this->dropTable('{{%comment}}');
         $this->dropTable('{{%config}}');
@@ -332,7 +332,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%gather}}');
         $this->dropTable('{{%menu}}'); // fk: parent
         $this->dropTable('{{%message}}');
-        $this->dropTable('{{%migration}}');
         $this->dropTable('{{%page}}');
         $this->dropTable('{{%profile}}');
         $this->dropTable('{{%reward}}');
