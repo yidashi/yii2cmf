@@ -23,6 +23,7 @@ class SystemController extends Controller
         $configs = $dataProvider->getModels();
         if (Model::loadMultiple($configs, \Yii::$app->request->post()) && Model::validateMultiple($configs)) {
             foreach ($configs as $config) {
+                /* @var $config Config */
                 $config->save(false);
             }
 

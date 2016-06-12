@@ -14,9 +14,10 @@ class Subscribe
     {
         $args = $this->args;
         $article = unserialize($args['article']);
+        $subscriber = ['liujuntaor@qq.com'];
         \Yii::$app->mailer->compose()
             ->setFrom('13353791538@163.com')
-            ->setTo('liujuntaor@qq.com')
+            ->setTo($subscriber)
             ->setSubject($article->title . '-' . \Yii::$app->config->get('SITE_NAME'))
             ->setTextBody($article->desc)
             ->setHtmlBody($article->desc . '<a href="http://www.51siyuan.cn/' . $article->id . '.html">阅读全文</a>')

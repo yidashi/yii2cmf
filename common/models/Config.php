@@ -143,8 +143,8 @@ class Config extends \yii\db\ActiveRecord
 
     /**
      * 分析枚举类型.
-     *
-     * @param $string
+     * @param $value string
+     * @return array
      */
     public function parseExtra($value)
     {
