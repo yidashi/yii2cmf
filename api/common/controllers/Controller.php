@@ -16,7 +16,12 @@ class Controller extends \yii\rest\Controller
     {
         $behaviors = parent::behaviors();
         unset($behaviors['contentNegotiator']['formats']['application/xml']);
-        $behaviors['cors'] = Cors::className();
+        $behaviors['cors'] = [
+            'class' => Cors::className(),
+            'cors' => [
+                'Access-Control-Expose-Headers' => ['Set-Cookie']
+            ]
+        ];
         return $behaviors;
     }
 }
