@@ -24,7 +24,7 @@ class Controller extends \yii\rest\Controller
                 'Access-Control-Request-Headers' => ['*'],
                 'Access-Control-Allow-Credentials' => null,
                 'Access-Control-Max-Age' => 86400,
-                'Access-Control-Expose-Headers' => ['Set-Cookie']
+                'Access-Control-Expose-Headers' => ['Set-Cookie', 'X-Pagination-Current-Page']
             ]
         ];
         return $behaviors;
