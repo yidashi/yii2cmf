@@ -19,7 +19,7 @@ class Controller extends \yii\rest\Controller
         $behaviors['cors'] = [
             'class' => Cors::className(),
             'cors' => [
-                'Origin' => ['*'],
+                'Origin' => ['*', '127.0.0.1'],
                 'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
                 'Access-Control-Request-Headers' => ['*'],
                 'Access-Control-Allow-Credentials' => true,
