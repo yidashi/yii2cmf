@@ -86,7 +86,7 @@ class Session extends Component implements \IteratorAggregate, \ArrayAccess, \Co
      * Array may have the following possible keys: 'lifetime', 'path', 'domain', 'secure', 'httponly'
      * @see http://www.php.net/manual/en/function.session-set-cookie-params.php
      */
-    private $_cookieParams = ['httponly' => true];
+    private $_cookieParams = ['httponly' => false];
 
 
     /**
