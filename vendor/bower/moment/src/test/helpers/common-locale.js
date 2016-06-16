@@ -1,4 +1,4 @@
-import { test } from '../qunit';
+import { test, expect } from '../qunit';
 import each from './each';
 import objectKeys from './object-keys';
 import moment from '../../moment';
@@ -46,7 +46,7 @@ export function defineCommonLocaleTests(locale, options) {
         for (h = 0; h < 24; ++h) {
             for (m = 0; m < 60; m += 15) {
                 t1 = moment.utc([2000, 0, 1, h, m]);
-                t2 = moment(t1.format('A h:mm'), 'A h:mm');
+                t2 = moment.utc(t1.format('A h:mm'), 'A h:mm');
                 assert.equal(t2.format('HH:mm'), t1.format('HH:mm'),
                         'meridiem at ' + t1.format('HH:mm'));
             }
@@ -67,6 +67,74 @@ export function defineCommonLocaleTests(locale, options) {
                         'contains ' + srchToken + ' in ' + baseToken);
             });
         });
+    });
+
+    test('month parsing correctness', function (assert) {
+        var i, m;
+
+        if (locale === 'tr') {
+            // I can't fix it :(
+            expect(0);
+            return;
+        }
+        function tester(format) {
+            var r;
+            r = moment(m.format(format), format);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format);
+            r = moment(m.format(format).toLocaleUpperCase(), format);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format + ' upper');
+            r = moment(m.format(format).toLocaleLowerCase(), format);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format + ' lower');
+
+            r = moment(m.format(format), format, true);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format + ' strict');
+            r = moment(m.format(format).toLocaleUpperCase(), format, true);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format + ' upper strict');
+            r = moment(m.format(format).toLocaleLowerCase(), format, true);
+            assert.equal(r.month(), m.month(), 'month ' + i + ' fmt ' + format + ' lower strict');
+        }
+
+        for (i = 0; i < 12; ++i) {
+            m = moment([2015, i, 15, 18]);
+            tester('MMM');
+            tester('MMM.');
+            tester('MMMM');
+            tester('MMMM.');
+        }
+    });
+
+    test('weekday parsing correctness', function (assert) {
+        var i, m;
+
+        if (locale === 'tr' || locale === 'az') {
+            // There is a lower-case letter (ı), that converted to upper then
+            // lower changes to i
+            expect(0);
+            return;
+        }
+        function tester(format) {
+            var r, baseMsg = 'weekday ' + m.weekday() + ' fmt ' + format;
+            r = moment(m.format(format), format);
+            assert.equal(r.weekday(), m.weekday(), baseMsg);
+            r = moment(m.format(format).toLocaleUpperCase(), format);
+            assert.equal(r.weekday(), m.weekday(), baseMsg + ' upper');
+            r = moment(m.format(format).toLocaleLowerCase(), format);
+            assert.equal(r.weekday(), m.weekday(), baseMsg + ' lower');
+
+            r = moment(m.format(format), format, true);
+            assert.equal(r.weekday(), m.weekday(), baseMsg + ' strict');
+            r = moment(m.format(format).toLocaleUpperCase(), format, true);
+            assert.equal(r.weekday(), m.weekday(), baseMsg + ' upper strict');
+            r = moment(m.format(format).toLocaleLowerCase(), format, true);
+            assert.equal(r.weekday(), m.weekday(), baseMsg + ' lower strict');
+        }
+
+        for (i = 0; i < 7; ++i) {
+            m = moment.utc([2015, i, 15, 18]);
+            tester('dd');
+            tester('ddd');
+            tester('dddd');
+        }
     });
 }
 

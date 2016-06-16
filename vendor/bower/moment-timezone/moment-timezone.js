@@ -1,5 +1,5 @@
 //! moment-timezone.js
-//! version : 0.5.3
+//! version : 0.5.4
 //! author : Tim Wood
 //! license : MIT
 //! github.com/moment/moment-timezone
@@ -24,7 +24,7 @@
 		return moment;
 	}
 
-	var VERSION = "0.5.3",
+	var VERSION = "0.5.4",
 		zones = {},
 		links = {},
 		names = {},
@@ -232,7 +232,7 @@
 
 	ZoneScore.prototype.scoreOffsetAt = function (offsetAt) {
 		this.offsetScore += Math.abs(this.zone.offset(offsetAt.at) - offsetAt.offset);
-		if (this.zone.abbr(offsetAt.at).match(/[A-Z]/g).join('') !== offsetAt.abbr) {
+		if (this.zone.abbr(offsetAt.at).replace(/[^A-Z]/g, '') !== offsetAt.abbr) {
 			this.abbrScore++;
 		}
 	};
@@ -325,11 +325,13 @@
 		// use Intl API when available and returning valid time zone
 		try {
 			var intlName = Intl.DateTimeFormat().resolvedOptions().timeZone;
-			var name = names[normalizeName(intlName)];
-			if (name) {
-				return name;
+			if (intlName){
+				var name = names[normalizeName(intlName)];
+				if (name) {
+					return name;
+				}
+				logError("Moment Timezone found " + intlName + " from the Intl api, but did not have that data loaded.");
 			}
-			logError("Moment Timezone found " + intlName + " from the Intl api, but did not have that data loaded.");
 		} catch (e) {
 			// Intl unavailable, fall back to manual guessing.
 		}

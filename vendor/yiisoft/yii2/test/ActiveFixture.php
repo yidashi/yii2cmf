@@ -57,7 +57,7 @@ class ActiveFixture extends BaseActiveFixture
     public function init()
     {
         parent::init();
-        if (!isset($this->modelClass) && !isset($this->tableName)) {
+        if ($this->modelClass === null && $this->tableName === null) {
             throw new InvalidConfigException('Either "modelClass" or "tableName" must be set.');
         }
     }
@@ -97,6 +97,7 @@ class ActiveFixture extends BaseActiveFixture
         if ($this->dataFile === null) {
             $class = new \ReflectionClass($this);
             $dataFile = dirname($class->getFileName()) . '/data/' . $this->getTableSchema()->fullName . '.php';
+
             return is_file($dataFile) ? require($dataFile) : [];
         } else {
             return parent::getData();

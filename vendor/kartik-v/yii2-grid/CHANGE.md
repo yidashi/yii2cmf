@@ -1,6 +1,43 @@
 Change Log: `yii2-grid`
 =======================
 
+## Version 3.1.1
+
+**Date:** 10-Apr-2016
+
+1. (enh #443): Enhance to show header in exported content when setting `floatHeader`.
+2. (enh #444): Set default PDF export encoding to utf8.
+3. (enh #445): Set default pjaxSettings `enablePushState` to match yii pjax defaults.
+4. (enh #450): Update Hungarian Translations.
+5. (enh #455): Update German Translations.
+6. (enh #457): Implement `array_replace_recursive` instead of `ArrayHelper::merge` for overriding defaults.
+7. (enh #458): Add Slovak Translations.
+8. (enh #461): Export configuration font awesome enhancements.
+9. (enh #462): Fix responsiveness for smaller devices (resizableColumns overflow).
+
+## Version 3.1.0
+
+**Date:** 13-Jan-2016
+
+1. (enh #402): Correct casting of primary key in EditableColumn for composite and MongoId scenario.
+2. (enh #407): Correct casting of primary key in ExpandRowColumn for composite and MongoId scenario.
+3. (bug #434): Correct pjax validation for DataColumn.
+4. (enh #436): Add branch alias for dev-master latest release.
+5. (enh #437): Update Brazilian Portuguese Translations
+6. (bug #438): Correct pjax validation for DataColumn.
+
+## Version 3.0.9
+
+**Date:** 10-Jan-2016
+
+1. (enh #410, #413): Add Thai translations.
+2. (bug #415): Fix double quote replace in csv export.
+3. (enh #419): Create new `EditableColumnAction` class.
+4. (enh #420): Enhance EditableColumn to pass current model `attribute` as ajax posted data.
+5. Sort entries in message files.
+6. (enh #431): Disable PJAX pushState by default to avoid plugin conflict on browser back forward.
+7. (enh #432): Enhancements for PJAX reinitialization.
+
 ## Version 3.0.8
 
 **Date:** 05-Dec-2015

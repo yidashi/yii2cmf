@@ -15,6 +15,7 @@ if(!empty($options['noConflict']))
 	Assets::noConflict($this);
 
 unset($options['noConflict']);
+$options['soundPath'] = Assets::getSoundPathUrl();
 
 
 $this->registerJs("

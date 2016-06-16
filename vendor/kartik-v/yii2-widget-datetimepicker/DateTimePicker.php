@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
  * @package yii2-widgets
  * @subpackage yii2-widget-datetimepicker
- * @version 1.4.1
+ * @version 1.4.2
  */
 
 namespace kartik\datetime;
@@ -95,6 +95,11 @@ class DateTimePicker extends InputWidget
      * @var array the HTML options for the DateTimePicker container
      */
     private $_container = [];
+
+    /**
+     * @inheritdoc
+     */
+    public $pluginName = 'datetimepicker';
 
     /**
      * Initializes the widget
@@ -243,9 +248,9 @@ class DateTimePicker extends InputWidget
             }
         }
         if ($this->type == self::TYPE_INPUT) {
-            $this->registerPlugin('datetimepicker');
+            $this->registerPlugin($this->pluginName);
         } else {
-            $this->registerPlugin('datetimepicker', 'jQuery("#' . $this->_container['id'] . '")');
+            $this->registerPlugin($this->pluginName, 'jQuery("#' . $this->_container['id'] . '")');
         }
     }
 }

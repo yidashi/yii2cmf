@@ -18,7 +18,8 @@
         "psr-4": {"mihaildev\\elfinder\\": ""}
     },
     "require": {
-        "yiisoft/yii2-jui": "*"
+        "yiisoft/yii2-jui": "*",
+        "studio-42/elfinder": "^2.1.10"
     },
     "extra": {
       "asset-installer-paths": {

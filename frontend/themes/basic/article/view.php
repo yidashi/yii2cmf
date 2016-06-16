@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>
-        <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+            <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
         <?php endforeach; ?>
     </ul>
     <!--内容-->
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $model->title;
         <div class="panel-body">
             <ul class="post-list">
                 <?php foreach ($hots as $item):?>
-                <li><?=Html::a($item->title, ['/article/view', 'id' => $item->id])?></li>
+                    <li><?=Html::a($item->title, ['/article/view', 'id' => $item->id])?></li>
                 <?php endforeach;?>
             </ul>
         </div>

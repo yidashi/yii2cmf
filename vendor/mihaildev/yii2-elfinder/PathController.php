@@ -12,6 +12,7 @@
 */
 
 namespace mihaildev\elfinder;
+use mihaildev\elfinder\volume\Local;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use Yii;
@@ -49,7 +50,7 @@ class PathController extends BaseController{
 			$root = ['path' => $root];
 
 		if(!isset($root['class']))
-			$root['class'] = 'mihaildev\elfinder\LocalPath';
+			$root['class'] = Local::className();
 
 		if(!empty($subPath)){
 			if(preg_match("/\./i", $subPath)){
@@ -64,7 +65,7 @@ class PathController extends BaseController{
 
 		$root = Yii::createObject($root);
 
-		/** @var \mihaildev\elfinder\LocalPath $root*/
+		/** @var Local $root*/
 
 		if($root->isAvailable())
 			$this->_options['roots'][] = $root->getRoot();

@@ -23,18 +23,17 @@ class DatePickerLanguageAsset extends AssetBundle
      * and its language settings. If this is false, you should explicitly specify the language js files via [[js]].
      */
     public $autoGenerate = true;
-
     /**
      * @var string language to register translation file for
      */
     public $language;
-
     /**
      * @inheritdoc
      */
     public $depends = [
         'yii\jui\JuiAsset',
     ];
+
 
     /**
      * @inheritdoc

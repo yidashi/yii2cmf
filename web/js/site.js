@@ -21,6 +21,9 @@ $(function(){
                 if(XMLHttpRequest.status == 302){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
+                if(XMLHttpRequest.status == 403){
+                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
+                }
                 this.abort();
 
             }
@@ -51,6 +54,9 @@ $(function(){
             error: function (XMLHttpRequest, textStatus) {
                 if(XMLHttpRequest.status == 302){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
+                }
+                if(XMLHttpRequest.status == 403){
+                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
                 }
                 this.abort();
             }
@@ -83,8 +89,9 @@ $(function(){
             error: function (XMLHttpRequest, textStatus) {
                 if(XMLHttpRequest.status == 302){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
-                }else{
-                    $('#modal').modal('hehe');
+                }
+                if(XMLHttpRequest.status == 403){
+                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
                 }
                 this.abort();
             }

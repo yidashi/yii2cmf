@@ -73,32 +73,32 @@ test('format week', function (assert) {
 test('from', function (assert) {
     var start = moment([2007, 1, 28]);
     assert.equal(start.from(moment([2007, 1, 28]).add({s: 44}), true),  '幾秒',   '44 seconds = a few seconds');
-    assert.equal(start.from(moment([2007, 1, 28]).add({s: 45}), true),  '一分鐘', '45 seconds = a minute');
-    assert.equal(start.from(moment([2007, 1, 28]).add({s: 89}), true),  '一分鐘', '89 seconds = a minute');
+    assert.equal(start.from(moment([2007, 1, 28]).add({s: 45}), true),  '1分鐘', '45 seconds = a minute');
+    assert.equal(start.from(moment([2007, 1, 28]).add({s: 89}), true),  '1分鐘', '89 seconds = a minute');
     assert.equal(start.from(moment([2007, 1, 28]).add({s: 90}), true),  '2分鐘',  '90 seconds = 2 minutes');
     assert.equal(start.from(moment([2007, 1, 28]).add({m: 44}), true),  '44分鐘', '44 minutes = 44 minutes');
-    assert.equal(start.from(moment([2007, 1, 28]).add({m: 45}), true),  '一小時', '45 minutes = an hour');
-    assert.equal(start.from(moment([2007, 1, 28]).add({m: 89}), true),  '一小時', '89 minutes = an hour');
+    assert.equal(start.from(moment([2007, 1, 28]).add({m: 45}), true),  '1小時', '45 minutes = an hour');
+    assert.equal(start.from(moment([2007, 1, 28]).add({m: 89}), true),  '1小時', '89 minutes = an hour');
     assert.equal(start.from(moment([2007, 1, 28]).add({m: 90}), true),  '2小時',  '90 minutes = 2 hours');
     assert.equal(start.from(moment([2007, 1, 28]).add({h: 5}), true),   '5小時',  '5 hours = 5 hours');
     assert.equal(start.from(moment([2007, 1, 28]).add({h: 21}), true),  '21小時', '21 hours = 21 hours');
-    assert.equal(start.from(moment([2007, 1, 28]).add({h: 22}), true),  '一天',   '22 hours = a day');
-    assert.equal(start.from(moment([2007, 1, 28]).add({h: 35}), true),  '一天',   '35 hours = a day');
+    assert.equal(start.from(moment([2007, 1, 28]).add({h: 22}), true),  '1天',   '22 hours = a day');
+    assert.equal(start.from(moment([2007, 1, 28]).add({h: 35}), true),  '1天',   '35 hours = a day');
     assert.equal(start.from(moment([2007, 1, 28]).add({h: 36}), true),  '2天',   '36 hours = 2 days');
-    assert.equal(start.from(moment([2007, 1, 28]).add({d: 1}), true),   '一天',   '1 day = a day');
+    assert.equal(start.from(moment([2007, 1, 28]).add({d: 1}), true),   '1天',   '1 day = a day');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 5}), true),   '5天',   '5 days = 5 days');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 25}), true),  '25天',  '25 days = 25 days');
-    assert.equal(start.from(moment([2007, 1, 28]).add({d: 26}), true),  '一個月', '26 days = a month');
-    assert.equal(start.from(moment([2007, 1, 28]).add({d: 30}), true),  '一個月', '30 days = a month');
-    assert.equal(start.from(moment([2007, 1, 28]).add({d: 43}), true),  '一個月', '43 days = a month');
+    assert.equal(start.from(moment([2007, 1, 28]).add({d: 26}), true),  '1個月', '26 days = a month');
+    assert.equal(start.from(moment([2007, 1, 28]).add({d: 30}), true),  '1個月', '30 days = a month');
+    assert.equal(start.from(moment([2007, 1, 28]).add({d: 43}), true),  '1個月', '43 days = a month');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 46}), true),  '2個月',  '46 days = 2 months');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 74}), true),  '2個月',  '75 days = 2 months');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 76}), true),  '3個月',  '76 days = 3 months');
-    assert.equal(start.from(moment([2007, 1, 28]).add({M: 1}), true),   '一個月', '1 month = a month');
+    assert.equal(start.from(moment([2007, 1, 28]).add({M: 1}), true),   '1個月', '1 month = a month');
     assert.equal(start.from(moment([2007, 1, 28]).add({M: 5}), true),   '5個月',  '5 months = 5 months');
-    assert.equal(start.from(moment([2007, 1, 28]).add({d: 345}), true), '一年',   '345 days = a year');
+    assert.equal(start.from(moment([2007, 1, 28]).add({d: 345}), true), '1年',   '345 days = a year');
     assert.equal(start.from(moment([2007, 1, 28]).add({d: 548}), true), '2年',   '548 days = 2 years');
-    assert.equal(start.from(moment([2007, 1, 28]).add({y: 1}), true),   '一年',   '1 year = a year');
+    assert.equal(start.from(moment([2007, 1, 28]).add({y: 1}), true),   '1年',   '1 year = a year');
     assert.equal(start.from(moment([2007, 1, 28]).add({y: 5}), true),   '5年',   '5 years = 5 years');
 });
 
@@ -117,14 +117,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(),                   '今天早上2點00分',     'today at the same time');
-    assert.equal(moment(a).add({m: 25}).calendar(),      '今天早上2點25分',     'Now plus 25 min');
-    assert.equal(moment(a).add({h: 1}).calendar(),       '今天早上3點00分',     'Now plus 1 hour');
-    assert.equal(moment(a).add({d: 1}).calendar(),       '明天早上2點00分',     'tomorrow at the same time');
-    assert.equal(moment(a).subtract({h: 1}).calendar(),  '今天早上1點00分',     'Now minus 1 hour');
-    assert.equal(moment(a).subtract({d: 1}).calendar(),  '昨天早上2點00分',     'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                   '今天中午12點00分',     'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),      '今天中午12點25分',     'Now plus 25 min');
+    assert.equal(moment(a).add({h: 1}).calendar(),       '今天下午1點00分',     'Now plus 1 hour');
+    assert.equal(moment(a).add({d: 1}).calendar(),       '明天中午12點00分',     'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(),  '今天上午11點00分',     'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(),  '昨天中午12點00分',     'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {

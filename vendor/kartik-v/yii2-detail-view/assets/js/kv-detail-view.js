@@ -1,19 +1,25 @@
 /*!
  * @package   yii2-detail-view
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.7.3
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version   1.7.4
  *
  * Client extension for the yii2-detail-view extension 
  * 
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2015, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2016, Kartik Visweswaran, Krajee.com
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-
 (function ($) {
     "use strict";
+
+    var NAMESPACE, events;
+    NAMESPACE = '.kvDetailView';
+    events = {
+        click: 'click' + NAMESPACE,
+        afterValidate: 'afterValidate' + NAMESPACE
+    };
 
     var KvDetailView = function (element, options) {
         var self = this;
@@ -31,7 +37,7 @@
             self.initElements();
             self.listen();
         },
-        alert: function(type, msg) {
+        alert: function (type, msg) {
             var self = this, css;
             css = self.alertMessageSettings[type];
             if (msg) {
@@ -41,41 +47,50 @@
             return '';
         },
         initAlert: function () {
-            var self = this, $alert = self.$element.find('.kv-alert-container');
-            $alert.find('.alert .close').each(function() {
+            var self = this, $alert = self.$element.find('.kv-alert-container'), eClick = events.click;
+            $alert.find('.alert .close').each(function () {
                 var $el = $(this);
-                $el.off('click').on('click', function() {
-                    setTimeout(function() {
-                        if (!$alert.find('.alert').length)  {
+                $el.off(eClick).on(eClick, function () {
+                    setTimeout(function () {
+                        if (!$alert.find('.alert').length) {
                             $alert.hide();
                         }
                     }, 300);
                 });
-            });            
+            });
+        },
+        destroy: function () {
+            var self = this, eClick = events.click, eValidate = events.afterValidate;
+            self.$btnSave.off(eClick);
+            self.$btnUpdate.off(eClick);
+            self.$btnView.off(eClick);
+            self.$btnDelete.off(eClick);
+            self.$element.find('.kv-detail-view').closest('form').off(eValidate);
+            self.$element.find('.kv-alert-container .alert .close').off(eClick);
         },
         listen: function () {
-            var self = this, $alert = self.$element.find('.kv-alert-container'), 
-                $detail = self.$element.find('.kv-detail-view');
-            $detail.closest('form').on('afterValidate', function (event, messages) {
+            var self = this, $alert = self.$element.find('.kv-alert-container'), eClick = events.click,
+                eValidate = events.afterValidate, $detail = self.$element.find('.kv-detail-view');
+            $detail.closest('form').off(eValidate).on(eValidate, function (event, messages) {
                 if (messages !== undefined) {
                     $detail.removeClass('kv-detail-loading');
                 }
             });
-            self.$btnSave.on('click', function () {
+            self.$btnSave.off(eClick).on(eClick, function () {
                 $alert.hide();
                 $detail.removeClass('kv-detail-loading').addClass('kv-detail-loading');
             });
-            self.$btnUpdate.on('click', function () {
+            self.$btnUpdate.off(eClick).on(eClick, function () {
                 self.setMode('edit');
             });
-            self.$btnView.on('click', function () {
+            self.$btnView.off(eClick).on(eClick, function () {
                 self.setMode('view');
             });
-            self.$btnDelete.on('click', function (ev) {
-            var $el = $(this), params = self.deleteParams, confirmMsg = self.deleteConfirm,
-                settings = self.deleteAjaxSettings || {};
+            self.$btnDelete.off(eClick).on(eClick, function (ev) {
+                var $el = $(this), params = self.deleteParams, confirmMsg = self.deleteConfirm,
+                    settings = self.deleteAjaxSettings || {};
                 ev.preventDefault();
-                if  (confirmMsg && !confirm(confirmMsg)) {
+                if (confirmMsg && !confirm(confirmMsg)) {
                     return;
                 }
                 settings = $.extend({
@@ -83,7 +98,7 @@
                     dataType: 'json',
                     data: params,
                     url: $el.attr('href'),
-                    beforeSend: function() {
+                    beforeSend: function () {
                         $alert.html('').hide();
                         $detail.removeClass('kv-detail-loading').addClass('kv-detail-loading');
                     },
@@ -94,20 +109,21 @@
                             self.$btnUpdate.attr('disabled', 'disabled');
                             self.$btnView.attr('disabled', 'disabled');
                             self.$btnSave.attr('disabled', 'disabled');
-                        };
-                        $.each(data.messages, function(key, msg) {
+                        }
+                        $.each(data.messages, function (key, msg) {
                             $alert.append(self.alert(key, msg));
                         });
-                        $alert.hide().fadeIn('slow', function() {
-                            $detail.removeClass('kv-detail-loading'); 
-                            self.initAlert();                           
+                        $alert.hide().fadeIn('slow', function () {
+                            $detail.removeClass('kv-detail-loading');
+                            self.initAlert();
                         });
                     },
-                    error: function(xhr, txt, err) {
+                    error: function (xhr, txt, err) {
                         var msg = '';
                         if (self.showErrorStack) {
                             msg = xhr.responseText ? $(xhr.responseText).text() : '';
-                            msg = msg && msg.length ? '<pre>' + $.trim(msg).replace(/\n\s*\n/g, '\n').replace(/\</g, '&lt;') + '</pre>' : '';
+                            msg = msg && msg.length ? '<pre>' + $.trim(msg).replace(/\n\s*\n/g, '\n')
+                                .replace(/</g, '&lt;') + '</pre>' : '';
                         }
                         msg = self.alert('kv-detail-error', err + msg);
                         $detail.removeClass('kv-detail-loading');

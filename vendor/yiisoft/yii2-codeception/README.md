@@ -10,6 +10,8 @@ It provides classes that help with testing with codeception:
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
+Documentation is at [docs/guide/README.md](docs/guide/README.md).
+
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-codeception/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-codeception)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-codeception/downloads.png)](https://packagist.org/packages/yiisoft/yii2-codeception)
 

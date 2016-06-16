@@ -25,11 +25,33 @@ class ElFinder extends BaseWidjet{
 
 	public $callbackFunction;
 
+	public $multiple = false;
+	
 	public $path;// work with PathController
+	public $startPath;
 
 	public $containerOptions = [];
 	public $frameOptions = [];
 	public $controller = 'elfinder';
+
+	public static function genPathHash($path)
+	{
+		if(DIRECTORY_SEPARATOR != '/'){
+			$path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+		}
+
+		if(preg_match('/^@(\d+)/', $path, $match)){
+			$volume = $match[1];
+			$path = ltrim(substr($path, strlen($match[0])), DIRECTORY_SEPARATOR);
+			if(empty($path)){
+				$path = DIRECTORY_SEPARATOR;
+			}
+		}else{
+			$volume = 1;
+		}
+		$hash = rtrim(strtr(base64_encode($path), '+/=', '-_.'), '.');
+		return 'elf_l' . $volume .'_' . $hash;
+	}
 
 	public static function getManagerUrl($controller, $params = [])
 	{
@@ -46,6 +68,11 @@ class ElFinder extends BaseWidjet{
 		}else{
 			$id = $controller;
 			$params = [];
+		}
+
+		if(isset($params['startPath'])){
+			$params['#'] = ElFinder::genPathHash($params['startPath']);
+			unset($params['startPath']);
 		}
 
 		return ArrayHelper::merge([
@@ -73,6 +100,12 @@ class ElFinder extends BaseWidjet{
 		if(!empty($this->path))
 			$managerOptions['path'] = $this->path;
 
+		if(!empty($this->startPath))
+			$managerOptions['#'] = ElFinder::genPathHash($this->startPath);
+
+		if($this->multiple)
+			$managerOptions['multiple'] = $this->multiple;
+			
 		$this->frameOptions['src'] = $this->getManagerUrl($this->controller, $managerOptions);
 
 		if(!isset($this->frameOptions['style'])){

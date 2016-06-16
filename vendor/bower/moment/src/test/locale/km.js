@@ -3,7 +3,7 @@ import moment from '../../moment';
 localeModule('km');
 
 test('parse', function (assert) {
-    var tests = 'មករា មករា_កុម្ភៈ កុម្ភៈ_មិនា មិនា_មេសា មេសា_ឧសភា ឧសភា_មិថុនា មិថុនា_កក្កដា កក្កដា_សីហា សីហា_កញ្ញា កញ្ញា_តុលា តុលា_វិច្ឆិកា វិច្ឆិកា_ធ្នូ ធ្នូ'.split('_'),
+    var tests = 'មករា មករា_កុម្ភៈ កុម្ភៈ_មីនា មីនា_មេសា មេសា_ឧសភា ឧសភា_មិថុនា មិថុនា_កក្កដា កក្កដា_សីហា សីហា_កញ្ញា កញ្ញា_តុលា តុលា_វិច្ឆិកា វិច្ឆិកា_ធ្នូ ធ្នូ'.split('_'),
         i;
 
     function equalTest(input, mmm, i) {
@@ -93,7 +93,7 @@ test('format ordinal', function (assert) {
 });
 
 test('format month', function (assert) {
-    var expected = 'មករា មករា_កុម្ភៈ កុម្ភៈ_មិនា មិនា_មេសា មេសា_ឧសភា ឧសភា_មិថុនា មិថុនា_កក្កដា កក្កដា_សីហា សីហា_កញ្ញា កញ្ញា_តុលា តុលា_វិច្ឆិកា វិច្ឆិកា_ធ្នូ ធ្នូ'.split('_'),
+    var expected = 'មករា មករា_កុម្ភៈ កុម្ភៈ_មីនា មីនា_មេសា មេសា_ឧសភា ឧសភា_មិថុនា មិថុនា_កក្កដា កក្កដា_សីហា សីហា_កញ្ញា កញ្ញា_តុលា តុលា_វិច្ឆិកា វិច្ឆិកា_ធ្នូ ធ្នូ'.split('_'),
         i;
     for (i = 0; i < expected.length; i++) {
         assert.equal(moment([2011, i, 1]).format('MMMM MMM'), expected[i], expected[i]);
@@ -159,24 +159,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(), 'ថ្ងៃនេះ ម៉ោង 02:00', 'today at the same time');
-    assert.equal(moment(a).add({
-        m: 25
-    }).calendar(), 'ថ្ងៃនេះ ម៉ោង 02:25', 'Now plus 25 min');
-    assert.equal(moment(a).add({
-        h: 1
-    }).calendar(), 'ថ្ងៃនេះ ម៉ោង 03:00', 'Now plus 1 hour');
-    assert.equal(moment(a).add({
-        d: 1
-    }).calendar(), 'ស្អែក ម៉ោង 02:00', 'tomorrow at the same time');
-    assert.equal(moment(a).subtract({
-        h: 1
-    }).calendar(), 'ថ្ងៃនេះ ម៉ោង 01:00', 'Now minus 1 hour');
-    assert.equal(moment(a).subtract({
-        d: 1
-    }).calendar(), 'ម្សិលមិញ ម៉ោង 02:00', 'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                  'ថ្ងៃនេះ ម៉ោង 12:00',  'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),     'ថ្ងៃនេះ ម៉ោង 12:25',  'Now plus 25 min');
+    assert.equal(moment(a).add({h: 1}).calendar(),      'ថ្ងៃនេះ ម៉ោង 13:00',  'Now plus 1 hour');
+    assert.equal(moment(a).add({d: 1}).calendar(),      'ស្អែក ម៉ោង 12:00',    'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(), 'ថ្ងៃនេះ ម៉ោង 11:00',  'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(), 'ម្សិលមិញ ម៉ោង 12:00', 'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {

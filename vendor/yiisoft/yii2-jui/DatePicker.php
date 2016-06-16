@@ -16,7 +16,7 @@ use yii\helpers\Json;
 /**
  * DatePicker renders a `datepicker` jQuery UI widget.
  *
- * For example to use the datepicker with a [[yii\base\Model|model]]:
+ * For example to use the datepicker with a [[\yii\base\Model|model]]:
  *
  * ```php
  * echo DatePicker::widget([
@@ -38,7 +38,7 @@ use yii\helpers\Json;
  * ]);
  * ```
  *
- * You can also use this widget in an [[yii\widgets\ActiveForm|ActiveForm]] using the [[yii\widgets\ActiveField::widget()|widget()]]
+ * You can also use this widget in an [[\yii\widgets\ActiveForm|ActiveForm]] using the [[\yii\widgets\ActiveField::widget()|widget()]]
  * method, for example like this:
  *
  * ```php

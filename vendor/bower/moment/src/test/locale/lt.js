@@ -106,12 +106,12 @@ test('format week', function (assert) {
 
 test('format week on US calendar', function (assert) {
     // Tests, whether the weekday names are correct, even if the week does not start on Monday
-    moment.locale('lt', {week: {dow: 0, doy: 6}});
+    moment.updateLocale('lt', {week: {dow: 0, doy: 6}});
     var expected = 'sekmadienis Sek S_pirmadienis Pir P_antradienis Ant A_trečiadienis Tre T_ketvirtadienis Ket K_penktadienis Pen Pn_šeštadienis Šeš Š'.split('_'), i;
     for (i = 0; i < expected.length; i++) {
         assert.equal(moment([2011, 0, 2 + i]).format('dddd ddd dd'), expected[i], expected[i]);
     }
-    moment.locale('lt', {week: {dow: 1, doy: 4}});
+    moment.updateLocale('lt', null);
 });
 
 test('from', function (assert) {
@@ -168,14 +168,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(),                     'Šiandien 02:00',     'today at the same time');
-    assert.equal(moment(a).add({m: 25}).calendar(),      'Šiandien 02:25',     'Now plus 25 min');
-    assert.equal(moment(a).add({h: 1}).calendar(),       'Šiandien 03:00',     'Now plus 1 hour');
-    assert.equal(moment(a).add({d: 1}).calendar(),       'Rytoj 02:00',  'tomorrow at the same time');
-    assert.equal(moment(a).subtract({h: 1}).calendar(),  'Šiandien 01:00',     'Now minus 1 hour');
-    assert.equal(moment(a).subtract({d: 1}).calendar(),  'Vakar 02:00', 'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                   'Šiandien 12:00',  'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),      'Šiandien 12:25',  'Now plus 25 min');
+    assert.equal(moment(a).add({h: 1}).calendar(),       'Šiandien 13:00',  'Now plus 1 hour');
+    assert.equal(moment(a).add({d: 1}).calendar(),       'Rytoj 12:00',     'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(),  'Šiandien 11:00',  'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(),  'Vakar 12:00',     'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {

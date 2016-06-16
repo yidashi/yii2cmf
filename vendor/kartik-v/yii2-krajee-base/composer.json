@@ -12,13 +12,17 @@
             "homepage": "http://www.krajee.com/"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "yiisoft/yii2-bootstrap": "@dev"
     },
     "autoload": {
         "psr-4": {
             "kartik\\base\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.8.x-dev"
         }
     }
 }

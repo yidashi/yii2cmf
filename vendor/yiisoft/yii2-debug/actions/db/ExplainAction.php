@@ -1,4 +1,10 @@
 <?php
+/**
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
 namespace yii\debug\actions\db;
 
 use yii\base\Action;
@@ -15,6 +21,7 @@ class ExplainAction extends Action
      */
     public $panel;
 
+
     public function run($seq, $tag)
     {
         $this->controller->loadData($tag);
@@ -27,19 +34,18 @@ class ExplainAction extends Action
 
         $query = $timings[$seq]['info'];
 
-        $result = $this->panel->getDb()->createCommand('EXPLAIN ' . $query)->queryOne();
+        $results = $this->panel->getDb()->createCommand('EXPLAIN ' . $query)->queryAll();
 
-        if (isset($result['id'])) {
-            unset($result['id']);
+        $output[] = '<table class="table"><thead><tr>' . implode(array_map(function($key) {
+            return '<th>' . $key . '</th>';
+        }, array_keys($results[0]))) . '</tr></thead><tbody>';
+
+        foreach ($results as $result) {
+            $output[] = '<tr>' . implode(array_map(function($value) {
+                return '<td>' . (empty($value) ? 'NULL' : htmlspecialchars($value)) . '</td>';
+            }, $result)) . '</tr>';
         }
-
-        $output = [];
-        foreach ($result as $key => $value) {
-            if ($value) {
-                $output[] = sprintf('<b>%s</b>: %s', $key, $value);
-            }
-        }
-
-        return implode('<br/>', $output);
+        $output[] = '</tbody></table>';
+        return implode($output);
     }
 }

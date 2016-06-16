@@ -150,14 +150,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(),                     'ਅਜ ਰਾਤ ੨:੦੦ ਵਜੇ',     'today at the same time');
-    assert.equal(moment(a).add({m: 25}).calendar(),      'ਅਜ ਰਾਤ ੨:੨੫ ਵਜੇ',     'Now plus 25 min');
-    assert.equal(moment(a).add({h: 3}).calendar(),       'ਅਜ ਸਵੇਰ ੫:੦੦ ਵਜੇ',     'Now plus 3 hour');
-    assert.equal(moment(a).add({d: 1}).calendar(),       'ਕਲ ਰਾਤ ੨:੦੦ ਵਜੇ',  'tomorrow at the same time');
-    assert.equal(moment(a).subtract({h: 1}).calendar(),  'ਅਜ ਰਾਤ ੧:੦੦ ਵਜੇ',     'Now minus 1 hour');
-    assert.equal(moment(a).subtract({d: 1}).calendar(),  'ਕਲ ਰਾਤ ੨:੦੦ ਵਜੇ', 'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                   'ਅਜ ਦੁਪਹਿਰ ੧੨:੦੦ ਵਜੇ',  'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),      'ਅਜ ਦੁਪਹਿਰ ੧੨:੨੫ ਵਜੇ',  'Now plus 25 min');
+    assert.equal(moment(a).add({h: 3}).calendar(),       'ਅਜ ਦੁਪਹਿਰ ੩:੦੦ ਵਜੇ',   'Now plus 3 hours');
+    assert.equal(moment(a).add({d: 1}).calendar(),       'ਕਲ ਦੁਪਹਿਰ ੧੨:੦੦ ਵਜੇ',  'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(),  'ਅਜ ਦੁਪਹਿਰ ੧੧:੦੦ ਵਜੇ',  'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(),  'ਕਲ ਦੁਪਹਿਰ ੧੨:੦੦ ਵਜੇ',  'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {
@@ -308,18 +308,6 @@ test('lenient ordinal parsing of number', function (assert) {
                 'lenient ordinal parsing of number ' + i + ' month check');
         assert.equal(testMoment.date(), i,
                 'lenient ordinal parsing of number ' + i + ' date check');
-    }
-});
-
-test('meridiem', function (assert) {
-    var h, m, t1, t2;
-    for (h = 0; h < 24; ++h) {
-        for (m = 0; m < 60; m += 15) {
-            t1 = moment.utc([2000, 0, 1, h, m]);
-            t2 = moment(t1.format('A h:mm'), 'A h:mm');
-            assert.equal(t2.format('HH:mm'), t1.format('HH:mm'),
-                    'meridiem at ' + t1.format('HH:mm'));
-        }
     }
 });
 

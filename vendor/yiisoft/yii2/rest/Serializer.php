@@ -274,7 +274,6 @@ class Serializer extends Component
     {
         list ($fields, $expand) = $this->getRequestedFields();
         foreach ($models as $i => $model) {
-
             if ($model instanceof Arrayable) {
                 $models[$i] = $model->toArray($fields, $expand);
             } elseif (is_array($model)) {

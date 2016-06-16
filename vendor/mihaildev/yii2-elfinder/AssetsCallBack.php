@@ -11,7 +11,7 @@ use yii\web\AssetBundle;
 
 class AssetsCallBack extends AssetBundle{
 	public $js = array(
-		'js/elfinder.callback.js'
+		'elfinder.callback.js'
 	);
 	public $depends = array(
 		'yii\web\JqueryAsset'

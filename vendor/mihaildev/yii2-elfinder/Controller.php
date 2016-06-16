@@ -1,13 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Администратор
  * Date: 20.01.14
  * Time: 13:26
  */
 
 namespace mihaildev\elfinder;
 
+use mihaildev\elfinder\volume\Local;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -39,11 +38,11 @@ class Controller extends BaseController{
 				$root = ['path' => $root];
 
 			if(!isset($root['class']))
-				$root['class'] = 'mihaildev\elfinder\LocalPath';
+				$root['class'] = Local::className();
 
 			$root = Yii::createObject($root);
 
-			/** @var \mihaildev\elfinder\LocalPath $root*/
+			/** @var \mihaildev\elfinder\volume\Local $root*/
 
 			if($root->isAvailable())
 				$this->_options['roots'][] = $root->getRoot();

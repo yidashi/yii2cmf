@@ -3,8 +3,8 @@
 /**
  * @package   yii2-krajee-base
  * @author    Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version   1.8.0
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version   1.8.5
  */
 
 namespace kartik\base;
@@ -47,7 +47,12 @@ class InputWidget extends \yii\widgets\InputWidget
     public $readonly = false;
 
     /**
-     * @var mixed show loading indicator while plugin loads
+     * @var string the javascript that will be used to destroy the jQuery plugin
+     */
+    public $pluginDestroyJs;
+
+    /**
+     * @var bool show loading indicator while plugin loads
      */
     public $pluginLoading = true;
 
@@ -78,12 +83,17 @@ class InputWidget extends \yii\widgets\InputWidget
      * ~~~
      */
     public $pluginEvents = [];
-    
+
     /**
      * @var string a pjax container identifier if applicable inside which the widget will be rendered.
      * If this is set, the widget will automatically reinitialize on pjax completion.
      */
     public $pjaxContainerId;
+
+    /**
+     * @var bool enable pop state fix for pjax container on press of browser back & forward buttons
+     */
+    public $enablePopStateFix = true;
 
     /**
      * @var boolean whether the widget should automatically format the date from
@@ -139,6 +149,7 @@ class InputWidget extends \yii\widgets\InputWidget
     public function init()
     {
         parent::init();
+        $this->initDestroyJs();
         $this->initInputWidget();
     }
 
@@ -161,8 +172,6 @@ class InputWidget extends \yii\widgets\InputWidget
             $this->value = Html::getAttributeValue($this->model, $this->attribute);
         }
         $this->initDisability($this->options);
-        $view = $this->getView();
-        WidgetAsset::register($view);
     }
 
     /**

@@ -8,7 +8,7 @@ AdminLTE Asset Bundle
 This package contains an [Asset Bundle for Yii 2.0 Framework](http://www.yiiframework.com/doc-2.0/guide-structure-assets.html) 
 which registers the CSS files for the AdminLTE user-interface.
 
-The CSS files are installed via Yii's recommended usage of the `fxp/composer-asset-plugin`.
+The CSS files are installed via Yii's recommended usage of the `fxp/composer-asset-plugin` v1.1.1 or later.
 
 
 Installation
@@ -140,6 +140,25 @@ About <small>static page</small>
     <code><?= __FILE__ ?></code>
 </div>
 ```
+
+### Left sidebar menu - Widget Menu
+
+If you need to separate sections of the menu then just add the `li.header` item to `items`
+```php
+    'items' => [
+        ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
+        ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
+        ['label' => 'MAIN NAVIGATION', 'options' => ['class' => 'header']], // here
+        // ... a group items
+        ['label' => '', 'options' => ['class' => 'header']],
+        // ... a group items
+        ['label' => '', 'options' => ['class' => 'header']],
+        // ... a group items
+```
+
+
+
+
 
 Further Information
 -------------------

@@ -117,7 +117,7 @@ class RequestPanel extends Panel
     {
         /* @var $session \yii\web\Session */
         $session = Yii::$app->has('session', true) ? Yii::$app->get('session') : null;
-        if ($session === null) {
+        if ($session === null || !$session->getIsActive()) {
             return [];
         }
 

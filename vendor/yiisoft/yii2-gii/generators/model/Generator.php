@@ -12,6 +12,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Connection;
 use yii\db\Schema;
+use yii\db\TableSchema;
 use yii\gii\CodeFile;
 use yii\helpers\Inflector;
 use yii\base\NotSupportedException;
@@ -24,12 +25,16 @@ use yii\base\NotSupportedException;
  */
 class Generator extends \yii\gii\Generator
 {
+    const RELATIONS_NONE = 'none';
+    const RELATIONS_ALL = 'all';
+    const RELATIONS_ALL_INVERSE = 'all-inverse';
+
     public $db = 'db';
     public $ns = 'app\models';
     public $tableName;
     public $modelClass;
     public $baseClass = 'yii\db\ActiveRecord';
-    public $generateRelations = true;
+    public $generateRelations = self::RELATIONS_ALL;
     public $generateLabelsFromComments = false;
     public $useTablePrefix = false;
     public $useSchemaName = true;
@@ -67,14 +72,15 @@ class Generator extends \yii\gii\Generator
             [['db', 'ns', 'tableName', 'baseClass', 'queryNs', 'queryBaseClass'], 'required'],
             [['db', 'modelClass', 'queryClass'], 'match', 'pattern' => '/^\w+$/', 'message' => 'Only word characters are allowed.'],
             [['ns', 'baseClass', 'queryNs', 'queryBaseClass'], 'match', 'pattern' => '/^[\w\\\\]+$/', 'message' => 'Only word characters and backslashes are allowed.'],
-            [['tableName'], 'match', 'pattern' => '/^(\w+\.)?([\w\*]+)$/', 'message' => 'Only word characters, and optionally an asterisk and/or a dot are allowed.'],
+            [['tableName'], 'match', 'pattern' => '/^([\w ]+\.)?([\w\* ]+)$/', 'message' => 'Only word characters, and optionally spaces, an asterisk and/or a dot are allowed.'],
             [['db'], 'validateDb'],
             [['ns', 'queryNs'], 'validateNamespace'],
             [['tableName'], 'validateTableName'],
             [['modelClass'], 'validateModelClass', 'skipOnEmpty' => false],
             [['baseClass'], 'validateClass', 'params' => ['extends' => ActiveRecord::className()]],
             [['queryBaseClass'], 'validateClass', 'params' => ['extends' => ActiveQuery::className()]],
-            [['generateRelations', 'generateLabelsFromComments', 'useTablePrefix', 'useSchemaName', 'generateQuery'], 'boolean'],
+            [['generateRelations'], 'in', 'range' => [self::RELATIONS_NONE, self::RELATIONS_ALL, self::RELATIONS_ALL_INVERSE]],
+            [['generateLabelsFromComments', 'useTablePrefix', 'useSchemaName', 'generateQuery'], 'boolean'],
             [['enableI18N'], 'boolean'],
             [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => false],
         ]);
@@ -97,6 +103,7 @@ class Generator extends \yii\gii\Generator
             'queryNs' => 'ActiveQuery Namespace',
             'queryClass' => 'ActiveQuery Class',
             'queryBaseClass' => 'ActiveQuery Base Class',
+            'useSchemaName' => 'Use Schema Name',
         ]);
     }
 
@@ -174,6 +181,23 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
+     * Returns the `tablePrefix` property of the DB connection as specified
+     *
+     * @return string
+     * @since 2.0.5
+     * @see getDbConnection
+     */
+    public function getTablePrefix()
+    {
+      $db = $this->getDbConnection();
+      if ($db !== null) {
+          return $db->tablePrefix;
+      } else {
+          return '';
+      }
+    }
+
+    /**
      * @inheritdoc
      */
     public function generate()
@@ -202,10 +226,8 @@ class Generator extends \yii\gii\Generator
 
             // query :
             if ($queryClassName) {
-                $params = [
-                    'className' => $queryClassName,
-                    'modelClassName' => $modelClassName,
-                ];
+                $params['className'] = $queryClassName;
+                $params['modelClassName'] = $modelClassName;
                 $files[] = new CodeFile(
                     Yii::getAlias('@' . str_replace('\\', '/', $this->queryNs)) . '/' . $queryClassName . '.php',
                     $this->render('query.php', $params)
@@ -294,27 +316,47 @@ class Generator extends \yii\gii\Generator
             $rules[] = "[['" . implode("', '", $columns) . "'], 'string', 'max' => $length]";
         }
 
+        $db = $this->getDbConnection();
+
         // Unique indexes rules
         try {
-            $db = $this->getDbConnection();
             $uniqueIndexes = $db->getSchema()->findUniqueIndexes($table);
             foreach ($uniqueIndexes as $uniqueColumns) {
                 // Avoid validating auto incremental columns
                 if (!$this->isColumnAutoIncremental($table, $uniqueColumns)) {
                     $attributesCount = count($uniqueColumns);
 
-                    if ($attributesCount == 1) {
+                    if ($attributesCount === 1) {
                         $rules[] = "[['" . $uniqueColumns[0] . "'], 'unique']";
                     } elseif ($attributesCount > 1) {
                         $labels = array_intersect_key($this->generateLabels($table), array_flip($uniqueColumns));
                         $lastLabel = array_pop($labels);
                         $columnsList = implode("', '", $uniqueColumns);
-                        $rules[] = "[['" . $columnsList . "'], 'unique', 'targetAttribute' => ['" . $columnsList . "'], 'message' => 'The combination of " . implode(', ', $labels) . " and " . $lastLabel . " has already been taken.']";
+                        $rules[] = "[['$columnsList'], 'unique', 'targetAttribute' => ['$columnsList'], 'message' => 'The combination of " . implode(', ', $labels) . " and $lastLabel has already been taken.']";
                     }
                 }
             }
         } catch (NotSupportedException $e) {
             // doesn't support unique indexes information...do nothing
+        }
+
+        // Exist rules for foreign keys
+        foreach ($table->foreignKeys as $refs) {
+            $refTable = $refs[0];
+            $refTableSchema = $db->getTableSchema($refTable);
+            if ($refTableSchema === null) {
+                // Foreign key could point to non-existing table: https://github.com/yiisoft/yii2-gii/issues/34
+                continue;
+            }
+            $refClassName = $this->generateClassName($refTable);
+            unset($refs[0]);
+            $attributes = implode("', '", array_keys($refs));
+            $targetAttributes = [];
+            foreach ($refs as $key => $value) {
+                $targetAttributes[] = "'$key' => '$value'";
+            }
+            $targetAttributes = implode(', ', $targetAttributes);
+            $rules[] = "[['$attributes'], 'exist', 'skipOnError' => true, 'targetClass' => $refClassName::className(), 'targetAttribute' => [$targetAttributes]]";
         }
 
         return $rules;
@@ -323,54 +365,56 @@ class Generator extends \yii\gii\Generator
     /**
      * Generates relations using a junction table by adding an extra viaTable().
      * @param \yii\db\TableSchema the table being checked
-     * @param array $fks obtained from the checkPivotTable() method
+     * @param array $fks obtained from the checkJunctionTable() method
      * @param array $relations
      * @return array modified $relations
      */
     private function generateManyManyRelations($table, $fks, $relations)
     {
         $db = $this->getDbConnection();
-        $table0 = $fks[$table->primaryKey[0]][0];
-        $table1 = $fks[$table->primaryKey[1]][0];
-        $className0 = $this->generateClassName($table0);
-        $className1 = $this->generateClassName($table1);
-        $table0Schema = $db->getTableSchema($table0);
-        $table1Schema = $db->getTableSchema($table1);
 
-        $link = $this->generateRelationLink([$fks[$table->primaryKey[1]][1] => $table->primaryKey[1]]);
-        $viaLink = $this->generateRelationLink([$table->primaryKey[0] => $fks[$table->primaryKey[0]][1]]);
-        $relationName = $this->generateRelationName($relations, $table0Schema, $table->primaryKey[1], true);
-        $relations[$table0Schema->fullName][$relationName] = [
-            "return \$this->hasMany($className1::className(), $link)->viaTable('"
-            . $this->generateTableName($table->name) . "', $viaLink);",
-            $className1,
-            true,
-        ];
+        foreach ($fks as $pair) {
+            list($firstKey, $secondKey) = $pair;
+            $table0 = $firstKey[0];
+            $table1 = $secondKey[0];
+            unset($firstKey[0], $secondKey[0]);
+            $className0 = $this->generateClassName($table0);
+            $className1 = $this->generateClassName($table1);
+            $table0Schema = $db->getTableSchema($table0);
+            $table1Schema = $db->getTableSchema($table1);
 
-        $link = $this->generateRelationLink([$fks[$table->primaryKey[0]][1] => $table->primaryKey[0]]);
-        $viaLink = $this->generateRelationLink([$table->primaryKey[1] => $fks[$table->primaryKey[1]][1]]);
-        $relationName = $this->generateRelationName($relations, $table1Schema, $table->primaryKey[0], true);
-        $relations[$table1Schema->fullName][$relationName] = [
-            "return \$this->hasMany($className0::className(), $link)->viaTable('"
-            . $this->generateTableName($table->name) . "', $viaLink);",
-            $className0,
-            true,
-        ];
+            $link = $this->generateRelationLink(array_flip($secondKey));
+            $viaLink = $this->generateRelationLink($firstKey);
+            $relationName = $this->generateRelationName($relations, $table0Schema, key($secondKey), true);
+            $relations[$table0Schema->fullName][$relationName] = [
+                "return \$this->hasMany($className1::className(), $link)->viaTable('"
+                . $this->generateTableName($table->name) . "', $viaLink);",
+                $className1,
+                true,
+            ];
+
+            $link = $this->generateRelationLink(array_flip($firstKey));
+            $viaLink = $this->generateRelationLink($secondKey);
+            $relationName = $this->generateRelationName($relations, $table1Schema, key($firstKey), true);
+            $relations[$table1Schema->fullName][$relationName] = [
+                "return \$this->hasMany($className0::className(), $link)->viaTable('"
+                . $this->generateTableName($table->name) . "', $viaLink);",
+                $className0,
+                true,
+            ];
+        }
 
         return $relations;
     }
 
     /**
-     * @return array the generated relation declarations
+     * @return string[] all db schema names or an array with a single empty string
+     * @throws NotSupportedException
+     * @since 2.0.5
      */
-    protected function generateRelations()
+    protected function getSchemaNames()
     {
-        if (!$this->generateRelations) {
-            return [];
-        }
-
         $db = $this->getDbConnection();
-
         $schema = $db->getSchema();
         if ($schema->hasMethod('getSchemaNames')) { // keep BC to Yii versions < 2.0.4
             try {
@@ -386,14 +430,31 @@ class Generator extends \yii\gii\Generator
                 $schemaNames = [''];
             }
         }
+        return $schemaNames;
+    }
+
+    /**
+     * @return array the generated relation declarations
+     */
+    protected function generateRelations()
+    {
+        if ($this->generateRelations === self::RELATIONS_NONE) {
+            return [];
+        }
+
+        $db = $this->getDbConnection();
 
         $relations = [];
-        foreach ($schemaNames as $schemaName) {
+        foreach ($this->getSchemaNames() as $schemaName) {
             foreach ($db->getSchema()->getTableSchemas($schemaName) as $table) {
                 $className = $this->generateClassName($table->fullName);
                 foreach ($table->foreignKeys as $refs) {
                     $refTable = $refs[0];
                     $refTableSchema = $db->getTableSchema($refTable);
+                    if ($refTableSchema === null) {
+                        // Foreign key could point to non-existing table: https://github.com/yiisoft/yii2-gii/issues/34
+                        continue;
+                    }
                     unset($refs[0]);
                     $fks = array_keys($refs);
                     $refClassName = $this->generateClassName($refTable);
@@ -408,19 +469,7 @@ class Generator extends \yii\gii\Generator
                     ];
 
                     // Add relation for the referenced table
-                    $uniqueKeys = [$table->primaryKey];
-                    try {
-                        $uniqueKeys = array_merge($uniqueKeys, $db->getSchema()->findUniqueIndexes($table));
-                    } catch (NotSupportedException $e) {
-                        // ignore
-                    }
-                    $hasMany = true;
-                    foreach ($uniqueKeys as $uniqueKey) {
-                        if (count(array_diff(array_merge($uniqueKey, $fks), array_intersect($uniqueKey, $fks))) === 0) {
-                            $hasMany = false;
-                            break;
-                        }
-                    }
+                    $hasMany = $this->isHasManyRelation($table, $fks);
                     $link = $this->generateRelationLink($refs);
                     $relationName = $this->generateRelationName($relations, $refTableSchema, $className, $hasMany);
                     $relations[$refTableSchema->fullName][$relationName] = [
@@ -430,15 +479,85 @@ class Generator extends \yii\gii\Generator
                     ];
                 }
 
-                if (($fks = $this->checkPivotTable($table)) === false) {
+                if (($junctionFks = $this->checkJunctionTable($table)) === false) {
                     continue;
                 }
 
-                $relations = $this->generateManyManyRelations($table, $fks, $relations);
+                $relations = $this->generateManyManyRelations($table, $junctionFks, $relations);
             }
         }
 
+        if ($this->generateRelations === self::RELATIONS_ALL_INVERSE) {
+            return $this->addInverseRelations($relations);
+        }
+
         return $relations;
+    }
+
+    /**
+     * Adds inverse relations
+     *
+     * @param array $relations relation declarations
+     * @return array relation declarations extended with inverse relation names
+     * @since 2.0.5
+     */
+    protected function addInverseRelations($relations)
+    {
+        $relationNames = [];
+        foreach ($this->getSchemaNames() as $schemaName) {
+            foreach ($this->getDbConnection()->getSchema()->getTableSchemas($schemaName) as $table) {
+                $className = $this->generateClassName($table->fullName);
+                foreach ($table->foreignKeys as $refs) {
+                    $refTable = $refs[0];
+                    $refTableSchema = $this->getDbConnection()->getTableSchema($refTable);
+                    unset($refs[0]);
+                    $fks = array_keys($refs);
+
+                    $leftRelationName = $this->generateRelationName($relationNames, $table, $fks[0], false);
+                    $relationNames[$table->fullName][$leftRelationName] = true;
+                    $hasMany = $this->isHasManyRelation($table, $fks);
+                    $rightRelationName = $this->generateRelationName(
+                        $relationNames,
+                        $refTableSchema,
+                        $className,
+                        $hasMany
+                    );
+                    $relationNames[$refTableSchema->fullName][$rightRelationName] = true;
+
+                    $relations[$table->fullName][$leftRelationName][0] =
+                        rtrim($relations[$table->fullName][$leftRelationName][0], ';')
+                        . "->inverseOf('".lcfirst($rightRelationName)."');";
+                    $relations[$refTableSchema->fullName][$rightRelationName][0] =
+                        rtrim($relations[$refTableSchema->fullName][$rightRelationName][0], ';')
+                        . "->inverseOf('".lcfirst($leftRelationName)."');";
+                }
+            }
+        }
+        return $relations;
+    }
+
+    /**
+     * Determines if relation is of has many type
+     *
+     * @param TableSchema $table
+     * @param array $fks
+     * @return boolean
+     * @since 2.0.5
+     */
+    protected function isHasManyRelation($table, $fks)
+    {
+        $uniqueKeys = [$table->primaryKey];
+        try {
+            $uniqueKeys = array_merge($uniqueKeys, $this->getDbConnection()->getSchema()->findUniqueIndexes($table));
+        } catch (NotSupportedException $e) {
+            // ignore
+        }
+        foreach ($uniqueKeys as $uniqueKey) {
+            if (count(array_diff(array_merge($uniqueKey, $fks), array_intersect($uniqueKey, $fks))) === 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -457,34 +576,44 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Checks if the given table is a junction table.
-     * For simplicity, this method only deals with the case where the pivot contains two PK columns,
-     * each referencing a column in a different table.
+     * Checks if the given table is a junction table, that is it has at least one pair of unique foreign keys.
      * @param \yii\db\TableSchema the table being checked
-     * @return array|boolean the relevant foreign key constraint information if the table is a junction table,
+     * @return array|boolean all unique foreign key pairs if the table is a junction table,
      * or false if the table is not a junction table.
      */
-    protected function checkPivotTable($table)
+    protected function checkJunctionTable($table)
     {
-        $pk = $table->primaryKey;
-        if (count($pk) !== 2) {
+        if (count($table->foreignKeys) < 2) {
             return false;
         }
-        $fks = [];
-        foreach ($table->foreignKeys as $refs) {
-            if (count($refs) === 2) {
-                if (isset($refs[$pk[0]])) {
-                    $fks[$pk[0]] = [$refs[0], $refs[$pk[0]]];
-                } elseif (isset($refs[$pk[1]])) {
-                    $fks[$pk[1]] = [$refs[0], $refs[$pk[1]]];
+        $uniqueKeys = [$table->primaryKey];
+        try {
+            $uniqueKeys = array_merge($uniqueKeys, $this->getDbConnection()->getSchema()->findUniqueIndexes($table));
+        } catch (NotSupportedException $e) {
+            // ignore
+        }
+        $result = [];
+        // find all foreign key pairs that have all columns in an unique constraint
+        $foreignKeys = array_values($table->foreignKeys);
+        for ($i = 0; $i < count($foreignKeys); $i++) {
+            $firstColumns = $foreignKeys[$i];
+            unset($firstColumns[0]);
+
+            for ($j = $i + 1; $j < count($foreignKeys); $j++) {
+                $secondColumns = $foreignKeys[$j];
+                unset($secondColumns[0]);
+
+                $fks = array_merge(array_keys($firstColumns), array_keys($secondColumns));
+                foreach ($uniqueKeys as $uniqueKey) {
+                    if (count(array_diff(array_merge($uniqueKey, $fks), array_intersect($uniqueKey, $fks))) === 0) {
+                        // save the foreign key pair
+                        $result[] = [$foreignKeys[$i], $foreignKeys[$j]];
+                        break;
+                    }
                 }
             }
         }
-        if (count($fks) === 2 && $fks[$pk[0]][0] !== $fks[$pk[1]][0]) {
-            return $fks;
-        } else {
-            return false;
-        }
+        return empty($result) ? false : $result;
     }
 
     /**
@@ -528,14 +657,17 @@ class Generator extends \yii\gii\Generator
     }
 
     /**
-     * Validates the [[ns]] attribute.
+     * Validates the namespace.
+     *
+     * @param string $attribute Namespace variable.
      */
-    public function validateNamespace()
+    public function validateNamespace($attribute)
     {
-        $this->ns = ltrim($this->ns, '\\');
-        $path = Yii::getAlias('@' . str_replace('\\', '/', $this->ns), false);
+        $value = $this->$attribute;
+        $value = ltrim($value, '\\');
+        $path = Yii::getAlias('@' . str_replace('\\', '/', $value), false);
         if ($path === false) {
-            $this->addError('ns', 'Namespace must be associated with an existing directory.');
+            $this->addError($attribute, 'Namespace must be associated with an existing directory.');
         }
     }
 

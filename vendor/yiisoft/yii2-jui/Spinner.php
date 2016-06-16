@@ -51,6 +51,10 @@ class Spinner extends InputWidget
      */
     protected $clientEventMap = [
         'spin' => 'spin',
+        'change' => 'spinchange',
+        'create' => 'spincreate',
+        'start' => 'spinstart',
+        'stop' => 'spinstop'
     ];
 
 

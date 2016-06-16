@@ -51,7 +51,7 @@ class RewardForm extends Model
     public function attributeHints()
     {
         return [
-            'money' => '(帐号余额:' . \Yii::$app->user->identity->profile->money . ')'
+            'money' => '(帐号余额:' . \Yii::$app->user->isGuest ? 0 : \Yii::$app->user->identity->profile->money . ')'
         ];
     }
 

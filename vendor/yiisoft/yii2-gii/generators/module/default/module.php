@@ -16,10 +16,19 @@ echo "<?php\n";
 
 namespace <?= $ns ?>;
 
+/**
+ * <?= $generator->moduleID ?> module definition class
+ */
 class <?= $className ?> extends \yii\base\Module
 {
+    /**
+     * @inheritdoc
+     */
     public $controllerNamespace = '<?= $generator->getControllerNamespace() ?>';
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();

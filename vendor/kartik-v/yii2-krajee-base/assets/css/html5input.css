@@ -2,8 +2,8 @@
  * @package    yii2-krajee-base
  * @subpackage yii2-widget-activeform
  * @author     Kartik Visweswaran <kartikv2@gmail.com>
- * @copyright  Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version    1.8.0
+ * @copyright  Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2016
+ * @version    1.8.5
  *
  * HTML 5 input styling for Twitter Bootstrap 3.0
  * Covers color and range inputs
@@ -80,7 +80,7 @@
 }
 
 .input-group-html5.kv-range-vertical input[type=range] {
-    writing-mode: bt-lr; /* IE */
+    -ms-writing-mode: bt-lr; /* IE */
     -webkit-appearance: slider-vertical; /* WebKit */
     width: 8px !important;
     height: 200px;
@@ -89,4 +89,8 @@
 .input-group-html5.kv-range-vertical .input-group-addon,
 .input-group-html5.input-group-sm .input-group-addon {
     padding: 2px 10px;
+}
+
+.kv-center-loading {
+    background: transparent url('../img/loading-plugin.gif') center center no-repeat;
 }

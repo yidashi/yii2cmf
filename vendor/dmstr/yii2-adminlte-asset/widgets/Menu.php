@@ -1,6 +1,5 @@
 <?php
 namespace dmstr\widgets;
-use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -22,24 +21,29 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if(isset($item['items']))
+        if(isset($item['items'])) {
+            $labelTemplate = '<a href="{url}">{label} <i class="fa fa-angle-left pull-right"></i></a>';
             $linkTemplate = '<a href="{url}">{icon} {label} <i class="fa fa-angle-left pull-right"></i></a>';
-        else
+        }
+        else {
+            $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
+        }
+
         if (isset($item['url'])) {
             $template = ArrayHelper::getValue($item, 'template', $linkTemplate);
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => FA::icon($item['icon']),
+                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
             ] : [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => FA::icon('angle-left'),
+                '{icon}' => null,
             ];
             return strtr($template, $replace);
         } else {
-            $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
+            $template = ArrayHelper::getValue($item, 'template', $labelTemplate);
             $replace = !empty($item['icon']) ? [
                 '{label}' => '<span>'.$item['label'].'</span>',
                 '{icon}' => '<i class="' . $item['icon'] . '"></i> '

@@ -8,23 +8,24 @@
 
 use yii\bootstrap\ButtonDropdown;
 use yii\bootstrap\ButtonGroup;
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = 'Yii Debugger';
 ?>
 <div class="default-view">
-    <div id="yii-debug-toolbar" class="yii-debug-toolbar-top">
+    <div id="yii-debug-toolbar" class="yii-debug-toolbar yii-debug-toolbar_position_top" style="display: none;">
+        <div class="yii-debug-toolbar__bar">
+            <div class="yii-debug-toolbar__block yii-debug-toolbar__title">
+                <a href="<?= Url::to(['index']) ?>">
+                    <img width="29" height="30" alt="" src="<?= \yii\debug\Module::getYiiLogo() ?>">
+                </a>
+            </div>
 
-        <div class="yii-debug-toolbar-block title">
-            <a href="<?= Url::to(['index']) ?>">
-                <img width="29" height="30" alt="" src="<?= \yii\debug\Module::getYiiLogo() ?>">
-            </a>
+            <?php foreach ($panels as $panel): ?>
+                <?= $panel->getSummary() ?>
+            <?php endforeach; ?>
         </div>
-
-        <?php foreach ($panels as $panel): ?>
-            <?= $panel->getSummary() ?>
-        <?php endforeach; ?>
     </div>
 
     <div class="container main-container">
@@ -94,3 +95,8 @@ $this->title = 'Yii Debugger';
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    if (!window.frameElement) {
+        document.querySelector('#yii-debug-toolbar').style.display = 'block';
+    }
+</script>

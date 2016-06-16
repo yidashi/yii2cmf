@@ -1,6 +1,17 @@
 Change Log: `yii2-widget-datetimepicker`
 ========================================
 
+## Version 1.4.2
+
+**Date:** 10-Jan-2016
+
+- (enh #42): Add Traditional Chinese Translations.
+- (enh #43): Add Hungarian Translations.
+- (enh #47): Add Italian translations.
+- (enh #48): Add Swedish translations.
+- (enh #49): Correct Italian Translation file name.
+- (enh #50): Enhancements for PJAX based reinitialization. Complements enhancements in kartik-v/yii2-krajee-base#52 and kartik-v/yii2-krajee-base#53.
+
 ## Version 1.4.1
 
 **Date:** 05-Nov-2015

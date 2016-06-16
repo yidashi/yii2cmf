@@ -4,7 +4,7 @@ build:
             version: 5.5.12
     dependencies:
         before:
-            - composer global require "fxp/composer-asset-plugin:~1.1.0"
+            - composer global require "fxp/composer-asset-plugin:~1.1"
     tests:
         override:
             - phpunit

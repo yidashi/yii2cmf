@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 1.3.0 - 2016-04-13
+
+* Added remaining interfaces needed for full PSR7 compatibility
+  (ServerRequestInterface, UploadedFileInterface, etc.).
+* Added support for stream_for from scalars.
+* Can now extend Uri.
+* Fixed a bug in validating request methods by making it more permissive.
+
+## 1.2.3 - 2016-02-18
+
+* Fixed support in `GuzzleHttp\Psr7\CachingStream` for seeking forward on remote
+  streams, which can sometimes return fewer bytes than requested with `fread`.
+* Fixed handling of gzipped responses with FNAME headers.
+
+## 1.2.2 - 2016-01-22
+
+* Added support for URIs without any authority.
+* Added support for HTTP 451 'Unavailable For Legal Reasons.'
+* Added support for using '0' as a filename.
+* Added support for including non-standard ports in Host headers.
+
 ## 1.2.1 - 2015-11-02
 
 * Now supporting negative offsets when seeking to SEEK_END.

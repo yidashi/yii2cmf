@@ -282,6 +282,13 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('https://www.google.com/search?q=foobar', (string) $request->getUri());
     }
 
+    public function testParsesRequestMessagesWithCustomMethod()
+    {
+        $req = "GET_DATA / HTTP/1.1\r\nFoo: Bar\r\nHost: foo.com\r\n\r\n";
+        $request = Psr7\parse_request($req);
+        $this->assertEquals('GET_DATA', $request->getMethod());
+    }
+
     /**
      * @expectedException \InvalidArgumentException
      */
@@ -544,6 +551,16 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
         ]);
         $this->assertEquals('http://www.foo.com', (string) $r2->getUri());
         $this->assertEquals('www.foo.com', (string) $r2->getHeaderLine('host'));
+    }
+
+    public function testCanModifyRequestWithUriAndPort()
+    {
+        $r1 = new Psr7\Request('GET', 'http://foo.com:8000');
+        $r2 = Psr7\modify_request($r1, [
+            'uri' => new Psr7\Uri('http://www.foo.com:8000')
+        ]);
+        $this->assertEquals('http://www.foo.com:8000', (string) $r2->getUri());
+        $this->assertEquals('www.foo.com:8000', (string) $r2->getHeaderLine('host'));
     }
 
     public function testCanModifyRequestWithCaseInsensitiveHeader()

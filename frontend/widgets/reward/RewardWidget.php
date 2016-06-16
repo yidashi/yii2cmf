@@ -19,13 +19,9 @@ class RewardWidget extends Widget
 
     public function run()
     {
-        if (Yii::$app->user->isGuest) {
-            Yii::$app->user->loginRequired();
-        } else {
-            $model = new RewardForm();
-            $model->money = Yii::$app->user->identity->profile->money;
-            $model->article_id = $this->articleId;
-            return $this->render('index', ['model' => $model]);
-        }
+        $model = new RewardForm();
+        $model->money = Yii::$app->user->isGuest ? 0 : Yii::$app->user->identity->profile->money;
+        $model->article_id = $this->articleId;
+        return $this->render('index', ['model' => $model]);
     }
 }

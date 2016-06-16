@@ -1,6 +1,61 @@
 Change Log: `yii2-widget-datepicker`
 ====================================
 
+## version 1.3.9
+
+**Date:** 29-Mar-2016
+
+- (bug #85): Correct locale files to use `kvDatepicker` modified plugin instance.
+
+## version 1.3.8
+
+**Date:** 25-Mar-2016
+
+- (bug #75): Enhance clear button method to trigger input change correctly.
+- Add branch alias for dev-master latest release.
+- (enh #78): Add Slovak Translations.
+- (enh #84): Update to latest version 1.6.x of `bootstrap-datepicker` plugin.
+
+## version 1.3.7
+
+**Date:** 10-Jan-2016
+
+- (enh #68): Add Czech translations
+- Update year.
+
+## version 1.3.6
+
+**Date:** 29-Dec-2015
+
+- (bug #67): Correct init of locale dates for `$.fn.kvDatepicker`.
+
+## version 1.3.5
+
+**Date:** 28-Dec-2015
+
+- (bug #63): Fix extra brace bug in plugin JS code.
+- (enh #64): Enhance and improve language & locale validation.
+
+## version 1.3.4
+
+**Date:** 27-Dec-2015
+
+- (enh #45): Add Greek translations.
+- (enh #46): Add Polish translations.
+- (enh #47): Enhancement for managing layout - **BC Breaking**.
+    - New property `layout` to control rendering of picker and remove buttons and add your own input group addons if necessary.
+    - The `addon` property will be removed as the `layout` property will allow better control for adding custom bootstrap input group addons.
+    - Will be applicable for `TYPE_COMPONENT_PREPEND`, `TYPE_COMPONENT_APPEND`, and `TYPE_RANGE`.
+- (enh #50): Add French Translations.
+- (enh #52): Fixed class name in DatePicker.
+- (enh #55): Enhance plugin to validate `enableOnReadonly` correctly for all layout types.
+- (enh #56): Enhance widget to focus the input on opening datepicker via addon icon.
+- (enh #59): Clean up Greek translations
+- (enh #61): Add Swedish Translations.
+- (enh #62): Add Turkish Translations.
+- Update to latest stable release (v1.5.0) of bootstrap-datepicker plugin.
+- Refactor code and code formatting improvements.
+
 ## version 1.3.3
 
 **Date:** 19-Jul-2015

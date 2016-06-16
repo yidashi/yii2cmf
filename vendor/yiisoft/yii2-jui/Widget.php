@@ -112,7 +112,7 @@ class Widget extends \yii\base\Widget
             $id = $this->options['id'];
         }
         JuiAsset::register($this->getView());
-        $this->registerClientOptions($name, $id);
         $this->registerClientEvents($name, $id);
+        $this->registerClientOptions($name, $id);
     }
 }

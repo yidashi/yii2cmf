@@ -32,7 +32,10 @@ class Icon
      */
     public function __construct($name, $options = [])
     {
-        Html::addCssClass($options, FA::$cssPrefix . ' ' . FA::$cssPrefix . '-' . $name);
+        Html::addCssClass($options, FA::$cssPrefix);
+        if (!empty($name)) {
+            Html::addCssClass($options, FA::$cssPrefix . '-' . $name);
+        }
 
         $this->options = $options;
     }
@@ -67,7 +70,7 @@ class Icon
      */
     public function fixed_width()
     {
-        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'fixed_width'));
+        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'fixed_width'), __METHOD__);
 
         return $this->fixedWidth();
     }
@@ -110,7 +113,7 @@ class Icon
      */
     public function pull_left()
     {
-        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'pull_left'));
+        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'pull_left'), __METHOD__);
 
         return $this->pullLeft();
     }
@@ -129,7 +132,7 @@ class Icon
      */
     public function pull_right()
     {
-        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'pull_right'));
+        \Yii::warning(sprintf('You are using an deprecated method `%s`.', 'pull_right'), __METHOD__);
 
         return $this->pullRight();
     }
@@ -242,8 +245,8 @@ class Icon
      */
     public function render($tag = null, $content = null, $options = [])
     {
-        $tag = empty($tag) ?
-            (empty($this->tag) ? static::$defaultTag : $this->tag)
+        $tag = empty($tag)
+            ? (empty($this->tag) ? static::$defaultTag : $this->tag)
             : $tag;
 
         $options = array_merge($this->options, $options);

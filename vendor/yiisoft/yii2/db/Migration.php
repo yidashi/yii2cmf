@@ -97,7 +97,7 @@ class Migration extends Component implements MigrationInterface
             }
             $transaction->commit();
         } catch (\Exception $e) {
-            echo "Exception: " . $e->getMessage() . ' (' . $e->getFile() . ':' . $e->getLine() . ")\n";
+            echo 'Exception: ' . $e->getMessage() . ' (' . $e->getFile() . ':' . $e->getLine() . ")\n";
             echo $e->getTraceAsString() . "\n";
             $transaction->rollBack();
 
@@ -125,7 +125,7 @@ class Migration extends Component implements MigrationInterface
             }
             $transaction->commit();
         } catch (\Exception $e) {
-            echo "Exception: " . $e->getMessage() . ' (' . $e->getFile() . ':' . $e->getLine() . ")\n";
+            echo 'Exception: ' . $e->getMessage() . ' (' . $e->getFile() . ':' . $e->getLine() . ")\n";
             echo $e->getTraceAsString() . "\n";
             $transaction->rollBack();
 
@@ -173,7 +173,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > execute SQL: $sql ...";
         $time = microtime(true);
         $this->db->createCommand($sql)->bindValues($params)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -187,7 +187,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > insert into $table ...";
         $time = microtime(true);
         $this->db->createCommand()->insert($table, $columns)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -202,7 +202,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > insert into $table ...";
         $time = microtime(true);
         $this->db->createCommand()->batchInsert($table, $columns, $rows)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -219,7 +219,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > update $table ...";
         $time = microtime(true);
         $this->db->createCommand()->update($table, $columns, $condition, $params)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -234,7 +234,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > delete from $table ...";
         $time = microtime(true);
         $this->db->createCommand()->delete($table, $condition, $params)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -258,6 +258,11 @@ class Migration extends Component implements MigrationInterface
         echo "    > create table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->createTable($table, $columns, $options)->execute();
+        foreach ($columns as $column => $type) {
+            if ($type instanceof ColumnSchemaBuilder && $type->comment !== null) {
+                $this->db->createCommand()->addCommentOnColumn($table, $column, $type->comment)->execute();
+            }
+        }
         echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
@@ -271,7 +276,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > rename table $table to $newName ...";
         $time = microtime(true);
         $this->db->createCommand()->renameTable($table, $newName)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -283,7 +288,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > drop table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->dropTable($table)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -295,7 +300,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > truncate table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->truncateTable($table)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -311,7 +316,10 @@ class Migration extends Component implements MigrationInterface
         echo "    > add column $column $type to table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->addColumn($table, $column, $type)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        if ($type instanceof ColumnSchemaBuilder && $type->comment !== null) {
+            $this->db->createCommand()->addCommentOnColumn($table, $column, $type->comment)->execute();
+        }
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -324,7 +332,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > drop column $column from table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->dropColumn($table, $column)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -338,7 +346,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > rename column $name in table $table to $newName ...";
         $time = microtime(true);
         $this->db->createCommand()->renameColumn($table, $name, $newName)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -354,7 +362,10 @@ class Migration extends Component implements MigrationInterface
         echo "    > alter column $column in table $table to $type ...";
         $time = microtime(true);
         $this->db->createCommand()->alterColumn($table, $column, $type)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        if ($type instanceof ColumnSchemaBuilder && $type->comment !== null) {
+            $this->db->createCommand()->addCommentOnColumn($table, $column, $type->comment)->execute();
+        }
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -366,10 +377,10 @@ class Migration extends Component implements MigrationInterface
      */
     public function addPrimaryKey($name, $table, $columns)
     {
-        echo "    > add primary key $name on $table (" . (is_array($columns) ? implode(',', $columns) : $columns).") ...";
+        echo "    > add primary key $name on $table (" . (is_array($columns) ? implode(',', $columns) : $columns) . ') ...';
         $time = microtime(true);
         $this->db->createCommand()->addPrimaryKey($name, $table, $columns)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -382,7 +393,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > drop primary key $name ...";
         $time = microtime(true);
         $this->db->createCommand()->dropPrimaryKey($name, $table)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -398,10 +409,10 @@ class Migration extends Component implements MigrationInterface
      */
     public function addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete = null, $update = null)
     {
-        echo "    > add foreign key $name: $table (" . implode(',', (array) $columns) . ") references $refTable (" . implode(',', (array) $refColumns) . ") ...";
+        echo "    > add foreign key $name: $table (" . implode(',', (array) $columns) . ") references $refTable (" . implode(',', (array) $refColumns) . ') ...';
         $time = microtime(true);
         $this->db->createCommand()->addForeignKey($name, $table, $columns, $refTable, $refColumns, $delete, $update)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -414,7 +425,7 @@ class Migration extends Component implements MigrationInterface
         echo "    > drop foreign key $name from table $table ...";
         $time = microtime(true);
         $this->db->createCommand()->dropForeignKey($name, $table)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -428,10 +439,10 @@ class Migration extends Component implements MigrationInterface
      */
     public function createIndex($name, $table, $columns, $unique = false)
     {
-        echo "    > create" . ($unique ? ' unique' : '') . " index $name on $table (" . implode(',', (array) $columns) . ") ...";
+        echo '    > create' . ($unique ? ' unique' : '') . " index $name on $table (" . implode(',', (array) $columns) . ') ...';
         $time = microtime(true);
         $this->db->createCommand()->createIndex($name, $table, $columns, $unique)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 
     /**
@@ -444,6 +455,70 @@ class Migration extends Component implements MigrationInterface
         echo "    > drop index $name ...";
         $time = microtime(true);
         $this->db->createCommand()->dropIndex($name, $table)->execute();
-        echo " done (time: " . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
+
+    /**
+     * Builds and execute a SQL statement for adding comment to column
+     *
+     * @param string $table the table whose column is to be commented. The table name will be properly quoted by the method.
+     * @param string $column the name of the column to be commented. The column name will be properly quoted by the method.
+     * @param string $comment the text of the comment to be added. The comment will be properly quoted by the method.
+     * @return $this the command object itself
+     * @since 2.0.8
+     */
+    public function addCommentOnColumn($table, $column, $comment)
+    {
+        echo "    > add comment on column $column ...";
+        $time = microtime(true);
+        $this->db->createCommand()->addCommentOnColumn($table, $column, $comment)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
+
+    /**
+     * Builds a SQL statement for adding comment to table
+     *
+     * @param string $table the table whose column is to be commented. The table name will be properly quoted by the method.
+     * @param string $comment the text of the comment to be added. The comment will be properly quoted by the method.
+     * @return $this the command object itself
+     * @since 2.0.8
+     */
+    public function addCommentOnTable($table, $comment)
+    {
+        echo "    > add comment on table $table ...";
+        $time = microtime(true);
+        $this->db->createCommand()->addCommentOnTable($table, $comment)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
+
+    /**
+     * Builds and execute a SQL statement for dropping comment from column
+     *
+     * @param string $table the table whose column is to be commented. The table name will be properly quoted by the method.
+     * @param string $column the name of the column to be commented. The column name will be properly quoted by the method.
+     * @return $this the command object itself
+     * @since 2.0.8
+     */
+    public function dropCommentFromColumn($table, $column)
+    {
+        echo "    > drop comment from column $column ...";
+        $time = microtime(true);
+        $this->db->createCommand()->dropCommentFromColumn($table, $column)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
+    }
+
+    /**
+     * Builds a SQL statement for dropping comment from table
+     *
+     * @param string $table the table whose column is to be commented. The table name will be properly quoted by the method.
+     * @return $this the command object itself
+     * @since 2.0.8
+     */
+    public function dropCommentFromTable($table)
+    {
+        echo "    > drop comment from table $table ...";
+        $time = microtime(true);
+        $this->db->createCommand()->dropCommentFromTable($table)->execute();
+        echo ' done (time: ' . sprintf('%.3f', microtime(true) - $time) . "s)\n";
     }
 }

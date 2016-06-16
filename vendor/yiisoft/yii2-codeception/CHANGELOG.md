@@ -1,8 +1,15 @@
 Yii Framework 2 Codeception extension Change Log
 ================================================
 
-2.0.4 under development
------------------------
+2.0.5 March 17, 2016
+--------------------
+
+- Bug #7: Extension won't create new app instance if it already exists, for example was created in module (kaiserfedor)
+- Bug #13: Close database connection and session on destroying application (kaiserfedor)
+
+
+2.0.4 May 10, 2015
+------------------
 
 - Enh #1: Allow to configure DI Container in configuration files (leandrogehlen)
 

@@ -61,7 +61,7 @@ class BaseStringHelper
      */
     public static function basename($path, $suffix = '')
     {
-        if (($len = mb_strlen($suffix)) > 0 && mb_substr($path, -$len) == $suffix) {
+        if (($len = mb_strlen($suffix)) > 0 && mb_substr($path, -$len) === $suffix) {
             $path = mb_substr($path, 0, -$len);
         }
         $path = rtrim(str_replace('\\', '/', $path), '/\\');
@@ -165,7 +165,7 @@ class BaseStringHelper
             } elseif ($token instanceof \HTMLPurifier_Token_Text && $totalCount <= $count) { //Text
                 if (false === $encoding) {
                     $token->data = self::truncateWords($token->data, $count - $totalCount, '');
-                    $currentCount = str_word_count($token->data);
+                    $currentCount = self::countWords($token->data);
                 } else {
                     $token->data = self::truncate($token->data, $count - $totalCount, '', $encoding) . ' ';
                     $currentCount = mb_strlen($token->data, $encoding);
@@ -187,7 +187,7 @@ class BaseStringHelper
         }
         $context = new \HTMLPurifier_Context();
         $generator = new \HTMLPurifier_Generator($config, $context);
-        return $generator->generateFromTokens($truncated) . $suffix;
+        return $generator->generateFromTokens($truncated) . ($totalCount >= $count ? $suffix : '');
     }
 
     /**
@@ -264,8 +264,22 @@ class BaseStringHelper
         }
         if ($skipEmpty) {
             // Wrapped with array_values to make array keys sequential after empty values removing
-            $result = array_values(array_filter($result));
+            $result = array_values(array_filter($result, function ($value) {
+                return $value !== '';
+            }));
         }
         return $result;
+    }
+
+    /**
+     * Counts words in a string
+     * @since 2.0.8
+     *
+     * @param string $string
+     * @return integer
+     */
+    public static function countWords($string)
+    {
+        return count(preg_split('/\s+/u', $string, null, PREG_SPLIT_NO_EMPTY));
     }
 }

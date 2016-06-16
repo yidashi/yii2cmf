@@ -36,6 +36,8 @@ test('getters programmatic', function (assert) {
 
 test('setters plural', function (assert) {
     var a = moment();
+    test.expectedDeprecations('years accessor', 'months accessor', 'dates accessor');
+
     a.years(2011);
     a.months(9);
     a.dates(12);
@@ -120,36 +122,30 @@ test('setter programmatic', function (assert) {
     assert.equal(a.month(), 3, 'month edge case');
 });
 
-// Disable this, until we weekYear setter is fixed.
-// https://github.com/moment/moment/issues/1379
-// test('setters programatic with weeks', function (assert) {
-//     var a = moment();
-//     a.set('weekYear', 2001);
-//     a.set('week', 49);
-//     a.set('day', 4);
-//     assert.equals(a.weekYear(), 2001);
-//     assert.equals(a.week(), 49);
-//     assert.equals(a.day(), 4);
+test('setters programatic with weeks', function (assert) {
+    var a = moment();
+    a.set('weekYear', 2001);
+    a.set('week', 49);
+    a.set('day', 4);
 
-//     a.set('weekday', 1);
-//     assert.equals(a.weekday(), 1);
+    assert.equal(a.weekYear(), 2001, 'weekYear');
+    assert.equal(a.week(), 49, 'week');
+    assert.equal(a.day(), 4, 'day');
 
-//     assert.done();
-//},
+    a.set('weekday', 1);
+    assert.equal(a.weekday(), 1, 'weekday');
+});
 
-// I think this suffers from the same issue as the non-iso version.
-// test('setters programatic with weeks ISO', function (assert) {
-//     var a = moment();
-//     a.set('isoWeekYear', 2001);
-//     a.set('isoWeek', 49);
-//     a.set('isoWeekday', 4);
+test('setters programatic with weeks ISO', function (assert) {
+    var a = moment();
+    a.set('isoWeekYear', 2001);
+    a.set('isoWeek', 49);
+    a.set('isoWeekday', 4);
 
-//     assert.equals(a.weekYear(), 2001);
-//     assert.equals(a.week(), 49);
-//     assert.equals(a.day(), 4);
-
-//     assert.done();
-//},
+    assert.equal(a.isoWeekYear(), 2001, 'isoWeekYear');
+    assert.equal(a.isoWeek(), 49, 'isoWeek');
+    assert.equal(a.isoWeekday(), 4, 'isoWeekday');
+});
 
 test('setters strings', function (assert) {
     var a = moment([2012]).locale('en');
@@ -254,4 +250,70 @@ test('string setters', function (assert) {
     assert.equal(a.minutes(), 7, 'minute');
     assert.equal(a.seconds(), 8, 'second');
     assert.equal(a.milliseconds(), 9, 'milliseconds');
+});
+
+test('setters across DST +1', function (assert) {
+    var oldUpdateOffset = moment.updateOffset,
+        // Based on a real story somewhere in America/Los_Angeles
+        dstAt = moment('2014-03-09T02:00:00-08:00').parseZone(),
+        m;
+
+    moment.updateOffset = function (mom, keepTime) {
+        if (mom.isBefore(dstAt)) {
+            mom.utcOffset(-8, keepTime);
+        } else {
+            mom.utcOffset(-7, keepTime);
+        }
+    };
+
+    m = moment('2014-03-15T00:00:00-07:00').parseZone();
+    m.year(2013);
+    assert.equal(m.format(), '2013-03-15T00:00:00-08:00', 'year across +1');
+
+    m = moment('2014-03-15T00:00:00-07:00').parseZone();
+    m.month(0);
+    assert.equal(m.format(), '2014-01-15T00:00:00-08:00', 'month across +1');
+
+    m = moment('2014-03-15T00:00:00-07:00').parseZone();
+    m.date(1);
+    assert.equal(m.format(), '2014-03-01T00:00:00-08:00', 'date across +1');
+
+    m = moment('2014-03-09T03:05:00-07:00').parseZone();
+    m.hour(0);
+    assert.equal(m.format(), '2014-03-09T00:05:00-08:00', 'hour across +1');
+
+    moment.updateOffset = oldUpdateOffset;
+});
+
+test('setters across DST -1', function (assert) {
+    var oldUpdateOffset = moment.updateOffset,
+        // Based on a real story somewhere in America/Los_Angeles
+        dstAt = moment('2014-11-02T02:00:00-07:00').parseZone(),
+        m;
+
+    moment.updateOffset = function (mom, keepTime) {
+        if (mom.isBefore(dstAt)) {
+            mom.utcOffset(-7, keepTime);
+        } else {
+            mom.utcOffset(-8, keepTime);
+        }
+    };
+
+    m = moment('2014-11-15T00:00:00-08:00').parseZone();
+    m.year(2013);
+    assert.equal(m.format(), '2013-11-15T00:00:00-07:00', 'year across -1');
+
+    m = moment('2014-11-15T00:00:00-08:00').parseZone();
+    m.month(0);
+    assert.equal(m.format(), '2014-01-15T00:00:00-07:00', 'month across -1');
+
+    m = moment('2014-11-15T00:00:00-08:00').parseZone();
+    m.date(1);
+    assert.equal(m.format(), '2014-11-01T00:00:00-07:00', 'date across -1');
+
+    m = moment('2014-11-02T03:30:00-08:00').parseZone();
+    m.hour(0);
+    assert.equal(m.format(), '2014-11-02T00:30:00-07:00', 'hour across -1');
+
+    moment.updateOffset = oldUpdateOffset;
 });

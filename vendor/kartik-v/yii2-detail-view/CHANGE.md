@@ -1,6 +1,19 @@
 Change Log: `yii2-detail-view`
 ==============================
 
+## Version 1.7.4
+
+**Date:** 11-Jan-2016
+
+- (bug #86): Fix Inflector class dependency.
+- (enh #87): Add ability to show values as not set when empty.
+- (enh #89): Fix documentation for type to correct constant.
+- (enh #93): Add Polish translations.
+- (enh #97): Enhance widget to parse visible attributes correctly.
+- (enh #98): CSS Styling enhancements for `table-condensed`.
+- (enh #101): Enhance plugin and widget with destroy method.
+- (enh #102): Enhancements for PJAX reinitialization. Complements enhancements in kartik-v/yii2-krajee-base#52 and kartik-v/yii2-krajee-base#53.
+
 ## Version 1.7.3
 
 **Date:** 13-Sep-2015

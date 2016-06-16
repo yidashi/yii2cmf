@@ -1,7 +1,8 @@
 yii2-widget-datepicker
 ======================
 
-[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
+[![Stable Version](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/v/stable)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
+[![Untable Version](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/v/unstable)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
 [![License](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/license)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
 [![Total Downloads](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/downloads)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
 [![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-widget-datepicker/d/monthly)](https://packagist.org/packages/kartik-v/yii2-widget-datepicker)
@@ -38,7 +39,7 @@ to the `require` section of your `composer.json` file.
 
 ## Latest Release
 
-> NOTE: The latest version of the module is v1.3.3. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-datepicker/blob/master/CHANGE.md) for details.
+> NOTE: The latest version of the module is v1.3.9. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-widget-datepicker/blob/master/CHANGE.md) for details.
 
 ## Demo
 

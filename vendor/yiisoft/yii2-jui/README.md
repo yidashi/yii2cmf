@@ -6,6 +6,8 @@ and makes using JQuery UI widgets in Yii applications extremely easy.
 
 For license information check the [LICENSE](LICENSE.md)-file.
 
+Documentation is at [docs/guide/README.md](docs/guide/README.md).
+
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-jui/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-jui)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-jui/downloads.png)](https://packagist.org/packages/yiisoft/yii2-jui)
 [![Build Status](https://travis-ci.org/yiisoft/yii2-jui.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-jui)

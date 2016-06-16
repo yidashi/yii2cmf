@@ -19,7 +19,12 @@ use common\helpers\Html;
 <?= $form->field($model, 'comment')?>
 <div class="clearfix">
     <div class="pull-right">
-        <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) . ' ' . Html::submitButton('确认打赏', ['class' => 'btn btn-primary'])?>
+        <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal'])?>
+        <?php if(Yii::$app->user->isGuest) : ?>
+        <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary']) ?>
+        <?php  else: ?>
+        <?= Html::submitButton('确认打赏', ['class' => 'btn btn-primary'])?>
+        <?php endif; ?>
     </div>
 </div>
 <?php \yii\widgets\ActiveForm::end()?>

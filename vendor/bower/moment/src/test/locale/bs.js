@@ -5,7 +5,7 @@ localeModule('bs');
 test('parse', function (assert) {
     var tests = 'januar jan._februar feb._mart mar._april apr._maj maj._juni jun._juli jul._august aug._septembar sep._oktobar okt._novembar nov._decembar dec.'.split('_'), i;
     function equalTest(input, mmm, i) {
-        assert.equal(moment(input, mmm).month(), i, input + ' should be month ' + (i + 1));
+        assert.equal(moment(input, mmm).month(), i, input + ' should be month ' + (i + 1) + ' inp ' + mmm);
     }
     for (i = 0; i < 12; i++) {
         tests[i] = tests[i].split(' ');
@@ -151,14 +151,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(),                     'danas u 2:00',  'today at the same time');
-    assert.equal(moment(a).add({m: 25}).calendar(),      'danas u 2:25',  'Now plus 25 min');
-    assert.equal(moment(a).add({h: 1}).calendar(),       'danas u 3:00',  'Now plus 1 hour');
-    assert.equal(moment(a).add({d: 1}).calendar(),       'sutra u 2:00',  'tomorrow at the same time');
-    assert.equal(moment(a).subtract({h: 1}).calendar(),  'danas u 1:00',  'Now minus 1 hour');
-    assert.equal(moment(a).subtract({d: 1}).calendar(),  'jučer u 2:00', 'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                   'danas u 12:00',  'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),      'danas u 12:25',  'Now plus 25 min');
+    assert.equal(moment(a).add({h: 1}).calendar(),       'danas u 13:00',  'Now plus 1 hour');
+    assert.equal(moment(a).add({d: 1}).calendar(),       'sutra u 12:00',  'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(),  'danas u 11:00',  'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(),  'jučer u 12:00',  'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {

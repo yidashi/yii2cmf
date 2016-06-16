@@ -14,19 +14,19 @@ $warningCount = count(Target::filterMessages($data['messages'], Logger::LEVEL_WA
 $output = [];
 
 if ($errorCount) {
-    $output[] = "<span class=\"label label-important\">$errorCount</span>";
+    $output[] = "<span class=\"yii-debug-toolbar__label yii-debug-toolbar__label_important\">$errorCount</span>";
     $title .= ", $errorCount errors";
 }
 
 if ($warningCount) {
-    $output[] = "<span class=\"label label-warning\">$warningCount</span>";
+    $output[] = "<span class=\"yii-debug-toolbar__label yii-debug-toolbar__label_warning\">$warningCount</span>";
     $title .= ", $warningCount warnings";
 }
 ?>
 
-<div class="yii-debug-toolbar-block">
+<div class="yii-debug-toolbar__block">
     <a href="<?= $panel->getUrl() ?>" title="<?= $title ?>">Log
-        <span class="label"><?= count($data['messages']) ?></span>
+        <span class="yii-debug-toolbar__label"><?= count($data['messages']) ?></span>
         <?= implode('&nbsp;', $output) ?>
     </a>
 </div>

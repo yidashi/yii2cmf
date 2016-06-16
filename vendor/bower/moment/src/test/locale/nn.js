@@ -138,11 +138,11 @@ test('from', function (assert) {
 
 test('suffix', function (assert) {
     assert.equal(moment(30000).from(0), 'om nokre sekund',  'prefix');
-    assert.equal(moment(0).from(30000), 'for nokre sekund sidan', 'suffix');
+    assert.equal(moment(0).from(30000), 'nokre sekund sidan', 'suffix');
 });
 
 test('now from now', function (assert) {
-    assert.equal(moment().fromNow(), 'for nokre sekund sidan',  'now from now should display as in the past');
+    assert.equal(moment().fromNow(), 'nokre sekund sidan',  'now from now should display as in the past');
 });
 
 test('fromNow', function (assert) {
@@ -151,14 +151,14 @@ test('fromNow', function (assert) {
 });
 
 test('calendar day', function (assert) {
-    var a = moment().hours(2).minutes(0).seconds(0);
+    var a = moment().hours(12).minutes(0).seconds(0);
 
-    assert.equal(moment(a).calendar(),                     'I dag klokka 02:00',     'today at the same time');
-    assert.equal(moment(a).add({m: 25}).calendar(),      'I dag klokka 02:25',     'Now plus 25 min');
-    assert.equal(moment(a).add({h: 1}).calendar(),       'I dag klokka 03:00',     'Now plus 1 hour');
-    assert.equal(moment(a).add({d: 1}).calendar(),       'I morgon klokka 02:00',  'tomorrow at the same time');
-    assert.equal(moment(a).subtract({h: 1}).calendar(),  'I dag klokka 01:00',     'Now minus 1 hour');
-    assert.equal(moment(a).subtract({d: 1}).calendar(),  'I går klokka 02:00',     'yesterday at the same time');
+    assert.equal(moment(a).calendar(),                   'I dag klokka 12:00',     'today at the same time');
+    assert.equal(moment(a).add({m: 25}).calendar(),      'I dag klokka 12:25',     'Now plus 25 min');
+    assert.equal(moment(a).add({h: 1}).calendar(),       'I dag klokka 13:00',     'Now plus 1 hour');
+    assert.equal(moment(a).add({d: 1}).calendar(),       'I morgon klokka 12:00',  'tomorrow at the same time');
+    assert.equal(moment(a).subtract({h: 1}).calendar(),  'I dag klokka 11:00',     'Now minus 1 hour');
+    assert.equal(moment(a).subtract({d: 1}).calendar(),  'I går klokka 12:00',     'yesterday at the same time');
 });
 
 test('calendar next week', function (assert) {
