@@ -61,8 +61,8 @@ return [
             'clients' => [
                 'qq' => [
                     'class' => 'frontend\components\authclient\clients\QqOAuth',
-                    'clientId' => '101277194',
-                    'clientSecret' => '11ce53c8fb7daadcc246805727bb6fdb',
+                    'clientId' => env('QQ_CLIENT_ID'),
+                    'clientSecret' => env('QQ_CLIENT_SECRET')
               ],
                 // etc.
             ],
