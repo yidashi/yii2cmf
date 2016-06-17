@@ -22,6 +22,16 @@ return [
         'schemadump' => [
             'class' => 'jamband\schemadump\SchemaDumpController',
         ],
+        'schedule' => [
+            'class' => \omnilight\scheduling\ScheduleController::className(),
+            'scheduleFile' => '@app/schedule.php'
+        ],
+        'seed' => [
+            'class' => 'yii\faker\FixtureController',
+            'fixtureDataPath' => '@database/seeds/data',
+            'templatePath' => '@database/seeds/templates',
+            'namespace' => 'database\seeds',
+        ],
     ],
     'components' => [
         'log' => [
@@ -31,7 +41,7 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
+        ]
     ],
     'params' => $params,
 ];
