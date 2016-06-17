@@ -131,7 +131,8 @@ class UserController extends Controller
     public function actionBan()
     {
         $id = Yii::$app->request->post('id');
-        if (Yii::$app->user->identity->isAdmin) {
+        $banUser = User::findOne($id);
+        if ($banUser->isAdmin) {
             throw new ForbiddenHttpException('不支持封禁管理员帐号');
         }
         $model = $this->findModel($id);
