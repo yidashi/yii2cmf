@@ -34,7 +34,8 @@
         "yidashi/yii2-bootstrap-markdown": "^1.0",
         "mihaildev/yii2-elfinder": "^1.0",
         "qiniu/php-sdk": "^7.0",
-        "omnilight/yii2-scheduling": "*"
+        "omnilight/yii2-scheduling": "*",
+        "vlucas/phpdotenv": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -42,6 +43,11 @@
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
         "jamband/yii2-schemadump": "*"
+    },
+    "autoload": {
+        "files": [
+            "helpers.php"
+        ]
     },
     "config": {
         "process-timeout": 1800

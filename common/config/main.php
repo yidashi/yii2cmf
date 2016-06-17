@@ -5,7 +5,7 @@ return [
     'runtimePath' => dirname(dirname(__DIR__)).'/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',
-    'name' => '饮水思源',
+    'name' => env('APP_NAME'),
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
