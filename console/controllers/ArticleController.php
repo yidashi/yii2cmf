@@ -21,4 +21,6 @@ class ArticleController extends Controller
         $spider = SpiderFactory::create($name);
         $spider->process();
     }
+
+   
 }

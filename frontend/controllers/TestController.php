@@ -76,15 +76,13 @@ class TestController extends Controller
         echo \Yii::$app->formatter->format('2016-01-24 6:28:00', 'relativeTime');
     }
 
-    public function actionUser()
+    public function actionTest()
     {
-        $user_list = User::find()->all();
-
-        foreach($user_list as $k=>$v){
-            //$data = array();
-            $data = $v->attributes;
-            print_r($data);
-            echo "<br>";
-        }
+        \Yii::$app->mailer->compose()
+            ->setFrom('admin@51siyuan.cn')
+            ->setTo('liujuntaor@qq.com')
+            ->setSubject('hehe')
+            ->setTextBody('test')
+            ->send();
     }
 }
