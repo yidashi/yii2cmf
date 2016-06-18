@@ -26,16 +26,16 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 
-            <?= $form->field($model, 'status')->radioList(['待审', '激活']) ?>
+            <?= $form->field($model, 'status')->checkbox() ?>
 
         </div>
         <div class="tab-pane" id="tab_2">
             <?= $form->field($model, 'published_at')->widget(
-                \trntv\yii\datetime\DateTimeWidget::className(),
+                \kartik\datetime\DateTimePicker::className(),
                 [
-                    'phpDatetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
-                    'phpMomentMapping' => ['yyyy-MM-dd HH:mm:ss' => 'YYYY-MM-DD HH:mm:ss'],
-                    'locale' => 'zh-cn'
+                    'type' => 1,
+                    'convertFormat' => true,
+                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
                 ]
             ) ?>
             <?= $form->field($model, 'desc')->textarea()?>

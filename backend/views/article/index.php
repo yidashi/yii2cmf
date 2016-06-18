@@ -22,7 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     'id',
-                    'title',
+                    [
+                        'attribute' => 'title',
+                        'value' => function($model) {
+                            return \common\helpers\Html::a($model->title, env('FRONTEND_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
+                        },
+                        'format' => 'raw'
+                    ],
                     'category',
                     'status:boolean',
                     // 'author',

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a4e93d06f95837904100a61f6cce3b1b",
+    "hash": "14fd2a0cc8b2321b09b45266380b12ea",
     "content-hash": "af9ed1fd3855e98ca71e993a20cdfdd7",
     "packages": [
         {
@@ -1767,16 +1767,16 @@
         },
         {
             "name": "yidashi/yii2-webuploader",
-            "version": "v1.0.7",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "645ca70759cde01a7ce73b6576614faeeff12793"
+                "reference": "3edb4d6326237fc2917908f24eb6b030e4130846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/645ca70759cde01a7ce73b6576614faeeff12793",
-                "reference": "645ca70759cde01a7ce73b6576614faeeff12793",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/3edb4d6326237fc2917908f24eb6b030e4130846",
+                "reference": "3edb4d6326237fc2917908f24eb6b030e4130846",
                 "shasum": ""
             },
             "require": {
@@ -1790,7 +1790,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-webuploader",
-            "time": "2016-04-14 06:25:42"
+            "time": "2016-06-18 05:23:11"
         },
         {
             "name": "yiisoft/yii2",

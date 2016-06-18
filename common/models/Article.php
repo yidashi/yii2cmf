@@ -75,7 +75,7 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
             'published_at' => '发布时间',
-            'status' => '状态',
+            'status' => '审核',
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',

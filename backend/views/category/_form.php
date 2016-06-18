@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_nav')->radioList(['否', '是']) ?>
+    <?= $form->field($model, 'is_nav')->checkbox() ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>
 
