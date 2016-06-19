@@ -215,7 +215,7 @@ class MenuHelper
                     $item = [
                         'label' => $menu['name'],
                         'url' => static::parseRoute($menu['route']),
-                        'icon' => $menu['icon']
+                        'icon' => 'fa fa-' . $menu['icon']
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];

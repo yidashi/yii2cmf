@@ -140,8 +140,13 @@ class Article extends \yii\db\ActiveRecord
         $this->on(SoftDeleteBehavior::EVENT_AFTER_REDUCTION, [$this, 'afterReductionInternal']);
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterInsertInternal']);
         $this->on(self::EVENT_AFTER_UPDATE, [$this, 'afterUpdateInternal']);
+        $this->on(self::EVENT_AFTER_FIND, [$this, 'afterFindInternal']);
     }
 
+    public function afterFindInternal($event)
+    {
+        $event->sender->published_at = Yii::$app->formatter->asDatetime($event->sender->published_at);
+    }
     /**
      * 删除文章内容
      */

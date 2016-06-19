@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
+/* @var $dataModel common\models\ArticleData */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="nav-tabs-custom">
