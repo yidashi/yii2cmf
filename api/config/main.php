@@ -28,7 +28,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/article']],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/article','v1/nav']],
             ],
         ],
     ],
