@@ -39,7 +39,6 @@ class ArticleController extends Controller
         <h1>{$article['title']}</h1>
     </div>
     <div class="action">
-        <span class="user">{$article['author']}</span>
         <span class="views">{$article['view']}次浏览</span>
     </div>
     <div class="view-content">{$article['data']['content']}</div>
