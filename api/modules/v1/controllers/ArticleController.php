@@ -16,7 +16,7 @@ use yii\helpers\Url;
 
 class ArticleController extends Controller
 {
-    public function actionList()
+    public function actionIndex()
     {
         $query = Article::find();
         $dataProvider = new ActiveDataProvider([
