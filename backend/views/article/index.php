@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use common\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -25,21 +25,44 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'title',
                         'value' => function($model) {
-                            return \common\helpers\Html::a($model->title, env('FRONTEND_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
+                            return Html::a($model->title, env('FRONTEND_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
                         },
                         'format' => 'raw'
                     ],
                     'category',
-                    'status:boolean',
-                    // 'author',
-                    // 'created_at',
-                    // 'updated_at',
-                    // 'status',
-                    // 'cover',
-
+                    [
+                        'attribute' => 'status',
+                        'value' => function($model) {
+                            $arr = Yii::$app->formatter->booleanFormat;
+                            return Html::a($model->status ? $arr[1] : $arr[0], 'javascript:;', ['onclick' => "changeStatus(this)", 'data-id' => $model->id, 'data-status' => $model->status]);
+                        },
+                        'format' => 'raw'
+                    ],
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>
         </div>
     </div>
 </div>
+<?php $this->beginBlock('js'); ?>
+<script>
+function changeStatus(ele)
+{
+    var url = "<?= \yii\helpers\Url::to(['/article/change-status']) ?>";
+    ele = $(ele);
+    var id = ele.data('id'),status = ele.data('status');
+    $.post(url,{id:id,status:status}, function(res){
+        if (res.status == 1) {
+            if (status == 1) {
+                ele.find('span').removeClass('label-success').addClass('label-danger').find('i').removeClass('fa-check').addClass('fa-times');
+                ele.data('status', 0);
+            } else {
+                ele.find('span').removeClass('label-danger').addClass('label-success').find('i').removeClass('fa-times').addClass('fa-check');
+                ele.data('status', 1);
+            }
+        }
+    })
+}
+</script>
+<?php $this->endBlock() ?>
+) ?>

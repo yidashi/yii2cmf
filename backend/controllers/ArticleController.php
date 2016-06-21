@@ -8,6 +8,7 @@ use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
+use yii\base\DynamicModel;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -233,5 +234,26 @@ class ArticleController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionChangeStatus()
+    {
+        Yii::$app->response->format = 'json';
+        $id = Yii::$app->request->post('id');
+        $status = Yii::$app->request->post('status');
+        $formModel = DynamicModel::validateData(['id' => $id, 'status' => $status], [
+            [['id', 'status'], 'required']
+        ]);
+        if ($formModel->hasErrors()) {
+            return ['status' => 0, 'msg' => current($formModel->getFirstErrors())];
+        }
+        $model = $this->findModel($id);
+        if ($model->status == $status) {
+            $model->status = 1- intval($status);
+            $model->save();
+        }
+        return [
+            'status' => 1
+        ];
     }
 }
