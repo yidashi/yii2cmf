@@ -16,7 +16,7 @@ use yii\helpers\Url;
 
 class ArticleController extends Controller
 {
-    public function actionIndex($cid = 0)
+    public function actionIndex($cid = '')
     {
         $query = Article::find()->andFilterWhere(['category_id' => $cid]);
         $dataProvider = new ActiveDataProvider([
