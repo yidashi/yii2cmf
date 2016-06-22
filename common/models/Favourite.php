@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\behaviors\FavouriteBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -53,7 +54,8 @@ class Favourite extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'updatedAtAttribute' => false
-            ]
+            ],
+            FavouriteBehavior::className()
         ];
     }
 
@@ -61,4 +63,5 @@ class Favourite extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Article::className(), ['id' => 'article_id']);
     }
+
 }

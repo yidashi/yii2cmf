@@ -40,7 +40,7 @@ class Article extends ArticleModel
      */
     public function search($params)
     {
-        $query = ArticleModel::find()->normal();
+        $query = ArticleModel::find()->notTrashed();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

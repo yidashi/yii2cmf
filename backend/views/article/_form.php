@@ -4,8 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
+/* @var $model backend\models\ArticleForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="nav-tabs-custom">
@@ -22,12 +21,11 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
 
-            <?php //$form->field($dataModel, 'content')->widget('kucha\ueditor\UEditor', ['options' => ['style' => 'height:500px']]) ?>
-            <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px']]) ?>
+            <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px']]) ?>
 
-            <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
+            <?= $form->field($model, 'cover')->widget(\yidashi\webuploader\Webuploader::className()) ?>
 
-            <?= $form->field($model, 'status')->checkbox() ?>
+            <?= $form->field($model, 'status')->radioList(\common\models\Article::getStatusList()) ?>
 
         </div>
         <div class="tab-pane" id="tab_2">
@@ -44,6 +42,8 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className()) ?>
 
             <?= $form->field($model, 'source')->textInput() ?>
+
+            <?= $form->field($model, 'view')->textInput() ?>
 
         </div>
         <div class="form-group">

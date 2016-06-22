@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\ArticleForm;
 use common\models\ArticleData;
 use common\models\ArticleTag;
 use yidashi\webuploader\WebuploaderAction;
@@ -67,7 +68,7 @@ class ArticleController extends Controller
      */
     public function actionTrash()
     {
-        $query = \common\models\Article::find()->trashed();
+        $query = \common\models\Article::find()->onlyTrashed();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -90,7 +91,7 @@ class ArticleController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->post('id');
-        $model = Article::find()->where(['id' => $id])->trashed()->one();
+        $model = Article::find()->where(['id' => $id])->onlyTrashed()->one();
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }
@@ -102,8 +103,9 @@ class ArticleController extends Controller
 
     /**
      * 彻底删除
-     * @param $id
-     * @return Response
+     * @return array
+     * @throws NotFoundHttpException
+     * @throws \Exception
      */
     public function actionHardDelete()
     {
@@ -120,7 +122,7 @@ class ArticleController extends Controller
     }
     public function actionClear()
     {
-        if (\common\models\Article::deleteAll(['>', 'deleted_at', 0]) !== false) {
+        if (Article::deleteAll(['>', 'deleted_at', 0]) !== false) {
             Yii::$app->session->setFlash('success', '操作成功');
             return $this->redirect('trash');
         }
@@ -148,29 +150,14 @@ class ArticleController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Article();
-        $dataModel = new ArticleData();
-        if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
-            $isValid = $model->validate();
-
-            if ($isValid) {
-                $isValid = $dataModel->validate();
-                if ($isValid) {
-                    $model->save(false);
-                    $model->setTags();
-                    $dataModel->id = $model->id;
-                    $dataModel->save(false);
-                    return $this->redirect(['index']);
-                }
-            }
+        $model = new ArticleForm();
+        if ($model->load(Yii::$app->request->post()) && $model->store()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('create', [
             'model' => $model,
-            'dataModel' => $dataModel
         ]);
     }
-
     /**
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -181,26 +168,14 @@ class ArticleController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $dataModel = ArticleData::findOne($id);
-        if ($model->load(Yii::$app->request->post()) && $dataModel->load(Yii::$app->request->post())) {
-            $isValid = $model->validate();
-            $isValid = $dataModel->validate() && $isValid;
-            if ($isValid) {
-                $model->save(false);
-                $model->setTags();
-                $dataModel->save(false);
-                Yii::$app->session->setFlash('success', '操作成功');
-                return $this->redirect(['index']);
-            }
+        $model = ArticleForm::findOne($id);
+        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+            return $this->redirect(['index']);
         }
-
         return $this->render('update', [
             'model' => $model,
-            'dataModel' => $dataModel,
         ]);
     }
-
     /**
      * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

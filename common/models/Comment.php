@@ -3,6 +3,7 @@
 namespace common\models;
 
 use common\helpers\Url;
+use common\models\behaviors\CommentBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
@@ -68,7 +69,8 @@ class Comment extends \yii\db\ActiveRecord
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false
-            ]
+            ],
+            CommentBehavior::className()
         ];
     }
 
@@ -106,7 +108,6 @@ class Comment extends \yii\db\ActiveRecord
     public function init()
     {
         $this->on(self::EVENT_AFTER_INSERT, [$this, 'updateComment'], ['comment' => 1]);
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'sendMessage']);
         $this->on(self::EVENT_AFTER_DELETE, [$this, 'updateComment'], ['comment' => -1]);
     }
     public function transactions()
@@ -114,50 +115,6 @@ class Comment extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
-    }
-
-    /**
-     * 更新文章评论计数器等.
-     */
-    public function updateComment($event)
-    {
-        if ($event->sender->type == 'article') {
-            $article = Article::find()->where(['id' => $this->type_id])->one();
-            $article->updateCounters(['comment' => $event->data['comment']]);
-        }
-    }
-
-    public function sendMessage($event)
-    {
-        // 如果是回复,发站内信,通知什么的
-        if ($event->sender->parent_id > 0) {
-            $toUid = $event->sender->parent->user_id;
-            $fromUid = $event->sender->user_id;
-            $content = $this->generateMsgContent($event->sender->content);
-            $title = '';
-            $link = '';
-            switch ($event->sender->type) {
-                case 'article':
-                    $title = '回复了你的评论';
-                    $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
-                    break;
-                case 'suggest':
-                    $title = '回复了你的留言';
-                    $link = Url::to(['/suggest', '#' => 'suggest-' . $event->sender->id]);
-                    break;
-            }
-            Yii::$app->message->setFrom($fromUid)
-                ->setTo($toUid)
-                ->setTitle($title)
-                ->setContent($content)
-                ->setLink($link)
-                ->send();
-        }
-    }
-
-    private function generateMsgContent($content)
-    {
-        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 50);
     }
 
     public function getIsUp()

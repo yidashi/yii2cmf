@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\behaviors\VoteBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -56,6 +57,7 @@ class Vote extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            VoteBehavior::className()
         ];
     }
 
@@ -63,4 +65,5 @@ class Vote extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Article::className(), ['id' => 'type_id']);
     }
+
 }

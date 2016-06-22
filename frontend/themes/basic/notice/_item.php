@@ -10,12 +10,11 @@ use common\helpers\Url;
 ?>
 <div class="media-left">
     <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
-        <img class="media-object" src="<?= Url::img($model->fromUser->avatar) ?>" alt="<?= $model->fromUser->username ?>">
+        <img class="media-object" src="<?= Url::img($model->from->avatar) ?>" alt="<?= $model->from->username ?>">
     </a>
 </div>
 <div class="media-body">
     <div class="media-heading">
-        <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="<?= $model->fromUser->username ?>" title="<?= $model->fromUser->username ?>"><?= $model->fromUser->username ?></a>
         <?= $model->title ?>
     </div>
     <div class="media-content">

@@ -83,7 +83,7 @@ return [
                 }
             }
         ],
-        'message' => \frontend\components\Message::className()
+        'notify' => \frontend\components\notify\Handler::className()
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),

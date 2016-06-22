@@ -61,3 +61,34 @@ if (! function_exists('url')) {
         return \yii\helpers\Url::to($url, $scheme);
     }
 }
+if (! function_exists('array_get')) {
+
+    /**
+     * Get a value by dot-key of an array, object or mix of both.
+     * @param $array
+     * @param $key
+     * @param null $default
+     * @return mixed
+     */
+    function array_get($array, $key, $default = null)
+    {
+        if (is_null($key)) {
+            return $array;
+        }
+
+        if (isset($array[$key])) {
+            return $array[$key];
+        }
+
+        foreach (explode('.', $key) as $segment) {
+
+            if (isset($array[$segment])) {
+                $array = $array[$segment];
+            } else {
+                return value($default);
+            }
+        }
+
+        return $array;
+    }
+}

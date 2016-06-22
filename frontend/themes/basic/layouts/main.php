@@ -58,7 +58,7 @@ AppAsset::register($this);
     ]);
     $rightMenuItems = [];
     $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
-    $noticeNums = Yii::$app->message->getNoViewedNums();
+    $noticeNums = Yii::$app->notify->getNoReadNums();
     if ($noticeNums > 0) {
         $rightMenuItems[] = [
             'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNums . '</span>',

@@ -168,18 +168,6 @@ class m130524_201442_init extends Migration
             'icon' => Schema::TYPE_STRING . "(50) NOT NULL DEFAULT ''",
         ], $this->tableOptions);
 
-// message
-        $this->createTable('{{%message}}', [
-            'id' => Schema::TYPE_PK,
-            'from_uid' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'to_uid' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'content' => Schema::TYPE_STRING . "(1000) NOT NULL",
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'is_viewed' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
-            'title' => Schema::TYPE_STRING . "(255) NULL",
-            'link' => Schema::TYPE_STRING . "(255) NULL",
-        ], $this->tableOptions);
-
 // page
         $this->createTable('{{%page}}', [
             'id' => Schema::TYPE_PK,
@@ -331,7 +319,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%favourite}}');
         $this->dropTable('{{%gather}}');
         $this->dropTable('{{%menu}}'); // fk: parent
-        $this->dropTable('{{%message}}');
         $this->dropTable('{{%page}}');
         $this->dropTable('{{%profile}}');
         $this->dropTable('{{%reward}}');

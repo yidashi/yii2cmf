@@ -6,18 +6,21 @@
  * Time: 上午10:10
  */
 
-namespace frontend\components;
+namespace frontend\components\notify;
 
 
 
 use yii\base\Object;
 use yii\data\ActiveDataProvider;
+use common\models\Notify;
+use yii\db\Query;
+use Yii;
+use yii\helpers\Json;
 
-class Message extends Object
+class Handler extends Object
 {
-
     /**
-     * @var \common\models\Message
+     * @var \common\models\Notify
      */
     public $messager;
     /**
@@ -29,42 +32,43 @@ class Message extends Object
      */
     private $_errors;
 
-    public function init()
+    public function __construct(Notify $message, $config = [])
     {
-        $this->messager = new \common\models\Message();
-        $this->user = \Yii::$app->user;
+        $this->messager = $message;
+        $this->user = Yii::$app->user;
+        parent::__construct($config);
     }
 
-    public function setTo($uid)
+    public function category($name)
     {
-        $this->messager->to_uid = $uid;
+        $category_id = (new Query())->from('{{%notify_category}}')->select('id')->where(['name' => $name])->scalar();
+        $this->messager->category_id = $category_id;
         return $this;
     }
 
-    public function setFrom($uid)
+    public function from($uid)
     {
         $this->messager->from_uid = $uid;
         return $this;
     }
 
-    public function setTitle($title)
+    public function to($uid)
     {
-        $this->messager->title = $title;
+        $this->messager->to_uid = $uid;
         return $this;
     }
 
-    public function setContent($content)
-    {
-        $this->messager->content = $content;
-        return $this;
-    }
-
-    public function setLink($link)
+    public function link($link)
     {
         $this->messager->link = $link;
         return $this;
     }
 
+    public function extra($extra)
+    {
+        $this->messager->extra = Json::encode($extra);
+        return $this;
+    }
     public function send()
     {
         if ($this->messager->save() === false) {
@@ -74,9 +78,9 @@ class Message extends Object
         return true;
     }
 
-    public function getNoViewedNums()
+    public function getNoReadNums()
     {
-        return $this->messager->find()->where(['to_uid' => $this->user->id, 'is_viewed' => 0])->count();
+        return $this->messager->find()->where(['to_uid' => $this->user->id, 'read' => 0])->count();
     }
 
     public function getDataProvider()
@@ -91,9 +95,9 @@ class Message extends Object
         ]);
     }
 
-    public function setViewed()
+    public function readAll()
     {
-        return $this->messager->updateAll(['is_viewed' => 1], ['to_uid' => $this->user->id]);
+        return $this->messager->updateAll(['read' => 1], ['to_uid' => $this->user->id]);
     }
 
     public function getErrors()

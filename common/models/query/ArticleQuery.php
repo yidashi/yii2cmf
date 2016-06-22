@@ -15,32 +15,54 @@ use yii\db\ActiveQuery;
 class ArticleQuery extends ActiveQuery
 {
     /**
-     * 已被删除的
+     * 被删除的
      */
-    public function trashed()
+    public function onlyTrashed()
     {
         return $this->andWhere(['>', 'deleted_at', 0]);
     }
-
     /**
-     * 不包括删除的
-     * @return $this the query object itself
+     * 未被删除的
      */
-    public function normal()
+    public function notTrashed()
     {
-        return $this->andWhere(['deleted_at' => 0]);
+        return $this->andWhere(['=', 'deleted_at', 0]);
     }
 
     /**
-     * 未删除且审核通过的
+     * 待审核的
+     */
+    public function pending()
+    {
+        return $this->andWhere(['status' => Article::STATUS_INIT]);
+    }
+    /**
+     * 拒绝的
+     */
+    public function refuse()
+    {
+        return $this->andWhere(['status' => Article::STATUS_REFUSE]);
+    }
+    /**
+     * 审核通过的
      */
     public function active()
     {
-        return $this->normal()->andWhere(['status' => Article::STATUS_ACTIVE]);
+        return $this->andWhere(['status' => Article::STATUS_ACTIVE]);
+    }
+    /**
+     * 未删除且审核通过的
+     */
+    public function normal()
+    {
+        return $this->notTrashed()->active();
     }
 
+    /**
+     * 已经发布的
+     */
     public function published()
     {
-        return $this->active()->andWhere(['<', 'published_at', time()]);
+        return $this->normal()->andWhere(['<', 'published_at', time()]);
     }
 }

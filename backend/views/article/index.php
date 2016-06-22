@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'status',
                         'value' => function($model) {
-                            $arr = Yii::$app->formatter->booleanFormat;
-                            return Html::a($model->status ? $arr[1] : $arr[0], 'javascript:;', ['onclick' => "changeStatus(this)", 'data-id' => $model->id, 'data-status' => $model->status]);
+                            $arr = [0 => Html::icon('clock-o'), 1 => Html::icon('check'), 10 => Html::icon('times')];
+                            return $arr[$model->status];
                         },
                         'format' => 'raw'
                     ],
@@ -44,25 +44,3 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
-<?php $this->beginBlock('js'); ?>
-<script>
-function changeStatus(ele)
-{
-    var url = "<?= \yii\helpers\Url::to(['/article/change-status']) ?>";
-    ele = $(ele);
-    var id = ele.data('id'),status = ele.data('status');
-    $.post(url,{id:id,status:status}, function(res){
-        if (res.status == 1) {
-            if (status == 1) {
-                ele.find('span').removeClass('label-success').addClass('label-danger').find('i').removeClass('fa-check').addClass('fa-times');
-                ele.data('status', 0);
-            } else {
-                ele.find('span').removeClass('label-danger').addClass('label-success').find('i').removeClass('fa-times').addClass('fa-check');
-                ele.data('status', 1);
-            }
-        }
-    })
-}
-</script>
-<?php $this->endBlock() ?>
-) ?>

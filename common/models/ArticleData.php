@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use common\models\behaviors\ArticleDataBehavior;
 use yii\helpers\Markdown;
 use yii\helpers\StringHelper;
 
@@ -42,35 +43,11 @@ class ArticleData extends \yii\db\ActiveRecord
             'content' => '内容',
         ];
     }
-    /**
-     * 绑定写入后的事件.
-     */
-    public function init()
-    {
-        $this->on(self::EVENT_AFTER_INSERT, [$this, 'afterSaveInternal']);
-        $this->on(self::EVENT_AFTER_UPDATE, [$this, 'afterSaveInternal']);
-    }
 
-    /**
-     * 发布新文章后（摘要为空的话根据内容生成摘要)
-     */
-    public function afterSaveInternal($event)
+    public function behaviors()
     {
-        $article = Article::findOne(['id' => $event->sender->id]);
-        if (empty($article->desc)) {
-            $article->desc = $this->generateDesc($event->sender->content);
-            $article->save(false);
-        }
-        if ($event->name == self::EVENT_AFTER_INSERT) {
-            \Yii::$app->queue->push('*', '\common\models\queue\Subscribe', ['article' => serialize($article)]);
-        }
-    }
-
-    /**
-     * 摘要生成方式
-     */
-    private function generateDesc($content)
-    {
-        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 150);
+        return [
+            ArticleDataBehavior::className()
+        ];
     }
 }

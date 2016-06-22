@@ -15,17 +15,17 @@ use Yii;
 class NoticeController extends Controller
 {
     /**
-     * @var \frontend\components\Message
+     * @var \frontend\components\Notify
      */
     public $message;
 
     public function init()
     {
-        $this->message = Yii::$app->message;
+        $this->message = Yii::$app->notify;
     }
     public function actionIndex()
     {
-        $this->message->setViewed();
+        $this->message->readAll();
         $dataProvider = $this->message->getDataProvider();
         return $this->render('index', [
            'dataProvider' => $dataProvider
