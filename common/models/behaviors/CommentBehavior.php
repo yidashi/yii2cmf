@@ -74,7 +74,6 @@ class CommentBehavior extends Behavior
             ->extra($extra)
             ->link($link)
             ->send();
-        print_r(Yii::$app->notify->getErrors());die;
     }
     private function generateMsgContent($content)
     {
