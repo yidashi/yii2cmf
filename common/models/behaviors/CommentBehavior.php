@@ -22,10 +22,14 @@ class CommentBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_INSERT => 'sendNotify',
-            ActiveRecord::EVENT_AFTER_INSERT => 'increaseComment',
+            ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
             ActiveRecord::EVENT_AFTER_DELETE => 'decreaseComment'
         ];
+    }
+    public function afterInsert($event)
+    {
+        $this->sendNotify($event);
+        $this->increaseComment($event);
     }
     public function sendNotify($event)
     {
@@ -70,6 +74,7 @@ class CommentBehavior extends Behavior
             ->extra($extra)
             ->link($link)
             ->send();
+        print_r(Yii::$app->notify->getErrors());die;
     }
     private function generateMsgContent($content)
     {
