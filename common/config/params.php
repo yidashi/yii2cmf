@@ -7,4 +7,11 @@ return [
     'availableLocales'=>[
         'zh-CN' => '简体中文'
     ],
+    'webuploader_driver' => env('WEBUPLOADER_DRIVER', 'local'),
+    'webuploader_qiniu_config' => [
+        'domain' => env('WEBUPLOADER_QINIU_DOMAIN'),
+        'bucket' => env('WEBUPLOADER_QINIU_BUCKET'),
+        'accessKey' => env('WEBUPLOADER_QINIU_ACCESS'),
+        'secretKey' => env('WEBUPLOADER_QINIU_SECRET'),
+    ]
 ];
