@@ -12,6 +12,7 @@ use common\models\Favourite;
 use common\models\Profile;
 use common\models\Vote;
 use frontend\models\Article;
+use frontend\models\ArticleForm;
 use yii\data\ActiveDataProvider;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -52,7 +53,7 @@ class MyController extends Controller
     public function actionArticleList()
     {
         $userId = \Yii::$app->user->id;
-        $query = Article::find()->where(['user_id' => $userId])->normal();
+        $query = Article::find()->where(['user_id' => $userId])->notTrashed();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -70,53 +71,27 @@ class MyController extends Controller
     }
     public function actionCreateArticle()
     {
-        $model = new Article();
-        $dataModel = new ArticleData();
-        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post())) {
-            $isValid = $model->validate();
-            if ($isValid) {
-                $isValid = $dataModel->validate();
-                if ($isValid) {
-                    $model->save(false);
-                    $model->setTags();
-                    $dataModel->id = $model->id;
-                    $dataModel->save(false);
-                    \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
-
-                    return $this->redirect(['create-article']);
-                }
-            }
+        $model = new ArticleForm();
+        if ($model->load(\Yii::$app->request->post()) && $model->store()) {
+            \Yii::$app->session->setFlash('success', '投稿成功，请等待管理员审核！');
+            return $this->redirect(['create-article']);
         }
 
         return $this->render('create-article', [
-            'model' => $model,
-            'dataModel' => $dataModel,
+            'model' => $model
         ]);
     }
     public function actionUpdateArticle($id)
     {
         $userId = \Yii::$app->user->id;
-        $model = Article::find()->normal()->where(['id' => $id, 'user_id' => $userId])->one();
-        $dataModel = ArticleData::find()->where(['id' => $id])->one();
-        if (!isset($model, $dataModel)) {
-            throw new NotFoundHttpException('文章不存在!');
-        }
-        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post())) {
-            $isValid = $model->validate();
-            $isValid = $dataModel->validate() && $isValid;
-            if ($isValid) {
-                $model->save(false);
-                $model->setTags();
-                $dataModel->save(false);
-                \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
-
-                return $this->redirect(['update-article', 'id' => $id]);
-            }
+        $model = ArticleForm::findOne($id);
+        if ($model->load(\Yii::$app->request->post()) && $model->update()) {
+            \Yii::$app->session->setFlash('success', '修改成功，请等待管理员审核！');
+            return $this->redirect(['update-article', 'id' => $id]);
         }
 
         return $this->render('update-article', [
             'model' => $model,
-            'dataModel' => $dataModel,
         ]);
     }
 

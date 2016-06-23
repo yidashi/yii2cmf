@@ -6,8 +6,7 @@
  */
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
+/* @var $model frontend\models\ArticleForm */
 
 $this->title = '投稿_'.Yii::$app->config->get('SITE_NAME');
 $this->params['breadcrumbs'][] = '投稿';
@@ -16,7 +15,6 @@ $this->params['breadcrumbs'][] = '投稿';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'dataModel' => $dataModel,
     ]) ?>
 
 </div>

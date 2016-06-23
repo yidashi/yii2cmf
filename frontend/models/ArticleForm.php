@@ -6,7 +6,7 @@
  * Time: 下午9:29
  */
 
-namespace backend\models;
+namespace frontend\models;
 
 
 use common\models\Article;
@@ -16,6 +16,7 @@ use common\models\Tag;
 use yii\base\Model;
 use Yii;
 use common\models\Category;
+use yii\web\NotFoundHttpException;
 
 class ArticleForm extends Model
 {
@@ -25,10 +26,9 @@ class ArticleForm extends Model
     public $cover;
     public $category_id;
     public $source;
-    public $status = 1;
+    public $status = 0;
     public $published_at;
     public $desc;
-    public $view;
 
     private $_isNewRecord = true;
     private $_id;
@@ -39,9 +39,8 @@ class ArticleForm extends Model
     {
         return [
             [['title', 'category_id', 'content'], 'required'],
-            [['status', 'category_id', 'view'], 'integer'],
+            [['category_id'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
-            ['published_at', 'string'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title'], 'string', 'max' => 50],
             [['cover', 'source', 'desc'], 'string', 'max' => 255],
@@ -58,7 +57,6 @@ class ArticleForm extends Model
             'id' => Yii::t('common', 'ID'),
             'title' => '标题',
             'content' => '内容',
-            'deleted_at' => '删除时间',
             'published_at' => '发布时间',
             'status' => '审核',
             'cover' => '封面',
@@ -68,7 +66,6 @@ class ArticleForm extends Model
             'desc' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
-            'view' => '浏览量'
         ];
     }
     public function attributeHints()
@@ -90,10 +87,8 @@ class ArticleForm extends Model
             $article = new Article();
             $article->title = $this->title;
             $article->cover = $this->cover;
-            $article->view = (int) $this->view;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
-            $article->published_at = $this->published_at;
             $article->save();
             $articleData = new ArticleData();
             $articleData->content = $this->content;
@@ -111,7 +106,6 @@ class ArticleForm extends Model
             $article = Article::findOne($this->id);
             $article->title = $this->title;
             $article->cover = $this->cover;
-            $article->view = (int) $this->view;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
             $article->published_at = $this->published_at;
@@ -156,11 +150,13 @@ class ArticleForm extends Model
     }
     public static function findOne($id)
     {
-        $article = Article::find()->where(['id' => $id])->with('data')->one();
+        $article = Article::find()->where(['id' => $id])->my()->with('data')->one();
+        if (empty($article)) {
+            throw new NotFoundHttpException('文章不存在或者不属于你');
+        }
         $model = new self();
         $model->title = $article->title;
         $model->cover = $article->cover;
-        $model->view = $article->view;
         $model->category_id = $article->category_id;
         $model->status = $article->status;
         $model->published_at = $article->published_at;

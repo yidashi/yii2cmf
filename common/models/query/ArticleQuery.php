@@ -65,4 +65,9 @@ class ArticleQuery extends ActiveQuery
     {
         return $this->normal()->andWhere(['<', 'published_at', time()]);
     }
+
+    public function my()
+    {
+        return $this->andWhere(['user_id' => \Yii::$app->user->id]);
+    }
 }

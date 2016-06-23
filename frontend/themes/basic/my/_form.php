@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -23,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cover')->widget('yidashi\webuploader\Webuploader') ?>
 
-    <?= $form->field($dataModel, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px;']]); ?>
+    <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px;']]); ?>
 
     <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className())?>
 

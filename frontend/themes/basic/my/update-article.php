@@ -6,10 +6,9 @@
  */
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
+/* @var $model frontend\models\ArticleForm */
 
-$this->title = '我的投稿_'.Yii::$app->params['seoTitle'].Yii::$app->params['seoSeparator'].Yii::$app->name;
+$this->title = '我的投稿_' . Yii::$app->name;
 $this->params['breadcrumbs'][] = ['label' => '我的投稿', 'url' => ['/my/article-list']];
 $this->params['breadcrumbs'][] = $model->title;
 
@@ -17,8 +16,7 @@ $this->params['breadcrumbs'][] = $model->title;
 <div class="article-update">
 
     <?= $this->render('_form', [
-        'model' => $model,
-        'dataModel' => $dataModel,
+        'model' => $model
     ]) ?>
 
 </div>
