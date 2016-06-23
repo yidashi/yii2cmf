@@ -10,7 +10,6 @@ namespace common\behaviors;
 
 
 use yii\base\Behavior;
-use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
 /**

@@ -46,12 +46,12 @@ class TestController extends Controller
         if ($len <= 0) {
             return $arr;
         }
-        for ($i = 1;$i < $len;++$i) {
-            for ($j = 0;$j < $len - $i;++$j) {
-                if ($arr[$j] > $arr[$j + 1]) {
-                    $tmp = $arr[$j];
-                    $arr[$j] = $arr[$j + 1];
-                    $arr[$j + 1] = $tmp;
+        for ($i = 0;$i < $len; $i++) {
+            for ($j = 1;$j < $len - $i; $j++) {
+                if ($arr[$j - 1] > $arr[$j]) {
+                    $tmp = $arr[$j-1];
+                    $arr[$j -1] = $arr[$j];
+                    $arr[$j] = $tmp;
                 }
             }
         }

@@ -64,7 +64,12 @@ if (! function_exists('url')) {
 if (! function_exists('array_get')) {
 
     /**
-     * Get a value by dot-key of an array, object or mix of both.
+     * 通过foo.bar方式获取多维数组的值
+     * ```
+     * $arr = ['a' => 1. 'b' => ['c' => 2, 'd' => 3]];
+     * echo array_get($arr, b.d);
+     * ```
+     * 输出3
      * @param $array
      * @param $key
      * @param null $default

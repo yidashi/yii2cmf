@@ -51,6 +51,7 @@ class ArticleController extends Controller
      */
     public function actionTag($name)
     {
+        /* @var $tag Tag */
         $tag = Tag::find()->where(['name' => $name])->one();
         if (empty($tag)) {
             throw new NotFoundHttpException('标签不存在');

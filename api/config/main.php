@@ -10,8 +10,7 @@ return [
     'controllerNamespace' => 'api\common\controllers',
     'components' => [
         'user' => [
-            'identityClass' => 'dektrium\user\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'common\models\User',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -26,7 +25,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => ['v1/article','v1/nav']],
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'v1/article',
+                        'v1/nav'
+                    ]
+                ],
             ],
         ],
     ],
