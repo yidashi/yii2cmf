@@ -24,6 +24,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px;']]); ?>
 
+    <?= $form->field($model, 'desc')->textarea(['rows' => 5]) ?>
+
     <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className())?>
 
     <div class="form-group">

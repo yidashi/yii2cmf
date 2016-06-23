@@ -57,7 +57,6 @@ class ArticleForm extends Model
             'title' => '标题',
             'content' => '内容',
             'published_at' => '发布时间',
-            'status' => '审核',
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',
