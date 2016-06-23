@@ -11,7 +11,6 @@ namespace api\modules\v1\controllers;
 
 use api\common\controllers\Controller;
 use api\modules\v1\models\Article;
-use yii\base\DynamicModel;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 
@@ -19,33 +18,6 @@ class ArticleController extends Controller
 {
     public function actionIndex($cid = '')
     {
-        $version1 = '5.9.10';
-        $version2 = '5.10.1';
-        $v1 = explode('.', $version1);
-        $v2 = explode('.', $version2);
-        $res = 0;
-        foreach($v1 as $k => $v) {
-            if($v != $v2[$k]){
-                $res = $v > $v2[$k] ? 'v1>v2' : 'v2>v1';
-            }
-        }
-        echo $res;die;
-        $access_token = \Yii::$app->request->post('access_token');
-        $app_version = \Yii::$app->request->post('app_version');
-        $id = \Yii::$app->request->post('id');
-        $model = DynamicModel::validateData(compact('access_token', 'app_version', 'id'), [
-            [['access_token', 'app_version', 'id'], 'required'],
-            ['id', 'integer'],
-            ['name', 'string'],
-            ['email', 'email'],
-            ['access_token', 'login']
-        ]);
-        if ($model->hasErrors()){
-            $model->getFirstErrors();
-            retur;
-        }
-
-
         $query = Article::find()->published()->andFilterWhere(['category_id' => $cid]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
