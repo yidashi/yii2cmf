@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php foreach ($models as $key => $item):?>
     <li>
         <a href="<?php if ($item->status == 1):?><?=\yii\helpers\Url::to(['/article/view', 'id' => $item->id])?><?php else:?><?=\yii\helpers\Url::to(['/my/update-article', 'id' => $item->id])?><?php endif;?>"><?=$item->title?></a>
-        <span class="pull-right"><?php if ($item->status == 1):?>审核通过<?php else:?>未审核<?php endif;?></span>
+        <span class="pull-right"><?php if ($item->status == 1):?>审核通过<?php elseif ($item->status == 0):?>待审核<?php else :?>未审核通过<?php endif;?></span>
         </li>
     <?php endforeach;?>
 </ul>

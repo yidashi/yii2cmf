@@ -26,7 +26,6 @@ class ArticleForm extends Model
     public $cover;
     public $category_id;
     public $source;
-    public $status = 0;
     public $published_at;
     public $desc;
 
@@ -40,7 +39,7 @@ class ArticleForm extends Model
         return [
             [['title', 'category_id', 'content'], 'required'],
             [['category_id'], 'integer'],
-            [['category_id', 'status'], 'filter', 'filter' => 'intval'],
+            [['category_id'], 'filter', 'filter' => 'intval'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title'], 'string', 'max' => 50],
             [['cover', 'source', 'desc'], 'string', 'max' => 255],
@@ -88,7 +87,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
-            $article->status = $this->status;
+            $article->status = 0;
             $article->save();
             $articleData = new ArticleData();
             $articleData->content = $this->content;
@@ -107,7 +106,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
-            $article->status = $this->status;
+            $article->status = 0;
             $article->published_at = $this->published_at;
             $article->save();
             $articleData = $article->data;
@@ -158,7 +157,6 @@ class ArticleForm extends Model
         $model->title = $article->title;
         $model->cover = $article->cover;
         $model->category_id = $article->category_id;
-        $model->status = $article->status;
         $model->published_at = $article->published_at;
         $model->content = $article->data->content;
         $model->tagNames = $article->getTagNames();

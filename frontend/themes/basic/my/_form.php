@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className())?>
 
     <div class="form-group">
-        <?= Html::submitButton('投稿', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
