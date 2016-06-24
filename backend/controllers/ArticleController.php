@@ -111,7 +111,7 @@ class ArticleController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         $id = Yii::$app->request->post('id');
-        $model = Article::find()->where(['id' => $id])->trashed()->one();
+        $model = Article::find()->where(['id' => $id])->onlyTrashed()->one();
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }

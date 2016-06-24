@@ -6,6 +6,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\Article;
 use common\models\User;
 use yii\base\DynamicModel;
 use yii\helpers\Html;
@@ -71,9 +72,11 @@ class TestController extends Controller
             // validation succeeds
         }
     }
-    public function actionFormat()
+    public function actionOop()
     {
-        echo \Yii::$app->formatter->format('2016-01-24 6:28:00', 'relativeTime');
+        $a = \Yii::$app->request->post('a');
+        $a = unserialize($a);
+        print_r($a);die;
     }
 
     public function actionTest()

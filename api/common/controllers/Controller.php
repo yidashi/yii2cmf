@@ -8,6 +8,7 @@
 
 namespace api\common\controllers;
 
+use api\common\behaviors\ValidateBehavior;
 use yii\filters\Cors;
 
 class Controller extends \yii\rest\Controller
@@ -27,6 +28,7 @@ class Controller extends \yii\rest\Controller
                 'Access-Control-Expose-Headers' => ['X-Pagination-Current-Page']
             ]
         ];
+        $behaviors['validate'] = ValidateBehavior::className();
         return $behaviors;
     }
 }
