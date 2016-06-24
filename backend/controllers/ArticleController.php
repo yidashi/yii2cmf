@@ -204,7 +204,7 @@ class ArticleController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Article::find()->where(['id' => $id])->normal()->one()) !== null) {
+        if (($model = Article::find()->where(['id' => $id])->notTrashed()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
