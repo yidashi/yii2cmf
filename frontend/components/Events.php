@@ -15,7 +15,5 @@ use yii\base\Event;
 
 class Events extends \common\components\Events implements BootstrapInterface
 {
-    protected $listeners = [
-        'common\models\Article.viewArticle' => 'common\listeners\ViewArticleListener'
-    ];
+
 }

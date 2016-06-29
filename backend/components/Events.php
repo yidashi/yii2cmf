@@ -13,7 +13,10 @@ use yii\base\BootstrapInterface;
 
 class Events extends \common\components\Events implements BootstrapInterface
 {
-    protected $listeners = [
-        'yii\db\BaseActiveRecord.afterUpdate' => 'backend\listeners\AdminLog',
-    ];
+    public function listeners()
+    {
+        return array_merge(parent::listeners(), [
+            'yii\db\BaseActiveRecord.afterUpdate' => 'backend\listeners\AdminLog',
+        ]);
+    }
 }
