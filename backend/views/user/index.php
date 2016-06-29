@@ -4,7 +4,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '用户';
@@ -20,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
 
             'id',
@@ -30,10 +28,45 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'password_reset_token',
             'email',
             // 'status',
-            // 'created_at',
-            // 'updated_at',
+             'created_at:datetime',
+             'login_at:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {assign}',
+                'buttons' => [
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
+                            'update',
+                            'id' => $model->id,
+                        ], [
+                            'title' => Yii::t('yii', 'Update'),
+                            'aria-label' => Yii::t('yii', 'Update'),
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
+                            'view',
+                            'id' => $model->id,
+                        ], [
+                            'title' => Yii::t('yii', 'View'),
+                            'aria-label' => Yii::t('yii', 'View'),
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                    'assign' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-hand-left"></span>', [
+                            '/admin/assignment/view',
+                            'id' => $model->id,
+                        ], [
+                            'title' => '分配',
+                            'aria-label' => '分配',
+                            'data-pjax' => '0',
+                        ]);
+                    },
+                ],
+            ]
         ],
     ]); ?>
 

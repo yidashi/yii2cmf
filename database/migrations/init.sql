@@ -128,7 +128,7 @@ UNLOCK TABLES;
 LOCK TABLES `pop_menu` WRITE;
 /*!40000 ALTER TABLE `pop_menu` DISABLE KEYS */;
 INSERT INTO `pop_menu` VALUES (1,'权限管理',NULL,NULL,1,NULL,'users'),
-(5,'用户管理',1,'/admin/assignment/index',NULL,NULL,''),
+(5,'用户管理',1,'/user/index',NULL,NULL,''),
 (6,'路由管理',1,'/admin/route/index',NULL,NULL,''),
 (7,'角色管理',1,'/admin/role/index',NULL,NULL,''),
 (8,'菜单管理',1,'/admin/menu/index',NULL,NULL,''),
