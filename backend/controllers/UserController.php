@@ -53,7 +53,7 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
-
+        $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post()) && $model->signUp()) {
             return $this->redirect(['/admin/assignment/index']);
         } else {

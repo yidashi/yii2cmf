@@ -16,6 +16,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Vote extends \yii\db\ActiveRecord
 {
+    const ACTION_UP = 'up';
+    const ACTION_DOWN = 'down';
     /**
      * {@inheritdoc}
      */

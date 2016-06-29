@@ -10,6 +10,7 @@ namespace common\models\behaviors;
 
 
 use common\helpers\Html;
+use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
@@ -25,7 +26,7 @@ class VoteBehavior extends Behavior
     public function sendNotify($event)
     {
         // 赞才发通知
-        if ($event->sender->action == 'up') {
+        if ($event->sender->action == Vote::ACTION_UP) {
             $fromUid = $event->sender->user_id;
             switch ($event->sender->type) {
                 case 'article':

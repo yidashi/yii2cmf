@@ -186,7 +186,12 @@ class Article extends \yii\db\ActiveRecord
             $cache->set($key, 1);
         }
     }
-    public function getTagNames()
+
+    /**
+     * 获取所有标签,默认空格分隔
+     * @return string
+     */
+    public function getTagNames($seperator = ' ')
     {
         $tags = $this->tags;
         if (!empty($tags)) {
@@ -194,7 +199,7 @@ class Article extends \yii\db\ActiveRecord
             foreach($tags as $tag) {
                 $tagNames[] = $tag->name;
             }
-            $tagNames = join(' ', $tagNames);
+            $tagNames = join($seperator, $tagNames);
         } else {
             $tagNames = '';
         }
@@ -225,7 +230,7 @@ class Article extends \yii\db\ActiveRecord
     {
         if (!Yii::$app->user->isGuest) {
             $userId = Yii::$app->user->id;
-            $up = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'up'])->one();
+            $up = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => Vote::ACTION_UP])->one();
             if ($up) {
                 return true;
             }
@@ -241,7 +246,7 @@ class Article extends \yii\db\ActiveRecord
     {
         if (!Yii::$app->user->isGuest) {
             $userId = Yii::$app->user->id;
-            $down = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'down'])->one();
+            $down = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => Vote::ACTION_DOWN])->one();
             if ($down) {
                 return true;
             }

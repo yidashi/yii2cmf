@@ -27,16 +27,17 @@ class User extends \common\models\User
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.', 'on' => 'create'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.', 'on' => 'create'],
 
-            ['password', 'required'],
+            ['password', 'required', 'on' => 'create'],
             ['password', 'string', 'min' => 6],
+            ['password', 'setPassword'],
 
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]]
 
