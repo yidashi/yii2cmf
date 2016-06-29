@@ -9,6 +9,8 @@
 namespace common\models\behaviors;
 
 
+use common\models\Favourite;
+use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use common\behaviors\SoftDeleteBehavior;
@@ -21,7 +23,7 @@ class ArticleBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_DELETE => [$this, 'deleteContent'],
+            ActiveRecord::EVENT_AFTER_DELETE => [$this, 'afterDeleteInternal'],
             SoftDeleteBehavior::EVENT_AFTER_SOFT_DELETE => [$this, 'afterSoftDeleteInternal'],
             SoftDeleteBehavior::EVENT_AFTER_REDUCTION => [$this, 'afterReductionInternal'],
             ActiveRecord::EVENT_AFTER_INSERT => [$this, 'afterInsertInternal'],
@@ -35,14 +37,18 @@ class ArticleBehavior extends Behavior
         $event->sender->published_at = Yii::$app->formatter->asDatetime($event->sender->published_at);
     }
     /**
-     * 删除文章内容
+     * 删除文章后
      */
-    public function deleteContent($event)
+    public function afterDeleteInternal($event)
     {
+        // 删除文章内容
         $content = $event->sender->data;
         if ($content) {
             $content->delete();
         }
+        // 清除收藏和顶
+        Vote::deleteAll(['type' => 'article', 'type_id' => $event->sender->id]);
+        Favourite::deleteAll(['article_id' => $event->sender->id]);
     }
     /**
      * 软删除文章后（更新分类文章数)
