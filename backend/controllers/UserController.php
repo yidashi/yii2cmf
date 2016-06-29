@@ -9,7 +9,6 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -52,7 +51,7 @@ class UserController extends Controller
         $model = new User();
         $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post()) && $model->signUp()) {
-            return $this->redirect(['/admin/assignment/index']);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -71,7 +70,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $model->scenario = 'update';
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/admin/assignment/index']);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -107,6 +106,10 @@ class UserController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    /**
+     * 重置密码
+     */
     public function actionResetPassword($id)
     {
         $model = $this->findModel($id);
@@ -122,8 +125,6 @@ class UserController extends Controller
 
     /**
      * 封禁用户
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
      */
     public function actionBan()
     {

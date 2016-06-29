@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use common\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
@@ -28,7 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'id',
                     'title',
                     'category',
-                    'status:boolean',
+                    [
+                        'attribute' => 'status',
+                        'value' => function($model) {
+                            $arr = [0 => Html::icon('clock-o'), 1 => Html::icon('check'), 10 => Html::icon('times')];
+                            return $arr[$model->status];
+                        },
+                        'format' => 'raw'
+                    ],
                     // 'author',
                     // 'created_at',
                      'deleted_at:datetime',

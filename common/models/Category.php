@@ -74,12 +74,12 @@ class Category extends \yii\db\ActiveRecord
     {
         return static::find()->select('title')->where(['id' => $this->pid])->scalar();
     }
+
     public static function lists()
     {
         $list = Yii::$app->cache->get('categoryList');
         if ($list === false) {
-            $list = static::find()->select('id,title')->asArray()->all();
-            $list = ArrayHelper::map($list, 'id', 'title');
+            $list = static::find()->select('title')->indexBy('id')->column();
             Yii::$app->cache->set('categoryList', $list);
         }
 

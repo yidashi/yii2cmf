@@ -22,9 +22,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(array_merge(['' => '全部'], \common\models\Category::find()->select('title')->indexBy('id')->column())) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::lists(), ['prompt' => '全部']) ?>
 
-    <?php  echo $form->field($model, 'status')->dropDownList(['' => '全部', '待审核', '正常']) ?>
+    <?php  echo $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
 
     <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
     <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
