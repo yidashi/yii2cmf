@@ -12,13 +12,9 @@ $this->title = $name;
 <div class="site-error">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+    <div class="error-search">
+        <form action="/search" method="get">        <div class="input-group"><input type="text" class="form-control" name="q" placeholder="全站搜索"><span class="input-group-btn"><button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button></span></div>        </form>
     </div>
 
-    <p>
-        抱歉，您访问的页面不存在！
-    </p>
 
 </div>

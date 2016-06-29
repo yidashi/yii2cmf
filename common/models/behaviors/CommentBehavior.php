@@ -9,6 +9,7 @@
 namespace common\models\behaviors;
 
 
+use common\helpers\Html;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
@@ -59,7 +60,7 @@ class CommentBehavior extends Behavior
                     $toUid = $article->user_id;
                     $extra = [
                         'comment' => $this->generateMsgContent($event->sender->content),
-                        'article_title' => $article->title
+                        'article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id])
                     ];
                     $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
                     break;

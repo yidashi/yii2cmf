@@ -3,6 +3,8 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+
+$logCount = \backend\models\SystemLog::find()->count();
 ?>
 
 <header class="main-header">
@@ -17,16 +19,19 @@ use yii\helpers\Html;
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <!-- Notifications: style can be found in dropdown.less -->
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>
+                        <?php if($logCount > 0) : ?>
                             <span class="label label-danger">
-                                <?php echo \backend\models\SystemLog::find()->count() ?>
+                                <?= $logCount ?>
                             </span>
+                        <?php endif; ?>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header"><?php echo sprintf('你有%d条日志', \backend\models\SystemLog::find()->count()) ?></li>
+                        <li class="header">
+                            <?= sprintf('你有%d条日志', $logCount) ?>
+                        </li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">

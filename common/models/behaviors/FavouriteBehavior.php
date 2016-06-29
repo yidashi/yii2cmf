@@ -9,6 +9,7 @@
 namespace common\models\behaviors;
 
 
+use common\helpers\Html;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use Yii;
@@ -29,12 +30,13 @@ class FavouriteBehavior extends Behavior
         $fromUid = $event->sender->user_id;
         $toUid = $article->user_id;
         $extra = [
-            'article_title' => $article->title
+            'article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id])
         ];
         Yii::$app->notify->category($category)
             ->from($fromUid)
             ->to($toUid)
             ->extra($extra)
+            ->link(url(['/article/view', 'id' => $article->id]))
             ->send();
     }
 }

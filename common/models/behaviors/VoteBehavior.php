@@ -9,6 +9,7 @@
 namespace common\models\behaviors;
 
 
+use common\helpers\Html;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
@@ -32,7 +33,7 @@ class VoteBehavior extends Behavior
                     $article = $event->sender->article;
                     $toUid = $article->user_id;
                     $extra = [
-                        'article_title' => $article->title
+                        'article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id])
                     ];
                     break;
                 default:
@@ -43,6 +44,7 @@ class VoteBehavior extends Behavior
                 ->from($fromUid)
                 ->to($toUid)
                 ->extra($extra)
+                ->link(url(['/article/view', 'id' => $article->id]))
                 ->send();
         }
     }
