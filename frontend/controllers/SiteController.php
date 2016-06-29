@@ -156,23 +156,23 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $news = Article::find()
-            ->active()
+            ->published()
             ->andWhere(['<>', 'cover', ''])
             ->orderBy(['id' => SORT_DESC])
             ->limit(40)
             ->all();
         $slider = Article::find()
-            ->active()
+            ->published()
             ->orderBy(['view' => SORT_DESC])
             ->limit(5)
             ->all();
         $recommend = Article::find()
-            ->active()
+            ->published()
             ->orderBy(['comment' => SORT_DESC])
             ->limit(10)
             ->all();
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->active(),
+            'query' => Article::find()->published(),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC
