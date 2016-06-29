@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\behaviors\CategoryBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -62,6 +63,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            CategoryBehavior::className()
         ];
     }
 
