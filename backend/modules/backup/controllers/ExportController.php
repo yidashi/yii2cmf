@@ -1,10 +1,9 @@
 <?php
 
-namespace database\controllers;
-use database\models\Database;
+namespace backup\controllers;
+use backup\models\Database;
 use yii\base\Exception;
 use yii\data\ArrayDataProvider;
-use yii\data\SqlDataProvider;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -26,7 +25,9 @@ class ExportController extends Controller
 
     /**
      * 优化表
-     * @param  String $tables 表名
+     * @param string $tables 表名
+     * @return array
+     * @throws Exception
      */
     public function actionOptimize($tables = null)
     {
@@ -103,12 +104,12 @@ class ExportController extends Controller
             mkdir($path, 0755, true);
         }
         //读取备份配置
-        $config = array(
+        $config = [
             'path'     => realpath($path) . DIRECTORY_SEPARATOR,
             'part'     => \Yii::$app->controller->module->params['DATA_BACKUP_PART_SIZE'],
             'compress' => \Yii::$app->controller->module->params['DATA_BACKUP_COMPRESS'],
             'level'    => \Yii::$app->controller->module->params['DATA_BACKUP_COMPRESS_LEVEL']
-        );
+        ];
 
         //检查是否有正在执行的任务
         $lock = "{$config['path']}backup.lock";

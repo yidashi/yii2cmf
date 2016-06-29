@@ -6,7 +6,7 @@
  * Time: 下午4:18
  */
 
-namespace database;
+namespace backup;
 
 
 class Module extends \yii\base\Module

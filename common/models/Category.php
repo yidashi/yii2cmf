@@ -142,9 +142,11 @@ class Category extends \yii\db\ActiveRecord
 
     /**
      * 把返回的数据集转换成Tree
-     * @param array $list 要转换的数据集
-     * @param string $pid parent标记字段
-     * @param string $level level标记字段
+     * @param $list
+     * @param string $pk
+     * @param string $pid
+     * @param string $child
+     * @param int $root
      * @return array
      */
     public static function list2tree($list, $pk='id', $pid = 'pid', $child = '_child', $root = 0) {

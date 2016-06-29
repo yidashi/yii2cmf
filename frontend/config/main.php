@@ -10,6 +10,7 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
+        \frontend\components\Events::className()
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [

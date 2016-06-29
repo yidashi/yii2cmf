@@ -74,9 +74,7 @@ class TestController extends Controller
     }
     public function actionOop()
     {
-        $a = \Yii::$app->request->post('a');
-        $a = unserialize($a);
-        print_r($a);die;
+
     }
 
     public function actionTest()

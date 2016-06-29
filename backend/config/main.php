@@ -9,7 +9,10 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        \backend\components\Events::className()
+    ],
     'controllerMap'=>[
         'file-manager-elfinder' => [
             'class' => 'mihaildev\elfinder\Controller',
@@ -69,12 +72,12 @@ return [
             'class' => 'mdm\admin\Module',
         ],
         'database' => [
-            'class' => 'database\Module'
+            'class' => 'backup\Module'
         ]
     ],
     'aliases' => [
-        '@mdm/admin' => '@backend/mdmsoft/yii2-admin',
-        '@database' => '@backend/database'
+        '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',
+        '@backup' => '@backend/modules/backup'
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
@@ -82,8 +85,5 @@ return [
             'site/logout',
         ],
     ],
-    'on beforeRequest' => function($event) {
-        \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_UPDATE, ['backend\components\AdminLog', 'write']);
-    },
     'params' => $params,
 ];

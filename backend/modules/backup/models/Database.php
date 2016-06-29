@@ -6,7 +6,7 @@
  * Time: 下午4:02
  */
 
-namespace database\models;
+namespace backup\models;
 
 
 class Database
@@ -57,7 +57,7 @@ class Database
                 $this->config['compress'] ? @gzclose($this->fp) : @fclose($this->fp);
                 $this->fp = null;
                 $this->file['part']++;
-                session('backup_file', $this->file);
+                \Yii::$app->session->set('backup_file', $this->file);
                 $this->create();
             }
         } else {

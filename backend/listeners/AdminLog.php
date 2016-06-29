@@ -4,14 +4,14 @@
  * Date: 2015/11/30
  * Time: 17:30.
  */
-namespace backend\components;
+namespace backend\listeners;
 
 use Yii;
 use yii\helpers\Url;
 
 class AdminLog
 {
-    public static function write($event)
+    public static function handle($event)
     {
         // 显示详情有待优化,不过基本功能完整齐全
         if(!empty($event->changedAttributes)) {
