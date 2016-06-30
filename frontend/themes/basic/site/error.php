@@ -13,7 +13,16 @@ $this->title = $name;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <div class="error-search">
-        <form action="/search" method="get">        <div class="input-group"><input type="text" class="form-control" name="q" placeholder="全站搜索"><span class="input-group-btn"><button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button></span></div>        </form>
+        <form action="<?= url(['/search']) ?>" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="全站搜索">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
     </div>
 
 

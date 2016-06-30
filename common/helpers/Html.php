@@ -26,4 +26,15 @@ class Html extends \yii\helpers\Html
         }
         return static::tag('img', '', $options);
     }
+
+    /**
+     * 标红字符串中含有的关键词
+     * @param $q string 关键词
+     * @param $str string 待过滤字符串
+     * @return string 处理后的html
+     */
+    public static function weight($q, $str)
+    {
+        return preg_replace('/' . $q . '/', Html::tag('span', '$0', ['style' => 'color:#f00']), $str);
+    }
 }

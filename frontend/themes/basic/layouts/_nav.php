@@ -38,6 +38,20 @@ echo Nav::widget([
     'items' => $menuItems,
     'encodeLabels' => false
 ]);
+$searchUrl = url(['/search']);
+echo <<<SEARCH
+<form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
+    <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="搜索">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+                <span class="fa fa-search"></span>
+            </button>
+        </span>
+    </div>
+</form>
+SEARCH;
+
 $rightMenuItems = [];
 $rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
 $noticeNums = Yii::$app->notify->getNoReadNums();

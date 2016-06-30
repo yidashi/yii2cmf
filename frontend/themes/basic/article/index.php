@@ -20,28 +20,20 @@ if(isset($category)) {
 
 ?>
 <div class="col-lg-8">
-    <div class="article-list">
-        <?php foreach ($models as $item):?>
-            <div class="media">
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <a href="<?= Url::to(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
-                    </h4>
-                    <div class="media-action">
-                        <span class="views"><?= Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
-                        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
-                    </div>
-                </div>
-            </div>
-        <?php endforeach;?>
-    </div>
+    <?= \yii\widgets\ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '_item',
+        'layout' => "{items}",
+        'options' => ['class' => 'article-list'],
+        'itemOptions' => ['class' => 'media']
+    ]) ?>
     <?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
     <?= \yii\widgets\LinkPager::widget([
-        'pagination' => $pages,
+        'pagination' => $dataProvider->pagination
     ]); ?>
     <?php else:?>
     <?= \yii\widgets\LinkPager::widget([
-        'pagination' => $pages,
+        'pagination' => $dataProvider->pagination,
         'nextPageLabel' => '下一页',
         'prevPageLabel' => '上一页',
         'maxButtonCount' => 0,
