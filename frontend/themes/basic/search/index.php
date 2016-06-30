@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
     <h2>搜索 - <?= Yii::$app->request->get('q') ?></h2>
-    <em class="pull-right">共<?= $dataProvider->pagination->totalCount ?>条</em>
+    <em class="pull-right">共<?= $dataProvider->totalCount ?>条</em>
 </div>
 <?= \yii\widgets\ListView::widget([
     'dataProvider' => $dataProvider,
