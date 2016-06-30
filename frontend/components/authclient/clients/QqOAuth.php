@@ -18,7 +18,7 @@ use yii\helpers\Json;
  *         'class' => 'yii\authclient\Collection',
  *         'clients' => [
  *             'qq' => [
- *                 'class' => 'common\components\QqOAuth',
+ *                 'class' => 'common\components\authclient\clients',
  *                 'clientId' => 'qq_client_id',
  *                 'clientSecret' => 'qq_client_secret',
  *             ],

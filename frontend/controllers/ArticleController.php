@@ -63,13 +63,10 @@ class ArticleController extends Controller
                 ]
             ]
         ]);
-        $pages = $dataProvider->getPagination();
-        $models = $dataProvider->getModels();
         // 热门标签
         $hotTags = Tag::find()->orderBy('article desc')->all();
         return $this->render('index', [
-            'models' => $models,
-            'pages' => $pages,
+            'dataProvider' => $dataProvider,
             'tag' => $tag,
             'hotTags' => $hotTags
         ]);
