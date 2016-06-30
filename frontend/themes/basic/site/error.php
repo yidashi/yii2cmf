@@ -11,7 +11,7 @@ $this->title = $name;
 ?>
 <div class="site-error">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::encode($message) ?></h1>
     <div class="error-search">
         <form action="<?= url(['/search']) ?>" method="get">
             <div class="input-group">
