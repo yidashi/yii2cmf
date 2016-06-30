@@ -35,6 +35,6 @@ class Html extends \yii\helpers\Html
      */
     public static function weight($q, $str)
     {
-        return preg_replace('/' . $q . '/', Html::tag('span', '$0', ['style' => 'color:#f00']), $str);
+        return preg_replace('/' . $q . '/i', Html::tag('span', '$0', ['style' => 'color:#f00']), $str);
     }
 }
