@@ -15,16 +15,19 @@ use yii\base\Event;
 
 class Events extends Component implements BootstrapInterface
 {
+    /**
+     * @return array   事件处理器 => 类名.事件名
+     */
     public function listeners()
     {
         return [
-            'common\models\Article.viewArticle' => 'common\listeners\ViewArticleListener'
+            'common\listeners\ViewArticleListener' => 'common\models\Article.viewArticle'
         ];
     }
 
     public function bootstrap($app)
     {
-        foreach ($this->listeners() as $event => $listener) {
+        foreach ($this->listeners() as $listener => $event) {
             list($class, $name) = explode('.', $event);
             Event::on($class, $name, [$listener, 'handle']);
         }

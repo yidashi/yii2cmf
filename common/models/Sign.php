@@ -11,6 +11,7 @@ use Yii;
  * @property integer $user_id
  * @property integer $last_sign_at
  * @property integer $times
+ * @property integer $continue_times
  */
 class Sign extends \yii\db\ActiveRecord
 {

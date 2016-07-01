@@ -84,6 +84,10 @@ return [
         ],
         'notify' => \frontend\components\notify\Handler::className()
     ],
+    'modules' => [
+        'donation' => 'frontend\modules\donation\Module',
+        'code' => 'frontend\modules\code\Module',
+    ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),
     'params' => $params,

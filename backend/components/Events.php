@@ -16,7 +16,7 @@ class Events extends \common\components\Events implements BootstrapInterface
     public function listeners()
     {
         return array_merge(parent::listeners(), [
-            'yii\db\BaseActiveRecord.afterUpdate' => 'backend\listeners\AdminLog',
+            'backend\listeners\AdminLog' => 'yii\db\BaseActiveRecord.afterUpdate',
         ]);
     }
 }

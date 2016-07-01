@@ -5,6 +5,7 @@
  * Date: 16/6/30
  * Time: 上午12:06
  */
+/* @var $this \yii\web\View */
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use common\helpers\Html;
@@ -31,11 +32,13 @@ foreach (\common\models\Category::tree(\common\models\Category::find()->where(['
     }
     $menuItems[] = $firstItem;
 }
-$menuItems[] = ['label' => '获取源码', 'url' => ['/page/index', 'name' => 'code']];
-$menuItems[] = ['label' => '留言', 'url' => ['/suggest/index']];
+$menuItems[] = ['label' => '留言', 'url' => ['/suggest']];
+$this->params['menuItems'] = $menuItems;
+// 挂个钩子,方便扩展导航
+$this->trigger('leftNav');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
-    'items' => $menuItems,
+    'items' => $this->params['menuItems'],
     'encodeLabels' => false
 ]);
 $searchUrl = url(['/search']);

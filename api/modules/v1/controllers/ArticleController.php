@@ -13,6 +13,8 @@ use api\common\controllers\Controller;
 use api\modules\v1\models\Article;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
+use common\events\ArticleEvent;
+use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller
 {
@@ -31,20 +33,24 @@ class ArticleController extends Controller
     }
     public function actionView($id = 0)
     {
-        $article = Article::find()->published()->where(['id' => $id])->with('data')->asArray()->one();
-        $article['data']['content'] = \yii\helpers\Markdown::process($article['data']['content'], 'gfm');
+        $model = Article::find()->published()->where(['id' => $id])->with('data')->asArray()->one();
+        if ($model === null) {
+            throw new NotFoundHttpException('not found');
+        }
+        ArticleEvent::trigger('common\models\Article', 'viewArticle', new ArticleEvent(['model' => $model]));
+        $model['data']['content'] = \yii\helpers\Markdown::process($model['data']['content'], 'gfm');
         $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
         $html = <<<CONTENT
     <div class="view-title">
-        <h1>{$article['title']}</h1>
+        <h1>{$model['title']}</h1>
     </div>
     <div class="action">
-        <span class="views">{$article['view']}次浏览</span>
+        <span class="views">{$model['view']}次浏览</span>
     </div>
-    <div class="view-content">{$article['data']['content']}</div>
+    <div class="view-content">{$model['data']['content']}</div>
 CONTENT;
-        $article['css'] = $css;
-        $article['html'] = $html;
-        return $article;
+        $model['css'] = $css;
+        $model['html'] = $html;
+        return $model;
     }
 }
