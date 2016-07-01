@@ -35,8 +35,8 @@ class Config extends Component
             case ConfigModel::TYPE_ARRAY:
                 $return = [];
                 foreach (explode("\r\n", $value) as $val) {
-                    if (strpos($val, ':') !== false) {
-                        list($k, $v) = explode(':', $val);
+                    if (strpos($val, '=>') !== false) {
+                        list($k, $v) = explode('=>', $val);
                         $return[$k] = $v;
                     } else {
                         $return[] = $val;

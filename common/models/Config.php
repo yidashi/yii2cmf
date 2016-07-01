@@ -127,8 +127,8 @@ class Config extends \yii\db\ActiveRecord
             case self::TYPE_ARRAY:
                 $return = [];
                 foreach (explode("\r\n", $value) as $val) {
-                    if (strpos($val, ':') !== false) {
-                        list($k, $v) = explode(':', $val);
+                    if (strpos($val, '=>') !== false) {
+                        list($k, $v) = explode('=>', $val);
                         $return[$k] = $v;
                     } else {
                         $return[] = $val;
@@ -150,8 +150,8 @@ class Config extends \yii\db\ActiveRecord
     {
         $return = [];
         foreach (explode("\r\n", $value) as $val) {
-            if (strpos($val, ':') !== false) {
-                list($k, $v) = explode(':', $val);
+            if (strpos($val, '=>') !== false) {
+                list($k, $v) = explode('=>', $val);
                 $return[$k] = $v;
             } else {
                 $return[] = $val;

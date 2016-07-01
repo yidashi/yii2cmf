@@ -19,7 +19,7 @@ NavBar::begin([
     ],
 ]);
 $menuItems = [];
-$menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl];
+$menuItems[] = ['label' => '首页', 'url' => ['/site/index']];
 // 暂只支持两级,多了也没意义
 foreach (\common\models\Category::tree(\common\models\Category::find()->where(['is_nav' => 1])->orderBy('sort asc')->asArray()->all()) as $nav) {
     $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];

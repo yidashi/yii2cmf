@@ -39,16 +39,21 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a></div>
-            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a></div>
-            <div class="col-sm-4"><a href="<?= Url::to(['/page/index', 'name' => 'code'])?>">获取源码</a></div>
+        <div class="footer-link">
+            <a href="<?= Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a>
+            <a href="<?= Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a>
+            <a href="<?= Url::to(['/suggest'])?>" title="意见反馈">意见反馈</a>
         </div>
-    </div>
-    <hr/>
-    <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
-        <p class="pull-right"><?= Yii::$app->config->get('SITE_ICP')?></p>
+        <div class="friendly-link">
+            <span>友情链接：</span>
+            <?php foreach(Yii::$app->config->get('friendly_link') as $k => $v): ?>
+            <a href="<?= $v ?>" target="_blank" title="<?= $k ?>"><?= $k ?></a>
+            <?php endforeach; ?>
+        </div>
+        <div class="footer-copyright">
+            <p>&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
+            <p><?= Yii::$app->config->get('SITE_ICP')?></p>
+        </div>
     </div>
 </footer>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

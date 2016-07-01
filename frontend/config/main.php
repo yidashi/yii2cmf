@@ -52,7 +52,8 @@ return [
                     'suffix' => '.html'
                 ],
                 'user/<id:\d+>' => '/user',
-                'tag/<name:\S+>' => '/article/tag'
+                'tag/<name:\S+>' => '/article/tag',
+                '/' => '/site/index'
             ],
         ],
         'authClientCollection' => [

@@ -110,13 +110,14 @@ UNLOCK TABLES;
 LOCK TABLES `pop_config` WRITE;
 /*!40000 ALTER TABLE `pop_config` DISABLE KEYS */;
 INSERT INTO `pop_config` VALUES
-(1,'CONFIG_TYPE_LIST','1:字符\r\n2:数组\r\n3:枚>举\r\n4:图\r\n5:多行字符','','配置类型列表',2,0,1461937892),
+(1,'CONFIG_TYPE_LIST','1=>字符\r\n2=>数组\r\n3=>枚>举\r\n4=>图\r\n5=>多行字符','','配置类型列表',2,0,1461937892),
 (3,'SEO_SITE_DESCRIPTION','yiicmf','','meta description',1,0,1461937892),
 (4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords',1,0,1461937892),
 (5,'SITE_ICP','','','域名备案号',1,0,1461937892),
 (6,'SITE_NAME','饮水思源','','网站名称',1,0,1461937892),
 (7,'FOOTER','','','底部',5,0,1461937892),
-(8,'THEME_NAME','basic','basic:basic\r\nspecial:special','主题名',3,0,1461937892),(9,'BACKEND_SKIN','skin-blue','skin-black:skin-black\r\nskin-blue:skin-blue\r\nskin-green:skin-green\r\nskin-purple:skin-purple\r\nskin-red:skin-red\r\nskin-yellow:skin-yellow','后台皮肤',3,1461931367,1461937892);
+(8,'THEME_NAME','basic','basic=>basic','主题名',3,0,1461937892),
+(9,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤',3,1461931367,1461937892);
 /*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
