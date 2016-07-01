@@ -9,15 +9,15 @@
 namespace frontend\modules\donation\controllers;
 
 
+use frontend\modules\donation\models\Donation;
 use yii\data\ActiveDataProvider;
-use yii\db\Query;
 use yii\web\Controller;
 
 class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $query = (new Query())->from('{{%donation}}');
+        $query = Donation::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);

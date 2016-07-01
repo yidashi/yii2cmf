@@ -73,7 +73,8 @@ return [
         ],
         'database' => [
             'class' => 'backup\Module'
-        ]
+        ],
+        'donation' => 'frontend\modules\donation\Module'
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',

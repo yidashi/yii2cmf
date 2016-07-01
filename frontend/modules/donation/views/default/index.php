@@ -26,10 +26,10 @@ list(, $url) = Yii::$app->assetManager->publish('@frontend/modules/donation//ass
             'dataProvider' => $dataProvider,
             'layout' => "{items}\n{pager}",
             'columns' => [
-                'created_at:datetime:时间',
-                'name:text:姓名',
-                'money:decimal:金额（元）',
-                'remark:text:留言'
+                'created_at',
+                'name',
+                'money',
+                'remark'
 
             ]
         ]) ?>
