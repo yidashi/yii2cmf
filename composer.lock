@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a181806eb6e57acee8adc0a9737bd608",
-    "content-hash": "918a0acc5cbec6e28c1df387c4183bbe",
+    "hash": "3ade0e3c6519c5015f164504e7e86fcc",
+    "content-hash": "4de9b15bbd703c9c62b15b6d190e7b11",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1734,22 +1734,22 @@
         },
         {
             "name": "yidashi/yii2-ueditor",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-ueditor.git",
-                "reference": "ee90f4ac5d0187814ba3c529ad472c65e7b3db80"
+                "reference": "780ae7fbf209289d6d054ec1825d49a44bbd544e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-ueditor/zipball/ee90f4ac5d0187814ba3c529ad472c65e7b3db80",
-                "reference": "ee90f4ac5d0187814ba3c529ad472c65e7b3db80",
+                "url": "https://api.github.com/repos/yidashi/yii2-ueditor/zipball/780ae7fbf209289d6d054ec1825d49a44bbd544e",
+                "reference": "780ae7fbf209289d6d054ec1825d49a44bbd544e",
                 "shasum": ""
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "yidashi\\yii2-ueditor\\": ""
+                    "kucha\\ueditor\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1763,7 +1763,7 @@
                 }
             ],
             "description": "desc",
-            "time": "2016-07-01 08:12:18"
+            "time": "2016-07-01 09:09:35"
         },
         {
             "name": "yidashi/yii2-webuploader",
