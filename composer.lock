@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14fd2a0cc8b2321b09b45266380b12ea",
-    "content-hash": "af9ed1fd3855e98ca71e993a20cdfdd7",
+    "hash": "a181806eb6e57acee8adc0a9737bd608",
+    "content-hash": "918a0acc5cbec6e28c1df387c4183bbe",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -923,39 +923,6 @@
             "time": "2016-01-10 12:18:38"
         },
         {
-            "name": "kucha/ueditor",
-            "version": "1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BigKuCha/yii2-ueditor-widget.git",
-                "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BigKuCha/yii2-ueditor-widget/zipball/b41439ee0c69efc800a53087c20d8bfcea0f9507",
-                "reference": "b41439ee0c69efc800a53087c20d8bfcea0f9507",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "kucha\\ueditor\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "null"
-            ],
-            "authors": [
-                {
-                    "name": "BigKuCha",
-                    "email": "nevermore1989@vip.qq.com"
-                }
-            ],
-            "description": "desc",
-            "time": "2015-02-06 02:01:30"
-        },
-        {
             "name": "mihaildev/yii2-elfinder",
             "version": "1.2.0",
             "source": {
@@ -1766,17 +1733,50 @@
             "time": "2016-04-14 06:34:38"
         },
         {
-            "name": "yidashi/yii2-webuploader",
-            "version": "v1.1.0",
+            "name": "yidashi/yii2-ueditor",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "3edb4d6326237fc2917908f24eb6b030e4130846"
+                "url": "https://github.com/yidashi/yii2-ueditor.git",
+                "reference": "ee90f4ac5d0187814ba3c529ad472c65e7b3db80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/3edb4d6326237fc2917908f24eb6b030e4130846",
-                "reference": "3edb4d6326237fc2917908f24eb6b030e4130846",
+                "url": "https://api.github.com/repos/yidashi/yii2-ueditor/zipball/ee90f4ac5d0187814ba3c529ad472c65e7b3db80",
+                "reference": "ee90f4ac5d0187814ba3c529ad472c65e7b3db80",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "yidashi\\yii2-ueditor\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "null"
+            ],
+            "authors": [
+                {
+                    "name": "BigKuCha",
+                    "email": "nevermore1989@vip.qq.com"
+                }
+            ],
+            "description": "desc",
+            "time": "2016-07-01 08:12:18"
+        },
+        {
+            "name": "yidashi/yii2-webuploader",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yidashi/yii2-webuploader.git",
+                "reference": "8398a5cd6d07733943a142c6c5286f373d27b5cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/8398a5cd6d07733943a142c6c5286f373d27b5cc",
+                "reference": "8398a5cd6d07733943a142c6c5286f373d27b5cc",
                 "shasum": ""
             },
             "require": {
@@ -1790,7 +1790,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-webuploader",
-            "time": "2016-06-18 05:23:11"
+            "time": "2016-06-23 03:03:49"
         },
         {
             "name": "yiisoft/yii2",
