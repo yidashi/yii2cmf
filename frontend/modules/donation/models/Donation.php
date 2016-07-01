@@ -38,9 +38,8 @@ class Donation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'money', 'created_at', 'updated_at'], 'required'],
+            [['name', 'money'], 'required'],
             [['money'], 'number'],
-            [['created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 50],
             [['remark'], 'string', 'max' => 255],
         ];
