@@ -34,6 +34,10 @@ return [
                 ],
             ],
         ],
+        'response' => [
+            'on afterSend' => function($event) {
+            }
+        ]
     ],
     'modules' => [
         'v1' => [
