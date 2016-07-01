@@ -27,7 +27,12 @@ list(, $url) = Yii::$app->assetManager->publish('@frontend/modules/donation//ass
             'layout' => "{items}\n{pager}",
             'columns' => [
                 'created_at:datetime',
-                'name',
+                [
+                    'attribute' => 'name',
+                    'value' => function($model) {
+                        return $model->name . '（' . $model->source . '）';
+                    }
+                ],
                 'money',
                 'remark'
 

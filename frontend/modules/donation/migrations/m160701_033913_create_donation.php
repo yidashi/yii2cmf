@@ -17,6 +17,7 @@ class m160701_033913_create_donation extends Migration
             'name' => $this->string(50)->notNull(),
             'money' => $this->decimal()->notNull(),
             'remark' => $this->string(255)->comment('留言'),
+            'source' => $this->string(255)->comment('来源'),
             'created_at' => $this->integer(10)->notNull(),
             'updated_at' => $this->integer(10)->notNull()
         ]);

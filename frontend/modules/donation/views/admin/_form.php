@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'source')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'money')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'remark')->textInput(['maxlength' => true]) ?>

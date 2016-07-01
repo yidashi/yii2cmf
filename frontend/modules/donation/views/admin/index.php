@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     'id',
                     'name',
+                    'source',
                     'money',
                     'remark',
                     'created_at:datetime',

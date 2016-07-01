@@ -41,7 +41,7 @@ class Donation extends \yii\db\ActiveRecord
             [['name', 'money'], 'required'],
             [['money'], 'number'],
             [['name'], 'string', 'max' => 50],
-            [['remark'], 'string', 'max' => 255],
+            [['remark', 'source'], 'string', 'max' => 255],
         ];
     }
 
@@ -55,6 +55,7 @@ class Donation extends \yii\db\ActiveRecord
             'name' => '姓名',
             'money' => '金额（元）',
             'remark' => '留言',
+            'source' => '来源',
             'created_at' => '时间',
             'updated_at' => '更新时间',
         ];
