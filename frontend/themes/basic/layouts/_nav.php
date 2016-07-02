@@ -14,8 +14,10 @@ use common\helpers\Html;
 
 <?php
 NavBar::begin([
+    'brandLabel' => Html::img(Yii::$app->config->get('SITE_LOGO', 'logo.png')),
+    'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-static-top',
+        'class' => 'navbar-inverse navbar-static-top'
     ],
 ]);
 $menuItems = [];
