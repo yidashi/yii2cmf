@@ -145,9 +145,11 @@ INSERT INTO `pop_menu` VALUES (1,'权限管理',NULL,NULL,1,NULL,'users'),
 (15,'单页管理',3,'/page/index',40,NULL,''),
 (16,'分类管理',3,'/category/index',4,NULL,''),
 (17,'评论管理',3,'/comment/index',6,NULL,''),
-(4,'数据库备份',NULL,NULL,4,NULL,'book'),
-(18,'备份',4,'/database/export/index',NULL,NULL,''),
-(19,'还原',4,'/database/import/index',NULL,NULL,'');
+(4,'插件管理',NULL,NULL,4,NULL,'book'),
+(18,'模块',4,'/database/export/index',NULL,NULL,''),
+(19,'数据库备份',NULL,NULL,4,NULL,'book'),
+(20,'备份',19,'/database/export/index',NULL,NULL,''),
+(21,'还原',19,'/database/import/index',NULL,NULL,'');
 /*!40000 ALTER TABLE `pop_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 

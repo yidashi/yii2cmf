@@ -6,10 +6,10 @@
  * Time: 上午11:09
  */
 
-namespace frontend\modules\donation\controllers;
+namespace modules\donation\controllers;
 
 
-use frontend\modules\donation\models\Donation;
+use modules\donation\models\Donation;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 

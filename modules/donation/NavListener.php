@@ -6,7 +6,7 @@
  * Time: 下午12:00
  */
 
-namespace frontend\modules\donation;
+namespace modules\donation;
 
 
 class NavListener

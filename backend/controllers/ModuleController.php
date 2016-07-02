@@ -1,18 +1,18 @@
 <?php
 
-namespace frontend\modules\donation\controllers;
+namespace backend\controllers;
 
 use Yii;
-use frontend\modules\donation\models\Donation;
+use common\models\Module;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AdminController implements the CRUD actions for Donation model.
+ * ModuleController implements the CRUD actions for Module model.
  */
-class AdminController extends Controller
+class ModuleController extends Controller
 {
     public function behaviors()
     {
@@ -27,13 +27,13 @@ class AdminController extends Controller
     }
 
     /**
-     * Lists all Donation models.
+     * Lists all Module models.
      * @return mixed
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Donation::find(),
+            'query' => Module::find(),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC
@@ -48,7 +48,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Displays a single Donation model.
+     * Displays a single Module model.
      * @param integer $id
      * @return mixed
      */
@@ -60,16 +60,16 @@ class AdminController extends Controller
     }
 
     /**
-     * Creates a new Donation model.
+     * Creates a new Module model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Donation();
+        $model = new Module();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -78,7 +78,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Updates an existing Donation model.
+     * Updates an existing Module model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -88,7 +88,7 @@ class AdminController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -97,7 +97,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Deletes an existing Donation model.
+     * Deletes an existing Module model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class AdminController extends Controller
     }
 
     /**
-     * Finds the Donation model based on its primary key value.
+     * Finds the Module model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Donation the loaded model
+     * @return Module the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Donation::findOne($id)) !== null) {
+        if (($model = Module::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model frontend\modules\donation\models\Donation */
+/* @var $model modules\donation\models\Donation */
 
 $this->title = Yii::t('app', 'Create Donation');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Donations'), 'url' => ['index']];

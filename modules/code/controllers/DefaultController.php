@@ -6,7 +6,7 @@
  * Time: 上午11:09
  */
 
-namespace frontend\modules\code\controllers;
+namespace modules\code\controllers;
 
 
 use yii\data\ActiveDataProvider;

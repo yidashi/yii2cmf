@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\donation\models;
+namespace modules\donation\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;

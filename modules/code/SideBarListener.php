@@ -6,7 +6,7 @@
  * Time: 下午12:00
  */
 
-namespace frontend\modules\code;
+namespace modules\code;
 
 
 use yii\base\Widget;

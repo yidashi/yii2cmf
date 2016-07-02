@@ -6,7 +6,7 @@
  * Time: 上午11:11
  */
 
-namespace frontend\modules\code;
+namespace modules\code;
 
 
 class Module extends \yii\base\Module

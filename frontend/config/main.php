@@ -10,7 +10,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        \frontend\components\Events::className()
+        \frontend\components\LoadModule::className(),
+        'events'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
@@ -77,17 +78,14 @@ return [
         'view' => [
             'on beginPage' => function($event){
                 if ($event->sender->title) {
-                    $event->sender->title .= '_' . \Yii::$app->config->get('SITE_NAME');
+                    $event->sender->title .= ' - ' . \Yii::$app->config->get('SITE_NAME');
                 } else {
                     $event->sender->title = \Yii::$app->config->get('SITE_NAME');
                 }
             }
         ],
-        'notify' => \frontend\components\notify\Handler::className()
-    ],
-    'modules' => [
-        'donation' => 'frontend\modules\donation\Module',
-        'code' => 'frontend\modules\code\Module',
+        'notify' => \frontend\components\notify\Handler::className(),
+        'events' => \frontend\components\Events::className()
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),

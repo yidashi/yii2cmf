@@ -7,6 +7,7 @@ Yii::setAlias('api', dirname(dirname(__DIR__)) . '/api');
 Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('tests', dirname(dirname(__DIR__)) . '/tests');
 Yii::setAlias('database', dirname(dirname(__DIR__)) . '/database');
+Yii::setAlias('modules', dirname(dirname(__DIR__)) . '/modules');
 
 
 
