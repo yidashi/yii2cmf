@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($model, 'content')->widget(\yidashi\markdown\Markdown::className(), ['options' => ['style' => 'height:500px']]) ?>
 
-            <?= $form->field($model, 'cover')->widget(\iisns\webuploader\Cropper::className()) ?>
+            <?= $form->field($model, 'cover')->widget(\yidashi\webuploader\Webuploader::className()) ?>
 
             <?= $form->field($model, 'status')->radioList(\common\models\Article::getStatusList()) ?>
 
