@@ -89,6 +89,7 @@ div.required label.control-label:after {
 a:hover{text-decoration: none;}
 .article-list .media{padding-top:15px;border-top:1px dashed #d9d9d9;}
 .article-list .media:first-child{padding-top:0;border-top:0;}
+.article-list em{color:#999;font-style: normal}
 .article-list .media-content{margin-top:10px;color:#666;}
 .article-list .media-action{margin-top:5px;color:#999;}
 .article-item .article-img-wrap{position:relative;width:100%;padding-top:50%;}
@@ -97,6 +98,14 @@ a:hover{text-decoration: none;}
 .view-title{border-bottom: 1px solid #F2F2F2;  padding-bottom: 5px;margin-bottom: 10px;}
 .view-content img{max-width: 95%!important;display: block;margin:0 auto!important;}
 .view-content{font-size:16px!important;}
+.top {
+    font-size: 12px;
+    background: #5bc0de none repeat scroll 0 0;
+    border: 1px solid #5bc0de;
+    color: #fff;
+    margin-left: 4px;
+    padding: 2px 7px;
+}
 
 /* 整体样式 */
 html, body { height: 100%; font-family: "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Microsoft Yahei", sans-serif; }

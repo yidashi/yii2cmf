@@ -23,6 +23,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $cover
  * @property int $view
  * @property string $published_at
+ * @property int $is_top
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
  * @property boolean $isFavourite read-only
@@ -49,7 +50,7 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'category_id'], 'required'],
-            [['status', 'category_id', 'view', 'up', 'down'], 'integer'],
+            [['status', 'category_id', 'view', 'up', 'down', 'is_top'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             [['published_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             ['published_at', 'default', 'value' => time()],
@@ -94,7 +95,8 @@ class Article extends \yii\db\ActiveRecord
             'source' => '来源连接',
             'desc' => '摘要',
             'tagNames' => '标签',
-            'user_id' => '作者'
+            'user_id' => '作者',
+            'is_top' => '是否置顶'
         ];
     }
     public function attributeHints()

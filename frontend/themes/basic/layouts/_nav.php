@@ -19,7 +19,7 @@ NavBar::begin([
     ],
 ]);
 $menuItems = [];
-$menuItems[] = ['label' => '首页', 'url' => ['/site/index']];
+$menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl, 'active' => \Yii::$app->controller->getRoute() == 'site/index'];
 // 暂只支持两级,多了也没意义
 foreach (\common\models\Category::tree(\common\models\Category::find()->where(['is_nav' => 1])->orderBy('sort asc')->asArray()->all()) as $nav) {
     $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
@@ -32,7 +32,7 @@ foreach (\common\models\Category::tree(\common\models\Category::find()->where(['
     }
     $menuItems[] = $firstItem;
 }
-$menuItems[] = ['label' => '留言', 'url' => ['/suggest']];
+$menuItems[] = ['label' => '留言', 'url' => ['/suggest'], 'active' => \Yii::$app->controller->getRoute() == 'suggest/index'];
 $this->params['menuItems'] = $menuItems;
 // 挂个钩子,方便扩展导航
 $this->trigger('leftNav');

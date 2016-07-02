@@ -14,6 +14,10 @@ class NavListener
     public static function handle($event)
     {
         //加到左边导航上
-        $event->sender->params['menuItems'][] = ['label' => '获取源码', 'url' => ['/code']];
+        $event->sender->params['menuItems'][] = [
+            'label' => '获取源码',
+            'url' => ['/code'],
+            'active' => \Yii::$app->controller->getRoute() == 'code/default/index'
+        ];
     }
 }

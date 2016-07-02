@@ -155,12 +155,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $news = Article::find()
-            ->published()
-            ->andWhere(['<>', 'cover', ''])
-            ->orderBy(['id' => SORT_DESC])
-            ->limit(40)
-            ->all();
         $slider = Article::find()
             ->published()
             ->orderBy(['view' => SORT_DESC])
@@ -175,6 +169,7 @@ class SiteController extends Controller
             'query' => Article::find()->published(),
             'sort' => [
                 'defaultOrder' => [
+                    'is_top' => SORT_DESC,
                     'id' => SORT_DESC
                 ]
             ]
@@ -182,7 +177,6 @@ class SiteController extends Controller
         $categorys = Category::find()->all();
         $hotTags = Tag::hot();
         return $this->render('index', [
-            'news' => $news,
             'slider' => $slider,
             'recommend' => $recommend,
             'dataProvider' => $dataProvider,

@@ -29,6 +29,7 @@ class ArticleForm extends Model
     public $published_at;
     public $desc;
     public $view;
+    public $is_top;
 
     private $_isNewRecord = true;
     private $_id;
@@ -39,7 +40,7 @@ class ArticleForm extends Model
     {
         return [
             [['title', 'category_id', 'content'], 'required'],
-            [['status', 'category_id', 'view'], 'integer'],
+            [['status', 'category_id', 'view', 'is_top'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             ['published_at', 'string'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
@@ -68,7 +69,8 @@ class ArticleForm extends Model
             'desc' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
-            'view' => '浏览量'
+            'view' => '浏览量',
+            'is_top' => '是否置顶'
         ];
     }
     public function attributeHints()
@@ -91,6 +93,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->view = (int) $this->view;
+            $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
             $article->published_at = $this->published_at;
@@ -112,6 +115,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->view = (int) $this->view;
+            $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
             $article->published_at = $this->published_at;

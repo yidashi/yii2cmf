@@ -9,24 +9,12 @@ use yii\helpers\Url;
     <div class="col-md-8">
         <div class="page-header"><h2>最新文章</h2></div>
         <div class="article-list">
-            <?php foreach ($dataProvider->models as $item):?>
-                <div class="media">
-                    <div class="media-body">
-                        <h4 class="media-heading">
-                            <a href="<?= Url::to(['article/view', 'id' => $item['id']])?>"><?= $item['title']?></a>
-                        </h4>
-                        <div class="media-content"><?= $item['desc'] ?></div>
-                        <div class="media-action">
-                            <span class="time"><?= Html::icon('clock-o')?> <?= Yii::$app->formatter->asRelativeTime($item['created_at']) ?></span>
-                            <span class="views"><?= Html::icon('eye')?> 浏览 <?= $item->trueView?></span>
-                            <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $item->comment, ['article/view', 'id' => $item->id, '#' => 'comments'])?></span>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach;?>
-            <?= \yii\widgets\LinkPager::widget([
-                'pagination' => $dataProvider->pagination,
-            ]); ?>
+            <?= \yii\widgets\ListView::widget([
+                'dataProvider' => $dataProvider,
+                'itemOptions' => ['class' => 'media'],
+                'itemView' => '_item',
+                'layout' => "{items}\n{pager}"
+            ]) ?>
         </div>
     </div>
     <div class="col-md-4">
