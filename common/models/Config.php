@@ -92,6 +92,7 @@ class Config extends \yii\db\ActiveRecord
                     'name' => 'widget',
                     'params' => [
                         '\yidashi\webuploader\Webuploader',
+                        ['options' => ['boxId' => 'config' . $this->id]]// 保证多个上传框ID不同
                     ],
                 ];
                 break;
