@@ -4,13 +4,13 @@
  * Date: 2015/12/4
  * Time: 17:18.
  */
-namespace common\widgets\danmu;
+namespace modules\danmu;
 
 use yii\web\AssetBundle;
 
 class DanmuAsset extends AssetBundle
 {
-    public $sourcePath = '@common/widgets/danmu/assets';
+    public $sourcePath = '@modules/danmu/assets';
     public $css = [
         'css/dm.css',
     ];

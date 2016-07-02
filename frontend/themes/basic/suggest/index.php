@@ -27,5 +27,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('create', ['model' => $model]); ?>
 </div>
-
-<?= \frontend\widgets\prettify\PrettifyWidget::widget() ?>
+<?php $this->trigger('afterSuggest') ?>

@@ -37,6 +37,10 @@ class Events extends Component implements BootstrapInterface
     {
         foreach ($this->listeners() as $listener => $event) {
             list($class, $name) = explode('.', $event);
+            // 同一个键可能监听多个事件,暂时想不到好的处理方法 @分隔下
+            if (strpos($listener, '@') !== false) {
+                list($listener,$many) = explode('@', $listener);
+            }
             Event::on($class, $name, [$listener, 'handle']);
         }
     }

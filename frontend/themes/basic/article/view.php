@@ -62,8 +62,7 @@ $this->params['breadcrumbs'][] = $model->title;
         </div>
     </div>
 </div>
-<?= \common\widgets\danmu\Danmu::widget(['id' => $model->id]) ?>
-<?= \frontend\widgets\prettify\PrettifyWidget::widget() ?>
+<?php $this->trigger('afterArticleView', new \common\events\ArticleEvent(['model' => $model])) ?>
 <?php
 $this->registerJsFile('@web/js/jquery.lazyload.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJs(<<<js

@@ -25,6 +25,8 @@ class m160702_101410_create_module extends Migration
         $this->batchInsert('{{%module}}', ['name', 'title', 'author', 'desc', 'status', 'created_at', 'updated_at'], [
             ['code', '获取源码', '易大师', '获取源码模块', 1, 1467461511, 1467461511],
             ['donation', '捐赠', '易大师', '捐赠模块', 1, 1467461511, 1467461511],
+            ['prettify', '代码高亮模块', '易大师', '代码高亮模块', 1, 1467461511, 1467461511],
+            ['danmu', '文章评论弹幕模块', '易大师', '文章评论弹幕模块', 1, 1467461511, 1467461511],
         ]);
     }
 
