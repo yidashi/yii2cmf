@@ -34,7 +34,7 @@ class ArticleDataBehavior extends Behavior
         $article = Article::findOne(['id' => $event->sender->id]);
         if (!empty($article) && empty($article->desc)) {
             $article->desc = $this->generateDesc($event->sender->content);
-            $article->save(false);
+            $article->save();
         }
         if ($event->name == ActiveRecord::EVENT_AFTER_INSERT) {
             \Yii::$app->queue->push('*', '\common\models\queue\Subscribe', ['article' => serialize($article)]);
