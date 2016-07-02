@@ -165,6 +165,7 @@ class ArticleForm extends Model
         $model->title = $article->title;
         $model->cover = $article->cover;
         $model->view = $article->view;
+        $model->is_top = $article->is_top;
         $model->category_id = $article->category_id;
         $model->status = $article->status;
         $model->published_at = $article->published_at;

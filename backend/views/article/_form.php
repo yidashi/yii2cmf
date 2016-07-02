@@ -29,6 +29,8 @@ use yii\widgets\ActiveForm;
 
         </div>
         <div class="tab-pane" id="tab_2">
+            <?= $form->field($model, 'is_top')->checkbox() ?>
+
             <?= $form->field($model, 'published_at')->widget(
                 \kartik\datetime\DateTimePicker::className(),
                 [
