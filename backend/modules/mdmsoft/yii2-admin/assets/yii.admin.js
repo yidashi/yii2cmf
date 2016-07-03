@@ -11,11 +11,19 @@ yii.admin = (function ($) {
                 action: action,
                 roles: $('#list-' + (action == 'assign' ? 'avaliable' : 'assigned')).val(),
             };
-            $.post(pub.assignUrl, params,
-                function () {
+            $.ajax({
+                url:pub.assignUrl,
+                method:'post',
+                data:params,
+                success:function () {
                     pub.searchAssignmet('avaliable', true);
                     pub.searchAssignmet('assigned', true);
-                });
+                },
+                error:function (xhr, textStatus) {
+                    $('#alert-info').find('.modal-body').text(xhr.responseText);
+                    $('#alert-info').modal('show')
+                }
+            });
         },
         searchAssignmet: function (target, force) {
             if (!_onSearch || force) {
@@ -58,11 +66,19 @@ yii.admin = (function ($) {
                 action: action,
                 roles: $('#list-' + (action == 'assign' ? 'avaliable' : 'assigned')).val(),
             };
-            $.post(pub.assignUrl, params,
-                function () {
+            $.ajax({
+                url:pub.assignUrl,
+                method:'post',
+                data:params,
+                success:function () {
                     pub.searchRole('avaliable', true);
                     pub.searchRole('assigned', true);
-                });
+                },
+                error:function (xhr, textStatus) {
+                    $('#alert-info').find('.modal-body').text(xhr.responseText);
+                    $('#alert-info').modal('show')
+                }
+            });
         },
         searchRole: function (target, force) {
             if (!_onSearch || force) {

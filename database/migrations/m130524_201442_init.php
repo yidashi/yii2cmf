@@ -190,7 +190,7 @@ class m130524_201442_init extends Migration
             'signature' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT ''",
             'avatar' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
-            'locale' => Schema::TYPE_STRING . "(32) NOT NULL",
+            'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
         ], $this->tableOptions);
 
 // reward
