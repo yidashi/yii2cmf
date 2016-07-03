@@ -96,6 +96,7 @@ class ArticleController extends Controller
             ],
             'sort' => [
                 'defaultOrder' => [
+                    'is_top' => SORT_DESC,
                     'id' => SORT_DESC
                 ]
             ]

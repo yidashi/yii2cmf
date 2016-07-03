@@ -16,7 +16,11 @@ use common\helpers\Html;
     </a>
 </div>
 <div class="media-body">
-    <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a> 发表于 <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:Y-m-d H:i') ?></div>
+    <div class="media-heading">
+        <a href="<?= Url::to(['/user', 'id' => $model->user_id])?>"><?=$model->user->username?></a>
+        发表于 <?= Yii::$app->formatter->asDatetime($model->created_at, 'php:Y-m-d H:i') ?>
+        <?php if($model->is_top): ?><span class="top-label">置顶</span><?php endif; ?>
+    </div>
     <div class="media-content" id="suggest-<?= $model->id ?>"><?= Markdown::process($model->content, 'gfm')?></div>
     <?php foreach ($model->sons as $son):?>
         <div class="media">

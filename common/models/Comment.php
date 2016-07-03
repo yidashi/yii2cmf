@@ -35,7 +35,7 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'type_id', 'content'], 'required'],
-            [['type_id', 'user_id', 'parent_id', 'up', 'down'], 'integer'],
+            [['type_id', 'user_id', 'parent_id', 'up', 'down', 'is_top'], 'integer'],
             [['content'], 'string'],
         ];
     }
@@ -53,6 +53,7 @@ class Comment extends \yii\db\ActiveRecord
             'content' => '内容',
             'up' => '顶',
             'down' => '踩',
+            'is_top' => '是否置顶',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
             'parent_id' => '父评论'

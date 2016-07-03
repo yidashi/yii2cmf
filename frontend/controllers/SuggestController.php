@@ -34,7 +34,7 @@ class SuggestController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->where(['type' => 'suggest', 'parent_id' => 0]),
+            'query' => Comment::find()->where(['type' => 'suggest', 'parent_id' => 0])->orderBy(['is_top' => SORT_DESC]),
         ]);
         $model = new Comment();
         $model->type = 'suggest';

@@ -23,7 +23,11 @@ use yii\helpers\Markdown;
                         </a>
                     </div>
                     <div class="media-body">
-                        <div class="media-heading"><a href="<?= Url::to(['/user', 'id' => $item->user_id])?>"><?=$item->user->username?></a> 评论于 <?=date('Y-m-d H:i', $item->created_at)?></div>
+                        <div class="media-heading">
+                            <a href="<?= Url::to(['/user', 'id' => $item->user_id])?>"><?=$item->user->username?></a>
+                            评论于 <?=date('Y-m-d H:i', $item->created_at)?>
+                            <?php if($item->is_top): ?><span class="top-label">置顶</span><?php endif; ?>
+                        </div>
                         <div class="media-content" id="comment-<?= $item->id ?>"><?= Markdown::process($item->content, 'gfm')?></div>
                         <?php foreach ($item->sons as $son):?>
                             <div class="media">
