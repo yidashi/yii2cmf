@@ -25,13 +25,20 @@ class LoadModule extends Component implements BootstrapInterface
         }
 
         foreach ($models as $model) {
+            // 模块根路径
+            $moduleDir = Yii::getAlias('@modules') . '/' . $model->name;
+            // 加载配置
+            $envFile = Yii::getAlias('@modules') . '/' . $model->name . '/.env';
+            if (is_file($envFile)) {
+                (new \Dotenv\Dotenv($moduleDir))->load();
+            }
             // 加载模块
             $moduleClass = 'modules\\' . $model->name . '\Module';
             if (class_exists($moduleClass)) {
                 $app->modules = [$model->name => $moduleClass];
             }
             // 监听事件
-            $moduleEventsFile = Yii::getAlias('@modules') . '/' . $model->name . '/config/events.php';
+            $moduleEventsFile = $moduleDir . '/config/events.php';
             if (is_file($moduleEventsFile)) {
                 $listeners = require $moduleEventsFile;
                 $app->events->addListener($listeners);

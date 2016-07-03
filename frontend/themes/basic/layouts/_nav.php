@@ -35,19 +35,20 @@ foreach (\common\models\Category::tree(\common\models\Category::find()->where(['
     $menuItems[] = $firstItem;
 }
 $menuItems[] = ['label' => '留言', 'url' => ['/suggest'], 'active' => \Yii::$app->controller->getRoute() == 'suggest/index'];
-$this->params['menuItems'] = $menuItems;
+$this->params['leftMenuItems'] = $menuItems;
 // 挂个钩子,方便扩展导航
 $this->trigger('leftNav');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
-    'items' => $this->params['menuItems'],
+    'items' => $this->params['leftMenuItems'],
     'encodeLabels' => false
 ]);
 $searchUrl = url(['/search']);
+$q = Yii::$app->request->get('q', '搜索');
 echo <<<SEARCH
 <form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
     <div class="input-group">
-        <input type="text" class="form-control" name="q" placeholder="搜索">
+        <input type="text" class="form-control" name="q" placeholder="{$q}">
         <span class="input-group-btn">
             <button type="submit" class="btn btn-default">
                 <span class="fa fa-search"></span>

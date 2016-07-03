@@ -25,10 +25,16 @@ class Config extends Component
         if (!empty($config)) {
             return self::_parse($config->type, $config->value);
         } else {
-            return $default;
+            return env($name, $default);
         }
     }
 
+    /**
+     * 解析数组类型配置
+     * @param $type
+     * @param $value
+     * @return array
+     */
     private static function _parse($type, $value)
     {
         switch ($type) {
