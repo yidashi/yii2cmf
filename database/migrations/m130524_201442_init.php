@@ -259,7 +259,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%tag}}', [
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . "(100) NOT NULL",
-            'article' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT 'å…·æœ‰è¯¥æ ‡ç­¾çš„æ–‡ç« æ•°ï¼ˆå†—ä½™å­—æ®µï¼‰'",
+            'article' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的文章数'",
         ], $this->tableOptions);
 
 // user

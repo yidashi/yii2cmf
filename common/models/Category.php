@@ -56,6 +56,14 @@ class Category extends \yii\db\ActiveRecord
             'updated_at' => '更新时间',
         ];
     }
+
+    public function attributeHints()
+    {
+        return [
+            'name' => '(url里显示)'
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */

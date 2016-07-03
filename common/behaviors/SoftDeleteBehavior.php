@@ -43,7 +43,7 @@ class SoftDeleteBehavior extends Behavior
         /* @var  $owner \yii\db\ActiveRecord */
         $owner = $this->owner;
         $owner->setAttribute($this->deletedAttribute, $this->getValue(null));
-        if ($owner->save(false)) {
+        if ($owner->save()) {
             $this->owner->trigger(self::EVENT_AFTER_SOFT_DELETE);
             return true;
         }
@@ -58,7 +58,7 @@ class SoftDeleteBehavior extends Behavior
         /* @var  $owner \yii\db\ActiveRecord */
         $owner = $this->owner;
         $owner->setAttribute($this->deletedAttribute, 0);
-        if ($owner->save(false)) {
+        if ($owner->save()) {
             $owner->trigger(self::EVENT_AFTER_REDUCTION);
             return true;
         }
