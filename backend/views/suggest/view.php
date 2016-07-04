@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'content:ntext',
-            'created_at',
-            'updated_at',
+            'created_at:datetime',
+            'updated_at:datetime',
             [
                 'attribute' => 'user_id',
                 'value' => $model->user->username

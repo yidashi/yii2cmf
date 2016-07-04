@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'route',
             'description:ntext',
-            'created_at',
+            'created_at:datetime',
             'user_id',
             'ip',
         ],
