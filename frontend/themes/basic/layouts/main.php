@@ -47,9 +47,11 @@ AppAsset::register($this);
         </div>
         <div class="friendly-link">
             <span>友情链接：</span>
+            <?php if(Yii::$app->config->get('friendly_link')): ?>
             <?php foreach(Yii::$app->config->get('friendly_link') as $k => $v): ?>
             <a href="<?= $v ?>" target="_blank" title="<?= $k ?>"><?= $k ?></a>
             <?php endforeach; ?>
+            <?php endif; ?>
         </div>
         <div class="footer-copyright">
             <p>&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>

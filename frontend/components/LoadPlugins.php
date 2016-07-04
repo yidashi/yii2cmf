@@ -39,7 +39,7 @@ class LoadPlugins extends Component implements BootstrapInterface
                 (new \Dotenv\Dotenv($moduleDir))->load();
             }
             // 加载模块
-            $moduleClass = 'modules\\' . $model->name . '\Module';
+            $moduleClass = 'plugins\\' . $model->name . '\Module';
             if (class_exists($moduleClass)) {
                 $app->modules = [$model->name => $moduleClass];
             }
