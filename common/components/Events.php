@@ -29,10 +29,11 @@ class Events extends Component implements BootstrapInterface
         return $this->_listeners;
     }
 
-    public function addListener(array $listener)
+    public function addListener($class, $name, $listener)
     {
-        $this->_listeners = array_merge($this->_listeners, $listener);
+        Event::on($class, $name, [$listener, 'handle']);
     }
+
     public function bootstrap($app)
     {
         foreach ($this->listeners() as $listener => $event) {
