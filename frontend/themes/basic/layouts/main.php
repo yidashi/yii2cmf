@@ -59,11 +59,12 @@ AppAsset::register($this);
         </div>
     </div>
 </footer>
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content"></div>
-    </div>
-</div>
+<?php \yii\bootstrap\Modal::begin([
+    'id' => 'alert-info',
+    'header' => '<h3>提示</h3>',
+    'footer' => \common\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
+])?>
+<?php \yii\bootstrap\Modal::end()?>
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
 <?php if (YII_ENV_PROD):?>

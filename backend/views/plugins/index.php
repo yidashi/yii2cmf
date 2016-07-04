@@ -30,6 +30,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 if ($model['install'] == 0) {
                                     return false;
                                 }
+                                if ($model['status'] == 1) {
+                                    return false;
+                                }
                                 return Html::a('开启', ['open'], [
                                     'data-method' => 'post',
                                     'data-params' => ['name' => $model['name']]
@@ -37,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                             'close' => function($url, $model, $key) {
                                 if ($model['install'] == 0) {
+                                    return false;
+                                }
+                                if ($model['status'] == 0) {
                                     return false;
                                 }
                                 return Html::a('关闭', ['close'], [
