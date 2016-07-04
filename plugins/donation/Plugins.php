@@ -39,6 +39,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
     {
         parent::uninstall();
         $class = new Migrate();
-        $class->down();
+        //避免数据被删除,卸载时候表还是不删了
+//        $class->down();
     }
 }
