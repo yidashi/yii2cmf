@@ -31,4 +31,4 @@ dump.rdb
 
 
 # env
-.env
+/.env
