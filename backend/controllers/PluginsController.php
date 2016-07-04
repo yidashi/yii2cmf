@@ -21,6 +21,8 @@ class PluginsController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
+                    'open' => ['post'],
+                    'close' => ['post'],
                     'install' => ['post'],
                     'uninstall' => ['post']
                 ],
@@ -62,7 +64,7 @@ class PluginsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-
+    // 安装
     public function actionInstall()
     {
         $name = Yii::$app->request->post('name');
@@ -79,7 +81,7 @@ class PluginsController extends Controller
         $model->save();
         return $this->redirect(['index']);
     }
-
+    //卸载
     public function actionUninstall()
     {
         $name = Yii::$app->request->post('name');
@@ -91,7 +93,7 @@ class PluginsController extends Controller
         $model->delete();
         return $this->redirect(['index']);
     }
-
+    // 开启
     public function actionOpen()
     {
         $name = Yii::$app->request->post('name');
@@ -104,7 +106,7 @@ class PluginsController extends Controller
         $model->save();
         return $this->redirect(['index']);
     }
-
+    // 关闭
     public function actionClose()
     {
         $name = Yii::$app->request->post('name');
