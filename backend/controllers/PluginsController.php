@@ -41,8 +41,10 @@ class PluginsController extends Controller
             $model = Module::find()->where(['name' => $dir])->one();
             if (empty($model)) {
                 $plugins[$k]['install'] = 0;
+                $plugins[$k]['status'] = 0;
             } else {
                 $plugins[$k]['install'] = 1;
+                $plugins[$k]['status'] = $model->status;
             }
             $pluginsClass = Yii::createObject([
                 'class' => 'plugins\\' . $dir . '\Plugins'
@@ -51,7 +53,6 @@ class PluginsController extends Controller
             $plugins[$k]['name'] = $pluginsClass->info['name'];
             $plugins[$k]['version'] = $pluginsClass->info['version'];
             $plugins[$k]['author'] = $pluginsClass->info['author'];
-            $plugins[$k]['status'] = $pluginsClass->info['status'];
         }
         $dataProvider = new ArrayDataProvider([
             'models' => $plugins
@@ -88,6 +89,32 @@ class PluginsController extends Controller
             return $this->redirect(['index']);
         }
         $model->delete();
+        return $this->redirect(['index']);
+    }
+
+    public function actionOpen()
+    {
+        $name = Yii::$app->request->post('name');
+        $model = Module::find()->where(['name' => $name])->one();
+        if (empty($model)) {
+            Yii::$app->session->setFlash('error', '插件没安装');
+            return $this->redirect(['index']);
+        }
+        $model->status = 1;
+        $model->save();
+        return $this->redirect(['index']);
+    }
+
+    public function actionClose()
+    {
+        $name = Yii::$app->request->post('name');
+        $model = Module::find()->where(['name' => $name])->one();
+        if (empty($model)) {
+            Yii::$app->session->setFlash('error', '插件没安装');
+            return $this->redirect(['index']);
+        }
+        $model->status = 0;
+        $model->save();
         return $this->redirect(['index']);
     }
 }

@@ -19,8 +19,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'version' => 'v1.0',
         'name' => 'danmu',
         'title' => '弹幕',
-        'desc' => '文章评论弹幕',
-        'status' => 1
+        'desc' => '文章评论弹幕'
     ];
 
     public function bootstrap($app)

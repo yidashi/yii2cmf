@@ -24,8 +24,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{install} {uninstall}',
+                        'template' => '{open} {close} {install} {uninstall}',
                         'buttons' => [
+                            'open' => function($url, $model, $key) {
+                                if ($model['install'] == 0) {
+                                    return false;
+                                }
+                                return Html::a('开启', ['open'], [
+                                    'data-method' => 'post',
+                                    'data-params' => ['name' => $model['name']]
+                                ]);
+                            },
+                            'close' => function($url, $model, $key) {
+                                if ($model['install'] == 0) {
+                                    return false;
+                                }
+                                return Html::a('关闭', ['close'], [
+                                    'data-method' => 'post',
+                                    'data-params' => ['name' => $model['name']]
+                                ]);
+                            },
                             'install' => function($url, $model, $key) {
                                 if ($model['install'] == 1) {
                                     return false;

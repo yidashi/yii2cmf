@@ -19,8 +19,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'version' => 'v1.0',
         'name' => 'prettify',
         'title' => '代码高亮',
-        'desc' => '代码高亮模块',
-        'status' => 1
+        'desc' => '代码高亮模块'
     ];
 
     public function bootstrap($app)

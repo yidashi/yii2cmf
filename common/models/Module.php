@@ -33,10 +33,11 @@ class Module extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'title', 'status', 'name', 'title'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'title', 'name', 'title'], 'required'],
+            [['status'], 'integer'],
             [['name', 'title', 'author'], 'string', 'max' => 50],
             [['desc'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => 1],
             [['name'], 'unique'],
         ];
     }

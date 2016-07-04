@@ -19,8 +19,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'version' => 'v1.0',
         'name' => 'donation',
         'title' => '捐赠',
-        'desc' => '捐赠模块',
-        'status' => 1
+        'desc' => '捐赠模块'
     ];
 
     public function bootstrap($app)

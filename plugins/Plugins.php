@@ -19,8 +19,7 @@ abstract class Plugins extends Object
         'version' => '',
         'name' => '',
         'title' => '',
-        'desc' => '',
-        'status' => 1
+        'desc' => ''
     ];
     final public function checkInfo(){
         $info_check_keys = ['name','title','description','status','author','version'];
