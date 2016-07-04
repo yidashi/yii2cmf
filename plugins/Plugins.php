@@ -22,7 +22,7 @@ abstract class Plugins extends Object
         'desc' => ''
     ];
     final public function checkInfo(){
-        $info_check_keys = ['name','title','description','status','author','version'];
+        $info_check_keys = ['name','title','desc','author','version'];
         foreach ($info_check_keys as $value) {
             if(!array_key_exists($value, $this->info))
                 return false;

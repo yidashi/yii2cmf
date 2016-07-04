@@ -11,6 +11,7 @@ namespace plugins\donation;
 
 use yii\base\BootstrapInterface;
 use yii\web\View;
+use plugins\donation\migrations\Migrate;
 
 class Plugins extends \plugins\Plugins implements BootstrapInterface
 {
@@ -25,5 +26,19 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
     public function bootstrap($app)
     {
         $app->events->addListener(View::className(), 'leftNav', 'plugins\donation\NavListener');
+    }
+
+    public function install()
+    {
+        parent::install();
+        $class = new Migrate();
+        $class->up();
+    }
+
+    public function uninstall()
+    {
+        parent::uninstall();
+        $class = new Migrate();
+        $class->down();
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace plugins\donation\migrations;
+
 use yii\db\Migration;
 
 /**
  * Handles the creation for table `{{%donation}}`.
  */
-class m160701_033913_create_donation extends Migration
+class Migrate extends Migration
 {
     /**
      * @inheritdoc

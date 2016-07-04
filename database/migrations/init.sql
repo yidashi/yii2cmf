@@ -59,7 +59,8 @@ INSERT INTO `pop_config` VALUES
 (7,'SITE_LOGO','logo.png','','网站LOGO',4,0,1461937892),
 (8,'FOOTER','','','底部',5,0,1461937892),
 (9,'THEME_NAME','basic','basic=>basic','主题名',3,0,1461937892),
-(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤',3,1461931367,1461937892);
+(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤',3,1461931367,1461937892),
+(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接',2,0,1461937892);
 /*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
 UNLOCK TABLES;
 

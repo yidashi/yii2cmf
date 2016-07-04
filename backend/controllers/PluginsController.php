@@ -73,12 +73,10 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '有同名插件已经安装');
             return $this->redirect(['index']);
         }
-        $model= new Module();
         $pluginsClass = Yii::createObject([
             'class' => 'plugins\\' . $name . '\Plugins'
         ]);
-        $model->attributes = $pluginsClass->info;
-        $model->save();
+        $pluginsClass->install();
         return $this->redirect(['index']);
     }
     //卸载
@@ -90,7 +88,10 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $model->delete();
+        $pluginsClass = Yii::createObject([
+            'class' => 'plugins\\' . $name . '\Plugins'
+        ]);
+        $pluginsClass->uninstall();
         return $this->redirect(['index']);
     }
     // 开启

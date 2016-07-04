@@ -47,8 +47,8 @@ AppAsset::register($this);
         </div>
         <div class="friendly-link">
             <span>友情链接：</span>
-            <?php if(Yii::$app->config->get('friendly_link')): ?>
-            <?php foreach(Yii::$app->config->get('friendly_link') as $k => $v): ?>
+            <?php if(Yii::$app->config->get('FRIENDLY_LINK')): ?>
+            <?php foreach(Yii::$app->config->get('FRIENDLY_LINK') as $k => $v): ?>
             <a href="<?= $v ?>" target="_blank" title="<?= $k ?>"><?= $k ?></a>
             <?php endforeach; ?>
             <?php endif; ?>

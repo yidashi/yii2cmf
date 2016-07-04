@@ -49,7 +49,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'formatter' => [
-            'booleanFormat' => ['<span class="label label-danger"><i class="fa fa-times"></i></span>', '<span class="label label-success"><i class="fa fa-check"></i></span>']
+            'booleanFormat' => ['<i class="fa fa-times"></i>', '<i class="fa fa-check"></i>']
         ],
         'i18n' => [
             'translations' => [

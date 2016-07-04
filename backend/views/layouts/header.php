@@ -1,5 +1,5 @@
 <?php
-use yii\helpers\Html;
+use common\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -19,6 +19,9 @@ $logCount = \backend\models\SystemLog::find()->count();
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li>
+                    <?= Html::a('<i class="fa fa-cogs"></i>', ['/system/config']) ?>
+                </li>
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>
