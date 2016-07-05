@@ -52,7 +52,6 @@ class Article extends \yii\db\ActiveRecord
             [['title', 'category_id'], 'required'],
             [['status', 'category_id', 'view', 'up', 'down', 'is_top'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
-            [['published_at'], 'filter', 'filter' => 'strtotime', 'skipOnEmpty' => true],
             ['published_at', 'default', 'value' => time()],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT, self::STATUS_REFUSE]],

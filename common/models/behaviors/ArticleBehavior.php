@@ -32,10 +32,6 @@ class ArticleBehavior extends Behavior
         ];
     }
 
-    public function afterFindInternal($event)
-    {
-        $event->sender->published_at = Yii::$app->formatter->asDatetime($event->sender->published_at);
-    }
     /**
      * 删除文章后
      */

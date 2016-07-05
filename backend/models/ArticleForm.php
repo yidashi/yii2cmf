@@ -43,6 +43,7 @@ class ArticleForm extends Model
             [['status', 'category_id', 'view', 'is_top'], 'integer'],
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             ['published_at', 'string'],
+            ['published_at', 'default', 'value' => date('Y-m-d H:i:s')],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title'], 'string', 'max' => 50],
             [['cover', 'source', 'desc'], 'string', 'max' => 255],
@@ -96,7 +97,7 @@ class ArticleForm extends Model
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
-            $article->published_at = $this->published_at;
+            $article->published_at = strtotime($this->published_at);
             $article->save();
             $articleData = new ArticleData();
             $articleData->content = $this->content;
@@ -118,7 +119,7 @@ class ArticleForm extends Model
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
-            $article->published_at = $this->published_at;
+            $article->published_at = strtotime($this->published_at);
             $article->save();
             $articleData = $article->data;
             $articleData->content = $this->content;
@@ -168,7 +169,7 @@ class ArticleForm extends Model
         $model->is_top = $article->is_top;
         $model->category_id = $article->category_id;
         $model->status = $article->status;
-        $model->published_at = $article->published_at;
+        $model->published_at = date('Y-m-d H:i:s', $article->published_at);
         $model->content = $article->data->content;
         $model->tagNames = $article->getTagNames();
         $model->_isNewRecord = false;

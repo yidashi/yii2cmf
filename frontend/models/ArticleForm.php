@@ -106,7 +106,6 @@ class ArticleForm extends Model
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
             $article->status = 0;
-            $article->published_at = $this->published_at;
             $article->save();
             $articleData = $article->data;
             $articleData->content = $this->content;
@@ -156,7 +155,6 @@ class ArticleForm extends Model
         $model->title = $article->title;
         $model->cover = $article->cover;
         $model->category_id = $article->category_id;
-        $model->published_at = $article->published_at;
         $model->content = $article->data->content;
         $model->tagNames = $article->getTagNames();
         $model->_isNewRecord = false;
