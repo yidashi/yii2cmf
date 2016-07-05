@@ -28,7 +28,6 @@ class ArticleBehavior extends Behavior
             SoftDeleteBehavior::EVENT_AFTER_REDUCTION => [$this, 'afterReductionInternal'],
             ActiveRecord::EVENT_AFTER_INSERT => [$this, 'afterInsertInternal'],
             ActiveRecord::EVENT_AFTER_UPDATE => [$this, 'afterUpdateInternal'],
-            ActiveRecord::EVENT_AFTER_FIND => [$this, 'afterFindInternal'],
         ];
     }
 
