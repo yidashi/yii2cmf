@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->widget('\kucha\ueditor\UEditor') ?>
 
-    <?= $form->field($model, 'use_layout')->dropDownList(['不使用', '使用']) ?>
+    <?= $form->field($model, 'use_layout')->checkbox() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
