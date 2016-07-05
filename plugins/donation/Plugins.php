@@ -9,11 +9,12 @@
 namespace plugins\donation;
 
 
-use yii\base\BootstrapInterface;
+use plugins\donation\controllers\AdminController;
+use plugins\donation\controllers\DefaultController;
 use yii\web\View;
 use plugins\donation\migrations\Migrate;
 
-class Plugins extends \plugins\Plugins implements BootstrapInterface
+class Plugins extends \plugins\Plugins
 {
     public $info = [
         'author' => '易大师',
@@ -23,9 +24,21 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'desc' => '捐赠模块'
     ];
 
-    public function bootstrap($app)
+    public function frontend($app)
     {
         $app->events->addListener(View::className(), 'leftNav', 'plugins\donation\NavListener');
+        $app->controllerMap['donation'] = [
+            'class' => DefaultController::className(),
+            'viewPath' => '@plugins/donation/views/default'
+        ];
+    }
+
+    public function backend($app)
+    {
+        $app->controllerMap['donation'] = [
+            'class' => AdminController::className(),
+            'viewPath' => '@plugins/donation/views/admin'
+        ];
     }
 
     public function install()
@@ -33,13 +46,16 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         parent::install();
         $class = new Migrate();
         $class->up();
+        $this->addMenu('捐赠', '/donation/index');
+
     }
 
     public function uninstall()
     {
         parent::uninstall();
         $class = new Migrate();
-        //避免数据被删除,卸载时候表还是不删了
+        //避免数据被删除,演示站卸载时候表还是不删了
 //        $class->down();
+        $this->deleteMenu('捐赠');
     }
 }

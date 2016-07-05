@@ -11,7 +11,8 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
         'log',
-        \backend\components\Events::className()
+        \common\components\LoadPlugins::className(),
+        'events'
     ],
     'controllerMap'=>[
         'file-manager-elfinder' => [
@@ -66,6 +67,7 @@ return [
             'rules' => [
             ],
         ],
+        'events' => \frontend\components\Events::className()
     ],
     'modules' => [
         'admin' => [
@@ -73,8 +75,7 @@ return [
         ],
         'database' => [
             'class' => 'backup\Module'
-        ],
-        'donation' => 'plugins\donation\Module'
+        ]
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',

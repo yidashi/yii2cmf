@@ -6,7 +6,7 @@
  * Time: 下午6:12
  */
 
-namespace frontend\components;
+namespace common\components;
 
 use common\models\Module;
 use Yii;

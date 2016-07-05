@@ -10,9 +10,11 @@ namespace plugins;
 
 
 use common\models\Module;
+use yii\base\BootstrapInterface;
 use yii\base\Object;
+use mdm\admin\components\MenuHelper;
 
-abstract class Plugins extends Object
+abstract class Plugins extends Object implements BootstrapInterface
 {
     public $info = [
         'author' => '',
@@ -28,6 +30,19 @@ abstract class Plugins extends Object
                 return false;
         }
         return true;
+    }
+
+    public function addMenu($name, $route)
+    {
+        $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件管理"')->queryScalar();
+        \Yii::$app->db->createCommand("INSERT INTO {{%menu}}(`name`,`parent`,`route`) VALUES ('{$name}','{$id}','{$route}')")->execute();
+        MenuHelper::invalidate();
+    }
+
+    public function deleteMenu($name)
+    {
+        \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
+        MenuHelper::invalidate();
     }
     //安装
     public function install()
@@ -47,4 +62,12 @@ abstract class Plugins extends Object
         $model->delete();
     }
 
+    public function bootstrap($app)
+    {
+        if ($app->id == 'app-backend' && $this->hasMethod('backend')) {
+            $this->backend($app);
+        } else if($app->id == 'app-frontend' && $this->hasMethod('frontend')){
+            $this->frontend($app);
+        }
+    }
 }
