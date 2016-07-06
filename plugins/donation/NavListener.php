@@ -17,7 +17,7 @@ class NavListener
         $event->sender->params['leftMenuItems'][] = [
             'label' => '捐赠',
             'url' => ['/donation'],
-            'active' => \Yii::$app->controller->getRoute() == 'donation/default/index'
+            'active' => \Yii::$app->controller->getRoute() == 'donation/index'
         ];
     }
 }
