@@ -16,3 +16,6 @@ Yii::setAlias('plugins', dirname(dirname(__DIR__)) . '/plugins');
 Yii::setAlias('runnerScript', dirname(dirname(dirname(__FILE__))) .'/yii');
 Yii::setAlias('staticroot', dirname(dirname(__DIR__)) . '/web/static');
 Yii::setAlias('static', env('STATIC_URL'));
+
+Yii::$container->set('yidashi\markdown\Markdown', ['useUploadImage' => true]);
+Yii::$container->set('yii\widgets\LinkPager', ['firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
