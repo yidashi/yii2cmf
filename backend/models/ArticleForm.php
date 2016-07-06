@@ -97,6 +97,7 @@ class ArticleForm extends Model
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
+            $article->desc = $this->desc;
             $article->published_at = strtotime($this->published_at);
             $article->save();
             $articleData = new ArticleData();
@@ -119,6 +120,7 @@ class ArticleForm extends Model
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
             $article->status = $this->status;
+            $article->desc = $this->desc;
             $article->published_at = strtotime($this->published_at);
             $article->save();
             $articleData = $article->data;
@@ -169,6 +171,7 @@ class ArticleForm extends Model
         $model->is_top = $article->is_top;
         $model->category_id = $article->category_id;
         $model->status = $article->status;
+        $model->desc = $article->desc;
         $model->published_at = date('Y-m-d H:i:s', $article->published_at);
         $model->content = $article->data->content;
         $model->tagNames = $article->getTagNames();

@@ -10,6 +10,7 @@ namespace common\behaviors;
 
 
 use yii\base\Behavior;
+use yii\db\BaseActiveRecord;
 use yii\db\Expression;
 
 /**
@@ -23,6 +24,27 @@ class SoftDeleteBehavior extends Behavior
     public $value;
     const EVENT_AFTER_SOFT_DELETE = 'afterSoftDelete';
     const EVENT_AFTER_REDUCTION = 'afterReduction';
+
+    public $replaceDelete = false;
+
+    /**
+     * @inheritdoc
+     */
+    public function events()
+    {
+        if ($this->replaceDelete) {
+            return [
+                BaseActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
+            ];
+        } else {
+            return [];
+        }
+    }
+    public function beforeDelete($event)
+    {
+        $this->softDelete();
+        $event->isValid = false;
+    }
     /**
      * @inheritdoc
      */

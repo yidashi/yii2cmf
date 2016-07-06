@@ -86,6 +86,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
+            $article->desc = $this->desc;
             $article->status = 0;
             $article->save();
             $articleData = new ArticleData();
@@ -105,6 +106,7 @@ class ArticleForm extends Model
             $article->title = $this->title;
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
+            $article->desc = $this->desc;
             $article->status = 0;
             $article->save();
             $articleData = $article->data;
@@ -155,6 +157,7 @@ class ArticleForm extends Model
         $model->title = $article->title;
         $model->cover = $article->cover;
         $model->category_id = $article->category_id;
+        $model->desc = $article->desc;
         $model->content = $article->data->content;
         $model->tagNames = $article->getTagNames();
         $model->_isNewRecord = false;
