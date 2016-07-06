@@ -35,7 +35,7 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ArrayDataProvider([
-            'allModels' => Category::treeList([], $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
+            'allModels' => Category::treeList(null, $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
             'key' => 'id'
         ]);
 
