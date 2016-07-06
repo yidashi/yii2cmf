@@ -22,7 +22,7 @@ $(function(){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
                 if(XMLHttpRequest.status == 403){
-                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
+                    $.modalLogin();
                 }
                 this.abort();
 
@@ -56,7 +56,7 @@ $(function(){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
                 if(XMLHttpRequest.status == 403){
-                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
+                    $.modalLogin();
                 }
                 this.abort();
             }
@@ -91,11 +91,46 @@ $(function(){
                     $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
                 }
                 if(XMLHttpRequest.status == 403){
-                    $('#modal').modal({ remote: SITE_URL + '/site/login'});
+                    $.modalLogin();
                 }
                 this.abort();
             }
         });
         return false;
     });
+});
+
+jQuery.extend({
+    modalLoad: function(url, data, callback) {
+        $('#modal .modal-body').load(url, data, callback);
+        $('#modal').modal();
+    },
+    modalLogin: function() {
+        $('#modal .modal-title').text('需要登录');
+        $('#modal .modal-body').load(SITE_URL + '/site/login');
+        $('#modal').modal();
+    },
+    modalAlert: function(content) {
+        $('#modal .modal-title').text('友情提示');
+        $('#modal .modal-body').html('<p>' + content + '</p>');
+        $('#modal .modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>');
+        $('#modal').modal();
+    },
+    modalConfirm: function(object) {
+        $('#modal .modal-title').text('确认');
+        $('#modal .modal-body').html('<p>' + object.attr('data-confirm') + '</p>');
+        $('#modal .modal-footer').html('<a class="btn btn-primary" href="' + object.attr('href') + '" data-method="post">确定</a><button type="button" class="btn btn-default" data-dismiss="modal">取消</button>');
+        $('#modal').modal();
+    },
+    modalPrompt: function() {
+    }
+});
+
+window.alert = $.modalAlert;
+$("[data-confirm]").click(function() {
+    $.modalConfirm($(this));
+    return false;
+});
+$(".modal").on("hidden.bs.modal", function() {
+    $(this).removeData("bs.modal");
 });
