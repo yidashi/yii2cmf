@@ -15,8 +15,8 @@ list(, $url) = Yii::$app->assetManager->publish('@plugins/donation//assets');
     <div class="donate-summary">
         <?= Yii::$app->config->get('DONATION_FEIHUA') ?>
         <p>
-            <img src="<?= $url . '/alipay.jpg' ?>" width="200" height="250" alt="支付宝">
-            <img src="<?= $url . '/weixin.png' ?>" width="200" height="250" alt="微信支付">
+            支付宝 <img src="<?= $url . '/alipay.png' ?>" width="200" height="200" alt="支付宝">&nbsp;&nbsp;&nbsp;
+            微信支付 <img src="<?= $url . '/weixin.png' ?>" width="200" height="200" alt="微信支付">
         </p>
     </div>
     <div>
