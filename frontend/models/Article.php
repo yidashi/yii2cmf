@@ -57,7 +57,7 @@ class Article extends \common\models\Article
     {
         return self::find()
             ->where(['category_id' => $categoryId])
-            ->active()
+            ->normal()
             ->limit($size)
             ->orderBy('view desc')
             ->all();

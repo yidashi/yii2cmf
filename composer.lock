@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ade0e3c6519c5015f164504e7e86fcc",
-    "content-hash": "4de9b15bbd703c9c62b15b6d190e7b11",
+    "hash": "d72c55b94165b40273a1c881306bffe6",
+    "content-hash": "209066189c184cd12108bf8ecf937a8f",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1767,16 +1767,16 @@
         },
         {
             "name": "yidashi/yii2-webuploader",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "8398a5cd6d07733943a142c6c5286f373d27b5cc"
+                "reference": "140c8375589928dda775bb26bafc2795e4be5681"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/8398a5cd6d07733943a142c6c5286f373d27b5cc",
-                "reference": "8398a5cd6d07733943a142c6c5286f373d27b5cc",
+                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/140c8375589928dda775bb26bafc2795e4be5681",
+                "reference": "140c8375589928dda775bb26bafc2795e4be5681",
                 "shasum": ""
             },
             "require": {
@@ -1790,7 +1790,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-webuploader",
-            "time": "2016-06-23 03:03:49"
+            "time": "2016-07-06 04:01:05"
         },
         {
             "name": "yiisoft/yii2",
