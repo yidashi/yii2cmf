@@ -12,7 +12,12 @@ $this->title = Yii::t('common', 'Profile');
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'avatar')->widget(\yidashi\webuploader\Webuploader::className()) ?>
+        <?= $form->field($model, 'avatar')->widget(\yidashi\webuploader\Cropper::className(), [
+            'options' => [
+                'previewWidth' => 200,
+                'previewHeight' => 200
+            ]
+        ]) ?>
         <?= $form->field($model, 'gender')->radioList($model->genderList) ?>
         <?= $form->field($model, 'locale')->dropDownList($model->localeList) ?>
         <?= $form->field($model, 'signature')->textarea() ?>
