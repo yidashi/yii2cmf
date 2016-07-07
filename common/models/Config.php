@@ -29,8 +29,8 @@ class Config extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'value', 'desc', 'type'], 'required'],
-            [['name'], 'string', 'max' => 20],
+            [['name', 'desc', 'type'], 'required'],
+            [['name'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
             [['value', 'desc', 'extra'], 'string'],
         ];
