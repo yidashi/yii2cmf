@@ -67,7 +67,7 @@ return [
             'rules' => [
             ],
         ],
-        'events' => \frontend\components\Events::className()
+        'events' => \backend\components\Events::className()
     ],
     'modules' => [
         'admin' => [
