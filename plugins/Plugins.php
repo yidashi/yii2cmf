@@ -32,6 +32,12 @@ abstract class Plugins extends Object implements BootstrapInterface
         return true;
     }
 
+    /**
+     * 在菜单插件管理下添加一个新菜单
+     * @param $name
+     * @param $route
+     * @throws \yii\db\Exception
+     */
     public function addMenu($name, $route)
     {
         $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件管理"')->queryScalar();
@@ -39,17 +45,31 @@ abstract class Plugins extends Object implements BootstrapInterface
         MenuHelper::invalidate();
     }
 
+    /**
+     * 删除一个插件管理下的子菜单
+     * @param $name
+     * @throws \yii\db\Exception
+     */
     public function deleteMenu($name)
     {
         \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
         MenuHelper::invalidate();
     }
-    //安装
+
+    /**
+     * 安装插件时候执行
+     * 比如后台添加菜单,建表等
+     */
     public function install()
     {
         if ($this->checkInfo()) {
-            $model = new Module();
-            $model->attributes = $this->info;
+            $model = Module::find()->where(['name' => $this->info['name']])->one();
+            if (empty($model)) {
+                $model = new Module();
+                $model->attributes = $this->info;
+            } else {
+                $model->status = Module::STATUS_OPEN;
+            }
             $model->save();
         }
     }
@@ -59,9 +79,24 @@ abstract class Plugins extends Object implements BootstrapInterface
     {
         $name = $this->info['name'];
         $model = Module::find()->where(['name' => $name])->one();
-        $model->delete();
+        $model->status = Module::STATUS_UNINSTALL;
+        $model->save();
     }
 
+    /**
+     * 各插件在系统bootstrap阶段执行,前台执行frontend方法,后台执行backend方法.
+     * 比如插件要在后台添加一个控制器,则可以这样写
+     * ```
+        public function backend($app)
+        {
+            $app->controllerMap['donation'] = [
+                'class' => '\plugins\donation\controllers\AdminController',
+                'viewPath' => '@plugins/donation/views/admin'
+            ];
+        }
+     * ```
+     * @param \yii\base\Application $app
+     */
     public function bootstrap($app)
     {
         if ($app->id == 'app-backend' && $this->hasMethod('backend')) {

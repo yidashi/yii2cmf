@@ -19,6 +19,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Module extends \yii\db\ActiveRecord
 {
+    const STATUS_OPEN = 1;
+    const STATUS_CLOSE = 0;
+    const STATUS_UNINSTALL = -1;
     /**
      * @inheritdoc
      */
