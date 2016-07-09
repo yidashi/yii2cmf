@@ -9,6 +9,14 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = Yii::t('common', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
+list(, $url) = Yii::$app->assetManager->publish('@frontend/components/authclient/assets');
+$this->registerCss(<<<CSS
+.auth-icon.QQ {
+    background: url({$url}/qq.png) no-repeat;
+    background-size: 32px 32px;
+}
+CSS
+);
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>

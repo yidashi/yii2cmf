@@ -185,12 +185,14 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%profile}}', [
             'id' => Schema::TYPE_PK,
             'money' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'signature' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT ''",
             'avatar' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
+            'qq' => $this->string(20),
+            'phone' => $this->string(20),
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
+            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
         ], $this->tableOptions);
 
 // reward
