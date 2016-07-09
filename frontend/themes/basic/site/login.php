@@ -9,14 +9,6 @@ use yii\bootstrap\ActiveForm;
 
 $this->title = Yii::t('common', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
-list(, $url) = Yii::$app->assetManager->publish('@frontend/components/authclient/assets');
-$this->registerCss(<<<CSS
-.auth-icon.QQ {
-    background: url({$url}/qq.png) no-repeat;
-    background-size: 32px 32px;
-}
-CSS
-);
 ?>
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -41,15 +33,8 @@ CSS
 
                     <?= Html::a('去注册', ['site/signup'], ['class' => 'btn btn-warning']) ?>
                 </div>
-                <!--第三方登录-->
-                <div class="form-group">
-                    <?= yii\authclient\widgets\AuthChoice::widget([
-                        'id' => 'auth-login',
-                        'baseAuthUrl' => ['site/auth'],
-                        'popupMode' => true,
-                    ]) ?>
-                </div>
             <?php ActiveForm::end(); ?>
+            <?php $this->trigger('afterLogin'); ?>
         </div>
     </div>
 </div>

@@ -57,17 +57,6 @@ return [
                 '/' => '/site/index'
             ],
         ],
-        'authClientCollection' => [
-            'class' => 'yii\authclient\Collection',
-            'clients' => [
-                'qq' => [
-                    'class' => 'frontend\components\authclient\clients\QqOAuth',
-                    'clientId' => env('QQ_CLIENT_ID'),
-                    'clientSecret' => env('QQ_CLIENT_SECRET')
-              ],
-                // etc.
-            ],
-        ],
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [

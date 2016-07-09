@@ -4,7 +4,7 @@
  * Date: 2015/12/4
  * Time: 11:19
  */
-namespace frontend\components\authclient\clients;
+namespace plugins\authclient\clients;
 
 use yii\authclient\OAuth2;
 use yii\base\Exception;
