@@ -87,16 +87,14 @@ class CommentBehavior extends Behavior
     public function increaseComment($event)
     {
         if ($event->sender->type == 'article') {
-            $article = Article::find()->where(['id' => $event->sender->type_id])->one();
-            $article->updateCounters(['comment' => 1]);
+            Article::updateAllCounters(['comment' => 1], ['id' => $event->sender->type_id]);
         }
     }
 
     public function decreaseComment($event)
     {
         if ($event->sender->type == 'article') {
-            $article = Article::find()->where(['id' => $event->sender->type_id])->one();
-            $article->updateCounters(['comment' => -1]);
+            Article::updateAllCounters(['comment' => -1], ['id' => $event->sender->type_id]);
         }
     }
 }
