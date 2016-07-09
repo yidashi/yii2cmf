@@ -62,6 +62,10 @@ abstract class Plugins extends Object implements BootstrapInterface
         $model->delete();
     }
 
+    /**
+     *
+     * @param \yii\base\Application $app
+     */
     public function bootstrap($app)
     {
         if ($app->id == 'app-backend' && $this->hasMethod('backend')) {

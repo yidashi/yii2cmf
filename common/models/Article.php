@@ -254,4 +254,20 @@ class Article extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    public function getExhibition()
+    {
+        return $this->hasOne(ArticleExhibition::className(), ['id' => 'id']);
+    }
+
+    public function getSameCityExhibition()
+    {
+//        $ip = Yii::$app->request->userIP;
+//        $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+//        $data = json_decode(file_get_contents($url), true);
+//        $city = isset($data['city']) ? $data['city'] : '北京';
+        $city = '洛阳';
+        return $this->hasOne(ArticleExhibition::className(), ['id' => 'id'])->where(['city' => $city]);
+    }
+
 }
