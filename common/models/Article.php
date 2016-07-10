@@ -190,6 +190,7 @@ class Article extends \yii\db\ActiveRecord
 
     /**
      * 获取所有标签,默认空格分隔
+     * @param string $seperator 分隔符
      * @return string
      */
     public function getTagNames($seperator = ' ')

@@ -116,4 +116,19 @@ class ArticleController extends Controller
             'commentDataProvider' => $commentDataProvider
         ]);
     }
+
+    /**
+     * @param $id
+     * @return Article|null
+     * @throws NotFoundHttpException
+     */
+    private function findModel($id)
+    {
+        /* @var $model Article|null */
+        $model = Article::find()->where(['id' => $id])->published()->one();
+        if ($model === null) {
+            throw new NotFoundHttpException('not found');
+        }
+        return $model;
+    }
 }

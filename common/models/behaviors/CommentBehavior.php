@@ -64,6 +64,14 @@ class CommentBehavior extends Behavior
                     ];
                     $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
                     break;
+                case 'suggest':
+                    $category = 'suggest';
+                    $toUid = 1; // 先写死
+                    $extra = [
+                        'comment' => $this->generateMsgContent($event->sender->content),
+                    ];
+                    $link = Url::to(['/suggest', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
+                    break;
                 default:
                     return;
                     break;
