@@ -9,6 +9,7 @@
 namespace plugins\authclient;
 
 
+use yii\authclient\clients\GitHub;
 use yii\web\View;
 
 class Plugins extends \plugins\Plugins
@@ -24,15 +25,27 @@ class Plugins extends \plugins\Plugins
     public function frontend($app)
     {
         $app->events->addListener(View::className(), 'afterLogin', 'plugins\authclient\AfterLoginListener');
+        $params = [
+            'qq' => [
+                'class' => 'plugins\authclient\clients\QqOAuth',
+                'clientId' => env('QQ_CLIENT_ID'),
+                'clientSecret' => env('QQ_CLIENT_SECRET')
+            ],
+            'github' => [
+                'class' => GitHub::className(),
+                'clientId' => env('GITHUB_CLIENT_ID'),
+                'clientSecret' => env('GITHUB_CLIENT_SECRET')
+            ],
+        ];
+        $openClients = explode(',',env('OPEN_AUTHCLIENT'));
+        $openParams = [];
+        foreach ($openClients as $client) {
+            $client = strtolower($client);
+            $openParams[$client] = $params[$client];
+        }
         $app->set('authClientCollection', [
             'class' => 'yii\authclient\Collection',
-            'clients' => [
-                'qq' => [
-                    'class' => 'plugins\authclient\clients\QqOAuth',
-                    'clientId' => env('QQ_CLIENT_ID'),
-                    'clientSecret' => env('QQ_CLIENT_SECRET')
-                ],
-            ]
+            'clients' => $openParams
         ]);
         $app->controllerMap['auth'] = [
             'class' => AuthController::className()
