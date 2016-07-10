@@ -109,27 +109,7 @@ jQuery.extend({
         $('#commonModal .modal-title').text('需要登录');
         $('#commonModal .modal-body').load(SITE_URL + '/site/login');
         $('#commonModal').modal();
-    },
-    modalAlert: function(content) {
-        $('#commonModal .modal-title').text('友情提示');
-        $('#commonModal .modal-body').html('<p>' + content + '</p>');
-        $('#commonModal .modal-footer').html('<button type="button" class="btn btn-default" data-dismiss="modal">确定</button>');
-        $('#modal').modal();
-    },
-    modalConfirm: function(object) {
-        $('#modal .modal-title').text('确认');
-        $('#modal .modal-body').html('<p>' + object.attr('data-confirm') + '</p>');
-        $('#modal .modal-footer').html('<a class="btn btn-primary" href="' + object.attr('href') + '" data-method="post">确定</a><button type="button" class="btn btn-default" data-dismiss="modal">取消</button>');
-        $('#commonModal').modal();
-    },
-    modalPrompt: function() {
     }
-});
-
-window.alert = $.modalAlert;
-$("[data-confirm]").click(function() {
-    $.modalConfirm($(this));
-    return false;
 });
 $(".modal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
