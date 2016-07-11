@@ -63,8 +63,10 @@ abstract class Plugins extends Object implements BootstrapInterface
         $model = Module::find()->where(['name' => $name])->one();
         $configs = Json::decode($model->config);
         $c = [];
-        foreach ($configs as $k => $config) {
-            $c[$config['name']] = $config['value'];
+        if (!empty($configs)) {
+            foreach ($configs as $k => $config) {
+                $c[$config['name']] = $config['value'];
+            }
         }
         return $c;
     }
