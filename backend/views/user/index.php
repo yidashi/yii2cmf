@@ -16,58 +16,60 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('创建新用户', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
+                    'id',
+                    'username',
+                    // 'auth_key',
+                    // 'password_hash',
+                    // 'password_reset_token',
+                    'email',
+                    // 'status',
+                     'created_at:datetime',
+                     'login_at:datetime',
 
-            'id',
-            'username',
-            // 'auth_key',
-            // 'password_hash',
-            // 'password_reset_token',
-            'email',
-            // 'status',
-             'created_at:datetime',
-             'login_at:datetime',
-
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update} {assign}',
-                'buttons' => [
-                    'update' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
-                            'update',
-                            'id' => $model->id,
-                        ], [
-                            'title' => Yii::t('yii', 'Update'),
-                            'aria-label' => Yii::t('yii', 'Update'),
-                            'data-pjax' => '0',
-                        ]);
-                    },
-                    'view' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
-                            'view',
-                            'id' => $model->id,
-                        ], [
-                            'title' => Yii::t('yii', 'View'),
-                            'aria-label' => Yii::t('yii', 'View'),
-                            'data-pjax' => '0',
-                        ]);
-                    },
-                    'assign' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-hand-left"></span>', [
-                            '/admin/assignment/view',
-                            'id' => $model->id,
-                        ], [
-                            'title' => '分配',
-                            'aria-label' => '分配',
-                            'data-pjax' => '0',
-                        ]);
-                    },
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {assign}',
+                        'buttons' => [
+                            'update' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
+                                    'update',
+                                    'id' => $model->id,
+                                ], [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'aria-label' => Yii::t('yii', 'Update'),
+                                    'data-pjax' => '0',
+                                ]);
+                            },
+                            'view' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
+                                    'view',
+                                    'id' => $model->id,
+                                ], [
+                                    'title' => Yii::t('yii', 'View'),
+                                    'aria-label' => Yii::t('yii', 'View'),
+                                    'data-pjax' => '0',
+                                ]);
+                            },
+                            'assign' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-hand-left"></span>', [
+                                    '/admin/assignment/view',
+                                    'id' => $model->id,
+                                ], [
+                                    'title' => '分配',
+                                    'aria-label' => '分配',
+                                    'data-pjax' => '0',
+                                ]);
+                            },
+                        ],
+                    ]
                 ],
-            ]
-        ],
-    ]); ?>
-
+            ]); ?>
+        </div>
+    </div>
 </div>
