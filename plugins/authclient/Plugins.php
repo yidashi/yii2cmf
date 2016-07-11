@@ -25,19 +25,20 @@ class Plugins extends \plugins\Plugins
     public function frontend($app)
     {
         $app->events->addListener(View::className(), 'afterLogin', 'plugins\authclient\AfterLoginListener');
+        $config = $this->getConfig();
         $params = [
             'qq' => [
                 'class' => 'plugins\authclient\clients\QqOAuth',
-                'clientId' => env('QQ_CLIENT_ID'),
-                'clientSecret' => env('QQ_CLIENT_SECRET')
+                'clientId' => $config['QQ_CLIENT_ID'],
+                'clientSecret' => $config['QQ_CLIENT_SECRET']
             ],
             'github' => [
                 'class' => GitHub::className(),
-                'clientId' => env('GITHUB_CLIENT_ID'),
-                'clientSecret' => env('GITHUB_CLIENT_SECRET')
+                'clientId' => $config['GITHUB_CLIENT_ID'],
+                'clientSecret' => $config['GITHUB_CLIENT_SECRET']
             ],
         ];
-        $openClients = explode(',',env('OPEN_AUTHCLIENT'));
+        $openClients = (array)$config['OPEN_AUTHCLIENT'];
         $openParams = [];
         foreach ($openClients as $client) {
             $client = strtolower($client);

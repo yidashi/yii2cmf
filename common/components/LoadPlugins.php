@@ -28,10 +28,10 @@ class LoadPlugins extends Component implements BootstrapInterface
             // 模块根路径
             $moduleDir = Yii::getAlias('@plugins') . '/' . $model->name;
             // 有配置先加载配置
-            $envFile = $moduleDir . '/.env';
+            /*$envFile = $moduleDir . '/.env';
             if (is_file($envFile)) {
                 (new \Dotenv\Dotenv($moduleDir))->load();
-            }
+            }*/
             $pluginsClass = 'plugins\\' . $model->name . '\Plugins';
             $plugins = Yii::createObject($pluginsClass);
 

@@ -5,18 +5,19 @@
  * Date: 16/7/1
  * Time: 上午11:13
  */
+use common\helpers\Url;
+
 $this->params['breadcrumbs'][] = '捐赠';
-list(, $url) = Yii::$app->assetManager->publish('@plugins/donation/assets');
 ?>
 <div class="col-lg-9">
     <div class="page-header">
         <h2>捐赠</h2>
     </div>
     <div class="donate-summary">
-        <?= Yii::$app->config->get('DONATION_FEIHUA') ?>
+        <?= $config['DONATION_FEIHUA'] ?>
         <p>
-            支付宝 <img src="<?= $url . '/alipay.png' ?>" width="200" height="200" alt="支付宝">&nbsp;&nbsp;&nbsp;
-            微信支付 <img src="<?= $url . '/weixin.png' ?>" width="200" height="200" alt="微信支付">
+            支付宝 <img src="<?= Url::img($config['DONATION_ALIPAY']) ?>" width="200" height="200" alt="支付宝">&nbsp;&nbsp;&nbsp;
+            微信支付 <img src="<?= Url::img($config['DONATION_WEIXIN']) ?>" width="200" height="200" alt="微信支付">
         </p>
     </div>
     <div>

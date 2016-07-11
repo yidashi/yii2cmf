@@ -40,11 +40,11 @@ class Module extends \yii\db\ActiveRecord
             [['status'], 'integer'],
             [['name', 'title', 'author'], 'string', 'max' => 50],
             [['desc'], 'string', 'max' => 255],
+            [['config'], 'string'],
             ['status', 'default', 'value' => 1],
             [['name'], 'unique'],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -57,6 +57,7 @@ class Module extends \yii\db\ActiveRecord
             'status' => '是否启用',
             'author' => '作者',
             'desc' => '描述',
+            'config' => '配置',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];

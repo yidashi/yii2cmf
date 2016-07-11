@@ -7,7 +7,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = '网站设置';
+$this->title = '插件设置:' .' '.$model->title;
+$this->params['breadcrumbs'][] = ['label' => '插件', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
@@ -17,15 +18,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'layout' => '{items}',
         'columns' => [
-            'desc',
+            'desc:text:配置描述',
             [
                 'attribute' => 'value',
+                'label' => '配置值',
                 'value' => function($model, $key, $index) use ($form) {
-                    return call_user_func_array([$form->field($model, "[$index]value")->label(false), $model->inputType['name']], $model->inputType['params']);
+                    $inputType = \backend\helpers\Config::getInputType($model);
+                    return call_user_func_array([$form->field($model, "[$index]value")->label(false), $inputType['name']], $inputType['params']);
                 },
                 'format' => 'raw'
             ],
-            'name'
+            'name:text:配置名'
         ]
     ]);
 
