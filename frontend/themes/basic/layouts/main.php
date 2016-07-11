@@ -6,7 +6,7 @@
 use common\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use frontend\assets\AppAsset;
+use frontend\themes\basic\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
@@ -71,6 +71,7 @@ AppAsset::register($this);
 <!--页脚-->
 <?= Yii::$app->config->get('FOOTER')?>
 <?php endif; ?>
+<?php $this->trigger('footer'); ?>
 <?php $this->endBody() ?>
 </body>
 </html>
