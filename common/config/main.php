@@ -36,6 +36,7 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath'=>'@common/messages',
                     'fileMap'=>[
+                        'app'=>'app.php',
                         'common'=>'common.php',
                         'backend'=>'backend.php',
                         'frontend'=>'frontend.php',
