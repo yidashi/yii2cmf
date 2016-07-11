@@ -15,7 +15,30 @@ class Scroll extends Widget
 {
     public function run()
     {
-        $html = '<a class="back-to-top btn btn-default" style="display: none;"><span class="fa fa-arrow-up"></span></a>';
+        $html = '<a class="back-to-top" style="display: none;"><span class="fa fa-arrow-up"></span></a>';
+        $this->view->registerCss(<<<CSS
+/* 回到顶部开始 */
+.back-to-top {
+    position: fixed;
+    bottom: 100px;
+    right: 2px;
+    padding: 3px 8px;
+    font-size: 24px;
+    color: #666;
+    display: none;
+    background-color: #fff;
+    border:1px solid #ccc;
+    border-radius:4px;
+    cursor: pointer;
+}
+.back-to-top:hover {
+    border-color:#adadad;
+    background-color: #e6e6e6;
+    color:#333;
+}
+/* 回到顶部结束 */
+CSS
+);
         $this->view->registerJs(<<<JS
 // back-to-top
     $(window).scroll(function(){

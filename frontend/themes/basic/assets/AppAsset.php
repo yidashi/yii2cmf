@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
-namespace frontend\assets;
+namespace frontend\themes\basic\assets;
 
 use yii\web\AssetBundle;
 
@@ -16,8 +16,7 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@frontend/themes/basic/assets';
     public $css = [
         'css/font-awesome/css/font-awesome.min.css',
         'css/site.css',

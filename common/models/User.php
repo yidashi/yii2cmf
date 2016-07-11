@@ -232,7 +232,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $profile = new Profile();
         $profile->id = $event->sender->id;
-        $profile->save(false);
+        $profile->save();
     }
 
     /**

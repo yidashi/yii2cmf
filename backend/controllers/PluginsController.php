@@ -43,9 +43,9 @@ class PluginsController extends Controller
             $model = Module::find()->where(['name' => $dir])->one();
             if (empty($model)) {
                 $plugins[$k]['install'] = 0;
-                $plugins[$k]['status'] = 0;
+                $plugins[$k]['status'] = Module::STATUS_CLOSE;
             } else {
-                $plugins[$k]['install'] = 1;
+                $plugins[$k]['install'] = $model->status == Module::STATUS_UNINSTALL ? 0 : 1;
                 $plugins[$k]['status'] = $model->status;
             }
             $pluginsClass = Yii::createObject([
@@ -69,7 +69,7 @@ class PluginsController extends Controller
     {
         $name = Yii::$app->request->post('name');
         $model = Module::find()->where(['name' => $name])->one();
-        if (!empty($model)) {
+        if (!empty($model) && $model->status != Module::STATUS_UNINSTALL) {
             Yii::$app->session->setFlash('error', '有同名插件已经安装');
             return $this->redirect(['index']);
         }
@@ -84,7 +84,7 @@ class PluginsController extends Controller
     {
         $name = Yii::$app->request->post('name');
         $model = Module::find()->where(['name' => $name])->one();
-        if (empty($model)) {
+        if (empty($model) || $model->status == Module::STATUS_UNINSTALL) {
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
@@ -103,7 +103,7 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $model->status = 1;
+        $model->status = Module::STATUS_OPEN;
         $model->save();
         return $this->redirect(['index']);
     }
@@ -116,7 +116,7 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $model->status = 0;
+        $model->status = Module::STATUS_CLOSE;
         $model->save();
         return $this->redirect(['index']);
     }

@@ -6,7 +6,7 @@
  * Time: 上午11:13
  */
 $this->params['breadcrumbs'][] = '捐赠';
-list(, $url) = Yii::$app->assetManager->publish('@plugins/donation//assets');
+list(, $url) = Yii::$app->assetManager->publish('@plugins/donation/assets');
 ?>
 <div class="col-lg-9">
     <div class="page-header">

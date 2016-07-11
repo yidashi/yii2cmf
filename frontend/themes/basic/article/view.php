@@ -63,13 +63,3 @@ $this->params['breadcrumbs'][] = $model->title;
     </div>
 </div>
 <?php $this->trigger('afterArticleView', new \common\events\ArticleEvent(['model' => $model])) ?>
-<?php
-$this->registerJsFile('@web/js/jquery.lazyload.min.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
-$this->registerJs(<<<js
-    $(function(){
-        $('.view-content iframe').addClass('embed-responsive-item').wrap('<div class="embed-responsive embed-responsive-16by9"></div>');
-        $("img.lazy").show().lazyload({effect: "fadeIn"});
-    });
-js
-);
-?>

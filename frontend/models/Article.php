@@ -18,41 +18,6 @@ use yii\behaviors\BlameableBehavior;
  */
 class Article extends \common\models\Article
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['title', 'category_id'], 'required'],
-            [['status', 'category_id', 'comment', 'user_id'], 'integer'],
-            [['title', 'category'], 'string', 'max' => 50],
-            [['category_id'], 'setCategory'],
-            [['cover', 'desc'], 'string', 'max' => 255],
-            ['tagNames', 'safe']
-        ];
-    }
-    public function setCategory($attribute, $params)
-    {
-        $this->category = Category::find()->where(['id' => $this->category_id])->select('title')->scalar();
-    }
-    /**
-     * @return array
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'user_id',
-                'updatedByAttribute' => false,
-                ],
-            ]
-        );
-    }
-
     public static function hots($categoryId, $size = 10)
     {
         return self::find()

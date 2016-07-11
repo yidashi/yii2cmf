@@ -327,10 +327,6 @@ h4 { font-size: 16px; }
 .online p { font-size: 10px; color: #16A314; text-align: center; margin: 2px 0 0 0; }
 /* 在线会员结束 */
 
-/* 回到顶部开始 */
-.back-to-top { position: fixed; bottom: 100px; right: 2px; padding: 3px 8px; font-size: 24px; color: #666; display: none; }
-/* 回到顶部结束 */
-
 /* 投票开始 */
 .vote { float:right; }
 .vote a { margin-left: 10px; text-decoration: none; }

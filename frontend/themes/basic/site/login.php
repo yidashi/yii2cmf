@@ -33,15 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= Html::a('去注册', ['site/signup'], ['class' => 'btn btn-warning']) ?>
                 </div>
-                <!--第三方登录-->
-                <div class="form-group">
-                    <?= yii\authclient\widgets\AuthChoice::widget([
-                        'id' => 'auth-login',
-                        'baseAuthUrl' => ['site/auth'],
-                        'popupMode' => true,
-                    ]) ?>
-                </div>
             <?php ActiveForm::end(); ?>
+            <?php $this->trigger('afterLogin'); ?>
         </div>
     </div>
 </div>
