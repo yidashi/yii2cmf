@@ -93,7 +93,7 @@ class PluginsConfig extends Model
                     'name' => 'widget',
                     'params' => [
                         '\yidashi\webuploader\Webuploader',
-                        ['options' => ['boxId' => 'config' . $model['name']]]// 保证多个上传框ID不同
+                        ['options' => ['boxId' => 'config' . $this['name']]]// 保证多个上传框ID不同
                     ],
                 ];
                 break;
