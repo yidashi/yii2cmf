@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\PluginsConfig;
 use Yii;
 use common\models\Module;
 use yii\base\DynamicModel;
@@ -136,10 +137,14 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $configModels = Json::decode($model->config);
-        if (!empty($configModels)) {
-            foreach ($configModels as $k => $configModel) {
-                $configModels[$k] = (new DynamicModel($configModel))->addRule(['value'], 'safe');
+        $configs = Json::decode($model->config);
+        $configModels = [];
+        if (!empty($configs)) {
+            foreach ($configs as $k => $config) {
+                $configModel = new PluginsConfig();
+                $configModel->scenario = 'init';
+                $configModel->attributes = $config;
+                $configModels[$k] = $configModel;
             }
         }
         $dataProvider = new ArrayDataProvider([

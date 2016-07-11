@@ -23,8 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'value',
                 'label' => '配置值',
                 'value' => function($model, $key, $index) use ($form) {
-                    $inputType = \backend\helpers\Config::getInputType($model);
-                    return call_user_func_array([$form->field($model, "[$index]value")->label(false), $inputType['name']], $inputType['params']);
+                    return call_user_func_array([$form->field($model, "[$index]value")->label(false), $model->inputType['name']], $model->inputType['params']);
                 },
                 'format' => 'raw'
             ],

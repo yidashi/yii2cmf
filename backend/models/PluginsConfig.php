@@ -3,25 +3,60 @@
  * Created by PhpStorm.
  * User: yidashi
  * Date: 16/7/11
- * Time: 上午11:47
+ * Time: 下午3:11
  */
 
-namespace backend\helpers;
+namespace backend\models;
 
 
-class Config
+use yii\base\Model;
+
+class PluginsConfig extends Model
 {
-    public static function getInputType($model)
+    public $name;
+    public $value;
+    public $extra;
+    public $desc;
+    public $type;
+
+    public function rules()
+    {
+        return [
+            [['name', 'extra', 'desc', 'type'], 'safe', 'on' => 'init'],
+            ['value', 'safe']
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => '配置名',
+            'value' => '配置值',
+            'desc' => '配置描述',
+            'extra' => '配置扩展'
+        ];
+    }
+
+    /**
+     * @return array|string
+     */
+    public function getInputType()
     {
         $inputType = '';
-        switch ($model['type']) {
-            case 'text':
+        switch ($this['type']) {
+            case 'text': // 文本框
                 $inputType = [
                     'name' => 'textInput',
                     'params' => [],
                 ];
                 break;
-            case 2:
+            case 'password': // 密码框
+                $inputType = [
+                    'name' => 'passwordInput',
+                    'params' => [],
+                ];
+                break;
+            case 'textarea': // 多行文本框
                 $inputType = [
                     'name' => 'textarea',
                     'params' => [
@@ -29,23 +64,31 @@ class Config
                     ],
                 ];
                 break;
-            case 'select':
+            case 'select': // 下拉
                 $inputType = [
                     'name' => 'dropDownList',
                     'params' => [
-                        'items' => self::parseExtra($model['extra']),
+                        'items' => $this->parseExtra($this['extra']),
                     ],
                 ];
                 break;
-            case 'checkbox':
+            case 'checkbox': // 多选
                 $inputType = [
                     'name' => 'checkboxList',
                     'params' => [
-                        'items' => self::parseExtra($model['extra']),
+                        'items' => $this->parseExtra($this['extra']),
                     ],
                 ];
                 break;
-            case 'image':
+            case 'radio': // 单选
+                $inputType = [
+                    'name' => 'radioList',
+                    'params' => [
+                        'items' => $this->parseExtra($this['extra']),
+                    ],
+                ];
+                break;
+            case 'image': // 图片
                 $inputType = [
                     'name' => 'widget',
                     'params' => [
@@ -54,7 +97,7 @@ class Config
                     ],
                 ];
                 break;
-            case 'editor':
+            case 'editor': // 编辑器
                 $inputType = [
                     'name' => 'widget',
                     'params' => [
@@ -62,16 +105,7 @@ class Config
                     ],
                 ];
                 break;
-            case 5:
-                $inputType = [
-                    'name' => 'textarea',
-                    'params' => [
-                        ['rows' => 5],
-                    ],
-                ];
-                break;
         }
-
         return $inputType;
     }
     /**
@@ -79,7 +113,7 @@ class Config
      * @param $value string
      * @return array
      */
-    public static function parseExtra($value)
+    public function parseExtra($value)
     {
         $return = [];
         if (is_array($value)) {
