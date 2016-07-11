@@ -18,35 +18,37 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('rbac-admin', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php
-    Pjax::begin(['formSelector' => 'form', 'enablePushState' => false]);
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            [
-                'attribute' => 'menuParent.name',
-                'filter' => Html::activeTextInput($searchModel, 'parent_name', [
-                    'class' => 'form-control', 'id' => null,
-                ]),
-                'label' => Yii::t('rbac-admin', 'Parent'),
-            ],
-            'route',
-            [
-                'attribute' => 'icon',
-                'value' => function($model) {
-                    return \rmrevin\yii\fontawesome\FA::icon($model->icon);
-                },
-                'format' => 'raw'
-            ],
-            'order',
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]);
-    Pjax::end();
-    ?>
-
+    <div class="box box-primary">
+        <div class="box-body">
+            <?php
+            Pjax::begin(['formSelector' => 'form', 'enablePushState' => false]);
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    'name',
+                    [
+                        'attribute' => 'menuParent.name',
+                        'filter' => Html::activeTextInput($searchModel, 'parent_name', [
+                            'class' => 'form-control', 'id' => null,
+                        ]),
+                        'label' => Yii::t('rbac-admin', 'Parent'),
+                    ],
+                    'route',
+                    [
+                        'attribute' => 'icon',
+                        'value' => function($model) {
+                            return \rmrevin\yii\fontawesome\FA::icon($model->icon);
+                        },
+                        'format' => 'raw'
+                    ],
+                    'order',
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]);
+            Pjax::end();
+            ?>
+        </div>
+    </div>
 </div>

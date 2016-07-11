@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('创建单页', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
+    <div class="box box-primary">
+        <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -32,5 +33,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    </div></div>
 </div>

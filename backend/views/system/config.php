@@ -11,6 +11,8 @@ $this->title = '网站设置';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
+    <div class="box box-primary">
+        <div class="box-body">
     <?php
     $form = ActiveForm::begin();
     echo \yii\grid\GridView::widget([
@@ -32,4 +34,5 @@ $this->params['breadcrumbs'][] = $this->title;
     echo Html::submitButton('提交', ['class' => 'btn btn-primary']);
     ActiveForm::end();
     ?>
+            </div></div>
 </div>

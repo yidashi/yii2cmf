@@ -10,51 +10,55 @@ $this->title = '数据还原';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="config-index">
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            [
-                'attribute' => 'time',
-                'label' => '备份名称',
-                'value' => function($model) {
-                    return date('Ymd-His', $model['time']);
-                }
-            ],
-            'part:text:卷数',
-            'compress:text:压缩',
-            [
-                'attribute' => 'size',
-                'label' => '数据大小',
-                'value' => function($model) {
-                    return Yii::$app->formatter->asShortSize($model['size']);
-                }
-            ],
-//            'create_time:text:备份时间',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{a} {b}',
-                'buttons' => [
-                    'a' => function ($url, $model, $key) {
-                        return Html::a('还原',
-                            ['init', 'time' => $model['time']],
-                            ['class' => 'db-import']
-                        );
-                    },
-                    'b' => function ($url, $model, $key) {
-                        return Html::a('删除',
-                            ['del'],
-                            [
-                                'data-method' => 'post',
-                                'data-ajax' => 1,
-                                'data-params' => ['time' => $model['time']],
-                                'data-confirm' => '删除后不能恢复,确定要删除吗?'
-                            ]
-                        );
-                    }
-                ]
-            ],
-        ],
-    ]); ?>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    [
+                        'attribute' => 'time',
+                        'label' => '备份名称',
+                        'value' => function($model) {
+                            return date('Ymd-His', $model['time']);
+                        }
+                    ],
+                    'part:text:卷数',
+                    'compress:text:压缩',
+                    [
+                        'attribute' => 'size',
+                        'label' => '数据大小',
+                        'value' => function($model) {
+                            return Yii::$app->formatter->asShortSize($model['size']);
+                        }
+                    ],
+        //            'create_time:text:备份时间',
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{a} {b}',
+                        'buttons' => [
+                            'a' => function ($url, $model, $key) {
+                                return Html::a('还原',
+                                    ['init', 'time' => $model['time']],
+                                    ['class' => 'db-import']
+                                );
+                            },
+                            'b' => function ($url, $model, $key) {
+                                return Html::a('删除',
+                                    ['del'],
+                                    [
+                                        'data-method' => 'post',
+                                        'data-ajax' => 1,
+                                        'data-params' => ['time' => $model['time']],
+                                        'data-confirm' => '删除后不能恢复,确定要删除吗?'
+                                    ]
+                                );
+                            }
+                        ]
+                    ],
+                ],
+            ]); ?>
+        </div>
+    </div>
 </div>
 <?php $this->beginBlock('js') ?>
     <script type="text/javascript">

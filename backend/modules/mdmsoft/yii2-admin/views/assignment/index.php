@@ -15,47 +15,49 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('rbac-admin', 'Create User'), ['/user/create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-	<?php
-    Pjax::begin();
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => 'yii\grid\DataColumn',
-                'attribute' => $usernameField,
-            ],
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{view} {update}',
-                'buttons' => [
-                    'update' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
-                        '/user/update',
-                        'id' => $model->id,
-                        ], [
-                            'title' => Yii::t('yii', 'Update'),
-                            'aria-label' => Yii::t('yii', 'Update'),
-                            'data-pjax' => '0',
-                        ]);
-                    },
-                    'view' => function ($url, $model) {
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
-                        'view',
-                        'id' => $model->id,
-                        ], [
-                            'title' => Yii::t('rbac-admin', 'Assigned'),
-                            'aria-label' => Yii::t('rbac-admin', 'Assigned'),
-                            'data-pjax' => '0',
-                        ]);
-                    },
+    <div class="box box-primary">
+        <div class="box-body">
+            <?php
+            Pjax::begin();
+            echo GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+                    [
+                        'class' => 'yii\grid\DataColumn',
+                        'attribute' => $usernameField,
+                    ],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update}',
+                        'buttons' => [
+                            'update' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-pencil"></span>', [
+                                '/user/update',
+                                'id' => $model->id,
+                                ], [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'aria-label' => Yii::t('yii', 'Update'),
+                                    'data-pjax' => '0',
+                                ]);
+                            },
+                            'view' => function ($url, $model) {
+                                return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', [
+                                'view',
+                                'id' => $model->id,
+                                ], [
+                                    'title' => Yii::t('rbac-admin', 'Assigned'),
+                                    'aria-label' => Yii::t('rbac-admin', 'Assigned'),
+                                    'data-pjax' => '0',
+                                ]);
+                            },
+                        ],
+                    ],
                 ],
-            ],
-        ],
-    ]);
-    Pjax::end();
-    ?>
-
+            ]);
+            Pjax::end();
+            ?>
+        </div>
+    </div>
 </div>

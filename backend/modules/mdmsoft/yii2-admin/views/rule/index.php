@@ -19,24 +19,26 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a(Yii::t('rbac-admin', 'Create Rule'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php
-    Pjax::begin([
-        'enablePushState' => false,
-    ]);
-    echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'attribute' => 'name',
-                'label' => Yii::t('rbac-admin', 'Name'),
+    <div class="box box-primary">
+        <div class="box-body">
+        <?php
+        Pjax::begin([
+            'enablePushState' => false,
+        ]);
+        echo GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
+                [
+                    'attribute' => 'name',
+                    'label' => Yii::t('rbac-admin', 'Name'),
+                ],
+                ['class' => 'yii\grid\ActionColumn'],
             ],
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]);
-    Pjax::end();
-    ?>
-
+        ]);
+        Pjax::end();
+        ?>
+        </div>
+    </div>
 </div>

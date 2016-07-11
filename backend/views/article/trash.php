@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ]) ?>
     </p>
-    <div class="box box-success">
+    <div class="box box-primary">
         <div class="box-body">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
