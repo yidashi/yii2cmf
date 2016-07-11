@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::lists(), ['prompt' => '全部']) ?>
 
-    <?php  echo $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
+    <?= $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
 
     <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
     <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
