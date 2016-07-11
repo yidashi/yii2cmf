@@ -34,15 +34,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'i18n' => [
-            'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/messages',
-                    'forceTranslation' => true,
-                ],
-            ],
-        ],
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

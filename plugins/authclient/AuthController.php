@@ -42,9 +42,7 @@ class AuthController extends Controller
                 Yii::$app->user->login($user);
             } else { // signup
                 if (isset($attributes['email']) && User::find()->where(['email' => $attributes['email']])->exists()) {
-                    Yii::$app->getSession()->setFlash('error', [
-                        Yii::t('app', "User with the same email as in {client} account already exists but isn't linked to it. Login using email first to link it.", ['client' => $client->getTitle()]),
-                    ]);
+                    Yii::$app->getSession()->setFlash('error', '相同邮箱已被' . $client->getTitle() . '注册');
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([

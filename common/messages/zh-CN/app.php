@@ -12,6 +12,5 @@ return [
     'Update' => '更新',
     'Search' => '搜索',
     'Reset' => '重置',
-    'Users' => '用户',
-    'User with the same email as in {client} account already exists but isn\'t linked to it. Login using email first to link it.' => '相同邮箱已被{client}注册'
+    'Users' => '用户'
 ];
