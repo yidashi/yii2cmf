@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7f5b67af109f478d8c5ad7ef5d5b4f8c",
-    "content-hash": "f8b9b5ec25e2245f68d462d553a50a3b",
+    "hash": "c8672aa0436cbf290dfec65ff65059c2",
+    "content-hash": "22ec75ce5e45434f7055a509f413f776",
     "packages": [
         {
             "name": "aferrandini/phpqrcode",
@@ -1707,16 +1707,16 @@
         },
         {
             "name": "yidashi/yii2-bootstrap-markdown",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
-                "reference": "4e44745601838c91a4883ee1d823e10ebf0bc22d"
+                "reference": "2297d1678810780754130c73763ac4dd913bb675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/4e44745601838c91a4883ee1d823e10ebf0bc22d",
-                "reference": "4e44745601838c91a4883ee1d823e10ebf0bc22d",
+                "url": "https://api.github.com/repos/yidashi/yii2-bootstrap-markdown/zipball/2297d1678810780754130c73763ac4dd913bb675",
+                "reference": "2297d1678810780754130c73763ac4dd913bb675",
                 "shasum": ""
             },
             "require": {
@@ -1730,7 +1730,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "yii2-bootstrap-markdown",
-            "time": "2016-07-06 14:44:17"
+            "time": "2016-07-10 09:12:28"
         },
         {
             "name": "yidashi/yii2-ueditor",
