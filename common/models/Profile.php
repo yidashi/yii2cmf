@@ -34,8 +34,16 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['area'], 'required', 'when' => function($model) {
+                $provinceValue = $model->province;
+                $provinceIsEmpty = $provinceValue === null || $provinceValue === [] || $provinceValue === '';
+                $cityValue = $model->city;
+                $cityIsEmpty = $cityValue === null || $cityValue === [] || $cityValue === '';
+                return !$provinceIsEmpty || !$cityIsEmpty;
+            }, 'whenClient' => "function(attribute, value){
+                return $('#profile-province').val() != '' || $('#profile-city').val() != '';
+            }"],
             [['province', 'city', 'area'], 'integer'],
-            [['area'], AreaValidator::className()],
             [['gender'], 'integer'],
             [['money'], 'integer', 'on' => 'charge'], // 充值场景
             [['signature'], 'string', 'max' => 100],
