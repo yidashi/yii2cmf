@@ -22,7 +22,11 @@ $this->title = Yii::t('common', 'Profile');
         <?= $form->field($model, 'locale')->dropDownList($model->localeList) ?>
         <?= $form->field($model, 'signature')->textarea() ?>
 
-    
+        <?= $form->field($model, 'area')->label('所在地')->widget(\common\widgets\area\Area::className(), [
+            'provinceAttribute' => 'province',
+            'cityAttribute' => 'city',
+            'areaAttribute' => 'area'
+        ]) ?>
         <div class="form-group">
             <?= Html::submitButton('修改', ['class' => 'btn btn-primary']) ?>
         </div>

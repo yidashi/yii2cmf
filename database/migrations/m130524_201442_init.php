@@ -190,6 +190,9 @@ class m130524_201442_init extends Migration
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'qq' => $this->string(20),
             'phone' => $this->string(20),
+            'province' => $this->smallInteger(4),
+            'city' => $this->smallInteger(4),
+            'area' => $this->smallInteger(4),
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"

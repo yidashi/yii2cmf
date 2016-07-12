@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\widgets\area\AreaValidator;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Url;
@@ -33,6 +34,8 @@ class Profile extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['province', 'city', 'area'], 'integer'],
+            [['area'], AreaValidator::className()],
             [['gender'], 'integer'],
             [['money'], 'integer', 'on' => 'charge'], // 充值场景
             [['signature'], 'string', 'max' => 100],
@@ -55,7 +58,11 @@ class Profile extends \yii\db\ActiveRecord
             'signature' => Yii::t('common', 'Signature'),
             'avatar' => Yii::t('common', 'Avatar'),
             'gender' => Yii::t('common', 'Gender'),
-            'locale' => Yii::t('common', 'Locale')
+            'locale' => Yii::t('common', 'Locale'),
+            'province' => '省',
+            'city' => '市',
+            'area' => '区',
+            'fullArea' => '所在地',
         ];
     }
 
@@ -74,5 +81,10 @@ class Profile extends \yii\db\ActiveRecord
     public static function getLocaleList()
     {
         return Yii::$app->params['availableLocales'];
+    }
+
+    public function getFullArea()
+    {
+        return Area::createFullArea($this->province, $this->city, $this->area);
     }
 }

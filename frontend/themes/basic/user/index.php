@@ -35,11 +35,9 @@ $this->title = '个人中心';
         <ul class="user-info">
             <li><i class="fa fa-calendar fa-fw"></i> 注册时间：<?= Yii::$app->formatter->asDatetime($user->created_at) ?></li>
             <li><i class="fa fa-sign-in fa-fw"></i> 最后登录：<?= Yii::$app->formatter->asRelativeTime($user->login_at) ?></li>
-<!--            <li><i class="fa fa-clock-o fa-fw"></i> 在线时长：37小时24分</li>-->
-            <li><i class="fa fa-map-marker fa-fw"></i> <?= $user->profile->signature ?></li>
-            <li><i class="fa fa-envelope-o fa-fw"></i> <?= $user->email ?></li>
-            <li><i class="fa fa-group fa-fw"></i> 未设置</li>
-        <ul>
-        </ul></ul>
+            <li><i class="fa fa-map-marker fa-fw"></i> 所在地： <?= $user->profile->fullArea ?></li>
+            <li><i class="fa fa-map-signs fa-fw"></i> 个性签名： <?= $user->profile->signature ?></li>
+            <li><i class="fa fa-envelope-o fa-fw"></i> 邮箱：<?= $user->email ?></li>
+        </ul>
     </div>
 </div>
