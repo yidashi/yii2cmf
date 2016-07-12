@@ -1,6 +1,7 @@
 function getArea(id)
 {
-    var ele = $(event.target);
+    var e = arguments.callee.caller.arguments[0] || window.event;
+    var ele = $(e.target);
     var url = SITE_URL + '/area/children?id=' + id;
     $.get(url, function(res){
         var html = '<option value>请选择</option>';
