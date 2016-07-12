@@ -22,12 +22,15 @@ class RewardForm extends Model
 
     public function rules()
     {
-        return [
+        $rules = [
             [['article_id', 'money'], 'required'],
             ['comment', 'string', 'max' => 255],
             ['money', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => '打赏额必须大于0'],
-            ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<', 'message' => '打赏额不能大于自身账户余额'],
         ];
+        if (!\Yii::$app->user->isGuest) {
+            $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<', 'message' => '打赏额不能大于自身账户余额'];
+        }
+        return $rules;
     }
 
     public function attributeLabels()
