@@ -99,7 +99,7 @@ $(function(){
         return false;
     });
 });
-$('p a').attr('target', '_blank');
+$('.view-content a').attr('target', '_blank');
 jQuery.extend({
     modalLoad: function(url, data, callback) {
         $('#commonModal .modal-body').load(url, data, callback);
