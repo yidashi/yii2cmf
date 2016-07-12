@@ -21,8 +21,8 @@ $this->title = '个人中心';
                 <p><?= $user->profile->signature?></p>
                 <ul class="stat">
                     <li>余额<h3><?= $user->profile->money ?></h3></li>
-                    <li>关注<h3>120</h3></li>
-                    <li>粉丝<h3>4365</h3></li>
+                    <li>关注<h3>120</h3></li><!---TODO -->
+                    <li>粉丝<h3>4365</h3></li><!---TODO -->
                 </ul>
             </div>
         </div>
@@ -39,6 +39,8 @@ $this->title = '个人中心';
                 <li><i class="fa fa-map-marker fa-fw"></i> 所在地： <?= $user->profile->fullArea ?></li>
                 <li><i class="fa fa-map-signs fa-fw"></i> 个性签名： <?= $user->profile->signature ?></li>
                 <li><i class="fa fa-envelope-o fa-fw"></i> 邮箱：<?= $user->email ?></li>
+                <li><i class="fa fa-qq fa-fw"></i> QQ：<?= $user->profile->qq ?></li>
+                <li><i class="fa fa-phone fa-fw"></i> 手机：<?= $user->profile->phone ?></li>
             </ul>
         </div>
     </div>

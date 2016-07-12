@@ -11,6 +11,7 @@ namespace frontend\models;
 
 use common\models\Reward;
 use yii\base\Model;
+use yii\validators\InlineValidator;
 
 class RewardForm extends Model
 {
@@ -23,21 +24,9 @@ class RewardForm extends Model
         return [
             [['article_id', 'money'], 'required'],
             ['comment', 'string', 'max' => 255],
-            ['money', 'validateMoney']
+            ['money', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => '打赏额必须大于0'],
+            ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<', 'message' => '打赏额不能大于自身账户余额'],
         ];
-    }
-
-    public function validateMoney($attribute, $params)
-    {
-        if ($this->$attribute <= 0) {
-            $this->addError($attribute, '打赏金额必须大于0');
-            return false;
-        }
-        if ($this->$attribute > \Yii::$app->user->identity->profile->money) {
-            $this->addError($attribute, '打赏金额不能超过帐号余额');
-            return false;
-        }
-        return true;
     }
 
     public function attributeLabels()

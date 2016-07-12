@@ -12,15 +12,18 @@ $this->title = Yii::t('common', 'Profile');
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'avatar')->widget(\yidashi\webuploader\Cropper::className(), [
+        <?= $form->field($model, 'avatar')->widget(\yidashi\webuploader\Webuploader::className(), [
             'options' => [
                 'previewWidth' => 200,
                 'previewHeight' => 200
             ]
         ]) ?>
+        <?= $form->field($model, 'qq')->textInput() ?>
+        <?= $form->field($model, 'phone')->textInput() ?>
         <?= $form->field($model, 'gender')->radioList($model->genderList) ?>
         <?= $form->field($model, 'locale')->dropDownList($model->localeList) ?>
-        <?= $form->field($model, 'signature')->textarea() ?>
+
+    <?= $form->field($model, 'signature')->textarea() ?>
 
         <?= $form->field($model, 'area')->label('所在地')->widget(\common\widgets\area\Area::className(), [
             'provinceAttribute' => 'province',

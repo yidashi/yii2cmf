@@ -88,8 +88,12 @@ if (Yii::$app->user->isGuest) {
         ],
         'items' => [
             [
-                'label' => Html::icon('user') . ' 个人信息',
+                'label' => Html::icon('user') . ' 个人主页',
                 'url' => ['/user', 'id' => Yii::$app->user->id],
+            ],
+            [
+                'label' => Html::icon('cog') . ' 账户设置',
+                'url' => ['/my/profile', 'id' => Yii::$app->user->id],
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',
