@@ -47,6 +47,8 @@ class Profile extends \yii\db\ActiveRecord
             [['gender'], 'integer'],
             [['money'], 'integer', 'on' => 'charge'], // 充值场景
             [['signature'], 'string', 'max' => 100],
+            [['qq'], 'string', 'max' => 20],
+            [['phone'], 'match', 'pattern' => '/^1[0-9]{10}$/'],
             [['avatar'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
             ['locale', 'in', 'range' => array_keys(Yii::$app->params['availableLocales'])],
