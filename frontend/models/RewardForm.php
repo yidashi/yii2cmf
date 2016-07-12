@@ -48,23 +48,28 @@ class RewardForm extends Model
     public function reward()
     {
         if ($this->validate()) {
-            \Yii::$app->db->beginTransaction();
+            $transaction = \Yii::$app->db->beginTransaction();
             try{
                 // 打赏者扣钱
+                /* @var $profile \common\models\Profile */
                 $profile = \Yii::$app->user->identity->profile;
-                $profile->updateCounters(['money' => -$this->money], ['>=', 'money', $this->money]);
+                $result = $profile::getDb()->createCommand('update {{%profile}} set money=money-' . $this->money . ' WHERE id = ' . $profile->id . ' AND money>=' . $this->money)->execute();
+                if ($result == 0) {
+                    throw new Exception('打赏失败');
+                }
                 // 作者加钱
-                $article = Article::find()->where(['id' => $this->article_id])->scalar();
-                $article->user->profile->updateCounters(['money' => $this->money], ['>=', 'money', $this->money]);
+                $article = Article::find()->where(['id' => $this->article_id])->one();
+                $article->user->profile->updateCounters(['money' => $this->money]);
                 $reward = new Reward();
                 $reward->article_id = $this->article_id;
                 $reward->money = $this->money;
-                if($reward->save() !== false) {
-                    return true;
-                } else {
+                if($reward->save() === false) {
                     throw new Exception('打赏失败');
                 }
+                $transaction->commit();
+                return true;
             } catch(\Exception $e) {
+                $transaction->rollback();
                 return false;
             }
         }
