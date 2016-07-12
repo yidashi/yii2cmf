@@ -93,7 +93,7 @@ if (Yii::$app->user->isGuest) {
             ],
             [
                 'label' => Html::icon('cog') . ' 账户设置',
-                'url' => ['/my/profile', 'id' => Yii::$app->user->id],
+                'url' => ['/my/profile'],
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',
