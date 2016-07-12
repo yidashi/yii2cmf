@@ -10,6 +10,7 @@ namespace frontend\models;
 
 
 use common\models\Reward;
+use yii\base\Exception;
 use yii\base\Model;
 use yii\validators\InlineValidator;
 
@@ -47,13 +48,25 @@ class RewardForm extends Model
     public function reward()
     {
         if ($this->validate()) {
-            $reward = new Reward();
-            $reward->article_id = $this->article_id;
-            $reward->money = $this->money;
-            if($reward->save() !== false) {
-                return true;
+            \Yii::$app->db->beginTransaction();
+            try{
+                // 打赏者扣钱
+                $profile = \Yii::$app->user->identity->profile;
+                $profile->updateCounters(['money' => -$this->money], ['>=', 'money', $this->money]);
+                // 作者加钱
+                $article = Article::find()->where(['id' => $this->article_id])->scalar();
+                $article->user->profile->updateCounters(['money' => $this->money], ['>=', 'money', $this->money]);
+                $reward = new Reward();
+                $reward->article_id = $this->article_id;
+                $reward->money = $this->money;
+                if($reward->save() !== false) {
+                    return true;
+                } else {
+                    throw new Exception('打赏失败');
+                }
+            } catch(\Exception $e) {
+                return false;
             }
         }
-        return false;
     }
 }
