@@ -49,6 +49,10 @@ abstract class Plugins extends Object implements BootstrapInterface
         return true;
     }
 
+    /**
+     * 获取插件初始配置
+     * @return array|mixed
+     */
     final public function getInitConfig()
     {
         if (is_file($this->configFile)) {
@@ -57,16 +61,24 @@ abstract class Plugins extends Object implements BootstrapInterface
         return $this->_config;
     }
 
-    public function getConfig()
+    /**
+     * 获取插件当前配置
+     * @return array|mixed
+     */
+    final public function getConfig()
     {
-        $name = $this->info['name'];
-        $model = Module::find()->where(['name' => $name])->one();
-        $configs = Json::decode($model->config);
-        $c = [];
-        if (!empty($configs)) {
-            foreach ($configs as $k => $config) {
-                $c[$config['name']] = $config['value'];
+        $c = Yii::$app->cache->get([__CLASS__, $this->info['name']]);
+        if ($c === false) {
+            $name = $this->info['name'];
+            $model = Module::find()->where(['name' => $name])->one();
+            $configs = Json::decode($model->config);
+            $c = [];
+            if (!empty($configs)) {
+                foreach ($configs as $k => $config) {
+                    $c[$config['name']] = $config['value'];
+                }
             }
+            Yii::$app->cache->set([__CLASS__, $this->info['name']], $c);
         }
         return $c;
     }
