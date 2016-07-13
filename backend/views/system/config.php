@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-primary">
         <div class="box-body">
             <?php
-            $form = ActiveForm::begin();
+            $form = ActiveForm::begin(['action' => ['store-config']]);
             echo \yii\grid\GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => '{items}',

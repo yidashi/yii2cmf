@@ -21,6 +21,17 @@ class SystemController extends Controller
             'query' => Config::find()->where(['group' => $group]),
             'pagination' => false
         ]);
+        return $this->render('config', [
+            'group' => $group,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+    public function actionStoreConfig($group = 'system')
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Config::find()->where(['group' => $group]),
+            'pagination' => false
+        ]);
         $configs = $dataProvider->getModels();
         if (Model::loadMultiple($configs, \Yii::$app->request->post()) && Model::validateMultiple($configs)) {
             foreach ($configs as $config) {
@@ -30,10 +41,5 @@ class SystemController extends Controller
             TagDependency::invalidate(\Yii::$app->cache, 'systemConfig');
             return $this->redirect('config');
         }
-
-        return $this->render('config', [
-            'group' => $group,
-            'dataProvider' => $dataProvider
-        ]);
     }
 }
