@@ -10,6 +10,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
+        \common\components\LoadPlugins::className(),
+        'events'
     ],
     'controllerNamespace' => 'wechat\controllers',
     'components' => [
@@ -50,6 +52,7 @@ return [
                 ]
             ]
         ],
+        'events' => \common\components\Events::className()
     ],
     'params' => $params,
 ];
