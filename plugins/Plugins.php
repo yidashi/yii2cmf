@@ -154,6 +154,8 @@ abstract class Plugins extends Object implements BootstrapInterface
             $this->backend($app);
         } else if($app->id == 'app-frontend' && $this->hasMethod('frontend')){
             $this->frontend($app);
+        } else if($app->id == 'app-wechat' && $this->hasMethod('wechat')){
+            $this->wechat($app);
         }
     }
 
