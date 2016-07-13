@@ -56,6 +56,14 @@ class PluginsConfig extends Model
                     'params' => [],
                 ];
                 break;
+            case 'array': // 数组
+                $inputType = [
+                    'name' => 'textarea',
+                    'params' => [
+                        ['rows' => 5],
+                    ],
+                ];
+                break;
             case 'textarea': // 多行文本框
                 $inputType = [
                     'name' => 'textarea',

@@ -135,7 +135,8 @@ class m130524_201442_init extends Migration
             'value' => Schema::TYPE_TEXT . " NOT NULL COMMENT '配置值'",
             'extra' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'desc' => Schema::TYPE_STRING . "(255) NOT NULL COMMENT '配置描述'",
-            'type' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '1'",
+            'type' => $this->string(30)->defaultValue('text')->comment('配置类型'),
+            'group' => $this->string(30)->defaultValue('system')->comment('配置分组'),
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);

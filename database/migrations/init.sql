@@ -51,16 +51,17 @@ UNLOCK TABLES;
 LOCK TABLES {{%config}} WRITE;
 /*!40000 ALTER TABLE {{%config}} DISABLE KEYS */;
 INSERT INTO {{%config}} VALUES
-(1,'CONFIG_TYPE_LIST','1=>字符\r\n2=>数组\r\n3=>枚举\r\n4=>图\r\n5=>多行字符','','配置类型列表',2,0,1461937892),
-(3,'SEO_SITE_DESCRIPTION','yiicmf','','meta description',1,0,1461937892),
-(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords',1,0,1461937892),
-(5,'SITE_ICP','','','域名备案号',1,0,1461937892),
-(6,'SITE_NAME','饮水思源','','网站名称',1,0,1461937892),
-(7,'SITE_LOGO','logo.png','','网站LOGO',4,0,1461937892),
-(8,'FOOTER','','','底部',5,0,1461937892),
-(9,'THEME_NAME','basic','basic=>basic','主题名',3,0,1461937892),
-(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤',3,1461931367,1461937892),
-(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接',2,0,1461937892);
+(1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数组\r\npassword=>密码\r\nimage=>图片\r\ntextarea=>多行字符\r\nselect=>下拉框\r\nradio=>单选框\r\ncheckbox=>多选框\r\neditor=>富文本编辑器','','配置类型列表','array',0,1461937892),
+(3,'SEO_SITE_DESCRIPTION','yiicmf','','meta description','text',0,1461937892),
+(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords','text',0,1461937892),
+(5,'SITE_ICP','','','域名备案号','text',0,1461937892),
+(6,'SITE_NAME','饮水思源','','网站名称','text',0,1461937892),
+(7,'SITE_LOGO','logo.png','','网站LOGO','image',0,1461937892),
+(8,'FOOTER','','','底部','textarea',0,1461937892),
+(9,'THEME_NAME','basic','basic=>basic','主题名','select',0,1461937892),
+(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤','select',1461931367,1461937892),
+(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1461937892);
+(12,'WX_TOKEN','','','微信token','text',0,1461937892);
 /*!40000 ALTER TABLE {{%config}} ENABLE KEYS */;
 UNLOCK TABLES;
 

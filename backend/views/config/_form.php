@@ -14,11 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'group')->dropDownList(Yii::$app->config->get('CONFIG_GROUP')) ?>
+
     <?= $form->field($model, 'type')->dropDownList($model->getTypeList()) ?>
 
     <?= $form->field($model, 'value')->textarea(['maxlength' => true, 'rows' => 8]) ?>
 
-    <?= $form->field($model, 'extra')->textarea(['maxlength' => true, 'rows' => 8])->hint('（如果是枚举型 需要配置该项）') ?>
+    <?= $form->field($model, 'extra')->textarea(['maxlength' => true, 'rows' => 8])->hint('（单选,多选,下拉框 需要配置该项）') ?>
 
     <?= $form->field($model, 'desc')->textInput(['maxlength' => true]) ?>
 

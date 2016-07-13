@@ -14,7 +14,7 @@ use yii\caching\DbDependency;
  */
 class Config extends \yii\db\ActiveRecord
 {
-    const TYPE_ARRAY = 2;
+    const TYPE_ARRAY = 'array';
     /**
      * {@inheritdoc}
      */
@@ -30,7 +30,7 @@ class Config extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'desc', 'type'], 'required'],
-            [['name'], 'string', 'max' => 50],
+            [['name', 'group'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
             [['value', 'desc', 'extra'], 'string'],
         ];
@@ -48,6 +48,7 @@ class Config extends \yii\db\ActiveRecord
             'desc' => '配置描述',
             'type' => '配置类型',
             'extra' => '配置项',
+            'group' => '分组',
         ];
     }
     public function behaviors()
@@ -59,19 +60,28 @@ class Config extends \yii\db\ActiveRecord
 
     public static function getTypeList()
     {
-        return self::get('CONFIG_TYPE_LIST');
+        return \Yii::$app->config->get('CONFIG_TYPE_LIST');
     }
+    /**
+     * @return array|string
+     */
     public function getInputType()
     {
         $inputType = '';
-        switch ($this->type) {
-            case 1:
+        switch ($this['type']) {
+            case 'text': // 文本框
                 $inputType = [
                     'name' => 'textInput',
                     'params' => [],
                 ];
                 break;
-            case 2:
+            case 'password': // 密码框
+                $inputType = [
+                    'name' => 'passwordInput',
+                    'params' => [],
+                ];
+                break;
+            case 'array': // 数组
                 $inputType = [
                     'name' => 'textarea',
                     'params' => [
@@ -79,69 +89,58 @@ class Config extends \yii\db\ActiveRecord
                     ],
                 ];
                 break;
-            case 3:
+            case 'textarea': // 多行文本框
                 $inputType = [
-                    'name' => 'dropDownList',
+                    'name' => 'textarea',
                     'params' => [
-                        'items' => $this->parseExtra($this->extra),
+                        ['rows' => 5],
                     ],
                 ];
                 break;
-            case 4:
+            case 'select': // 下拉
+                $inputType = [
+                    'name' => 'dropDownList',
+                    'params' => [
+                        'items' => $this->parseExtra($this['extra']),
+                    ],
+                ];
+                break;
+            case 'checkbox': // 多选
+                $inputType = [
+                    'name' => 'checkboxList',
+                    'params' => [
+                        'items' => $this->parseExtra($this['extra']),
+                    ],
+                ];
+                break;
+            case 'radio': // 单选
+                $inputType = [
+                    'name' => 'radioList',
+                    'params' => [
+                        'items' => $this->parseExtra($this['extra']),
+                    ],
+                ];
+                break;
+            case 'image': // 图片
                 $inputType = [
                     'name' => 'widget',
                     'params' => [
                         '\yidashi\webuploader\Webuploader',
-                        ['options' => ['boxId' => 'config' . $this->id]]// 保证多个上传框ID不同
+                        ['options' => ['boxId' => 'config' . $this['name']]]// 保证多个上传框ID不同
                     ],
                 ];
                 break;
-            case 5:
+            case 'editor': // 编辑器
                 $inputType = [
-                    'name' => 'textarea',
+                    'name' => 'widget',
                     'params' => [
-                        ['rows' => 5],
+                        '\kucha\ueditor\UEditor',
                     ],
                 ];
                 break;
         }
-
         return $inputType;
     }
-    public static function get($name, $default = '')
-    {
-        $config = \Yii::$app->cache->get([__CLASS__, $name]);
-        if ($config === false) {
-            $config = static::find()->where(['name' => $name])->one();
-            \Yii::$app->cache->set([__CLASS__, $name], $config, 60 * 60, new DbDependency(['sql' => 'SELECT MAX(updated_at) FROM {{%config}}']));
-        }
-        if (!empty($config)) {
-            return self::_parse($config->type, $config->value);
-        } else {
-            return $default;
-        }
-    }
-
-    private static function _parse($type, $value)
-    {
-        switch ($type) {
-            case self::TYPE_ARRAY:
-                $return = [];
-                foreach (explode("\r\n", $value) as $val) {
-                    if (strpos($val, '=>') !== false) {
-                        list($k, $v) = explode('=>', $val);
-                        $return[$k] = $v;
-                    } else {
-                        $return[] = $val;
-                    }
-                }
-                $value = $return;
-                break;
-        }
-
-        return $value;
-    }
-
     /**
      * 分析枚举类型.
      * @param $value string
@@ -150,6 +149,9 @@ class Config extends \yii\db\ActiveRecord
     public function parseExtra($value)
     {
         $return = [];
+        if (is_array($value)) {
+            return $value;
+        }
         foreach (explode("\r\n", $value) as $val) {
             if (strpos($val, '=>') !== false) {
                 list($k, $v) = explode('=>', $val);
@@ -158,7 +160,6 @@ class Config extends \yii\db\ActiveRecord
                 $return[] = $val;
             }
         }
-
         return $return;
     }
 }
