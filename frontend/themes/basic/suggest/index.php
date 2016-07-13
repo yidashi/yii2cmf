@@ -10,21 +10,9 @@
 $this->title = '留言';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="col-4">
-    <?= \yii\widgets\ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemView' => '_item',
-        'layout' => "{items}\n{pager}",
-        'itemOptions' => [
-            'class' => 'media',
-            'tag' => 'li'
-        ],
-        'options' => [
-            'class' => 'media-list',
-            'tag' => 'ul'
-        ]
-    ])?>
-
-    <?= $this->render('create', ['model' => $model]); ?>
-</div>
-<?php $this->trigger('afterSuggest') ?>
+<?= \frontend\widgets\comment\CommentWidget::widget([
+    'type' => 'suggest',
+    'type_id' => 1,
+    'listTitle' => '留言',
+    'createTitle' => '留言'
+]) ?>

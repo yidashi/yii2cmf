@@ -24,7 +24,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
 
     public function bootstrap($app)
     {
-        $app->events->addListener(View::className(), 'afterSuggest', 'plugins\prettify\Prettify');
+        $app->events->addListener(View::className(), 'afterComment', 'plugins\prettify\Prettify');
         $app->events->addListener(View::className(), 'afterArticleView', 'plugins\prettify\Prettify');
     }
 }

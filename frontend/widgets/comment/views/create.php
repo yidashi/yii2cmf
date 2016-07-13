@@ -8,13 +8,14 @@
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
 use common\helpers\Html;
+use common\helpers\Url;
 
 ?>
 <div class="article-create">
 
-    <h4>留言</h4>
+    <h4><?= $createTitle ?></h4>
 
-    <?php $form = \yii\widgets\ActiveForm::begin(['action' => \yii\helpers\Url::toRoute('suggest/create')]); ?>
+    <?php $form = \yii\widgets\ActiveForm::begin(['action' => Url::to(['/comment/create'])]); ?>
     <?= $form->field($model, 'content')->label(false)->widget('\yidashi\markdown\Markdown', ['options' => ['style' => 'height:200px;']]); ?>
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>

@@ -46,7 +46,8 @@ $this->params['breadcrumbs'][] = $model->title;
 
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
-    <?= $this->render('comment', ['model' => $model, 'commentModel' => $commentModel, 'commentModels' => $commentModels, 'pages' => $pages, 'commentDataProvider' => $commentDataProvider])?>
+    <!-- 评论   -->
+    <?= \frontend\widgets\comment\CommentWidget::widget(['type_id' => $model->id]) ?>
 </div>
 <div class="col-lg-3">
     <div class="panel panel-default">
