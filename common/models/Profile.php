@@ -41,7 +41,7 @@ class Profile extends \yii\db\ActiveRecord
                 $cityIsEmpty = $cityValue === null || $cityValue === [] || $cityValue === '';
                 return !$provinceIsEmpty || !$cityIsEmpty;
             }, 'whenClient' => "function(attribute, value){
-                return $('#profile-province').val() != '' || $('#profile-city').val() != '';
+                return $('#profile-province').val() || $('#profile-city').val();
             }"],
             [['province', 'city', 'area'], 'integer'],
             [['gender'], 'integer'],
