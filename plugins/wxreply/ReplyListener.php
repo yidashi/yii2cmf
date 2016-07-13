@@ -19,7 +19,7 @@ class ReplyListener
         if ($msgType == 'text') {
             $word = trim($params['Content']);
         }
-        $result = $event->sender->controller->renderText('你说了:' . $word);
+        $result = $event->action->controller->renderText('你说了:' . $word);
         $event->result = $result;
     }
 }
