@@ -28,9 +28,9 @@ UNLOCK TABLES;
 -- Dumping data for table `pop_auth_assignment`
 --
 
-LOCK TABLES `pop_auth_assignment` WRITE;
+LOCK TABLES {{%auth_assignment}} WRITE;
 /*!40000 ALTER TABLE `pop_auth_assignment` DISABLE KEYS */;
-INSERT INTO `pop_auth_assignment` VALUES ('superAdmin','1',1443080982);
+INSERT INTO {{%auth_assignment}} VALUES ('superAdmin','1',1443080982);
 /*!40000 ALTER TABLE `pop_auth_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -48,9 +48,9 @@ UNLOCK TABLES;
 -- Dumping data for table {{%config}}
 --
 
-LOCK TABLES `{{%config}}` WRITE;
+LOCK TABLES {{%config}} WRITE;
 /*!40000 ALTER TABLE `pop_config` DISABLE KEYS */;
-INSERT INTO `pop_config` VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数组\r\npassword=>密码\r\nimage=>图片\r\ntextarea=>多行字符\r\nselect=>下拉框\r\nradio=>单选框\r\ncheckbox=>多选框\r\neditor=>富文本编辑器','','配置类型列表','array',0,1461937892,'system'),(3,'SEO_SITE_DESCRIPTION','yiicmf2','','meta description','text',0,1468403120,'system'),(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords','text',0,1461937892,'system'),(5,'SITE_ICP','','','域名备案号','text',0,1461937892,'system'),(6,'SITE_NAME','饮水思源','','网站名称','text',0,1461937892,'system'),(7,'SITE_LOGO','logo.png','','网站LOGO','image',0,1461937892,'system'),(8,'FOOTER','','','底部','textarea',0,1461937892,'system'),(9,'THEME_NAME','chncomic','basic=>basic\r\nchncomic=>chncomic','主题名','select',0,1467882452,'system'),(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤','select',1461931367,1461937892,'system'),(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1468406411,'email'),(12,'CONFIG_GROUP','system=>系统2\r\nwechat=>微信\r\nemail=>邮箱','','配置分组','array',1468405444,1468421137,'system');
+INSERT INTO {{%config}} VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数组\r\npassword=>密码\r\nimage=>图片\r\ntextarea=>多行字符\r\nselect=>下拉框\r\nradio=>单选框\r\ncheckbox=>多选框\r\neditor=>富文本编辑器','','配置类型列表','array',0,1461937892,'system'),(3,'SEO_SITE_DESCRIPTION','yiicmf2','','meta description','text',0,1468403120,'system'),(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords','text',0,1461937892,'system'),(5,'SITE_ICP','','','域名备案号','text',0,1461937892,'system'),(6,'SITE_NAME','饮水思源','','网站名称','text',0,1461937892,'system'),(7,'SITE_LOGO','logo.png','','网站LOGO','image',0,1461937892,'system'),(8,'FOOTER','','','底部','textarea',0,1461937892,'system'),(9,'THEME_NAME','chncomic','basic=>basic\r\nchncomic=>chncomic','主题名','select',0,1467882452,'system'),(10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤','select',1461931367,1461937892,'system'),(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1468406411,'email'),(12,'CONFIG_GROUP','system=>系统2\r\nwechat=>微信\r\nemail=>邮箱','','配置分组','array',1468405444,1468421137,'system');
 /*!40000 ALTER TABLE `pop_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
