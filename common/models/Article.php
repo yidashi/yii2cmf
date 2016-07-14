@@ -111,17 +111,20 @@ class Article extends \yii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             TimestampBehavior::className(),
             PushBehavior::className(),
             SoftDeleteBehavior::className(),
-            [
+            ArticleBehavior::className()
+        ];
+        if (!Yii::$app->request->isConsoleRequest) {
+            $behaviors[] = [
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false
-            ],
-            ArticleBehavior::className()
-        ];
+            ];
+        }
+        return $behaviors;
     }
 
     /**
