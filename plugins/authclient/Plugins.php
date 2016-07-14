@@ -45,14 +45,14 @@ class Plugins extends \plugins\Plugins
                 $client = strtolower($client);
                 $openParams[$client] = $params[$client];
             }
+            $app->set('authClientCollection', [
+                'class' => 'yii\authclient\Collection',
+                'clients' => $openParams
+            ]);
+            $app->controllerMap['auth'] = [
+                'class' => AuthController::className()
+            ];
         }
-        $app->set('authClientCollection', [
-            'class' => 'yii\authclient\Collection',
-            'clients' => $openParams
-        ]);
-        $app->controllerMap['auth'] = [
-            'class' => AuthController::className()
-        ];
     }
 
 }
