@@ -38,7 +38,7 @@ class Plugins extends \plugins\Plugins
                 'clientSecret' => $config['GITHUB_CLIENT_SECRET']
             ],
         ];
-        $openClients = (array)$config['OPEN_AUTHCLIENT'];
+        $openClients = $config['OPEN_AUTHCLIENT'];
         $openParams = [];
         if (!empty($openClients)) {
             foreach ($openClients as $client) {
