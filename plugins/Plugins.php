@@ -67,7 +67,8 @@ abstract class Plugins extends Object implements BootstrapInterface
      */
     final public function getConfig()
     {
-        $c = Yii::$app->cache->get([__CLASS__, $this->info['name']]);
+        $cacheKey = 'pluginConfig-' . $this->info['name'];
+        $c = Yii::$app->cache->get($cacheKey);
         if ($c === false) {
             $name = $this->info['name'];
             $model = Module::find()->where(['name' => $name])->one();
@@ -78,7 +79,7 @@ abstract class Plugins extends Object implements BootstrapInterface
                     $c[$config['name']] = $config['value'];
                 }
             }
-            Yii::$app->cache->set([__CLASS__, $this->info['name']], $c);
+            Yii::$app->cache->set($cacheKey, $c);
         }
         return $c;
     }
