@@ -43,7 +43,7 @@ class AuthHandler
             if ($auth) { // login
                 /** @var User $user */
                 $user = $auth->user;
-                Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
+                Yii::$app->user->login($user);
             } else { // signup
                 if ($email !== null && User::find()->where(['email' => $email])->exists()) {
                     Yii::$app->getSession()->setFlash('error', [
@@ -69,7 +69,7 @@ class AuthHandler
                         ]);
                         if ($auth->save()) {
                             $transaction->commit();
-                            Yii::$app->user->login($user, Yii::$app->params['user.rememberMeDuration']);
+                            Yii::$app->user->login($user);
                         } else {
                             Yii::$app->getSession()->setFlash('error', [
                                 Yii::t('app', 'Unable to save {client} account: {errors}', [

@@ -31,5 +31,5 @@ class AuthController extends Controller
     {
         (new AuthHandler($client))->handle();
     }
-    
+
 }
