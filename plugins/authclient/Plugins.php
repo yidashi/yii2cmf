@@ -40,9 +40,11 @@ class Plugins extends \plugins\Plugins
         ];
         $openClients = (array)$config['OPEN_AUTHCLIENT'];
         $openParams = [];
-        foreach ($openClients as $client) {
-            $client = strtolower($client);
-            $openParams[$client] = $params[$client];
+        if (!empty($openClients)) {
+            foreach ($openClients as $client) {
+                $client = strtolower($client);
+                $openParams[$client] = $params[$client];
+            }
         }
         $app->set('authClientCollection', [
             'class' => 'yii\authclient\Collection',
