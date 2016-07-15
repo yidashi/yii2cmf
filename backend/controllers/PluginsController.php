@@ -155,7 +155,7 @@ class PluginsController extends Controller
             $configs = Json::encode($configModels);
             $model->config = $configs;
             $model->save();
-            Yii::$app->cache->delete('pluginConfing-' . $model->name);
+            Yii::$app->cache->delete('pluginConfig-' . $model->name);
             return $this->redirect(['config', 'name' => $name]);
         }
 
