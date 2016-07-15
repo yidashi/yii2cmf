@@ -28,7 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'value',
                         'value' => function($model, $key, $index) use ($form) {
-                            return call_user_func_array([$form->field($model, "[$index]value")->label(false), $model->inputType['name']], $model->inputType['params']);
+                            return $form->field($model, "[$index]value")->label(false)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(),[
+                                'data' => $model->extra,
+                                'type' => $model->type
+                            ]);
                         },
                         'format' => 'raw'
                     ],
