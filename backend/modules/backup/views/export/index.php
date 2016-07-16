@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="config-index">
     <?php \yii\widgets\ActiveForm::begin(['id' => 'export-form', 'action' => ['init']])?>
     <p>
-        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success', 'id' => 'export']) ?>
+        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success btn-flat', 'id' => 'export']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">

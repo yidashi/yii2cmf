@@ -9,6 +9,7 @@ class m130524_201442_init extends Migration
 
     public function safeUp()
     {
+        $this->execute('SET foreign_key_checks = 0');
         // admin_log
         $this->createTable('{{%admin_log}}', [
             'id' => Schema::TYPE_PK,
@@ -308,6 +309,7 @@ class m130524_201442_init extends Migration
         $this->addForeignKey('fk_menu_parent', '{{%menu}}', 'parent', '{{%menu}}', 'id');
 
         $this->execute(file_get_contents(__DIR__ .'/init.sql'));
+        $this->execute('SET foreign_key_checks = 1');
     }
 
     public function safeDown()

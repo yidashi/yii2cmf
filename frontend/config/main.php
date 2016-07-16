@@ -14,6 +14,9 @@ return [
         'events'
     ],
     'controllerNamespace' => 'frontend\controllers',
+    'controllerMap' => [
+        'upload' => \common\actions\UploadController::className()
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',

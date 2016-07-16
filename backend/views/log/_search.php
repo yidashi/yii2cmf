@@ -28,7 +28,7 @@ use yii\bootstrap\ActiveForm;
     <?php echo $form->field($model, 'message') ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::submitButton('搜索', ['class' => 'btn btn-primary btn-flat']) ?>
         <?php echo Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
     </div>
 

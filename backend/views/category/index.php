@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="category-index">
 
     <p>
-        <?= Html::a('添加分类', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('添加分类', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">

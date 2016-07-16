@@ -31,10 +31,58 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'category',
                     [
+                        'attribute' => 'is_top',
+                        'value' => function($model) {
+                            $source = [
+                                [
+                                    'value' => 0,
+                                    'text' => '否'
+                                ],
+                                [
+                                    'value' => 1,
+                                    'text' => '是'
+                                ]
+                            ];
+                            return \dosamigos\editable\Editable::widget([
+                                'name' => 'is_top',
+                                'type' => 'select',
+                                'url' => '/article/ajax-update-field',
+                                'clientOptions' => [
+                                    'pk' => $model->id,
+                                    'source' => $source,
+                                    'value' => $model->is_top,
+                                    'showbuttons' => false,
+                                    'escape' => false
+                                ]
+                            ]);
+                        },
+                        'format' => 'raw'
+                    ],
+                    [
                         'attribute' => 'status',
                         'value' => function($model) {
-                            $arr = [0 => Html::icon('clock-o'), 1 => Html::icon('check'), 10 => Html::icon('times')];
-                            return $arr[$model->status];
+                            $source = [
+                                [
+                                    'value' => 0,
+                                    'text' => '待审'
+                                ],
+                                [
+                                    'value' => 1,
+                                    'text' => '通过'
+                                ]
+                            ];
+                            return \dosamigos\editable\Editable::widget([
+                                'name' => 'status',
+                                'type' => 'select',
+                                'url' => '/article/ajax-update-field',
+                                'clientOptions' => [
+                                    'pk' => $model->id,
+                                    'source' => $source,
+                                    'value' => $model->status,
+                                    'showbuttons' => false,
+                                    'escape' => false
+                                ]
+                            ]);
                         },
                         'format' => 'raw'
                     ],

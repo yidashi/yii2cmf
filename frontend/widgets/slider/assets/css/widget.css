@@ -1,0 +1,63 @@
+
+/* Revolution Slider */
+.tp-banner-container {
+    position: relative;
+}
+
+.tp-caption.align-right {
+    padding-right: 30px;
+}
+
+.main-revolution h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 54px;
+    margin: 0;
+}
+
+.main-revolution p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+    margin: 0;
+}
+
+.main-revolution a.button {
+    border-bottom-color: #738497;
+    margin: 0;
+}
+
+.main-revolution .great-vibes+h2 {
+    margin-top: 10px;
+}
+
+.main-revolution .great-vibes {
+    font-size: 36px;
+    position: relative;
+    display: inline-block;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.main-revolution .great-vibes:before {
+    content: '';
+    display: block;
+    width: 40px;
+    border-top: 1px solid #fff;
+    border-color: rgba(255, 255, 255, .6);
+    position: absolute;
+    top: 50%;
+    left: -60px;
+}
+
+.main-revolution .great-vibes:after {
+    content: '';
+    display: block;
+    width: 40px;
+    border-top: 1px solid #fff;
+    border-color: rgba(255, 255, 255, .6);
+    position: absolute;
+    top: 50%;
+    right: -60px;
+}

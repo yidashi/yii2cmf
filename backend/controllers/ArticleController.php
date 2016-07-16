@@ -211,24 +211,21 @@ class ArticleController extends Controller
         }
     }
 
-    public function actionChangeStatus()
+    public function actionAjaxUpdateField()
     {
         Yii::$app->response->format = 'json';
-        $id = Yii::$app->request->post('id');
-        $status = Yii::$app->request->post('status');
-        $formModel = DynamicModel::validateData(['id' => $id, 'status' => $status], [
-            [['id', 'status'], 'required']
+        $pk = Yii::$app->request->post('pk');
+        $id = unserialize(base64_decode($pk));
+        $post = Yii::$app->request->post();
+        $formModel = DynamicModel::validateData(['id' => $id, 'name' => $post['name'], 'value' => $post['value']], [
+            [['id'], 'required'],
+            ['name', 'in', 'range' => ['status', 'is_top']]
         ]);
         if ($formModel->hasErrors()) {
-            return ['status' => 0, 'msg' => current($formModel->getFirstErrors())];
+            throw new Exception(current($formModel->getFirstErrors()));
         }
         $model = $this->findModel($id);
-        if ($model->status == $status) {
-            $model->status = 1- intval($status);
-            $model->save();
-        }
-        return [
-            'status' => 1
-        ];
+        $model->updateAll([$post['name'] => $post['value']], ['id' => $id]);
+        return ['status' => 1];
     }
 }

@@ -25,7 +25,8 @@ return [
                     'path'   => '/',
                 ]
             ]
-        ]
+        ],
+        'upload' => \common\actions\UploadController::className()
     ],
     'components' => [
         'user' => [
@@ -59,6 +60,10 @@ return [
                     'basePath' => '@kvgrid/messages',
                     'forceTranslation' => true,
                 ],
+                'yii2tech-admin' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2tech/admin/messages',
+                ],
             ],
         ],
         'urlManager' => [
@@ -79,7 +84,7 @@ return [
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',
-        '@backup' => '@backend/modules/backup'
+        '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

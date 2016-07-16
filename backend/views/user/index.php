@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('创建新用户', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建新用户', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">

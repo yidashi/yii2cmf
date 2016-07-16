@@ -12,7 +12,7 @@ $this->title = Yii::t('rbac-admin', 'Routes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <p>
-    <?= Html::a(Yii::t('rbac-admin', 'Create route'), ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a(Yii::t('rbac-admin', 'Create route'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
 </p>
 
 <div>
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-1">
             <br><br>
-            <a href="#" id="btn-add" class="btn btn-success">&gt;&gt;</a><br>
+            <a href="#" id="btn-add" class="btn btn-success btn-flat">&gt;&gt;</a><br>
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">

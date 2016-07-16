@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assignment-index">
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create User'), ['/user/create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Create User'), ['/user/create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">

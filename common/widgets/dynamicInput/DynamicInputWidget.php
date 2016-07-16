@@ -9,8 +9,8 @@
 namespace common\widgets\dynamicInput;
 
 
-use kucha\ueditor\UEditor;
-use yidashi\webuploader\Webuploader;
+use common\widgets\EditorWidget;
+use common\widgets\upload\SingleWidget;
 use yii\base\InvalidParamException;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
@@ -72,10 +72,10 @@ class DynamicInputWidget extends InputWidget
                 return Html::radioList($this->name, $this->value, $this->data, $this->options);
                 break;
             case 'image': // 图片
-                return Webuploader::widget(['name' => $this->name, 'value' => $this->value]);
+                return SingleWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
             case 'editor': // 编辑器
-                return UEditor::widget(['name' => $this->name, 'value' => $this->value]);
+                return EditorWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
         }
     }
@@ -109,10 +109,10 @@ class DynamicInputWidget extends InputWidget
                 return Html::activeRadioList($this->model, $this->attribute, $this->data, $this->options);
                 break;
             case 'image': // 图片
-                return Webuploader::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
             case 'editor': // 编辑器
-                return UEditor::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                return EditorWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
         }
     }

@@ -34,14 +34,7 @@ class ArticleQuery extends ActiveQuery
      */
     public function pending()
     {
-        return $this->andWhere(['status' => Article::STATUS_INIT]);
-    }
-    /**
-     * 拒绝的
-     */
-    public function refuse()
-    {
-        return $this->andWhere(['status' => Article::STATUS_REFUSE]);
+        return $this->andWhere(['status' => Article::STATUS_PENDING]);
     }
     /**
      * 审核通过的

@@ -36,6 +36,6 @@ echo GridView::widget([
         ],
     ],
 ]);
-echo Html::submitButton(Yii::t('rbac-admin', 'Append'), ['name' => 'Submit', 'class' => 'btn btn-primary']);
+echo Html::submitButton(Yii::t('rbac-admin', 'Append'), ['name' => 'Submit', 'class' => 'btn btn-primary btn-flat']);
 echo Html::endForm();
 ?>

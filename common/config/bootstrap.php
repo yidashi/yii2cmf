@@ -19,3 +19,4 @@ Yii::setAlias('static', env('STATIC_URL'));
 
 Yii::$container->set('yidashi\markdown\Markdown', ['useUploadImage' => true]);
 Yii::$container->set('yii\widgets\LinkPager', ['firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
+Yii::$container->set('common\widgets\EditorWidget', ['type' => env('EDITOR_TYPE')]);

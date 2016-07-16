@@ -11,18 +11,21 @@ use yii\widgets\ActiveForm;
 <div class="page-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <div class="col-lg-9">
+        <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'content')->widget('\kucha\ueditor\UEditor') ?>
-
-    <?= $form->field($model, 'use_layout')->checkbox() ?>
-
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className()) ?>
     </div>
+    <div class="col-lg-3">
+        <?= $form->field($model, 'use_layout')->checkbox() ?>
+
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => 'btn btn-flat bg-maroon btn-block']) ?>
+        </div>
+    </div>
+
 
     <?php ActiveForm::end(); ?>
 
