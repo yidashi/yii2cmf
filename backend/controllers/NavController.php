@@ -3,17 +3,16 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Category;
+use common\models\Nav;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CaetgoryController implements the CRUD actions for Category model.
+ * NavController implements the CRUD actions for Nav model.
  */
-class CategoryController extends Controller
+class NavController extends Controller
 {
     public function behaviors()
     {
@@ -28,26 +27,29 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
-     *
+     * Lists all Nav models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => Category::treeList(null, $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
-            'key' => 'id'
+        $dataProvider = new ActiveDataProvider([
+            'query' => Nav::find(),
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC
+                ]
+            ]
+
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
+
     /**
-     * Displays a single Category model.
-     *
-     * @param int $id
-     *
+     * Displays a single Nav model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -58,17 +60,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new Nav model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     *
      * @return mixed
      */
-    public function actionCreate($pid = 0)
+    public function actionCreate()
     {
-        $model = new Category();
-        $model->pid = $pid;
+        $model = new Nav();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,11 +78,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing Nav model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -89,7 +88,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -98,11 +97,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing Nav model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -113,18 +110,15 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the Nav model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param int $id
-     *
-     * @return Category the loaded model
-     *
+     * @param integer $id
+     * @return Nav the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = Nav::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

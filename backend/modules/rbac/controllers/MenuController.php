@@ -2,6 +2,7 @@
 
 namespace mdm\admin\controllers;
 
+use common\helpers\Tree;
 use Yii;
 use mdm\admin\models\Menu;
 use mdm\admin\models\searchs\Menu as MenuSearch;
@@ -49,7 +50,15 @@ class MenuController extends Controller
                 'searchModel' => $searchModel,
         ]);
     }
-
+    public function actionIndex2()
+    {
+        $models = Menu::find()->asArray()->all();
+        $tree = Tree::build($models, 'id', 'parent', 'children');
+//        p($tree);
+        return $this->render('index2', [
+           'tree' => $tree
+        ]);
+    }
     /**
      * Displays a single Menu model.
      *
