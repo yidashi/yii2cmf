@@ -97,3 +97,14 @@ if (! function_exists('array_get')) {
         return $array;
     }
 }
+
+if (! function_exists('p')) {
+
+    function p($var, $die = true)
+    {
+        echo '<pre>' . print_r($var, true), '</pre>';
+        if ($die) {
+            die;
+        }
+    }
+}

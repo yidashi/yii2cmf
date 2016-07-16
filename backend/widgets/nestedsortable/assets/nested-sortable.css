@@ -1,0 +1,19 @@
+ol.sortable,ol.sortable ol {
+    list-style-type: none;
+	max-width: 650px;
+    padding-left: 25px;
+}
+
+.sortable li 
+{	
+	margin:10px 0;
+}
+.sortable li div.box {
+    cursor: move;
+	margin-bottom:0px;
+}
+
+
+.placeholder {
+    outline: 1px dashed #4183C4;
+}

@@ -1,0 +1,18 @@
+
+/**
+ * 分类挂件背景
+ */
+.categorydiv{
+	min-height: 42px;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0 .9em;
+    border: 1px solid #dfdfdf;
+    background-color: #fdfdfd;
+}
+
+.categorydiv ul{
+	list-style: none;
+    margin: 0 0 0 18px;
+    padding: 0;
+}
