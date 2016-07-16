@@ -35,6 +35,9 @@ return [
             'idParam' => '__idBackend',
             'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
         ],
+        'request' => [
+            'csrfParam' => '_csrfBackend'
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

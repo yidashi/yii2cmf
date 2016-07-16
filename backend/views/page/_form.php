@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="page-form">
-
+    <div class="row">
     <?php $form = ActiveForm::begin(); ?>
     <div class="col-lg-9">
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -28,5 +28,5 @@ use yii\widgets\ActiveForm;
 
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

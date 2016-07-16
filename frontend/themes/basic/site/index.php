@@ -6,6 +6,13 @@ use yii\helpers\Url;
 
 ?>
 <div class="site-index">
+    <!--<div class="tp-banner-container">
+        <div class="tp-banner">
+            <?= \frontend\widgets\slider\Revolutionslider::widget([
+
+            ]) ?>
+        </div>
+    </div>-->
     <div class="col-md-8">
         <div class="page-header"><h2>最新文章</h2></div>
         <div class="article-list">

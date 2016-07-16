@@ -10,6 +10,9 @@ use yii\grid\GridView;
 $this->title = '文章';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a('发布文章', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
 <div class="article-index">
     <div class="box box-primary">
         <div class="box-header"><h2 class="box-title">文章搜索</h2></div>
