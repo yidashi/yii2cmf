@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
 
-    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary']) ?>
+    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary btn-flat']) ?>
     <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
     <div class="error-summary hide"><ul></ul></div>
 

@@ -40,5 +40,5 @@ echo GridView::widget([
 echo Html::submitButton($type == 1 ? 'Append' : 'Delete', [
     'name' => 'Submit',
     'value' => $type == 1 ? 'New' : 'Del',
-    'class' => 'btn btn-primary', ]);
+    'class' => 'btn btn-primary btn-flat', ]);
 echo Html::endForm();

@@ -13,7 +13,7 @@ $this->title = '个人中心';
 <div class="col-lg-3">
     <div class="panel panel-default">
         <div class="panel-body" style="background: url(http://www.yiichina.com/images/user-bg.jpg); background-size:100% 120px; background-repeat:no-repeat;">
-            <div class="user">
+            <div class="profile-user">
                 <a href="<?= Url::to(['/my/profile']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改头像">
                     <?= Html::img($user->profile->avatar, ['class' => 'avatar']) ?>
                 </a>

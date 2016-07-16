@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="system-log-view">
 
     <p>
-        <?php echo Html::a('删除', ['delete', 'id'=>$model->id], ['class' => 'btn btn-danger', 'data'=>['method'=>'post']]) ?>
+        <?php echo Html::a('删除', ['delete', 'id'=>$model->id], ['class' => 'btn btn-danger btn-flat', 'data'=>['method'=>'post']]) ?>
     </p>
 
     <?php echo DetailView::widget([

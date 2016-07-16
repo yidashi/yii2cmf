@@ -8,14 +8,12 @@
 
 namespace common\helpers;
 
-
-use rmrevin\yii\fontawesome\FA;
-
 class Html extends \yii\helpers\Html
 {
-    public static function icon($name, $options = [])
+    public static function icon($name)
     {
-        return FA::i($name, $options);
+        $options = ['class' => 'fa fa-' . $name];
+        return self::tag('i', '', $options);
     }
 
     public static function img($src, $options = [])

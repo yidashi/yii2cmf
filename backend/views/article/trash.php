@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-index">
     <p>
         <?= Html::a('清空回收站', ['clear'], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger btn-flat',
             'data' => [
                 'ajax' => 1,
                 'confirm' => '确定要清空吗?',

@@ -12,7 +12,7 @@ $this->title = Yii::t('rbac-admin', 'Assignments');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assignment-index">
-    <?= Html::a(Yii::t('rbac-admin', 'Users'), ['index'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a(Yii::t('rbac-admin', 'Users'), ['index'], ['class' => 'btn btn-success btn-flat']) ?>
 
     <div class="row">
         <div class="col-lg-5">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-1">
             <br><br>
-            <a href="#" id="btn-assign" class="btn btn-success">&gt;&gt;</a><br>
+            <a href="#" id="btn-assign" class="btn btn-success btn-flat">&gt;&gt;</a><br>
             <a href="#" id="btn-revoke" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">

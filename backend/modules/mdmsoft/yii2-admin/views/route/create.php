@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= $form->field($model, 'route') ?>
 
 		<div class="form-group">
-			<?= Html::submitButton(Yii::t('rbac-admin', 'Create'), ['class' => 'btn btn-primary']) ?>
+			<?= Html::submitButton(Yii::t('rbac-admin', 'Create'), ['class' => 'btn btn-primary btn-flat']) ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 

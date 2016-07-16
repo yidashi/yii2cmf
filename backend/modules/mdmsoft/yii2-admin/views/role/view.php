@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="auth-item-view">
 
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary btn-flat']) ?>
         <?php
         echo Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->name], [
             'class' => 'btn btn-danger',
@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-1">
             <br><br>
-            <a href="#" id="btn-add" class="btn btn-success">&gt;&gt;</a><br>
+            <a href="#" id="btn-add" class="btn btn-success btn-flat">&gt;&gt;</a><br>
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">

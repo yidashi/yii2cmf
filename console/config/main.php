@@ -41,5 +41,7 @@ return [
             ],
         ]
     ],
+    'aliases' => [
+    ],
     'params' => $params,
 ];

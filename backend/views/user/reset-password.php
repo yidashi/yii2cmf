@@ -12,7 +12,7 @@ $this->title = '重置密码';
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'password')->passwordInput() ?>
     <div class="form-group">
-        <?= Html::submitButton('确定', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('确定', ['class' => 'btn btn-primary btn-flat']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

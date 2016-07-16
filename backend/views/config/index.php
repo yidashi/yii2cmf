@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="config-index">
     <p>
-        <?= Html::a('创建新配置', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建新配置', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">

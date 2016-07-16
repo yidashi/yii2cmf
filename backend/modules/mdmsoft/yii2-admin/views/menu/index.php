@@ -1,6 +1,6 @@
 <?php
 
-use yii\helpers\Html;
+use common\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
 
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('rbac-admin', 'Create Menu'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'icon',
                         'value' => function($model) {
-                            return \rmrevin\yii\fontawesome\FA::icon($model->icon);
+                            return Html::icon($model->icon);
                         },
                         'format' => 'raw'
                     ],
