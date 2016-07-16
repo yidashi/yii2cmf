@@ -83,7 +83,7 @@ return [
         ]
     ],
     'aliases' => [
-        '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',
+        '@mdm/admin' => '@backend/modules/rbac',
         '@backup' => '@backend/modules/backup',
     ],
     'as access' => [

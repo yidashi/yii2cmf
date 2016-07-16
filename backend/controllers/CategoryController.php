@@ -63,10 +63,10 @@ class CategoryController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($pid = 0)
     {
         $model = new Category();
-
+        $model->pid = $pid;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
