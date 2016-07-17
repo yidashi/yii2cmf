@@ -37,7 +37,7 @@ use yii\helpers\Url;
             <div class="panel-body">
                 <ul class="post-list">
                 <?php foreach ($categorys as $item):?>
-                    <li><a href="<?= Url::to(['/' . $item->name])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
+                    <li><a href="<?= Url::to(['/article/index', 'cate' => $item->slug])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
                 <?php endforeach;?>
                 </ul>
             </div>

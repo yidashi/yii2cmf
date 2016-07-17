@@ -22,7 +22,7 @@ class ArticleController extends Controller
      */
     public function actionIndex($cate)
     {
-        $category = Category::find()->andWhere(['name' => $cate])->one();
+        $category = Category::find()->andWhere(['slug' => $cate])->one();
         if (empty($category)) {
             throw new NotFoundHttpException('分类不存在');
         }

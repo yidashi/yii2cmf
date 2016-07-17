@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-3">
         <?= $form->field($model, 'use_layout')->checkbox() ?>
 
-        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => 'btn btn-flat bg-maroon btn-block']) ?>

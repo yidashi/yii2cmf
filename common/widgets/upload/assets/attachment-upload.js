@@ -79,7 +79,6 @@
                         ).text(progress + '%');
                     },
                     done: function (e, data) {
-                        console.log(data);
                         $.each(data.result.files, function (index, file) {
                             if (!file.error) {
                                 var item = methods.createItem(file);

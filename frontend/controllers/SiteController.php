@@ -4,8 +4,6 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use frontend\models\Article;
-use common\models\Auth;
-use common\models\User;
 use frontend\models\Tag;
 use Yii;
 use common\models\LoginForm;

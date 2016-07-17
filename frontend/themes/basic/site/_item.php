@@ -20,6 +20,6 @@ use common\helpers\Html;
 
 <div class="media-right">
 <?php if ($model->cover): ?>
-    <?= Html::img($model->cover, ['width' => 160, 'height' => 120]) ?>
+    <a href="<?= Url::to(['article/view', 'id' => $model->id])?>"><?= Html::img($model->cover, ['width' => 160, 'height' => 120]) ?></a>
 <?php endif; ?>
 </div>

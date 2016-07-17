@@ -17,7 +17,6 @@ $config = [
                 ],
                 'user/<id:\d+>' => '/user',
                 'tag/<name:\S+>' => '/article/tag',
-                '/' => '/site/index'
             ],
         ]
     ],

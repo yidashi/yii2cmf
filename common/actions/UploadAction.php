@@ -10,9 +10,11 @@ namespace common\actions;
 
 use yii\base\Action;
 use yii\base\DynamicModel;
+use yii\base\Exception;
 use yii\base\InvalidCallException;
 use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
@@ -21,6 +23,10 @@ use Yii;
 
 class UploadAction extends Action
 {
+    /**
+     * @var \yii\db\ActiveRecord
+     */
+    public $modelClass = 'common\models\attachment';
     /**
      * @var string Path to directory where files will be uploaded
      */
@@ -39,7 +45,11 @@ class UploadAction extends Action
     /**
      * @var string Variable's name that Imperavi Redactor sent upon image/file upload.
      */
-    public $uploadParam = 'fileparam';
+    public $uploadParam = 'file';
+    /**
+     * @var string 参数指定文件名
+     */
+    public $uploadQueryParam = 'fileparam';
 
     /**
      * @var boolean If `true` unique filename will be generated automatically
@@ -57,6 +67,10 @@ class UploadAction extends Action
      * @var string Model validator name
      */
     private $_validator = 'image';
+
+    public $deleteUrl = ['/upload/delete'];
+
+    public $callback;
 
     /**
      * @inheritdoc
@@ -77,6 +91,12 @@ class UploadAction extends Action
                 throw new InvalidCallException("Directory specified in 'path' attribute doesn't exist or cannot be created.");
             }
         }
+        if (Yii::$app->request->get($this->uploadQueryParam)) {
+            $this->uploadParam = Yii::$app->request->get($this->uploadQueryParam);
+        }
+        if ($this->modelClass) {
+            $this->modelClass = Yii::createObject($this->modelClass);
+        }
         if ($this->uploadOnlyImage !== true) {
             $this->_validator = 'file';
         }
@@ -87,18 +107,21 @@ class UploadAction extends Action
      */
     public function run()
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         if (Yii::$app->request->isPost) {
-            $files = UploadedFile::getInstanceByName(Yii::$app->request->get($this->uploadParam));
+            $files = UploadedFile::getInstanceByName($this->uploadParam);
             if (!$this->multiple) {
                 $res = [$this->uploadOne($files)];
             } else {
                 $res = $this->uploadMore($files);
             }
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            return [
-              'files' => $res
+            $result = [
+                'files' => $res
             ];
+            if ($this->callback instanceof \Closure) {
+                $result = call_user_func($this->callback, $result);
+            }
+            return $result;
         } else {
             throw new BadRequestHttpException('Only POST is allowed');
         }
@@ -114,32 +137,48 @@ class UploadAction extends Action
     }
     private function uploadOne($file)
     {
-        $model = new DynamicModel(compact('file'));
-        $model->addRule('file', $this->_validator, $this->validatorOptions)->validate();
+        try {
+            $model = new DynamicModel(compact('file'));
+            $model->addRule('file', $this->_validator, $this->validatorOptions)->validate();
 
-        if ($model->hasErrors()) {
-            $result = [
-                'error' => $model->getFirstError('file')
-            ];
-        } else {
-            if ($this->unique === true && $model->file->extension) {
-                $model->file->name = uniqid() . '.' . $model->file->extension;
-            }
-            if ($model->file->saveAs($this->path . $model->file->name)) {
+            if ($model->hasErrors()) {
+                throw new Exception($model->getFirstError('file'));
+            } else {
+                $hash = md5_file($file->tempName);
+                $attachment = $this->modelClass->find()->where(['hash' => $hash])->one();
+                if (empty($attachment)) {
+                    if ($this->unique === true && $model->file->extension) {
+                        $model->file->name = uniqid() . '.' . $model->file->extension;
+                    }
+                    if ($model->file->saveAs($this->path . $model->file->name)) {
+                        $attachment = $this->modelClass;
+                        $attachment->url = $this->url . $model->file->name;
+                        $attachment->name = $model->file->name;
+                        $attachment->extension = $model->file->extension;
+                        $attachment->type = $model->file->type;
+                        $attachment->size = $model->file->size;
+                        $attachment->hash = $hash;
+                        $attachment->save();
+                    } else {
+                        throw new Exception('上传失败');
+                    }
+                }
                 $result = [
-                    'url' => $this->url . $model->file->name,
-                    'thumbUrl' => $this->url . $model->file->name,
-                    'extension' => $model->file->extension,
-                    'type' => $model->file->type
+                    'id' => $attachment->id,
+                    'url' => $attachment->url,
+                    'extension' => $attachment->extension,
+                    'type' => $attachment->type,
+                    'size' => $attachment->size,
+                    'deleteUrl' => Url::to(array_merge($this->deleteUrl, ['id' => $attachment->id]))
                 ];
                 if ($this->uploadOnlyImage !== true) {
-                    $result['filename'] = $model->file->name;
+                    $result['filename'] = $attachment->name;
                 }
-            } else {
-                $result = [
-                    'error' => '上传失败'
-                ];
             }
+        }catch (Exception $e) {
+            $result = [
+                'error' => $e->getMessage()
+            ];
         }
         return $result;
     }

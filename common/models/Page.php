@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -27,10 +28,10 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'title', 'name'], 'required'],
+            [['content', 'title', 'slug'], 'required'],
             [['content'], 'string'],
             [['use_layout'], 'in', 'range' => [0, 1]],
-            [['title', 'name'], 'string', 'max' => 50],
+            [['title'], 'string', 'max' => 50],
         ];
     }
 
@@ -44,7 +45,7 @@ class Page extends \yii\db\ActiveRecord
             'use_layout' => '是否使用布局',
             'content' => '内容',
             'title' => '标题',
-            'name' => '标识'
+            'slug' => '标识'
         ];
     }
 
@@ -58,7 +59,7 @@ class Page extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
         ];
     }
 }
