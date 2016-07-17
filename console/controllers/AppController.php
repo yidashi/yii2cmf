@@ -10,7 +10,8 @@ namespace console\controllers;
 
 
 use yii\console\Controller;
-use yii\db\Query;
+use Yii;
+use yii\helpers\Console;
 
 class AppController extends Controller
 {
@@ -28,12 +29,69 @@ class AppController extends Controller
         }
         $root = str_replace('\\', '/', dirname(dirname(__DIR__)));
         setWritable($root, $this->writAblePaths);
-        echo "\n  ... 应用构建成功.\n\n";
+        $envFile = $root . '/.env';
+        if (is_file($envFile) && !$this->confirm('系统已经安装,是否要重置?')) {
+            die;
+        }
+        do {
+            $dbHost = $this->prompt('数据库地址:', ['default' => '127.0.0.1']);
+            $dbPort = $this->prompt('数据库端口:', ['default' => '3306']);
+            $dbDbname = $this->prompt('数据库库名(不存在则自动创建):', ['default' => 'yii']);
+            $dbUsername = $this->prompt('数据库帐号:', ['default' => 'root']);
+            $dbPassword = $this->prompt('数据库密码:', ['default' => 'root']);
+            $dbDsn = "mysql:host={$dbHost};port={$dbPort}";
+        } while(!$this->testConnect($dbDsn, $dbDbname, $dbUsername, $dbPassword));
+        $dbDsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbDbname}";
+        $dbTablePrefix = $this->prompt('数据库表前缀:', ['default' => 'pop_']);
+        copy($root . '/.env.example', $envFile);
+        setEnv('DB_USERNAME', $dbUsername);
+        setEnv('DB_PASSWORD', $dbPassword);
+        setEnv('DB_TABLE_PREFIX', $dbTablePrefix);
+        setEnv('DB_DSN', $dbDsn);
+        setEnv('FRONTEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
+        setEnv('BACKEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
+        $this->command('migrate --interactive=0');
+        $appStatus = $this->select('当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
+        setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
+        setEnv('YII_ENV', $appStatus);
+        $this->stdout("\n  ... 应用构建成功.\n\n", Console::FG_GREEN);
     }
-
-    public function actionImport()
+    public function testConnect($dsn = '', $dbname, $username = '', $password = '')
     {
-        (new Query())->from('chncomic.destoon_article_23')->select('itemid,title,catid,introduce');
+        try{
+            $pdo = new \PDO($dsn, $username, $password);
+            $sql = "CREATE DATABASE IF NOT EXISTS {$dbname}";
+            $pdo->query($sql);
+        } catch(\Exception $e) {
+            $this->stderr("\n" . $e->getMessage(), Console::FG_RED);
+            $this->stderr("\n  ... 连接失败,核对数据库信息.\n\n", Console::FG_RED, Console::BOLD);
+            return false;
+        }
+        return true;
+    }
+    public function command($cmd)
+    {
+        $yii = str_replace('\\', '/', dirname(dirname(__DIR__))) . '/yii';
+        $cmd = PHP_BINDIR . '/php ' . $yii . ' ' . $cmd;
+        if ($this->isWindows() === true) {
+            pclose(popen('start /b ' . $cmd, 'r'));
+        } else {
+            pclose(popen($cmd . ' > /dev/null &', 'r'));
+        }
+        return true;
+    }
+    /**
+     * Check operating system
+     *
+     * @return boolean true if it's Windows OS
+     */
+    protected function isWindows()
+    {
+        if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 function getFileList($root, $basePath = '')
@@ -56,69 +114,14 @@ function getFileList($root, $basePath = '')
     return $files;
 }
 
-function copyFile($root, $source, $target, &$all, $params)
+function setEnv($name, $value)
 {
-    if (!is_file($root . '/' . $source)) {
-        echo "       skip $target ($source not exist)\n";
-        return true;
-    }
-    if (is_file($root . '/' . $target)) {
-        if (file_get_contents($root . '/' . $source) === file_get_contents($root . '/' . $target)) {
-            echo "  unchanged $target\n";
-            return true;
-        }
-        if ($all) {
-            echo "  overwrite $target\n";
-        } else {
-            echo "      exist $target\n";
-            echo "            ...overwrite? [Yes|No|All|Quit] ";
-
-
-            $answer = !empty($params['overwrite']) ? $params['overwrite'] : trim(fgets(STDIN));
-            if (!strncasecmp($answer, 'q', 1)) {
-                return false;
-            } else {
-                if (!strncasecmp($answer, 'y', 1)) {
-                    echo "  overwrite $target\n";
-                } else {
-                    if (!strncasecmp($answer, 'a', 1)) {
-                        echo "  overwrite $target\n";
-                        $all = true;
-                    } else {
-                        echo "       skip $target\n";
-                        return true;
-                    }
-                }
-            }
-        }
-        file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
-        return true;
-    }
-    echo "   generate $target\n";
-    @mkdir(dirname($root . '/' . $target), 0777, true);
-    file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
-    return true;
+    $root = str_replace('\\', '/', dirname(dirname(__DIR__)));
+    $file = $root . '/.env';
+    $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1$value", file_get_contents($file));
+    file_put_contents($file, $content);
 }
 
-function getParams()
-{
-    $rawParams = [];
-    if (isset($_SERVER['argv'])) {
-        $rawParams = $_SERVER['argv'];
-        array_shift($rawParams);
-    }
-
-    $params = [];
-    foreach ($rawParams as $param) {
-        if (preg_match('/^--(\w+)(=(.*))?$/', $param, $matches)) {
-            $name = $matches[1];
-            $params[$name] = isset($matches[3]) ? $matches[3] : true;
-        } else {
-            $params[] = $param;
-        }
-    }
-    return $params;
-}
 
 function setWritable($root, $paths)
 {
@@ -136,17 +139,12 @@ function setExecutable($root, $paths)
     }
 }
 
-function setCookieValidationKey($root, $paths)
+function generateCookieValidationKey()
 {
-    foreach ($paths as $file) {
-        echo "   generate cookie validation key in $file\n";
-        $file = $root . '/' . $file;
-        $length = 32;
-        $bytes = openssl_random_pseudo_bytes($length);
-        $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
-        $content = preg_replace('/(("|\')cookieValidationKey("|\')\s*=>\s*)(""|\'\')/', "\\1'$key'", file_get_contents($file));
-        file_put_contents($file, $content);
-    }
+    $length = 32;
+    $bytes = openssl_random_pseudo_bytes($length);
+    $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
+    return $key;
 }
 
 function createSymlink($root, $links) {
