@@ -33,7 +33,7 @@ class ArticleDataBehavior extends Behavior
     {
         $article = Article::findOne(['id' => $event->sender->id]);
         if (!empty($article) && empty($article->desc)) {
-            $article->desc = $this->generateDesc($event->sender->content);
+            $article->desc = $this->generateDesc($event->sender->processedContent);
             $article->save();
         }
     }
@@ -43,6 +43,6 @@ class ArticleDataBehavior extends Behavior
      */
     private function generateDesc($content)
     {
-        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 150);
+        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags($content)), 150);
     }
 }
