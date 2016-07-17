@@ -18,7 +18,8 @@ class Html extends \yii\helpers\Html
 
     public static function img($src, $options = [])
     {
-        $options['src'] = Url::img($src);
+        $type = isset($options['type']) ? $options['type'] : '';
+        $options['src'] = Url::img($src, $type);
         if (!isset($options['alt'])) {
             $options['alt'] = '';
         }

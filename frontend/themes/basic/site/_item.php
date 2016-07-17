@@ -17,3 +17,9 @@ use common\helpers\Html;
         <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $model->comment, ['article/view', 'id' => $model->id, '#' => 'comments'])?></span>
     </div>
 </div>
+
+<div class="media-right">
+<?php if ($model->cover): ?>
+    <?= Html::img($model->cover, ['width' => 160, 'height' => 120]) ?>
+<?php endif; ?>
+</div>
