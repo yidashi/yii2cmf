@@ -62,17 +62,7 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@kvgrid/messages',
                     'forceTranslation' => true,
-                ],
-                'yii2tech-admin' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@yii2tech/admin/messages',
-                ],
-            ],
-        ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+                ]
             ],
         ],
         'events' => \backend\components\Events::className()

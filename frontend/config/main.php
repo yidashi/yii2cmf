@@ -37,20 +37,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                [
-                    'pattern' => '<id:\d+>',
-                    'route' => 'article/view',
-                    'suffix' => '.html'
-                ],
-                'user/<id:\d+>' => '/user',
-                'tag/<name:\S+>' => '/article/tag',
-                '/' => '/site/index'
-            ],
-        ],
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
