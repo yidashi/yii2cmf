@@ -1,7 +1,6 @@
 <?php
 namespace common\widgets\upload;
 
-use common\widgets\upload\assets\AttachmentUploadAsset;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -146,7 +145,7 @@ class MultipleWidget extends InputWidget
     {
         Html::addCssClass($this->wrapperOptions, " upload-kit");
 
-        AttachmentUploadAsset::register($this->getView());
+        ImageUploadAsset::register($this->getView());
 
         if ($this->sortable) {
             JuiAsset::register($this->getView());

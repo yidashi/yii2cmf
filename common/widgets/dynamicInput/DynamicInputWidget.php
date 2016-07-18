@@ -77,6 +77,9 @@ class DynamicInputWidget extends InputWidget
             case 'editor': // 编辑器
                 return EditorWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
+            case 'file': // 文件上传
+                return Html::fileInput($this->name,$this->value);
+                break;
         }
     }
     private function parseActive()
@@ -113,6 +116,9 @@ class DynamicInputWidget extends InputWidget
                 break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                break;
+            case 'file': // 文件上传
+                return Html::activeFileInput($this->model,$this->attribute);
                 break;
         }
     }

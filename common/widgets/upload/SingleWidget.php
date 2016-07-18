@@ -5,7 +5,6 @@ namespace common\widgets\upload;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\jui\JuiAsset;
-use common\widgets\upload\assets\AttachmentUploadAsset;
 
 class SingleWidget extends MultipleWidget
 {
@@ -13,7 +12,7 @@ class SingleWidget extends MultipleWidget
     public $multiple = false;
 
     public $url = [
-        '/upload/upload'
+        '/upload/image-upload'
     ];
 
     public $maxFileSize = 0;
@@ -25,7 +24,7 @@ class SingleWidget extends MultipleWidget
     {
         Html::addCssClass($this->wrapperOptions, " single-media upload-kit");
 
-        AttachmentUploadAsset::register($this->getView());
+        ImageUploadAsset::register($this->getView());
 
         if ($this->sortable) {
             JuiAsset::register($this->getView());

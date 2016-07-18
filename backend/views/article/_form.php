@@ -32,7 +32,7 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className()) ?>
 
-                    <?= $form->field($model, 'source')->textInput() ?>
+                    <?= $form->field($model, 'source') ?>
 
                 </div>
             </div>

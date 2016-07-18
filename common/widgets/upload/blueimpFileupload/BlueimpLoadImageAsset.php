@@ -7,7 +7,7 @@
 * @copyright Copyright (c) 2016-2099 Hassium Software LLC.
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
-namespace common\widgets\upload\assets\blueimpFileupload;
+namespace common\widgets\upload\blueimpFileupload;
 
 use yii\web\AssetBundle;
 
@@ -17,11 +17,11 @@ use yii\web\AssetBundle;
 * @author zhepama <zhepama@gmail.com>
 * @since 0.1.0
  */
-class BlueimpTmplAsset extends AssetBundle
+class BlueimpLoadImageAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/blueimp-tmpl';
+    public $sourcePath = '@bower/blueimp-load-image';
 
     public $js = [
-        'js/tmpl.min.js'
+        'js/load-image.all.min.js'
     ];
 }

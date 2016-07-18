@@ -7,7 +7,7 @@
 * @copyright Copyright (c) 2016-2099 Hassium Software LLC.
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
-namespace common\widgets\upload\assets\blueimpFileupload;
+namespace common\widgets\upload\blueimpFileupload;
 
 use yii\web\AssetBundle;
 
@@ -36,6 +36,6 @@ class BlueimpFileuploadAsset extends AssetBundle
 
     public $depends = [
         'yii\web\JqueryAsset',
-        'common\widgets\upload\assets\blueimpFileupload\BlueimpLoadImageAsset'
+        'common\widgets\upload\blueimpFileupload\BlueimpLoadImageAsset'
     ];
 }

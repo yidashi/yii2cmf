@@ -7,7 +7,7 @@
 * @copyright Copyright (c) 2016-2099 Hassium Software LLC.
 * @license http://opensource.org/licenses/gpl-license.php GNU Public License
 */
-namespace common\widgets\upload\assets\blueimpFileupload;
+namespace common\widgets\upload\blueimpFileupload;
 
 use yii\web\AssetBundle;
 

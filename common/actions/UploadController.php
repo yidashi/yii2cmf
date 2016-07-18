@@ -18,13 +18,13 @@ class UploadController extends Controller
     public function actions()
     {
         return [
-            'files-get' => [
+            'redactor-files-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
                 'url' => \Yii::getAlias('@static/upload'),
                 'path' => '@staticroot/upload',
                 'type' => GetAction::TYPE_FILES,
             ],
-            'image-upload' => [
+            'redactor-image-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'url' => \Yii::getAlias('@static/upload'),
                 'path' => '@staticroot/upload',
@@ -35,13 +35,13 @@ class UploadController extends Controller
                     ];
                 }
             ],
-            'images-get' => [
+            'redactor-images-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
                 'url' => \Yii::getAlias('@static/upload'),
                 'path' => '@staticroot/upload',
                 'type' => GetAction::TYPE_IMAGES,
             ],
-            'file-upload' => [
+            'redactor-file-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'url' => \Yii::getAlias('@static/upload'),
                 'path' => '@staticroot/upload',
@@ -54,12 +54,19 @@ class UploadController extends Controller
                     ];
                 }
             ],
-            'upload' => [
+            'image-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'url' => \Yii::getAlias('@static/upload'),
                 'path' => '@staticroot/upload',
                 'modelClass' => 'common\models\Attachment'
-            ]
+            ],
+            'file-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'url' => \Yii::getAlias('@static/upload'),
+                'path' => '@staticroot/upload',
+                'modelClass' => 'common\models\Attachment',
+                'uploadOnlyImage' => false
+            ],
         ];
     }
 
