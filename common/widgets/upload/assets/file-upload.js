@@ -19,6 +19,7 @@
         var methods = {
             init: function(){
                 methods.dragInit();
+                methods.fileuploadInit();
             },
             dragInit: function(){
                 $(document).on('dragover', function () {
@@ -28,6 +29,58 @@
                 $(document).on('dragleave drop', function () {
                     $dragDropArea.removeClass('drag-highlight');
                 });
+            },
+            fileuploadInit: function(){
+                console.log('hehe')
+                var $fileupload = $input.fileupload({
+                    url: options.url,
+                    dropZone: $dragDropArea,
+                    dataType: 'json',
+                    singleFileUploads: false,
+                    multiple: options.multiple,
+                    maxNumberOfFiles: null,
+                    maxFileSize: options.maxFileSize, // 5 MB
+                    acceptFileTypes: null,
+                    process: true,
+                    getNumberOfFiles: function () {
+                        return $mediaItems.find('.media-item').length;
+                    },
+                    start: function (e, data) {
+                    },
+                    processfail: function (e, data) {
+                        console.log(data)
+                        if (data.files.error) {
+                            alert(data.files[0].error);
+                        }
+                    },
+                    progressall: function (e, data) {
+
+                    },
+                    done: function (e, data) {
+                        $.each(data.result.files, function (index, file) {
+                            if (!file.error) {
+                                var item = createItem(file);
+                                $mediaItems.html(item);
+                            } else {
+                                alert(file.errors)
+                            }
+
+                        });
+                    },
+                    fail: function (e, data) {
+                        alert(data.errorThrown);
+                    },
+                    always: function (e, data) {
+
+                    }
+                });
+                if (options.files) {
+                    options.files.sort(function(a, b){
+                        return parseInt(a.order) - parseInt(b.order);
+                    });
+                    $fileupload.fileupload('option', 'done').call($fileupload, $.Event('done'), {result: {files: options.files}});
+                    //methods.checkInputVisibility();
+                }
             }
         }
 
@@ -48,48 +101,7 @@
             return item;
         }
 
-        $input.fileupload({
-            url: options.url,
-            dropZone: $dragDropArea,
-            dataType: 'json',
-            singleFileUploads: false,
-            multiple: options.multiple,
-            maxNumberOfFiles: null,
-            maxFileSize: options.maxFileSize, // 5 MB
-            acceptFileTypes: null,
-            process: true,
-            getNumberOfFiles: function () {
-                return $mediaItems.find('.media-item').length;
-            },
-            start: function (e, data) {
-            },
-            processfail: function (e, data) {
-                console.log(data)
-                if (data.files.error) {
-                    alert(data.files[0].error);
-                }
-            },
-            progressall: function (e, data) {
 
-            },
-            done: function (e, data) {
-                $.each(data.result.files, function (index, file) {
-                    if (!file.error) {
-                        var item = createItem(file);
-                        $mediaItems.html(item);
-                    } else {
-                        alert(file.errors)
-                    }
-
-                });
-            },
-            fail: function (e, data) {
-                alert(data.errorThrown);
-            },
-            always: function (e, data) {
-
-            }
-        });
         methods.init.apply(this);
         return this;
     }

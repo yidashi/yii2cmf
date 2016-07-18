@@ -45,6 +45,7 @@
                 $files.on('click', '.upload-kit-item .remove', methods.removeItem);
                 methods.checkInputVisibility();
                 methods.fileuploadInit();
+                console.log('haha')
                 methods.dragInit();
             },
             fileuploadInit: function(){

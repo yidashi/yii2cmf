@@ -112,7 +112,10 @@ class MultipleWidget extends InputWidget
     protected function formartAttachment($attachment)
     {
         if (is_string($attachment) && !empty($attachment)) {
-            return ["url"=>$attachment,"path"=>$attachment];
+            return [
+                "url"=>$attachment,
+                "path"=>$attachment
+            ];
         } else if (is_array($attachment)) {
             return $attachment;
         }
