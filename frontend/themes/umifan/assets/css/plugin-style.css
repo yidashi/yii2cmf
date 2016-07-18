@@ -1,0 +1,142 @@
+#plugins-container .panel p img {
+    max-width: 100%;
+}
+._releasenote img {
+    max-width: 100%;
+    height: auto;
+}
+.plugins-header {
+    margin-bottom: 20px;
+}
+.timeline-header {
+    position: relative;
+}
+.plugin-panel {
+    overflow: hidden;
+    padding: 10px;
+}
+.plugin-panel .panel-header {
+    margin: -10px -10px 0;
+    padding: 15px;
+}
+.plugin-panel .panel-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+.plugin-panel .panel-header h2 small {
+    white-space: nowrap;
+}
+.plugin-panel .panel-header h2 a {
+    padding-right: 10px;
+}
+.plugin-panel .panel-header h2 .fa-stack {
+    line-height: 1em;
+    height: 1em;
+    width: 1em;
+    margin: 0 5px;
+}
+.plugin-panel .plugin-thumbnail {
+    float: left;
+    position: relative;
+}
+.plugin-panel .plugin-thumbnail img {
+    width: 150px;
+    height: 150px;
+}
+.plugin-panel .plugin-thumbnail .score {
+    display: none;
+    position: absolute;
+    margin: 0;
+    float: left;
+    bottom: 0;
+    width: 100%;
+    opacity: 0.9;
+    text-align: center;
+    background-color: #FFF;
+}
+.plugin-panel:hover .score {
+    display: block;
+}
+.plugin-panel .plugin-summary {
+    margin-left: 160px;
+    height: 140px;
+    overflow: hidden;
+}
+.plugin-panel .plugin-summary dl {
+    margin-bottom: 5px;
+}
+.plugin-panel .plugin-summary dl dt,
+.plugin-panel .plugin-summary dl dd {
+    display: inline-block;
+}
+.plugin-panel .plugin-summary dl dd {
+    padding: 0 15px 0 0;
+    white-space: nowrap;
+}
+.plugin-panel .plugin-summary p {
+    margin: 0;
+}
+.plugin-panel.plugin-detail .plugin-summary {
+    height: auto;
+}
+.plugin-panel h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+.btn-group.btn-block {
+    display: table;
+}
+.btn-group.btn-block > .btn {
+    display: table-cell;
+}
+.timeline-profile-image {
+    clear: both;
+    float: left;
+    width: 95px;
+    text-align: center;
+}
+.timeline-profile-image img {
+    width: 50px;
+    height: auto;
+}
+.clear-sr-only {
+    overflow: visible;
+    clip: auto;
+    width: 100%;
+    height: auto;
+}
+.plugin-dashboard .thumbnail {
+    position: relative;
+    margin-bottom: 11px;
+}
+.plugin-dashboard .thumbnail .title {
+    margin: 5px 0 0;
+    padding: 0;
+    width: 100%;
+    font-size: 13px;
+    font-weight: normal;
+    background: #FFF;
+}
+.plugin-dashboard .row {
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.plugin-dashboard .col-xs-2 {
+    padding: 5px;
+}
+
+
+
+.chak-code {
+    display: none;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+.chak-code p {
+    margin: 10px;
+}
+.chak-code textarea {
+    font-size: 12px;
+    font-family: monospace;
+}

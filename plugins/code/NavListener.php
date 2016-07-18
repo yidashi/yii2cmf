@@ -15,7 +15,7 @@ class NavListener
     {
         //加到左边导航上
         $event->sender->params['leftMenuItems'][] = [
-            'label' => '获取源码',
+            'label' => '下载',
             'url' => ['/code'],
             'active' => \Yii::$app->controller->getRoute() == 'code/default/index'
         ];
