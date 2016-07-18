@@ -148,9 +148,9 @@ class ArticleController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($module = 'base')
     {
-        $model = new ArticleForm();
+        $model = new ArticleForm($module);
         if ($model->load(Yii::$app->request->post()) && $model->store()) {
             return $this->redirect(['index']);
         }
@@ -173,7 +173,7 @@ class ArticleController extends Controller
             return $this->redirect(['index']);
         }
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
     /**

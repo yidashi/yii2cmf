@@ -11,8 +11,11 @@ namespace backend\models;
 
 use common\models\Article;
 use common\models\ArticleData;
+use common\models\ArticleModule;
+use common\models\ArticleModuleInterface;
 use common\models\ArticleTag;
 use common\models\Tag;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use Yii;
 use common\models\Category;
@@ -30,15 +33,65 @@ class ArticleForm extends Model
     public $desc;
     public $view;
     public $is_top;
-
+    public $module;
+    public $moduleClass;
+    private $_extendAttributes = [];
     private $_isNewRecord = true;
     private $_id;
+    public function __construct($moduleName = 'base', array $config = [])
+    {
+        $this->module = $moduleName;
+        if ($moduleName != 'base') {
+            $module = ArticleModule::find()->where(['name' => $this->module])->one();
+            if (empty($module)) {
+                throw new InvalidConfigException('文档类型不合法');
+            }
+            $moduleClass = new $module->model;
+            if (!$moduleClass instanceof ArticleModuleInterface) {
+                throw new InvalidConfigException('文档类型不合法');
+            }
+            $this->moduleClass = $moduleClass;
+            $this->_extendAttributes = $moduleClass->attributes;
+        }
+        parent::__construct($config);
+    }
+
+    public function extendAttributes()
+    {
+        $extendAttributes = array_keys($this->_extendAttributes);
+        unset($extendAttributes[array_search('id', $extendAttributes)]);
+        return $extendAttributes;
+    }
+
+    public function __get($name)
+    {
+        if (isset($this->_extendAttributes[$name]) || array_key_exists($name, $this->_extendAttributes)) {
+            return $this->_extendAttributes[$name];
+        } elseif ($this->hasAttribute($name)) {
+            return null;
+        } else {
+            return parent::__get($name);
+        }
+    }
+
+    public function __set($name, $value)
+    {
+        if ($this->hasAttribute($name)) {
+            $this->_extendAttributes[$name] = $value;
+        } else {
+            parent::__set($name, $value);
+        }
+    }
+    public function hasAttribute($name)
+    {
+        return isset($this->_extendAttributes[$name]) || array_key_exists($name, $this->_extendAttributes);
+    }
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
-        return [
+        $rules = [
             [['title', 'category_id', 'content'], 'required'],
             [['status', 'category_id', 'view', 'is_top'], 'integer'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
@@ -49,6 +102,10 @@ class ArticleForm extends Model
             [['cover', 'source', 'desc'], 'string', 'max' => 255],
             [['tagNames'], 'string']
         ];
+        if ($this->moduleClass) {
+            $rules = array_merge($rules, $this->moduleClass->rules());
+        }
+        return $rules;
     }
 
     /**
@@ -56,7 +113,7 @@ class ArticleForm extends Model
      */
     public function attributeLabels()
     {
-        return [
+        $labels = [
             'id' => Yii::t('common', 'ID'),
             'title' => '标题',
             'content' => '内容',
@@ -73,6 +130,10 @@ class ArticleForm extends Model
             'view' => '浏览量',
             'is_top' => '是否置顶'
         ];
+        if ($this->moduleClass) {
+            $labels = array_merge($labels, $this->moduleClass->attributeLabels());
+        }
+        return $labels;
     }
     public function attributeHints()
     {
@@ -80,6 +141,17 @@ class ArticleForm extends Model
             'desc' => '（默认截取内容前150个字符）',
             'tagNames' => '（空格分隔多个标签）'
         ];
+    }
+
+    public function attributeTypes()
+    {
+        return $this->moduleClass->attributeTypes();
+    }
+
+    public function getAttributeType($attribute)
+    {
+        $types = $this->attributeTypes();
+        return isset($types[$attribute]) ? $types[$attribute] : 'text';
     }
 
     public function getIsNewRecord()
@@ -90,23 +162,35 @@ class ArticleForm extends Model
     public function store()
     {
         if ($this->validate()) {
-            $article = new Article();
-            $article->title = $this->title;
-            $article->cover = $this->cover;
-            $article->source = $this->source;
-            $article->view = (int) $this->view;
-            $article->is_top = $this->is_top;
-            $article->category_id = $this->category_id;
-            $article->status = $this->status;
-            $article->desc = $this->desc;
-            $article->published_at = strtotime($this->published_at);
-            $article->save();
-            $articleData = new ArticleData();
-            $articleData->content = $this->content;
-            $articleData->id = $article->id;
-            $articleData->save();
-            $this->setTags($article);
-            return true;
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $article = new Article();
+                $article->title = $this->title;
+                $article->cover = $this->cover;
+                $article->source = $this->source;
+                $article->view = (int)$this->view;
+                $article->is_top = $this->is_top;
+                $article->category_id = $this->category_id;
+                $article->status = $this->status;
+                $article->desc = $this->desc;
+                $article->published_at = strtotime($this->published_at);
+                $article->save();
+                $articleData = new ArticleData();
+                $articleData->content = $this->content;
+                $articleData->id = $article->id;
+                $articleData->save();
+                $this->setTags($article);
+                if ($this->moduleClass) {
+                    $this->moduleClass->attributes = $this->_extendAttributes;
+                    $this->moduleClass->id = $article->id;
+                    $this->moduleClass->insert();
+                }
+                $transaction->commit();
+                return true;
+            }catch (\Exception $e) {
+                $transaction->rollBack();
+                return false;
+            }
         }
         return false;
     }
@@ -114,22 +198,35 @@ class ArticleForm extends Model
     public function update()
     {
         if ($this->validate()) {
-            $article = Article::findOne($this->id);
-            $article->title = $this->title;
-            $article->cover = $this->cover;
-            $article->source = $this->source;
-            $article->view = (int) $this->view;
-            $article->is_top = $this->is_top;
-            $article->category_id = $this->category_id;
-            $article->status = $this->status;
-            $article->desc = $this->desc;
-            $article->published_at = strtotime($this->published_at);
-            $article->save();
-            $articleData = $article->data;
-            $articleData->content = $this->content;
-            $articleData->save();
-            $this->setTags($article);
-            return true;
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $article = Article::findOne($this->id);
+                $article->title = $this->title;
+                $article->cover = $this->cover;
+                $article->source = $this->source;
+                $article->view = (int)$this->view;
+                $article->is_top = $this->is_top;
+                $article->category_id = $this->category_id;
+                $article->status = $this->status;
+                $article->desc = $this->desc;
+                $article->published_at = strtotime($this->published_at);
+                $article->save();
+                $articleData = $article->data;
+                $articleData->content = $this->content;
+                $articleData->save();
+                $this->setTags($article);
+                if ($this->moduleClass) {
+                    $this->moduleClass->attributes = $this->_extendAttributes;
+                    $this->moduleClass->id = $article->id;
+                    $this->moduleClass->update();
+                }
+                $transaction->commit();
+                return true;
+            }catch (\Exception $e) {
+                echo $e->getMessage();die;
+                $transaction->rollBack();
+                return false;
+            }
         }
         return false;
     }
@@ -166,7 +263,12 @@ class ArticleForm extends Model
     public static function findOne($id)
     {
         $article = Article::find()->where(['id' => $id])->with('data')->one();
-        $model = new self();
+        $model = new self($article->module);
+        // 不能保证一定有扩展
+        if ($article->extend) {
+            $model->moduleClass = $article->extend;
+            $model->_extendAttributes = $model->moduleClass->attributes;
+        }
         $model->title = $article->title;
         $model->cover = $article->cover;
         $model->view = $article->view;

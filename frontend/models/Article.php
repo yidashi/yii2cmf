@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\ArticleExhibition;
 use common\models\Category;
 use yii\behaviors\BlameableBehavior;
 
@@ -26,5 +27,14 @@ class Article extends \common\models\Article
             ->limit($size)
             ->orderBy('view desc')
             ->all();
+    }
+    public function getSameCityExhibition()
+    {
+//        $ip = Yii::$app->request->userIP;
+//        $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+//        $data = json_decode(file_get_contents($url), true);
+//        $city = isset($data['city']) ? $data['city'] : '北京';
+        $city = '北京';
+        return $this->hasOne(ArticleExhibition::className(), ['id' => 'id'])->where(['city' => $city]);
     }
 }

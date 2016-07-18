@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = '更新';
 <div class="article-update">
 
     <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model
     ]) ?>
 
 </div>

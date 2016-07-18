@@ -7,6 +7,7 @@ use common\behaviors\SoftDeleteBehavior;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -93,7 +94,8 @@ class Article extends \yii\db\ActiveRecord
             'desc' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
-            'is_top' => '置顶'
+            'is_top' => '置顶',
+            'module' => '类型'
         ];
     }
     public function attributeHints()
@@ -255,5 +257,13 @@ class Article extends \yii\db\ActiveRecord
             }
         }
         return false;
+    }
+
+    public function getExtend()
+    {
+        if ($this->module != 'base') {
+            $module = ArticleModule::find()->where(['name' => $this->module])->one();
+            return $this->hasOne($module->model, ['id' => 'id']);
+        }
     }
 }

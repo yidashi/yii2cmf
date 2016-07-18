@@ -10,7 +10,10 @@ namespace common\widgets\dynamicInput;
 
 
 use common\widgets\EditorWidget;
+use common\widgets\upload\FileWidget;
 use common\widgets\upload\SingleWidget;
+use kartik\date\DatePicker;
+use kartik\datetime\DateTimePicker;
 use yii\base\InvalidParamException;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
@@ -20,7 +23,19 @@ class DynamicInputWidget extends InputWidget
     /**
      * @var array 支持的类型集合
      */
-    public $types = ['text', 'array', 'password', 'textarea', 'select', 'checkbox', 'radio', 'image', 'editor'];
+    public $types = [
+        'text',
+        'array',
+        'password',
+        'textarea',
+        'select',
+        'checkbox',
+        'radio',
+        'image',
+        'editor',
+        'date',
+        'datetime'
+    ];
     public $type;
     public $data;
     public $inputOptions = ['class' => 'form-control'];
@@ -74,11 +89,29 @@ class DynamicInputWidget extends InputWidget
             case 'image': // 图片
                 return SingleWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
+            case 'file': // 文件
+                return FileWidget::widget(['name' => $this->name, 'value' => $this->value]);
+                break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
-            case 'file': // 文件上传
-                return Html::fileInput($this->name,$this->value);
+            case 'date': // 日期
+                return DatePicker::widget([
+                    'name' => $this->name,
+                    'value' => $this->value,
+                    'type' => 2,
+                    'convertFormat' => true,
+                    'pluginOptions' => ['format' => 'php:Y-m-d']
+                ]);
+                break;
+            case 'datetime': // 时间
+                return DateTimePicker::widget([
+                    'name' => $this->name,
+                    'value' => $this->value,
+                    'type' => 2,
+                    'convertFormat' => true,
+                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
+                ]);
                 break;
         }
     }
@@ -114,11 +147,29 @@ class DynamicInputWidget extends InputWidget
             case 'image': // 图片
                 return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
+            case 'file': // 文件
+                return FileWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
-            case 'file': // 文件上传
-                return Html::activeFileInput($this->model,$this->attribute);
+            case 'date': // 日期
+                return DatePicker::widget([
+                    'model' => $this->model,
+                    'attribute' => $this->attribute,
+                    'type' => 2,
+                    'convertFormat' => true,
+                    'pluginOptions' => ['format' => 'php:Y-m-d']
+                ]);
+                break;
+            case 'datetime': // 时间
+                return DateTimePicker::widget([
+                        'model' => $this->model,
+                    'attribute' => $this->attribute,
+                        'type' => 2,
+                        'convertFormat' => true,
+                        'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
+                    ]);
                 break;
         }
     }

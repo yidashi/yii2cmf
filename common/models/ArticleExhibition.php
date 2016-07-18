@@ -1,0 +1,68 @@
+<?php
+
+namespace common\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "{{%article_exhibition}}".
+ *
+ * @property integer $id
+ * @property integer $start_at
+ * @property integer $end_at
+ * @property string $city
+ * @property string $address
+ */
+class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInterface
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return '{{%article_exhibition}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['id'], 'integer'],
+            [['start_at', 'end_at'], 'date', 'format' => 'php:Y-m-d'],
+            [['city'], 'string', 'max' => 50],
+            [['address'], 'string', 'max' => 255],
+            [['id'], 'unique', 'on' => 'create'],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'start_at' => '开始日期',
+            'end_at' => '结束日期',
+            'city' => '城市',
+            'address' => '地址',
+        ];
+    }
+    public function attributeTypes()
+    {
+        return [
+            'start_at' => 'date',
+            'end_at' => 'date',
+            'city' => 'text',
+            'address' => 'text'
+        ];
+    }
+
+    public function getAttributeType($attribute)
+    {
+        $types = $this->attributeTypes();
+        return isset($types[$attribute]) ? $types[$attribute] : 'text';
+    }
+}

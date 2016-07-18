@@ -13,8 +13,10 @@ use dosamigos\fileupload\FileUploadUI;
     <div class="col-lg-9">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">主要内容</a></li>
-                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">附加内容</a></li>
+                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">通用</a></li>
+                <?php if ($model->moduleClass): ?>
+                <li><a href="#tab_2" data-toggle="tab" aria-expanded="true">扩展</a></li>
+                <?php endif; ?>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -28,13 +30,13 @@ use dosamigos\fileupload\FileUploadUI;
                     <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className()); ?>
 
                 </div>
+                <?php if ($model->moduleClass): ?>
                 <div class="tab-pane" id="tab_2">
-
-                    <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className()) ?>
-
-                    <?= $form->field($model, 'source')->widget(\common\widgets\upload\FileWidget::className()) ?>
-
+                    <?php foreach ($model->extendAttributes() as $attribute): ?>
+                        <?= $form->field($model, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $model->getAttributeType($attribute)]) ?>
+                    <?php endforeach; ?>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -59,6 +61,12 @@ use dosamigos\fileupload\FileUploadUI;
         <?= $form->field($model, 'status')->radioList(\common\models\Article::getStatusList()) ?>
 
         <?= $form->field($model, 'view')->textInput() ?>
+
+        <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className(), [
+            'clientOptions' => ['width' => '230px']
+        ]) ?>
+
+        <?= $form->field($model, 'source')->textInput() ?>
 
     </div>
     <?php ActiveForm::end(); ?>
