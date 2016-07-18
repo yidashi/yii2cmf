@@ -43,6 +43,7 @@ class AppController extends Controller
         } while(!$this->testConnect($dbDsn, $dbDbname, $dbUsername, $dbPassword));
         $dbDsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbDbname}";
         $dbTablePrefix = $this->prompt('数据库表前缀:', ['default' => 'pop_']);
+        $this->stdout("\n  ... 初始化配置 ...\n\n");
         copy($root . '/.env.example', $envFile);
         setEnv('DB_USERNAME', $dbUsername);
         setEnv('DB_PASSWORD', $dbPassword);
@@ -50,11 +51,18 @@ class AppController extends Controller
         setEnv('DB_DSN', $dbDsn);
         setEnv('FRONTEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
         setEnv('BACKEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
+        $this->stdout("\n  ... 初始化配置成功 ...\n\n", Console::FG_GREEN);
+        $this->stdout("\n  ... 初始化数据库 ...\n\n");
         $this->command('migrate --interactive=0');
-        $appStatus = $this->select('当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
+        $this->stdout("\n  ... 初始化数据库成功 ...\n\n", Console::FG_GREEN);
+        $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
         setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         setEnv('YII_ENV', $appStatus);
         $this->stdout("\n  ... 应用构建成功.\n\n", Console::FG_GREEN);
+    }
+    public function actionUpdate()
+    {
+        $this->command('migrate --interactive=0');
     }
     public function testConnect($dsn = '', $dbname, $username = '', $password = '')
     {
@@ -127,7 +135,7 @@ function setWritable($root, $paths)
 {
     foreach ($paths as $writable) {
         echo "      chmod 0777 $writable\n";
-        chmod("$root/$writable", 0777);
+        @chmod("$root/$writable", 0777);
     }
 }
 

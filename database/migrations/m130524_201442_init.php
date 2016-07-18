@@ -137,9 +137,9 @@ class m130524_201442_init extends Migration
             'extra' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'desc' => Schema::TYPE_STRING . "(255) NOT NULL COMMENT '配置描述'",
             'type' => $this->string(30)->defaultValue('text')->comment('配置类型'),
-            'group' => $this->string(30)->defaultValue('system')->comment('配置分组'),
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+            'group' => $this->string(30)->defaultValue('system')->comment('配置分组')
         ], $this->tableOptions);
 
 // favourite
@@ -314,6 +314,7 @@ class m130524_201442_init extends Migration
 
     public function safeDown()
     {
+        $this->execute('SET foreign_key_checks = 0');
         $this->dropTable('{{%admin_log}}');
         $this->dropTable('{{%article}}');
         $this->dropTable('{{%article_data}}');
@@ -340,6 +341,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%tag}}');
         $this->dropTable('{{%user}}');
         $this->dropTable('{{%vote}}');
-
+        $this->execute('SET foreign_key_checks = 1');
     }
 }
