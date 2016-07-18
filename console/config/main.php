@@ -30,6 +30,10 @@ return [
             'templatePath' => '@database/seeds/templates',
             'namespace' => 'database\seeds',
         ],
+        'serve' => [
+            'class' => 'yii\console\controllers\ServeController',
+            'docroot' => dirname(dirname(__DIR__)) . '/web'
+        ]
     ],
     'components' => [
         'log' => [
@@ -40,6 +44,8 @@ return [
                 ],
             ],
         ]
+    ],
+    'aliases' => [
     ],
     'params' => $params,
 ];

@@ -41,7 +41,7 @@ class ArticleForm extends Model
         return [
             [['title', 'category_id', 'content'], 'required'],
             [['status', 'category_id', 'view', 'is_top'], 'integer'],
-            [['category_id', 'status'], 'filter', 'filter' => 'intval'],
+            [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
             ['published_at', 'string'],
             ['published_at', 'default', 'value' => date('Y-m-d H:i:s')],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
@@ -93,6 +93,7 @@ class ArticleForm extends Model
             $article = new Article();
             $article->title = $this->title;
             $article->cover = $this->cover;
+            $article->source = $this->source;
             $article->view = (int) $this->view;
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
@@ -116,6 +117,7 @@ class ArticleForm extends Model
             $article = Article::findOne($this->id);
             $article->title = $this->title;
             $article->cover = $this->cover;
+            $article->source = $this->source;
             $article->view = (int) $this->view;
             $article->is_top = $this->is_top;
             $article->category_id = $this->category_id;
@@ -169,6 +171,7 @@ class ArticleForm extends Model
         $model->cover = $article->cover;
         $model->view = $article->view;
         $model->is_top = $article->is_top;
+        $model->source = $article->source;
         $model->category_id = $article->category_id;
         $model->status = $article->status;
         $model->desc = $article->desc;

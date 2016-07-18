@@ -10,9 +10,8 @@ $this->title = '配置';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="config-index">
-    <style>td{word-break: break-all}</style>
     <p>
-        <?= Html::a('创建新配置', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建新配置', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">
@@ -27,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->getTypeList()[$model->type];
                         },
                     ],
-                    'value',
+                    'group',
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
             ]); ?>

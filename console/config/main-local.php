@@ -12,7 +12,7 @@ return [
                     'templates' => [
                         'default' => '@backend/components/gii/crud/default'
                     ]
-                ]
+                ],
             ]
         ],
     ],

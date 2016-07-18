@@ -12,9 +12,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="page-index">
 
     <p>
-        <?= Html::a('创建单页', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建单页', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
-
+    <div class="box box-primary">
+        <div class="box-body">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -28,9 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'title',
+            'slug',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    </div></div>
 </div>

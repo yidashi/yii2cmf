@@ -30,9 +30,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Article extends \yii\db\ActiveRecord
 {
-    const STATUS_INIT = 0;
+    const STATUS_PENDING = 0;
     const STATUS_ACTIVE = 1;
-    const STATUS_REFUSE = 10;
 
     private $_tagNames;
     /**
@@ -54,7 +53,7 @@ class Article extends \yii\db\ActiveRecord
             [['category_id', 'status'], 'filter', 'filter' => 'intval'],
             ['published_at', 'default', 'value' => time()],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INIT, self::STATUS_REFUSE]],
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_PENDING]],
             [['category_id'], 'setCategory'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category'], 'string', 'max' => 50],
@@ -70,9 +69,8 @@ class Article extends \yii\db\ActiveRecord
     public static function getStatusList()
     {
         return [
-            self::STATUS_INIT => '待审',
+            self::STATUS_PENDING => '待审',
             self::STATUS_ACTIVE => '通过',
-            self::STATUS_REFUSE => '拒绝'
         ];
     }
     /**
@@ -87,7 +85,7 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
             'published_at' => '发布时间',
-            'status' => '审核',
+            'status' => '状态',
             'cover' => '封面',
             'category_id' => '分类',
             'category' => '分类',
@@ -95,7 +93,7 @@ class Article extends \yii\db\ActiveRecord
             'desc' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
-            'is_top' => '是否置顶'
+            'is_top' => '置顶'
         ];
     }
     public function attributeHints()
@@ -111,17 +109,20 @@ class Article extends \yii\db\ActiveRecord
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             TimestampBehavior::className(),
             PushBehavior::className(),
             SoftDeleteBehavior::className(),
-            [
+            ArticleBehavior::className()
+        ];
+        if (!Yii::$app->request->isConsoleRequest) {
+            $behaviors[] = [
                 'class' => BlameableBehavior::className(),
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false
-            ],
-            ArticleBehavior::className()
-        ];
+            ];
+        }
+        return $behaviors;
     }
 
     /**

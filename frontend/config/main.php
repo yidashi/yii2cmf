@@ -14,6 +14,9 @@ return [
         'events'
     ],
     'controllerNamespace' => 'frontend\controllers',
+    'controllerMap' => [
+        'upload' => \common\actions\UploadController::className()
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -33,29 +36,6 @@ return [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
-        ],
-        'i18n' => [
-            'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@frontend/messages',
-                    'forceTranslation' => true,
-                ],
-            ],
-        ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                [
-                    'pattern' => '<id:\d+>',
-                    'route' => 'article/view',
-                    'suffix' => '.html'
-                ],
-                'user/<id:\d+>' => '/user',
-                'tag/<name:\S+>' => '/article/tag',
-                '/' => '/site/index'
-            ],
         ],
         'assetManager' => [
             'bundles' => [

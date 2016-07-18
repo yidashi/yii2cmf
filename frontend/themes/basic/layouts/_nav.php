@@ -23,12 +23,12 @@ NavBar::begin([
 $menuItems = [];
 $menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl, 'active' => \Yii::$app->controller->getRoute() == 'site/index'];
 // 暂只支持两级,多了也没意义
-foreach (\common\models\Category::tree(\common\models\Category::find()->where(['is_nav' => 1])->orderBy('sort asc')->asArray()->all()) as $nav) {
-    $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
+foreach (\common\helpers\Tree::build(\common\models\Category::find()->where(['is_nav' => 1])->orderBy('sort asc')->asArray()->all()) as $nav) {
+    $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['slug']]];
     if (isset($nav['_child'])) {
         $secondItems = [];
         foreach($nav['_child'] as $second) {
-            $secondItems[] = ['label' => $second['title'], 'url' => ['/article/index', 'cate' => $second['name']]];
+            $secondItems[] = ['label' => $second['title'], 'url' => ['/article/index', 'cate' => $second['slug']]];
         }
         $firstItem['items'] = $secondItems;
     }
@@ -88,8 +88,12 @@ if (Yii::$app->user->isGuest) {
         ],
         'items' => [
             [
-                'label' => Html::icon('user') . ' 个人信息',
+                'label' => Html::icon('user') . ' 个人主页',
                 'url' => ['/user', 'id' => Yii::$app->user->id],
+            ],
+            [
+                'label' => Html::icon('cog') . ' 账户设置',
+                'url' => ['/my/profile'],
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',

@@ -2,10 +2,13 @@
 
 namespace backend\controllers;
 
+use backend\models\PluginsConfig;
 use Yii;
 use common\models\Module;
-use yii\data\ActiveDataProvider;
+use yii\base\DynamicModel;
+use yii\base\Model;
 use yii\data\ArrayDataProvider;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -119,5 +122,46 @@ class PluginsController extends Controller
         $model->status = Module::STATUS_CLOSE;
         $model->save();
         return $this->redirect(['index']);
+    }
+
+    /**
+     * 插件配置
+     * @param $name
+     * @return string|\yii\web\Response
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function actionConfig($name)
+    {
+        $model = Module::find()->where(['name' => $name])->one();
+        if (empty($model) || $model->status == Module::STATUS_UNINSTALL) {
+            Yii::$app->session->setFlash('error', '插件没安装');
+            return $this->redirect(['index']);
+        }
+        $configs = Json::decode($model->config);
+        $configModels = [];
+        if (!empty($configs)) {
+            foreach ($configs as $k => $config) {
+                $configModel = new PluginsConfig();
+                $configModel->scenario = 'init';
+                $configModel->attributes = $config;
+                $configModels[$k] = $configModel;
+            }
+        }
+        $dataProvider = new ArrayDataProvider([
+            'models' => $configModels,
+            'pagination' => false
+        ]);
+        if (\Yii::$app->request->isPost && Model::loadMultiple($configModels, \Yii::$app->request->post()) && Model::validateMultiple($configModels)) {
+            $configs = Json::encode($configModels);
+            $model->config = $configs;
+            $model->save();
+            Yii::$app->cache->delete('pluginConfig-' . $model->name);
+            return $this->redirect(['config', 'name' => $name]);
+        }
+
+        return $this->render('config', [
+            'model' => $model,
+            'dataProvider' => $dataProvider
+        ]);
     }
 }

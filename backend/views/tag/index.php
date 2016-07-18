@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
 
     <div class="box box-primary">

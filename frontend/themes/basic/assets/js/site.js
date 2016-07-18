@@ -83,6 +83,7 @@ $(function(){
         $.ajax({
             url: url,
             dataType: 'json',
+            method:'post',
             success: function(html){
                 button.html("<i class=\"fa fa-calendar-check-o\"></i> 今日已签到<br />已连续" + html.days + "天").removeClass('btn-registration').addClass('disabled');
             },
@@ -93,13 +94,12 @@ $(function(){
                 if(XMLHttpRequest.status == 403){
                     $.modalLogin();
                 }
-                this.abort();
             }
         });
         return false;
     });
 });
-
+$('.view-content a').attr('target', '_blank');
 jQuery.extend({
     modalLoad: function(url, data, callback) {
         $('#commonModal .modal-body').load(url, data, callback);

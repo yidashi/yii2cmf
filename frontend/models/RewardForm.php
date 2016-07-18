@@ -10,7 +10,9 @@ namespace frontend\models;
 
 
 use common\models\Reward;
+use yii\base\Exception;
 use yii\base\Model;
+use yii\validators\InlineValidator;
 
 class RewardForm extends Model
 {
@@ -20,24 +22,15 @@ class RewardForm extends Model
 
     public function rules()
     {
-        return [
+        $rules = [
             [['article_id', 'money'], 'required'],
             ['comment', 'string', 'max' => 255],
-            ['money', 'validateMoney']
+            ['money', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => '打赏额必须大于0'],
         ];
-    }
-
-    public function validateMoney($attribute, $params)
-    {
-        if ($this->$attribute <= 0) {
-            $this->addError($attribute, '打赏金额必须大于0');
-            return false;
+        if (!\Yii::$app->user->isGuest) {
+            $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<', 'message' => '打赏额不能大于自身账户余额'];
         }
-        if ($this->$attribute > \Yii::$app->user->identity->profile->money) {
-            $this->addError($attribute, '打赏金额不能超过帐号余额');
-            return false;
-        }
-        return true;
+        return $rules;
     }
 
     public function attributeLabels()
@@ -58,13 +51,30 @@ class RewardForm extends Model
     public function reward()
     {
         if ($this->validate()) {
-            $reward = new Reward();
-            $reward->article_id = $this->article_id;
-            $reward->money = $this->money;
-            if($reward->save() !== false) {
+            $transaction = \Yii::$app->db->beginTransaction();
+            try{
+                // 打赏者扣钱
+                /* @var $profile \common\models\Profile */
+                $profile = \Yii::$app->user->identity->profile;
+                $result = $profile::getDb()->createCommand('update {{%profile}} set money=money-' . $this->money . ' WHERE id = ' . $profile->id . ' AND money>=' . $this->money)->execute();
+                if ($result == 0) {
+                    throw new Exception('打赏失败');
+                }
+                // 作者加钱
+                $article = Article::find()->where(['id' => $this->article_id])->one();
+                $article->user->profile->updateCounters(['money' => $this->money]);
+                $reward = new Reward();
+                $reward->article_id = $this->article_id;
+                $reward->money = $this->money;
+                if($reward->save() === false) {
+                    throw new Exception('打赏失败');
+                }
+                $transaction->commit();
                 return true;
+            } catch(\Exception $e) {
+                $transaction->rollback();
+                return false;
             }
         }
-        return false;
     }
 }

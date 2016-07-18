@@ -20,6 +20,7 @@ class m160702_101410_create_plugins extends Migration
             'author' => $this->string(50)->comment('作者'),
             'version' => $this->string(50)->comment('版本'),
             'desc' => $this->string(255)->comment('说明'),
+            'config' => $this->text()->comment('配置'),
             'created_at' => $this->integer(10)->notNull(),
             'updated_at' => $this->integer(10)->notNull(),
         ]);

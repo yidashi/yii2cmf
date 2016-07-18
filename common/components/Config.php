@@ -12,17 +12,20 @@ namespace common\components;
 use yii\base\Component;
 use yii\caching\DbDependency;
 use common\models\Config as ConfigModel;
+use yii\caching\TagDependency;
 
 class Config extends Component
 {
     public function get($name, $default = '')
     {
-        $config = \Yii::$app->cache->get([__CLASS__, $name]);
-        if ($config === false) {
-            $config = ConfigModel::find()->where(['name' => $name])->one();
-            \Yii::$app->cache->set([__CLASS__, $name], $config, 60 * 60, new DbDependency(['sql' => 'SELECT MAX(updated_at) FROM {{%config}}']));
+        $cacheKey = 'allSystemConfigs';
+        $configs = \Yii::$app->cache->get($cacheKey);
+        if ($configs === false) {
+            $configs = ConfigModel::find()->indexBy('name')->all();
+            \Yii::$app->cache->set($cacheKey, $configs, 60 * 60, new TagDependency(['tags' => 'systemConfig']));
         }
-        if (!empty($config)) {
+        if (isset($configs[$name])) {
+            $config = $configs[$name];
             return self::_parse($config->type, $config->value);
         } else {
             return env($name, $default);

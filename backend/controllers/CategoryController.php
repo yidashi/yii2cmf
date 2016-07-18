@@ -38,7 +38,6 @@ class CategoryController extends Controller
             'allModels' => Category::treeList(null, $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
             'key' => 'id'
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -63,11 +62,12 @@ class CategoryController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($pid = 0)
     {
         $model = new Category();
-
+        $model->pid = $pid;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->cache->delete('categoryList');
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -89,6 +89,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->cache->delete('categoryList');
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [

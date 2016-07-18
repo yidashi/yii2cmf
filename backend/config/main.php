@@ -25,7 +25,8 @@ return [
                     'path'   => '/',
                 ]
             ]
-        ]
+        ],
+        'upload' => \common\actions\UploadController::className()
     ],
     'components' => [
         'user' => [
@@ -33,6 +34,9 @@ return [
             'enableAutoLogin' => true,
             'idParam' => '__idBackend',
             'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
+        ],
+        'request' => [
+            'csrfParam' => '_csrfBackend'
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -58,13 +62,7 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@kvgrid/messages',
                     'forceTranslation' => true,
-                ],
-            ],
-        ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
+                ]
             ],
         ],
         'events' => \backend\components\Events::className()
@@ -78,8 +76,8 @@ return [
         ]
     ],
     'aliases' => [
-        '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',
-        '@backup' => '@backend/modules/backup'
+        '@mdm/admin' => '@backend/modules/rbac',
+        '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

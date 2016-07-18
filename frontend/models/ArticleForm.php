@@ -87,7 +87,7 @@ class ArticleForm extends Model
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
             $article->desc = $this->desc;
-            $article->status = 0;
+            $article->status = Yii::$app->config->get('FRONTEND_PUB_CHECK', 1) ? Article::STATUS_INIT : Article::STATUS_ACTIVE;
             $article->save();
             $articleData = new ArticleData();
             $articleData->content = $this->content;
@@ -107,7 +107,7 @@ class ArticleForm extends Model
             $article->cover = $this->cover;
             $article->category_id = $this->category_id;
             $article->desc = $this->desc;
-            $article->status = 0;
+            $article->status = Yii::$app->config->get('FRONTEND_PUB_CHECK', 1) ? Article::STATUS_INIT : Article::STATUS_ACTIVE;
             $article->save();
             $articleData = $article->data;
             $articleData->content = $this->content;

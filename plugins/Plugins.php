@@ -9,6 +9,7 @@
 namespace plugins;
 
 use Yii;
+use yii\helpers\Json;
 use yii\web\View;
 use ReflectionClass;
 use yii\base\InvalidParamException;
@@ -19,6 +20,8 @@ use mdm\admin\components\MenuHelper;
 
 abstract class Plugins extends Object implements BootstrapInterface
 {
+    private $_config = [];
+
     public $info = [
         'author' => '',
         'version' => '',
@@ -26,6 +29,17 @@ abstract class Plugins extends Object implements BootstrapInterface
         'title' => '',
         'desc' => ''
     ];
+
+    public $configFile = '';
+
+    public function init()
+    {
+        if (empty($this->configFile)) {
+            $class = new ReflectionClass($this);
+            $this->configFile = dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'config.php';
+
+        }
+    }
     final public function checkInfo(){
         $info_check_keys = ['name','title','desc','author','version'];
         foreach ($info_check_keys as $value) {
@@ -35,6 +49,40 @@ abstract class Plugins extends Object implements BootstrapInterface
         return true;
     }
 
+    /**
+     * 获取插件初始配置
+     * @return array|mixed
+     */
+    final public function getInitConfig()
+    {
+        if (is_file($this->configFile)) {
+            $this->_config = include $this->configFile;
+        }
+        return $this->_config;
+    }
+
+    /**
+     * 获取插件当前配置
+     * @return array|mixed
+     */
+    final public function getConfig()
+    {
+        $cacheKey = 'pluginConfig-' . $this->info['name'];
+        $c = Yii::$app->cache->get($cacheKey);
+        if ($c === false) {
+            $name = $this->info['name'];
+            $model = Module::find()->where(['name' => $name])->one();
+            $configs = Json::decode($model->config);
+            $c = [];
+            if (!empty($configs)) {
+                foreach ($configs as $k => $config) {
+                    $c[$config['name']] = $config['value'];
+                }
+            }
+            Yii::$app->cache->set($cacheKey, $c);
+        }
+        return $c;
+    }
     /**
      * 在菜单插件管理下添加一个新菜单
      * @param $name
@@ -70,6 +118,7 @@ abstract class Plugins extends Object implements BootstrapInterface
             if (empty($model)) {
                 $model = new Module();
                 $model->attributes = $this->info;
+                $model->config = Json::encode($this->getInitConfig());
             } else {
                 $model->status = Module::STATUS_OPEN;
             }
@@ -106,6 +155,8 @@ abstract class Plugins extends Object implements BootstrapInterface
             $this->backend($app);
         } else if($app->id == 'app-frontend' && $this->hasMethod('frontend')){
             $this->frontend($app);
+        } else if($app->id == 'app-wechat' && $this->hasMethod('wechat')){
+            $this->wechat($app);
         }
     }
 

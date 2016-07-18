@@ -9,6 +9,7 @@ class m130524_201442_init extends Migration
 
     public function safeUp()
     {
+        $this->execute('SET foreign_key_checks = 0');
         // admin_log
         $this->createTable('{{%admin_log}}', [
             'id' => Schema::TYPE_PK,
@@ -135,7 +136,8 @@ class m130524_201442_init extends Migration
             'value' => Schema::TYPE_TEXT . " NOT NULL COMMENT '配置值'",
             'extra' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'desc' => Schema::TYPE_STRING . "(255) NOT NULL COMMENT '配置描述'",
-            'type' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '1'",
+            'type' => $this->string(30)->defaultValue('text')->comment('配置类型'),
+            'group' => $this->string(30)->defaultValue('system')->comment('配置分组'),
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
@@ -190,6 +192,9 @@ class m130524_201442_init extends Migration
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'qq' => $this->string(20),
             'phone' => $this->string(20),
+            'province' => $this->smallInteger(4),
+            'city' => $this->smallInteger(4),
+            'area' => $this->smallInteger(4),
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
@@ -304,6 +309,7 @@ class m130524_201442_init extends Migration
         $this->addForeignKey('fk_menu_parent', '{{%menu}}', 'parent', '{{%menu}}', 'id');
 
         $this->execute(file_get_contents(__DIR__ .'/init.sql'));
+        $this->execute('SET foreign_key_checks = 1');
     }
 
     public function safeDown()

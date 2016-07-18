@@ -8,7 +8,7 @@ use common\helpers\Html;
 use common\helpers\Url;
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('name')->scalar()]];
+$this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('slug')->scalar()]];
 $this->params['breadcrumbs'][] = $model->title;
 ?>
 <div class="col-lg-9">
@@ -40,13 +40,14 @@ $this->params['breadcrumbs'][] = $model->title;
         <?php endforeach; ?>
     </ul>
     <!--内容-->
-    <div class="view-content"><?= \yii\helpers\Markdown::process($model->data->content, 'gfm') ?></div>
+    <div class="view-content"><?= $model->data->processedContent ?></div>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
     <div class="well">带到手机上看<?= Html::img(Url::to(['/qrcode', 'text' => Yii::$app->request->absoluteUrl])) ?></div>
 
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
-    <?= $this->render('comment', ['model' => $model, 'commentModel' => $commentModel, 'commentModels' => $commentModels, 'pages' => $pages, 'commentDataProvider' => $commentDataProvider])?>
+    <!-- 评论   -->
+    <?= \frontend\widgets\comment\CommentWidget::widget(['type_id' => $model->id]) ?>
 </div>
 <div class="col-lg-3">
     <div class="panel panel-default">

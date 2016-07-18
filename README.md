@@ -1,28 +1,18 @@
-demo地址 `www.51siyuan.cn`
-
-demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
-
 ## 安装:
 
 进入项目根目录
 
 1. `composer install` 
 
-2. 创建项目所需数据库 `mysql -uroot -proot -e 'create database yii;'`
+2. `php yii app`
 
-    root root分别是你的mysql用户和密码，创建yii库
+3. `php yii serve`
 
-3. 数据库配置
+4. 收工
 
-   创建.env文件，复制.env.example里的内容，修改Databases下的几个配置
+    前台访问地址: `http://localhost:8080/`
 
-4. 导入初始化数据 `php yii migrate` 
-
-5. 收工
-
-    前台访问地址: `/web/`
-
-    后台访问地址: `/web/admin/` 管理员 帐号 `hehe` 密码 `111111`
+    后台访问地址: `http://localhost:8080/admin/` 管理员 帐号 `hehe` 密码 `111111`
     
 ## 现有功能:
 
@@ -39,6 +29,12 @@ demo后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 * 可拆卸插件
 
 * todo
+
+## demo
+
+前台地址 `www.51siyuan.cn`
+
+后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
 相关前端项目,基于本项目api
 -----------------------

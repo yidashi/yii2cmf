@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{open} {close} {install} {uninstall}',
+                        'template' => '{open} {close} {install} {uninstall} {config}',
                         'buttons' => [
                             'open' => function($url, $model, $key) {
                                 if ($model['install'] == 0) {
@@ -68,6 +68,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-confirm' => '确定要卸载该插件吗?',
                                     'data-params' => ['name' => $model['name']]
                                 ]);
+                            },
+                            'config' => function($url, $model, $key) {
+                                if ($model['install'] == 0) {
+                                    return false;
+                                }
+                                return Html::a('配置', ['config', 'name' => $model['name']]);
                             }
                         ]
                     ],

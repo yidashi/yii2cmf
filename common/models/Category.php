@@ -4,8 +4,9 @@ namespace common\models;
 
 use common\models\behaviors\CategoryBehavior;
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\ArrayHelper;
+use common\helpers\Tree;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -31,8 +32,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'name'], 'required'],
+            [['title', 'slug'], 'required'],
             [['pid', 'is_nav', 'sort'], 'integer'],
+            ['pid', 'default', 'value' => 0],
             [['is_nav','sort'], 'default', 'value' => 0]
         ];
     }
@@ -45,7 +47,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => '分类名',
-            'name' => '标识',
+            'slug' => '标识',
             'pid' => '上级分类',
             'ptitle' => '上级分类', // 非表字段,方便后台显示
             'description' => '分类介绍',
@@ -100,7 +102,7 @@ class Category extends \yii\db\ActiveRecord
             $list = self::find()->asArray()->all();
         }
 
-        $tree = self::list2tree($list);
+        $tree = Tree::build($list);
         return $tree;
     }
 
@@ -113,8 +115,8 @@ class Category extends \yii\db\ActiveRecord
         foreach($tree as $list) {
             $list['title'] = str_repeat($separator, $deep-1) . $list['title'];
             $result[] = $list;
-            if (isset($list['_child'])) {
-                self::treeList($list['_child'], $result, $deep, $separator);
+            if (isset($list['children'])) {
+                self::treeList($list['children'], $result, $deep, $separator);
             }
         }
         return $result;
@@ -130,11 +132,11 @@ class Category extends \yii\db\ActiveRecord
         $deep++;
         foreach($tree as $list) {
             $result[$list['id']] = str_repeat($separator, $deep-1) . $list['title'];
-            if (isset($list['_child'])) {
-                self::getDropDownlist($list['_child'], $result, $deep);
+            if (isset($list['children'])) {
+                self::getDropDownlist($list['children'], $result, $deep);
             }
         }
-        return ['无'] + $result;
+        return $result;
     }
 
     public function getCategoryNameById($id)
@@ -149,39 +151,5 @@ class Category extends \yii\db\ActiveRecord
         $list = $this->lists();
 
         return array_search($name, $list);
-    }
-
-    /**
-     * 把返回的数据集转换成Tree
-     * @param $list
-     * @param string $pk
-     * @param string $pid
-     * @param string $child
-     * @param int $root
-     * @return array
-     */
-    public static function list2tree($list, $pk='id', $pid = 'pid', $child = '_child', $root = 0) {
-        // 创建Tree
-        $tree = array();
-        if(is_array($list)) {
-            // 创建基于主键的数组引用
-            $refer = array();
-            foreach ($list as $key => $data) {
-                $refer[$data[$pk]] =& $list[$key];
-            }
-            foreach ($list as $key => $data) {
-                // 判断是否存在parent
-                $parentId =  $data[$pid];
-                if ($root == $parentId) {
-                    $tree[] =& $list[$key];
-                }else{
-                    if (isset($refer[$parentId])) {
-                        $parent =& $refer[$parentId];
-                        $parent[$child][] =& $list[$key];
-                    }
-                }
-            }
-        }
-        return $tree;
     }
 }

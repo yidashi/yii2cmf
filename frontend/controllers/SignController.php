@@ -14,6 +14,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use Yii;
+use yii\web\MethodNotAllowedHttpException;
 
 class SignController extends Controller
 {
@@ -28,6 +29,12 @@ class SignController extends Controller
                         'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'verbs' => ['post']
+                    ],
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'verbs' => ['get']
                     ],
                 ]
             ]
@@ -37,6 +44,9 @@ class SignController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->request->isAjax) {
+            if (!Yii::$app->request->isPost) {
+                throw new MethodNotAllowedHttpException('post');
+            }
             Yii::$app->response->format = 'json';
             $sign = Sign::find()->where(['user_id' => Yii::$app->user->id])->one();
             if (empty($sign)) {

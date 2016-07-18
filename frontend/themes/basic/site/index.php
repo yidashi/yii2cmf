@@ -5,8 +5,14 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 ?>
-<div class="site-index">
-    <div class="col-md-8">
+    <!--<div class="tp-banner-container">
+        <div class="tp-banner">
+            <?= \frontend\widgets\slider\Revolutionslider::widget([
+
+            ]) ?>
+        </div>
+    </div>-->
+    <div class="col-md-9">
         <div class="page-header"><h2>最新文章</h2></div>
         <div class="article-list">
             <?= \yii\widgets\ListView::widget([
@@ -17,7 +23,7 @@ use yii\helpers\Url;
             ]) ?>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="btn-group btn-group-justified">
             <?php if(Yii::$app->user->isGuest || (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isSign)): ?>
             <a class="btn btn-success btn-registration" href="<?= Url::to(['/sign'])?>"><i class="fa fa-calendar-plus-o"></i> 点此处签到<br>签到有好礼</a>
@@ -31,7 +37,7 @@ use yii\helpers\Url;
             <div class="panel-body">
                 <ul class="post-list">
                 <?php foreach ($categorys as $item):?>
-                    <li><a href="<?= Url::to(['/' . $item->name])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
+                    <li><a href="<?= Url::to(['/article/index', 'cate' => $item->slug])?>"><?= $item->title?> <span class="pull-right badge"><?= $item->article?></span></a></li>
                 <?php endforeach;?>
                 </ul>
             </div>
@@ -49,6 +55,4 @@ use yii\helpers\Url;
             </div>
         </div>
         <?php $this->trigger('indexSideBar') ?>
-
     </div>
-</div>

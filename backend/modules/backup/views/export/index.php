@@ -12,59 +12,63 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="config-index">
     <?php \yii\widgets\ActiveForm::begin(['id' => 'export-form', 'action' => ['init']])?>
     <p>
-        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success', 'id' => 'export']) ?>
+        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success btn-flat', 'id' => 'export']) ?>
     </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            [
-                'class' => \yii\grid\CheckboxColumn::className(),
-                'name' => 'tables',
-                'checkboxOptions' => function ($model, $key, $index, $column) {
-                    return ['value' => $model['name']];
-                }
-            ],
-            'name:text:表名',
-            'rows:text:数据量',
-            [
-                'attribute' => 'data_length',
-                'label' => '数据大小',
-                'value' => function ($model) {
-                    return Yii::$app->formatter->asShortSize($model['data_length']);
-                }
-            ],
-            'create_time:text:创建时间',
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{a} {b}',
-                'buttons' => [
-                    'a' => function ($url, $model, $key) {
-                        return Html::a('优化表',
-                            ['export/optimize', 'tables' => $model['name']],
-                            [
-                                'data' => [
-                                    'ajax' => 1,
-                                    'method' => 'get'
-                                ]
-                            ]
-                        );
-                    },
-                    'b' => function ($url, $model, $key) {
-                        return Html::a('修复表',
-                            ['export/repair', 'tables' => $model['name']],
-                            [
-                                'data' => [
-                                    'ajax' => 1,
-                                    'method' => 'get'
-                                ]
-                            ]
-                        );
-                    }
-                ]
-            ],
-        ],
-    ]); ?>
-    <?php \yii\widgets\ActiveForm::end()?>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    [
+                        'class' => \yii\grid\CheckboxColumn::className(),
+                        'name' => 'tables',
+                        'checkboxOptions' => function ($model, $key, $index, $column) {
+                            return ['value' => $model['name']];
+                        }
+                    ],
+                    'name:text:表名',
+                    'rows:text:数据量',
+                    [
+                        'attribute' => 'data_length',
+                        'label' => '数据大小',
+                        'value' => function ($model) {
+                            return Yii::$app->formatter->asShortSize($model['data_length']);
+                        }
+                    ],
+                    'create_time:text:创建时间',
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{a} {b}',
+                        'buttons' => [
+                            'a' => function ($url, $model, $key) {
+                                return Html::a('优化表',
+                                    ['export/optimize', 'tables' => $model['name']],
+                                    [
+                                        'data' => [
+                                            'ajax' => 1,
+                                            'method' => 'get'
+                                        ]
+                                    ]
+                                );
+                            },
+                            'b' => function ($url, $model, $key) {
+                                return Html::a('修复表',
+                                    ['export/repair', 'tables' => $model['name']],
+                                    [
+                                        'data' => [
+                                            'ajax' => 1,
+                                            'method' => 'get'
+                                        ]
+                                    ]
+                                );
+                            }
+                        ]
+                    ],
+                ],
+            ]); ?>
+            <?php \yii\widgets\ActiveForm::end()?>
+        </div>
+    </div>
 </div>
 <?php $this->beginBlock('js'); ?>
 <!-- /应用列表 -->
