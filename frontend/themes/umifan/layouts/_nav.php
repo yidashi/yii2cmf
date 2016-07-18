@@ -94,12 +94,8 @@ if ($noticeNums > 0) {
             ]
         ]
     ];
-} else {
-    $rightMenuItems[] = [
-        'label' => '<i class="fa fa-bell"></i>',
-        'url' => ['/notice']
-    ];
 }
+$rightMenuItems[] = ['label' => '插件', 'url' => ['/article/index', 'cate' => 'plugins']];
 if (Yii::$app->user->isGuest) {
     $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
     $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];

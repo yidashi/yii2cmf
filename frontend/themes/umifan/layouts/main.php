@@ -35,7 +35,7 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@frontend/themes/umi
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
-            <?= $content ?>
+                    <?= $content ?>
         </div>
         <footer class="clearfix">
             <div class="container">
