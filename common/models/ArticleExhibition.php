@@ -13,7 +13,7 @@ use Yii;
  * @property string $city
  * @property string $address
  */
-class ArticleExhibition extends \yii\db\ActiveRecord
+class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInterface
 {
     /**
      * @inheritdoc
@@ -29,10 +29,11 @@ class ArticleExhibition extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'start_at', 'end_at'], 'integer'],
+            [['id'], 'integer'],
+            [['start_at', 'end_at'], 'date', 'format' => 'php:Y-m-d'],
             [['city'], 'string', 'max' => 50],
             [['address'], 'string', 'max' => 255],
-            [['id'], 'unique'],
+            [['id'], 'unique', 'on' => 'create'],
         ];
     }
 
@@ -43,10 +44,25 @@ class ArticleExhibition extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'start_at' => 'Start At',
-            'end_at' => 'End At',
-            'city' => 'City',
-            'address' => 'Address',
+            'start_at' => '开始日期',
+            'end_at' => '结束日期',
+            'city' => '城市',
+            'address' => '地址',
         ];
+    }
+    public function attributeTypes()
+    {
+        return [
+            'start_at' => 'date',
+            'end_at' => 'date',
+            'city' => 'text',
+            'address' => 'text'
+        ];
+    }
+
+    public function getAttributeType($attribute)
+    {
+        $types = $this->attributeTypes();
+        return isset($types[$attribute]) ? $types[$attribute] : 'text';
     }
 }

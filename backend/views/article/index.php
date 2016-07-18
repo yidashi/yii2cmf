@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'format' => 'raw'
                     ],
+                    'module',
                     'category',
                     [
                         'attribute' => 'is_top',

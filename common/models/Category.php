@@ -33,6 +33,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'slug'], 'required'],
+            ['module', 'string'],
             [['pid', 'is_nav', 'sort'], 'integer'],
             ['pid', 'default', 'value' => 0],
             [['is_nav','sort'], 'default', 'value' => 0]
@@ -54,6 +55,7 @@ class Category extends \yii\db\ActiveRecord
             'article' => '文章数', //冗余字段,方便查询
             'is_nav' => '是否显示在导航栏',
             'sort' => '排序',
+            'module' => '文档类型',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];

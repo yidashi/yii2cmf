@@ -7,6 +7,7 @@ use common\behaviors\SoftDeleteBehavior;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -93,7 +94,8 @@ class Article extends \yii\db\ActiveRecord
             'desc' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
-            'is_top' => '置顶'
+            'is_top' => '置顶',
+            'module' => '类型'
         ];
     }
     public function attributeHints()
@@ -257,19 +259,11 @@ class Article extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function getExhibition()
+    public function getExtend()
     {
-        return $this->hasOne(ArticleExhibition::className(), ['id' => 'id']);
+        if ($this->module != 'base') {
+            $module = ArticleModule::find()->where(['name' => $this->module])->one();
+            return $this->hasOne($module->model, ['id' => 'id']);
+        }
     }
-
-    public function getSameCityExhibition()
-    {
-//        $ip = Yii::$app->request->userIP;
-//        $url = "http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
-//        $data = json_decode(file_get_contents($url), true);
-//        $city = isset($data['city']) ? $data['city'] : '北京';
-        $city = '洛阳';
-        return $this->hasOne(ArticleExhibition::className(), ['id' => 'id'])->where(['city' => $city]);
-    }
-
 }
