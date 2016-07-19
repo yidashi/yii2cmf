@@ -41,8 +41,8 @@ AppAsset::register($this);
 <footer class="footer">
     <div class="container">
         <div class="footer-link">
-            <a href="<?= Url::to(['/page/index', 'slug' => 'aboutus'])?>">关于我们</a>
-            <a href="<?= Url::to(['/page/index', 'slug' => 'mianze'])?>">免责声明</a>
+            <a href="<?= Url::to(['/page/slug', 'slug' => 'aboutus'])?>">关于我们</a>
+            <a href="<?= Url::to(['/page/slug', 'slug' => 'mianze'])?>">免责声明</a>
             <a href="<?= Url::to(['/suggest'])?>" title="意见反馈">意见反馈</a>
         </div>
         <div class="friendly-link">
