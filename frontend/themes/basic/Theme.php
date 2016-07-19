@@ -14,6 +14,9 @@ class Theme extends \frontend\themes\Theme
     public $info = [
         'author' => '易大师',
         'id' => 'basic',
-        'title' => '基本'
+        'name' => '基本',
+        'version' => 'v1.0',
+        'description' => '基础主题',
+        'keywords' => '基础 经典'
     ];
 }

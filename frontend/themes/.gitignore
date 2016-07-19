@@ -1,3 +1,4 @@
 *
 !.gitignore
-!basic
+!/basic
+!/Theme.php

@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             <h3 class="theme-name">
-                <span><?php echo $theme->isActive()?"默认:":"";?></span><?php echo $theme->getTitle()?>
+                <span><?php echo $theme->isActive()?"默认:":"";?></span><?php echo $theme->getName()?>
             </h3>
 
             <div class="theme-actions">

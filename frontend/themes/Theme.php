@@ -26,15 +26,36 @@ abstract class Theme extends Object
         return $this->getPackage() == $this->manager->getDefaultTheme();
     }
 
+    public function getPath()
+    {
+        $class = new \ReflectionClass($this);
+        return dirname($class->getFileName());
+    }
     public function getPackage()
     {
         return $this->info['id'];
     }
-    public function getTitle()
+    public function getName()
     {
-        return $this->info['title'];
+        return isset($this->info['name']) ? $this->info['name'] : '';
+    }
+    public function getAuthor()
+    {
+        return isset($this->info['author']) ? $this->info['author'] : '';
+    }
+    public function getVersion()
+    {
+        return isset($this->info['version']) ? $this->info['version'] : '';
+    }
+    public function getDescription()
+    {
+        return isset($this->info['description']) ? $this->info['description'] : '';
     }
 
+    public function getKeywords()
+    {
+        return isset($this->info['keywords']) ? $this->info['keywords'] : '';
+    }
     public function getScreenshot()
     {
         $class = new \ReflectionClass($this);
