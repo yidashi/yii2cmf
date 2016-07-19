@@ -1,3 +1,4 @@
 *
 !.gitignore
 !authclient
+!Plugins.php
