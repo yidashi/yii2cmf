@@ -31,7 +31,15 @@ class Config extends Component
             return env($name, $default);
         }
     }
-
+    public function set($name, $value)
+    {
+        $result = ConfigModel::updateAll(['value' => $value], ['name' => $name]);
+        if ($result === false) {
+            return false;
+        }
+        TagDependency::invalidate(\Yii::$app->cache, 'systemConfig');
+        return true;
+    }
     /**
      * 解析数组类型配置
      * @param $type

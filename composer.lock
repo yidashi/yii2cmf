@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2f5cc1d2d005e45e6b43b70705fe86b",
-    "content-hash": "32a39356633227343ddfef72da7e2681",
+    "hash": "cdd5c9a6d588ac6da74e4a90a14e1d1a",
+    "content-hash": "0043d5c88d871f552575b4810dd4b8a2",
     "packages": [
         {
             "name": "2amigos/yii2-editable-widget",
@@ -17,7 +17,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/2amigos/yii2-editable-widget/4ef78e7bfd575dc39e43e85ef23196382cb72783.zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-editable-widget/zipball/4ef78e7bfd575dc39e43e85ef23196382cb72783",
                 "reference": "4ef78e7bfd575dc39e43e85ef23196382cb72783",
                 "shasum": ""
             },
@@ -982,6 +982,52 @@
             "time": "2015-09-27 18:46:32"
         },
         {
+            "name": "pimple/pimple",
+            "version": "v3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silexphp/Pimple.git",
+                "reference": "a30f7d6e57565a2e1a316e1baf2a483f788b258a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/a30f7d6e57565a2e1a316e1baf2a483f788b258a",
+                "reference": "a30f7d6e57565a2e1a316e1baf2a483f788b258a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Pimple": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Pimple, a simple Dependency Injection Container",
+            "homepage": "http://pimple.sensiolabs.org",
+            "keywords": [
+                "container",
+                "dependency injection"
+            ],
+            "time": "2015-09-11 15:10:35"
+        },
+        {
             "name": "qiniu/php-sdk",
             "version": "v7.0.7",
             "source": {
@@ -1033,6 +1079,75 @@
             "time": "2016-01-11 13:20:52"
         },
         {
+            "name": "raulfraile/distill",
+            "version": "v0.9.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raulfraile/distill.git",
+                "reference": "9ab33b98651bd15c2d6d70bf8c78eda0068fe52b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raulfraile/distill/zipball/9ab33b98651bd15c2d6d70bf8c78eda0068fe52b",
+                "reference": "9ab33b98651bd15c2d6d70bf8c78eda0068fe52b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "pimple/pimple": "~3.0",
+                "symfony/filesystem": "~2.4|^3.0",
+                "symfony/process": "~2.4|^3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.1",
+                "raulfraile/ladybug": "~1.0",
+                "symfony/finder": "~2.4|^3.0"
+            },
+            "suggest": {
+                "ext-rar": "Allows to uncompress rar files using RarArchive",
+                "ext-zip": "Allows to uncompress zip files using ZipArchive"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Distill\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raul Fraile",
+                    "email": "raulfraile@gmail.com"
+                }
+            ],
+            "description": "Smart compressed files extractor",
+            "keywords": [
+                "7zip",
+                "archive",
+                "bz2",
+                "bzip",
+                "bzip2",
+                "cab",
+                "compression",
+                "epub",
+                "extractor",
+                "gzip",
+                "phar",
+                "rar",
+                "strategy",
+                "tar.gz",
+                "tar.xz",
+                "tgz",
+                "unzip",
+                "xz",
+                "zip"
+            ],
+            "time": "2015-12-15 06:50:39"
+        },
+        {
             "name": "studio-42/elfinder",
             "version": "2.1.13",
             "source": {
@@ -1042,7 +1157,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/Studio-42/elFinder/0fdd17e79be892ba807fc38127339372cb1b7c30.zip",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/0fdd17e79be892ba807fc38127339372cb1b7c30",
                 "reference": "0fdd17e79be892ba807fc38127339372cb1b7c30",
                 "shasum": ""
             },
@@ -1100,7 +1215,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153.zip",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
@@ -1142,6 +1257,55 @@
                 "mailer"
             ],
             "time": "2016-07-08 11:51:25"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/filesystem.git",
+                "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/322da5f0910d8aa0b25fa65ffccaba68dbddb890",
+                "reference": "322da5f0910d8aa0b25fa65ffccaba68dbddb890",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-06-29 05:41:56"
         },
         {
             "name": "symfony/process",
@@ -1402,7 +1566,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-framework/2b75151ea60e1fd820046416eee2e89c3dda1133.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
                 "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
                 "shasum": ""
             },
@@ -1496,7 +1660,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-authclient/96dd47c762749991a57d8c343b1a1ecfadf9c4c8.zip",
+                "url": "https://api.github.com/repos/yiisoft/yii2-authclient/zipball/96dd47c762749991a57d8c343b1a1ecfadf9c4c8",
                 "reference": "96dd47c762749991a57d8c343b1a1ecfadf9c4c8",
                 "shasum": ""
             },
@@ -2135,7 +2299,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "raulfraile/distill": 0
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

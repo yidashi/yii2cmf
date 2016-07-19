@@ -65,7 +65,10 @@ return [
                 ]
             ],
         ],
-        'events' => \backend\components\Events::className()
+        'events' => \backend\components\Events::className(),
+        'themeManager' => [
+            'class' => \backend\components\ThemeManager::className(),
+        ]
     ],
     'modules' => [
         'admin' => [
