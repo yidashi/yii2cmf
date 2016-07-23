@@ -44,7 +44,7 @@ class m160722_114202_create_area_table extends Migration
         $this->insert('{{%area}}', [
             'area_id' => '3',
             'title' => '侧边栏',
-            'slug' => 'slider',
+            'slug' => 'sidebar',
             'description' => '侧边栏',
             'blocks' => ''
         ]);
