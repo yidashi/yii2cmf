@@ -6,7 +6,6 @@ use yii\helpers\Html;
 
 backend\assets\AppAsset::register($this);
 
-$directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/assets');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -23,19 +22,16 @@ $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@backend/assets');
 <div class="wrapper">
 
     <?= $this->render(
-        'header.php',
-        ['directoryAsset' => $directoryAsset]
+        'header.php'
     ) ?>
 
     <?= $this->render(
-        'left.php',
-        ['directoryAsset' => $directoryAsset]
-    )
+        'left.php')
     ?>
 
     <?= $this->render(
         'content.php',
-        ['content' => $content, 'directoryAsset' => $directoryAsset]
+        ['content' => $content]
     ) ?>
 
 </div>

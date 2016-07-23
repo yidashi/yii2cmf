@@ -26,11 +26,15 @@ return [
         ],
         'i18n' => [
             'translations' => [
+                'app' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/messages',
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
+                ],
                 '*'=> [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath'=>'@common/messages',
                     'fileMap'=>[
-                        'app'=>'app.php',
                         'common'=>'common.php',
                         'backend'=>'backend.php',
                         'frontend'=>'frontend.php',
