@@ -30,7 +30,7 @@ class AppController extends Controller
 
     public $envPath = '@root/.env';
 
-    public $installFile = '@root/storage/install.txt';
+    public $installFile = '@root/web/storage/install.txt';
 
     public function actionSetWritable()
     {
