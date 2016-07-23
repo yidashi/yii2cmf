@@ -53,8 +53,7 @@ class Plugins extends \plugins\Plugins
     {
         parent::uninstall();
         $class = new Migrate();
-        //避免数据被删除,演示站卸载时候表还是不删了
-//        $class->down();
+        $class->down();
         $this->deleteMenu('捐赠');
     }
 }

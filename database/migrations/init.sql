@@ -60,8 +60,7 @@ INSERT INTO {{%config}} VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数
 (8,'FOOTER','','','底部','textarea',0,1461937892,'site'),
 (9,'THEME_NAME','basic','','主题名','text',0,1467882452,'site'),
 (10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤','select',1461931367,1461937892,'system'),
-(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1468406411,'site'),
-(12,'ADMIN_EMAIL','','','管理员邮箱','text',0,1468406411,'email');
+(11,'ADMIN_EMAIL','','','管理员邮箱','text',0,1468406411,'email');
 /*!40000 ALTER TABLE {{%config}} ENABLE KEYS */;
 UNLOCK TABLES;
 

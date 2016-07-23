@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `{{%area}}`.
+ * Handles the creation for table `{{%city}}`.
  */
 class m160712_030817_create_city_table extends Migration
 {
@@ -26,7 +26,7 @@ class m160712_030817_create_city_table extends Migration
     /**
      * @inheritdoc
      */
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%city}}');
     }
