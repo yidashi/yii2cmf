@@ -19,7 +19,7 @@ class m160712_030817_create_city_table extends Migration
             'sort' => $this->smallInteger(1)->comment('排序'),
             'deep' => $this->smallInteger(1)->comment('地区深度,冗余字段')
         ]);
-        $this->createIndex('parent_id', '{{%area}}', 'parent_id');
+        $this->createIndex('parent_id', '{{%city}}', 'parent_id');
         $this->execute(file_get_contents(__DIR__ . '/city.sql'));
     }
 
