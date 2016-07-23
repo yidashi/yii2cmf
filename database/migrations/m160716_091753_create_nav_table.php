@@ -31,7 +31,7 @@ class m160716_091753_create_nav_table extends Migration
             'key' => 'header',
             'title' => '顶部导航'
          ]);
-        $this->insert('{{%nav-item}}', [
+        $this->insert('{{%nav_item}}', [
             'id' => 1,
             'nav_id' => 1,
             'title' => '首页',
