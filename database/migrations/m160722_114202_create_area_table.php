@@ -33,6 +33,44 @@ class m160722_114202_create_area_table extends Migration
             'used' => 'SMALLINT(6) NOT NULL',
             'PRIMARY KEY (`block_id`)'
         ], "CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB");
+
+        $this->insert('{{%area}}', [
+            'area_id' => '1',
+            'title' => '首页头部',
+            'slug' => 'index-header',
+            'description' => 'default',
+            'blocks' => ''
+        ]);
+        $this->insert('{{%area}}', [
+            'area_id' => '3',
+            'title' => '侧边栏',
+            'slug' => 'slider',
+            'description' => '侧边栏',
+            'blocks' => ''
+        ]);
+
+        $this->insert('{{%area_block}}', [
+            'block_id' => '7',
+            'title' => '公告',
+            'type' => 'text',
+            'widget' => 'hass\\area\\widgets\\TextWidget',
+            'slug' => 'gong-gao',
+            'config' => '',
+            'template' => '<p>这里是公告</p>',
+            'cache' => '0',
+            'used' => '0'
+        ]);
+        $this->insert('{{%area_block}}', [
+            'block_id' => '9',
+            'title' => '区域测试',
+            'type' => 'text',
+            'widget' => 'hass\\area\\widgets\\TextWidget',
+            'slug' => 'qu-yu-ce-shi',
+            'config' => '',
+            'template' => '<p>这里是侧边栏的区域中的一个区块</p>',
+            'cache' => '0',
+            'used' => '0'
+        ]);
     }
 
     /**
