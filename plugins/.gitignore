@@ -1,4 +1,3 @@
-*
-!.gitignore
-!authclient
-!Plugins.php
+backup
+danmu
+donation
