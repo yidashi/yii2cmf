@@ -10,19 +10,28 @@ namespace common\components;
 
 
 use yii\base\Component;
-use yii\caching\DbDependency;
 use common\models\Config as ConfigModel;
 use yii\caching\TagDependency;
+use yii\helpers\VarDumper;
 
 class Config extends Component
 {
+    public $cacheKey = 'allSystemConfigs';
+
+    public $localConfigFile;
+
+    public function init()
+    {
+        parent::init();
+        $this->localConfigFile = \Yii::getAlias($this->localConfigFile);
+    }
+
     public function get($name, $default = '')
     {
-        $cacheKey = 'allSystemConfigs';
-        $configs = \Yii::$app->cache->get($cacheKey);
+        $configs = \Yii::$app->cache->get($this->cacheKey);
         if ($configs === false) {
             $configs = ConfigModel::find()->indexBy('name')->all();
-            \Yii::$app->cache->set($cacheKey, $configs, 60 * 60, new TagDependency(['tags' => 'systemConfig']));
+            \Yii::$app->cache->set($this->cacheKey, $configs, 60 * 60, new TagDependency(['tags' => 'systemConfig']));
         }
         if (isset($configs[$name])) {
             $config = $configs[$name];
@@ -64,5 +73,29 @@ class Config extends Component
         }
 
         return $value;
+    }
+
+
+    public function getConfigFromLocal()
+    {
+        $config = require ($this->localConfigFile);
+
+        if (! is_array($config))
+            return [];
+        return $config;
+    }
+
+    /**
+     * Sets configuration into the file
+     *
+     * @param array $config
+     */
+    public function setConfigToLocal($config = [])
+    {
+        $content = "<" . "?php return ";
+        $content .= VarDumper::export($config);
+        $content .= ";";
+
+        file_put_contents($this->localConfigFile, $content);
     }
 }

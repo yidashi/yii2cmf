@@ -2,8 +2,9 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Nav;
+use Yii;
+use common\models\NavItem;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -20,7 +21,7 @@ class NavController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['post']
                 ],
             ],
         ];
@@ -33,31 +34,13 @@ class NavController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Nav::find(),
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
-            ]
-
+            'query' => Nav::find()
         ]);
-
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
     }
 
-    /**
-     * Displays a single Nav model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new Nav model.
@@ -69,7 +52,7 @@ class NavController extends Controller
         $model = new Nav();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -87,11 +70,16 @@ class NavController extends Controller
     {
         $model = $this->findModel($id);
 
+        $navItemsProvider = new ActiveDataProvider([
+            'query' => NavItem::find()->where(['nav_id'=>$model->id])->orderBy('order')
+        ]);
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'navItemsProvider'=>$navItemsProvider
             ]);
         }
     }

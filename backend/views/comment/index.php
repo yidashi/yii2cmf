@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      'down',
                     'created_at:datetime',
                     [
-                        'class' => 'yii\grid\ActionColumn',
+                        'class' => 'backend\widgets\grid\ActionColumn',
                         'template' => '{view} {delete} {ban}',
                         'buttons' => [
                             'ban' => function($url, $model, $key) {

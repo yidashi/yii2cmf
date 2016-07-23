@@ -2,7 +2,7 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
-    'runtimePath' => dirname(dirname(__DIR__)).'/runtime',
+    'runtimePath' => '@root/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',
     'components' => [
@@ -20,17 +20,12 @@ return [
         'assetManager' => [
             'bundles' => [
                 'yii\web\YiiAsset' => [
-                    'sourcePath' => '@common/assets',
+                    'sourcePath' => '@common/static',
                 ],
             ],
         ],
         'i18n' => [
             'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
-                    'forceTranslation' => true,
-                ],
                 '*'=> [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath'=>'@common/messages',
@@ -42,9 +37,25 @@ return [
                     ],
                     'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
                 ],
+                /*'*'=> [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'sourceMessageTable'=>'{{%i18n_source_message}}',
+                    'messageTable'=>'{{%i18n_message}}',
+                    'enableCaching' => YII_ENV_DEV,
+                    'cachingDuration' => 3600,
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
+                ],*/
             ],
         ],
-        'config' => \common\components\Config::className(), //数据库动态配置
+        'config' => [ //动态配置
+            'class' => 'common\\components\\Config',
+            'localConfigFile' => '@common/config/main-local.php'
+        ],
+        'storage' => [
+            'class' => 'common\\components\\Storage',
+            'basePath' => '@storagePath/upload',
+            'baseUrl' => '@storageUrl/upload'
+        ],
         'queue' => [//队列组件化,方便替换
             'class' => \common\components\Queue::className(),
         ],

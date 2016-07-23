@@ -20,7 +20,7 @@ class AdminLog
                 $desc .= $name . ' : ' . $value . '=>' . $event->sender->getAttribute($name) . ',';
             }
             $desc = substr($desc, 0, -1);
-            $description = Yii::$app->user->identity->username . '修改了表' . $event->sender->tableSchema->name . ' id:' . $event->sender->id . '的' . $desc;
+            $description = Yii::$app->user->identity->username . '修改了表' . $event->sender->tableSchema->name . ' id:' . $event->sender->primaryKey()[0] . '的' . $desc;
             $route = Url::to();
             $userId = Yii::$app->user->id;
             $ip = ip2long(Yii::$app->request->userIP);

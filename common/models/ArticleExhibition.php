@@ -30,7 +30,7 @@ class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInt
     {
         return [
             [['id'], 'integer'],
-            [['start_at', 'end_at'], 'date', 'format' => 'php:Y-m-d'],
+            [['start_at', 'end_at'], 'date', 'format' => 'php:Y-m-d H:i:s'],
             [['city'], 'string', 'max' => 50],
             [['address'], 'string', 'max' => 255],
             [['id'], 'unique', 'on' => 'create'],
@@ -53,8 +53,8 @@ class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInt
     public function attributeTypes()
     {
         return [
-            'start_at' => 'date',
-            'end_at' => 'date',
+            'start_at' => 'datetime',
+            'end_at' => 'datetime',
             'city' => 'text',
             'address' => 'text'
         ];

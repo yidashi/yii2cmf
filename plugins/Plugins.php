@@ -8,6 +8,7 @@
 
 namespace plugins;
 
+use common\components\PackageInfo;
 use Yii;
 use yii\helpers\Json;
 use yii\web\View;
@@ -15,10 +16,9 @@ use ReflectionClass;
 use yii\base\InvalidParamException;
 use common\models\Module;
 use yii\base\BootstrapInterface;
-use yii\base\Object;
 use mdm\admin\components\MenuHelper;
 
-abstract class Plugins extends Object implements BootstrapInterface
+abstract class Plugins extends PackageInfo implements BootstrapInterface
 {
     private $_config = [];
 
@@ -30,6 +30,14 @@ abstract class Plugins extends Object implements BootstrapInterface
         'desc' => ''
     ];
 
+    public $aliases = [];
+    /**
+     * @var string 模块所属应用ID(frontend,backend,wechat,api)
+     */
+    public $app = 'app-backend';
+    /**
+     * @var string 配置文件名
+     */
     public $configFile = '';
 
     public function init()
@@ -41,7 +49,7 @@ abstract class Plugins extends Object implements BootstrapInterface
         }
     }
     final public function checkInfo(){
-        $info_check_keys = ['name','title','desc','author','version'];
+        $info_check_keys = ['id','name','description','author','version'];
         foreach ($info_check_keys as $value) {
             if(!array_key_exists($value, $this->info))
                 return false;
@@ -114,7 +122,7 @@ abstract class Plugins extends Object implements BootstrapInterface
     public function install()
     {
         if ($this->checkInfo()) {
-            $model = Module::find()->where(['name' => $this->info['name']])->one();
+            $model = Module::find()->where(['id' => $this->getPackage()])->one();
             if (empty($model)) {
                 $model = new Module();
                 $model->attributes = $this->info;
@@ -122,19 +130,23 @@ abstract class Plugins extends Object implements BootstrapInterface
             } else {
                 $model->status = Module::STATUS_OPEN;
             }
-            $model->save();
+            return $model->save();
         }
+        return false;
     }
 
     //卸载
     public function uninstall()
     {
-        $name = $this->info['name'];
-        $model = Module::find()->where(['name' => $name])->one();
+        $model = Module::find()->where(['id' => $this->getPackage()])->one();
         $model->status = Module::STATUS_UNINSTALL;
         $model->save();
     }
 
+    public function upgrade()
+    {
+
+    }
     /**
      * 各插件在系统bootstrap阶段执行,前台执行frontend方法,后台执行backend方法.
      * 比如插件要在后台添加一个控制器,则可以这样写
@@ -234,4 +246,38 @@ abstract class Plugins extends Object implements BootstrapInterface
 
         return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
     }
+
+    private $_model;
+    public function getModel()
+    {
+        if ($this->_model == null) {
+            $model = Module::findOne($this->getPackage());
+            if ($model == null) {
+                $model = new Module();
+                $model->loadDefaultValues();
+                $model->id = $this->getPackage();
+                $model->app = $this->app;
+            }
+            $this->_model = $model;
+        }
+        return $this->_model;
+    }
+    public function getInstall()
+    {
+        return $this->getModel()->getInstall();
+    }
+    public function getOpen()
+    {
+        return $this->getModel()->getOpen();
+    }
+    public function canUninstall()
+    {
+        return $this->getModel()->install === true;
+    }
+
+    public function canInstall()
+    {
+        return $this->getModel()->install ===  false;
+    }
+
 }

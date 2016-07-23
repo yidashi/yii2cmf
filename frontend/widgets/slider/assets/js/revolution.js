@@ -6,7 +6,10 @@ $('.tp-banner').not('.full-width-revolution').revolution({
 	startwidth:1170,
 	startheight:500,
 	hideThumbs:10,
-	navigationType:"none"
+    navigationType:"both",					//bullet, thumb, none, both	 (No Shadow in Fullwidth Version !)
+    navigationArrows:"verticalcentered",		//nexttobullets, verticalcentered, none
+    navigationStyle:"round",
+
 });
 
 /* Revolution Slider Fullwidth */

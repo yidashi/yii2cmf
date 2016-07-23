@@ -15,54 +15,85 @@ use yii\helpers\Console;
 
 class AppController extends Controller
 {
-    public $writAblePaths = [
-        'runtime',
-        'web/assets',
-        'web/admin/assets',
-        'web/static'
-    ];
-    public function actionIndex()
-    {
+    public $defaultAction = 'install';
 
-        if (!extension_loaded('openssl')) {
-            die('The OpenSSL PHP extension is required by Yii2.');
+    public $writablePaths = [
+        '@root/runtime',
+        '@root/web/assets',
+        '@root/web/admin/assets',
+        '@root/web/storage'
+    ];
+
+    public $executablePaths = [
+        '@root/yii',
+    ];
+
+    public $envPath = '@root/.env';
+
+    public $installFile = '@root/storage/install.txt';
+
+    public function actionSetWritable()
+    {
+        $this->setWritable($this->writablePaths);
+    }
+
+    public function actionSetExecutable()
+    {
+        $this->setExecutable($this->executablePaths);
+    }
+
+    public function actionSetKeys()
+    {
+        $this->setKeys($this->envPath);
+    }
+
+    public function setWritable($paths)
+    {
+        foreach ($paths as $writable) {
+            $writable = Yii::getAlias($writable);
+            Console::output("Setting writable: {$writable}");
+            @chmod($writable, 0777);
         }
-        $root = str_replace('\\', '/', dirname(dirname(__DIR__)));
-        setWritable($root, $this->writAblePaths);
-        $envFile = $root . '/.env';
-        if (is_file($envFile) && !$this->confirm('系统已经安装,是否要重置?')) {
-            die;
+    }
+
+    public function setExecutable($paths)
+    {
+        foreach ($paths as $executable) {
+            $executable = Yii::getAlias($executable);
+            Console::output("Setting executable: {$executable}");
+            @chmod($executable, 0755);
         }
+    }
+
+    public function setKeys($file)
+    {
+        $file = Yii::getAlias($file);
+        Console::output("Generating keys in {$file}");
+        $content = file_get_contents($file);
+        $content = preg_replace_callback('/<generated_key>/', function () {
+            $length = 32;
+            $bytes = openssl_random_pseudo_bytes(32, $cryptoStrong);
+            return strtr(substr(base64_encode($bytes), 0, $length), '+/', '_-');
+        }, $content);
+        file_put_contents($file, $content);
+    }
+
+    public function actionSetDb()
+    {
         do {
-            $dbHost = $this->prompt('数据库地址:', ['default' => '127.0.0.1']);
-            $dbPort = $this->prompt('数据库端口:', ['default' => '3306']);
-            $dbDbname = $this->prompt('数据库库名(不存在则自动创建):', ['default' => 'yii']);
-            $dbUsername = $this->prompt('数据库帐号:', ['default' => 'root']);
-            $dbPassword = $this->prompt('数据库密码:', ['default' => 'root']);
+            $dbHost = $this->prompt('dbhost:', ['default' => '127.0.0.1']);
+            $dbPort = $this->prompt('dbport:', ['default' => '3306']);
+            $dbDbname = $this->prompt('dbname(auto create):', ['default' => 'yii']);
+            $dbUsername = $this->prompt('dbusername:', ['default' => 'root']);
+            $dbPassword = $this->prompt('dbpassword:', ['default' => 'root']);
             $dbDsn = "mysql:host={$dbHost};port={$dbPort}";
         } while(!$this->testConnect($dbDsn, $dbDbname, $dbUsername, $dbPassword));
         $dbDsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbDbname}";
-        $dbTablePrefix = $this->prompt('数据库表前缀:', ['default' => 'pop_']);
-        $this->stdout("\n  ... 初始化配置 ...\n\n");
-        copy($root . '/.env.example', $envFile);
-        setEnv('DB_USERNAME', $dbUsername);
-        setEnv('DB_PASSWORD', $dbPassword);
-        setEnv('DB_TABLE_PREFIX', $dbTablePrefix);
-        setEnv('DB_DSN', $dbDsn);
-        setEnv('FRONTEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
-        setEnv('BACKEND_COOKIE_VALIDATION_KEY', generateCookieValidationKey());
-        $this->stdout("\n  ... 初始化配置成功 ...\n\n", Console::FG_GREEN);
-        $this->stdout("\n  ... 初始化数据库 ...\n\n");
-        $this->command('migrate --interactive=0');
-        $this->stdout("\n  ... 初始化数据库成功 ...\n\n", Console::FG_GREEN);
-        $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
-        setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
-        setEnv('YII_ENV', $appStatus);
-        $this->stdout("\n  ... 应用构建成功.\n\n", Console::FG_GREEN);
-    }
-    public function actionUpdate()
-    {
-        $this->command('migrate --interactive=0');
+        $dbTablePrefix = $this->prompt('tableprefix:', ['default' => 'pop_']);
+        $this->setEnv('DB_USERNAME', $dbUsername);
+        $this->setEnv('DB_PASSWORD', $dbPassword);
+        $this->setEnv('DB_TABLE_PREFIX', $dbTablePrefix);
+        $this->setEnv('DB_DSN', $dbDsn);
     }
     public function testConnect($dsn = '', $dbname, $username = '', $password = '')
     {
@@ -77,89 +108,48 @@ class AppController extends Controller
         }
         return true;
     }
-    public function command($cmd)
+    public function setEnv($name, $value)
     {
-        $yii = str_replace('\\', '/', dirname(dirname(__DIR__))) . '/yii';
-        $cmd = PHP_BINDIR . '/php ' . $yii . ' ' . $cmd;
-        if ($this->isWindows() === true) {
-            pclose(popen('start /b ' . $cmd, 'r'));
-        } else {
-            pclose(popen($cmd . ' > /dev/null &', 'r'));
-        }
-        return true;
+        $file = Yii::getAlias($this->envPath);
+        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1$value", file_get_contents($file));
+        file_put_contents($file, $content);
     }
-    /**
-     * Check operating system
-     *
-     * @return boolean true if it's Windows OS
-     */
-    protected function isWindows()
+
+    public function checkInstalled()
     {
-        if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32') {
-            return true;
-        } else {
-            return false;
+        return file_exists(Yii::getAlias($this->installFile));
+    }
+
+    public function actionInstall()
+    {
+        if ($this->checkInstalled()) {
+            $this->stdout("\n  ... 已经安装过.\n\n", Console::FG_RED);
+            die;
         }
+        copy(Yii::getAlias('@root/.env.example'), Yii::getAlias($this->envPath));
+        $this->runAction('set-writable', ['interactive' => $this->interactive]);
+        $this->runAction('set-executable', ['interactive' => $this->interactive]);
+        $this->runAction('set-keys', ['interactive' => $this->interactive]);
+        $this->runAction('set-db', ['interactive' => $this->interactive]);
+        Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
+        $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
+        $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
+        $this->setEnv('YII_ENV', $appStatus);
+        file_put_contents(Yii::getAlias($this->installFile), time());
+        $this->stdout("\n  ... 应用构建成功.\n\n", Console::FG_GREEN);
     }
-}
-function getFileList($root, $basePath = '')
-{
-    $files = [];
-    $handle = opendir($root);
-    while (($path = readdir($handle)) !== false) {
-        if ($path === '.svn' || $path === '.' || $path === '..') {
-            continue;
-        }
-        $fullPath = "$root/$path";
-        $relativePath = $basePath === '' ? $path : "$basePath/$path";
-        if (is_dir($fullPath)) {
-            $files = array_merge($files, getFileList($fullPath, $relativePath));
-        } else {
-            $files[] = $relativePath;
-        }
+
+    public function actionReset()
+    {
+
     }
-    closedir($handle);
-    return $files;
-}
 
-function setEnv($name, $value)
-{
-    $root = str_replace('\\', '/', dirname(dirname(__DIR__)));
-    $file = $root . '/.env';
-    $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1$value", file_get_contents($file));
-    file_put_contents($file, $content);
-}
-
-
-function setWritable($root, $paths)
-{
-    foreach ($paths as $writable) {
-        echo "      chmod 0777 $writable\n";
-        @chmod("$root/$writable", 0777);
+    public function actionUpdate()
+    {
+        \Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
     }
+
+
 }
 
-function setExecutable($root, $paths)
-{
-    foreach ($paths as $executable) {
-        echo "      chmod 0755 $executable\n";
-        @chmod("$root/$executable", 0755);
-    }
-}
 
-function generateCookieValidationKey()
-{
-    $length = 32;
-    $bytes = openssl_random_pseudo_bytes($length);
-    $key = strtr(substr(base64_encode($bytes), 0, $length), '+/=', '_-.');
-    return $key;
-}
-
-function createSymlink($root, $links) {
-    foreach ($links as $link => $target) {
-        echo "      symlink " . $root . "/" . $target . " " . $root . "/" . $link . "\n";
-        //first removing folders to avoid errors if the folder already exists
-        @rmdir($root . "/" . $link);
-        @symlink($root . "/" . $target, $root . "/" . $link);
-    }
-}

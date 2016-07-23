@@ -14,13 +14,16 @@ class m160716_091753_create_nav_table extends Migration
     {
         $this->createTable('{{%nav}}', [
             'id' => $this->primaryKey(),
-            'slug' => $this->string(128),
+            'key' => $this->string(128),
+            'title' => $this->string(128),
+        ]);
+        $this->createTable('{{%nav_item}}', [
+            'id' => $this->primaryKey(),
+            'nav_id' => $this->integer(11),
             'title' => $this->string(128),
             'url' => $this->string(128),
-            'data' => $this->string(128),
-            'type' => $this->string(128),
-            'pid' => $this->smallInteger(1),
-            'status' => $this->smallInteger(1),
+            'order' => $this->smallInteger(1),
+            'status' => $this->smallInteger(1)
         ]);
     }
 
@@ -30,5 +33,6 @@ class m160716_091753_create_nav_table extends Migration
     public function down()
     {
         $this->dropTable('{{%nav}}');
+        $this->dropTable('{{%nav_item}}');
     }
 }

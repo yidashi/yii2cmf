@@ -40,13 +40,6 @@ class ThemeBehavior extends ActionFilter
                 }
             }
         }
-        //设置cookie
-        Yii::$app->response->cookies->add(new Cookie([
-            'name' => $this->themeCookieName,
-            'value' => $themeName,
-            'expire' => 0 // 默认0,浏览器关闭cookie失效
-
-        ]));
         return $themeName;
     }
     public function setTheme($themeName)

@@ -7,11 +7,14 @@ use Yii;
 /**
  * This is the model class for table "{{%area}}".
  *
- * @property integer $id
- * @property string $name
- * @property integer $parent_id
- * @property integer $sort
- * @property integer $deep
+ * @property integer $area_id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property string $blocks
+ * @package hass\package_name
+ * @author zhepama <zhepama@gmail.com>
+ * @since 0.1.0
  */
 class Area extends \yii\db\ActiveRecord
 {
@@ -29,8 +32,9 @@ class Area extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'sort', 'deep'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['title', 'slug', 'description'], 'required'],
+            [['title', 'slug', 'description'], 'string'],
+            ["blocks","safe"]
         ];
     }
 
@@ -40,66 +44,51 @@ class Area extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => '地区名',
-            'parent_id' => '父ID',
-            'sort' => '排序',
-            'deep' => '地区深度',
+            'area_id' => Yii::t('backend', 'Area ID'),
+            'title' => Yii::t('backend', 'Title'),
+            'slug' => Yii::t('backend', 'Slug'),
+            'description' => Yii::t('backend', 'Description'),
+            'blocks' => Yii::t('backend', 'Blocks'),
         ];
     }
 
-    /**
-     * 解析全地址( 北京 北京市 东城区)成省ID 市ID 区ID
-     * @param string|array $fullArea
-     * @return array
-     */
-    public static function parseFullArea($fullArea)
+
+    public function beforeSave($insert)
     {
-        if (is_string($fullArea)) {
-            $fullArea = explode(' ', $fullArea);
+        if(parent::beforeSave($insert) == false) {
+            return false;
         }
-        list($province, $city, $area) = $fullArea;
-        return [
-            self::getId($province),
-            self::getId($city),
-            self::getId($area)
-        ];
+        $this->blocks = serialize($this->blocks);
+        return true;
 
     }
 
-    /**
-     * 把省市区ID生成全地址 北京 北京市 东城区
-     * @param $province
-     * @param $city
-     * @param $area
-     * @return string
-     */
-    public static function createFullArea($province, $city, $area)
+    public function afterFind()
     {
-        return join(' ', [
-            self::getName($province),
-            self::getName($city),
-            self::getName($area)
-        ]);
+        parent::afterFind();
+        $this->blocks = unserialize($this->blocks);
     }
-    public static function getId($name)
-    {
-        return self::find()->where(['name' => $name])->select('id')->scalar();
-    }
-    public static function getName($id)
-    {
-        return self::find()->where(['id' => $id])->select('name')->scalar();
-    }
-    public static function getChildren($id = null)
-    {
-        if (is_null($id)) {
-            return [];
+
+    public function getBlocks() {
+        if(!empty($this->blocks))
+        {
+            $query =   Block::find()->where(['block_id' => $this->blocks])->orderBy([new \yii\db\Expression('FIELD (block_id, ' . implode(', ', $this->blocks) . ')')]);
+            return $query->all();
         }
-        $area = Yii::$app->cache->get(['area', $id]);
-        if ($area === false) {
-            $area = self::find()->where(['parent_id' => $id])->select('name')->indexBy('id')->column();
-            Yii::$app->cache->set(['area', $id], $area);
-        }
-        return $area;
+        return [];
     }
+
+    public static function findByIdOrSlug($id)
+    {
+        if (intval($id) == 0) {
+            $condition = ["slug" => $id];
+        } else {
+            $condition = [
+                $id
+            ];
+        }
+
+        return static::findOne($condition);
+    }
+
 }

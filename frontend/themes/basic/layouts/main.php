@@ -9,6 +9,14 @@ use yii\widgets\Breadcrumbs;
 use frontend\themes\basic\assets\AppAsset;
 
 AppAsset::register($this);
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => isset($this->params['SEO_SITE_KEYWORDS']) ? $this->params['SEO_SITE_KEYWORDS'] : Yii::$app->config->get('SEO_SITE_KEYWORDS')
+], 'keywords');
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => isset($this->params['SEO_SITE_DESCRIPTION']) ? $this->params['SEO_SITE_DESCRIPTION'] : Yii::$app->config->get('SEO_SITE_DESCRIPTION')
+], 'description');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -19,8 +27,6 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link type="image/x-icon" href="<?= Yii::getAlias('@web') ?>favicon.ico" rel="shortcut icon">
-    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->config->get('SEO_SITE_KEYWORDS')]);?>
-    <?php $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);?>
     <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';</script>
     <?php $this->head() ?>
 </head>
@@ -37,28 +43,7 @@ AppAsset::register($this);
         <?= $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-link">
-            <a href="<?= Url::to(['/page/slug', 'slug' => 'aboutus'])?>">关于我们</a>
-            <a href="<?= Url::to(['/page/slug', 'slug' => 'mianze'])?>">免责声明</a>
-            <a href="<?= Url::to(['/suggest'])?>" title="意见反馈">意见反馈</a>
-        </div>
-        <div class="friendly-link">
-            <span>友情链接：</span>
-            <?php if(Yii::$app->config->get('FRIENDLY_LINK')): ?>
-            <?php foreach(Yii::$app->config->get('FRIENDLY_LINK') as $k => $v): ?>
-            <a href="<?= $v ?>" target="_blank" title="<?= $k ?>"><?= $k ?></a>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
-        <div class="footer-copyright">
-            <p>&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
-            <p><?= Yii::$app->config->get('SITE_ICP')?></p>
-        </div>
-    </div>
-</footer>
+<?= $this->render('_footer') ?>
 <?php \yii\bootstrap\Modal::begin([
     'id' => 'commonModal',
     'header' => '<h4>提示</h4>',
@@ -67,11 +52,7 @@ AppAsset::register($this);
 <?php \yii\bootstrap\Modal::end()?>
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
-<?php if (YII_ENV_PROD):?>
-<!--页脚-->
 <?= Yii::$app->config->get('FOOTER')?>
-<?php endif; ?>
-<?php $this->trigger('footer'); ?>
 <?php $this->endBody() ?>
 </body>
 </html>

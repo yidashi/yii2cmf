@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
     <ul class="nav nav-pills">
-        <?php foreach(Yii::$app->config->get('CONFIG_GROUP') as $k => $g): ?>
+        <?php foreach($groups as $k => $g): ?>
             <li<?php if ($k == $group): ?> class="active"<?php endif; ?>><?= \common\helpers\Html::a($g, ['config', 'group' => $k]) ?></li>
         <?php endforeach; ?>
     </ul>

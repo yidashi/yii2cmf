@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
+/* @var $model common\models\Article */
 /* @var $module string */
 
 $this->title = '发表文章';
@@ -16,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-create">
 
     <?= $this->render('_form', [
-        'model' => $model
+        'model' => $model,
+        'dataModel' => $dataModel,
+        'moduleModel' => $moduleModel,
+        'module' => $module
     ]) ?>
 
 </div>

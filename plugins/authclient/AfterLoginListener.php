@@ -21,6 +21,14 @@ class AfterLoginListener
     background: url({$url}/qq.png) no-repeat;
     background-size: 32px 32px;
 }
+.auth-icon.weibo {
+    background: url({$url}/weibo.png) no-repeat;
+    background-size: 32px 32px;
+}
+.auth-icon.weixin {
+    background: url({$url}/weixin.png) no-repeat;
+    background-size: 32px 32px;
+}
 CSS
             );
             echo \yii\authclient\widgets\AuthChoice::widget([

@@ -17,9 +17,9 @@ class Plugins extends \plugins\Plugins
     public $info = [
         'author' => '易大师',
         'version' => 'v1.0',
-        'name' => 'authclient',
-        'title' => '第三方登录',
-        'desc' => '第三方登录插件'
+        'id' => 'authclient',
+        'name' => '第三方登录',
+        'description' => '第三方登录插件'
     ];
 
     public function frontend($app)
@@ -28,7 +28,7 @@ class Plugins extends \plugins\Plugins
         $config = $this->getConfig();
         $params = [
             'qq' => [
-                'class' => 'plugins\authclient\clients\QqOAuth',
+                'class' => 'plugins\authclient\clients\QqAuth',
                 'clientId' => $config['QQ_CLIENT_ID'],
                 'clientSecret' => $config['QQ_CLIENT_SECRET']
             ],
@@ -36,6 +36,16 @@ class Plugins extends \plugins\Plugins
                 'class' => GitHub::className(),
                 'clientId' => $config['GITHUB_CLIENT_ID'],
                 'clientSecret' => $config['GITHUB_CLIENT_SECRET']
+            ],
+            'weibo' => [
+                'class' => 'plugins\authclient\clients\WeiboAuth',
+                'clientId' => $config['WEIBO_CLIENT_ID'],
+                'clientSecret' => $config['WEIBO_CLIENT_SECRET']
+            ],
+            'weixin' => [
+                'class' => 'plugins\authclient\clients\WeixinAuth',
+                'clientId' => $config['WEIXIN_CLIENT_ID'],
+                'clientSecret' => $config['WEIXIN_CLIENT_SECRET']
             ],
         ];
         $openClients = $config['OPEN_AUTHCLIENT'];

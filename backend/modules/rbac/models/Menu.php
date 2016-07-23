@@ -5,6 +5,7 @@ namespace mdm\admin\models;
 use Yii;
 use mdm\admin\components\Configs;
 use yii\helpers\Html;
+use yii2tech\ar\position\PositionBehavior;
 
 /**
  * This is the model class for table "menu".
@@ -44,6 +45,18 @@ class Menu extends \yii\db\ActiveRecord
         } else {
             return parent::getDb();
         }
+    }
+    public function behaviors()
+    {
+        return [
+            'positionBehavior' => [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'order',
+                'groupAttributes' => [
+                    'parent' // multiple lists varying by 'parent'
+                ],
+            ],
+        ];
     }
 
     /**

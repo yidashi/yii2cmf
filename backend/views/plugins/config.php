@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = '插件设置:' .' '.$model->title;
+$this->title = '插件设置:' .' '.$model->name;
 $this->params['breadcrumbs'][] = ['label' => '插件', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

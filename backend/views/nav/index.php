@@ -6,34 +6,33 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Navs');
+$this->title = Yii::t('backend', 'Nav');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nav-index">
-
+<div class="widget-Nav-index">
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Nav'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
+                'modelClass' => Yii::t('backend', 'Nav'),
+            ]), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
-
     <div class="box box-primary">
         <div class="box-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    'id',
-                    'slug',
-                    'title',
-                    'url:url',
-                    'data',
-                    // 'type',
-                    // 'pid',
-                    // 'status',
 
-                    ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
+
+    <?php echo GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+
+            'id',
+            'key',
+
+            [
+                'class' => 'backend\widgets\grid\ActionColumn',
+                'template'=>'{update} {delete}'
+            ],
+        ],
+    ]); ?>
         </div>
     </div>
-
 </div>

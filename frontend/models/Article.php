@@ -19,6 +19,13 @@ use yii\behaviors\BlameableBehavior;
  */
 class Article extends \common\models\Article
 {
+    public function rules()
+    {
+        $rules = parent::rules();
+        $rules[] = ['status', 'default', 'value' => \Yii::$app->config->get('FRONTEND_PUB_CHECK', self::STATUS_ACTIVE)];
+        return $rules;
+    }
+
     public static function hots($categoryId, $size = 10)
     {
         return self::find()

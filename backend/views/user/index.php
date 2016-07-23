@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                      'login_at:datetime',
 
                     [
-                        'class' => 'yii\grid\ActionColumn',
+                        'class' => 'backend\widgets\grid\ActionColumn',
                         'template' => '{view} {update} {assign}',
                         'buttons' => [
                             'update' => function ($url, $model) {

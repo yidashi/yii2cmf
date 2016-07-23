@@ -6,7 +6,7 @@
  * Time: 下午2:21
  */
 use common\helpers\Html;
-use common\helpers\Url;
+use yii\helpers\Url;
 
 ?>
 <div class="media-body">

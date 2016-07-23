@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use backend\widgets\ActiveForm;
-use dosamigos\fileupload\FileUploadUI;
+use backend\widgets\meta\MetaForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ArticleForm */
+/* @var $model common\models\Article */
+/* @var $dataModel common\models\ArticleData */
 /* @var $form backend\widgets\ActiveForm */
 ?>
 <div class="row">
@@ -14,7 +15,7 @@ use dosamigos\fileupload\FileUploadUI;
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">通用</a></li>
-                <?php if ($model->moduleClass): ?>
+                <?php if ($moduleModel): ?>
                 <li><a href="#tab_2" data-toggle="tab" aria-expanded="true">扩展</a></li>
                 <?php endif; ?>
             </ul>
@@ -25,15 +26,16 @@ use dosamigos\fileupload\FileUploadUI;
 
                     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
 
-                    <?= $form->boxField($model, 'desc')->textarea()?>
+                    <?= $form->boxField($model, 'description')->textarea()?>
 
-                    <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className()); ?>
+                    <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), ['type' => $dataModel->markdown ? 'markdown' : null]); ?>
 
+                    <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
                 </div>
-                <?php if ($model->moduleClass): ?>
+                <?php if ($moduleModel): ?>
                 <div class="tab-pane" id="tab_2">
-                    <?php foreach ($model->extendAttributes() as $attribute): ?>
-                        <?= $form->field($model, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $model->getAttributeType($attribute)]) ?>
+                    <?php foreach ($moduleModel->attributes() as $attribute): ?>
+                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute)]) ?>
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>
@@ -50,13 +52,18 @@ use dosamigos\fileupload\FileUploadUI;
             \kartik\datetime\DateTimePicker::className(),
             [
                 'type' => 1,
-                'convertFormat' => true,
-                'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
+                'options' => [
+                    'value' => !empty($model->published_at) ? date('Y-m-d H:i:s', $model->published_at) : ''
+                ]
             ]
         ) ?>
         <?= $form->boxField($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
 
         <?= $form->field($model, 'is_top')->checkbox() ?>
+
+        <?= $form->field($model, 'is_hot')->checkbox() ?>
+
+        <?= $form->field($model, 'is_best')->checkbox() ?>
 
         <?= $form->field($model, 'status')->radioList(\common\models\Article::getStatusList()) ?>
 

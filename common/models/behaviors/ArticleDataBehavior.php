@@ -32,8 +32,8 @@ class ArticleDataBehavior extends Behavior
     public function afterSaveInternal($event)
     {
         $article = Article::findOne(['id' => $event->sender->id]);
-        if (!empty($article) && empty($article->desc)) {
-            $article->desc = $this->generateDesc($event->sender->processedContent);
+        if (!empty($article) && empty($article->description)) {
+            $article->description = $this->generateDesc($event->sender->processedContent);
             $article->save();
         }
     }

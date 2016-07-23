@@ -16,16 +16,6 @@ class Html extends \yii\helpers\Html
         return self::tag('i', '', $options);
     }
 
-    public static function img($src, $options = [])
-    {
-        $type = isset($options['type']) ? $options['type'] : 'avatar';
-        $options['src'] = Url::img($src, $type);
-        if (!isset($options['alt'])) {
-            $options['alt'] = '';
-        }
-        return static::tag('img', '', $options);
-    }
-
     /**
      * 标红字符串中含有的关键词
      * @param $q string 关键词

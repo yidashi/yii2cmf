@@ -51,16 +51,17 @@ UNLOCK TABLES;
 LOCK TABLES {{%config}} WRITE;
 /*!40000 ALTER TABLE {{%config}} DISABLE KEYS */;
 INSERT INTO {{%config}} VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数组\r\npassword=>密码\r\nimage=>图片\r\ntextarea=>多行字符\r\nselect=>下拉框\r\nradio=>单选框\r\ncheckbox=>多选框\r\neditor=>富文本编辑器','','配置类型列表','array',0,1461937892,'system'),
-(3,'SEO_SITE_DESCRIPTION','yiicmf2','','meta description','text',0,1468403120,'system'),
-(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords','text',0,1461937892,'system'),
-(5,'SITE_ICP','','','域名备案号','text',0,1461937892,'system'),
-(6,'SITE_NAME','饮水思源','','网站名称','text',0,1461937892,'system'),
-(7,'SITE_LOGO','logo.png','','网站LOGO','image',0,1461937892,'system'),
-(8,'FOOTER','','','底部','textarea',0,1461937892,'system'),
-(9,'THEME_NAME','chncomic','basic=>basic\r\nchncomic=>chncomic','主题名','select',0,1467882452,'system'),
+(2,'CONFIG_GROUP','site=>网站\r\nsystem=>系统\r\nwechat=>微信\r\nemail=>邮箱','','配置分组','array',1468405444,1468421137,'system'),
+(3,'SEO_SITE_DESCRIPTION','yiicmf2','','meta description','text',0,1468403120,'site'),
+(4,'SEO_SITE_KEYWORDS','yiicmf','','meta keywords','text',0,1461937892,'site'),
+(5,'SITE_ICP','','','域名备案号','text',0,1461937892,'site'),
+(6,'SITE_NAME','yii2cmf','','网站名称','text',0,1461937892,'site'),
+(7,'SITE_LOGO','logo.png','','网站LOGO','image',0,1461937892,'site'),
+(8,'FOOTER','','','底部','textarea',0,1461937892,'site'),
+(9,'THEME_NAME','basic','','主题名','text',0,1467882452,'site'),
 (10,'BACKEND_SKIN','skin-blue','skin-black=>skin-black\r\nskin-blue=>skin-blue\r\nskin-green=>skin-green\r\nskin-purple=>skin-purple\r\nskin-red=>skin-red\r\nskin-yellow=>skin-yellow','后台皮肤','select',1461931367,1461937892,'system'),
-(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1468406411,'email'),
-(12,'CONFIG_GROUP','system=>系统\r\nwechat=>微信\r\nemail=>邮箱','','配置分组','array',1468405444,1468421137,'system');
+(11,'FRIENDLY_LINK','Yii2CMF=>http://www.51siyuan.cn','','友情链接','array',0,1468406411,'site'),
+(12,'ADMIN_EMAIL','','','管理员邮箱','text',0,1468406411,'email');
 /*!40000 ALTER TABLE {{%config}} ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,10 +89,12 @@ INSERT INTO {{%menu}} VALUES (1,'权限管理',NULL,NULL,1,NULL,'users'),
 (16,'分类管理',3,'/category/index',4,NULL,''),
 (17,'评论管理',3,'/comment/index',6,NULL,''),
 (4,'插件管理',NULL,NULL,4,NULL,'book'),
-(18,'模块',4,'/plugins/index',NULL,NULL,''),
+(18,'插件',4,'/plugins/index',NULL,NULL,''),
 (19,'数据库备份',NULL,NULL,4,NULL,'book'),
-(20,'备份',19,'/database/export/index',NULL,NULL,''),
-(21,'还原',19,'/database/import/index',NULL,NULL,'');
+(20,'备份',19,'/backup/export/index',NULL,NULL,''),
+(21,'还原',19,'/backup/import/index',NULL,NULL,''),
+(22,'主题管理',NULL,NULL,NULL,NULL,''),
+(23,'主题',22,'/theme/index',NULL,NULL,'');
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;
 

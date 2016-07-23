@@ -62,10 +62,10 @@ class CategoryController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate($pid = 0)
+    public function actionCreate($id = 0)
     {
         $model = new Category();
-        $model->pid = $pid;
+        $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->cache->delete('categoryList');
             return $this->redirect(['index']);

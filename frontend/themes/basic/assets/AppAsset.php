@@ -16,9 +16,8 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@frontend/themes/basic/assets';
+    public $sourcePath = '@frontend/themes/basic/static';
     public $css = [
-        'css/font-awesome/css/font-awesome.min.css',
         'css/site.css',
     ];
     public $js = [
@@ -28,5 +27,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'common\assets\FontAwesomeAsset'
     ];
 }

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                     ],
                     'group',
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'backend\widgets\grid\ActionColumn'],
                 ],
             ]); ?>
         </div>

@@ -219,9 +219,28 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Profile::className(), ['id' => 'id']);
     }
 
-    public function getAvatar()
+    public function getAvatar($width = 96)
     {
-        return $this->profile->avatar;
+        if($this->profile->avatar) {
+            return $this->profile->avatar;
+        }
+        return $this->getDefaultAvatar($width, $width);
+    }
+    public static  function getDefaultAvatar($width, $height)
+    {
+        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");
+
+        $name = "avatar_" . $width."x".$height. ".png";
+        if(file_exists($basePath . DIRECTORY_SEPARATOR . $name))
+        {
+            return $baseUrl . "/" . $name;
+        }
+        return $baseUrl . "/" . "avatar_200x200.png";
+    }
+    public function saveAvatar($avatar)
+    {
+        $this->profile->avatar = $avatar;
+        return $this->profile->save();
     }
 
     public function init()
@@ -239,7 +258,8 @@ class User extends ActiveRecord implements IdentityInterface
      * 是否管理员用户
      * @return bool
      */
-    public function getIsAdmin(){
+    public function getIsAdmin()
+    {
         return $this->is_admin ? true : false;
     }
 
@@ -262,5 +282,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function getSign()
     {
         return $this->hasOne(Sign::className(), ['user_id' => 'id']);
+    }
+
+    public function getBadge()
+    {
+        return '土豪';
     }
 }

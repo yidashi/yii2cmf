@@ -28,69 +28,26 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'title',
                         'value' => function($model) {
-                            return Html::a($model->title, env('FRONTEND_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
+                            return Html::a($model->title, Yii::$app->config->get('SITE_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
                         },
                         'format' => 'raw'
                     ],
-                    'module',
+//                    'module',
                     'category',
                     [
+                        'class' => 'backend\widgets\grid\SwitcherColumn',
                         'attribute' => 'is_top',
-                        'value' => function($model) {
-                            $source = [
-                                [
-                                    'value' => 0,
-                                    'text' => '否'
-                                ],
-                                [
-                                    'value' => 1,
-                                    'text' => '是'
-                                ]
-                            ];
-                            return \dosamigos\editable\Editable::widget([
-                                'name' => 'is_top',
-                                'type' => 'select',
-                                'url' => '/article/ajax-update-field',
-                                'clientOptions' => [
-                                    'pk' => $model->id,
-                                    'source' => $source,
-                                    'value' => $model->is_top,
-                                    'showbuttons' => false,
-                                    'escape' => false
-                                ]
-                            ]);
-                        },
-                        'format' => 'raw'
+                        'reload' => 0
                     ],
                     [
+                        'class' => 'backend\widgets\grid\SwitcherColumn',
                         'attribute' => 'status',
-                        'value' => function($model) {
-                            $source = [
-                                [
-                                    'value' => 0,
-                                    'text' => '待审'
-                                ],
-                                [
-                                    'value' => 1,
-                                    'text' => '通过'
-                                ]
-                            ];
-                            return \dosamigos\editable\Editable::widget([
-                                'name' => 'status',
-                                'type' => 'select',
-                                'url' => '/article/ajax-update-field',
-                                'clientOptions' => [
-                                    'pk' => $model->id,
-                                    'source' => $source,
-                                    'value' => $model->status,
-                                    'showbuttons' => false,
-                                    'escape' => false
-                                ]
-                            ]);
-                        },
-                        'format' => 'raw'
+                        'reload' => 0
                     ],
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'template' => '{update} {delete}'
+                    ],
                 ],
             ]); ?>
         </div>

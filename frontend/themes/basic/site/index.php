@@ -5,14 +5,14 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 ?>
-    <!--<div class="tp-banner-container">
-        <div class="tp-banner">
-            <?= \frontend\widgets\slider\Revolutionslider::widget([
 
-            ]) ?>
-        </div>
-    </div>-->
     <div class="col-md-9">
+        <?= \frontend\widgets\slider\CarouselWidget::widget([
+            'key'=>'index',
+            'options' => [
+                'class' => 'slide',
+            ],
+        ]) ?>
         <div class="page-header"><h2>最新文章</h2></div>
         <div class="article-list">
             <?= \yii\widgets\ListView::widget([
@@ -32,6 +32,12 @@ use yii\helpers\Url;
             <?php endif; ?>
             <a class="btn btn-primary" href="<?= Url::to(['/sign'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") = "'. date('Ymd') . '"')->queryScalar() ?>人签到</a>
         </div>
+        <?= \frontend\widgets\area\AreaWidget::widget([
+            'slug' => 'sidebar',
+            "blockClass"=>"panel panel-default",
+            "headerClass"=>"panel-heading",
+            "bodyClass"=>"panel-body",
+        ])?>
         <div class="panel panel-default">
             <div class="panel-heading"><h2>所有分类</h2></div>
             <div class="panel-body">

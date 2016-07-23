@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-use common\helpers\Url;
+use yii\helpers\Url;
 
 $this->title = '控制面板';
 ?>

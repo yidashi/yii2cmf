@@ -35,7 +35,7 @@ class m130524_201442_init extends Migration
             'down' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'is_top' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否置顶'),
-            'desc' => Schema::TYPE_STRING . "(255) NULL",
+            'description' => Schema::TYPE_STRING . "(255) NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'source' => Schema::TYPE_STRING . "(50) NOT NULL",
             'deleted_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",

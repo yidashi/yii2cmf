@@ -37,7 +37,9 @@
         "bower-asset/blueimp-file-upload" : "*",
         "bower-asset/font-awesome": "^4.0",
         "2amigos/yii2-editable-widget": "0.1.*",
-        "raulfraile/distill": "@stable"
+        "raulfraile/distill": "@stable",
+        "yiisoft/yii2-imagine": "^2.0",
+        "dektrium/yii2-user": "0.9.*@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

@@ -8,7 +8,7 @@
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
 use common\helpers\Html;
-use common\helpers\Url;
+use yii\helpers\Url;
 
 ?>
 <div class="article-create">

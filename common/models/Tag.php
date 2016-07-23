@@ -57,7 +57,7 @@ class Tag extends \yii\db\ActiveRecord
             $level = 'success';
         } elseif ($this->article >= self::LEVEL_PRIMARY && $this->article < self::LEVEL_DANGER) {
             $level = 'primary';
-        } elseif ($this->article > self::LEVEL_DANGER) {
+        } elseif ($this->article >= self::LEVEL_DANGER) {
             $level = 'danger';
         }
         return $level;

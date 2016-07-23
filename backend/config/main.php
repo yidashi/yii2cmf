@@ -20,8 +20,8 @@ return [
             'disabledCommands' => ['netmount'],
             'roots' => [
                 [
-                    'baseUrl' => '@static',
-                    'basePath' => '@staticroot',
+                    'baseUrl' => '@storageUrl',
+                    'basePath' => '@storagePath',
                     'path'   => '/',
                 ]
             ]
@@ -58,29 +58,31 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'kvgrid' => [
+                'yii2tech-admin' => [
                     'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@kvgrid/messages',
-                    'forceTranslation' => true,
-                ]
+                    'basePath' => '@yii2tech/admin/messages',
+                ],
             ],
         ],
         'events' => \backend\components\Events::className(),
         'themeManager' => [
-            'class' => \backend\components\ThemeManager::className(),
+            'class' => 'common\components\ThemeManager',
+        ],
+        'pluginManager' => [
+            'class' => 'common\components\PluginManager',
         ]
     ],
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
         ],
-        'database' => [
-            'class' => 'backup\Module'
+        'i18n' => [
+            'class' => 'backend\modules\i18n\Module',
+            'defaultRoute'=>'i18n-message/index'
         ]
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/modules/rbac',
-        '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',

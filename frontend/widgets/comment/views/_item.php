@@ -12,7 +12,7 @@ use common\helpers\Html;
 ?>
 <div class="media-left">
     <a href="<?= Url::to(['/user', 'id' => $model->user_id])?>">
-        <?= Html::img($model->profile->avatar, ['class' => 'media-object', 'alt' => $model->user->username]) ?>
+        <?= Html::img($model->user->getAvatar(), ['class' => 'media-object', 'alt' => $model->user->username]) ?>
     </a>
 </div>
 <div class="media-body">
@@ -26,7 +26,7 @@ use common\helpers\Html;
         <div class="media">
             <div class="media-left">
                 <a href="<?= Url::to(['/user', 'id' => $son->user_id])?>" rel="author" title="">
-                    <?= Html::img($son->profile->avatar, ['class' => 'media-object', 'alt' => $son->user->username]) ?>
+                    <?= Html::img($son->user->getAvatar(96), ['class' => 'media-object', 'alt' => $son->user->username]) ?>
                 </a>
             </div>
             <div class="media-body">

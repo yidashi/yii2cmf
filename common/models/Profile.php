@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use common\widgets\area\AreaValidator;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Url;
@@ -97,6 +96,6 @@ class Profile extends \yii\db\ActiveRecord
 
     public function getFullArea()
     {
-        return Area::createFullArea($this->province, $this->city, $this->area);
+        return City::createFullArea($this->province, $this->city, $this->area);
     }
 }

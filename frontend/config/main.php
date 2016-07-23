@@ -53,6 +53,9 @@ return [
                 }
             }
         ],
+        'pluginManager' => [
+            'class' => 'common\components\PluginManager',
+        ],
         'notify' => \frontend\components\notify\Handler::className(),
         'events' => \frontend\components\Events::className()
     ],

@@ -60,7 +60,7 @@ if (($tableSchema = $generator->getTableSchema()) === false) {
 }
 ?>
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    ['class' => 'backend\widgets\grid\ActionColumn'],
                 ],
             ]); ?>
         </div>

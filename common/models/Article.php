@@ -2,12 +2,14 @@
 
 namespace common\models;
 
+use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
+use common\behaviors\UserBehavior;
+use common\behaviors\VoteBehavior;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use Yii;
-use yii\base\InvalidConfigException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -34,7 +36,6 @@ class Article extends \yii\db\ActiveRecord
     const STATUS_PENDING = 0;
     const STATUS_ACTIVE = 1;
 
-    private $_tagNames;
     /**
      * {@inheritdoc}
      */
@@ -50,16 +51,21 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'category_id'], 'required'],
-            [['status', 'category_id', 'view', 'up', 'down', 'is_top'], 'integer'],
-            [['category_id', 'status'], 'filter', 'filter' => 'intval'],
-            ['published_at', 'default', 'value' => time()],
+            [['status', 'category_id', 'view', 'up', 'down', 'is_top', 'is_hot', 'is_best'], 'integer'],
+            [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
+            ['published_at', 'default', 'value' => function(){
+                return date('Y-m-d H:i:s', time());
+            }],
+            ['published_at', 'filter', 'filter' => function($value) {
+                return is_numeric($value) ? $value : strtotime($value);
+            }, 'skipOnEmpty' => true],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_PENDING]],
             [['category_id'], 'setCategory'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category'], 'string', 'max' => 50],
             [['cover', 'source'], 'string', 'max' => 255],
-            [['desc', 'tagNames'], 'safe']
+            [['description'], 'safe']
         ];
     }
     public function setCategory($attribute, $params)
@@ -91,17 +97,21 @@ class Article extends \yii\db\ActiveRecord
             'category_id' => '分类',
             'category' => '分类',
             'source' => '来源连接',
-            'desc' => '摘要',
+            'view' => '浏览量',
+            'description' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
             'is_top' => '置顶',
-            'module' => '类型'
+            'is_hot' => '热门',
+            'is_best' => '精华',
+            'module' => '类型',
+            'content' => '内容'
         ];
     }
     public function attributeHints()
     {
         return [
-            'desc' => '（默认截取内容前150个字符）',
+            'description' => '（默认截取内容前150个字符）',
             'tagNames' => '（空格分隔多个标签）'
         ];
     }
@@ -115,7 +125,16 @@ class Article extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
             PushBehavior::className(),
             SoftDeleteBehavior::className(),
-            ArticleBehavior::className()
+            ArticleBehavior::className(),
+            [
+                'class' => MetaBehavior::className(),
+                'type' => 'article'
+            ],
+            [
+                'class' => VoteBehavior::className(),
+                'type' => 'article'
+            ],
+            UserBehavior::className()
         ];
         if (!Yii::$app->request->isConsoleRequest) {
             $behaviors[] = [
@@ -137,7 +156,6 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * 事务关联删除
      * @return array
      */
     public function transactions()
@@ -145,6 +163,17 @@ class Article extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function getMetaData()
+    {
+        $model =  $this->getMetaModel();
+
+        $title = $model->title ? : $this->title;
+        $description =$model->description ? : $this->description;
+        $keywords = $model->keywords ? : $this->getTagNames(',');
+
+        return [$title,$description,$keywords];
     }
 
     public function getData()
@@ -158,10 +187,6 @@ class Article extends \yii\db\ActiveRecord
             ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
     }
 
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
     /**
      * 真实浏览量
      */
@@ -190,7 +215,7 @@ class Article extends \yii\db\ActiveRecord
             $cache->set($key, 1);
         }
     }
-
+    private $_tagNames;
     /**
      * 获取所有标签,默认空格分隔
      * @param string $seperator 分隔符
@@ -221,38 +246,6 @@ class Article extends \yii\db\ActiveRecord
             $userId = Yii::$app->user->id;
             $favourite = Favourite::find()->where(['article_id' => $this->id, 'user_id' => $userId])->one();
             if ($favourite) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 当前用户是否顶
-     * @return bool
-     */
-    public function getIsUp()
-    {
-        if (!Yii::$app->user->isGuest) {
-            $userId = Yii::$app->user->id;
-            $up = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => Vote::ACTION_UP])->one();
-            if ($up) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * 当前用户是否踩
-     * @return bool
-     */
-    public function getIsDown()
-    {
-        if (!Yii::$app->user->isGuest) {
-            $userId = Yii::$app->user->id;
-            $down = Vote::find()->where(['type' => 'article', 'type_id' => $this->id, 'user_id' => $userId, 'action' => Vote::ACTION_DOWN])->one();
-            if ($down) {
                 return true;
             }
         }

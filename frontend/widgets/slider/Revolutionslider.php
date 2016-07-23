@@ -1,37 +1,52 @@
 <?php
-/**
- * 
-* HassCMS (http://www.hassium.org/)
-*
-* @link http://github.com/hasscms for the canonical source repository
-* @copyright Copyright (c) 2016-2099 Hassium Software LLC.
-* @license http://opensource.org/licenses/gpl-license.php GNU Public License
-*/
+
 namespace frontend\widgets\slider;
 
-use frontend\models\Article;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use common\models\CarouselItem;
+use yii\base\InvalidConfigException;
+use common\models\Carousel as CarouselModel;
 
-/**
-*
-* @package hass\package_name
-* @author zhepama <zhepama@gmail.com>
-* @since 0.1.0
- */
 class Revolutionslider extends \yii\base\Widget{
 
+    public $key;
+
     public $options=[];
-    
+
+    public $items = [];
+
     public $itemOptions = [];
     
     public function init()
     {
+        if (!$this->key) {
+            throw new InvalidConfigException;
+        }
+        $cacheKey = [
+            CarouselModel::className(),
+            $this->key
+        ];
+        $items = \Yii::$app->cache->get($cacheKey);
+        if ($items === false) {
+            $items = [];
+            $query = CarouselItem::find()
+                ->joinWith('carousel')
+                ->where([
+                    '{{%carousel_item}}.status' => 1,
+                    '{{%carousel}}.status' => CarouselModel::STATUS_ACTIVE,
+                    '{{%carousel}}.key' => $this->key,
+                ])
+                ->orderBy(['order' => SORT_ASC]);
+            $items = $query->asArray()->all();
+            \Yii::$app->cache->set($cacheKey, $items, 60*60*24*365);
+        }
+        $this->items = $items;
         $this->itemOptions = [
             'data-transition'=>"papercut",
             'data-slotamount'=>"7"
         ];
-        
+        parent::init();
 
     }
         
@@ -53,7 +68,7 @@ class Revolutionslider extends \yii\base\Widget{
         
         $lines = [];
         
-        $items = Article::find()->limit(5)->all();
+        $items = $this->items;
   
         if(!empty($items))
         {
@@ -78,18 +93,17 @@ class Revolutionslider extends \yii\base\Widget{
     {
         $result = "";
         
-        if (($url = $item->cover)) {
+        if (($url = $item['image'])) {
             $result .= Html::img($url);
         }
-                
 //        foreach ($item->captions as $caption) {
-            $result .= Html::tag('div',$item->title,[
+            $result .= Html::tag('div',$item['caption'],[
                 'class'=>"tp-caption ".'align-center',
                 'data-x'=>0,
-                "data-y"=>0,
-                "data-speed"=>300,
-                "data-start"=>0,
-                'data-easing'=>'easeInBack'
+                "data-y"=>145,
+                "data-speed"=>400,
+                "data-start"=>1900,
+                'data-easing'=>'easeOutExpo'
             ]);
 //        }
         return $result;

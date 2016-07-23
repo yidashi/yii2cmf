@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\behaviors\MetaBehavior;
 use common\models\behaviors\CategoryBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
@@ -75,10 +76,23 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => MetaBehavior::className(),
+                'type' => 'category'
+            ],
             CategoryBehavior::className()
         ];
     }
 
+    public function getMetaData()
+    {
+        $model =  $this->getMetaModel();
+
+        $title = $model->title ? : $this->title;
+        $description =$model->description ? : $this->description;
+
+        return [$title,$description,$model->keywords];
+    }
     /**
      * 获取分类名
      */

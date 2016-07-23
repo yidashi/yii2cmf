@@ -6,8 +6,8 @@
  */
 namespace backend\controllers;
 
+use Yii;
 use common\models\Config;
-use yidashi\webuploader\WebuploaderAction;
 use yii\base\Model;
 use yii\caching\TagDependency;
 use yii\data\ActiveDataProvider;
@@ -15,18 +15,20 @@ use yii\web\Controller;
 
 class SystemController extends Controller
 {
-    public function actionConfig($group = 'system')
+    public function actionConfig($group = 'site')
     {
+        $groups = Yii::$app->config->get('CONFIG_GROUP');
         $dataProvider = new ActiveDataProvider([
             'query' => Config::find()->where(['group' => $group]),
             'pagination' => false
         ]);
         return $this->render('config', [
+            'groups' => $groups,
             'group' => $group,
             'dataProvider' => $dataProvider
         ]);
     }
-    public function actionStoreConfig($group = 'system')
+    public function actionStoreConfig($group = 'site')
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Config::find()->where(['group' => $group]),

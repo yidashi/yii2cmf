@@ -9,7 +9,9 @@
 namespace common\models\behaviors;
 
 
+use common\models\ArticleTag;
 use common\models\Favourite;
+use common\models\Tag;
 use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
@@ -65,6 +67,7 @@ class ArticleBehavior extends Behavior
     public function afterInsertInternal($event)
     {
         Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
+        $this->setTagNames($event->sender);
     }
     /**
      * 修改文章后（如果修改了分类,更新分类文章数)
@@ -74,6 +77,32 @@ class ArticleBehavior extends Behavior
         if (isset($changedAttributes['category_id'])) {
             Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
             Category::updateAllCounters(['article' => -1], ['id' => $changedAttributes['category_id']]);
+        }
+        $this->setTagNames($event->sender);
+    }
+    public function setTagNames($model)
+    {
+        $data = \Yii::$app->request->post($model->formName());
+        // 更新原标签文章数
+        $oldTags = explode(' ', $model->getTagNames());
+        Tag::updateAllCounters(['article' => -1], ['name' => $oldTags]);
+        // 先清除文章所有标签
+        ArticleTag::deleteAll(['article_id' => $model->id]);
+        if (isset($data['tagNames']) && !empty($data['tagNames'])) {
+            $tags = explode(' ', $data['tagNames']);
+            foreach($tags as $tag) {
+                $tagModel = Tag::findOne(['name' => $tag]);
+                if (empty($tagModel)) {
+                    $tagModel = new Tag();
+                    $tagModel->name = $tag;
+                    $tagModel->save();
+                }
+                $articleTag = new ArticleTag();
+                $articleTag->article_id = $model->id;
+                $articleTag->tag_id = $tagModel->id;
+                $articleTag->save();
+            }
+            Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
         }
     }
 }

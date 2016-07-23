@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'create_time:text:创建时间',
                     [
-                        'class' => 'yii\grid\ActionColumn',
+                        'class' => 'backend\widgets\grid\ActionColumn',
                         'template' => '{a} {b}',
                         'buttons' => [
                             'a' => function ($url, $model, $key) {

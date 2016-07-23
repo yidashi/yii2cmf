@@ -5,7 +5,7 @@
  * Date: 16/7/1
  * Time: 上午11:13
  */
-use common\helpers\Url;
+use yii\helpers\Url;
 
 $this->params['breadcrumbs'][] = '捐赠';
 ?>

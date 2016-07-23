@@ -11,7 +11,7 @@ use yii\helpers\Url;
 
 <div class="media-left">
     <a href="<?= Url::to(['/user', 'id' => $model->user_id]) ?>" rel="author">
-        <?= Html::img($model->user->avatar, ['class' => 'media-object', 'alt' => $model->user->username]) ?>
+        <?= Html::img($model->user->getAvatar(), ['class' => 'media-object', 'alt' => $model->user->username]) ?>
     </a>
 </div>
 <div class="media-body">

@@ -1,22 +1,9 @@
 <?php
-/**
- *
- * HassCMS (http://www.hassium.org/)
- *
- * @link http://github.com/hasscms for the canonical source repository
- * @copyright Copyright (c) 2014-2099 Hassium Software LLC.
- * @license http://opensource.org/licenses/gpl-license.php GNU Public License
- */
 namespace backend\widgets;
 
 use yii\widgets\ActiveField;
 use yii\helpers\Html;
 
-/**
- * @package hass\backend
- * @author zhepama <zhepama@gmail.com>
- * @since 0.1.0
- */
 class BoxField extends ActiveField
 {
 

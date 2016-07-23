@@ -5,16 +5,10 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "pop_nav".
+ * This is the model class for table "{{%nav}}".
  *
  * @property integer $id
- * @property string $slug
- * @property string $title
- * @property string $url
- * @property string $data
- * @property string $type
- * @property integer $pid
- * @property integer $status
+ * @property string $key
  */
 class Nav extends \yii\db\ActiveRecord
 {
@@ -23,7 +17,7 @@ class Nav extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_nav';
+        return '{{%nav}}';
     }
 
     /**
@@ -32,8 +26,7 @@ class Nav extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['pid', 'status'], 'integer'],
-            [['slug', 'title', 'url', 'data', 'type'], 'string', 'max' => 128],
+            [['key', 'title'], 'string', 'max' => 128],
         ];
     }
 
@@ -43,14 +36,27 @@ class Nav extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'slug' => 'Slug',
-            'title' => 'Title',
-            'url' => 'Url',
-            'data' => 'Data',
-            'type' => 'Type',
-            'pid' => 'Pid',
-            'status' => 'Status',
+            'id' => Yii::t('common', 'ID'),
+            'key' => Yii::t('common', 'Key'),
+            'title' => Yii::t('common', 'Title'),
         ];
+    }
+
+    public function getActiveItem()
+    {
+        return $this->hasMany(NavItem::className(), ['nav_id' => 'id'])->where(['status' => 1]);
+    }
+
+    public static function getItems($key)
+    {
+        $nav = self::find()->where(['key' => $key])->one();
+        if ($nav == null) {
+            return [];
+        }
+        $items = NavItem::find()->select('title label, url')
+            ->where(['nav_id' => $nav->id])
+            ->orderBy(['order' => SORT_ASC])
+            ->asArray()->all();
+        return $items;
     }
 }

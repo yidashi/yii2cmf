@@ -1,33 +1,23 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Nav */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="nav-form">
+<div class="widget-Nav-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
+    <?php echo $form->field($model, 'key')->textInput(['maxlength' => 1024]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'data')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'pid')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?php echo $form->field($model, 'title')->textInput(['maxlength' => 1024]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>
+        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => 'btn btn-primary btn-flat']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

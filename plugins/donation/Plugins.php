@@ -19,14 +19,13 @@ class Plugins extends \plugins\Plugins
     public $info = [
         'author' => '易大师',
         'version' => 'v1.0',
-        'name' => 'donation',
-        'title' => '捐赠',
-        'desc' => '捐赠模块'
+        'id' => 'donation',
+        'name' => '捐赠',
+        'description' => '捐赠模块'
     ];
 
     public function frontend($app)
     {
-        $app->events->addListener(View::className(), 'leftNav', 'plugins\donation\NavListener');
         $app->controllerMap['donation'] = [
             'class' => DefaultController::className(),
             'viewPath' => '@plugins/donation/views/default'

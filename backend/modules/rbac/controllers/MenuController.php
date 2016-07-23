@@ -34,7 +34,19 @@ class MenuController extends Controller
             ],
         ];
     }
-
+    public function actions()
+    {
+        return [
+            'ajax-update-field' => [
+                'class' => 'common\\actions\\AjaxUpdateFieldAction',
+                'allowFields' => ['order'],
+                'findModel' => [$this, 'findModel']
+            ],
+            'position' => [
+                'class' => 'yii2tech\\admin\\actions\\Position'
+            ]
+        ];
+    }
     /**
      * Lists all Menu models.
      *
@@ -48,15 +60,6 @@ class MenuController extends Controller
         return $this->render('index', [
                 'dataProvider' => $dataProvider,
                 'searchModel' => $searchModel,
-        ]);
-    }
-    public function actionIndex2()
-    {
-        $models = Menu::find()->asArray()->all();
-        $tree = Tree::build($models, 'id', 'parent', 'children');
-//        p($tree);
-        return $this->render('index2', [
-           'tree' => $tree
         ]);
     }
     /**
@@ -79,10 +82,10 @@ class MenuController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = null)
     {
         $model = new Menu();
-
+        $model->parent_name = $id ? Menu::findOne($id)->name : null;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             MenuHelper::invalidate();
 
@@ -145,7 +148,7 @@ class MenuController extends Controller
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Menu::findOne($id)) !== null) {
             return $model;

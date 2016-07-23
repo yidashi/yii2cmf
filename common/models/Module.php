@@ -36,10 +36,9 @@ class Module extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'title', 'name', 'title'], 'required'],
+            [['id', 'name'], 'required'],
             [['status'], 'integer'],
-            [['name', 'title', 'author'], 'string', 'max' => 50],
-            [['desc'], 'string', 'max' => 255],
+            [['name', 'app'], 'string', 'max' => 50],
             [['config'], 'string'],
             ['status', 'default', 'value' => 1],
             [['name'], 'unique'],
@@ -52,11 +51,9 @@ class Module extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => '标识',
-            'title' => '名称',
+            'name' => '名称',
+            'app' => 'appID',
             'status' => '是否启用',
-            'author' => '作者',
-            'desc' => '描述',
             'config' => '配置',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
@@ -68,5 +65,27 @@ class Module extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className()
         ];
+    }
+
+    public static function findOpenModules()
+    {
+        $query = static::find();
+        return $query->where([
+            "status" => self::STATUS_OPEN
+        ])->all();
+    }
+
+    public function loadDefaultValues($skipIfSet = true)
+    {
+        $this->status = self::STATUS_UNINSTALL;
+        return $this;
+    }
+    public function getInstall()
+    {
+        return $this->status != self::STATUS_UNINSTALL;
+    }
+    public function getOpen()
+    {
+        return $this->status == self::STATUS_OPEN;
     }
 }

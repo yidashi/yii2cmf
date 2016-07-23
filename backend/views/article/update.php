@@ -3,7 +3,9 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\ArticleForm */
+/* @var $model common\models\Article */
+/* @var $dataModel common\models\ArticleData */
+/* @var $moduleModel yii\db\ActiveRecord */
 
 $this->title = '更新文章';
 $this->params['breadcrumbs'][] = ['label' => '文章', 'url' => ['index']];
@@ -16,7 +18,10 @@ $this->params['breadcrumbs'][] = '更新';
 <div class="article-update">
 
     <?= $this->render('_form', [
-        'model' => $model
+        'model' => $model,
+        'dataModel' => $dataModel,
+        'moduleModel' => $moduleModel,
+        'module' => $module
     ]) ?>
 
 </div>

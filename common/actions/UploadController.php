@@ -12,6 +12,7 @@ namespace common\actions;
 use common\models\Attachment;
 use vova07\imperavi\actions\GetAction;
 use yii\web\Controller;
+use Yii;
 
 class UploadController extends Controller
 {
@@ -20,14 +21,14 @@ class UploadController extends Controller
         return [
             'redactor-files-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'type' => GetAction::TYPE_FILES,
             ],
             'redactor-image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
                     return [
@@ -37,14 +38,14 @@ class UploadController extends Controller
             ],
             'redactor-images-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'type' => GetAction::TYPE_IMAGES,
             ],
             'redactor-file-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'uploadOnlyImage' => false,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
@@ -56,14 +57,14 @@ class UploadController extends Controller
             ],
             'image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
             'file-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => \Yii::getAlias('@static/upload'),
-                'path' => '@staticroot/upload',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false
             ],

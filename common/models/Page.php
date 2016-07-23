@@ -1,8 +1,10 @@
 <?php
 
 namespace common\models;
+use common\behaviors\MetaBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -60,6 +62,21 @@ class Page extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => MetaBehavior::className(),
+                'type' => 'page'
+            ],
         ];
+    }
+
+    public function getMetaData()
+    {
+        $model = $this->getMetaModel();
+
+        $title = $model->title ?  : $this->title;
+
+        $description = $model->description ?  : StringHelper::truncate(strip_tags($this->content), 150);
+
+        return [$title, $description, $model->keywords];
     }
 }

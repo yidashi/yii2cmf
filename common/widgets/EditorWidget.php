@@ -21,12 +21,15 @@ class EditorWidget extends InputWidget
     /**
      * @var string 编辑器类型
      */
-    public $type = 'redactor';
+    public $type;
 
     public $inputOptions = ['rows' => 10];
 
     public function init()
     {
+        if (empty($this->type)) {
+            $this->type = \Yii::$app->config->get('EDITOR_TYPE');
+        }
         if(!in_array($this->type, $this->typeEnum)) {
             throw new InvalidParamException('编辑器类型不存在');
         }

@@ -26,13 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'is_nav:boolean:是否显示导航栏',
                     'sort',
                     [
-                        'class' => 'yii\grid\ActionColumn',
-                        'template' => '{add} {update} {delete}',
-                        'buttons' => [
-                            'add' => function($url, $model, $key) {
-                                return Html::a(Html::icon('plus'), ['create', 'pid' => $model['id']]);
-                            }
-                        ]
+                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'template' => '{create} {update} {delete}'
                     ],
                 ],
             ]); ?>

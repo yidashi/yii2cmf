@@ -1,0 +1,40 @@
+.sortable {
+    -moz-user-select: none;
+    padding:0;
+    border-radius: 4px;
+	min-height:120px;
+}
+
+.sortable li {
+    border: 1px solid #ddd;
+    list-style: none outside none;
+    margin: 5px 1%;
+    padding: 8px;
+    cursor: normal;
+}
+
+
+.sortable.grid {
+    overflow: hidden;
+}
+
+.sortable.grid li {
+    float: left;
+    min-width: 48%;
+    text-align: center;
+}
+
+
+.sortable li.sortable-placeholder {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px dashed #CCCCCC;
+    padding: 16px;
+}
+
+.sortable li.sortable-dragging {
+}
+
+.sortable li.is-hovered{
+	
+    cursor: move;	
+}

@@ -2,10 +2,9 @@
 
 namespace backend\controllers;
 
-use backend\models\ArticleForm;
 use common\models\ArticleData;
+use common\models\ArticleModule;
 use common\models\ArticleTag;
-use yidashi\webuploader\WebuploaderAction;
 use Yii;
 use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
@@ -36,15 +35,17 @@ class ArticleController extends Controller
     public function actions()
     {
         return [
-            'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    'imageUrlPrefix' => \Yii::getAlias('@static').'/', //图片访问路径前缀
-                    'imagePathFormat' => 'upload/image/{yyyy}{mm}{dd}/{time}{rand:6}', //上传保存路径
-                ],
+            'ajax-update-field' => [
+                'class' => 'common\\actions\\AjaxUpdateFieldAction',
+                'allowFields' => ['status', 'is_top', 'is_hot', 'is_best'],
+                'findModel' => [$this, 'findModel']
             ],
+            'switcher' => [
+                'class' => 'backend\widgets\grid\SwitcherAction'
+            ]
         ];
     }
+
     /**
      * Lists all Article models.
      *
@@ -146,17 +147,60 @@ class ArticleController extends Controller
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
+     * @param string $module 文章类型
      * @return mixed
      */
     public function actionCreate($module = 'base')
     {
-        $model = new ArticleForm($module);
-        if ($model->load(Yii::$app->request->post()) && $model->store()) {
+        $model = new Article();
+        $dataModel = new ArticleData();
+        if ($module != 'base') {
+            $moduleModelClass = $this->findModule($module);
+            $moduleModel = new $moduleModelClass;
+        } else {
+            $moduleModel = null;
+        }
+        if (Yii::$app->request->isPost) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try{
+                $model->load(Yii::$app->request->post());
+                $model->module = $module;
+                $model->save();
+                $dataModel->load(Yii::$app->request->post());
+                $dataModel->id = $model->id;
+                $dataModel->save();
+                if($model->hasErrors() || $dataModel->hasErrors()) {
+                    throw new Exception('操作失败');
+                }
+                if ($module != 'base') {
+                    $moduleModel->load(Yii::$app->request->post());
+                    $moduleModel->id = $model->id;
+                    $moduleModel->save();
+                    if($moduleModel->hasErrors()) {
+                        throw new Exception('操作失败');
+                    }
+                }
+
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+            }
             return $this->redirect(['index']);
         }
         return $this->render('create', [
             'model' => $model,
+            'dataModel' => $dataModel,
+            'moduleModel' => $moduleModel,
+            'module' => $module
         ]);
+    }
+    public function findModule($name)
+    {
+        if (($module = ArticleModule::findOne(['name' => $name])) != null) {
+            return $module->model;
+        } else {
+            throw new NotFoundHttpException('文章类型不存在');
+        }
     }
     /**
      * Updates an existing Article model.
@@ -168,12 +212,38 @@ class ArticleController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = ArticleForm::findOne($id);
-        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+        $model = Article::find()->where(['id' => $id])->with('data')->one();
+        $dataModel = $model->data;
+        $moduleModel = $model->extend;
+        if (Yii::$app->request->isPost) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->load(Yii::$app->request->post());
+                $model->save();
+                $dataModel->load(Yii::$app->request->post());
+                $dataModel->save();
+                if($model->hasErrors() || $dataModel->hasErrors()) {
+                    throw new Exception('操作失败');
+                }
+                if ($moduleModel) {
+                    $moduleModel->load(Yii::$app->request->post()) &&
+                    $moduleModel->save();
+                    if($moduleModel->hasErrors()) {
+                        throw new Exception('操作失败');
+                    }
+                }
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
             return $this->redirect(['index']);
         }
         return $this->render('update', [
-            'model' => $model
+            'model' => $model,
+            'dataModel' => $dataModel,
+            'moduleModel' => $moduleModel,
+            'module' => $model->module
         ]);
     }
     /**
@@ -202,30 +272,12 @@ class ArticleController extends Controller
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Article::find()->where(['id' => $id])->notTrashed()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionAjaxUpdateField()
-    {
-        Yii::$app->response->format = 'json';
-        $pk = Yii::$app->request->post('pk');
-        $id = unserialize(base64_decode($pk));
-        $post = Yii::$app->request->post();
-        $formModel = DynamicModel::validateData(['id' => $id, 'name' => $post['name'], 'value' => $post['value']], [
-            [['id'], 'required'],
-            ['name', 'in', 'range' => ['status', 'is_top']]
-        ]);
-        if ($formModel->hasErrors()) {
-            throw new Exception(current($formModel->getFirstErrors()));
-        }
-        $model = $this->findModel($id);
-        $model->updateAll([$post['name'] => $post['value']], ['id' => $id]);
-        return ['status' => 1];
     }
 }

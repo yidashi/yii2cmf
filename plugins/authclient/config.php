@@ -7,7 +7,9 @@ return [
         'desc' => '开启的第三方',
         'extra' => [
             'qq' => 'QQ',
-            'github' => 'GitHub'
+            'github' => 'GitHub',
+            'weibo' => '微博',
+            'weixin' => '微信'
         ]
     ],
     [
@@ -33,5 +35,29 @@ return [
         'type' => 'text',
         'value' => '',
         'desc' => 'GITHUB_CLIENT_SECRET',
+    ],
+    [
+        'name' => 'WEIBO_CLIENT_ID',
+        'type' => 'text',
+        'value' => '',
+        'desc' => 'WEIBO_CLIENT_ID',
+    ],
+    [
+        'name' => 'WEIBO_CLIENT_SECRET',
+        'type' => 'text',
+        'value' => '',
+        'desc' => 'WEIBO_CLIENT_SECRET',
+    ],
+    [
+        'name' => 'WEIXIN_CLIENT_ID',
+        'type' => 'text',
+        'value' => '',
+        'desc' => 'WEIXIN_CLIENT_ID',
+    ],
+    [
+        'name' => 'WEIXIN_CLIENT_SECRET',
+        'type' => 'text',
+        'value' => '',
+        'desc' => 'WEIXIN_CLIENT_SECRET',
     ],
 ];

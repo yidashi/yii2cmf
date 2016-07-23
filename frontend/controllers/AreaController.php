@@ -9,7 +9,7 @@
 namespace frontend\controllers;
 
 
-use common\models\Area;
+use common\models\City;
 use yii\web\Controller;
 
 class AreaController extends Controller
@@ -20,6 +20,6 @@ class AreaController extends Controller
         if (!is_numeric($id)) {
             $id = null;
         }
-        return Area::getChildren($id);
+        return City::getChildren($id);
     }
 }

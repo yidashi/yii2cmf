@@ -2,13 +2,12 @@
 
 namespace common\models;
 
-use common\helpers\Url;
+use common\behaviors\UserBehavior;
+use common\behaviors\VoteBehavior;
 use common\models\behaviors\CommentBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
-use yii\helpers\Markdown;
-use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%comment}}".
@@ -71,24 +70,15 @@ class Comment extends \yii\db\ActiveRecord
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false
             ],
+            [
+                'class' => VoteBehavior::className(),
+                'type' => 'comment'
+            ],
+            UserBehavior::className(),
             CommentBehavior::className()
         ];
     }
 
-    /**
-     * 获取发表评论的用户信息.
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
-    }
-
-    public function getProfile()
-    {
-        return $this->hasOne(Profile::className(), ['id' => 'user_id']);
-    }
     /**
      * 获取所有子评论.
      *
@@ -108,29 +98,5 @@ class Comment extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
-    }
-
-    public function getIsUp()
-    {
-        if (!Yii::$app->user->isGuest) {
-            $userId = Yii::$app->user->id;
-            $up = Vote::find()->where(['type' => 'comment', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'up'])->one();
-            if (!empty($up)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public function getIsDown()
-    {
-        if (!Yii::$app->user->isGuest) {
-            $userId = Yii::$app->user->id;
-            $down = Vote::find()->where(['type' => 'comment', 'type_id' => $this->id, 'user_id' => $userId, 'action' => 'down'])->one();
-            if (!empty($down)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

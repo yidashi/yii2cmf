@@ -17,9 +17,9 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
     public $info = [
         'author' => '易大师',
         'version' => 'v1.0',
-        'name' => 'danmu',
-        'title' => '弹幕',
-        'desc' => '文章评论弹幕'
+        'id' => 'danmu',
+        'name' => '弹幕',
+        'description' => '文章评论弹幕'
     ];
 
     public function bootstrap($app)

@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'target_category',
             // 'target_category_url:url',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'backend\widgets\grid\ActionColumn'],
         ],
     ]); ?>
 

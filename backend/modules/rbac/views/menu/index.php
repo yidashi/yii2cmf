@@ -20,9 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
     <div class="box box-primary">
         <div class="box-body">
-            <?php
-            Pjax::begin(['formSelector' => 'form', 'enablePushState' => false]);
-            echo GridView::widget([
+            <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
@@ -43,11 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'format' => 'raw'
                     ],
-                    'order',
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii2tech\admin\grid\PositionColumn',
+                        'attribute' => 'order'
+                    ],
+                    [
+                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'template' => '{create} {view} {update} {delete}',
+                    ],
                 ],
             ]);
-            Pjax::end();
             ?>
         </div>
     </div>

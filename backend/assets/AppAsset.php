@@ -10,13 +10,14 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/assets';
+    public $sourcePath = '@backend/static';
     public $css = [
         'css/AdminLTE.min.css',
         'css/site.css'
     ];
     public $js = [
         'js/app.min.js',
+        'js/notify.js',
         'plugins/slimScroll/jquery.slimscroll.min.js'
     ];
     public $depends = [

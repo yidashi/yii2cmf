@@ -107,7 +107,7 @@ class ArticleController extends Controller
         $commentModel = new Comment();
         $commentModel->type = 'article';
 
-        return $this->render('view', [
+        return $this->render($model->module . '/view', [
             'model' => $model,
             'commentModel' => $commentModel,
             'commentModels' => $commentModels,

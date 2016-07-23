@@ -61,7 +61,9 @@ class ThemeController extends Controller
     public function actionCustom()
     {
         Yii::$app->session->setFlash("error", "暂未开放");
-        return $this->goBack();
+        return $this->redirect([
+            "index"
+        ]);
     }
     public function actionUpload()
     {

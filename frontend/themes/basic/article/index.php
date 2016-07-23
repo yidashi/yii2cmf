@@ -10,8 +10,7 @@ use yii\helpers\Url;
 if(isset($category)) {
     $this->title = $category->title;
     $this->params['breadcrumbs'][] = $category->title;
-    $this->registerMetaTag(['name' => 'keywords', 'content' => $category->title . ' ' . Yii::$app->config->get('SEO_SITE_KEYWORDS')]);
-    $this->registerMetaTag(['name' => 'description', 'content' => $category->description . ' ' . Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);
+    list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $category->getMetaData();
 } elseif (isset($tag)) {
     $this->title = $tag->name;
     $this->params['breadcrumbs'][] = $tag->name;

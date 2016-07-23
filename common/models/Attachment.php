@@ -74,7 +74,7 @@ class Attachment extends \yii\db\ActiveRecord
 
     public function getFilePath()
     {
-        return Yii::getAlias('@staticroot') . '/upload/' . $this->name;
+        return Yii::$app->storage->basePath . DIRECTORY_SEPARATOR . $this->name;
     }
 
     public function afterDelete()

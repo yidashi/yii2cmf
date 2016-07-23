@@ -1,8 +1,5 @@
 <?php
-
 return [
-    'adminEmail' => env('MAIL_USERNAME'),
-    'supportEmail' => env('MAIL_USERNAME'),
     'user.passwordResetTokenExpire' => 3600,
     'availableLocales'=>[
         'zh-CN' => '简体中文'

@@ -1,6 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
-use common\helpers\Url;
+use yii\helpers\Url;
 use common\helpers\Html;
 ?>
 <div class="media-body">
@@ -9,7 +9,7 @@ use common\helpers\Html;
         <em>[<?= $model->category ?>]</em>
         <?php if($model->is_top): ?><span class="top-label">置顶</span><?php endif; ?>
     </h4>
-    <div class="media-content"><?= $model->desc ?></div>
+    <div class="media-content"><?= $model->description ?></div>
     <div class="media-action">
         <span class="user"><a href="<?= Url::to(['/user', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
         <span class="time"><?= Html::icon('clock-o')?> <?= Yii::$app->formatter->asRelativeTime($model->published_at) ?></span>

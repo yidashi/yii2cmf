@@ -1,11 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use backend\widgets\ActiveForm;
+use backend\widgets\meta\MetaForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Category */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form backend\widgets\ActiveForm */
 ?>
 
 <div class="category-form">
@@ -23,6 +24,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+
+    <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>

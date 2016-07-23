@@ -1,19 +1,17 @@
 <?php
-
-use yii\helpers\Html;
-
-
 /* @var $this yii\web\View */
-/* @var $model common\models\Nav */
+/* @var $model common\models\WidgetNav */
 
-$this->title = Yii::t('app', 'Create Nav');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Navs'), 'url' => ['index']];
+$this->title = Yii::t('backend', 'Create {modelClass}', [
+    'modelClass' => 'Nav',
+]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Navs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="nav-create">
+<div class="widget-Nav-create">
 
-    <?= $this->render('_form', [
-        'model' => $model,
+    <?php echo $this->render('_form', [
+        'model' => $model
     ]) ?>
 
 </div>
