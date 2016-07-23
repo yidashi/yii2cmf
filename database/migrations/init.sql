@@ -72,29 +72,37 @@ UNLOCK TABLES;
 
 LOCK TABLES {{%menu}} WRITE;
 /*!40000 ALTER TABLE {{%menu}} DISABLE KEYS */;
-INSERT INTO {{%menu}} VALUES (1,'权限管理',NULL,NULL,1,NULL,'users'),
-(5,'用户管理',1,'/user/index',NULL,NULL,''),
-(6,'路由管理',1,'/admin/route/index',NULL,NULL,''),
-(7,'角色管理',1,'/admin/role/index',NULL,NULL,''),
-(8,'菜单管理',1,'/admin/menu/index',NULL,NULL,''),
-(2,'系统管理',NULL,NULL,2,NULL,'cog'),
-(9,'网站设置',2,'/system/config',1,NULL,''),
-(10,'配置管理',2,'/config/index',2,NULL,''),
-(11,'操作记录',2,'/admin-log/index',NULL,NULL,''),
-(3,'内容管理',NULL,NULL,3,NULL,'edit'),
-(12,'文章列表',3,'/article/index',1,NULL,''),
-(13,'发布文章',3,'/article/create',2,NULL,''),
-(14,'回收站',3,'/article/trash',3,NULL,''),
-(15,'单页管理',3,'/page/index',40,NULL,''),
-(16,'分类管理',3,'/category/index',4,NULL,''),
-(17,'评论管理',3,'/comment/index',6,NULL,''),
-(4,'插件管理',NULL,NULL,4,NULL,'book'),
-(18,'插件',4,'/plugins/index',NULL,NULL,''),
-(19,'数据库备份',NULL,NULL,4,NULL,'book'),
-(20,'备份',19,'/backup/export/index',NULL,NULL,''),
-(21,'还原',19,'/backup/import/index',NULL,NULL,''),
-(22,'主题管理',NULL,NULL,NULL,NULL,''),
-(23,'主题',22,'/theme/index',NULL,NULL,'');
+INSERT INTO {{%menu}} (`id`, `name`, `parent`, `route`, `order`, `data`, `icon`)
+VALUES
+	(15, '用户管理', 33, '/user/index', NULL, NULL, ''),
+	(16, '路由管理', 33, '/admin/route/index', NULL, NULL, ''),
+	(17, '角色管理', 33, '/admin/role/index', NULL, NULL, ''),
+	(22, '文章列表', 39, '/article/index', 1, NULL, ''),
+	(24, '系统管理', NULL, NULL, 2, NULL, 'cog'),
+	(25, '网站设置', 24, '/system/config', 1, NULL, ''),
+	(26, '配置管理', 24, '/config/index', 2, NULL, ''),
+	(27, '单页管理', 39, '/page/index', 40, NULL, ''),
+	(29, '分类管理', 39, '/category/index', 4, NULL, ''),
+	(30, '数据库备份', NULL, NULL, 5, NULL, 'book'),
+	(31, '备份', 30, '/backup/export/index', NULL, NULL, ''),
+	(32, '还原', 30, '/backup/import/index', NULL, NULL, ''),
+	(33, '权限管理', NULL, NULL, 1, NULL, 'users'),
+	(34, '菜单管理', 33, '/admin/menu/index', NULL, NULL, ''),
+	(37, '操作记录', 24, '/admin-log/index', NULL, NULL, ''),
+	(39, '内容管理', NULL, NULL, 3, NULL, 'edit'),
+	(40, '发布文章', 39, '/article/create', 2, NULL, ''),
+	(41, '回收站', 39, '/article/trash', 3, NULL, ''),
+	(42, '评论管理', 39, '/comment/index', 6, NULL, ''),
+	(43, '留言板', 39, '/suggest/index', 7, NULL, ''),
+	(44, '插件管理', NULL, NULL, 4, NULL, 'plug'),
+	(45, '插件', 44, '/plugins/index', NULL, NULL, ''),
+	(46, '外观', NULL, NULL, 6, NULL, 'tv'),
+	(47, '主题', 46, '/theme/index', 0, NULL, ''),
+	(48, '幻灯片', 46, '/carousel/index', 0, NULL, ''),
+	(49, '导航', 46, '/nav/index', NULL, NULL, ''),
+	(50, '区域', 46, '/area/index', NULL, NULL, ''),
+	(51, '区块', 46, '/block/index', NULL, NULL, '');
+
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;
 
