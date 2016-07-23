@@ -10,6 +10,7 @@ namespace yii2tech\admin\actions;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
+use yii\data\ActiveDataProvider;
 
 /**
  * Index action displays the models listing with search support.
@@ -54,6 +55,11 @@ class Index extends Action
     public $view = 'index';
 
 
+    public $searchModelClass;
+
+    public $modelClass;
+
+
     /**
      * Creates new search model instance.
      * @return Model new model instance.
@@ -76,7 +82,7 @@ class Index extends Action
      */
     public function run()
     {
-        $searchModel = $this->newSearchModel();
+        /*$searchModel = $this->newSearchModel();
         $dataProvider = $this->prepareDataProvider($searchModel);
 
         $this->setReturnAction();
@@ -84,7 +90,23 @@ class Index extends Action
         return $this->controller->render($this->view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
+        ]);*/
+        $this->setReturnAction();
+        if (!empty($this->newSearchModelClass)) {
+            $searchModel = new $this->newSearchModelClass;
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            return $this->controller->render($this->view, [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => (new $this->modelClass)->find()
+            ]);
+            return $this->controller->render($this->view, [
+                'dataProvider' => $dataProvider
+            ]);
+        }
     }
 
     /**

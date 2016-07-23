@@ -57,97 +57,29 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
         ];
     }
 
-    /**
-     * Lists all <?= $modelClass ?> models.
-     * @return mixed
-     */
-    public function actionIndex()
+    public function actions()
     {
-<?php if (!empty($generator->searchModelClass)): ?>
-        $searchModel = new <?= isset($searchModelAlias) ? $searchModelAlias : $searchModelClass ?>();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-<?php else: ?>
-        $dataProvider = new ActiveDataProvider([
-            'query' => <?= $modelClass ?>::find(),
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
-            ]
-
-        ]);
-
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-        ]);
+        return [
+            'index' => [
+                'class' => 'yii2tech\admin\actions\Index',
+                <?php if (!empty($generator->searchModelClass)): ?>'searchModelClass' => '<?= $generator->searchModelClass ?>'<?php else : ?>'modelClass' => '<?= $generator->modelClass ?>'
 <?php endif; ?>
-    }
-
-    /**
-     * Displays a single <?= $modelClass ?> model.
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return mixed
-     */
-    public function actionView(<?= $actionParams ?>)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel(<?= $actionParams ?>),
-        ]);
-    }
-
-    /**
-     * Creates a new <?= $modelClass ?> model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new <?= $modelClass ?>();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing <?= $modelClass ?> model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return mixed
-     */
-    public function actionUpdate(<?= $actionParams ?>)
-    {
-        $model = $this->findModel(<?= $actionParams ?>);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', <?= $urlParams ?>]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing <?= $modelClass ?> model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * <?= implode("\n     * ", $actionParamComments) . "\n" ?>
-     * @return mixed
-     */
-    public function actionDelete(<?= $actionParams ?>)
-    {
-        $this->findModel(<?= $actionParams ?>)->delete();
-
-        return $this->redirect(['index']);
+            ],
+            'view' => [
+                'class' => 'yii2tech\admin\actions\View',
+            ],
+            'create' => [
+                'class' => 'yii2tech\admin\actions\Create',
+                'scenario' => \yii\base\Model::SCENARIO_DEFAULT,
+            ],
+            'update' => [
+                'class' => 'yii2tech\admin\actions\Update',
+                'scenario' => \yii\base\Model::SCENARIO_DEFAULT,
+            ],
+            'delete' => [
+                'class' => 'yii2tech\admin\actions\Delete',
+            ],
+        ];
     }
 
     /**
@@ -157,7 +89,7 @@ class <?= $controllerClass ?> extends <?= StringHelper::basename($generator->bas
      * @return <?=                   $modelClass ?> the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel(<?= $actionParams ?>)
+    public function findModel(<?= $actionParams ?>)
     {
 <?php
 if (count($pks) === 1) {

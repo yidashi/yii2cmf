@@ -17,12 +17,7 @@ class BlockController extends Controller
         return [
             'index' => [
                 'class' => 'yii2tech\admin\actions\Index',
-                'newSearchModel' => function () {
-                    return new Block();
-                },
-                'prepareDataProvider' => function ($model) {
-                    return new ActiveDataProvider(['query' => $model->find()]);
-                }
+                'modelClass' => 'common\models\Block'
             ],
             'delete' => [
                 'class' => 'yii2tech\admin\actions\Delete',
