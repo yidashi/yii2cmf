@@ -5,6 +5,7 @@ namespace common\models;
 use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
+use common\behaviors\TagBehavior;
 use common\behaviors\UserBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\behaviors\ArticleBehavior;
@@ -115,6 +116,12 @@ class Article extends \yii\db\ActiveRecord
             'tagNames' => '（空格分隔多个标签）'
         ];
     }
+    public function loadDefaultValues($skipIfSet = true)
+    {
+        parent::loadDefaultValues($skipIfSet);
+        $this->status = self::STATUS_ACTIVE;
+        return $this;
+    }
 
     /**
      * {@inheritdoc}
@@ -134,6 +141,7 @@ class Article extends \yii\db\ActiveRecord
                 'class' => VoteBehavior::className(),
                 'type' => 'article'
             ],
+            ['class' => TagBehavior::className()],
             UserBehavior::className()
         ];
         if (!Yii::$app->request->isConsoleRequest) {
@@ -181,11 +189,14 @@ class Article extends \yii\db\ActiveRecord
         return $this->hasOne(ArticleData::className(), ['id' => 'id']);
     }
 
-    public function getTags()
+    public function getExtend()
     {
-        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])
-            ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
+        if ($this->module != 'base') {
+            $module = ArticleModule::find()->where(['name' => $this->module])->one();
+            return $this->hasOne($module->model, ['id' => 'id']);
+        }
     }
+
 
     /**
      * 真实浏览量
@@ -215,26 +226,6 @@ class Article extends \yii\db\ActiveRecord
             $cache->set($key, 1);
         }
     }
-    private $_tagNames;
-    /**
-     * 获取所有标签,默认空格分隔
-     * @param string $seperator 分隔符
-     * @return string
-     */
-    public function getTagNames($seperator = ' ')
-    {
-        $tags = $this->tags;
-        if (!empty($tags)) {
-            $tagNames = [];
-            foreach($tags as $tag) {
-                $tagNames[] = $tag->name;
-            }
-            $tagNames = join($seperator, $tagNames);
-        } else {
-            $tagNames = '';
-        }
-        return $tagNames;
-    }
 
     /**
      * 当前用户是否收藏
@@ -252,11 +243,9 @@ class Article extends \yii\db\ActiveRecord
         return false;
     }
 
-    public function getExtend()
+    public function getIsReprint()
     {
-        if ($this->module != 'base') {
-            $module = ArticleModule::find()->where(['name' => $this->module])->one();
-            return $this->hasOne($module->model, ['id' => 'id']);
-        }
+        return !empty($this->source);
     }
+
 }

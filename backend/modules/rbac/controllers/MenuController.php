@@ -6,6 +6,7 @@ use common\helpers\Tree;
 use Yii;
 use mdm\admin\models\Menu;
 use mdm\admin\models\searchs\Menu as MenuSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -43,7 +44,8 @@ class MenuController extends Controller
                 'findModel' => [$this, 'findModel']
             ],
             'position' => [
-                'class' => 'yii2tech\\admin\\actions\\Position'
+                'class' => 'yii2tech\\admin\\actions\\Position',
+                'returnUrl' => Url::current()
             ]
         ];
     }

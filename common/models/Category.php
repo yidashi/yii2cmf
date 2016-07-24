@@ -162,9 +162,9 @@ class Category extends \yii\db\ActiveRecord
         return isset($list[$id]) ? $list[$id] : null;
     }
 
-    public function getCategoryIdByName($name)
+    public static function getIdByName($name)
     {
-        $list = $this->lists();
+        $list = self::lists();
 
         return array_search($name, $list);
     }

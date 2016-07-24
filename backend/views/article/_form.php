@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use backend\widgets\ActiveForm;
 use backend\widgets\meta\MetaForm;
+use common\widgets\tag\TagsInput;
+use common\behaviors\TagBehavior;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -57,7 +59,7 @@ use backend\widgets\meta\MetaForm;
                 ]
             ]
         ) ?>
-        <?= $form->boxField($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
+        <?= $form->boxField($model, 'cover', ['collapsed' => true])->widget(\common\widgets\upload\SingleWidget::className()) ?>
 
         <?= $form->field($model, 'is_top')->checkbox() ?>
 
@@ -65,13 +67,11 @@ use backend\widgets\meta\MetaForm;
 
         <?= $form->field($model, 'is_best')->checkbox() ?>
 
-        <?= $form->field($model, 'status')->radioList(\common\models\Article::getStatusList()) ?>
+        <?= $form->field($model, 'status')->checkbox() ?>
 
         <?= $form->field($model, 'view')->textInput() ?>
 
-        <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className(), [
-            'clientOptions' => ['width' => '230px']
-        ]) ?>
+        <?= $form->boxField($model, TagBehavior::$formName)->widget(TagsInput::className())->header(TagBehavior::$formLable); ?>
 
         <?= $form->field($model, 'source')->textInput() ?>
 

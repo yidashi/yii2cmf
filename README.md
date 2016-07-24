@@ -13,7 +13,26 @@
     前台访问地址: `http://localhost:8080/`
 
     后台访问地址: `http://localhost:8080/admin/` 管理员 帐号 `hehe` 密码 `111111`
-    
+
+## 目录结构
+
+```
+api             api
+backend         后台
+common          核心
+console         命令
+database        数据库（迁移 填充）
+frontend        前台
+plugins         插件
+runtime         运行时（日志 缓存等）
+tests           测试
+vendor          扩展
+web             web目录（web服务器可只开放该目录,保证安全）
+wechat          微信
+.env            基本配置文件
+helpers         基本工具函数（已自动加载）
+```
+
 ## 现有功能:
 
 * rbac权限管理

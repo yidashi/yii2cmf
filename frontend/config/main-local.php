@@ -16,6 +16,7 @@ $config = [
                     'suffix' => '.html'
                 ],
                 'user/<id:\d+>' => '/user',
+                'tag/search' => '/tag/search',
                 'tag/<name:\S+>' => '/article/tag',
             ],
         ]

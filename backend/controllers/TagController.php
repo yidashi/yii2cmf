@@ -26,6 +26,15 @@ class TagController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'search' => [
+                'class' => 'common\\actions\\TagSearchAction'
+            ]
+        ];
+    }
+
     /**
      * Lists all Tag models.
      * @return mixed

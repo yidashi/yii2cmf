@@ -14,6 +14,13 @@ use yii\web\Controller;
 
 class TagController extends Controller
 {
+    public function actions()
+    {
+        return [
+            'search' => 'common\\actions\\TagSearchAction'
+        ];
+    }
+
     public function actionIndex()
     {
         $hotModels = Tag::hot();

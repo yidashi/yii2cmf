@@ -20,7 +20,6 @@
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
         "kartik-v/yii2-widget-datepicker": "^1.3",
-        "chrisboulton/php-resque": "*",
         "yiisoft/yii2-authclient": "^2.0",
         "aferrandini/PHPQRCode": "1.0.1",
         "yiisoft/yii2-redis": "*",
@@ -39,7 +38,8 @@
         "2amigos/yii2-editable-widget": "0.1.*",
         "raulfraile/distill": "@stable",
         "yiisoft/yii2-imagine": "^2.0",
-        "dektrium/yii2-user": "0.9.*@dev"
+        "fabpot/goutte": "^3.1",
+        "kartik-v/yii2-widget-select2": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

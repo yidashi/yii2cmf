@@ -6,6 +6,7 @@
  */
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\behaviors\TagBehavior;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -29,7 +30,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-3">
         <?= $form->field($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
 
-        <?= $form->field($model, 'tagNames')->widget(\common\widgets\tag\Tag::className())?>
+        <?= $form->field($model, TagBehavior::$formName)->label(TagBehavior::$formLable)->widget(\common\widgets\tag\TagsInput::className())?>
         <div class="form-group">
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         </div>

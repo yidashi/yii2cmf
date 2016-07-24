@@ -26,6 +26,7 @@ class Nav extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['key', 'title'], 'required'],
             [['key', 'title'], 'string', 'max' => 128],
         ];
     }

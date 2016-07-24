@@ -153,6 +153,7 @@ class ArticleController extends Controller
     public function actionCreate($module = 'base')
     {
         $model = new Article();
+        $model->loadDefaultValues();
         $dataModel = new ArticleData();
         if ($module != 'base') {
             $moduleModelClass = $this->findModule($module);
