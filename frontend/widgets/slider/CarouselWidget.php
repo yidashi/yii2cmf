@@ -9,6 +9,7 @@
 namespace frontend\widgets\slider;
 
 
+use common\helpers\Util;
 use common\models\CarouselItem;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Carousel;
@@ -57,7 +58,7 @@ class CarouselWidget extends Carousel
                 /** @var $item \common\models\CarouselItem */
                 $items[$k]['content'] = Html::img($item->image);
                 if ($item->url) {
-                    $items[$k]['content'] = Html::a($items[$k]['content'], $item->url, ['target'=>'_blank']);
+                    $items[$k]['content'] = Html::a($items[$k]['content'], Util::parseUrl($item->url), ['target'=>'_blank']);
                 }
 
                 if ($item->caption) {

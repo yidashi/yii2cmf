@@ -21,7 +21,7 @@ use yii\helpers\Html;
         <div class="col-md-6">
             <?php echo $form->field($model, 'order')->textInput() ?>
 
-            <?php echo $form->field($model, 'url')->textInput(['maxlength' => 1024]) ?>
+            <?php echo $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
 
             <?php echo $form->field($model, 'caption')->textarea() ?>
 
