@@ -18,7 +18,7 @@ use yii\web\Controller;
 class SearchController extends Controller
 {
 
-    public function actionSearch()
+    public function actionIndex()
     {
         $q = \Yii::$app->request->get('q');
         if (empty($q)) $this->goHome();

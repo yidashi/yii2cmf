@@ -40,7 +40,7 @@ class RouteBehavior extends Behavior
             }
             $cate = implode('|', $cate);
             $rules['<cate:('.$cate.')>'] = 'article/index';
-            Yii::$app->UrlManager->addRules($rules);
+            Yii::$app->getUrlManager()->addRules($rules, false);
         }
 
         // 单页路由
@@ -61,7 +61,7 @@ class RouteBehavior extends Behavior
                 'route' => 'page/slug',
                 'suffix' => '.html'
             ];
-            Yii::$app->UrlManager->addRules($rules);
+            Yii::$app->getUrlManager()->addRules($rules, false);
         }
     }
 }

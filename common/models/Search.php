@@ -14,9 +14,22 @@ use yii\data\ActiveDataProvider;
 
 class Search extends ActiveRecord
 {
+    public function getArticle()
+    {
+        return Article::findOne($this->id);
+    }
+    public function getTrueView()
+    {
+        return $this->getArticle()->getTrueView();
+    }
+    public function getComment()
+    {
+        return $this->getArticle()->comment;
+    }
     public function search($q)
     {
-        $query = self::find()->where($q)->andWhere(['status' => 1]);
+        $query = self::find()->where($q)->andWhere(['status' => 1])
+            ->andWhere(['<', 'published_at', time()]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [

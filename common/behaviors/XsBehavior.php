@@ -30,15 +30,14 @@ class XsBehavior extends Behavior
         if (!empty($article)) {
             if ($event->name == 'afterInsert') {
                 $search = new Search();
-                $search->article_id = $event->sender->id;
-                $search->status = Article::STATUS_ACTIVE;
+                $search->id = $event->sender->id;
             } else {
                 $search = Search::findOne($event->sender->id);
-                $search->status = $article->status;
             }
+            $search->status = $article->status;
             $search->title = $article->title;
             $search->content = $event->sender->content;
-            $search->updated_at = $article->updated_at;
+            $search->published_at = $article->published_at;
             $search->save();
         }
     }
