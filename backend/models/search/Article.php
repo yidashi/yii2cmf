@@ -18,7 +18,7 @@ class Article extends ArticleModel
     {
         return [
             [['id', 'category_id', 'created_at', 'updated_at', 'status'], 'integer'],
-            [['title', 'category', 'cover'], 'integer'],
+            [['title', 'category', 'cover'], 'string'],
         ];
     }
 

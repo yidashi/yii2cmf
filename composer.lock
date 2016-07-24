@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57bbafd931b7b9294225aa5fcac99c46",
-    "content-hash": "ad7644b41054362de6226771a7191f05",
+    "hash": "f749952e3c6b23a4908d98b02f719019",
+    "content-hash": "f3ab4b06e2fc8368d64e9722455e901d",
     "packages": [
         {
             "name": "2amigos/yii2-editable-widget",
@@ -807,6 +807,64 @@
                 "uri"
             ],
             "time": "2016-06-24 23:00:38"
+        },
+        {
+            "name": "hightman/xunsearch",
+            "version": "1.4.10-beta4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hightman/xs-sdk-php.git",
+                "reference": "20ecf25fd4281b8490594557d039ad1a5b3b16f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/hightman/xs-sdk-php/20ecf25fd4281b8490594557d039ad1a5b3b16f6.zip",
+                "reference": "20ecf25fd4281b8490594557d039ad1a5b3b16f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "lib-pcre": "*",
+                "php": ">=5.3.0"
+            },
+            "bin": [
+                "util/xs"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "lib/",
+                    "wrapper/yii-ext/"
+                ],
+                "psr-4": {
+                    "hightman\\xunsearch\\": "wrapper/yii2-ext/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "hightman",
+                    "email": "hightman@twomice.net",
+                    "role": "Founder and project leader"
+                }
+            ],
+            "description": "xunsearch php sdk, include yii, yii2 supports",
+            "homepage": "http://www.xunsearch.com/",
+            "keywords": [
+                "search engine",
+                "xunsearch",
+                "yii",
+                "yii2"
+            ],
+            "time": "2016-03-23 15:34:06"
         },
         {
             "name": "imagine/imagine",
@@ -3052,7 +3110,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "raulfraile/distill": 0,
-        "udokmeci/yii2-beanstalk": 20
+        "udokmeci/yii2-beanstalk": 20,
+        "hightman/xunsearch": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,

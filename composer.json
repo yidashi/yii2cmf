@@ -40,7 +40,8 @@
         "yiisoft/yii2-imagine": "^2.0",
         "fabpot/goutte": "^3.1",
         "kartik-v/yii2-widget-select2": "*",
-        "udokmeci/yii2-beanstalk": "dev-master"
+        "udokmeci/yii2-beanstalk": "dev-master",
+        "hightman/xunsearch": "*@beta"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

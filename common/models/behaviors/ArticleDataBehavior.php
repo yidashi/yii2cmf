@@ -8,6 +8,7 @@
 
 namespace common\models\behaviors;
 
+use frontend\models\Search;
 use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
@@ -32,9 +33,11 @@ class ArticleDataBehavior extends Behavior
     public function afterSaveInternal($event)
     {
         $article = Article::findOne(['id' => $event->sender->id]);
-        if (!empty($article) && empty($article->description)) {
-            $article->description = $this->generateDesc($event->sender->processedContent);
-            $article->save();
+        if (!empty($article)) {
+            if (empty($article->description)) {
+                $article->description = $this->generateDesc($event->sender->processedContent);
+                $article->save();
+            }
         }
     }
 

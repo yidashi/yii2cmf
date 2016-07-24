@@ -147,7 +147,17 @@ STR;
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
         file_put_contents(Yii::getAlias($this->installFile), time());
-        $this->stdout("\n  ... 应用构建成功.\n\n", Console::FG_GREEN);
+        $success = <<<STR
++=================================================+
+| Installation completed successfully, Thanks you |
+| 安装成功，感谢选择和使用 yii2cmf              |
++-------------------------------------------------+
+| 说明和注意事项：                                |
+| 一些基本的设置可以在.env文件里修改
++=================================================+
+STR;
+
+        $this->stdout($success, Console::FG_GREEN);
     }
 
     public function actionReset()

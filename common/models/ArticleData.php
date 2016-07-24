@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use common\behaviors\XsBehavior;
 use common\models\behaviors\ArticleDataBehavior;
 use yii\helpers\Markdown;
 use yii\helpers\StringHelper;
@@ -62,7 +63,8 @@ class ArticleData extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            ArticleDataBehavior::className()
+            ArticleDataBehavior::className(),
+            XsBehavior::className()
         ];
     }
 }

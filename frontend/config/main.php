@@ -57,7 +57,8 @@ return [
             'class' => 'common\components\PluginManager',
         ],
         'notify' => \frontend\components\notify\Handler::className(),
-        'events' => \frontend\components\Events::className()
+        'events' => \frontend\components\Events::className(),
+        'search' => 'frontend\\components\\Search'
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),
