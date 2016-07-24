@@ -15,7 +15,7 @@ use yii\helpers\Html;
 
             <?php echo $form->field($model, 'title') ?>
 
-            <?php echo $form->field($model, 'url')->textInput(['maxlength' => 1024]) ?>
+            <?php echo $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
 
             <?php echo $form->field($model, 'status')->checkbox() ?>
 

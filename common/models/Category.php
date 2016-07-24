@@ -167,4 +167,17 @@ class Category extends \yii\db\ActiveRecord
 
         return array_search($name, $list);
     }
+
+    public static function findByIdOrSlug($id)
+    {
+        if (intval($id) == 0) {
+            $condition = ["slug" => $id];
+        } else {
+            $condition = [
+                $id
+            ];
+        }
+
+        return static::findOne($condition);
+    }
 }

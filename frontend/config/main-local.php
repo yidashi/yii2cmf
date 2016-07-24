@@ -15,6 +15,8 @@ $config = [
                     'route' => 'article/view',
                     'suffix' => '.html'
                 ],
+                'site' => 'site/index',
+                '<controller:([^article|page])>' => '<controller>/index',
                 'user/<id:\d+>' => '/user',
                 'tag/search' => '/tag/search',
                 'tag/<name:\S+>' => '/article/tag',

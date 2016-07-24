@@ -20,18 +20,26 @@ class ArticleController extends Controller
     /**
      * 分类文章列表
      */
-    public function actionIndex($cate)
+    public function actionIndex($cate = null)
     {
-        $category = Category::find()->andWhere(['slug' => $cate])->one();
-        if (empty($category)) {
-            throw new NotFoundHttpException('分类不存在');
+        $query = Article::find()->published();
+        $category = null;
+        if (!empty($cate)) {
+            $category = Category::findByIdOrSlug($cate);
+            if (empty($category)) {
+                throw new NotFoundHttpException('分类不存在');
+            }
+            $query = $query->andFilterWhere(['category_id' => $category->id]);
         }
-        $query = Article::find()->published()->andFilterWhere(['category_id' => $category->id]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
                     'published_at' => SORT_DESC
+                ],
+                'attributes' => [
+                    'published_at',
+                    'view'
                 ]
             ]
         ]);

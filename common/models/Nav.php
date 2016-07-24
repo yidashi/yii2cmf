@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\helpers\Util;
 use Yii;
 
 /**
@@ -58,6 +59,10 @@ class Nav extends \yii\db\ActiveRecord
             ->where(['nav_id' => $nav->id])
             ->orderBy(['order' => SORT_ASC])
             ->asArray()->all();
-        return $items;
+        return array_map(function($value){
+            $value['url'] = Util::parseUrl($value['url']);
+            return $value;
+        }, $items);
     }
+
 }
