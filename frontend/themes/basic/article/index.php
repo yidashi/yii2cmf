@@ -14,8 +14,10 @@ if(isset($category)) {
 } elseif (isset($tag)) {
     $this->title = $tag->name;
     $this->params['breadcrumbs'][] = $tag->name;
+} else {
+    $this->title = '文章';
+    $this->params['breadcrumbs'][] = $this->title;
 }
-
 
 ?>
 <div class="col-lg-8">

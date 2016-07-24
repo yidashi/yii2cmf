@@ -26,7 +26,7 @@ class TagSearchAction extends Action
         if (empty($q) && $this->skipEmpty) {
             $data = ['id' => '', 'text' => ''];
         } else {
-            $data = Tag::find()->where(['like', 'name', $q])->select('id,name text')->asArray()->all();
+            $data = Tag::find()->where(['like', 'name', $q])->select('name id,name text')->asArray()->all();
         }
         return [
             'results' => $data

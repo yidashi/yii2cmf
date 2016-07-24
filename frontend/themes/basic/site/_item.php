@@ -7,7 +7,8 @@ use common\helpers\Html;
     <h4 class="media-heading">
         <a href="<?= Url::to(['article/view', 'id' => $model->id])?>"><?= $model->title?></a>
         <em>[<?= $model->category ?>]</em>
-        <?php if($model->is_top): ?><span class="top-label">置顶</span><?php endif; ?>
+        <?php if($model->is_top): ?><span class="label label-primary">置顶</span><?php endif; ?>
+        <?php if($model->isReprint): ?><span class="label label-info">转载</span><?php endif; ?>
     </h4>
     <div class="media-content"><?= $model->description ?></div>
     <div class="media-action">
