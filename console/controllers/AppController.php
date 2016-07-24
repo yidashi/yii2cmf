@@ -81,15 +81,15 @@ class AppController extends Controller
     public function actionSetDb()
     {
         do {
-            $dbHost = $this->prompt('dbhost:', ['default' => '127.0.0.1']);
-            $dbPort = $this->prompt('dbport:', ['default' => '3306']);
-            $dbDbname = $this->prompt('dbname(auto create):', ['default' => 'yii']);
-            $dbUsername = $this->prompt('dbusername:', ['default' => 'root']);
-            $dbPassword = $this->prompt('dbpassword:');
+            $dbHost = $this->prompt('dbhost(默认为中括号内的值)' . PHP_EOL, ['default' => '127.0.0.1']);
+            $dbPort = $this->prompt('dbport(默认为中括号内的值)' . PHP_EOL, ['default' => '3306']);
+            $dbDbname = $this->prompt('dbname(不存在则自动创建)' . PHP_EOL, ['default' => 'yii']);
+            $dbUsername = $this->prompt('dbusername(默认为中括号内的值)' . PHP_EOL, ['default' => 'root']);
+            $dbPassword = $this->prompt('dbpassword' . PHP_EOL);
             $dbDsn = "mysql:host={$dbHost};port={$dbPort}";
         } while(!$this->testConnect($dbDsn, $dbDbname, $dbUsername, $dbPassword));
         $dbDsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbDbname}";
-        $dbTablePrefix = $this->prompt('tableprefix:', ['default' => 'yii2cmf_']);
+        $dbTablePrefix = $this->prompt('tableprefix(默认为中括号内的值)' . PHP_EOL, ['default' => 'yii2cmf_']);
         $this->setEnv('DB_USERNAME', $dbUsername);
         $this->setEnv('DB_PASSWORD', $dbPassword);
         $this->setEnv('DB_TABLE_PREFIX', $dbTablePrefix);
@@ -126,6 +126,17 @@ class AppController extends Controller
             $this->stdout("\n  ... 已经安装过.\n\n", Console::FG_RED);
             die;
         }
+        $str = <<<STR
++==========================================+
+| Welcome to setup yii2cmf         |
+| 欢迎使用 yii2cmf 安装程序     |
++------------------------------------------+
+| Follow the on-screen instructions please |
+| 请按照屏幕上的提示操作以完成安装         |
++==========================================+
+
+STR;
+        $this->stdout($str, Console::FG_GREEN);
         copy(Yii::getAlias('@root/.env.example'), Yii::getAlias($this->envPath));
         $this->runAction('set-writable', ['interactive' => $this->interactive]);
         $this->runAction('set-executable', ['interactive' => $this->interactive]);

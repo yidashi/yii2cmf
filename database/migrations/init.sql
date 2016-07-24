@@ -71,7 +71,7 @@ UNLOCK TABLES;
 
 LOCK TABLES {{%menu}} WRITE;
 /*!40000 ALTER TABLE {{%menu}} DISABLE KEYS */;
-INSERT INTO `pop_menu` (`id`, `name`, `parent`, `route`, `order`, `data`, `icon`)
+INSERT INTO {{%menu}} (`id`, `name`, `parent`, `route`, `order`, `data`, `icon`)
 VALUES
 	(24, '系统管理', NULL, NULL, 2, NULL, 'cog'),
 	(30, '数据库备份', NULL, NULL, 5, NULL, 'book'),
