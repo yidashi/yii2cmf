@@ -85,11 +85,11 @@ class AppController extends Controller
             $dbPort = $this->prompt('dbport:', ['default' => '3306']);
             $dbDbname = $this->prompt('dbname(auto create):', ['default' => 'yii']);
             $dbUsername = $this->prompt('dbusername:', ['default' => 'root']);
-            $dbPassword = $this->prompt('dbpassword:', ['default' => 'root']);
+            $dbPassword = $this->prompt('dbpassword:');
             $dbDsn = "mysql:host={$dbHost};port={$dbPort}";
         } while(!$this->testConnect($dbDsn, $dbDbname, $dbUsername, $dbPassword));
         $dbDsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbDbname}";
-        $dbTablePrefix = $this->prompt('tableprefix:', ['default' => 'pop_']);
+        $dbTablePrefix = $this->prompt('tableprefix:', ['default' => 'yii2cmf_']);
         $this->setEnv('DB_USERNAME', $dbUsername);
         $this->setEnv('DB_PASSWORD', $dbPassword);
         $this->setEnv('DB_TABLE_PREFIX', $dbTablePrefix);

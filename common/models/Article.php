@@ -116,12 +116,6 @@ class Article extends \yii\db\ActiveRecord
             'tagNames' => '（空格分隔多个标签）'
         ];
     }
-    public function loadDefaultValues($skipIfSet = true)
-    {
-        parent::loadDefaultValues($skipIfSet);
-        $this->status = self::STATUS_ACTIVE;
-        return $this;
-    }
 
     /**
      * {@inheritdoc}

@@ -110,7 +110,6 @@ class m130524_201442_init extends Migration
             'name' => Schema::TYPE_STRING . "(20) NOT NULL",
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
             'article' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
-            'is_nav' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '1'",
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
         ], $this->tableOptions);
 

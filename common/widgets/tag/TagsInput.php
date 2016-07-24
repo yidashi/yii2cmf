@@ -22,8 +22,8 @@ class TagsInput extends Select2
     public $ajaxUrl = ['/tag/search'];
 
     public $toggleAllSettings= [
-        'selectLabel' => '<i class="glyphicon glyphicon-ok-circle"></i> 全选',
-        'unselectLabel' => '<i class="glyphicon glyphicon-remove-circle"></i> 全删',
+        'selectLabel' => '',
+        'unselectLabel' => '',
         'selectOptions' => ['class' => 'text-success'],
         'unselectOptions' => ['class' => 'text-danger'],
     ];
