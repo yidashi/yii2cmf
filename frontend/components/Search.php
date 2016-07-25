@@ -16,19 +16,23 @@ use yii\data\ActiveDataProvider;
 
 class Search extends Component
 {
+    public $engine = 'local';
+
+
     public function search($q)
+    {
+        return call_user_func([$this, $this->engine], $q);
+    }
+    public function xunsearch($q)
     {
         $search = new SearchModel();
         return $search->search($q);
     }
 
-    /**
-     * 如果不用迅搜,则替换这个方法
-     */
-    /*public function search($q)
+    public function local($q)
     {
         return new ActiveDataProvider([
             'query' => Article::find()->published()->andWhere(['like', 'title', $q])
         ]);
-    }*/
+    }
 }

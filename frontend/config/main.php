@@ -58,7 +58,10 @@ return [
         ],
         'notify' => \frontend\components\notify\Handler::className(),
         'events' => \frontend\components\Events::className(),
-        'search' => 'frontend\\components\\Search'
+        'search' => [
+            'class' => 'frontend\\components\\Search',
+            'engine' => env('SEARCH_ENGINE', 'local')
+        ]
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),

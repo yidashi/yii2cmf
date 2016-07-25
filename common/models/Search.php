@@ -28,8 +28,7 @@ class Search extends ActiveRecord
     }
     public function search($q)
     {
-        $query = self::find()->where($q)->andWhere(['status' => 1])
-            ->andWhere(['<', 'published_at', time()]);
+        $query = self::find()->where($q)->andWhere(['status' => 1]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
