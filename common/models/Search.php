@@ -33,7 +33,7 @@ class Search extends ActiveRecord
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
-                    'updated_at' => SORT_DESC,
+                    'published_at' => SORT_DESC,
                 ]
             ]
         ]);
