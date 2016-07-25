@@ -18,6 +18,8 @@ class Config extends Component
 {
     public $cacheKey = 'allSystemConfigs';
 
+    public $cacheTag = 'systemConfig';
+
     public $localConfigFile;
 
     public function init()
@@ -31,7 +33,7 @@ class Config extends Component
         $configs = \Yii::$app->cache->get($this->cacheKey);
         if ($configs === false) {
             $configs = ConfigModel::find()->indexBy('name')->all();
-            \Yii::$app->cache->set($this->cacheKey, $configs, 60 * 60, new TagDependency(['tags' => 'systemConfig']));
+            \Yii::$app->cache->set($this->cacheKey, $configs, 60 * 60, new TagDependency(['tags' => $this->cacheTag]));
         }
         if (isset($configs[$name])) {
             $config = $configs[$name];
@@ -46,7 +48,7 @@ class Config extends Component
         if ($result === false) {
             return false;
         }
-        TagDependency::invalidate(\Yii::$app->cache, 'systemConfig');
+        TagDependency::invalidate(\Yii::$app->cache, $this->cacheTag);
         return true;
     }
     /**

@@ -37,7 +37,7 @@ class ArticleController extends Controller
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
-        ArticleEvent::trigger('common\models\Article', 'viewArticle', new ArticleEvent(['model' => $model]));
+        $model->addView();
         $model['data']['content'] = \yii\helpers\Markdown::process($model['data']['content'], 'gfm');
         $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
         $html = <<<CONTENT

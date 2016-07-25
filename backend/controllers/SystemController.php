@@ -40,7 +40,7 @@ class SystemController extends Controller
                 /* @var $config Config */
                 $config->save(false);
             }
-            TagDependency::invalidate(\Yii::$app->cache, 'systemConfig');
+            TagDependency::invalidate(\Yii::$app->cache,  Yii::$app->config->cacheTag);
             return $this->redirect('config');
         }
     }

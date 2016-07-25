@@ -18,7 +18,7 @@ NavBar::begin([
     'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 48, 'height' => 48]) : Yii::$app->config->get('SITE_NAME'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-static-top'
+        'class' => 'navbar-inverse navbar-fixed-top'
     ],
 ]);
 $menuItems = NavModel::getItems('header');

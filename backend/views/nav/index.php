@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'key',
+            'title',
 
             [
                 'class' => 'backend\widgets\grid\ActionColumn',
