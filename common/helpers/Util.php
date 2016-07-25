@@ -13,6 +13,9 @@ class Util
 {
     public static function parseUrl($url)
     {
+        if (strpos($url, '//') !== false) {
+            return $url;
+        }
         $url = explode("\r\n", $url);
         if (isset($url[1])) {
             $tmp = $url[1];
