@@ -11,7 +11,6 @@ return [
     'bootstrap' => [
         'log',
         \common\components\LoadPlugins::className(),
-        'events'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'controllerMap' => [
@@ -57,7 +56,6 @@ return [
             'class' => 'common\components\PluginManager',
         ],
         'notify' => \frontend\components\notify\Handler::className(),
-        'events' => \frontend\components\Events::className(),
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')

@@ -1,17 +1,35 @@
 <?php
 /**
- * author: yidashi
- * Date: 2015/11/30
- * Time: 17:30.
+ * Created by PhpStorm.
+ * User: yidashi
+ * Date: 16/7/25
+ * Time: 下午12:25
  */
-namespace backend\listeners;
 
+namespace backend\behaviors;
+
+
+use yii\base\Application;
+use yii\base\Behavior;
 use Yii;
 use yii\helpers\Url;
+use yii\base\Event;
+use yii\db\ActiveRecord;
 
-class AdminLog
+class AdminLogBehavior extends Behavior
 {
-    public static function handle($event)
+    public function events()
+    {
+        return [
+            Application::EVENT_BEFORE_REQUEST => 'handle'
+        ];
+    }
+    public function handle()
+    {
+        Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_UPDATE, [$this, 'log']);
+    }
+
+    public function log($event)
     {
         // 显示详情有待优化,不过基本功能完整齐全
         if(!empty($event->changedAttributes)) {

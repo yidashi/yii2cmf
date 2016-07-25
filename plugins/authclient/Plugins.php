@@ -10,6 +10,7 @@ namespace plugins\authclient;
 
 
 use yii\authclient\clients\GitHub;
+use yii\base\Event;
 use yii\web\View;
 
 class Plugins extends \plugins\Plugins
@@ -24,7 +25,7 @@ class Plugins extends \plugins\Plugins
 
     public function frontend($app)
     {
-        $app->events->addListener(View::className(), 'afterLogin', 'plugins\authclient\AfterLoginListener');
+        Event::on(View::className(), 'afterLogin', ['plugins\authclient\AfterLoginListener', 'handle']);
         $config = $this->getConfig();
         $params = [
             'qq' => [

@@ -11,6 +11,7 @@ namespace plugins\prettify;
 
 use yii\base\BootstrapInterface;
 use yii\web\View;
+use yii\base\Event;
 
 class Plugins extends \plugins\Plugins implements BootstrapInterface
 {
@@ -24,7 +25,14 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
 
     public function bootstrap($app)
     {
-        $app->events->addListener(View::className(), 'afterComment', 'plugins\prettify\Prettify');
-        $app->events->addListener(View::className(), 'afterArticleView', 'plugins\prettify\Prettify');
+        Event::on(View::className(), 'afterComment', [$this, 'run']);
+        Event::on(View::className(), 'afterArticleView', [$this, 'run']);
+    }
+
+    public function run()
+    {
+        PrettifyAsset::register($this->view);
+        $script = "$('pre').addClass('prettyprint linenums');prettyPrint();";
+        $this->view->registerJs($script);
     }
 }

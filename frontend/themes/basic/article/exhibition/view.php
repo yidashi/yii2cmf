@@ -104,4 +104,3 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         </div>
     </div>
 </div>
-<?php $this->trigger('afterArticleView', new \common\events\ArticleEvent(['model' => $model])) ?>

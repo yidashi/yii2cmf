@@ -9,6 +9,8 @@
 namespace plugins\wxreply;
 
 
+use yii\base\Event;
+
 class Plugins extends \plugins\Plugins
 {
     public $info = [
@@ -21,7 +23,7 @@ class Plugins extends \plugins\Plugins
 
     public function wechat($app)
     {
-        $app->events->addListener('yii\web\Controller','afterAction', 'plugins\wxreply\ReplyListener');
+        Event::on('yii\web\Controller','afterAction', ['plugins\wxreply\ReplyListener', 'handle']);
     }
 
 }

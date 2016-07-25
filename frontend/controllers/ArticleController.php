@@ -6,7 +6,6 @@
  */
 namespace frontend\controllers;
 
-use common\events\ArticleEvent;
 use common\models\Comment;
 use frontend\models\Tag;
 use frontend\models\Article;
@@ -92,7 +91,7 @@ class ArticleController extends Controller
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
-        ArticleEvent::trigger('common\models\Article', 'viewArticle', new ArticleEvent(['model' => $model]));
+        $model->addView();
 
         // sidebar
         $hots = Article::hots($model->category_id);

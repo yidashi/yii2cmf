@@ -12,7 +12,6 @@ return [
     'bootstrap' => [
         'log',
         \common\components\LoadPlugins::className(),
-        'events'
     ],
     'controllerMap'=>[
         'file-manager-elfinder' => [
@@ -64,17 +63,19 @@ return [
                 ],
             ],
         ],
-        'events' => \backend\components\Events::className(),
         'themeManager' => [
             'class' => 'common\components\ThemeManager',
         ],
         'pluginManager' => [
             'class' => 'common\components\PluginManager',
-        ]
+        ],
     ],
     'modules' => [
-        'admin' => [
+        'rbac' => [
             'class' => 'mdm\admin\Module',
+        ],
+        'backup' => [
+            'class' => 'backup\Module',
         ],
         'i18n' => [
             'class' => 'backend\modules\i18n\Module',
@@ -83,6 +84,7 @@ return [
     ],
     'aliases' => [
         '@mdm/admin' => '@backend/modules/rbac',
+        '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
@@ -90,5 +92,6 @@ return [
             'site/logout',
         ],
     ],
+    'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',
     'params' => $params,
 ];
