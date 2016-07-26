@@ -4,11 +4,11 @@ $config = [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => env('DB_DSN', 'mysql:host=127.0.0.1;dbname=yii'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', 'root'),
+            'dsn' => env('DB_DSN'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
             'charset' => 'utf8',
-            'tablePrefix' => env('DB_TABLE_PREFIX', 'pop_'),
+            'tablePrefix' => env('DB_TABLE_PREFIX'),
             'enableSchemaCache' => YII_ENV_PROD,
         ],
         'redis' => [
