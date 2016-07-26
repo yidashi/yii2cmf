@@ -11,12 +11,18 @@ namespace common\helpers;
 
 class Util
 {
+    /**
+     * 解析url 格式: route[空格,回车]a=1&b=2
+     * @param $url
+     * @return array
+     */
     public static function parseUrl($url)
     {
         if (strpos($url, '//') !== false) {
             return $url;
         }
-        $url = explode("\r\n", $url);
+        // 空格换行都行
+        $url = preg_split('/[ \r\n]+/', $url);
         if (isset($url[1])) {
             $tmp = $url[1];
             unset($url[1]);

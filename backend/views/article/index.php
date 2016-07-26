@@ -36,13 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'category',
                     [
                         'class' => 'backend\widgets\grid\SwitcherColumn',
-                        'attribute' => 'is_top',
-                        'reload' => 0
+                        'attribute' => 'is_top'
                     ],
                     [
                         'class' => 'backend\widgets\grid\SwitcherColumn',
-                        'attribute' => 'status',
-                        'reload' => 0
+                        'attribute' => 'status'
                     ],
                     [
                         'class' => 'backend\widgets\grid\ActionColumn',

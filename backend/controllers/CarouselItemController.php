@@ -6,6 +6,7 @@ use common\models\Carousel;
 use Yii;
 use common\models\CarouselItem;
 use backend\models\search\CarouselItemSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
@@ -33,7 +34,20 @@ class CarouselItemController extends Controller
             ],
         ];
     }
-
+    public function actions()
+    {
+        return [
+            'position' => [
+                'class' => 'yii2tech\admin\actions\Position',
+                'returnUrl' => function($model){
+                    return Url::to(['/carousel/update', 'id' => $model->carousel_id]);
+                }
+            ],
+            'switcher' => [
+                'class' => 'backend\widgets\grid\SwitcherAction'
+            ]
+        ];
+    }
     /**
      * Creates a new CarouselItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -50,7 +64,7 @@ class CarouselItemController extends Controller
         $model->carousel_id =  $carousel->id;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('backend', 'Carousel slide was successfully saved'));
+                Yii::$app->getSession()->setFlash('success', Yii::t('common', 'Created success'));
                 return $this->redirect(['/carousel/update', 'id' => $model->carousel_id]);
             }
         }
@@ -100,7 +114,7 @@ class CarouselItemController extends Controller
      * @return CarouselItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = CarouselItem::findOne($id)) !== null) {
             return $model;

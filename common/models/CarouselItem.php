@@ -6,6 +6,7 @@ use common\behaviors\CacheInvalidateBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii2tech\ar\position\PositionBehavior;
 
 /**
  * This is the model class for table "carousel_item".
@@ -44,6 +45,11 @@ class CarouselItem extends ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'order',
+                'groupAttributes' => ['carousel_id']
+            ],
             'cacheInvalidate' => [
                 'class' => CacheInvalidateBehavior::className(),
                 'keys' => [
@@ -83,6 +89,13 @@ class CarouselItem extends ActiveRecord
             'caption' => Yii::t('common', 'Caption'),
             'status' => Yii::t('common', 'Status'),
             'order' => Yii::t('common', 'Order')
+        ];
+    }
+
+    public function attributeHints()
+    {
+        return [
+            'url' => '格式: /site/index a=1&b=2'
         ];
     }
 

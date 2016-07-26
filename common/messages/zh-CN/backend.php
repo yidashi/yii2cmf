@@ -21,5 +21,6 @@ return [
     'Update' => '更新',
     'Create {modelClass}' => '创建{modelClass}',
     'Update {modelClass}: ' => '更新{modelClass}:',
-    'Carousel' => '幻灯片'
+    'Carousel' => '幻灯片',
+    'Nav' => '导航'
 ];

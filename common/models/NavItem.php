@@ -49,6 +49,13 @@ class NavItem extends \yii\db\ActiveRecord
         ];
     }
 
+    public function attributeHints()
+    {
+        return [
+            'url' => '格式: /site/index a=1&b=2'
+        ];
+    }
+
     public function behaviors()
     {
         return [

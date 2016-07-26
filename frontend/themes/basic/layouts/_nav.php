@@ -28,7 +28,7 @@ echo Nav::widget([
     'encodeLabels' => false
 ]);
 $searchUrl = url(['/search']);
-$q = Yii::$app->request->get('q', '搜索');
+$q = Yii::$app->request->get('q', '全站搜索');
 echo <<<SEARCH
 <form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
     <div class="input-group">

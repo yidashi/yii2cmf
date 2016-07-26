@@ -9,7 +9,9 @@ use yii\helpers\Url;
 class SwitcherColumn extends  DataColumn
 {
 
-    public $reload = 1;
+    public $reload = 0;
+
+    public $route = 'switcher';
 
     public function registerClientScript()
     {
@@ -50,8 +52,8 @@ EOT;
     protected function renderDataCellContent($model, $key, $index)
     {
         $params = is_array($key) ? $key : ['id' => (string) $key];
-        $params[0]='switcher';
-        $params["attribute"] =$this->attribute;
+        $params[0] = $this->route;
+        $params["attribute"] = $this->attribute;
 
         $value = $this->getDataCellValue($model, $key, $index) ;
 

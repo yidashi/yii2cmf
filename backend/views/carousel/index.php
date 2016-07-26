@@ -9,7 +9,7 @@ use yii\grid\GridView;
 $this->title = Yii::t('backend', 'Carousel');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="widget-carousel-index">
+<div class="carousel-index">
 
     <p>
         <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [

@@ -1,11 +1,11 @@
 <?php
 /** @var $this yii\web\View
- * @var $model common\models\WidgetCarouselItem
- * @var $carousel common\models\WidgetCarousel
+ * @var $model common\models\CarouselItem
+ * @var $carousel common\models\Carousel
  */
 
 $this->title = Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'Widget Carousel Item',
+    'modelClass' => 'Carousel Item',
 ]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Carousel Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $carousel->key, 'url' => ['update', 'id' => $carousel->id]];

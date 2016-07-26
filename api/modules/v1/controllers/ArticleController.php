@@ -33,11 +33,12 @@ class ArticleController extends Controller
     }
     public function actionView($id = 0)
     {
-        $model = Article::find()->published()->where(['id' => $id])->with('data')->asArray()->one();
+        $model = Article::find()->published()->where(['id' => $id])->with('data')->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
         $model->addView();
+        $model = $model->toArray([], ['data']);
         $model['data']['content'] = \yii\helpers\Markdown::process($model['data']['content'], 'gfm');
         $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
         $html = <<<CONTENT
