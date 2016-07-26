@@ -1,17 +1,3 @@
---
--- Dumping data for table {{%user}}
---
-
-LOCK TABLES {{%user}} WRITE;
-/*!40000 ALTER TABLE {{%user}} DISABLE KEYS */;
-INSERT INTO {{%user}} VALUES (1,'hehe','1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs','$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',NULL,'hehe@qq.com',10,1,1441766741,1441766741,1458640427);
-/*!40000 ALTER TABLE {{%user}} ENABLE KEYS */;
-UNLOCK TABLES;
-
-LOCK TABLES {{%profile}} WRITE;
-INSERT INTO {{%profile}} (id,locale) VALUES(1, 'zh-CN');
-UNLOCK TABLES;
-
 
 --
 -- Dumping data for table {{%auth_item}}

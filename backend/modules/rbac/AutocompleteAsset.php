@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin;
+namespace rbac;
 
 /**
  * AutocompleteAsset.
@@ -14,7 +14,7 @@ class AutocompleteAsset extends \yii\web\AssetBundle
     /**
      * {@inheritdoc}
      */
-    public $sourcePath = '@mdm/admin/assets';
+    public $sourcePath = '@rbac/assets';
 
     /**
      * {@inheritdoc}

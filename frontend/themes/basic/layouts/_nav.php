@@ -62,8 +62,8 @@ if ($noticeNums > 0) {
     ];
 }
 if (Yii::$app->user->isGuest) {
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/user/signup']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/user/login']];
 } else {
     $rightMenuItems[] = [
         'label' => Html::img(Yii::$app->user->identity->getAvatar(32), ['width' => 32, 'height' => 32]),
@@ -77,7 +77,7 @@ if (Yii::$app->user->isGuest) {
             ],
             [
                 'label' => Html::icon('cog') . ' 账户设置',
-                'url' => ['/user/profile'],
+                'url' => ['/user/settings/profile'],
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',
@@ -93,7 +93,7 @@ if (Yii::$app->user->isGuest) {
             ],
             [
                 'label' => Html::icon('sign-out') . ' 退出',
-                'url' => ['/site/logout'],
+                'url' => ['/user/logout'],
                 'linkOptions' => ['data-method' => 'post'],
             ]
         ]

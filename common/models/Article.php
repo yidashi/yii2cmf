@@ -6,7 +6,7 @@ use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use common\behaviors\TagBehavior;
-use common\behaviors\UserBehavior;
+use common\modules\user\behaviors\UserBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;

@@ -1,0 +1,65 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: yidashi
+ * Date: 16/7/26
+ * Time: 下午10:41
+ */
+
+namespace common\modules\user\controllers;
+
+
+use yii\web\Controller;
+use common\modules\user\models\Profile;
+use yii\imagine\Image;
+use common\models\Attachment;
+use Yii;
+
+class SettingsController extends Controller
+{
+    public function actionProfile()
+    {
+        $userId = \Yii::$app->user->id;
+        $profile = Profile::find()->where(['user_id' => $userId])->one();
+        if ($profile->load(\Yii::$app->request->post()) && $profile->save()) {
+            return $this->redirect(['profile']);
+        } else {
+            return $this->render('profile', [
+                'model' => $profile
+            ]);
+        }
+    }
+    public function actionAvatar()
+    {
+        $user = \Yii::$app->user->identity;
+
+        if (Yii::$app->getRequest()->isAjax) {
+            $avatar = Yii::$app->getRequest()->post("avatar");
+            $x = Yii::$app->getRequest()->post("x");
+            $y = Yii::$app->getRequest()->post("y");
+            $w = Yii::$app->getRequest()->post("w");
+            $h = Yii::$app->getRequest()->post("h");
+            $attachment = Attachment::findOne($avatar);
+            $original= $attachment->filePath;
+            $fileInfo = pathinfo($original);
+            $target = $fileInfo['dirname'] . '/' . $fileInfo['filename'] . '_avatar.' . $fileInfo['extension'];
+            Image::crop($original, $w, $h, [
+                $x,
+                $y
+            ])->save($target);
+            $targetUrl = Yii::$app->storage->path2url($target);
+            $user->saveAvatar($targetUrl);
+
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $result = [
+                'status' => true,
+                'msg' => '保存成功'
+            ];
+            return $result;
+        }
+
+        return $this->render('avatar', [
+            'user' => $user
+        ]);
+    }
+}

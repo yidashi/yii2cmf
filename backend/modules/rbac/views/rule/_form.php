@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var rbac\models\AuthItem $model
  * @var yii\widgets\ActiveForm $form
  */
 ?>
@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?php
-        echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), [
+        echo Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), [
             'class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat', ])
         ?>
     </div>

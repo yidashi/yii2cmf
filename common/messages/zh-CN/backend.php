@@ -22,5 +22,11 @@ return [
     'Create {modelClass}' => '创建{modelClass}',
     'Update {modelClass}: ' => '更新{modelClass}:',
     'Carousel' => '幻灯片',
-    'Nav' => '导航'
+    'Nav' => '导航',
+    'Account details' => '账户',
+    'Profile details' => '信息',
+    'Assignments' => '指派',
+    'Block' => '封禁',
+    'UnBlock' => '解禁',
+    'You can assign multiple roles or permissions to user by using the form below' => '您可以使用下面的表单给用户分配多个角色或权限'
 ];

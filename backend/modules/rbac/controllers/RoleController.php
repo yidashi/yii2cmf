@@ -1,15 +1,15 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace rbac\controllers;
 
-use mdm\admin\models\AuthItem;
-use mdm\admin\models\searchs\AuthItem as AuthItemSearch;
+use rbac\models\AuthItem;
+use rbac\models\searchs\AuthItem as AuthItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\rbac\Item;
 use Yii;
-use mdm\admin\components\MenuHelper;
+use rbac\components\MenuHelper;
 
 /**
  * AuthItemController implements the CRUD actions for AuthItem model.

@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Json;
-use mdm\admin\AutocompleteAsset;
+use rbac\AutocompleteAsset;
 
 /* @var $this yii\web\View */
-/* @var $model mdm\admin\models\AuthItem */
+/* @var $model rbac\models\AuthItem */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -23,7 +23,7 @@ use mdm\admin\AutocompleteAsset;
 
         <div class="form-group">
             <?php
-            echo Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), [
+            echo Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), [
                 'class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat', ])
             ?>
         </div>

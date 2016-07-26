@@ -41,7 +41,8 @@
         "fabpot/goutte": "^3.1",
         "kartik-v/yii2-widget-select2": "*",
         "udokmeci/yii2-beanstalk": "dev-master",
-        "hightman/xunsearch": "*@beta"
+        "hightman/xunsearch": "*@beta",
+        "bower-asset/pace": "^1.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

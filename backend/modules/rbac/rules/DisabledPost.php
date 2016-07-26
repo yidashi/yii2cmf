@@ -1,5 +1,5 @@
 <?php
-namespace mdm\admin\rules;
+namespace rbac\rules;
 
 use yii\rbac\Rule;
 use yii\rbac\Item;

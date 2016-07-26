@@ -18,7 +18,8 @@ return [
     ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\user\models\User',
+            'loginUrl' => '/user/security/login',
             'enableAutoLogin' => true,
             'on afterLogin' => function($event) {
                 $event->identity->touch('login_at');
@@ -42,6 +43,16 @@ return [
                     'sourcePath' => '@frontend/components/bootstrap/dist'
                 ],
             ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/messages',
+                    'fileMap' => ['app' => 'frontend.php'],
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
+                ],
+            ]
         ],
         'view' => [
             'on beginPage' => function($event){

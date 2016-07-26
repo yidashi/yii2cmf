@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use mdm\admin\models\Menu;
+use rbac\models\Menu;
 use yii\helpers\Json;
-use mdm\admin\AutocompleteAsset;
+use rbac\AutocompleteAsset;
 
 /* @var $this yii\web\View */
-/* @var $model mdm\admin\models\Menu */
+/* @var $model rbac\models\Menu */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
@@ -29,7 +29,7 @@ use mdm\admin\AutocompleteAsset;
     <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac-admin', 'Create') : Yii::t('rbac-admin', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

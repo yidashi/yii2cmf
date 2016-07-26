@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace rbac\controllers;
 
 use Yii;
-use mdm\admin\models\Assignment;
-use mdm\admin\models\searchs\Assignment as AssignmentSearch;
+use rbac\models\Assignment;
+use rbac\models\searchs\Assignment as AssignmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use mdm\admin\components\MenuHelper;
+use rbac\components\MenuHelper;
 use yii\web\Response;
 
 /**

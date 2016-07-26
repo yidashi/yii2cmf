@@ -69,12 +69,12 @@ class Notify extends \yii\db\ActiveRecord
 
     public function getFrom()
     {
-        return $this->hasOne(User::className(), ['id' => 'from_uid']);
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'from_uid']);
     }
 
     public function getTo()
     {
-        return $this->hasOne(User::className(), ['id' => 'to_uid']);
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'to_uid']);
     }
 
     public function getCategory()

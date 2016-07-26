@@ -17,7 +17,7 @@
         <?= backend\widgets\Menu::widget(
             [
                 'options' => ['class' => 'sidebar-menu'],
-                'items' => \mdm\admin\components\MenuHelper::getAssignedMenu(Yii::$app->user->id)
+                'items' => \rbac\components\MenuHelper::getAssignedMenu(Yii::$app->user->id)
             ]
         ) ?>
 

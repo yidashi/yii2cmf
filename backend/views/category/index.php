@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title:html:分类名',
                     'slug:text:标识',
                     'article:text:文章数',
-                    'is_nav:boolean:是否显示导航栏',
                     'sort',
                     [
                         'class' => 'backend\widgets\grid\ActionColumn',

@@ -29,7 +29,8 @@ return [
     ],
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\user\models\User',
+            'loginUrl' => '/user/security/login',
             'enableAutoLogin' => true,
             'idParam' => '__idBackend',
             'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
@@ -47,7 +48,7 @@ return [
             ],
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager',
+            'class' => 'rbac\components\DbManager',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -57,10 +58,16 @@ return [
         ],
         'i18n' => [
             'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/messages',
+                    'fileMap' => ['app' => 'backend.php'],
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
+                ],
                 'yii2tech-admin' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@yii2tech/admin/messages',
-                ],
+                ]
             ],
         ],
         'themeManager' => [
@@ -72,7 +79,7 @@ return [
     ],
     'modules' => [
         'rbac' => [
-            'class' => 'mdm\admin\Module',
+            'class' => 'rbac\Module',
         ],
         'backup' => [
             'class' => 'backup\Module',
@@ -80,14 +87,17 @@ return [
         'i18n' => [
             'class' => 'backend\modules\i18n\Module',
             'defaultRoute'=>'i18n-message/index'
+        ],
+        'user' => [
+            'defaultRoute' => 'admin'
         ]
     ],
     'aliases' => [
-        '@mdm/admin' => '@backend/modules/rbac',
+        '@rbac' => '@backend/modules/rbac',
         '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
+        'class' => 'rbac\components\AccessControl',
         'allowActions' => [
             'site/logout',
         ],

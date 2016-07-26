@@ -1,9 +1,9 @@
 <?php
 
-namespace mdm\admin\models;
+namespace rbac\models;
 
 use Yii;
-use mdm\admin\components\Configs;
+use rbac\components\Configs;
 use yii\helpers\Html;
 use yii2tech\ar\position\PositionBehavior;
 
@@ -107,14 +107,14 @@ class Menu extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('rbac-admin', 'ID'),
-            'name' => Yii::t('rbac-admin', 'Name'),
-            'parent' => Yii::t('rbac-admin', 'Parent'),
-            'parent_name' => Yii::t('rbac-admin', 'Parent Name'),
-            'route' => Yii::t('rbac-admin', 'Route'),
-            'icon' => Yii::t('rbac-admin', 'Icon'),
-            'order' => Yii::t('rbac-admin', 'Order'),
-            'data' => Yii::t('rbac-admin', 'Data'),
+            'id' => Yii::t('rbac', 'ID'),
+            'name' => Yii::t('rbac', 'Name'),
+            'parent' => Yii::t('rbac', 'Parent'),
+            'parent_name' => Yii::t('rbac', 'Parent Name'),
+            'route' => Yii::t('rbac', 'Route'),
+            'icon' => Yii::t('rbac', 'Icon'),
+            'order' => Yii::t('rbac', 'Order'),
+            'data' => Yii::t('rbac', 'Data'),
         ];
     }
 

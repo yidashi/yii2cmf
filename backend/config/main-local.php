@@ -10,6 +10,7 @@ $config = [
             'enablePrettyUrl' => env('BACKEND_PRETTY_URL', false),
             'showScriptName' => false,
             'rules' => [
+                'user/<action:\S+>' => 'user/admin/<action>',
             ],
         ],
     ],

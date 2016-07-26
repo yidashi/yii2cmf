@@ -14,7 +14,7 @@ class Yii extends \yii\BaseYii
     }
     public static function powered()
     {
-        return 'Powered by ' . '<a href="http://cms.51siyuan.cn/" rel="external">Yuan CMS</a>';
+        return 'Powered by ' . '<a href="http://www.51siyuan.cn/" rel="external">Yuan CMS</a>';
     }
 }
 

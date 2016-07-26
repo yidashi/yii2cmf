@@ -1,12 +1,12 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace rbac\models\searchs;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
-use mdm\admin\models\BizRule as MBizRule;
-use mdm\admin\components\RouteRule;
+use rbac\models\BizRule as MBizRule;
+use rbac\components\RouteRule;
 
 /**
  * Description of BizRule.
@@ -35,7 +35,7 @@ class BizRule extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('rbac-admin', 'Name'),
+            'name' => Yii::t('rbac', 'Name'),
         ];
     }
 

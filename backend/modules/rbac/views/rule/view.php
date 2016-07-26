@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var rbac\models\AuthItem $model
  */
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Rules', 'url' => ['index']];
@@ -14,11 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="auth-item-view">
 
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a(Yii::t('rbac', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary btn-flat']) ?>
         <?php
-        echo Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->name], [
+        echo Html::a(Yii::t('rbac', 'Delete'), ['delete', 'id' => $model->name], [
             'class' => 'btn btn-danger',
-            'data-confirm' => Yii::t('rbac-admin', 'Are you sure to delete this item?'),
+            'data-confirm' => Yii::t('rbac', 'Are you sure to delete this item?'),
             'data-method' => 'post',
         ]);
         ?>

@@ -3,11 +3,11 @@
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var rbac\models\AuthItem $model
  */
 
-$this->title = Yii::t('rbac-admin', 'Create Role');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Roles'), 'url' => ['index']];
+$this->title = Yii::t('rbac', 'Create Role');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-create">

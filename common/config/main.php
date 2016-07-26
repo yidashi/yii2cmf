@@ -26,11 +26,6 @@ return [
         ],
         'i18n' => [
             'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath'=>'@common/messages',
-                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
-                ],
                 '*'=> [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath'=>'@common/messages',
@@ -77,6 +72,11 @@ return [
                     'logTable'=>'{{%system_log}}'
                 ],
             ]
+        ]
+    ],
+    'modules' => [
+        'user' => [
+            'class' => 'common\modules\user\Module',
         ]
     ],
     'as locale' => [

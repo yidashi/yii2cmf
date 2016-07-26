@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\models;
+namespace rbac\models;
 
 use yii\rbac\Rule;
 use Yii;
@@ -83,8 +83,8 @@ class BizRule extends \yii\base\Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('rbac-admin', 'Name'),
-            'className' => Yii::t('rbac-admin', 'Class Name'),
+            'name' => Yii::t('rbac', 'Name'),
+            'className' => Yii::t('rbac', 'Class Name'),
         ];
     }
 

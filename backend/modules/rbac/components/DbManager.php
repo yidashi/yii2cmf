@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\components;
+namespace rbac\components;
 
 use Yii;
 use yii\db\Connection;
@@ -682,5 +682,29 @@ class DbManager extends \yii\rbac\DbManager
         $this->invalidate(self::PART_CHILDREN);
 
         return $result;
+    }
+
+    /**
+     * Returns both roles and permissions assigned to user.
+     *
+     * @param  integer $userId
+     * @return array
+     */
+    public function getItemsByUser($userId)
+    {
+        if (empty($userId)) {
+            return [];
+        }
+
+        $query = (new Query)->select('b.*')
+            ->from(['a' => $this->assignmentTable, 'b' => $this->itemTable])
+            ->where('{{a}}.[[item_name]]={{b}}.[[name]]')
+            ->andWhere(['a.user_id' => (string) $userId]);
+
+        $roles = [];
+        foreach ($query->all($this->db) as $row) {
+            $roles[$row['name']] = $this->populateItem($row);
+        }
+        return $roles;
     }
 }

@@ -6,14 +6,14 @@ use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $searchModel mdm\admin\models\searchs\Assignment */
+/* @var $searchModel rbac\models\searchs\Assignment */
 
-$this->title = Yii::t('rbac-admin', 'Users');
+$this->title = Yii::t('rbac', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assignment-index">
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create User'), ['/user/create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a(Yii::t('rbac', 'Create User'), ['/user/create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'view',
                                 'id' => $model->id,
                                 ], [
-                                    'title' => Yii::t('rbac-admin', 'Assigned'),
-                                    'aria-label' => Yii::t('rbac-admin', 'Assigned'),
+                                    'title' => Yii::t('rbac', 'Assigned'),
+                                    'aria-label' => Yii::t('rbac', 'Assigned'),
                                     'data-pjax' => '0',
                                 ]);
                             },

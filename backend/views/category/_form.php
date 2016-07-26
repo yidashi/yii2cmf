@@ -19,8 +19,6 @@ use backend\widgets\meta\MetaForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'is_nav')->checkbox() ?>
-
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>

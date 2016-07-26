@@ -2,26 +2,26 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use mdm\admin\AdminAsset;
+use rbac\AdminAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var rbac\models\AuthItem $model
  */
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Roles'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Roles'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-view">
 
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a(Yii::t('rbac', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary btn-flat']) ?>
         <?php
-        echo Html::a(Yii::t('rbac-admin', 'Delete'), ['delete', 'id' => $model->name], [
+        echo Html::a(Yii::t('rbac', 'Delete'), ['delete', 'id' => $model->name], [
             'class' => 'btn btn-danger',
-            'data-confirm' => Yii::t('rbac-admin', 'Are you sure to delete this item?'),
+            'data-confirm' => Yii::t('rbac', 'Are you sure to delete this item?'),
             'data-method' => 'post',
         ]);
         ?>
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     <div class="row">
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Avaliable') ?>:
+            <?= Yii::t('rbac', 'Avaliable') ?>:
             <input id="search-avaliable"><br>
             <select id="list-avaliable" multiple size="20" style="width: 100%">
             </select>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Assigned') ?>:
+            <?= Yii::t('rbac', 'Assigned') ?>:
             <input id="search-assigned"><br>
             <select id="list-assigned" multiple size="20" style="width: 100%">
             </select>

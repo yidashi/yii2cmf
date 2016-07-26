@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace rbac\models\searchs;
 
 use Yii;
 use yii\base\Model;
@@ -41,12 +41,12 @@ class AuthItem extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('rbac-admin', 'Name'),
-            'item_name' => Yii::t('rbac-admin', 'Name'),
-            'type' => Yii::t('rbac-admin', 'Type'),
-            'description' => Yii::t('rbac-admin', 'Description'),
-            'ruleName' => Yii::t('rbac-admin', 'Rule Name'),
-            'data' => Yii::t('rbac-admin', 'Data'),
+            'name' => Yii::t('rbac', 'Name'),
+            'item_name' => Yii::t('rbac', 'Name'),
+            'type' => Yii::t('rbac', 'Type'),
+            'description' => Yii::t('rbac', 'Description'),
+            'ruleName' => Yii::t('rbac', 'Rule Name'),
+            'data' => Yii::t('rbac', 'Data'),
         ];
     }
 

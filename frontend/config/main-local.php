@@ -17,9 +17,12 @@ $config = [
                 ],
                 '/' => 'site/index',
                 '<controller:\w+>' => '<controller>/index',
-                'user/<id:\d+>' => '/user',
                 'tag/search' => '/tag/search',
                 'tag/<name:\S+>' => '/article/tag',
+                'user/<id:\d+>' => '/user',
+                'user/<action:(login|logout)>' => 'user/security/<action>',
+                'user/<action:(signup)>' => 'user/registration/<action>',
+                'user/<action:(up|article-list|notice|favourite)>' => 'user/default/<action>'
             ],
         ]
     ],

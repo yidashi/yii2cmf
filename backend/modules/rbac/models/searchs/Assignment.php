@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin\models\searchs;
+namespace rbac\models\searchs;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -34,9 +34,9 @@ class Assignment extends Model
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('rbac-admin', 'ID'),
-            'username' => Yii::t('rbac-admin', 'Username'),
-            'name' => Yii::t('rbac-admin', 'Name'),
+            'id' => Yii::t('rbac', 'ID'),
+            'username' => Yii::t('rbac', 'Username'),
+            'name' => Yii::t('rbac', 'Name'),
         ];
     }
 

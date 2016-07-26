@@ -64,7 +64,7 @@ Once the extension is installed, simply modify your application configuration as
 return [
     'modules' => [
         'admin' => [
-            'class' => 'mdm\admin\Module',
+            'class' => 'rbac\Module',
             ...
         ]
         ...
@@ -77,7 +77,7 @@ return [
         ]
     ],
     'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
+        'class' => 'rbac\components\AccessControl',
         'allowActions' => [
             'site/*',
             'admin/*',
@@ -125,7 +125,7 @@ To do that, change them via `controllerMap` property. For example:
             ...
             'controllerMap' => [
                  'assignment' => [
-                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    'class' => 'rbac\controllers\AssignmentController',
                     /* 'userClassName' => 'app\models\User', */ // fully qualified class name of your User model
                     // Usually you don't need to specify it explicitly, since the module will detect it automatically
                     'idField' => 'user_id',        // id field of your User model that corresponds to Yii::$app->user->id

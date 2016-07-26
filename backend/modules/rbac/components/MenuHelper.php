@@ -1,17 +1,17 @@
 <?php
 
-namespace mdm\admin\components;
+namespace rbac\components;
 
 use Yii;
 use yii\caching\TagDependency;
-use mdm\admin\models\Menu;
+use rbac\models\Menu;
 
 /**
  * MenuHelper used to generate menu depend of user role.
  * Usage.
  * 
  * ~~~
- * use mdm\admin\components\MenuHelper;
+ * use rbac\components\MenuHelper;
  * use yii\bootstrap\Nav;
  *
  * echo Nav::widget([

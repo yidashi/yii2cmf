@@ -182,23 +182,6 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NULL",
         ], $this->tableOptions);
 
-// profile
-        $this->createTable('{{%profile}}', [
-            'id' => Schema::TYPE_PK,
-            'money' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'signature' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT ''",
-            'avatar' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
-            'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
-            'qq' => $this->string(20),
-            'phone' => $this->string(20),
-            'province' => $this->smallInteger(4),
-            'city' => $this->smallInteger(4),
-            'area' => $this->smallInteger(4),
-            'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
-        ], $this->tableOptions);
-
 // reward
         $this->createTable('{{%reward}}', [
             'id' => Schema::TYPE_PK,
@@ -268,21 +251,6 @@ class m130524_201442_init extends Migration
             'article' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的文章数'",
         ], $this->tableOptions);
 
-// user
-        $this->createTable('{{%user}}', [
-            'id' => Schema::TYPE_PK,
-            'username' => $this->string(255)->notNull()->unique(),
-            'auth_key' => Schema::TYPE_STRING . "(32) NOT NULL",
-            'password_hash' => Schema::TYPE_STRING . "(255) NOT NULL",
-            'password_reset_token' => Schema::TYPE_STRING . "(255) NULL",
-            'email' => Schema::TYPE_STRING . "(255) NOT NULL",
-            'status' => Schema::TYPE_SMALLINT . "(6) NOT NULL DEFAULT '10'",
-            'created_at' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'is_admin' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
-            'login_at' => Schema::TYPE_INTEGER . "(11) NULL",
-        ], $this->tableOptions);
-
 // vote
         $this->createTable('{{%vote}}', [
             'id' => Schema::TYPE_PK,
@@ -330,7 +298,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%gather}}');
         $this->dropTable('{{%menu}}'); // fk: parent
         $this->dropTable('{{%page}}');
-        $this->dropTable('{{%profile}}');
         $this->dropTable('{{%reward}}');
         $this->dropTable('{{%sign}}');
         $this->dropTable('{{%spider}}');
@@ -338,7 +305,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%suggest}}');
         $this->dropTable('{{%system_log}}');
         $this->dropTable('{{%tag}}');
-        $this->dropTable('{{%user}}');
         $this->dropTable('{{%vote}}');
         $this->execute('SET foreign_key_checks = 1');
     }

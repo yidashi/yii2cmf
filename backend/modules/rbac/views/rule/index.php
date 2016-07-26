@@ -7,14 +7,14 @@ use yii\widgets\Pjax;
 /*
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var mdm\admin\models\AuthItemSearch $searchModel
+ * @var rbac\models\AuthItemSearch $searchModel
  */
-$this->title = Yii::t('rbac-admin', 'Rules');
+$this->title = Yii::t('rbac', 'Rules');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-index">
     <p>
-        <?= Html::a(Yii::t('rbac-admin', 'Create Rule'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a(Yii::t('rbac', 'Create Rule'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ['class' => 'yii\grid\SerialColumn'],
                 [
                     'attribute' => 'name',
-                    'label' => Yii::t('rbac-admin', 'Name'),
+                    'label' => Yii::t('rbac', 'Name'),
                 ],
                 ['class' => 'backend\widgets\grid\ActionColumn'],
             ],

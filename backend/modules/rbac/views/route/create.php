@@ -5,12 +5,12 @@ use yii\widgets\ActiveForm;
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\Route $model
+ * @var rbac\models\Route $model
  * @var ActiveForm $form
  */
 
-$this->title = Yii::t('rbac-admin', 'Create Route');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Routes'), 'url' => ['index']];
+$this->title = Yii::t('rbac', 'Create Route');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('rbac', 'Routes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?= $form->field($model, 'route') ?>
 
 		<div class="form-group">
-			<?= Html::submitButton(Yii::t('rbac-admin', 'Create'), ['class' => 'btn btn-primary btn-flat']) ?>
+			<?= Html::submitButton(Yii::t('rbac', 'Create'), ['class' => 'btn btn-primary btn-flat']) ?>
 		</div>
 	<?php ActiveForm::end(); ?>
 

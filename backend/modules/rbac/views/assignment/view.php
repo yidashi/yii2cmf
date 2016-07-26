@@ -1,22 +1,22 @@
 <?php
 
 use yii\helpers\Html;
-use mdm\admin\AdminAsset;
+use rbac\AdminAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model yii\web\IdentityInterface */
 
-$this->title = Yii::t('rbac-admin', 'Assignments');
+$this->title = Yii::t('rbac', 'Assignments');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="assignment-index">
-    <?= Html::a(Yii::t('rbac-admin', 'Users'), ['index'], ['class' => 'btn btn-success btn-flat']) ?>
+    <?= Html::a(Yii::t('rbac', 'Users'), ['index'], ['class' => 'btn btn-success btn-flat']) ?>
 
     <div class="row">
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Avaliable') ?>:
+            <?= Yii::t('rbac', 'Avaliable') ?>:
             <input id="search-avaliable"><br>
             <select id="list-avaliable" multiple size="20" style="width: 100%">
             </select>
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a href="#" id="btn-revoke" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Assigned') ?>:
+            <?= Yii::t('rbac', 'Assigned') ?>:
             <input id="search-assigned"><br>
             <select id="list-assigned" multiple size="20" style="width: 100%">
             </select>

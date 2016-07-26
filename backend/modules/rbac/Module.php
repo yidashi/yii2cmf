@@ -1,6 +1,6 @@
 <?php
 
-namespace mdm\admin;
+namespace rbac;
 
 use Yii;
 use yii\helpers\Inflector;
@@ -15,7 +15,7 @@ use yii\helpers\Inflector;
  * 'layout' => 'left-menu', // default to null mean use application layout.
  * 'controllerMap' => [
  *     'assignment' => [
- *         'class' => 'mdm\admin\controllers\AssignmentController',
+ *         'class' => 'rbac\controllers\AssignmentController',
  *         'userClassName' => 'app\models\User',
  *         'idField' => 'id'
  *     ]
@@ -91,18 +91,19 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        if (!isset(Yii::$app->i18n->translations['rbac-admin'])) {
-            Yii::$app->i18n->translations['rbac-admin'] = [
+        if (!isset(Yii::$app->i18n->translations['rbac'])) {
+            Yii::$app->i18n->translations['rbac'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en',
-                'basePath' => '@mdm/admin/messages',
+                'basePath' => '@rbac/messages',
+                'fileMap' => ['rbac' => 'rbac-admin.php']
             ];
         }
         //user did not define the Navbar?
         if ($this->navbar === null) {
             $this->navbar = [
-                ['label' => Yii::t('rbac-admin', 'Help'), 'url' => 'https://github.com/mdmsoft/yii2-admin/blob/master/docs/guide/basic-usage.md'],
-                ['label' => Yii::t('rbac-admin', 'Application'), 'url' => Yii::$app->homeUrl],
+                ['label' => Yii::t('rbac', 'Help'), 'url' => 'https://github.com/mdmsoft/yii2-admin/blob/master/docs/guide/basic-usage.md'],
+                ['label' => Yii::t('rbac', 'Application'), 'url' => Yii::$app->homeUrl],
             ];
         }
     }
@@ -121,11 +122,11 @@ class Module extends \yii\base\Module
             $config = components\Configs::instance();
             foreach ($this->_coreItems as $id => $lable) {
                 if ($id !== 'menu' || ($config->db !== null && $config->db->schema->getTableSchema($config->menuTable) !== null)) {
-                    $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac-admin', $lable), 'url' => [$mid.$id]];
+                    $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac', $lable), 'url' => [$mid.$id]];
                 }
             }
             foreach (array_keys($this->controllerMap) as $id) {
-                $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac-admin', Inflector::humanize($id)), 'url' => [$mid.$id]];
+                $this->_normalizeMenus[$id] = ['label' => Yii::t('rbac', Inflector::humanize($id)), 'url' => [$mid.$id]];
             }
 
             // user configure menus

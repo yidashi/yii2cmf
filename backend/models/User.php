@@ -7,7 +7,7 @@ use Yii;
 /**
  * Signup form
  */
-class User extends \common\models\User
+class User extends \common\modules\user\models\User
 {
     public function attributes()
     {

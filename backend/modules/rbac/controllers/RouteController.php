@@ -1,14 +1,14 @@
 <?php
 
-namespace mdm\admin\controllers;
+namespace rbac\controllers;
 
 use Yii;
-use mdm\admin\models\Route;
-use mdm\admin\components\MenuHelper;
+use rbac\models\Route;
+use rbac\components\MenuHelper;
 use yii\caching\TagDependency;
 use yii\web\Response;
-use mdm\admin\components\RouteRule;
-use mdm\admin\components\Configs;
+use rbac\components\RouteRule;
+use rbac\components\Configs;
 use yii\helpers\Inflector;
 use yii\helpers\VarDumper;
 use Exception;

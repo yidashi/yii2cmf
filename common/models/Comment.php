@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\behaviors\UserBehavior;
+use common\modules\user\behaviors\UserBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\behaviors\CommentBehavior;
 use yii\behaviors\BlameableBehavior;

@@ -1,24 +1,24 @@
 <?php
 
 use yii\helpers\Html;
-use mdm\admin\AdminAsset;
+use rbac\AdminAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
 /*
  * @var yii\web\View $this
  */
-$this->title = Yii::t('rbac-admin', 'Routes');
+$this->title = Yii::t('rbac', 'Routes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <p>
-    <?= Html::a(Yii::t('rbac-admin', 'Create route'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+    <?= Html::a(Yii::t('rbac', 'Create route'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
 </p>
 
 <div>
     <div class="row">
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Avaliable') ?>:
+            <?= Yii::t('rbac', 'Avaliable') ?>:
             <input id="search-avaliable">
             <a href="#" id="btn-refresh"><span class="glyphicon glyphicon-refresh"></span></a><br>
             <select id="list-avaliable" multiple size="20" style="width: 100%">
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
         <div class="col-lg-5">
-            <?= Yii::t('rbac-admin', 'Assigned') ?>:
+            <?= Yii::t('rbac', 'Assigned') ?>:
             <input id="search-assigned"><br>
             <select id="list-assigned" multiple size="20" style="width: 100%">
             </select>

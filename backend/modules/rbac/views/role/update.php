@@ -3,12 +3,12 @@
 
 /*
  * @var yii\web\View $this
- * @var mdm\admin\models\AuthItem $model
+ * @var rbac\models\AuthItem $model
  */
-$this->title = Yii::t('rbac-admin', 'Update Role').': '.$model->name;
+$this->title = Yii::t('rbac', 'Update Role').': '.$model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Roles', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
-$this->params['breadcrumbs'][] = Yii::t('rbac-admin', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('rbac', 'Update');
 ?>
 <div class="auth-item-update">
 
