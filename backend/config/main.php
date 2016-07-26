@@ -30,7 +30,7 @@ return [
     'components' => [
         'user' => [
             'identityClass' => 'common\modules\user\models\User',
-            'loginUrl' => '/user/security/login',
+            'loginUrl' => ['/user/security/login'],
             'enableAutoLogin' => true,
             'idParam' => '__idBackend',
             'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
@@ -89,7 +89,15 @@ return [
             'defaultRoute'=>'i18n-message/index'
         ],
         'user' => [
-            'defaultRoute' => 'admin'
+            'defaultRoute' => 'admin',
+            'controllerMap' => [
+                'security' => [
+                    'class' => 'common\modules\user\controllers\SecurityController',
+                    'layout' => '@backend/views/layouts/main-login',
+                    'viewPath' => '@backend/views/site'
+                ]
+
+            ]
         ]
     ],
     'aliases' => [
@@ -99,7 +107,7 @@ return [
     'as access' => [
         'class' => 'rbac\components\AccessControl',
         'allowActions' => [
-            'site/logout',
+            '/user/security/logout'
         ],
     ],
     'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',

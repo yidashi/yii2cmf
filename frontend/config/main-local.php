@@ -22,7 +22,7 @@ $config = [
                 'user/<id:\d+>' => '/user',
                 'user/<action:(login|logout)>' => 'user/security/<action>',
                 'user/<action:(signup)>' => 'user/registration/<action>',
-                'user/<action:(up|article-list|notice|favourite)>' => 'user/default/<action>'
+                'user/<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'user/default/<action>'
             ],
         ]
     ],

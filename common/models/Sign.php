@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\modules\user\behaviors\UserBehavior;
 use Yii;
 
 /**
@@ -49,8 +50,10 @@ class Sign extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getUser()
+    public function behaviors()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return [
+            UserBehavior::class
+        ];
     }
 }

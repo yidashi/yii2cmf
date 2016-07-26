@@ -9,6 +9,7 @@
 namespace common\modules\user\controllers;
 
 
+use common\modules\user\models\LoginForm;
 use common\modules\user\models\Profile;
 use common\modules\user\traits\AjaxValidationTrait;
 use Yii;
@@ -230,11 +231,9 @@ class AdminController extends Controller
     }
 
     /**
-     * Confirms the User.
-     *
-     * @param int $id
-     *
-     * @return Response
+     * @param $id
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionConfirm($id)
     {
@@ -255,5 +254,22 @@ class AdminController extends Controller
         return $this->render('_assignments', [
             'user' => $user
         ]);
+    }
+
+    public function actionLogin()
+    {
+        $this->layout = '@backend/views/layouts/main-login';
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        } else {
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
     }
 }
