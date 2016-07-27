@@ -22,9 +22,6 @@ use yii\web\Response;
  */
 class ArticleController extends Controller
 {
-    use MenuTrait;
-    public $group = '内容';
-
     public function behaviors()
     {
         return [

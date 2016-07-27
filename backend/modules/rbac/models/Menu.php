@@ -66,6 +66,7 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
+            ['name', 'unique'],
             [['parent_name'], 'filterParent'],
             [['parent_name'], 'in',
                 'range' => static::find()->select(['name'])->column(),
