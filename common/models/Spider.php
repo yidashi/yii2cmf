@@ -26,7 +26,7 @@ class Spider extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_spider';
+        return '{{%spider}}';
     }
 
     /**

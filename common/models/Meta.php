@@ -21,7 +21,7 @@ class Meta extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_meta';
+        return '{{%meta}}';
     }
 
     /**

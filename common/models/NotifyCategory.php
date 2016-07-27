@@ -18,7 +18,7 @@ class NotifyCategory extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_notify_category';
+        return '{{%notify_category}}';
     }
 
     /**
