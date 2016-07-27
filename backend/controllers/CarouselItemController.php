@@ -5,7 +5,6 @@ namespace backend\controllers;
 use common\models\Carousel;
 use Yii;
 use common\models\CarouselItem;
-use backend\models\search\CarouselItemSearch;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;

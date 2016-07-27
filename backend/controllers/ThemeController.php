@@ -14,7 +14,6 @@ use Distill\Distill;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use Yii;
-use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
 class ThemeController extends Controller
@@ -38,7 +37,7 @@ class ThemeController extends Controller
     }
     public function actionOpen($id)
     {
-        /** @var $themeManager \backend\components\ThemeManager  */
+        /** @var $themeManager \common\components\ThemeManager  */
         $themeManager = \Yii::$app->get("themeManager");
         $theme = $themeManager->findOne($id);
         if ($theme != null) {

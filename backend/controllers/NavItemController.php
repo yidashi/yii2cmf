@@ -5,7 +5,6 @@ namespace backend\controllers;
 use common\models\Nav;
 use Yii;
 use common\models\NavItem;
-use backend\models\search\NavItemSearch;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;

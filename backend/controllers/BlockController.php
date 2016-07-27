@@ -4,7 +4,6 @@ namespace backend\controllers;
 use common\models\Block;
 use frontend\widgets\area\TextWidget;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;

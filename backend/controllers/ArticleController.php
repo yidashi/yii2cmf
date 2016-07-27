@@ -2,14 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\traits\MenuTrait;
 use common\models\ArticleData;
 use common\models\ArticleModule;
-use common\models\ArticleTag;
 use Yii;
 use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
-use yii\base\DynamicModel;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

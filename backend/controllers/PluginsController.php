@@ -5,12 +5,10 @@ namespace backend\controllers;
 use backend\models\PluginsConfig;
 use Yii;
 use common\models\Module;
-use yii\base\DynamicModel;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
 use yii\helpers\Json;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**

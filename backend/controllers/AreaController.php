@@ -32,7 +32,7 @@ class AreaController extends Controller
     public function actionIndex()
     {
         return $this->render("index", [
-            "blocks" => Block::find()->where(["used"=>BooleanEnum::FLASE])->all(),
+            "blocks" => Block::find()->where(["used" => BooleanEnum::FLASE])->all(),
             "areas" => Area::find()->all()
         ]);
     }

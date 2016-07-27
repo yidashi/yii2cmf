@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Category;
-use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
