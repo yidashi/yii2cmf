@@ -9,8 +9,8 @@ use backend\widgets\meta\MetaForm;
 /* @var $form backend\widgets\ActiveForm */
 ?>
 
-<div class="category-form">
-
+<div class="box box-primary">
+    <div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'pid')->dropDownList(\common\models\Category::getDropDownlist(), ['prompt' => '请选择']) ?>
@@ -26,9 +26,9 @@ use backend\widgets\meta\MetaForm;
     <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>
+        <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success btn-flat btn-block' : 'btn btn-primary btn-flat btn-block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

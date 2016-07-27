@@ -9,27 +9,25 @@ use yii\grid\GridView;
 $this->title = '分类';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-index">
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a(Yii::t('app', 'Create Category'), ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
 
-    <p>
-        <?= Html::a('添加分类', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
-    </p>
-    <div class="box box-primary">
-        <div class="box-body">
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    'id:text:ID',
-                    'title:html:分类名',
-                    'slug:text:标识',
-                    'article:text:文章数',
-                    'sort',
-                    [
-                        'class' => 'backend\widgets\grid\ActionColumn',
-                        'template' => '{create} {update} {delete}'
-                    ],
+<div class="box box-primary">
+    <div class="box-body">
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                'id:text:ID',
+                'title:html:分类名',
+                'slug:text:标识',
+                'article:text:文章数',
+                'sort',
+                [
+                    'class' => 'backend\widgets\grid\ActionColumn',
+                    'template' => '{create} {update} {delete}'
                 ],
-            ]); ?>
-        </div>
+            ],
+        ]); ?>
     </div>
 </div>

@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Spider */
 
-$this->title = 'Create Spider';
-$this->params['breadcrumbs'][] = ['label' => 'Spiders', 'url' => ['index']];
+$this->title = Yii::t('app', 'Create Spider');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Spiders'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="spider-create">

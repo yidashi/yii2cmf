@@ -108,4 +108,9 @@ if (count($pks) === 1) {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function newModel()
+    {
+    return new <?= $modelClass ?>();
+    }
 }
