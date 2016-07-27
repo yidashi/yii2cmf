@@ -10,7 +10,7 @@ $config = [
             'enablePrettyUrl' => env('BACKEND_PRETTY_URL', false),
             'showScriptName' => false,
             'rules' => [
-                'user/login' => '/user/security/login',
+                'user/<action:(login|logout)>' => '/user/security/<action>',
                 'user/<action:\S+>' => '/user/admin/<action>',
             ],
         ],

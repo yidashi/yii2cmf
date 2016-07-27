@@ -59,8 +59,8 @@ $logCount = \backend\models\SystemLog::find()->count();
                         <i class="fa fa-user"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= \yii\helpers\Url::to(['/user/reset-password', 'id' => \Yii::$app->user->id]) ?>">修改密码</a></li>
-                        <li><a href="<?= \yii\helpers\Url::to(['/site/logout']) ?>" data-method="post">退出</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/user/security/reset-password', 'id' => \Yii::$app->user->id]) ?>">修改密码</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/user/security/logout']) ?>" data-method="post">退出</a></li>
                     </ul>
                 </li>
             </ul>

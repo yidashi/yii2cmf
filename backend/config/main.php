@@ -107,7 +107,7 @@ return [
     'as access' => [
         'class' => 'rbac\components\AccessControl',
         'allowActions' => [
-            '/user/security/logout'
+            'user/security/logout'
         ],
     ],
     'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',

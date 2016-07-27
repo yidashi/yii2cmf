@@ -135,7 +135,7 @@ h4 { font-size: 16px; }
 
 /* 标签开始 */
 .tag-list { padding: 0; }
-.tag-list li { line-height: 2em; margin: 0 5px; }
+.tag-list li { line-height: 2em;}
 .tag-list li .label { font-size: 12px; font-weight: normal; }
 /* 标签结束 */
 

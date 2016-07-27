@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\traits\MenuTrait;
 use common\models\ArticleData;
 use common\models\ArticleModule;
 use common\models\ArticleTag;
@@ -21,6 +22,9 @@ use yii\web\Response;
  */
 class ArticleController extends Controller
 {
+    use MenuTrait;
+    public $group = '内容';
+
     public function behaviors()
     {
         return [

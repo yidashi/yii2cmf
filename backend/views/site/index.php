@@ -39,7 +39,7 @@ $this->title = '控制面板';
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3><?= \common\models\User::find()->count() ?><sup style="font-size: 20px">人</sup></h3>
+                        <h3><?= \common\modules\user\models\User::find()->count() ?><sup style="font-size: 20px">人</sup></h3>
                         <p>当前注册用户</p>
                     </div>
                     <div class="icon">
