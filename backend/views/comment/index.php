@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'type_id',
                     [
                         'attribute' => 'content',
+                        'options' => ['width' => '40%'],
                         'value' => function($model) {
                             return \yii\helpers\Markdown::process($model->content);
                         },

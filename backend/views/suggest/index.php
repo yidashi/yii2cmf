@@ -17,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     'id',
-                    'content:ntext',
+                    [
+                        'attribute' => 'content',
+                        'options' => ['width' => '60%']
+                    ],
                     'created_at:datetime',
                     [
                         'attribute' => 'user_id',
