@@ -16,7 +16,7 @@ use ReflectionClass;
 use yii\base\InvalidParamException;
 use common\models\Module;
 use yii\base\BootstrapInterface;
-use mdm\admin\components\MenuHelper;
+use rbac\components\MenuHelper;
 
 abstract class Plugins extends PackageInfo implements BootstrapInterface
 {

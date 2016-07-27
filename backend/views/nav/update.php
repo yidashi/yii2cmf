@@ -21,28 +21,31 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
         </div>
         <div class="col-md-8">
         <p>
-            <?= Html::a(Yii::t('backend', 'Create {modelClass}', [
-                'modelClass' => 'Nav Item',
-            ]), ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
-        </p>
-
-        <?= GridView::widget([
-            'dataProvider' => $navItemsProvider,
-            'columns' => [
-                'title',
-                'url',
-                [
-                    'class' => 'yii2tech\admin\grid\PositionColumn',
-                    'attribute' => 'order',
-                    'route' => '/nav-item/position'
+                <?= Html::a(Yii::t('backend', 'Create {modelClass}', [
+                    'modelClass' => 'Nav Item',
+                ]), ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
+            </p>
+            <div class="box box-primary">
+                <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $navItemsProvider,
+                'columns' => [
+                    'title',
+                    'url',
+                    [
+                        'class' => 'yii2tech\admin\grid\PositionColumn',
+                        'attribute' => 'order',
+                        'route' => '/nav-item/position'
+                    ],
+                    [
+                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'controller' => '/nav-item',
+                        'template' => '{update} {delete}'
+                    ],
                 ],
-                [
-                    'class' => 'backend\widgets\grid\ActionColumn',
-                    'controller' => '/nav-item',
-                    'template' => '{update} {delete}'
-                ],
-            ],
-        ]); ?>
+            ]); ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,6 +1,5 @@
 <?php
 use yii\widgets\Breadcrumbs;
-use dmstr\widgets\Alert;
 
 ?>
 <div class="content-wrapper">
@@ -30,9 +29,6 @@ use dmstr\widgets\Alert;
     </section>
 
     <section class="content">
-        <?php if (array_key_exists('demo', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))): ?>
-        <?php Yii::$app->session->setFlash('warning', '演示组权限有限,少很多功能,需要看全部功能请下载本源码') ?>
-        <?php endif; ?>
         <?= \common\widgets\AlertPlus::widget()?>
         <?= $content ?>
     </section>
