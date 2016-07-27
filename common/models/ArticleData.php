@@ -62,9 +62,12 @@ class ArticleData extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
-        return [
-            ArticleDataBehavior::className(),
-            XsBehavior::className()
+        $behaviors = [
+            ArticleDataBehavior::className()
         ];
+        if (\Yii::$app->config->get('SEARCH_ENGINE') == 'xunsearch') {
+            $behaviors[] = XsBehavior::className();
+        }
+        return $behaviors;
     }
 }
