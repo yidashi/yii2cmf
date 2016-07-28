@@ -32,7 +32,7 @@ class Config extends \yii\db\ActiveRecord
             [['name', 'description', 'type'], 'required'],
             [['name', 'group'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
-            [['value', 'desc', 'extra'], 'string'],
+            [['value', 'description', 'extra'], 'string'],
         ];
     }
 

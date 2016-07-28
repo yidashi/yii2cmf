@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'layout' => '{items}',
                 'columns' => [
-                    'desc',
+                    'description',
                     [
                         'attribute' => 'value',
                         'value' => function($model, $key, $index) use ($form) {
