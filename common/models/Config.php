@@ -29,7 +29,7 @@ class Config extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'desc', 'type'], 'required'],
+            [['name', 'description', 'type'], 'required'],
             [['name', 'group'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
             [['value', 'desc', 'extra'], 'string'],
@@ -45,7 +45,7 @@ class Config extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => '配置名',
             'value' => '配置值',
-            'desc' => '配置描述',
+            'description' => '配置描述',
             'type' => '配置类型',
             'extra' => '配置项',
             'group' => '分组',

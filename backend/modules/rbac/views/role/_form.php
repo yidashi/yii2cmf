@@ -17,7 +17,7 @@ use rbac\AutocompleteAsset;
 
         <?= $form->field($model, 'description')->textarea(['rows' => 2]) ?>
 
-        <?= $form->field($model, 'ruleName')->textInput(['id' => 'rule-name']) ?>
+        <?= $form->field($model, 'ruleName')->dropDownList(\backend\modules\rbac\components\RuleHelper::enums(), ['prompt' => '请选择']) ?>
 
         <?= $form->field($model, 'data')->textarea(['rows' => 6]) ?>
 
@@ -30,10 +30,4 @@ use rbac\AutocompleteAsset;
 
     <?php ActiveForm::end(); ?>
 </div>
-<?php
-AutocompleteAsset::register($this);
 
-$options = Json::htmlEncode([
-    'source' => array_keys(Yii::$app->authManager->getRules()),
-]);
-$this->registerJs("$('#rule-name').autocomplete($options);");

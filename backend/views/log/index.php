@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'backend\widgets\grid\ActionColumn',
-                        'template'=>'{view}{delete}'
+                        'template'=>'{view} {delete}'
                     ]
                 ]
             ]); ?>

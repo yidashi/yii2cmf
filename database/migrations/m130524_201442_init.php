@@ -64,42 +64,6 @@ class m130524_201442_init extends Migration
             'source_id' => Schema::TYPE_STRING . "(255) NOT NULL",
         ], $this->tableOptions);
 
-// auth_assignment
-        $this->createTable('{{%auth_assignment}}', [
-            'item_name' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'user_id' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'created_at' => Schema::TYPE_INTEGER . "(11) NULL",
-            'PRIMARY KEY (item_name, user_id)',
-        ], $this->tableOptions);
-
-// auth_item
-        $this->createTable('{{%auth_item}}', [
-            'name' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'type' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'description' => Schema::TYPE_TEXT . " NULL",
-            'rule_name' => Schema::TYPE_STRING . "(64) NULL",
-            'data' => Schema::TYPE_TEXT . " NULL",
-            'created_at' => Schema::TYPE_INTEGER . "(11) NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(11) NULL",
-            'PRIMARY KEY (name)',
-        ], $this->tableOptions);
-
-// auth_item_child
-        $this->createTable('{{%auth_item_child}}', [
-            'parent' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'child' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'PRIMARY KEY (parent, child)',
-        ], $this->tableOptions);
-
-// auth_rule
-        $this->createTable('{{%auth_rule}}', [
-            'name' => Schema::TYPE_STRING . "(64) NOT NULL",
-            'data' => Schema::TYPE_TEXT . " NULL",
-            'created_at' => Schema::TYPE_INTEGER . "(11) NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(11) NULL",
-            'PRIMARY KEY (name)',
-        ], $this->tableOptions);
-
 // category
         $this->createTable('{{%category}}', [
             'id' => Schema::TYPE_PK,
@@ -128,18 +92,6 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
         $this->createIndex('type', '{{%comment}}', ['type', 'type_id']);
-// config
-        $this->createTable('{{%config}}', [
-            'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING . "(20) NOT NULL COMMENT '配置键值'",
-            'value' => Schema::TYPE_TEXT . " NOT NULL COMMENT '配置值'",
-            'extra' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
-            'desc' => Schema::TYPE_STRING . "(255) NOT NULL COMMENT '配置描述'",
-            'type' => $this->string(30)->defaultValue('text')->comment('配置类型'),
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'group' => $this->string(30)->defaultValue('system')->comment('配置分组')
-        ], $this->tableOptions);
 
 // favourite
         $this->createTable('{{%favourite}}', [
@@ -262,18 +214,7 @@ class m130524_201442_init extends Migration
             'type_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
         ], $this->tableOptions);
 
-// fk: auth_assignment
-        $this->addForeignKey('fk_auth_assignment_item_name', '{{%auth_assignment}}', 'item_name', '{{%auth_item}}', 'name');
 
-// fk: auth_item
-        $this->addForeignKey('fk_auth_item_rule_name', '{{%auth_item}}', 'rule_name', '{{%auth_rule}}', 'name');
-
-// fk: auth_item_child
-        $this->addForeignKey('fk_auth_item_child_parent', '{{%auth_item_child}}', 'parent', '{{%auth_item}}', 'name');
-        $this->addForeignKey('fk_auth_item_child_child', '{{%auth_item_child}}', 'child', '{{%auth_item}}', 'name');
-
-// fk: menu
-        $this->addForeignKey('fk_menu_parent', '{{%menu}}', 'parent', '{{%menu}}', 'id');
 
         $this->execute(file_get_contents(__DIR__ .'/init.sql'));
         $this->execute('SET foreign_key_checks = 1');
@@ -287,13 +228,8 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%article_data}}');
         $this->dropTable('{{%article_tag}}');
         $this->dropTable('{{%auth}}');
-        $this->dropTable('{{%auth_assignment}}'); // fk: item_name
-        $this->dropTable('{{%auth_item_child}}'); // fk: parent, child
-        $this->dropTable('{{%auth_item}}'); // fk: rule_name
-        $this->dropTable('{{%auth_rule}}');
         $this->dropTable('{{%category}}');
         $this->dropTable('{{%comment}}');
-        $this->dropTable('{{%config}}');
         $this->dropTable('{{%favourite}}');
         $this->dropTable('{{%gather}}');
         $this->dropTable('{{%menu}}'); // fk: parent
