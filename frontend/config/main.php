@@ -72,6 +72,11 @@ return [
             'engine' => env('SEARCH_ENGINE', 'local')
         ]
     ],
+    'modules' => [
+        'user' => [
+            'as frontend' => 'common\modules\user\filters\FrontendFilter',
+        ]
+    ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),
     'params' => $params,

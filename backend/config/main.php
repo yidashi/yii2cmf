@@ -96,8 +96,8 @@ return [
                     'layout' => '@backend/views/layouts/main-login',
                     'viewPath' => '@backend/views/site'
                 ]
-
-            ]
+            ],
+            'as backend' => 'common\modules\user\filters\BackendFilter',
         ]
     ],
     'aliases' => [
