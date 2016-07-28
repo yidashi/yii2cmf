@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-method' => 'post',
                                 'data-confirm' => Yii::t('app', 'Are you sure you want to confirm this user?'),
                             ],
-                            'encode'=>false
+                            'encode' => false
                         ],
                         [
                             'label' => '<i class="fa   fa-ban "></i> '.Yii::t('app', 'Block'),
@@ -76,7 +76,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-method' => 'post',
                                 'data-confirm' => Yii::t('app', 'Are you sure you want to block this user?'),
                             ],
-                            'encode'=>false
+                            'encode' => false
                         ],
                         [
                             'label' => '<i class="fa fa-check"></i> '.Yii::t('app', 'Unblock'),
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-method' => 'post',
                                 'data-confirm' => Yii::t('app', 'Are you sure you want to unblock this user?'),
                             ],
-                            'encode'=>false
+                            'encode' => false
                         ],
                         [
                             'label' =>'<i class="fa fa-trash-o"></i> '. Yii::t('app', 'Delete'),
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'data-method' => 'post',
                                 'data-confirm' => Yii::t('app', 'Are you sure you want to delete this user?'),
                             ],
-                            'encode'=>false
+                            'encode' => false
                         ],
                     ],
                 ]) ?>

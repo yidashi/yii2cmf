@@ -29,7 +29,9 @@ class SwitcherColumn extends  DataColumn
 		        var url =  $(this).data("url");
 		        var reload =  $(this).data("reload");
 		        var checked =  $(this).is(':checked') ? '1' : '0';
-		        $.getJSON( url +'&value=' + checked, function(response){
+		        var data = $(this).data("params");
+		        data.value = checked;
+		        $.post( url, data, function(response){
 		            if(response.status == false){
 		                notify.error(response.msg);
 		                return;
@@ -52,7 +54,6 @@ EOT;
     protected function renderDataCellContent($model, $key, $index)
     {
         $params = is_array($key) ? $key : ['id' => (string) $key];
-        $params[0] = $this->route;
         $params["attribute"] = $this->attribute;
 
         $value = $this->getDataCellValue($model, $key, $index) ;
@@ -67,7 +68,8 @@ EOT;
             $this->registerClientScript();
             $result =  Html::checkbox('', $value == StatusEnum::STATUS_ON, [
                 'class' => 'js-switch',
-                'data-url' => Url::to($params),
+                'data-url' => Url::to($this->route),
+                'data-params' => $params,
                 'data-reload' => $this->reload
             ]);
         }

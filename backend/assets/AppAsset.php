@@ -18,7 +18,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/app.min.js',
         'js/notify.js',
-        'plugins/slimScroll/jquery.slimscroll.min.js'
+        'plugins/slimScroll/jquery.slimscroll.min.js',
+        'js/site.js'
     ];
     public $depends = [
         'common\assets\FontAwesomeAsset',

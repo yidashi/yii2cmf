@@ -246,21 +246,4 @@ class AdminController extends Controller
             'user' => $user
         ]);
     }
-
-    public function actionLogin()
-    {
-        $this->layout = '@backend/views/layouts/main-login';
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
 }

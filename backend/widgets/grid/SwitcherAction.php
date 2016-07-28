@@ -6,9 +6,12 @@ use yii2tech\admin\actions\Action;
 
 class SwitcherAction extends Action
 {
-    public function run($id, $attribute,$value)
+    public function run()
     {
         Yii::$app->response->format = 'json';
+        $id = Yii::$app->request->post('id');
+        $attribute = Yii::$app->request->post('attribute');
+        $value = Yii::$app->request->post('value');
         $model = $this->findModel($id);
         $model->setAttribute($attribute,intval($value));
         $model->update();

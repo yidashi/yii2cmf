@@ -98,6 +98,7 @@ return [
                 ]
             ],
             'as backend' => 'common\modules\user\filters\BackendFilter',
+            'admins' => ['superAdmin', 'demo']
         ]
     ],
     'aliases' => [

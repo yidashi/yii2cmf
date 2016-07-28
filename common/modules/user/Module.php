@@ -32,7 +32,10 @@ class Module extends \yii\base\Module
     /** @var bool Whether user can remove his account */
     public $enableAccountDelete = false;
 
+    /**  @var string rbac默认管理员permission名 */
     public $adminPermission = 'admin';
+
+    public $admins = [];
 
     public function init()
     {
