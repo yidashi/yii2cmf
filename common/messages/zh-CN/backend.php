@@ -28,5 +28,7 @@ return [
     'Assignments' => '指派',
     'Block' => '封禁',
     'UnBlock' => '解禁',
+    'Level' => '级别',
+    'Category' => '分类',
     'You can assign multiple roles or permissions to user by using the form below' => '您可以使用下面的表单给用户分配多个角色或权限'
 ];

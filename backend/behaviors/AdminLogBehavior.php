@@ -15,6 +15,7 @@ use Yii;
 use yii\helpers\Url;
 use yii\base\Event;
 use yii\db\ActiveRecord;
+use common\models\AdminLog;
 
 class AdminLogBehavior extends Behavior
 {
@@ -38,7 +39,10 @@ class AdminLogBehavior extends Behavior
                 $desc .= $name . ' : ' . $value . '=>' . $event->sender->getAttribute($name) . ',';
             }
             $desc = substr($desc, 0, -1);
-            $description = Yii::$app->user->identity->username . '修改了表' . $event->sender->tableSchema->name . ' id:' . $event->sender->primaryKey()[0] . '的' . $desc;
+            $userName = Yii::$app->user->identity->username;
+            $tableName = $event->sender->tableSchema->name;
+            $description = "%s修改了表%s %s:%s的%s";
+            $description = sprintf($description, $userName, $tableName, $event->sender->primaryKey()[0], $event->sender->getPrimaryKey(), $desc);
             $route = Url::to();
             $userId = Yii::$app->user->id;
             $ip = ip2long(Yii::$app->request->userIP);
@@ -48,7 +52,7 @@ class AdminLogBehavior extends Behavior
                 'user_id' => $userId,
                 'ip' => $ip
             ];
-            $model = new \common\models\AdminLog();
+            $model = new AdminLog();
             $model->setAttributes($data);
             $model->save();
         }
