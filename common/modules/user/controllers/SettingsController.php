@@ -9,6 +9,7 @@
 namespace common\modules\user\controllers;
 
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use common\modules\user\models\Profile;
 use yii\imagine\Image;
@@ -17,6 +18,21 @@ use Yii;
 
 class SettingsController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'accessControl' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
+
     public function actionProfile()
     {
         $userId = \Yii::$app->user->id;
