@@ -28,4 +28,8 @@ class Storage extends Component
     {
         return $this->baseUrl . DIRECTORY_SEPARATOR . pathinfo($path, PATHINFO_BASENAME);
     }
+    public function url2path($url)
+    {
+        return $this->basePath . DIRECTORY_SEPARATOR . pathinfo($url, PATHINFO_BASENAME);
+    }
 }

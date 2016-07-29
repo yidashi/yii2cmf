@@ -160,22 +160,6 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * 封禁用户
-     */
-    public function actionBan()
-    {
-        $id = Yii::$app->request->post('id');
-        $banUser = User::findOne($id);
-        if ($banUser->isAdmin) {
-            throw new ForbiddenHttpException('不支持封禁管理员帐号');
-        }
-        $model = $this->findModel($id);
-        $model->status = User::STATUS_DELETED;
-        $model->save(false);
-        return $this->goBack();
-    }
-
     public function actionUpdateProfile($id)
     {
         Url::remember('', 'actions-redirect');

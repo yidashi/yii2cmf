@@ -37,6 +37,8 @@ class Module extends \yii\base\Module
 
     public $admins = [];
 
+    public $defaultPassword = '111111';
+
     public function init()
     {
         parent::init();

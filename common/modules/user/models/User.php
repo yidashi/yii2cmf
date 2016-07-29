@@ -8,6 +8,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\imagine\Image;
 use yii\web\IdentityInterface;
 
 /**
@@ -101,7 +102,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'blocked_at' => null]);
     }
 
     /**
@@ -121,11 +122,17 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::find()->where(['or', 'username = "' . $username . '"', 'email = "' . $username . '"'])
-            ->andWhere(['status' => self::STATUS_ACTIVE])
+        return static::find()->where(['username' => $username])
+            ->andWhere(['blocked_at' => null])
             ->one();
     }
 
+    public static function findByUsernameOrEmail($login)
+    {
+        return static::find()->where(['or', 'username = "' . $login . '"', 'email = "' . $login . '"'])
+            ->andWhere(['blocked_at' => null])
+            ->one();
+    }
     /**
      * Finds user by password reset token.
      *
@@ -141,7 +148,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'blocked_at' => null
         ]);
     }
 
@@ -241,7 +248,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
 
         $this->confirmed_at = time();
-        $this->password = $this->password == null ? '111111' : $this->password;
+        $this->password = $this->password == null ? $this->getModule()->defaultPassword : $this->password;
         if (!$this->save()) {
             return false;
         }
@@ -283,12 +290,21 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Profile::className(), ['user_id' => 'id']);
     }
 
-    public function getAvatar($width = 96)
+    public function getAvatar($width = 96, $height = 0)
     {
-        if($this->profile->avatar) {
-            return $this->profile->avatar;
+        if (empty($height)) {
+            $height = $width;
         }
-        return $this->getDefaultAvatar($width, $width);
+        if($this->profile->avatar) {
+            $avatarFile = Yii::$app->storage->url2path($this->profile->avatar);
+            $info = pathinfo($avatarFile);
+            $thumbFile = $info['dirname'] . DIRECTORY_SEPARATOR . $info['filename'] . '_' . $width . '_' . $height . '.' . $info['extension'];
+            if (!is_file($thumbFile)) {
+                Image::thumbnail($avatarFile, $width, $height, 'inset')->save($thumbFile);
+            }
+            return Yii::$app->storage->path2url($thumbFile);
+        }
+        return $this->getDefaultAvatar($width, $height);
     }
     public static  function getDefaultAvatar($width, $height)
     {

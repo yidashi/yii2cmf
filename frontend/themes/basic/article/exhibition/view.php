@@ -18,7 +18,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <h1><?= $model->title ?></h1>
     </div>
     <div class="action">
-        <span class="user"><a href="<?= Url::to(['/user', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
+        <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
         <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d', $model->created_at) ?></span>
         <span class="views"><?= Html::icon('eye')?> <?= $model->trueView?>次浏览</span>
         <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?=$model->comment?>条评论</a></span>
@@ -59,12 +59,12 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <div class="panel-body">
             <div class="media media-user">
                 <div class="media-left">
-                    <a href="<?= url(['/user/index', 'id' => $model->user_id]) ?>"><?= Html::img($model->user->getAvatar(), ['class' => 'media-object', 'alt' => $model->user->username]) ?></a>
+                    <a href="<?= url(['/user', 'id' => $model->user_id]) ?>"><?= Html::img($model->user->getAvatar(), ['class' => 'media-object', 'alt' => $model->user->username]) ?></a>
                     <div class="label label-primary"><?= $model->user->getBadge() ?></div>
                 </div>
                 <div class="media-body">
                     <h2 class="media-heading">
-                        <a href="<?= url(['/user/index', 'id' => $model->user_id]) ?>"><?= $model->user->username ?></a>
+                        <a href="<?= url(['/user', 'id' => $model->user_id]) ?>"><?= $model->user->username ?></a>
                     </h2>
                     <div class="time">注册时间：<?= Yii::$app->formatter->asDate($model->user->created_at) ?><br>最后登录：<?= Yii::$app->formatter->asRelativeTime($model->user->login_at) ?></div>
                 </div>

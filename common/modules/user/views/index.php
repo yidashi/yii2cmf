@@ -14,7 +14,7 @@ $this->title = '个人中心';
     <div class="panel panel-default">
         <div class="panel-body" style="background: url(http://www.yiichina.com/images/user-bg.jpg); background-size:100% 120px; background-repeat:no-repeat;">
             <div class="profile-user">
-                <a href="<?= Url::to(['/user/profile']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改头像">
+                <a href="<?= Url::to(['/user/settings/avatar']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改头像">
                     <?= Html::img($user->getAvatar(96), ['class' => 'avatar']) ?>
                 </a>
                 <h1><?= $user->username?></h1>
@@ -30,7 +30,7 @@ $this->title = '个人中心';
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="panel-title">个人信息</div>
-            <span class="pull-right"><a href="<?= Url::to(['/user/profile']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改个人信息"><i class="fa fa-cog"></i> </a></span>
+            <span class="pull-right"><a href="<?= Url::to(['/user/settings/profile']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改个人信息"><i class="fa fa-cog"></i> </a></span>
         </div>
         <div class="panel-body">
             <ul class="user-info">
