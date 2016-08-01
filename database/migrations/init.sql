@@ -1,4 +1,8 @@
 
+--
+-- Dumping data for table {{%auth_item}}
+--
+
 LOCK TABLES {{%auth_item}} WRITE;
 /*!40000 ALTER TABLE {{%auth_item}} DISABLE KEYS */;
 INSERT INTO {{%auth_item}} VALUES ('superAdmin',1,'超级管理员',NULL,NULL,1443080982,1443408507),('/*',2,NULL,NULL,NULL,1458640575,1458640575);
@@ -6,12 +10,19 @@ INSERT INTO {{%auth_item}} VALUES ('superAdmin',1,'超级管理员',NULL,NULL,14
 UNLOCK TABLES;
 
 
+--
+-- Dumping data for table {{%auth_assignment}}
+--
+
 LOCK TABLES {{%auth_assignment}} WRITE;
 /*!40000 ALTER TABLE {{%auth_assignment}} DISABLE KEYS */;
 INSERT INTO {{%auth_assignment}} VALUES ('superAdmin','1',1443080982);
 /*!40000 ALTER TABLE {{%auth_assignment}} ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Dumping data for table {{%auth_item_child}}
+--
 
 LOCK TABLES {{%auth_item_child}} WRITE;
 /*!40000 ALTER TABLE {{%auth_item_child}} DISABLE KEYS */;
@@ -21,6 +32,9 @@ UNLOCK TABLES;
 
 
 
+--
+-- Dumping data for table {{%menu}}
+--
 
 LOCK TABLES {{%menu}} WRITE;
 /*!40000 ALTER TABLE {{%menu}} DISABLE KEYS */;
@@ -37,7 +51,7 @@ VALUES
 	(37, '操作记录', 24, '/admin-log/index', NULL, NULL, ''),
 	(31, '备份', 30, '/backup/export/index', NULL, NULL, ''),
 	(32, '还原', 30, '/backup/import/index', NULL, NULL, ''),
-	(15, '用户管理', 33, '/user/index', NULL, NULL, ''),
+	(15, '用户管理', 33, '/user/admin/index', NULL, NULL, ''),
 	(16, '路由管理', 33, '/rbac/route/index', NULL, NULL, ''),
 	(17, '角色管理', 33, '/rbac/role/index', NULL, NULL, ''),
 	(34, '菜单管理', 33, '/rbac/menu/index', NULL, NULL, ''),
