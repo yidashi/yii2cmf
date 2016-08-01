@@ -11,16 +11,16 @@ use yii\helpers\Url;
 $this->title = Yii::t('rbac', 'Routes');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<p>
-    <?= Html::a(Yii::t('rbac', 'Create route'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
-</p>
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a(Yii::t('app', '新路由'), ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
 
-<div>
-    <div class="row">
+<div class="box box-primary">
+    <div class="box-body">
         <div class="col-lg-5">
             <?= Yii::t('rbac', 'Avaliable') ?>:
             <input id="search-avaliable">
-            <a href="#" id="btn-refresh"><span class="glyphicon glyphicon-refresh"></span></a><br>
+            <a href="#" id="btn-refresh"><span class="glyphicon glyphicon-refresh"></span></a><br><br>
             <select id="list-avaliable" multiple size="20" style="width: 100%">
             </select>
         </div>
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-lg-5">
             <?= Yii::t('rbac', 'Assigned') ?>:
-            <input id="search-assigned"><br>
+            <input id="search-assigned"><br><br>
             <select id="list-assigned" multiple size="20" style="width: 100%">
             </select>
         </div>

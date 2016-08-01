@@ -9,31 +9,26 @@ use yii\grid\GridView;
 $this->title = Yii::t('backend', 'Nav');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="widget-Nav-index">
-
-    <p>
-        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
-                'modelClass' => Yii::t('backend', 'Nav'),
-            ]), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
-    </p>
-    <div class="box box-primary">
-        <div class="box-body">
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a('新导航', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
+<div class="box box-primary">
+    <div class="box-body">
 
 
-    <?php echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
+<?php echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
 
-            'id',
-            'key',
-            'title',
+        'id',
+        'key',
+        'title',
 
-            [
-                'class' => 'backend\widgets\grid\ActionColumn',
-                'template'=>'{update} {delete}'
-            ],
+        [
+            'class' => 'backend\widgets\grid\ActionColumn',
+            'template'=>'{update} {delete}'
         ],
-    ]); ?>
-        </div>
+    ],
+]); ?>
     </div>
 </div>

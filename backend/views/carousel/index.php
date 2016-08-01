@@ -9,34 +9,29 @@ use yii\grid\GridView;
 $this->title = Yii::t('backend', 'Carousel');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="carousel-index">
-
-    <p>
-        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
-                'modelClass' => Yii::t('backend', 'Carousel'),
-            ]), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
-    </p>
-    <div class="box box-primary">
-        <div class="box-body">
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a('新幻灯片', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
+<div class="box box-primary">
+    <div class="box-body">
 
 
-    <?php echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
+<?php echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
 
-            'id',
-            'key',
-            [
-                'class' => 'backend\widgets\grid\SwitcherColumn',
-                'attribute' => 'status',
-                'reload' => 0
-            ],
-            [
-                'class' => 'backend\widgets\grid\ActionColumn',
-                'template'=>'{update} {delete}'
-            ],
+        'id',
+        'key',
+        [
+            'class' => 'backend\widgets\grid\SwitcherColumn',
+            'attribute' => 'status',
+            'reload' => 0
         ],
-    ]); ?>
-        </div>
+        [
+            'class' => 'backend\widgets\grid\ActionColumn',
+            'template'=>'{update} {delete}'
+        ],
+    ],
+]); ?>
     </div>
 </div>

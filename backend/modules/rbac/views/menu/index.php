@@ -11,13 +11,9 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('rbac', 'Menus');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="menu-index">
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]);  ?>
-
-    <p>
-        <?= Html::a(Yii::t('rbac', 'Create Menu'), ['create'], ['class' => 'btn btn-success btn-flat']) ?>
-    </p>
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a('新菜单', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
     <div class="box box-primary">
         <div class="box-body">
             <?= GridView::widget([
@@ -54,4 +50,3 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
         </div>
     </div>
-</div>

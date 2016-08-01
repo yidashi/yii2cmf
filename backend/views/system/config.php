@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ]);
 
-            echo Html::submitButton('提交', ['class' => 'btn btn-primary btn-flat']);
+            echo Html::submitButton('提交', ['class' => 'btn btn-primary btn-flat btn-block']);
             ActiveForm::end();
             ?>
         </div>

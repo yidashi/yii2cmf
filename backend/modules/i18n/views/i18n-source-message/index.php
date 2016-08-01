@@ -10,16 +10,11 @@ use yii\grid\GridView;
 $this->title = Yii::t('backend', 'I18n Source Messages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="i18n-source-message-index">
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?php echo Html::a(Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'I18n Source Message',
-]), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a(Yii::t('app', '新i18n源信息'), ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
+<div class="box box-primary">
+    <div class="box-body">
     <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -31,5 +26,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
+    </div>
 </div>
