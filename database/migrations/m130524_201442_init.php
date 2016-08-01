@@ -71,7 +71,7 @@ class m130524_201442_init extends Migration
             'pid' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '父id'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'name' => Schema::TYPE_STRING . "(20) NOT NULL",
+            'slug' => Schema::TYPE_STRING . "(20) NOT NULL",
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
             'article' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
@@ -129,7 +129,7 @@ class m130524_201442_init extends Migration
             'use_layout' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '1' COMMENT '0:不使用1:使用'",
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '内容'",
             'title' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '标题'",
-            'name' => Schema::TYPE_STRING . "(50) NOT NULL DEFAULT ''",
+            'slug' => Schema::TYPE_STRING . "(50) NOT NULL DEFAULT ''",
             'created_at' => Schema::TYPE_INTEGER . "(10) NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NULL",
         ], $this->tableOptions);
@@ -214,9 +214,14 @@ class m130524_201442_init extends Migration
             'type_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
         ], $this->tableOptions);
 
-
-
-        $this->execute(file_get_contents(__DIR__ .'/init.sql'));
+        $this->insert('{{%page}}', [
+            'use_layout' => 1,
+            'content' => '关于我们',
+            'title' => '关于我们',
+            'slug' => 'aboutus',
+            'created_at' => 1441766741,
+            'updated_at' => 1441766741
+        ]);
         $this->execute('SET foreign_key_checks = 1');
     }
 

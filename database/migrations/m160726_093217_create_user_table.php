@@ -52,7 +52,7 @@ class m160726_093217_create_user_table extends Migration
             'password_hash' => '$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',
             'email' => 'hehe@xxx.com',
             'status' => 10,
-            'create_at' => 1441766741,
+            'created_at' => 1441766741,
             'updated_at' => 1441766741,
             'login_at' => '1441766741',
             'confirmed_at' => '1441766741'

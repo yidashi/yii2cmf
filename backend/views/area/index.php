@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-
 use backend\assets\AreaAsset;
 use yii\web\View;
 /**
@@ -20,7 +19,7 @@ $this->registerJs("var updateBlocksUrl = '".Url::to(["update-blocks"])."'",View:
 
 <?php $this->beginBlock('content-header'); ?>
 <h1>
-	<?php echo $this->title?> <a class="btn bg-purple btn-flat btn-xs "
+	<?php echo $this->title?> <a class="btn btn-primary btn-flat btn-xs "
 		href="<?= Url::to(['create']) ?>"> <?= Yii::t('common', '新区域') ?>
 	</a>
 </h1>

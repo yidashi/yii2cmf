@@ -7,7 +7,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('content-header'); ?>
     <h1>
         <?php echo $this->title?>
-        <a class="btn bg-purple btn-flat btn-xs " href="<?= Url::to(['upload']) ?>">上传新主题</a>
+        <a class="btn btn-primary btn-flat btn-xs " href="<?= Url::to(['upload']) ?>">上传新主题</a>
     </h1>
 <?php $this->endBlock(); ?>
 <?php foreach ($dataProvider->getModels() as $theme):?>

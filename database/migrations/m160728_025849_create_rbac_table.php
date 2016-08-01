@@ -8,6 +8,7 @@ use yii\db\mysql\Schema;
  */
 class m160728_025849_create_rbac_table extends Migration
 {
+    public $tableOptions;
     /**
      * @inheritdoc
      */
@@ -61,6 +62,7 @@ class m160728_025849_create_rbac_table extends Migration
 
 // fk: menu
         $this->addForeignKey('fk_menu_parent', '{{%menu}}', 'parent', '{{%menu}}', 'id');
+        $this->execute(file_get_contents(__DIR__ .'/init.sql'));
         $this->execute('SET foreign_key_checks = 1');
     }
 

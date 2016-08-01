@@ -9,7 +9,7 @@ use rbac\models\Menu;
 /**
  * MenuHelper used to generate menu depend of user role.
  * Usage.
- * 
+ *
  * ~~~
  * use rbac\components\MenuHelper;
  * use yii\bootstrap\Nav;
@@ -18,9 +18,9 @@ use rbac\models\Menu;
  *    'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
  * ]);
  * ~~~
- * 
+ *
  * To reformat returned, provide callback to method.
- * 
+ *
  * ~~~
  * $callback = function ($menu) {
  *    $data = eval($menu['data']);
@@ -51,7 +51,7 @@ class MenuHelper
      * @param int      $root
      * @param \Closure $callback use to reformat output.
      *                           callback should have format like
-     * 
+     *
      * ~~~
      * function ($menu) {
      *    return [
@@ -73,7 +73,7 @@ class MenuHelper
 
         /* @var $manager \yii\rbac\BaseManager */
         $manager = Yii::$app->getAuthManager();
-        $menus = Menu::find()->asArray()->indexBy('id')->all();
+        $menus = Menu::find()->asArray()->indexBy('id')->orderBy('order')->all();
         $key = [__METHOD__, $userId, $manager->defaultRoles];
         $cache = $config->cache;
 
@@ -145,6 +145,48 @@ class MenuHelper
     }
 
     /**
+     * 获取navs中第一个有url的nav.
+     *
+     * @param unknown $navs
+     */
+    public static function getFirstMenu($navs)
+    {
+        foreach ($navs as $nav) {
+            if (array_key_exists('url', $nav)) {
+                return $nav;
+            }
+
+            if (array_key_exists('items', $nav) && count($nav['items']) > 0) {
+                $nav = static::getFirstMenu($nav['items']);
+                if ($nav != null) {
+                    return $nav;
+                }
+            }
+        }
+
+        return;
+    }
+    public static function getSiblingsMenu($label, $navs)
+    {
+        foreach ($navs as $nav) {
+            if($nav['label'] == $label) {
+                return $navs;
+            }
+            if (array_key_exists('items', $nav) && count($nav['items']) > 0) {
+                $n = self::getSiblingsMenu($label, $nav['items']);
+                if (!empty($n)) {
+                    return $n;
+                }
+            }
+        }
+        return [];
+    }
+
+    public static function getRootMenu()
+    {
+
+    }
+    /**
      * Ensure all item menu has parent.
      *
      * @param array $assigned
@@ -215,7 +257,7 @@ class MenuHelper
                     $item = [
                         'label' => $menu['name'],
                         'url' => static::parseRoute($menu['route']),
-                        'icon' => 'fa fa-' . $menu['icon']
+                        'icon' => 'fa fa-' . ($menu['icon'] ? : 'circle-o')
                     ];
                     if ($menu['children'] != []) {
                         $item['items'] = $menu['children'];

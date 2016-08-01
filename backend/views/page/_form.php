@@ -8,8 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="page-form">
-    <div class="row">
+<div class="box box-primary">
+    <div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
     <div class="col-lg-9">
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>

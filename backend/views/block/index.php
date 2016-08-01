@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $this->beginBlock('content-header'); ?>
 <h1>
-	<?php echo $this->title?> <a class="btn bg-purple btn-flat btn-xs "
+	<?php echo $this->title?> <a class="btn btn-primary btn-flat btn-xs "
 		href="<?= Url::to(['create']) ?>"> <?= Yii::t('backend', '新区块') ?>
 	</a>
 </h1>
