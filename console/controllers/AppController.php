@@ -146,6 +146,7 @@ STR;
         $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
+        $this->runAction('cache/flush-all', ['interactive' => false]);
         file_put_contents(Yii::getAlias($this->installFile), time());
         $success = <<<STR
 +=================================================+
