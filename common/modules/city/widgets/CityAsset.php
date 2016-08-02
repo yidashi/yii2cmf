@@ -6,14 +6,14 @@
  * Time: 下午12:06
  */
 
-namespace common\widgets\city;
+namespace common\modules\city\widgets;
 
 
 use yii\web\AssetBundle;
 
 class CityAsset extends AssetBundle
 {
-    public $sourcePath = '@common/widgets/city/assets';
+    public $sourcePath = '@common/modules/city/widgets/assets';
 
     public $js = [
         'city.js'

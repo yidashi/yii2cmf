@@ -4,7 +4,8 @@ $.fn.getArea = function(options)
         var id = $(this).val();
         var e = arguments.callee.caller.arguments[0] || window.event;
         var ele = $(e.target);
-        var url = options.url + '?id=' + id;
+        var joinMark = options.url.indexOf('?') > -1 ? '&' : '?';
+        var url = options.url + joinMark + 'id=' + id;
         $.get(url, function(res){
             var html = '<option value>请选择</option>';
             ele.next('select').next('select').html(html);

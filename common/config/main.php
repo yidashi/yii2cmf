@@ -77,6 +77,9 @@ return [
     'modules' => [
         'user' => [
             'class' => 'common\modules\user\Module',
+        ],
+        'city' => [
+            'class' => 'common\modules\city\Module'
         ]
     ],
     'as locale' => [

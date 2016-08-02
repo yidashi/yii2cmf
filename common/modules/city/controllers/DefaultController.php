@@ -6,13 +6,13 @@
  * Time: 下午12:03
  */
 
-namespace frontend\controllers;
+namespace common\modules\city\controllers;
 
 
 use common\models\City;
 use yii\web\Controller;
 
-class AreaController extends Controller
+class DefaultController extends Controller
 {
     public function actionChildren($id)
     {

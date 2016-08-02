@@ -2,9 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\modules\city\widgets\CityWidget;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Profile */
+/* @var $model common\modules\user\models\Profile */
 /* @var $form ActiveForm */
 $this->title = Yii::t('common', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
@@ -24,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'signature')->textarea() ?>
 
-                <?= $form->field($model, 'area')->label('所在地')->widget(\common\widgets\city\CityWidget::className(), [
+                <?= $form->field($model, 'area')->label('所在地')->widget(CityWidget::className(), [
                     'provinceAttribute' => 'province',
                     'cityAttribute' => 'city',
                     'areaAttribute' => 'area'

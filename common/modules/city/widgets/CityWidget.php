@@ -6,7 +6,7 @@
  * Time: 上午11:18
  */
 
-namespace common\widgets\city;
+namespace common\modules\city\widgets;
 
 
 use yii\base\InvalidConfigException;
@@ -29,7 +29,7 @@ class CityWidget extends InputWidget
     public $areaValue;
     public $required = false;
 
-    public $route = ['/area/children'];
+    public $route = ['/city/default/children'];
     /**
      * @var $fullArea string|array 地区合集 eg. 北京 北京市 东城区
      */

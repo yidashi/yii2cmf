@@ -43,7 +43,7 @@ echo <<<SEARCH
 SEARCH;
 
 $rightMenuItems = [];
-$rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/create-article']];
+$rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
 $noticeNums = Yii::$app->notify->getNoReadNums();
 if ($noticeNums > 0) {
     $rightMenuItems[] = [
@@ -58,12 +58,12 @@ if ($noticeNums > 0) {
 } else {
     $rightMenuItems[] = [
         'label' => '<i class="fa fa-bell"></i>',
-        'url' => ['/user/notice']
+        'url' => ['/user/default/notice']
     ];
 }
 if (Yii::$app->user->isGuest) {
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/user/signup']];
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/user/login']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/user/registration/signup']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/user/security/login']];
 } else {
     $rightMenuItems[] = [
         'label' => Html::img(Yii::$app->user->identity->getAvatar(32), ['width' => 32, 'height' => 32]),
