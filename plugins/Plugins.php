@@ -9,6 +9,7 @@
 namespace plugins;
 
 use common\components\PackageInfo;
+use rbac\models\Menu;
 use Yii;
 use yii\helpers\Json;
 use yii\web\View;
@@ -100,7 +101,11 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
     public function addMenu($name, $route)
     {
         $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件" AND `parent` IS NULL')->queryScalar();
-        \Yii::$app->db->createCommand("INSERT INTO {{%menu}}(`name`,`parent`,`route`) VALUES ('{$name}','{$id}','{$route}')")->execute();
+        $model = new Menu();
+        $model->name = $name;
+        $model->route = $route;
+        $model->parent = $id;
+        $model->save();
         MenuHelper::invalidate();
     }
 

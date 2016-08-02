@@ -21,12 +21,16 @@ class CityWidget extends InputWidget
     public $provinceAttribute;
     public $provinceName;
     public $provinceValue;
+    public $provincePrompt = '请选择';
     public $cityAttribute;
     public $cityName;
     public $cityValue;
+    public $cityPrompt = '请选择';
     public $areaAttribute;
     public $areaName;
     public $areaValue;
+    public $areaPrompt = '请选择';
+
     public $required = false;
 
     public $route = ['/city/default/children'];
@@ -56,24 +60,24 @@ class CityWidget extends InputWidget
             $cityValue = Html::getAttributeValue($this->model, $this->cityAttribute);
             $select = Html::activeDropDownList($this->model, $this->provinceAttribute, City::getChildren(0), [
                 'class' => $this->selectClass,
-                'prompt' => '请选择'
+                'prompt' => $this->provincePrompt
             ]) . ' ' . Html::activeDropDownList($this->model, $this->cityAttribute, City::getChildren($provinceValue), [
                     'class' => $this->selectClass,
-                    'prompt' => '请选择'
+                    'prompt' => $this->cityPrompt
                 ]) . ' ' . Html::activeDropDownList($this->model, $this->areaAttribute, City::getChildren($cityValue), [
                     'class' => $this->selectClass,
-                    'prompt' => '请选择'
+                    'prompt' => $this->areaPrompt
                 ]);
         } else {
             $select = Html::dropDownList($this->provinceName, $this->provinceValue, City::getChildren(0), [
                     'class' => $this->selectClass,
-                    'prompt' => '请选择'
+                    'prompt' => $this->provincePrompt
                 ]) . ' ' . Html::dropDownList($this->cityName, $this->cityValue, City::getChildren($this->provinceValue), [
                     'class' => $this->selectClass,
-                    'prompt' => '请选择'
+                    'prompt' => $this->cityPrompt
                 ]) . ' ' . Html::dropDownList($this->areaName, $this->areaValue, City::getChildren($this->cityValue), [
                     'class' => $this->selectClass,
-                    'prompt' => '请选择'
+                    'prompt' => $this->areaPrompt
                 ]);
         }
 

@@ -11,7 +11,6 @@ return [
     'bootstrap' => [
         'log',
         \common\components\LoadPlugins::className(),
-        'events'
     ],
     'controllerNamespace' => 'wechat\controllers',
     'components' => [
@@ -52,7 +51,9 @@ return [
                 ]
             ]
         ],
-        'events' => \common\components\Events::className()
+        'pluginManager' => [
+            'class' => 'common\components\PluginManager',
+        ],
     ],
     'params' => $params,
 ];
