@@ -94,6 +94,14 @@ class AppController extends Controller
         $this->setEnv('DB_PASSWORD', $dbPassword);
         $this->setEnv('DB_TABLE_PREFIX', $dbTablePrefix);
         $this->setEnv('DB_DSN', $dbDsn);
+        Yii::$app->set('db', Yii::createObject([
+                'class' => 'yii\db\Connection',
+                'dsn' => $dbDsn,
+                'username' => $dbUsername,
+                'password' => $dbPassword,
+                'tablePrefix' => $dbTablePrefix
+            ])
+        );
     }
     public function testConnect($dsn = '', $dbname, $username = '', $password = '')
     {
@@ -142,10 +150,10 @@ STR;
         $this->runAction('set-executable', ['interactive' => $this->interactive]);
         $this->runAction('set-keys', ['interactive' => $this->interactive]);
         $this->runAction('set-db', ['interactive' => $this->interactive]);
-        Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
         $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
+        Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
         Yii::$app->runAction('cache/flush-all', ['interactive' => false]);
         file_put_contents(Yii::getAlias($this->installFile), time());
         $success = <<<STR
@@ -163,7 +171,7 @@ STR;
 
     public function actionReset()
     {
-
+        @unlink(Yii::getAlias('@root/web/storage/install.txt'));
     }
 
     public function actionUpdate()
