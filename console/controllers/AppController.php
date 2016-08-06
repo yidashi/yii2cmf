@@ -17,6 +17,8 @@ class AppController extends Controller
 {
     public $defaultAction = 'install';
 
+    public $interactive = false;
+
     public $writablePaths = [
         '@root/runtime',
         '@root/web/assets',
@@ -154,7 +156,7 @@ STR;
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
         Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
-        Yii::$app->runAction('cache/flush-all', ['interactive' => false]);
+        Yii::$app->runAction('cache/flush-all', ['interactive' => $this->interactive]);
         file_put_contents(Yii::getAlias($this->installFile), time());
         $success = <<<STR
 +=================================================+
@@ -164,6 +166,7 @@ STR;
 | 说明和注意事项：                                |
 | 一些基本的设置可以在.env文件里修改
 +=================================================+
+
 STR;
 
         $this->stdout($success, Console::FG_GREEN);
