@@ -46,7 +46,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
         '<id:\d+>' => 'default/index',
         '<action:(login|logout)>' => 'security/<action>',
         '<action:(signup)>' => 'registration/<action>',
-        '<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'default/<action>'
+        '<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'default/<action>',
     ];
 
     public function init()
@@ -94,6 +94,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'idParam' => '__idBackend',
                 'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
             ]);
+            $app->urlManager->addRules([
+                'user/<action:\S+>' => 'user/admin/<action>',
+            ], false);
         }
     }
 }
