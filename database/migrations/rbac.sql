@@ -48,7 +48,7 @@ VALUES
 	(46, '外观', NULL, NULL, 6, NULL, 'tv'),
 	(25, '网站设置', 24, '/system/config', 1, NULL, ''),
 	(26, '配置管理', 24, '/config/index', 2, NULL, ''),
-	(37, '操作记录', 24, '/admin-log/index', NULL, NULL, ''),
+	(37, '操作记录', 24, '/admin-log/index', 3, NULL, ''),
 	(31, '备份', 30, '/backup/export/index', NULL, NULL, ''),
 	(32, '还原', 30, '/backup/import/index', NULL, NULL, ''),
 	(15, '用户管理', 33, '/user/admin/index', NULL, NULL, ''),
@@ -67,6 +67,7 @@ VALUES
 	(48, '幻灯片', 46, '/carousel/index', 3, NULL, ''),
 	(49, '导航', 46, '/nav/index', 5, NULL, ''),
 	(50, '区域', 46, '/area/index', 1, NULL, ''),
-	(51, '区块', 46, '/block/index', 2, NULL, '');
+	(51, '区块', 46, '/block/index', 2, NULL, ''),
+	(52, '群发站内信', 24, '/message/admin/create', 4, NULL, '');
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;

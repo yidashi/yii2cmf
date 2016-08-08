@@ -10,19 +10,18 @@ use yii\helpers\Url;
 
 ?>
 <div class="media-left">
-    <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
+    <a href="<?= Url::to(['/user/default/index', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
         <?= Html::img($model->from->getAvatar(), ['class' => 'media-object', 'alt' => $model->from->username]) ?>
     </a>
 </div>
 <div class="media-body">
     <div class="media-heading">
-        <?= $model->title ?>
+        <a href="<?= Url::to(['/user/default/index', 'id' => $model->from_uid]) ?>"><?= $model->from->username ?></a> 发布于 <span><?= Yii::$app->formatter->asRelativeTime($model->data->created_at) ?></span>
     </div>
     <div class="media-content">
-        <p><?= $model->content ?></p>
+        <p><?= $model->data->content ?></p>
     </div>
     <div class="media-action">
-        <span><?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></span>
-        <span class="pull-right"><a href="<?= $model->link ?>">查看</a></span>
+        <span><a href="<?= Url::to(['/message/default/create', 'id' => $model->from_uid]) ?>">回复</a></span>
     </div>
 </div>

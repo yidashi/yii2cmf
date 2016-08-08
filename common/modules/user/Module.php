@@ -9,8 +9,9 @@
 namespace common\modules\user;
 
 use Yii;
+use yii\base\BootstrapInterface;
 
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements BootstrapInterface
 {
     public $enableGeneratingPassword = true;
 
@@ -39,6 +40,15 @@ class Module extends \yii\base\Module
 
     public $defaultPassword = '111111';
 
+    public $urlPrefix = 'user';
+
+    public $urlRules = [
+        '<id:\d+>' => 'default/index',
+        '<action:(login|logout)>' => 'security/<action>',
+        '<action:(signup)>' => 'registration/<action>',
+        '<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'default/<action>'
+    ];
+
     public function init()
     {
         parent::init();
@@ -47,6 +57,29 @@ class Module extends \yii\base\Module
                 'class' => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@common/modules/user/messages'
             ];
+        }
+    }
+
+    public function bootstrap($app)
+    {
+        $configUrlRule = [
+            'prefix' => $this->urlPrefix,
+            'rules'  => $this->urlRules,
+        ];
+
+        if ($this->urlPrefix != 'user') {
+            $configUrlRule['routePrefix'] = 'user';
+        }
+
+        $configUrlRule['class'] = 'yii\web\GroupUrlRule';
+        $rule = Yii::createObject($configUrlRule);
+
+        $app->urlManager->addRules([$rule], false);
+
+        if ($app->id == 'app-frontend') {
+            $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
+        } elseif ($app->id == 'app-backend') {
+            $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
         }
     }
 }

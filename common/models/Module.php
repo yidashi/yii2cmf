@@ -22,6 +22,9 @@ class Module extends \yii\db\ActiveRecord
     const STATUS_OPEN = 1;
     const STATUS_CLOSE = 0;
     const STATUS_UNINSTALL = -1;
+
+    const TYPE_CORE = 1;
+    const TYPE_PLUGIN = 2;
     /**
      * @inheritdoc
      */
@@ -37,11 +40,12 @@ class Module extends \yii\db\ActiveRecord
     {
         return [
             [['id', 'name'], 'required'],
-            [['status'], 'integer'],
-            [['name', 'app'], 'string', 'max' => 50],
+            [['status', 'type'], 'integer'],
+            [['type'], 'in', 'range' => [1,2]],
+            [['name', 'bootstrap'], 'string', 'max' => 50],
             [['config'], 'string'],
             ['status', 'default', 'value' => 1],
-            [['name'], 'unique'],
+            [['id'], 'unique'],
         ];
     }
     /**
@@ -52,7 +56,7 @@ class Module extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '名称',
-            'app' => 'appID',
+            'bootstrap' => '初始化的应用',
             'status' => '是否启用',
             'config' => '配置',
             'created_at' => '创建时间',
@@ -67,12 +71,13 @@ class Module extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function findOpenModules()
+    public static function findOpenModules($type = null)
     {
         $query = static::find();
         return $query->where([
             "status" => self::STATUS_OPEN
-        ])->all();
+        ])->andFilterWhere(['type' => $type])
+            ->all();
     }
 
     public function loadDefaultValues($skipIfSet = true)

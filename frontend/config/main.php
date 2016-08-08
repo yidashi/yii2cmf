@@ -10,7 +10,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        \common\components\LoadPlugins::className(),
+        'common\\components\\LoadPlugins',
+        'common\\components\\LoadModule'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'controllerMap' => [
@@ -70,11 +71,6 @@ return [
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')
-        ]
-    ],
-    'modules' => [
-        'user' => [
-            'as frontend' => 'common\modules\user\filters\FrontendFilter',
         ]
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),

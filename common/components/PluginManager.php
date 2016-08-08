@@ -19,11 +19,6 @@ class PluginManager extends PackageManager
 
     public $infoClass = 'Plugins';
 
-    public function getThemePath()
-    {
-        return  $this->paths[0];
-    }
-
     public function install(Plugins $plugin)
     {
         $plugin->install();

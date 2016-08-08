@@ -11,7 +11,8 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => [
         'log',
-        \common\components\LoadPlugins::className(),
+        'common\\components\\LoadPlugins',
+        'common\\components\\LoadModule'
     ],
     'controllerMap'=>[
         'file-manager-elfinder' => [
@@ -97,7 +98,6 @@ return [
                     'viewPath' => '@backend/views/site'
                 ]
             ],
-            'as backend' => 'common\modules\user\filters\BackendFilter',
             'admins' => ['superAdmin', 'demo']
         ]
     ],

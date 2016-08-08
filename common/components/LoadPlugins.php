@@ -21,7 +21,7 @@ class LoadPlugins extends Component implements BootstrapInterface
     {
         $models = Yii::$app->cache->get('plugins');
         if ($models === false) {
-            $models = Module::findOpenModules();
+            $models = Module::findOpenModules(Module::TYPE_PLUGIN);
             Yii::$app->cache->set('plugins', $models, 0, new DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM {{%module}}']));
         }
 

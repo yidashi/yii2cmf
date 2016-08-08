@@ -261,7 +261,6 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
                 $model = new Module();
                 $model->loadDefaultValues();
                 $model->id = $this->getPackage();
-                $model->app = $this->app;
             }
             $this->_model = $model;
         }

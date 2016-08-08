@@ -25,6 +25,17 @@ class UserBehavior extends Behavior
     {
         return $this->owner->hasOne(User::className(), ['id' => $this->userIdAttribute]);
     }
+
+    public function getFrom()
+    {
+        return $this->owner->hasOne(User::className(), ['id' => 'from_uid']);
+    }
+
+    public function getTo()
+    {
+        return $this->owner->hasOne(User::className(), ['id' => 'to_uid']);
+    }
+
     public function getProfile()
     {
         return $this->hasOne(Profile::className(), ['user_id' => $this->userIdAttribute]);

@@ -19,6 +19,10 @@ $this->title = '个人中心';
                 </a>
                 <h1><?= $user->username?></h1>
                 <p><?= $user->profile->signature?></p>
+                <div class="button">
+                    <a class="follow btn btn-xs btn-success" href="javascript:void(0);" data-id="27683"><i class="fa fa-plus"></i> 关注Ta</a>
+                    <a class="btn btn-xs btn-primary" href="<?= Url::to(['/message/default/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                </div>
                 <ul class="stat">
                     <li>余额<h3><?= $user->profile->money ?></h3></li>
                     <li>关注<h3>120</h3></li><!---TODO -->
