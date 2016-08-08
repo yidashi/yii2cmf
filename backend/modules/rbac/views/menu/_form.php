@@ -12,8 +12,8 @@ use rbac\AutocompleteAsset;
 
 ?>
 
-<div class="menu-form">
-
+<div class="box box-primary">
+    <div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
@@ -29,11 +29,11 @@ use rbac\AutocompleteAsset;
     <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-flat' : 'btn btn-primary btn-flat']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), ['class' => 'btn btn-flat btn-block bg-maroon']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>
 <?php
 AutocompleteAsset::register($this);
