@@ -14,6 +14,7 @@ use yii\base\BootstrapInterface;
 use yii\base\Component;
 use yii\caching\DbDependency;
 use plugins\Plugins;
+use yii\helpers\ArrayHelper;
 
 class LoadModule extends Component implements BootstrapInterface
 {
@@ -22,9 +23,7 @@ class LoadModule extends Component implements BootstrapInterface
         $models = Module::findOpenModules(Module::TYPE_CORE);
         $bootstrapType = $app->id;
         foreach ($models as $model) {
-            Yii::$app->setModule($model->id, [
-                'class' => $model->class
-            ]);
+            $this->setModule($model->id, ['class' => $model->class]);
             $bootstraps = explode("|", $model->bootstrap);
             if (in_array($bootstrapType, $bootstraps)) {
                 $module = \Yii::$app->getModule($model->id);
@@ -33,5 +32,13 @@ class LoadModule extends Component implements BootstrapInterface
                 }
             }
         }
+    }
+
+    public function setModule($id, $config)
+    {
+        $definitions = \Yii::$app->getModules();
+        Yii::$app->setModule($id,
+            ArrayHelper::merge($config, array_key_exists($id, $definitions) ? $definitions[$id] : [])
+        );
     }
 }

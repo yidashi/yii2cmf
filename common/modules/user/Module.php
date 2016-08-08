@@ -72,6 +72,19 @@ class Module extends \yii\base\Module implements BootstrapInterface
             }
         ]);
 
+        if ($app->id == 'app-frontend') {
+            $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
+        } elseif ($app->id == 'app-backend') {
+            $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
+            Yii::$container->set('yii\web\User', [
+                'idParam' => '__idBackend',
+                'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
+            ]);
+            $app->urlManager->addRules([
+                'user/<action:\S+>' => 'user/admin/<action>',
+            ], false);
+        }
+
         $configUrlRule = [
             'prefix' => $this->urlPrefix,
             'rules'  => $this->urlRules,
@@ -85,18 +98,5 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $rule = Yii::createObject($configUrlRule);
 
         $app->urlManager->addRules([$rule], false);
-
-        if ($app->id == 'app-frontend') {
-            $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
-        } elseif ($app->id == 'app-backend') {
-            $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
-            Yii::$container->set('yii\web\User', [
-                'idParam' => '__idBackend',
-                'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
-            ]);
-            $app->urlManager->addRules([
-                'user/<action:\S+>' => 'user/admin/<action>',
-            ], false);
-        }
     }
 }
