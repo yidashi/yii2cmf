@@ -32,7 +32,7 @@ class m160726_093217_create_user_table extends Migration
         // profile
         $this->createTable('{{%profile}}', [
             'user_id' => Schema::TYPE_PK,
-            'money' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'money' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT 0",
             'signature' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT ''",
             'avatar' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
@@ -42,8 +42,8 @@ class m160726_093217_create_user_table extends Migration
             'city' => $this->smallInteger(4),
             'area' => $this->smallInteger(4),
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
+            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT 1470585600",
+            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT 1470585600"
         ]);
 
         $this->insert('{{%user}}', [
