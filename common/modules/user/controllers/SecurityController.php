@@ -119,7 +119,7 @@ class SecurityController extends Controller
      *
      * @throws BadRequestHttpException
      */
-    /*public function actionResetPassword($token)
+    public function actionResetPassword($token)
     {
         try {
             $model = new ResetPasswordForm($token);
@@ -136,18 +136,6 @@ class SecurityController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
-    }*/
-
-    public function actionResetPassword($id)
-    {
-        $model = User::findIdentity($id);
-        $model->scenario = 'resetPassword';
-        if($model->load(Yii::$app->request->post()) && $model->save()){
-            Yii::$app->user->logout();
-            return $this->goHome();
-        }
-        return $this->render('resetPassword', [
-            'model' => $model
-        ]);
     }
+
 }

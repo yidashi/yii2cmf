@@ -151,7 +151,7 @@ class AdminController extends Controller
     {
         $model = $this->findModel($id);
         $model->scenario = 'resetPassword';
-        if($model->load(Yii::$app->request->post()) && $model->resetPassword()){
+        if($model->load(Yii::$app->request->post()) && $model->save()){
             Yii::$app->user->logout();
             return $this->goHome();
         }
