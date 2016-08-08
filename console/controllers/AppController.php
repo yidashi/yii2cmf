@@ -17,8 +17,6 @@ class AppController extends Controller
 {
     public $defaultAction = 'install';
 
-    public $interactive = false;
-
     public $writablePaths = [
         '@root/runtime',
         '@root/web/assets',
@@ -101,7 +99,8 @@ class AppController extends Controller
                 'dsn' => $dbDsn,
                 'username' => $dbUsername,
                 'password' => $dbPassword,
-                'tablePrefix' => $dbTablePrefix
+                'tablePrefix' => $dbTablePrefix,
+                'charset' => 'utf8'
             ])
         );
     }
@@ -136,7 +135,7 @@ class AppController extends Controller
             $this->stdout("\n  ... 已经安装过.\n\n", Console::FG_RED);
             die;
         }
-        $str = <<<STR
+        $start = <<<STR
 +==========================================+
 | Welcome to setup yii2cmf         |
 | 欢迎使用 yii2cmf 安装程序     |
@@ -146,7 +145,7 @@ class AppController extends Controller
 +==========================================+
 
 STR;
-        $this->stdout($str, Console::FG_GREEN);
+        $this->stdout($start, Console::FG_GREEN);
         copy(Yii::getAlias('@root/.env.example'), Yii::getAlias($this->envPath));
         $this->runAction('set-writable', ['interactive' => $this->interactive]);
         $this->runAction('set-executable', ['interactive' => $this->interactive]);
@@ -155,10 +154,10 @@ STR;
         $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
-        Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
-        Yii::$app->runAction('cache/flush-all', ['interactive' => $this->interactive]);
+        Yii::$app->runAction('migrate/up', ['interactive' => false]);
+        Yii::$app->runAction('cache/flush-all', ['interactive' => false]);
         file_put_contents(Yii::getAlias($this->installFile), time());
-        $success = <<<STR
+        $end = <<<STR
 +=================================================+
 | Installation completed successfully, Thanks you |
 | 安装成功，感谢选择和使用 yii2cmf              |
@@ -169,7 +168,7 @@ STR;
 
 STR;
 
-        $this->stdout($success, Console::FG_GREEN);
+        $this->stdout($end, Console::FG_GREEN);
     }
 
     public function actionReset()
