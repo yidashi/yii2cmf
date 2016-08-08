@@ -62,6 +62,16 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
     public function bootstrap($app)
     {
+        Yii::$app->set('user', [
+            'class' => 'yii\web\User',
+            'identityClass' => 'common\modules\user\models\User',
+            'loginUrl' => ['/user/security/login'],
+            'enableAutoLogin' => true,
+            'on afterLogin' => function($event) {
+                $event->identity->touch('login_at');
+            }
+        ]);
+
         $configUrlRule = [
             'prefix' => $this->urlPrefix,
             'rules'  => $this->urlRules,
@@ -80,6 +90,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
             $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
         } elseif ($app->id == 'app-backend') {
             $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
+            Yii::$container->set('yii\web\User', [
+                'idParam' => '__idBackend',
+                'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
+            ]);
         }
     }
 }

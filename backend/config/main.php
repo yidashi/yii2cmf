@@ -29,13 +29,6 @@ return [
         'upload' => \common\actions\UploadController::className()
     ],
     'components' => [
-        'user' => [
-            'identityClass' => 'common\modules\user\models\User',
-            'loginUrl' => ['/user/security/login'],
-            'enableAutoLogin' => true,
-            'idParam' => '__idBackend',
-            'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
-        ],
         'request' => [
             'csrfParam' => '_csrfBackend'
         ],

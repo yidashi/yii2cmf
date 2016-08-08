@@ -18,14 +18,6 @@ return [
         'upload' => \common\actions\UploadController::className()
     ],
     'components' => [
-        'user' => [
-            'identityClass' => 'common\modules\user\models\User',
-            'loginUrl' => '/user/security/login',
-            'enableAutoLogin' => true,
-            'on afterLogin' => function($event) {
-                $event->identity->touch('login_at');
-            }
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
