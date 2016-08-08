@@ -16,6 +16,7 @@ $user = Yii::$app->user->identity;
             ['label' => '头像设置','url' => ['/user/settings/avatar']],
             ['label' => '我的发布','url' => ['/user/default/article-list']],
             ['label' => '我的通知','url' => ['/user/default/notice']],
+            ['label' => '我的私信','url' => ['/message/default/index'], 'active' => Yii::$app->controller->module->id == 'message'],
             ['label' => '我赞过的','url' => ['/user/default/up']],
             ['label' => '我收藏的','url' => ['/user/default/favourite']],
         ]]) ?>

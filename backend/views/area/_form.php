@@ -7,12 +7,6 @@ use backend\widgets\ActiveForm;
 ]); ?>
 
 <div class="box box-solid">
-<?php if($model->isNewRecord):?>
-    <div class="box-header with-border" >
-        <h3 class="box-title"> 创建新区域</h3>
-    </div>
-<?php endif;?>
-
 <div class="box-body">
 <?= $form->field($model, 'title') ?>
 <?= $form->field($model, 'slug') ?>

@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 ?>
 <div class="media-left">
-    <a href="<?= Url::to(['/user', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
+    <a href="<?= Url::to(['/user/default/index', 'id' => $model->from_uid]) ?>" rel="author" data-original-title="" title="">
         <?= Html::img($model->from->getAvatar(), ['class' => 'media-object', 'alt' => $model->from->username]) ?>
     </a>
 </div>

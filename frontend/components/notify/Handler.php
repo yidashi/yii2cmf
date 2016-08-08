@@ -16,6 +16,7 @@ use yii\data\ActiveDataProvider;
 use common\models\Notify;
 use Yii;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 class Handler extends Object
 {
@@ -68,7 +69,7 @@ class Handler extends Object
 
     public function link($link)
     {
-        $this->notify->link = $link;
+        $this->notify->link = Url::to($link);
         return $this;
     }
 

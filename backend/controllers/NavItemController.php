@@ -60,7 +60,7 @@ class NavItemController extends Controller
         $model->nav_id =  $nav->id;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('backend', 'Nav slide was successfully saved'));
+                Yii::$app->getSession()->setFlash('success', '添加成功');
                 return $this->redirect(['/nav/update', 'id' => $model->nav_id]);
             }
         }
@@ -81,7 +81,7 @@ class NavItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('backend', 'Nav slide was successfully saved'));
+            Yii::$app->getSession()->setFlash('success', '更新成功');
             return $this->redirect(['/nav/update', 'id' => $model->nav_id]);
         }
         return $this->render('update', [
@@ -99,7 +99,7 @@ class NavItemController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->delete()) {
-            return $this->redirect(['/Nav/update', 'id'=>$model->nav_id]);
+            return $this->redirect(['/nav/update', 'id'=>$model->nav_id]);
         };
     }
 

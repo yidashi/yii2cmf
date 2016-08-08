@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
+/* @var $model \common\modules\user\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div style="color:#999;margin:1em 0">
-                    如果忘记了密码，你可以 <?= Html::a('重置密码', ['/user/recurity/request-password-reset']) ?>.
+                    如果忘记了密码，你可以 <?= Html::a('重置密码', ['/user/security/request-password-reset']) ?>.
                 </div>
 
                 <div class="form-group">

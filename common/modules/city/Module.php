@@ -15,11 +15,5 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-//        if (!isset(Yii::$app->i18n->translations['city'])) {
-//            Yii::$app->i18n->translations['city'] = [
-//                'class' => 'yii\i18n\PhpMessageSource',
-//                'basePath' => '@common/modules/city/messages'
-//            ];
-//        }
     }
 }

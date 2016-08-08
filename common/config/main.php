@@ -72,14 +72,9 @@ return [
                     'logTable'=>'{{%system_log}}'
                 ],
             ]
-        ]
-    ],
-    'modules' => [
-        'user' => [
-            'class' => 'common\modules\user\Module',
         ],
-        'city' => [
-            'class' => 'common\modules\city\Module'
+        'moduleManager' => [
+            'class' => 'common\\components\\ModuleManager'
         ]
     ],
     'as locale' => [

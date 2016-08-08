@@ -14,8 +14,8 @@ class m160707_084650_create_article_exhibition extends Migration
     {
         $this->createTable('{{%article_exhibition}}', [
             'id' => $this->integer(11)->unique(),
-            'start_at' => $this->timestamp()->comment('开始时间')->defaultValue('2016-08-08 00:00:00'),
-            'end_at' => $this->timestamp()->comment('结束时间')->defaultValue('2016-08-08 00:00:00'),
+            'start_at' => $this->timestamp()->comment('开始时间'),
+            'end_at' => $this->timestamp()->comment('结束时间'),
             'city' => $this->string(50)->comment('举办城市'),
             'address' => $this->string(255)->comment('举办地址')
         ]);

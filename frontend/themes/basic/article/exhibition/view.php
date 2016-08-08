@@ -74,10 +74,9 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
                         <li>粉丝<h3><?= \common\models\Friend::getFansNumber($model->user_id) ?></h3></li>
                         <li>关注<h3><?= \common\models\Friend::getFollowNumber($model->user_id) ?></h3></li>
                         <li>金钱<h3><?= $model->user->profile->money ?></h3></li>
-                    </ul>
-                    <a class="follow btn btn-xs btn-success disabled" href="javascript:void(0);" data-id="32132"><i class="fa fa-plus"></i> 关注Ta</a>
-                    <a class="btn btn-xs btn-primary disabled" href="/user/message/create?id=32132"><i class="fa fa-envelope"></i> 发私信</a>
-                -->
+                    </ul>                -->
+<!--                <a class="follow btn btn-xs btn-success disabled" href="javascript:void(0);" data-id="32132"><i class="fa fa-plus"></i> 关注Ta</a>-->
+                    <a class="btn btn-xs btn-info" href="<?= Url::to(['/message/default/create', 'id' => $model->user_id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
             </div>
         </div>
     </div>

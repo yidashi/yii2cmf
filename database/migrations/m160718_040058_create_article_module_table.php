@@ -18,8 +18,6 @@ class m160718_040058_create_article_module_table extends Migration
             'title' => $this->string(50),
             'model' => $this->string(128)
         ]);
-        $this->addColumn('{{%article}}', 'is_hot', $this->smallInteger()->notNull()->defaultValue(0)->comment('是否热门'));
-        $this->addColumn('{{%article}}', 'is_best', $this->smallInteger()->notNull()->defaultValue(0)->comment('是否精华'));
     }
 
     /**

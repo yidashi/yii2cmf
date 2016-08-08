@@ -19,7 +19,7 @@ class Comment
         if (!empty($matches)) {
             $replyUserName = $matches[1];
             $replyUserId = User::find()->select('id')->where(['username' => $replyUserName])->scalar();
-            $data = preg_replace('/(@\S+?\s)/', Html::a('$1', ['/user', 'id' => $replyUserId]), $data);
+            $data = preg_replace('/(@\S+?\s)/', Html::a('$1', ['/user/default/index', 'id' => $replyUserId]), $data);
         }
         return $data;
     }

@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\modules\user\behaviors\UserBehavior;
 use frontend\components\notify\Parser;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -63,18 +64,9 @@ class Notify extends \yii\db\ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'updatedAtAttribute' => false
-            ]
+            ],
+            UserBehavior::className()
         ];
-    }
-
-    public function getFrom()
-    {
-        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'from_uid']);
-    }
-
-    public function getTo()
-    {
-        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'to_uid']);
     }
 
     public function getCategory()

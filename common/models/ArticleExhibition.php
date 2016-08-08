@@ -29,6 +29,7 @@ class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInt
     public function rules()
     {
         return [
+            [['start_at', 'end_at', 'city', 'address'], 'required'],
             [['id'], 'integer'],
             [['start_at', 'end_at'], 'date', 'format' => 'php:Y-m-d H:i:s'],
             [['city'], 'string', 'max' => 50],

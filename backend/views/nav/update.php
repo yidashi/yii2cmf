@@ -9,8 +9,8 @@ use yii\helpers\Html;
 $this->title = Yii::t('backend', 'Update {modelClass}: ', [
     'modelClass' => 'Nav',
 ]) . ' ' . $model->key;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Navs'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Navs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="widget-Nav-update">
     <div class="row">

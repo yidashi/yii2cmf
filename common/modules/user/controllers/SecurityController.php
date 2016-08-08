@@ -12,6 +12,7 @@ use common\modules\user\models\LoginForm;
 use common\modules\user\models\PasswordResetRequestForm;
 use common\modules\user\models\ResetPasswordForm;
 
+use common\modules\user\models\User;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -26,13 +27,8 @@ class SecurityController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
+                'only' => ['logout'],
                 'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
                     [
                         'actions' => ['logout'],
                         'allow' => true,
@@ -44,14 +40,6 @@ class SecurityController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
-                ],
-            ],
-            [
-                'class' => 'yii\filters\PageCache',
-                'only' => ['sitemap'],
-                'duration' => 60 * 60,
-                'variations' => [
-                    \Yii::$app->language,
                 ],
             ],
         ];
@@ -149,4 +137,5 @@ class SecurityController extends Controller
             'model' => $model,
         ]);
     }
+
 }

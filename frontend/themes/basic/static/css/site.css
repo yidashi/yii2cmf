@@ -305,6 +305,7 @@ h4 { font-size: 16px; }
 /* 个人主页开始 */
 
 .profile-user { text-align: center; padding: 45px 0 0 0; }
+.profile-user .button{margin-bottom: 10px;}
 .profile-user .stat { height: 80px; border-top: #eee solid 1px; padding-top: 20px; }
 .profile-user .stat li { width: 33.33%; float: left; text-align: center; font-size: 18px; list-style: none; border-right: #eee solid 1px; }
 .profile-user .stat li h3 { font-size: 18px; margin: 5px 0; color: #D8582B; }

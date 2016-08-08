@@ -23,6 +23,7 @@ return [
     'Update {modelClass}: ' => '更新{modelClass}:',
     'Carousel' => '幻灯片',
     'Nav' => '导航',
+    'Navs' => '导航',
     'Account details' => '账户',
     'Profile details' => '信息',
     'Assignments' => '指派',

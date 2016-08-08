@@ -10,21 +10,14 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        \common\components\LoadPlugins::className(),
+        'common\\components\\LoadPlugins',
+        'common\\components\\LoadModule'
     ],
     'controllerNamespace' => 'frontend\controllers',
     'controllerMap' => [
         'upload' => \common\actions\UploadController::className()
     ],
     'components' => [
-        'user' => [
-            'identityClass' => 'common\modules\user\models\User',
-            'loginUrl' => '/user/security/login',
-            'enableAutoLogin' => true,
-            'on afterLogin' => function($event) {
-                $event->identity->touch('login_at');
-            }
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -70,11 +63,6 @@ return [
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')
-        ]
-    ],
-    'modules' => [
-        'user' => [
-            'as frontend' => 'common\modules\user\filters\FrontendFilter',
         ]
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),

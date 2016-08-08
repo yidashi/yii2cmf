@@ -42,8 +42,8 @@ class m160726_093217_create_user_table extends Migration
             'city' => $this->smallInteger(4),
             'area' => $this->smallInteger(4),
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
-            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT 1470585600",
-            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT 1470585600"
+            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
         ]);
 
         $this->insert('{{%user}}', [

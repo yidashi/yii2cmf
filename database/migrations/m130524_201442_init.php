@@ -5,7 +5,7 @@ use yii\db\Schema;
 
 class m130524_201442_init extends Migration
 {
-    public $tableOptions;
+    public $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
 
     public function safeUp()
     {
@@ -35,6 +35,8 @@ class m130524_201442_init extends Migration
             'down' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'is_top' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否置顶'),
+            'is_hot' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否热门'),
+            'is_best' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否精华'),
             'description' => Schema::TYPE_STRING . "(255) NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'source' => Schema::TYPE_STRING . "(50) NOT NULL",
