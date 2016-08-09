@@ -128,6 +128,13 @@ class User extends ActiveRecord implements IdentityInterface
             ->one();
     }
 
+    public static function findByEmail($email)
+    {
+        return static::find()->where(['email' => $email])
+            ->andWhere(['blocked_at' => null])
+            ->one();
+    }
+
     public static function findByUsernameOrEmail($login)
     {
         return static::find()->where(['or', 'username = "' . $login . '"', 'email = "' . $login . '"'])
