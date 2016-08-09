@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "pop_reward".
@@ -63,5 +64,23 @@ class Reward extends \yii\db\ActiveRecord
                 'updatedByAttribute' => false
             ]
         ];
+    }
+
+    public function getArticle()
+    {
+        return $this->hasOne(Article::className(), ['id' => 'article_id']);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $article = $this->article;
+            Yii::$app->notify->category('reward')
+                ->from($this->user_id)
+                ->to($article->user_id)
+                ->extra(['article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id]), 'money' => $this->money])
+                ->send();
+        }
     }
 }

@@ -384,6 +384,10 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Sign::className(), ['user_id' => 'id']);
     }
 
+    /**
+     * TODO
+     * @return string
+     */
     public function getBadge()
     {
         return '土豪';

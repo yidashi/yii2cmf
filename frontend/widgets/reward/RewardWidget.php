@@ -9,7 +9,6 @@
 namespace frontend\widgets\reward;
 
 
-use frontend\models\RewardForm;
 use yii\base\Widget;
 use Yii;
 

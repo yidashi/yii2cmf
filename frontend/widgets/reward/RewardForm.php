@@ -6,9 +6,10 @@
  * Time: 下午5:48
  */
 
-namespace frontend\models;
+namespace frontend\widgets\reward;
 
 
+use common\models\Article;
 use common\models\Reward;
 use yii\base\Exception;
 use yii\base\Model;
@@ -28,7 +29,7 @@ class RewardForm extends Model
             ['money', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => '打赏额必须大于0'],
         ];
         if (!\Yii::$app->user->isGuest) {
-            $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<', 'message' => '打赏额不能大于自身账户余额'];
+            $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<=', 'message' => '打赏额不能大于自身账户余额'];
         }
         return $rules;
     }
@@ -54,9 +55,9 @@ class RewardForm extends Model
             $transaction = \Yii::$app->db->beginTransaction();
             try{
                 // 打赏者扣钱
-                /* @var $profile \common\models\Profile */
+                /* @var $profile \common\modules\user\models\Profile */
                 $profile = \Yii::$app->user->identity->profile;
-                $result = $profile::getDb()->createCommand('update {{%profile}} set money=money-' . $this->money . ' WHERE id = ' . $profile->id . ' AND money>=' . $this->money)->execute();
+                $result = $profile::getDb()->createCommand('update {{%profile}} set money=money-' . $this->money . ' WHERE user_id = ' . $profile->user_id . ' AND money>=' . $this->money)->execute();
                 if ($result == 0) {
                     throw new Exception('打赏失败');
                 }

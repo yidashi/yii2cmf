@@ -33,7 +33,10 @@ return [
         'assetManager' => [
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => '@frontend/components/bootstrap/dist'
+                    'sourcePath' => '@frontend/components/bootstrap/dist',
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css'
+                    ]
                 ],
             ],
         ],

@@ -2,8 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Reward;
-use frontend\models\RewardForm;
+use frontend\widgets\reward\RewardForm;
 use Yii;
 use yii\filters\AccessControl;
 
