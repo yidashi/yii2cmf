@@ -20,13 +20,13 @@ $this->title = '个人中心';
                 <h1><?= $user->username?></h1>
                 <p><?= $user->profile->signature?></p>
                 <div class="button">
-                    <a class="follow btn btn-xs btn-success" href="javascript:void(0);" data-id="27683"><i class="fa fa-plus"></i> 关注Ta</a>
+                    <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($user->id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($user->id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $user->id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($user->id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>
                     <a class="btn btn-xs btn-primary" href="<?= Url::to(['/message/default/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
                 </div>
                 <ul class="stat">
-                    <li>余额<h3><?= $user->profile->money ?></h3></li>
-                    <li>关注<h3>120</h3></li><!---TODO -->
-                    <li>粉丝<h3>4365</h3></li><!---TODO -->
+                    <li>金钱<h3><?= $user->profile->money ?></h3></li>
+                    <li>关注<h3><?= \common\models\Friend::getFollowNumber($user->id) ?></h3></li>
+                    <li>粉丝<h3><?= \common\models\Friend::getFansNumber($user->id) ?></h3></li>
                 </ul>
             </div>
         </div>

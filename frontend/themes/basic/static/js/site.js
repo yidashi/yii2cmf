@@ -98,6 +98,22 @@ $(function(){
         });
         return false;
     });
+    $(document).on('click', '.follow', function() {
+        var a = $(this);
+        var url = a.attr('href');
+        $.ajax({
+            url:url,
+            method:'post',
+            success:function(data) {
+                if (a.hasClass('btn')) {
+                    a.html('<i class="fa fa-check"></i> ' + data.message).addClass('disabled');
+                } else {
+                    a.replaceWith('<i class="fa fa-check"></i> ' + data.message);
+                }
+            }
+        });
+        return false;
+    });
 });
 $('.view-content a').attr('target', '_blank');
 jQuery.extend({
@@ -113,4 +129,14 @@ jQuery.extend({
 });
 $(".modal").on("hidden.bs.modal", function() {
     $(this).removeData("bs.modal");
+});
+$(document).ajaxError(function(event,XMLHttpRequest,options,exc){
+    if(XMLHttpRequest.status == 302){
+        $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
+    } else if(XMLHttpRequest.status == 403){
+        $.modalLogin();
+    } else {
+        alert(XMLHttpRequest.responseJSON.message);
+        //console.log(XMLHttpRequest)
+    }
 });
