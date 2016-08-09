@@ -13,6 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/artic
 $this->params['breadcrumbs'][] = $model->title;
 list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $model->getMetaData();
 ?>
+
 <div class="col-lg-9">
     <div class="view-title">
         <h1><?= $model->title ?></h1>
