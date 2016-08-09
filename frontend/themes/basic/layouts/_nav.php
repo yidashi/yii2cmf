@@ -73,7 +73,7 @@ if (Yii::$app->user->isGuest) {
         'items' => [
             [
                 'label' => Html::icon('user') . ' 个人主页',
-                'url' => ['/user', 'id' => Yii::$app->user->id],
+                'url' => ['/user/default/index', 'id' => Yii::$app->user->id],
             ],
             [
                 'label' => Html::icon('cog') . ' 账户设置',
