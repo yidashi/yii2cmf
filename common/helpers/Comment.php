@@ -9,7 +9,7 @@
 namespace common\helpers;
 
 
-use common\models\User;
+use common\modules\user\models\User;
 
 class Comment
 {
