@@ -23,7 +23,7 @@ use yii\helpers\Url;
         <?php if (!Yii::$app->user->isGuest): ?>
             <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
         <?php else: ?>
-            <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
+            <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
         <?php endif; ?>
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
@@ -37,7 +37,7 @@ use yii\helpers\Url;
         <?php if (!Yii::$app->user->isGuest): ?>
             <button type="submit" class="btn btn-sm btn-primary">回复</button>
         <?php else: ?>
-            <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary'])?>
+            <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
         <?php endif; ?>
     </div>
     <?php \yii\widgets\ActiveForm::end(); ?>
