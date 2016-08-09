@@ -73,7 +73,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
                         <li>金钱<h3><?= $model->user->profile->money ?></h3></li>
                     </ul>
                     <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($model->user_id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($model->user_id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $model->user_id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($model->user_id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>
-                    <a class="btn btn-xs btn-primary" href="<?= Url::to(['/message/default/create', 'id' => $model->user_id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                    <a class="btn btn-xs btn-primary <?php if ($model->user_id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/message/default/create', 'id' => $model->user_id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
                 </div>
             </div>
         </div>
