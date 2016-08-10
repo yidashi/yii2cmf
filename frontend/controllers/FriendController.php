@@ -10,11 +10,25 @@ namespace frontend\controllers;
 
 
 use common\models\Friend;
-use yii\base\Exception;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class FriendController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     public function actionFollow($id)
     {
         \Yii::$app->response->format = 'json';

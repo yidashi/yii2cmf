@@ -65,11 +65,6 @@ class TagBehavior extends Behavior
         }
 
         $data = \Yii::$app->request->post($this->owner->formName());
-        // 更新原标签文章数
-        $oldTags = $this->getTagItems();
-        Tag::updateAllCounters(['article' => -1], ['name' => $oldTags]);
-        // 先清除文章所有标签
-        ArticleTag::deleteAll(['article_id' => $this->owner->id]);
         if(isset($data[static::$formName]) && !empty($data[static::$formName])) {
             $tags = $data[static::$formName];
             foreach($tags as $tag) {

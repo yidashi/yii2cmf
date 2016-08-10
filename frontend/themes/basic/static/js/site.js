@@ -104,6 +104,7 @@ $(function(){
         $.ajax({
             url:url,
             method:'post',
+            dataType: 'json',
             success:function(data) {
                 if (a.hasClass('btn')) {
                     a.html('<i class="fa fa-check"></i> ' + data.message).addClass('disabled');
@@ -137,6 +138,5 @@ $(document).ajaxError(function(event,XMLHttpRequest,options,exc){
         $.modalLogin();
     } else {
         alert(XMLHttpRequest.responseJSON.message);
-        //console.log(XMLHttpRequest)
     }
 });
