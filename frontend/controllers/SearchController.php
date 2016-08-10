@@ -21,7 +21,9 @@ class SearchController extends Controller
     public function actionIndex()
     {
         $q = \Yii::$app->request->get('q');
-        if (empty($q)) $this->goHome();
+        if (empty($q)){
+            return $this->goHome();
+        }
         $dataProvider = \Yii::$app->search->search($q);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
