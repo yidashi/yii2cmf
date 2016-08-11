@@ -8,7 +8,7 @@ use yii\db\mysql\Schema;
  */
 class m160728_025849_create_rbac_table extends Migration
 {
-    public $tableOptions;
+    public $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     /**
      * @inheritdoc
      */

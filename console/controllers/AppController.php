@@ -108,7 +108,7 @@ class AppController extends Controller
     {
         try{
             $pdo = new \PDO($dsn, $username, $password);
-            $sql = "CREATE DATABASE IF NOT EXISTS {$dbname}";
+            $sql = "CREATE DATABASE IF NOT EXISTS {$dbname} DEFAULT CHARSET utf8 COLLATE utf8_general_ci;";
             $pdo->query($sql);
         } catch(\Exception $e) {
             $this->stderr("\n" . $e->getMessage(), Console::FG_RED);

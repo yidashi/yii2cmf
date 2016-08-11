@@ -12,6 +12,10 @@ class m160728_025305_create_config_table extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         // config
         $this->createTable('{{%config}}', [
             'id' => $this->primaryKey(),
@@ -23,7 +27,7 @@ class m160728_025305_create_config_table extends Migration
             'created_at' => $this->integer(10)->notNull(),
             'updated_at' => $this->integer(10)->notNull(),
             'group' => $this->string(30)->defaultValue('system')->comment('配置分组')
-        ]);
+        ], $tableOptions);
         $this->execute(<<<SQL
 --
 -- Dumping data for table {{%config}}
