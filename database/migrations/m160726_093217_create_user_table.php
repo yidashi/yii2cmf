@@ -24,7 +24,6 @@ class m160726_093217_create_user_table extends Migration
             'status' => Schema::TYPE_SMALLINT . "(6) NOT NULL DEFAULT '10'",
             'created_at' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'is_admin' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'login_at' => Schema::TYPE_INTEGER . "(11) NULL",
             'blocked_at' => $this->integer()->null(),
             'confirmed_at' => $this->integer()->null()

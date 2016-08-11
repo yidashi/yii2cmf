@@ -9,9 +9,7 @@
 namespace common\models\behaviors;
 
 
-use common\models\ArticleTag;
 use common\models\Favourite;
-use common\models\Tag;
 use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;

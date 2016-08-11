@@ -37,7 +37,9 @@ class m160622_073825_create_notify extends Migration
             ['comment', '{from.username} 评论了你的文章 {extra.article_title}', '{extra.comment}'],
             ['favourite', '{from.username} 收藏了你的文章 {extra.article_title}', null],
             ['up_article', '{from.username} 赞了你的文章 {extra.article_title}', null],
-            ['message', '{from.username} 给你发了私信', '{extra.message}']
+            ['message', '{from.username} 给你发了私信', '{extra.message}'],
+            ['reward', '{from.username} 打赏了你的文章 {extra.article_title}', '{extra.money}'],
+            ['follow', '{from.username} 关注了你', null],
         ]);
     }
 

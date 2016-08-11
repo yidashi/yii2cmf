@@ -37,8 +37,8 @@ class CommentWidget extends Widget
             ]
         ]);
         $model = Article::find()->normal()->andWhere(['id' => $this->type_id])->one();
-        if (is_null($model) || !$model->hasProperty('comment')) {
-            $comment = $dataProvider->getTotalCount();
+        if (is_null($model) || !$model->hasAttribute('comment') || !$model->hasProperty('comment')) {
+            $comment = Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id])->count();
         } else {
             $comment = $model->comment;
         }

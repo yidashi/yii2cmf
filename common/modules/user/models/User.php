@@ -128,6 +128,13 @@ class User extends ActiveRecord implements IdentityInterface
             ->one();
     }
 
+    public static function findByEmail($email)
+    {
+        return static::find()->where(['email' => $email])
+            ->andWhere(['blocked_at' => null])
+            ->one();
+    }
+
     public static function findByUsernameOrEmail($login)
     {
         return static::find()->where(['or', 'username = "' . $login . '"', 'email = "' . $login . '"'])
@@ -384,6 +391,10 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Sign::className(), ['user_id' => 'id']);
     }
 
+    /**
+     * TODO
+     * @return string
+     */
     public function getBadge()
     {
         return '土豪';

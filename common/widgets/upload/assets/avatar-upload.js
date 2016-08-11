@@ -95,12 +95,7 @@ $(document).ready(function() {
                 avatar:avatar
             },
             success: function(msg) {
-                if (msg.status == true) {
-                    location.reload();
-                } else {
-                    console.log(msg);
-                    //alert(msg.error);
-                }
+                location.reload();
             }
         });
         return false;

@@ -41,10 +41,7 @@ class PasswordResetRequestForm extends Model
     public function sendEmail()
     {
         /* @var $user User */
-        $user = User::findOne([
-            'status' => User::STATUS_ACTIVE,
-            'email' => $this->email,
-        ]);
+        $user = User::findByEmail($this->email);
 
         if ($user) {
             if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
@@ -52,7 +49,9 @@ class PasswordResetRequestForm extends Model
             }
 
             if ($user->save()) {
-                return \Yii::$app->mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
+                $mailer = \Yii::$app->mailer;
+                $mailer->viewPath = '@common/modules/user/mail';
+                return $mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
                     ->setFrom([\Yii::$app->config->get('ADMIN_EMAIL') => \Yii::$app->config->get('SITE_NAME').' robot'])
                     ->setTo($this->email)
                     ->setSubject('重置密码 -' . \Yii::$app->config->get('SITE_NAME'))

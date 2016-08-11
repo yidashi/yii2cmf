@@ -68,15 +68,16 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
                     </h2>
                     <div class="time">注册时间：<?= Yii::$app->formatter->asDate($model->user->created_at) ?><br>最后登录：<?= Yii::$app->formatter->asRelativeTime($model->user->login_at) ?></div>
                 </div>
-                <!--
+
                 <div class="media-footer">
                     <ul class="stat">
                         <li>粉丝<h3><?= \common\models\Friend::getFansNumber($model->user_id) ?></h3></li>
                         <li>关注<h3><?= \common\models\Friend::getFollowNumber($model->user_id) ?></h3></li>
                         <li>金钱<h3><?= $model->user->profile->money ?></h3></li>
-                    </ul>                -->
-<!--                <a class="follow btn btn-xs btn-success disabled" href="javascript:void(0);" data-id="32132"><i class="fa fa-plus"></i> 关注Ta</a>-->
-                    <a class="btn btn-xs btn-info" href="<?= Url::to(['/message/default/create', 'id' => $model->user_id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                    </ul>
+                    <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($model->user_id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($model->user_id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $model->user_id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($model->user_id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>
+                    <a class="btn btn-xs btn-primary <?php if ($model->user_id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/message/default/create', 'id' => $model->user_id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                </div>
             </div>
         </div>
     </div>
