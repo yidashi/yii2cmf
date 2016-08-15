@@ -13,6 +13,10 @@ class m160622_073825_create_notify extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         // notify
         $this->createTable('{{%notify}}', [
             'id' => $this->primaryKey(),
@@ -23,14 +27,14 @@ class m160622_073825_create_notify extends Migration
             'created_at' => $this->integer(10)->notNull(),
             'read' => $this->boolean()->notNull()->defaultValue(0),
             'link' => $this->string(255)
-        ]);
+        ], $tableOptions);
         // notify_category
         $this->createTable('{{%notify_category}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(50)->unique(),
             'title' => $this->string(255),
             'content' => $this->string(255),
-        ]);
+        ], $tableOptions);
         $this->batchInsert('{{%notify_category}}', ['name', 'title', 'content'], [
             ['reply', '{from.username} 回复了你的评论', '{extra.comment}'],
             ['suggest', '{from.username} 给你留言了', '{extra.comment}'],
