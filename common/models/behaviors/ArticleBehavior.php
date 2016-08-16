@@ -25,7 +25,7 @@ class ArticleBehavior extends Behavior
         return [
             ActiveRecord::EVENT_AFTER_DELETE => [$this, 'afterDeleteInternal'],
             SoftDeleteBehavior::EVENT_AFTER_SOFT_DELETE => [$this, 'afterSoftDeleteInternal'],
-            SoftDeleteBehavior::EVENT_AFTER_REDUCTION => [$this, 'afterReductionInternal'],
+            SoftDeleteBehavior::EVENT_AFTER_RESTORE => [$this, 'afterRestoreInternal'],
             ActiveRecord::EVENT_AFTER_INSERT => [$this, 'afterInsertInternal'],
             ActiveRecord::EVENT_AFTER_UPDATE => [$this, 'afterUpdateInternal'],
         ];
@@ -38,7 +38,7 @@ class ArticleBehavior extends Behavior
     {
         // 删除文章内容
         $content = $event->sender->data;
-        if ($content) {
+        if ($content != null) {
             $content->delete();
         }
         // 清除收藏和顶
@@ -55,7 +55,7 @@ class ArticleBehavior extends Behavior
     /**
      * 软删除文章还原后（更新分类文章数)
      */
-    public function afterReductionInternal($event)
+    public function afterRestoreInternal($event)
     {
         Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
     }

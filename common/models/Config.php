@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use common\behaviors\CacheInvalidateBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\caching\DbDependency;
 
@@ -54,7 +55,13 @@ class Config extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'tags' => [
+                    \Yii::$app->config->cacheTag
+                ]
+            ]
         ];
     }
 

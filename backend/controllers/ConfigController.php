@@ -56,7 +56,6 @@ class ConfigController extends Controller
         $model = new Config();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            TagDependency::invalidate(\Yii::$app->cache, Yii::$app->config->cacheTag);
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -78,7 +77,6 @@ class ConfigController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            TagDependency::invalidate(\Yii::$app->cache, Yii::$app->config->cacheTag);
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -98,7 +96,6 @@ class ConfigController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        TagDependency::invalidate(\Yii::$app->cache, Yii::$app->config->cacheTag);
         return $this->redirect(['index']);
     }
 

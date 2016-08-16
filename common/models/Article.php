@@ -125,7 +125,15 @@ class Article extends \yii\db\ActiveRecord
         $behaviors = [
             TimestampBehavior::className(),
             PushBehavior::className(),
-            SoftDeleteBehavior::className(),
+            [
+                'class' => SoftDeleteBehavior::className(),
+                'softDeleteAttributeValues' => [
+                    'deleted_at' => function ($model) {return time();}
+                ],
+                'restoreAttributeValues' => [
+                    'deleted_at' => null
+                ],
+            ],
             ArticleBehavior::className(),
             [
                 'class' => MetaBehavior::className(),

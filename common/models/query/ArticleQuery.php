@@ -19,14 +19,14 @@ class ArticleQuery extends ActiveQuery
      */
     public function onlyTrashed()
     {
-        return $this->andWhere(['>', 'deleted_at', 0]);
+        return $this->andWhere(['not', ['deleted_at' => null]]);
     }
     /**
      * 未被删除的
      */
     public function notTrashed()
     {
-        return $this->andWhere(['=', 'deleted_at', 0]);
+        return $this->andWhere(['deleted_at' => null]);
     }
 
     /**

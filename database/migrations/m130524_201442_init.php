@@ -30,7 +30,7 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'status' => Schema::TYPE_BOOLEAN . " NOT NULL COMMENT '状态'",
             'cover' => Schema::TYPE_STRING . "(255) NULL COMMENT '封面'",
-            'comment' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'comment' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'up' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'down' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
@@ -39,10 +39,10 @@ class m130524_201442_init extends Migration
             'is_best' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否精华'),
             'description' => Schema::TYPE_STRING . "(255) NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
-            'source' => Schema::TYPE_STRING . "(50) NOT NULL",
-            'deleted_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
+            'source' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
+            'deleted_at' => Schema::TYPE_INTEGER . "(10)",
             'favourite' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
-            'published_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+            'published_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
         ], $this->tableOptions);
 
 // article_data
