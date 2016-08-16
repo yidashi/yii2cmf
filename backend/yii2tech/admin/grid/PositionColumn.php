@@ -40,7 +40,7 @@ class PositionColumn extends DataColumn
     /**
      * @var array html options to be applied to the [[initDefaultButtons()|default buttons]].
      */
-    public $buttonOptions = [];
+    public $buttonOptions = ["class"=>"btn btn-default btn-xs"];
     /**
      * @var string route to the action, which should process position switching, for example: 'item/position'.
      */
@@ -85,6 +85,7 @@ class PositionColumn extends DataColumn
                     'options' => [
                         'title' => Yii::t('yii2tech-admin', 'Move top'),
                         'aria-label' => Yii::t('yii2tech-admin', 'Move top'),
+                        'data-method' => 'post'
                     ],
                 ],
                 'last' => [
@@ -99,6 +100,7 @@ class PositionColumn extends DataColumn
                     'options' => [
                         'title' => Yii::t('yii2tech-admin', 'Move bottom'),
                         'aria-label' => Yii::t('yii2tech-admin', 'Move bottom'),
+                        'data-method' => 'post'
                     ],
                 ],
                 'prev' => [
@@ -113,6 +115,7 @@ class PositionColumn extends DataColumn
                     'options' => [
                         'title' => Yii::t('yii2tech-admin', 'Move up'),
                         'aria-label' => Yii::t('yii2tech-admin', 'Move up'),
+                        'data-method' => 'post'
                     ],
                 ],
                 'next' => [
@@ -127,6 +130,7 @@ class PositionColumn extends DataColumn
                     'options' => [
                         'title' => Yii::t('yii2tech-admin', 'Move down'),
                         'aria-label' => Yii::t('yii2tech-admin', 'Move down'),
+                        'data-method' => 'post'
                     ],
                 ],
             ],
