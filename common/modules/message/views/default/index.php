@@ -8,7 +8,7 @@
 /**
  * @var $this \yii\web\View;
  */
-$this->title = '我的消息';
+$this->title = '我的私信';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container">
