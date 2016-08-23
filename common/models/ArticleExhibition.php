@@ -13,7 +13,7 @@ use Yii;
  * @property string $city
  * @property string $address
  */
-class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInterface
+class ArticleExhibition extends ArticleModuleContract
 {
     /**
      * @inheritdoc
@@ -61,9 +61,4 @@ class ArticleExhibition extends \yii\db\ActiveRecord implements ArticleModuleInt
         ];
     }
 
-    public function getAttributeType($attribute)
-    {
-        $types = $this->attributeTypes();
-        return isset($types[$attribute]) ? $types[$attribute] : 'text';
-    }
 }

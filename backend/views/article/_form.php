@@ -9,6 +9,7 @@ use common\behaviors\TagBehavior;
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
 /* @var $dataModel common\models\ArticleData */
+/* @var $moduleModel common\models\ArticleModuleContract */
 /* @var $form backend\widgets\ActiveForm */
 ?>
 <div class="row">
@@ -36,7 +37,7 @@ use common\behaviors\TagBehavior;
                 </div>
                 <?php if ($moduleModel): ?>
                 <div class="tab-pane" id="tab_2">
-                    <?php foreach ($moduleModel->attributes() as $attribute): ?>
+                    <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
                         <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute)]) ?>
                     <?php endforeach; ?>
                 </div>
