@@ -35,7 +35,7 @@ class DefaultController extends Controller
     }
     public function actionIndex()
     {
-        $query = Message::find()->where(['to_uid' => Yii::$app->user->id])->innerJoinWith('data');
+        $query = Message::find()->where(['to_uid' => Yii::$app->user->id])->innerJoinWith('data')->orderBy('id desc');
         $dataProvider = new ActiveDataProvider([
             'query' => $query
         ]);
