@@ -20,11 +20,11 @@ class Search extends ActiveRecord
     }
     public function getTrueView()
     {
-        return $this->getArticle()->getTrueView();
+        return $this->getArticle() ? $this->getArticle()->getTrueView() : 0;
     }
     public function getComment()
     {
-        return $this->getArticle()->comment;
+        return $this->getArticle() ? $this->getArticle()->comment : 0;
     }
     public function search($q)
     {
