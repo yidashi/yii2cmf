@@ -66,7 +66,7 @@ class MultipleWidget extends InputWidget
      * ----------------------------------------------
      */
 
-      public $deleteUrl = ["/attachment/upload/delete"];
+      public $deleteUrl = ["/upload/delete"];
 
     /**
      *
@@ -81,11 +81,12 @@ class MultipleWidget extends InputWidget
             $value = Html::getAttributeValue($this->model, $this->attribute);
             $attachments = $this->multiple == true ? $value :[$value];
             $this->value = [];
-            foreach ($attachments as $attachment) {
-                $value =  $this->formartAttachment($attachment);
-                if($value)
-                {
-                    $this->value[] = $value;
+            if ($attachments) {
+                foreach ($attachments as $attachment) {
+                    $value = $this->formartAttachment($attachment);
+                    if ($value) {
+                        $this->value[] = $value;
+                    }
                 }
             }
 

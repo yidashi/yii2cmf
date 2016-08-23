@@ -34,7 +34,8 @@ class DynamicInputWidget extends InputWidget
         'image',
         'editor',
         'date',
-        'datetime'
+        'datetime',
+        'file'
     ];
     public $type;
     public $data;
