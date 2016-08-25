@@ -31,7 +31,6 @@
                 });
             },
             fileuploadInit: function(){
-                console.log('hehe')
                 var $fileupload = $input.fileupload({
                     url: options.url,
                     dropZone: $dragDropArea,
@@ -48,7 +47,6 @@
                     start: function (e, data) {
                     },
                     processfail: function (e, data) {
-                        console.log(data)
                         if (data.files.error) {
                             alert(data.files[0].error);
                         }

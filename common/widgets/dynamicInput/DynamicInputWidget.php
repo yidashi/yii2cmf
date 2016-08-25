@@ -166,7 +166,7 @@ class DynamicInputWidget extends InputWidget
             case 'datetime': // 时间
                 return DateTimePicker::widget([
                         'model' => $this->model,
-                    'attribute' => $this->attribute,
+                        'attribute' => $this->attribute,
                         'type' => 2,
                         'convertFormat' => true,
                         'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
