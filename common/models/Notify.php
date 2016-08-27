@@ -3,7 +3,7 @@
 namespace common\models;
 
 use common\modules\user\behaviors\UserBehavior;
-use frontend\components\notify\Parser;
+use common\components\notify\Parser;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;

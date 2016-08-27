@@ -28,7 +28,7 @@ class WorkerController extends BeanstalkController
 
     /**
      *
-     * @param Pheanstalk\Job $job
+     * @param \Pheanstalk\Job $job
      * @return string  self::BURY
      *                 self::RELEASE
      *                 self::DELAY
@@ -41,10 +41,10 @@ class WorkerController extends BeanstalkController
         $sentData = $job->getData();
         try {
             // something useful here
+            print_r($sentData);
+            return self::DELETE;
 
-
-
-            if($everthingIsAllRight == true){
+            /*if($everthingIsAllRight == true){
                 fwrite(STDOUT, Console::ansiFormat("- Everything is allright"."\n", [Console::FG_GREEN]));
                 //Delete the job from beanstalkd
                 return self::DELETE;
@@ -64,7 +64,7 @@ class WorkerController extends BeanstalkController
 
             fwrite(STDOUT, Console::ansiFormat("- Not everything is allright!!!"."\n", [Console::FG_GREEN]));
             //Decay the job to try DELAY_MAX times.
-            return self::DECAY;
+            return self::DECAY;*/
 
             // if you return anything else job is burried.
         } catch (\Exception $e) {

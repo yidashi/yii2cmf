@@ -63,7 +63,6 @@ return [
         'pluginManager' => [
             'class' => 'common\components\PluginManager',
         ],
-        'notify' => \frontend\components\notify\Handler::className(),
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')

@@ -6,7 +6,7 @@
  * Time: 下午4:53
  */
 
-namespace frontend\components\notify;
+namespace common\components\notify;
 
 
 use yii\base\Object;

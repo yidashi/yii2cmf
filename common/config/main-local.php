@@ -38,6 +38,13 @@ $config = [
             'iniDirectory' => '@common/config',    // 搜索 ini 文件目录，默认：@vendor/hightman/xunsearch/app
             'charset' => 'utf-8',   // 指定项目使用的默认编码，默认即时 utf-8，可不指定
         ],
+        'beanstalk'=>[
+            'class' => 'udokmeci\yii2beanstalk\Beanstalk',
+            'host'=> "127.0.0.1", // default host
+            'port'=>11300, //default port
+            'connectTimeout'=> 1,
+            'sleep' => false, // or int for usleep after every job
+        ],
     ],
 ];
 if (YII_ENV_DEV) {
