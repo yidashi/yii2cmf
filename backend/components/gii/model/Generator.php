@@ -5,6 +5,7 @@ namespace backend\components\gii\model;
 use Yii;
 use yii\db\Schema;
 use yii\base\NotSupportedException;
+use ReflectionClass;
 
 
 class Generator extends \yii\gii\generators\model\Generator
@@ -109,5 +110,10 @@ class Generator extends \yii\gii\generators\model\Generator
 
         return $rules;
     }
+    public function formView()
+    {
+        $class = new ReflectionClass(get_parent_class());
 
+        return dirname($class->getFileName()) . '/form.php';
+    }
 }
