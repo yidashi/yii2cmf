@@ -131,6 +131,7 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
             if (empty($model)) {
                 $model = new Module();
                 $model->attributes = $this->info;
+                $model->type = Module::TYPE_PLUGIN;
                 $model->config = Json::encode($this->getInitConfig());
             } else {
                 $model->status = Module::STATUS_OPEN;

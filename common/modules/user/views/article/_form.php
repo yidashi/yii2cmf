@@ -24,7 +24,7 @@ use common\behaviors\TagBehavior;
 
         <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
-        <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className()); ?>
+        <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), ['type' => $dataModel->markdown ? 'markdown' : null]); ?>
 
     </div>
     <div class="col-lg-3">
