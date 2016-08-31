@@ -133,6 +133,7 @@ class Article extends \yii\db\ActiveRecord
                 'restoreAttributeValues' => [
                     'deleted_at' => null
                 ],
+                'invokeDeleteEvents' => false // 不触发删除相关事件
             ],
             ArticleBehavior::className(),
             [
