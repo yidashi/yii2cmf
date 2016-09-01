@@ -60,12 +60,11 @@ class TagBehavior extends Behavior
 
     public function afterSave()
     {
-        if(!$this->owner->isNewRecord) {
-            $this->beforeDelete();
-        }
-
         $data = \Yii::$app->request->post($this->owner->formName());
         if(isset($data[static::$formName]) && !empty($data[static::$formName])) {
+            if(!$this->owner->isNewRecord) {
+                $this->beforeDelete();
+            }
             $tags = $data[static::$formName];
             foreach($tags as $tag) {
                 $tagModel = Tag::findOne(['name' => $tag]);
