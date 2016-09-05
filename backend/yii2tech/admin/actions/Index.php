@@ -92,8 +92,8 @@ class Index extends Action
             'dataProvider' => $dataProvider,
         ]);*/
         $this->setReturnAction();
-        if (!empty($this->newSearchModelClass)) {
-            $searchModel = new $this->newSearchModelClass;
+        if (!empty($this->searchModelClass)) {
+            $searchModel = new $this->searchModelClass;
             $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             return $this->controller->render($this->view, [
                 'searchModel' => $searchModel,
