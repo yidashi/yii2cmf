@@ -25,6 +25,8 @@ class WeiboAuth extends OAuth2
         $result = $this->api("2/users/show.json", 'GET', [
             'uid' => $attributes['uid']
         ]);
+        $result['login'] = $result['name'];
+        $result['email'] = $result['name'] . '@weibo.com';
         return $result;
     }
 

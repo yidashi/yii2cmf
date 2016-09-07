@@ -8,8 +8,8 @@
 
 namespace plugins\authclient;
 
-use common\models\Auth;
-use common\models\User;
+use common\modules\user\models\Auth;
+use common\modules\user\models\User;
 use Yii;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
