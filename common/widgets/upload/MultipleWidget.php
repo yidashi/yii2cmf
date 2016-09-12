@@ -28,7 +28,9 @@ class MultipleWidget extends InputWidget
      *
      * @var array 上传url地址
      */
-    public $url = [];
+    public $url = [
+        '/upload/images-upload'
+    ];
 
     /**
      *  这里为了配合后台方便处理所有都是设为true,文件上传数目请控制好 $maxNumberOfFiles

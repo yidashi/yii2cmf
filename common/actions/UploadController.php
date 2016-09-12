@@ -68,6 +68,13 @@ class UploadController extends Controller
                 'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false
             ],
+            'images-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'multiple' => true,
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment'
+            ],
         ];
     }
 
