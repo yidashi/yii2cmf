@@ -4,7 +4,7 @@
 
 1. `composer install` 
 
-2. `php yii app`
+2. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可)
 
 3. `php yii serve`
 
@@ -30,7 +30,7 @@ vendor          扩展
 web             web统一入口（web服务器可只开放该目录,保证安全）
 wechat          微信
 .env            基本配置文件
-helpers         基本工具函数（已自动加载）
+helpers         基本工具函数（自动加载）
 ```
 
 ## 现有功能:
