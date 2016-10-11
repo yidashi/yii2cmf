@@ -58,7 +58,9 @@ class m160726_093217_create_user_table extends Migration
         ]);
         $this->insert('{{%profile}}', [
             'user_id' => 1,
-            'locale' => 'zh-CN'
+            'locale' => 'zh-CN',
+            'created_at' => 1441766741,
+            'updated_at' => 1441766741,
         ]);
     }
 
