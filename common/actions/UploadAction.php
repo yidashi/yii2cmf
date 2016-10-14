@@ -112,7 +112,7 @@ class UploadAction extends Action
             $files = UploadedFile::getInstancesByName($this->uploadParam);
 //            p($files);
             if (!$this->multiple) {
-                $res = [$this->uploadOne($files)];
+                $res = [$this->uploadOne($files[0])];
             } else {
                 $res = $this->uploadMore($files);
             }
