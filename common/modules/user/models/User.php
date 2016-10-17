@@ -257,6 +257,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         $this->confirmed_at = time();
         $this->password = $this->password == null ? $this->getModule()->defaultPassword : $this->password;
+        $this->generateAuthKey();
         if (!$this->save()) {
             return false;
         }

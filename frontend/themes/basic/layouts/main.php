@@ -28,7 +28,7 @@ $this->registerMetaTag([
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link type="image/x-icon" href="<?= Yii::getAlias('@web') ?>favicon.ico" rel="shortcut icon">
-    <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';</script>
+    <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';var LOGIN_URL = "<?= Url::to(['/user/security/login']) ?>"</script>
     <?php $this->head() ?>
 </head>
 <body>

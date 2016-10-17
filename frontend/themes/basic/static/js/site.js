@@ -124,7 +124,7 @@ jQuery.extend({
     },
     modalLogin: function() {
         $('#commonModal .modal-title').text('需要登录');
-        $('#commonModal .modal-body').load(SITE_URL + '/user/login');
+        $('#commonModal .modal-body').load(LOGIN_URL);
         $('#commonModal').modal();
     }
 });
