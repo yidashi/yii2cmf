@@ -81,19 +81,19 @@ if (Yii::$app->user->isGuest) {
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',
-                'url' => ['/user/article-list'],
+                'url' => ['/user/default/article-list'],
             ],
             [
                 'label' => Html::icon('thumbs-up') . ' 我赞过的',
-                'url' => ['/user/up'],
+                'url' => ['/user/default/up'],
             ],
             [
                 'label' => Html::icon('star') . ' 我收藏的',
-                'url' => ['/user/favourite'],
+                'url' => ['/user/default/favourite'],
             ],
             [
                 'label' => Html::icon('sign-out') . ' 退出',
-                'url' => ['/user/logout'],
+                'url' => ['/user/security/logout'],
                 'linkOptions' => ['data-method' => 'post'],
             ]
         ]
