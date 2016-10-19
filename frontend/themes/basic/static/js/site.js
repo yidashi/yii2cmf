@@ -1,3 +1,78 @@
+/**
+ * Created by yidashi on 16/7/28.
+ */
+$.extend(yii, {
+    confirm: function (message, ok, cancel) {
+        $.modal.confirm(message, ok, cancel);
+    }
+});
+$.extend({
+    modal: {
+        alert: function (message, type, callback) {
+            if (type == undefined) {
+                type = 0;
+            }
+            layer.alert(message, {icon: type, title:"提示"}, function (index) {
+                layer.close(index)
+                if (callback) {
+                    callback();
+                }
+            });
+        },
+        info: function (message) {
+            this.alert(message, 0);
+        },
+        success: function (message) {
+            this.alert(message, 1);
+        },
+        error: function (message) {
+            this.alert(message, 2);
+        },
+        confirm: function (message, ok, cancel) {
+            layer.confirm(message, {icon: 3, title:'提示'}, function(index){
+                ok();
+                layer.close(index);
+            });
+        },
+        load: function (url, message, data) {
+            var loading = layer.load();
+            $.ajax({
+                url: url,
+                data:data,
+                type: data ? 'post' : 'get',
+                success: function (str) {
+                    layer.close(loading);
+                    index = layer.open({
+                        type: 1,
+                        title:message,
+                        area:['900px'],
+                        content: str,
+                    });
+                }
+            });
+        },
+        login: function() {
+            this.load(LOGIN_URL);
+        },
+        close: function (index) {
+            if (index != undefined) {
+                layer.close(index);
+            } else {
+                layer.closeAll();
+            }
+        }
+    }
+});
+window.alert = $.modal.alert;
+$(function () {
+    $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
+        var url = $(this).data('remote-modal-url') || $(this).attr('href');
+        var title = $(this).data('remote-modal-title') || $(this).text();
+        var data = $(this).data('remote-modal-params') || {};
+        $.modal.load(url, title, data);
+        return false;
+    });
+})
 $(function(){
     $("[data-toggle=tooltip]").tooltip({container: 'body'});
 
@@ -16,16 +91,6 @@ $(function(){
                 a.parent().find('.down em').html(data.down);
                 a.attr('data-original-title');
                 a.attr('data-original-title', '您已' + title).tooltip('show').attr('data-original-title', title);
-            },
-            error: function (XMLHttpRequest, textStatus) {
-                if(XMLHttpRequest.status == 302){
-                    $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
-                }
-                if(XMLHttpRequest.status == 403){
-                    $.modalLogin();
-                }
-                this.abort();
-
             }
         });
         return false;
@@ -50,15 +115,6 @@ $(function(){
                     a.attr('data-original-title', '您已取消收藏').tooltip('show').attr('data-original-title', '收藏');
                 }
                 em.html(data.count);
-            },
-            error: function (XMLHttpRequest, textStatus) {
-                if(XMLHttpRequest.status == 302){
-                    $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
-                }
-                if(XMLHttpRequest.status == 403){
-                    $.modalLogin();
-                }
-                this.abort();
             }
         });
         return false;
@@ -86,14 +142,6 @@ $(function(){
             method:'post',
             success: function(html){
                 button.html("<i class=\"fa fa-calendar-check-o\"></i> 今日已签到<br />已连续" + html.days + "天").removeClass('btn-registration').addClass('disabled');
-            },
-            error: function (XMLHttpRequest, textStatus) {
-                if(XMLHttpRequest.status == 302){
-                    $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
-                }
-                if(XMLHttpRequest.status == 403){
-                    $.modalLogin();
-                }
             }
         });
         return false;
@@ -117,25 +165,13 @@ $(function(){
     });
 });
 $('.view-content a').attr('target', '_blank');
-jQuery.extend({
-    modalLoad: function(url, data, callback) {
-        $('#commonModal .modal-body').load(url, data, callback);
-        $('#commonModal').modal();
-    },
-    modalLogin: function() {
-        $('#commonModal .modal-title').text('需要登录');
-        $('#commonModal .modal-body').load(LOGIN_URL);
-        $('#commonModal').modal();
-    }
-});
-$(".modal").on("hidden.bs.modal", function() {
-    $(this).removeData("bs.modal");
-});
+
+
 $(document).ajaxError(function(event,XMLHttpRequest,options,exc){
     if(XMLHttpRequest.status == 302){
         $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
     } else if(XMLHttpRequest.status == 403){
-        $.modalLogin();
+        $.modal.login();
     } else {
         alert(XMLHttpRequest.responseJSON.message);
     }
