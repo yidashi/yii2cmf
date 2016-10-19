@@ -10,6 +10,7 @@ namespace common\helpers;
 
 
 use common\modules\user\models\User;
+use yii\helpers\Html;
 
 class Comment
 {

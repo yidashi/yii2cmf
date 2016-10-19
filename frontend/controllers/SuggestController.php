@@ -6,11 +6,6 @@
  */
 namespace frontend\controllers;
 
-use common\models\Comment;
-use common\models\Suggest;
-use yii\base\DynamicModel;
-use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 
 class SuggestController extends Controller

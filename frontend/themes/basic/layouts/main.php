@@ -45,12 +45,6 @@ $this->registerMetaTag([
     </div>
 </div>
 <?= $this->render('_footer') ?>
-<?php \yii\bootstrap\Modal::begin([
-    'id' => 'commonModal',
-    'header' => '<h4>提示</h4>',
-    'footer' => \yii\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
-])?>
-<?php \yii\bootstrap\Modal::end()?>
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
 <?= Yii::$app->config->get('FOOTER')?>

@@ -1,4 +1,6 @@
 <?php
+Yii::$classMap['yii\helpers\Html'] = '@common/helpers/Html.php';
+
 Yii::setAlias('root', dirname(dirname(__DIR__)));
 Yii::setAlias('common', dirname(__DIR__));
 Yii::setAlias('frontend', dirname(dirname(__DIR__)) . '/frontend');
@@ -12,13 +14,11 @@ Yii::setAlias('yii2tech', '@backend/yii2tech');
 
 
 
-
-
 Yii::setAlias('storagePath', '@root/web/storage');
 Yii::setAlias('storageUrl', env('STORAGE_URL', env('FRONTEND_URL/storage')));
+
 
 Yii::$container->set('yidashi\markdown\Markdown', ['useUploadImage' => true]);
 Yii::$container->set('yii\widgets\LinkPager', ['firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
 Yii::$container->set('common\widgets\EditorWidget', ['type' => env('EDITOR_TYPE', 'redactor')]);
 
-Yii::$classMap['yii\helpers\Html'] = '@common/helpers/Html.php';

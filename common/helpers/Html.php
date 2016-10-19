@@ -8,8 +8,6 @@
 
 namespace yii\helpers;
 
-use yii\helpers\BaseHtml;
-
 class Html extends BaseHtml
 {
     public static function icon($name)

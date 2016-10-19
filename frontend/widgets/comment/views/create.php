@@ -9,13 +9,14 @@
 /* @var $model common\models\Article */
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 ?>
 <div class="article-create">
 
     <h4><?= $createTitle ?></h4>
 
-    <?php $form = \yii\widgets\ActiveForm::begin(['action' => Url::to(['/comment/create'])]); ?>
+    <?php $form = ActiveForm::begin(['action' => Url::to(['/comment/create'])]); ?>
     <?= $form->field($model, 'content')->label(false)->widget('\yidashi\markdown\Markdown', ['options' => ['style' => 'height:200px;']]); ?>
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
@@ -26,9 +27,9 @@ use yii\helpers\Url;
             <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
         <?php endif; ?>
     </div>
-    <?php \yii\widgets\ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
     <!--回复-->
-    <?php $form = \yii\widgets\ActiveForm::begin(['action' => Url::to(['/comment/create']), 'options' => ['class' => 'reply-form hidden']]); ?>
+    <?php $form = ActiveForm::begin(['action' => Url::to(['/comment/create']), 'options' => ['class' => 'reply-form hidden']]); ?>
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
     <?= Html::hiddenInput(Html::getInputName($model, 'parent_id'), 0, ['class' => 'parent_id']) ?>
@@ -40,5 +41,5 @@ use yii\helpers\Url;
             <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
         <?php endif; ?>
     </div>
-    <?php \yii\widgets\ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 </div>
