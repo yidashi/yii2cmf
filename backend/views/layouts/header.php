@@ -1,5 +1,5 @@
 <?php
-use common\helpers\Html;
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

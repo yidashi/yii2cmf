@@ -20,3 +20,5 @@ Yii::setAlias('storageUrl', env('STORAGE_URL', env('FRONTEND_URL/storage')));
 Yii::$container->set('yidashi\markdown\Markdown', ['useUploadImage' => true]);
 Yii::$container->set('yii\widgets\LinkPager', ['firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
 Yii::$container->set('common\widgets\EditorWidget', ['type' => env('EDITOR_TYPE', 'redactor')]);
+
+Yii::$classMap['yii\helpers\Html'] = '@common/helpers/Html.php';

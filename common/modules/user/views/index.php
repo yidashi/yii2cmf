@@ -1,6 +1,6 @@
 <?php
 
-use common\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 /**
  * Created by PhpStorm.

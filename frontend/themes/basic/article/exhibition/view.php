@@ -5,7 +5,7 @@
 /* @var $model common\models\Article */
 /* @var $commentModels common\models\Comment */
 /* @var $pages yii\data\Pagination */
-use common\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = $model->title;

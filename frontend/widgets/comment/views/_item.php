@@ -7,7 +7,7 @@
  */
 use yii\helpers\Markdown;
 use yii\helpers\Url;
-use common\helpers\Html;
+use yii\helpers\Html;
 
 ?>
 <div class="media-left">

@@ -6,9 +6,11 @@
  * Time: 下午6:28
  */
 
-namespace common\helpers;
+namespace yii\helpers;
 
-class Html extends \yii\helpers\Html
+use yii\helpers\BaseHtml;
+
+class Html extends BaseHtml
 {
     public static function icon($name)
     {

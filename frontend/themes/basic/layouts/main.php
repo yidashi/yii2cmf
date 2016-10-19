@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use common\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use frontend\themes\basic\assets\AppAsset;
@@ -48,7 +48,7 @@ $this->registerMetaTag([
 <?php \yii\bootstrap\Modal::begin([
     'id' => 'commonModal',
     'header' => '<h4>提示</h4>',
-    'footer' => \common\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
+    'footer' => \yii\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
 ])?>
 <?php \yii\bootstrap\Modal::end()?>
 <!--回到顶部-->

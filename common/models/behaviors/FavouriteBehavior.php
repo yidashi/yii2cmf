@@ -9,7 +9,7 @@
 namespace common\models\behaviors;
 
 
-use common\helpers\Html;
+use yii\helpers\Html;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use Yii;

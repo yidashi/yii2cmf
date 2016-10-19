@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-9">
             <div class="row">
-                <a href="<?= \yii\helpers\Url::to(['index']) ?>" class="btn btn-success btn-sm pull-right"><?= \common\helpers\Html::icon('arrow-left') ?> 返回列表</a>
+                <a href="<?= \yii\helpers\Url::to(['index']) ?>" class="btn btn-success btn-sm pull-right"><?= \yii\helpers\Html::icon('arrow-left') ?> 返回列表</a>
             </div>
             <?php $form = \yii\widgets\ActiveForm::begin() ?>
             <?= $form->field($model, 'toUsername') ?>

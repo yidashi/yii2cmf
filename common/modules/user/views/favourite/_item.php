@@ -1,5 +1,5 @@
 <a href="<?=\yii\helpers\Url::to(['/article/view', 'id' => $model->article->id])?>"><?=$model->article->title?></a>
-<?= \common\helpers\Html::a('取消', ['/favourite'], [
+<?= \yii\helpers\Html::a('取消', ['/favourite'], [
     'data' => [
         'method' => 'post',
         'ajax' => 1,

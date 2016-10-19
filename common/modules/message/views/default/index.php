@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-md-9">
             <div class="row">
-            <a href="<?= \yii\helpers\Url::to(['create']) ?>" class="btn btn-success btn-sm pull-right"><?= \common\helpers\Html::icon('plus') ?> 发新私信</a>
+            <a href="<?= \yii\helpers\Url::to(['create']) ?>" class="btn btn-success btn-sm pull-right"><?= \yii\helpers\Html::icon('plus') ?> 发新私信</a>
             </div>
             <?= \yii\widgets\ListView::widget([
                 'dataProvider' => $dataProvider,

@@ -36,7 +36,7 @@ use yii\widgets\Breadcrumbs;
 <?php \yii\bootstrap\Modal::begin([
     'id' => 'alert-info',
     'header' => '<h3>提示</h3>',
-    'footer' => \common\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
+    'footer' => \yii\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
 ])?>
 <?php \yii\bootstrap\Modal::end()?>
 <footer class="main-footer">

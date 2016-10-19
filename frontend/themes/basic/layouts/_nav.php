@@ -8,7 +8,7 @@
 /* @var $this \yii\web\View */
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use common\helpers\Html;
+use yii\helpers\Html;
 use common\models\Nav as NavModel;
 
 ?>

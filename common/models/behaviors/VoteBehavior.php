@@ -9,7 +9,7 @@
 namespace common\models\behaviors;
 
 
-use common\helpers\Html;
+use yii\helpers\Html;
 use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;

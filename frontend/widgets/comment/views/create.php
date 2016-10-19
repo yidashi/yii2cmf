@@ -7,7 +7,7 @@
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-use common\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
