@@ -2,23 +2,25 @@
  * Created by yidashi on 16/7/28.
  */
 $(document).ajaxError(function(event,xhr,options,exc){
-    if (xhr.statusText != 'abort') {
-        notify.error(xhr.responseText);
-    }
+    $.modal.error('操作失败');
 });
 $.extend(yii, {
-    clickableSelector: 'a:not([data-ajax]), button:not([data-ajax]), input[type="submit"]:not([data-ajax]), input[type="button"]:not([data-ajax]), input[type="reset"]:not([data-ajax]), input[type="image"]:not([data-ajax])',
     confirm: function (message, ok, cancel) {
         $.modal.confirm(message, ok, cancel);
     }
 });
 $.extend({
     modal: {
-        alert: function (message, type) {
+        alert: function (message, type, callback) {
             if (type == undefined) {
                 type = 0;
             }
-            layer.alert(message, {icon: type, title:"提示"});
+            layer.alert(message, {icon: type, title:"提示"}, function (index) {
+                layer.close(index)
+                if (callback) {
+                    callback();
+                }
+            });
         },
         info: function (message) {
             this.alert(message, 0);
@@ -39,6 +41,8 @@ $.extend({
             var loading = layer.load();
             $.ajax({
                 url: url,
+                data:data,
+                type: data ? 'post' : 'get',
                 success: function (str) {
                     layer.close(loading);
                     index = layer.open({

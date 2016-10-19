@@ -51,13 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-ajax' => 1,
                                     'data-method' => 'post',
                                     'data-params' => ['id' => $model->id],
+                                    'data-refresh' => '1'
                                 ]);
                             },
                             'delete' => function($url, $model) {
                                 return Html::a('清除',['hard-delete'], [
+                                    'data-ajax' => 1,
+                                    'data-confirm' => '确定要彻底删除吗？不可恢复！',
                                     'data-params' => ['id' => $model->id],
                                     'data-method' => 'post',
-                                    'data-ajax' => 1,
+                                    'data-refresh' => '1'
                                 ]);
                             }
                         ]
