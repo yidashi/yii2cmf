@@ -55,7 +55,7 @@ return [
             'basePath' => '@storagePath/upload',
             'baseUrl' => '@storageUrl/upload'
         ],
-        'queue' => [//队列组件化,方便替换
+        'queue' => [
             'class' => \common\components\Queue::className(),
         ],
         'log' => [
