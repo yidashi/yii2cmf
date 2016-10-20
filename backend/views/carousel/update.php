@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
                         'dataProvider' => $carouselItemsProvider,
                         'columns' => [
                             [
-                                'class' => 'yii2tech\admin\grid\PositionColumn',
+                                'class' => 'backend\widgets\grid\PositionColumn',
                                 'attribute' => 'order',
                                 'route' => '/carousel-item/position'
                             ],
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
                             ],
 
                             [
-                                'class' => 'backend\widgets\grid\ActionColumn',
+                                'class' => 'yii\grid\ActionColumn',
                                 'controller' => '/carousel-item',
                                 'template' => '{update} {delete}'
                             ],

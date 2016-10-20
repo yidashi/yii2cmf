@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'article:text:文章数',
                 'sort',
                 [
-                    'class' => 'backend\widgets\grid\ActionColumn',
+                    'class' => 'yii\grid\ActionColumn',
                     'template' => '{create} {update} {delete}'
                 ],
             ],

@@ -5,7 +5,7 @@
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
-namespace yii2tech\admin\grid;
+namespace backend\widgets\grid;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -83,8 +83,8 @@ class PositionColumn extends DataColumn
                         return true;
                     },
                     'options' => [
-                        'title' => Yii::t('yii2tech-admin', 'Move top'),
-                        'aria-label' => Yii::t('yii2tech-admin', 'Move top'),
+                        'title' => 'Move top',
+                        'aria-label' => 'Move top',
                         'data-method' => 'post'
                     ],
                 ],
@@ -98,8 +98,8 @@ class PositionColumn extends DataColumn
                         return true;
                     },
                     'options' => [
-                        'title' => Yii::t('yii2tech-admin', 'Move bottom'),
-                        'aria-label' => Yii::t('yii2tech-admin', 'Move bottom'),
+                        'title' => 'Move bottom',
+                        'aria-label' => 'Move bottom',
                         'data-method' => 'post'
                     ],
                 ],
@@ -113,8 +113,8 @@ class PositionColumn extends DataColumn
                         return true;
                     },
                     'options' => [
-                        'title' => Yii::t('yii2tech-admin', 'Move up'),
-                        'aria-label' => Yii::t('yii2tech-admin', 'Move up'),
+                        'title' => 'Move up',
+                        'aria-label' => 'Move up',
                         'data-method' => 'post'
                     ],
                 ],
@@ -128,8 +128,8 @@ class PositionColumn extends DataColumn
                         return true;
                     },
                     'options' => [
-                        'title' => Yii::t('yii2tech-admin', 'Move down'),
-                        'aria-label' => Yii::t('yii2tech-admin', 'Move down'),
+                        'title' => 'Move down',
+                        'aria-label' => 'Move down',
                         'data-method' => 'post'
                     ],
                 ],

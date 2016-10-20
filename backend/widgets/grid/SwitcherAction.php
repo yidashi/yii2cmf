@@ -2,7 +2,7 @@
 namespace backend\widgets\grid;
 
 use Yii;
-use yii2tech\admin\actions\Action;
+use backend\actions\Action;
 
 class SwitcherAction extends Action
 {

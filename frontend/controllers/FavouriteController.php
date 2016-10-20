@@ -33,10 +33,13 @@ class FavouriteController extends \yii\web\Controller
             throw new InvalidParamException('参数不合法');
         }
         $article = Article::find()->where(['id' => $articleId])->normal()->one();
+        $favourite = Favourite::find()->where(['user_id' => \Yii::$app->user->id, 'article_id' => $articleId])->one();
         if (empty($article)) {
+            if (!empty($favourite)) {
+                $favourite->delete();
+            }
             throw new NotFoundHttpException('文章不存在');
         }
-        $favourite = Favourite::find()->where(['user_id' => \Yii::$app->user->id, 'article_id' => $articleId])->one();
         if (empty($favourite)) {
             $favourite = new Favourite();
             $favourite->user_id = \Yii::$app->user->id;

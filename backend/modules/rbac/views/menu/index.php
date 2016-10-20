@@ -38,11 +38,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw'
                     ],
                     [
-                        'class' => 'yii2tech\admin\grid\PositionColumn',
+                        'class' => 'backend\widgets\grid\PositionColumn',
                         'attribute' => 'order'
                     ],
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{create} {view} {update} {delete}',
                     ],
                 ],

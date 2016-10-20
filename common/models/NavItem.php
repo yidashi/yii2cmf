@@ -3,7 +3,7 @@
 namespace common\models;
 
 use Yii;
-use yii2tech\ar\position\PositionBehavior;
+use backend\behaviors\PositionBehavior;
 
 /**
  * This is the model class for table "{{%nav_item}}".

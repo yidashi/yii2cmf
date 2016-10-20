@@ -6,7 +6,7 @@ use common\behaviors\CacheInvalidateBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii2tech\ar\position\PositionBehavior;
+use backend\behaviors\PositionBehavior;
 
 /**
  * This is the model class for table "carousel_item".

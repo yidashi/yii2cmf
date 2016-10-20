@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'created_at:datetime',
 
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{view}'
                     ],
                 ],

@@ -1,3 +1,11 @@
+<?php
+/**
+ * @var $this yii\web\View
+ */
+?>
+<style>
+    .media-content img{width:80px;height:80px;margin-right:10px;}
+</style>
 <div id="comments">
     <h4>共 <span class="text-danger"><?= $comment ?></span> 条<?= $listTitle ?></h4>
     <div class="col-4">
@@ -22,4 +30,14 @@
 
     <?= $this->render('create', ['model' => $commentModel, 'createTitle' => $createTitle]); ?>
 </div>
+<?php $this->beginBlock('js') ?>
+<script>
+    layer.ready(function () {
+        layer.photos({
+            photos:'.media-content',
+            shift:5
+        });
+    })
+</script>
+<?php $this->endBlock() ?>
 <?php $this->trigger('afterComment') ?>

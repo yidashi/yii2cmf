@@ -5,7 +5,7 @@ namespace rbac\models;
 use Yii;
 use rbac\components\Configs;
 use yii\helpers\Html;
-use yii2tech\ar\position\PositionBehavior;
+use backend\behaviors\PositionBehavior;
 
 /**
  * This is the model class for table "menu".

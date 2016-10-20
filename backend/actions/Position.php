@@ -5,7 +5,7 @@
  * @license http://www.quartsoft.com/license/
  */
 
-namespace yii2tech\admin\actions;
+namespace backend\actions;
 
 use Yii;
 use yii\web\BadRequestHttpException;

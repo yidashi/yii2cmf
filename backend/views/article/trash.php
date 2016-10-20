@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'cover',
 
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{update} {delete}',
                         'buttons' => [
                             'update' => function($url, $model) {

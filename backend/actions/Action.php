@@ -5,7 +5,7 @@
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
-namespace yii2tech\admin\actions;
+namespace backend\actions;
 
 use Yii;
 use yii\base\InvalidConfigException;

@@ -33,14 +33,14 @@ class SwitcherColumn extends  DataColumn
 		        data.value = checked;
 		        $.post( url, data, function(response){
 		            if(response.status == false){
-		                notify.error(response.msg);
+		                $.modal.error(response.msg);
 		                return;
 		            }
 
 		            if(reload){
 		                location.reload();
 		            }else{
-		            	notify.success(response.msg);
+		            	$.modal.success(response.msg);
 		            	switchery.enable();
 		            }
 		        });

@@ -231,17 +231,4 @@ class AdminController extends Controller
             'user' => $user
         ]);
     }
-
-    public function actionAlbum()
-    {
-        $model = Album::find()->where(['owner_id' => 1])->innerJoinWith('attachments')->one();
-//        p($model->getAttachmentUrls());
-        if($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('album');
-        }
-
-        return $this->render('_album', [
-            'model' => $model
-        ]);
-    }
 }

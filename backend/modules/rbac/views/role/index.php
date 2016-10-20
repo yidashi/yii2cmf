@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'description',
                     'label' => Yii::t('rbac', 'Description'),
                 ],
-                ['class' => 'backend\widgets\grid\ActionColumn'],
+                ['class' => 'yii\grid\ActionColumn'],
             ],
         ]);
         Pjax::end();

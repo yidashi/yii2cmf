@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'open:boolean:是否启用',
 
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{open} {close} {install} {uninstall} {config}',
                         'buttons' => [
                             'open' => function($url, $model, $key) {

@@ -45,7 +45,7 @@ class Assignment extends Model
     public function attributeLabels()
     {
         return [
-            'items' => \Yii::t('app', 'Items')
+            'items' => '角色'
         ];
     }
 

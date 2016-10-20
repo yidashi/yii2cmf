@@ -33,12 +33,12 @@ $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
                     'title',
                     'url',
                     [
-                        'class' => 'yii2tech\admin\grid\PositionColumn',
+                        'class' => 'backend\widgets\grid\PositionColumn',
                         'attribute' => 'order',
                         'route' => '/nav-item/position'
                     ],
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'controller' => '/nav-item',
                         'template' => '{update} {delete}'
                     ],

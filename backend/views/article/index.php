@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'status'
                     ],
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{update} {delete}'
                     ],
                 ],

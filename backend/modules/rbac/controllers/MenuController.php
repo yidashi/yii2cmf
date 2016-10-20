@@ -44,7 +44,7 @@ class MenuController extends Controller
                 'findModel' => [$this, 'findModel']
             ],
             'position' => [
-                'class' => 'yii2tech\\admin\\actions\\Position',
+                'class' => 'backend\\actions\\Position',
                 'returnUrl' => Url::current()
             ]
         ];

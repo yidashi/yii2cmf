@@ -7,6 +7,7 @@
             'id' => $model->article->id
         ],
         'confirm' => '确定要取消收藏吗?',
+        'refresh' => '1'
     ],
     'class' => 'text-danger pull-right'
 ])?>

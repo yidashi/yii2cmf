@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{view} {delete} {ban}',
                         'buttons' => [
                             'ban' => function($url, $model, $key) {

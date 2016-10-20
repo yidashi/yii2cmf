@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => $usernameField,
                     ],
                     [
-                        'class' => 'backend\widgets\grid\ActionColumn',
+                        'class' => 'yii\grid\ActionColumn',
                         'template' => '{view} {update}',
                         'buttons' => [
                             'update' => function ($url, $model) {

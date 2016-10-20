@@ -14,27 +14,66 @@ use yii\web\NotFoundHttpException;
 class AreaController extends Controller
 {
 
-    public function actions()
-    {
-        return [
-            'create' => [
-                'class' => 'yii2tech\admin\actions\Create',
-            ],
-            'update' => [
-                'class' => 'yii2tech\admin\actions\Update',
-            ],
-            'delete' => [
-                'class' => 'yii2tech\admin\actions\Delete',
-            ]
-        ];
-    }
-
     public function actionIndex()
     {
         return $this->render("index", [
             "blocks" => Block::find()->where(["used" => BooleanEnum::FLASE])->all(),
             "areas" => Area::find()->all()
         ]);
+    }
+
+    /**
+     * Creates a new Area model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     *
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Area();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Area model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['index']);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing Area model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     public function actionUpdateBlocks()
@@ -132,8 +171,4 @@ class AreaController extends Controller
         }
     }
 
-    public function newModel()
-    {
-        return new Area();
-    }
 }

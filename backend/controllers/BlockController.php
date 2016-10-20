@@ -8,23 +8,27 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
+use yii\data\ActiveDataProvider;
 
 class BlockController extends Controller
 {
-    public function actions()
+
+    /**
+     * Lists all Block models.
+     *
+     * @return mixed
+     */
+    public function actionIndex()
     {
-        return [
-            'index' => [
-                'class' => 'yii2tech\admin\actions\Index',
-                'modelClass' => 'common\models\Block'
-            ],
-            'delete' => [
-                'class' => 'yii2tech\admin\actions\Delete',
-            ]
-        ];
+        $query = Block::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
-
-
     /**
      * Creates a new Area model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -87,6 +91,28 @@ class BlockController extends Controller
 
     }
 
+    /**
+     * Deletes an existing Block model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Area model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     *
+     * @param integer $id
+     * @return Block the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
 
     public function findModel($id)
     {

@@ -5,7 +5,7 @@
  * @license [New BSD License](http://www.opensource.org/licenses/bsd-license.php)
  */
 
-namespace yii2tech\ar\position;
+namespace backend\behaviors;
 
 use yii\base\Behavior;
 use yii\base\ModelEvent;

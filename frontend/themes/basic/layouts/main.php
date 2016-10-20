@@ -48,7 +48,11 @@ $this->registerMetaTag([
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
 <?= Yii::$app->config->get('FOOTER')?>
+
 <?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage() ?>

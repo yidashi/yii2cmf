@@ -10,7 +10,6 @@ Yii::setAlias('console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('tests', dirname(dirname(__DIR__)) . '/tests');
 Yii::setAlias('database', dirname(dirname(__DIR__)) . '/database');
 Yii::setAlias('plugins', dirname(dirname(__DIR__)) . '/plugins');
-Yii::setAlias('yii2tech', '@backend/yii2tech');
 
 
 

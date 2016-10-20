@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'res',
             // 'result',
 
-            ['class' => 'backend\widgets\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
