@@ -57,6 +57,10 @@ class SecurityController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = 'json';
+                return ['message' => '登录成功'];
+            }
             return $this->goBack();
         } else {
             if (Yii::$app->request->isAjax) {

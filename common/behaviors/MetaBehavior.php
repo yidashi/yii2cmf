@@ -29,6 +29,9 @@ class MetaBehavior extends Behavior
 
     public function afterSave()
     {
+        if (\Yii::$app->request->isConsoleRequest ) {
+            return;
+        }
         $model = $this->getMetaModel();
         if ($model->load(Yii::$app->request->post())) {
             $model->save();

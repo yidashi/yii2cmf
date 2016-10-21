@@ -55,6 +55,16 @@ helpers         基本工具函数（自动加载）
 
 后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
+## 定时采集：
+
+`crontab -e` 添加
+
+`* * * * * php /path/to/yii schedule/run  1>> /dev/null 2>&1`
+
+`console/schedule.php` 里添加
+
+`$schedule->exec('craw jianshu')->daily();`
+
 相关前端项目,基于本项目api
 -----------------------
 

@@ -21,11 +21,11 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
     <div class="form-group">
-        <?php if (!Yii::$app->user->isGuest): ?>
-            <?= Html::submitButton('提交', ['class' => 'btn btn-primary']) ?>
-        <?php else: ?>
-            <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
-        <?php endif; ?>
+        <?= Html::submitButton('提交', [
+            'class' => 'btn btn-primary',
+            'data-ajax' => '1',
+            'data-refresh-pjax-container' => 'comment-container'
+        ]) ?>
     </div>
     <?php ActiveForm::end(); ?>
     <!--回复-->
@@ -35,15 +35,11 @@ use yii\widgets\ActiveForm;
     <?= Html::hiddenInput(Html::getInputName($model, 'parent_id'), 0, ['class' => 'parent_id']) ?>
     <?=$form->field($model, 'content')->label(false)->textarea()?>
     <div class="form-group">
-        <?php if (!Yii::$app->user->isGuest): ?>
-            <?= Html::submitButton('回复', [
-                'class' => 'btn btn-sm btn-primary',
-                'data-ajax' => '1',
-                'data-refresh-pjax-container' => 'comment-container'
-            ]) ?>
-        <?php else: ?>
-            <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
-        <?php endif; ?>
+        <?= Html::submitButton('回复', [
+            'class' => 'btn btn-sm btn-primary',
+            'data-ajax' => '1',
+            'data-refresh-pjax-container' => 'comment-container'
+        ]) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

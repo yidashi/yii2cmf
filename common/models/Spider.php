@@ -3,6 +3,11 @@
 namespace common\models;
 
 use Yii;
+use Goutte\Client;
+use Symfony\Component\DomCrawler\Crawler;
+use yii\base\Event;
+use yii\bootstrap\Html;
+use yii\helpers\FileHelper;
 
 /**
  * This is the model class for table "pop_spider".
@@ -61,5 +66,59 @@ class Spider extends \yii\db\ActiveRecord
             'target_category' => '目标分类',
             'target_category_url' => '目标分类地址',
         ];
+    }
+
+    public function craw()
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+        $spider = $this;
+        $client = new Client();
+        $crawler = $client->request('get', $spider->target_category_url);
+        $category = Category::findOne(['title' => $spider->target_category]);
+        if ($category == null) {
+            $category = new Category();
+            $category->slug = $spider->target_category;
+            $category->title = $spider->target_category;
+            $category->save();
+        }
+        $crawler->filter($spider->list_dom)->each(function (Crawler $node) use ($spider, $client, $category) {
+            try {
+                $contentUrl = $node->attr('href');
+                $gather = Gather::findOne(['url_org' => md5($contentUrl)]);
+                if ($gather !== null) {
+                    return;
+                }
+                $contentCrawler = $client->request('get', $contentUrl);
+                $title = $contentCrawler->filter($spider->title_dom)->text();
+                $content = $contentCrawler->filter($spider->content_dom)->html();
+                $content = preg_replace_callback('/<img[\s\S]*?src="([\s\S]*?)"[\s\S]*?>/', function ($matches) {
+                    if (!empty($matches[1])) {
+                        $imgDir = Yii::$app->storage->basePath . '/' . date('Ymd');
+                        if (!is_dir($imgDir)) {
+                            FileHelper::createDirectory($imgDir);
+                        }
+                        $imgPath = $imgDir . '/' . time() . mt_rand(1000, 9999) . '.jpg';
+                        file_put_contents($imgPath, file_get_contents($matches[1]));
+                        return Html::img(Yii::$app->storage->path2url($imgPath));
+                    }
+                }, $content);
+                $article = new Article();
+                $article->title = $title;
+                $article->status = Article::STATUS_ACTIVE;
+                $article->category_id = $category->id;
+                $article->source = $spider->domain;
+                $article->save();
+                $articleData = new ArticleData();
+                $articleData->content = $content;
+                $articleData->markdown = 0;
+                $article->link('data', $articleData);
+                $gather = new Gather();
+                $gather->url_org = md5($contentUrl);
+                $gather->save(false);
+            } catch (\Exception $e) {
+
+            }
+        });
+        $transaction->commit();
     }
 }

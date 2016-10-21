@@ -29,7 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
 
                 <div class="form-group">
-                    <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?php
+                    $loginOptions = [
+                        'class' => 'btn btn-primary', 'name' => 'login-button'
+                    ];
+                    if (Yii::$app->request->isAjax) {
+                        $loginOptions['data-ajax'] = 1;
+                        $loginOptions['data-refresh-pjax-container'] = 'header-container';
+                        $loginOptions['data-callback'] = '$.modal.close()';
+                    }
+                    ?>
+                    <?= Html::submitButton('登录', $loginOptions) ?>
 
                     <?= Html::a('去注册', ['/user/registration/signup'], ['class' => 'btn btn-warning']) ?>
                 </div>

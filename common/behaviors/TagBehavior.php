@@ -60,6 +60,9 @@ class TagBehavior extends Behavior
 
     public function afterSave()
     {
+        if (\Yii::$app->request->isConsoleRequest ) {
+            return;
+        }
         $data = \Yii::$app->request->post($this->owner->formName());
         if(isset($data[static::$formName]) && !empty($data[static::$formName])) {
             if(!$this->owner->isNewRecord) {

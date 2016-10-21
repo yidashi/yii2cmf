@@ -28,8 +28,8 @@
             'tag' => 'ul'
         ]
     ])?>
-    <?php \yii\widgets\Pjax::end() ?>
     <?= $this->render('create', ['model' => $commentModel, 'createTitle' => $createTitle]); ?>
+    <?php \yii\widgets\Pjax::end() ?>
 </div>
 <?php $this->beginBlock('js') ?>
 <script>

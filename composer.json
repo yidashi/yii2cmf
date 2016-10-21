@@ -1,16 +1,16 @@
 {
     "name": "yii2cmf",
     "description": "yii2内容管理框架",
-    "keywords": ["yii2", "cmf"],
+    "keywords": ["yii2", "cmf", "yii2cmf"],
     "homepage": "http://www.51siyuan.cn/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
+        "issues": "https://github.com/yidashi/yii2cmf/issues?state=open",
+        "forum": "http://www.51siyuan.cn/suggest/",
+        "wiki": "http://www.51siyuan.cn/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/yidashi/yii2cmf"
     },
     "minimum-stability": "stable",
     "require": {
@@ -48,8 +48,7 @@
         "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*",
-        "jamband/yii2-schemadump": "*"
+        "yiisoft/yii2-faker": "*"
     },
     "autoload": {
         "files": [

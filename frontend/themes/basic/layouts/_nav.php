@@ -12,7 +12,11 @@ use yii\helpers\Html;
 use common\models\Nav as NavModel;
 
 ?>
-
+<?php \yii\widgets\Pjax::begin([
+    'id' => 'header-container',
+    'linkSelector' => false,
+    'formSelector' => false
+]) ?>
 <?php
 NavBar::begin([
     'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 48, 'height' => 48]) : Yii::$app->config->get('SITE_NAME'),
@@ -116,3 +120,4 @@ echo Nav::widget([
 ]);
 NavBar::end();
 ?>
+<?php \yii\widgets\Pjax::end() ?>

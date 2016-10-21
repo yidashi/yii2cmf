@@ -254,7 +254,7 @@ yii = (function ($) {
                 })
             }
             if (ajax !== undefined) {
-                $(document).on('submit', $form, function (e) {
+                $form.on('submit', function (e) {
                     e.preventDefault();
                 });
                 var loading = $.modal.loading();
@@ -278,9 +278,6 @@ yii = (function ($) {
                                 eval(callback);
                             }
                         });
-                    },
-                    error: function (error) {
-                        alert('操作失败');
                     },
                     complete: function () {
                         $.modal.close(loading);

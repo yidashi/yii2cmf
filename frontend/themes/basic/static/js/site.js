@@ -63,20 +63,14 @@ $(function(){
     });
     //回复
     $(document).on("click", ".reply-btn", function(){
-        $(".reply-form").removeClass("hidden");
-        if($(this).closest('div').attr("class") == "media-action") {
-            $(".reply-form").find("textarea").val("");
+        $('.reply-form').removeClass('hidden');
+        $('.reply-form').appendTo($(this).closest('.media-body'));
+        $('.reply-form').find('.parent_id').val($(this).parents('li').attr('data-key'));
+        if($(this).parents('div.media').length > 0) {
+            $('.reply-form').find('textarea').val('@' + $(this).closest('.media-body').find('[rel=author]').first().html() + ' ');
         } else {
-            $(".reply-form").find("textarea").val("@"+$(this).parents(".media-heading").find("a").html()+" ");
+            $('.reply-form').find('textarea').val('');
         }
-
-        $(".reply-form").find(".parent_id").val($(this).parents("li").data("key"));
-        layer.open({
-            type:1,
-            content:$('.reply-form'),
-            area:'900px',
-            title:'回复'
-        });
         return false;
     });
     // 签到
@@ -116,7 +110,7 @@ $('.view-content a').attr('target', '_blank');
 
 $(document).ajaxError(function(event,XMLHttpRequest,options,exc){
     if(XMLHttpRequest.status == 302){
-        $('#modal').modal({ remote: XMLHttpRequest.getResponseHeader('X-Redirect')});
+        $.modal.load(XMLHttpRequest.getResponseHeader('X-Redirect'));
     } else if(XMLHttpRequest.status == 403){
         $.modal.login();
     } else {
