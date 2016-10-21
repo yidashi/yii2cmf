@@ -4,14 +4,13 @@ namespace common\assets;
 use yii\base\Exception;
 use yii\web\AssetBundle;
 
-
-class LayerAsset extends AssetBundle
+class ModalAsset extends AssetBundle
 {
-    public $sourcePath = '@common/static/layer';
+    public $sourcePath = '@common/static';
     public $js = [
-        'layer.js'
+        'modal.js'
     ];
     public $depends = [
-        'yii\web\JqueryAsset',
+        'common\assets\LayerAsset',
     ];
 }

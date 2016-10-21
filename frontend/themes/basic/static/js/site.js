@@ -6,64 +6,6 @@ $.extend(yii, {
         $.modal.confirm(message, ok, cancel);
     }
 });
-$.extend({
-    modal: {
-        alert: function (message, type, callback) {
-            if (type == undefined) {
-                type = 0;
-            }
-            layer.alert(message, {icon: type, title:"提示"}, function (index) {
-                layer.close(index)
-                if (callback) {
-                    callback();
-                }
-            });
-        },
-        info: function (message) {
-            this.alert(message, 0);
-        },
-        success: function (message) {
-            this.alert(message, 1);
-        },
-        error: function (message) {
-            this.alert(message, 2);
-        },
-        confirm: function (message, ok, cancel) {
-            layer.confirm(message, {icon: 3, title:'提示'}, function(index){
-                ok();
-                layer.close(index);
-            });
-        },
-        load: function (url, message, data) {
-            var loading = layer.load();
-            $.ajax({
-                url: url,
-                data:data,
-                type: data ? 'post' : 'get',
-                success: function (str) {
-                    layer.close(loading);
-                    index = layer.open({
-                        type: 1,
-                        title:message,
-                        area:['900px'],
-                        content: str,
-                    });
-                }
-            });
-        },
-        login: function() {
-            this.load(LOGIN_URL);
-        },
-        close: function (index) {
-            if (index != undefined) {
-                layer.close(index);
-            } else {
-                layer.closeAll();
-            }
-        }
-    }
-});
-window.alert = $.modal.alert;
 $(function () {
     $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
         var url = $(this).data('remote-modal-url') || $(this).attr('href');
@@ -120,16 +62,21 @@ $(function(){
         return false;
     });
     //回复
-    $(".reply-btn").click(function(){
+    $(document).on("click", ".reply-btn", function(){
         $(".reply-form").removeClass("hidden");
-        if($(this).parent().attr("class")=="media-action") {
-            $(".reply-form").appendTo($(this).parent());
+        if($(this).closest('div').attr("class") == "media-action") {
             $(".reply-form").find("textarea").val("");
         } else {
-            $(".reply-form").appendTo($(this).parents("li").find(".media-action"));
             $(".reply-form").find("textarea").val("@"+$(this).parents(".media-heading").find("a").html()+" ");
         }
-        $(".reply-form").find(".parent_id").val($(this).parents("li").attr("data-key"));
+
+        $(".reply-form").find(".parent_id").val($(this).parents("li").data("key"));
+        layer.open({
+            type:1,
+            content:$('.reply-form'),
+            area:'900px',
+            title:'回复'
+        });
         return false;
     });
     // 签到

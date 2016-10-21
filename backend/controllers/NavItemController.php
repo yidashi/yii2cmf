@@ -25,7 +25,7 @@ class NavItemController extends Controller
     {
         return [
             'position' => [
-                'class' => 'yii2tech\admin\actions\Position',
+                'class' => 'backend\actions\Position',
                 'returnUrl' => function($model){
                     return Url::to(['/nav/update', 'id' => $model->nav_id]);
                 }

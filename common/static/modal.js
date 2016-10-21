@@ -1,14 +1,6 @@
 /**
- * Created by yidashi on 16/7/28.
+ * Created by pc on 2016/10/21.
  */
-$(document).ajaxError(function(event,xhr,options,exc){
-    $.modal.error('操作失败');
-});
-$.extend(yii, {
-    confirm: function (message, ok, cancel) {
-        $.modal.confirm(message, ok, cancel);
-    }
-});
 $.extend({
     modal: {
         alert: function (message, type, callback) {
@@ -52,10 +44,13 @@ $.extend({
                         type: 1,
                         title:message,
                         area:['900px'],
-                        content: str,
+                        content: '<div class="container-fluid">' + str + '</div>',
                     });
                 }
             });
+        },
+        login: function() {
+            this.load(LOGIN_URL, '登录');
         },
         close: function (index) {
             if (index != undefined) {
@@ -67,12 +62,3 @@ $.extend({
     }
 });
 window.alert = $.modal.alert;
-$(function () {
-    $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
-        var url = $(this).data('remote-modal-url') || $(this).attr('href');
-        var title = $(this).data('remote-modal-title') || $(this).text();
-        var data = $(this).data('remote-modal-params') || {};
-        $.modal.load(url, title, data);
-        return false;
-    });
-})

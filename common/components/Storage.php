@@ -26,10 +26,10 @@ class Storage extends Component
 
     public function path2url($path)
     {
-        return $this->baseUrl . DIRECTORY_SEPARATOR . pathinfo($path, PATHINFO_BASENAME);
+        return str_replace($this->basePath, $this->baseUrl, $path);
     }
     public function url2path($url)
     {
-        return $this->basePath . DIRECTORY_SEPARATOR . pathinfo($url, PATHINFO_BASENAME);
+        return str_replace($this->baseUrl, $this->basePath, $url);
     }
 }

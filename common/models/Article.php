@@ -25,6 +25,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $status
  * @property int $category_id
  * @property string $cover
+ * @property string $source
  * @property int $view
  * @property string $published_at
  * @property int $is_top
@@ -52,6 +53,7 @@ class Article extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'category_id'], 'required'],
+            [['title'], 'trim'],
             [['status', 'category_id', 'view', 'up', 'down', 'is_top', 'is_hot', 'is_best'], 'integer'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
             ['published_at', 'default', 'value' => function(){

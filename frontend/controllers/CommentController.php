@@ -7,6 +7,7 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
+use yii\base\Exception;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -35,17 +36,15 @@ class CommentController extends Controller
     }
     public function actionCreate()
     {
+        \Yii::$app->response->format = 'json';
         $model = new Comment();
         $model->load(\Yii::$app->request->post());
         $model->user_id = \Yii::$app->user->id;
-        $returnUrl = \Yii::$app->request->getReferrer();
         if ($model->save()) {
-            \Yii::$app->session->setFlash('success', '评论成功！');
+            return ['message' => '评论成功'];
         } else {
-            \Yii::$app->session->setFlash('error', '评论失败！');
+            throw new Exception('评论失败');
         }
-
-        return $this->redirect($returnUrl);
     }
     // 图文弹幕
     public function actionDm()

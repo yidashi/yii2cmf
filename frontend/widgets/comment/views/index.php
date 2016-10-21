@@ -14,6 +14,7 @@
     </div>
 </div>
 <div class="col-4">
+    <?php \yii\widgets\Pjax::begin(['id' => 'comment-container', 'timeout' => 2000]) ?>
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
@@ -27,7 +28,7 @@
             'tag' => 'ul'
         ]
     ])?>
-
+    <?php \yii\widgets\Pjax::end() ?>
     <?= $this->render('create', ['model' => $commentModel, 'createTitle' => $createTitle]); ?>
 </div>
 <?php $this->beginBlock('js') ?>

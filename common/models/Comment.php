@@ -13,9 +13,10 @@ use Yii;
  * This is the model class for table "{{%comment}}".
  *
  * @property int $id
- * @property int $article_id
  * @property int $user_id
  * @property string $content
+ * @property string $type
+ * @property int $type_id
  */
 class Comment extends \yii\db\ActiveRecord
 {

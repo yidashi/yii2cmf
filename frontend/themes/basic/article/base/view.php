@@ -95,7 +95,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <div class="panel-body">
             <ul class="post-list">
                 <?php foreach ($hots as $item):?>
-                    <li><?=Html::a($item->title, ['/article/view', 'id' => $item->id])?></li>
+                    <li><?= Html::a($item->title, ['/article/view', 'id' => $item->id])?></li>
                 <?php endforeach;?>
             </ul>
         </div>

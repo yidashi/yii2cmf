@@ -106,12 +106,9 @@ class m130524_201442_init extends Migration
 // gather
         $this->createTable('{{%gather}}', [
             'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING . "(255) NOT NULL",
-            'category' => Schema::TYPE_STRING . "(255) NOT NULL",
-            'url' => Schema::TYPE_STRING . "(255) NOT NULL",
             'url_org' => Schema::TYPE_STRING . "(255) NOT NULL",
-            'res' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '1'",
-            'result' => Schema::TYPE_STRING . "(255) NOT NULL",
+            'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+            'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
 
 // menu

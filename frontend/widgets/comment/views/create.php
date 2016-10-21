@@ -36,7 +36,11 @@ use yii\widgets\ActiveForm;
     <?=$form->field($model, 'content')->label(false)->textarea()?>
     <div class="form-group">
         <?php if (!Yii::$app->user->isGuest): ?>
-            <button type="submit" class="btn btn-sm btn-primary">回复</button>
+            <?= Html::submitButton('回复', [
+                'class' => 'btn btn-sm btn-primary',
+                'data-ajax' => '1',
+                'data-refresh-pjax-container' => 'comment-container'
+            ]) ?>
         <?php else: ?>
             <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary'])?>
         <?php endif; ?>

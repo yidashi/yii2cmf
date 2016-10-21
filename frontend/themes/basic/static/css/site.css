@@ -390,7 +390,7 @@ table.emot td {cursor: pointer; border: #eee solid 1px; padding: 2px;}
 /* 签到结束 */
 
 /* 第三方登录开始 */
-.auth-clients { padding: 0; text-align: center; }
+.auth-clients { padding: 0 0 1em; text-align: center; margin:0!important;}
 .auth-clients .auth-client { margin-right: 20px; }
 .auth-clients .auth-client .auth-link { width: auto; }
 /*第三方登录 */

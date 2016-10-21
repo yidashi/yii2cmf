@@ -11,6 +11,7 @@ use yii\helpers\StringHelper;
  *
  * @property int $id
  * @property string $content
+ * @property integer $markdown
  */
 class ArticleData extends \yii\db\ActiveRecord
 {

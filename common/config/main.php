@@ -21,6 +21,9 @@ return [
             'bundles' => [
                 'yii\web\YiiAsset' => [
                     'sourcePath' => '@common/static',
+                    'depends' => [
+                        'common\assets\ModalAsset'
+                    ]
                 ],
             ],
         ],

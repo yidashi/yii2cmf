@@ -37,7 +37,7 @@ class CarouselItemController extends Controller
     {
         return [
             'position' => [
-                'class' => 'yii2tech\admin\actions\Position',
+                'class' => 'backend\actions\Position',
                 'returnUrl' => function($model){
                     return Url::to(['/carousel/update', 'id' => $model->carousel_id]);
                 }

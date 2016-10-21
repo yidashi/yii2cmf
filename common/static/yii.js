@@ -254,33 +254,37 @@ yii = (function ($) {
                 })
             }
             if (ajax !== undefined) {
-                $(document).off('submit', $form).on('submit', $form, function (e) {
+                $(document).on('submit', $form, function (e) {
                     e.preventDefault();
-                    $.ajax({
-                        url: $form.attr('action'),
-                        method: $form.attr('method'),
-                        data: $form.serialize(),
-                        dataType: 'json',
-                        success: function (res) {
-                            if (!res.message) {
-                                res.message = '操作成功';
-                            }
-                            $.modal.alert(res.message, 0, function () {
-                                if (refreshPjaxContainer) {
-                                    $.pjax.reload({container:'#' + refreshPjaxContainer});
-                                }
-                                if (refresh) {
-                                    location.reload();
-                                }
-                                if (callback) {
-                                    eval(callback);
-                                }
-                            });
-                        },
-                        error: function (error) {
-                            alert('操作失败');
+                });
+                var loading = $.modal.loading();
+                $.ajax({
+                    url: $form.attr('action'),
+                    method: $form.attr('method'),
+                    data: $form.serialize(),
+                    dataType: 'json',
+                    success: function (res) {
+                        if (!res.message) {
+                            res.message = '操作成功';
                         }
-                    });
+                        $.modal.alert(res.message, 0, function () {
+                            if (refreshPjaxContainer) {
+                                $.pjax.reload({container:'#' + refreshPjaxContainer});
+                            }
+                            if (refresh) {
+                                location.reload();
+                            }
+                            if (callback) {
+                                eval(callback);
+                            }
+                        });
+                    },
+                    error: function (error) {
+                        alert('操作失败');
+                    },
+                    complete: function () {
+                        $.modal.close(loading);
+                    }
                 });
             }
             $form.trigger('submit');
@@ -380,9 +384,10 @@ yii = (function ($) {
             var $this = $(this),
                 method = $this.data('method'),
                 message = $this.data('confirm'),
+                ajax = !!$this.data('ajax'),
                 form = $this.data('form');
 
-            if (method === undefined && message === undefined && form === undefined) {
+            if (method === undefined && message === undefined && form === undefined && !ajax) {
                 return true;
             }
 

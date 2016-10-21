@@ -14,6 +14,7 @@ use common\helpers\Tree;
  *
  * @property int $id
  * @property string $title
+ * @property string $slug
  * @property int $created_at
  * @property int $updated_at
  */

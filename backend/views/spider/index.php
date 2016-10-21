@@ -30,7 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     // 'target_category',
                     // 'target_category_url:url',
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view} {update} {delete} {craw}',
+                        'buttons' => [
+                            'craw' => function($url, $model, $key) {
+                                return Html::a('采集', ['craw', 'id' => $model->id], ['data-method' => 'post', 'data-ajax' => 1]);
+                            }
+                        ]
+                    ],
                 ],
             ]); ?>
         </div>
