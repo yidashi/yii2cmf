@@ -9,14 +9,12 @@
 namespace common\modules\user\controllers;
 
 
-use common\models\Album;
-use common\modules\user\models\LoginForm;
 use common\modules\user\models\Profile;
 use common\modules\user\traits\AjaxValidationTrait;
 use Yii;
 use common\modules\user\models\User;
+use yii\base\UserException;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -188,6 +186,10 @@ class AdminController extends Controller
     public function actionBlock($id)
     {
         if ($id == \Yii::$app->user->getId()) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = 'json';
+                return ['status' => 0, 'message' => \Yii::t('user', 'You can not block your own account')];
+            }
             \Yii::$app->getSession()->setFlash('danger', \Yii::t('user', 'You can not block your own account'));
         } else {
             $user  = $this->findModel($id);
@@ -196,13 +198,20 @@ class AdminController extends Controller
             }
             if ($user->getIsBlocked()) {
                 $user->unblock();
+                if (Yii::$app->request->isAjax) {
+                    Yii::$app->response->format = 'json';
+                    return ['message' => \Yii::t('user', 'User has been unblocked')];
+                }
                 \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been unblocked'));
             } else {
                 $user->block();
+                if (Yii::$app->request->isAjax) {
+                    Yii::$app->response->format = 'json';
+                    return ['message' => \Yii::t('user', 'User has been blocked')];
+                }
                 \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been blocked'));
             }
         }
-
         return $this->redirect(Url::previous('actions-redirect'));
     }
 

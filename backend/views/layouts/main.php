@@ -5,7 +5,6 @@ use yii\helpers\Html;
 /* @var $content string */
 
 backend\assets\AppAsset::register($this);
-\common\assets\PaceAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>

@@ -29,7 +29,7 @@ use yii\widgets\Breadcrumbs;
     </section>
 
     <section class="content">
-        <?= \common\widgets\AlertPlus::widget()?>
+        <?= \common\widgets\Alert::widget()?>
         <?= $content ?>
     </section>
 </div>

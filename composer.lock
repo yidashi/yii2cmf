@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a302afaeab7e9df7c5d17dc5c7492bd3",
-    "content-hash": "a07aa3086a88cd61e95588642ec9730e",
+    "hash": "8161c0d565764efb48e989d359e0bf34",
+    "content-hash": "d9398281bf287a94bf5d954ef980fd1b",
     "packages": [
         {
             "name": "2amigos/yii2-editable-widget",
@@ -392,52 +392,6 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
-        },
-        {
-            "name": "bower-asset/pace",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/HubSpot/pace.git",
-                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/HubSpot/pace/zipball/c6846cbf6b928e9903b569269fa9fbf32f2554f4",
-                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "pace.js",
-                "bower-asset-ignore": [
-                    ".*",
-                    "Gruntfile.coffee",
-                    "bower_components",
-                    "docs",
-                    "node_modules",
-                    "package.json",
-                    "templates",
-                    "tests"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Automatic page load progress bar",
-            "keywords": [
-                "activity",
-                "ajax",
-                "automatic",
-                "bar",
-                "client-side",
-                "load",
-                "loading",
-                "pageload",
-                "progress",
-                "progress",
-                "spinner"
             ]
         },
         {
@@ -2323,16 +2277,16 @@
         },
         {
             "name": "yiisoft/yii2",
-            "version": "2.0.9",
+            "version": "2.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133"
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2b75151ea60e1fd820046416eee2e89c3dda1133",
-                "reference": "2b75151ea60e1fd820046416eee2e89c3dda1133",
+                "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-framework/5bfcb7a6dfa9771e2248eb8c4448613330f343ff.zip",
+                "reference": "5bfcb7a6dfa9771e2248eb8c4448613330f343ff",
                 "shasum": ""
             },
             "require": {
@@ -2413,7 +2367,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-07-11 13:36:42"
+            "time": "2016-10-20 12:02:50"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2805,6 +2759,52 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "bower-asset/pace",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HubSpot/pace.git",
+                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HubSpot/pace/zipball/c6846cbf6b928e9903b569269fa9fbf32f2554f4",
+                "reference": "c6846cbf6b928e9903b569269fa9fbf32f2554f4",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": "pace.js",
+                "bower-asset-ignore": [
+                    ".*",
+                    "Gruntfile.coffee",
+                    "bower_components",
+                    "docs",
+                    "node_modules",
+                    "package.json",
+                    "templates",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Automatic page load progress bar",
+            "keywords": [
+                "activity",
+                "ajax",
+                "automatic",
+                "bar",
+                "client-side",
+                "load",
+                "loading",
+                "pageload",
+                "progress",
+                "progress",
+                "spinner"
+            ]
+        },
         {
             "name": "bower-asset/typeahead.js",
             "version": "v0.11.1",

@@ -264,10 +264,14 @@ yii = (function ($) {
                     data: $form.serialize(),
                     dataType: 'json',
                     success: function (res) {
+                        if (res.status != undefined && res.status == 0) {
+                            $.modal.error(res.message || '操作失败');
+                            return;
+                        }
                         if (!res.message) {
                             res.message = '操作成功';
                         }
-                        $.modal.alert(res.message, 0, function () {
+                        layer.msg(res.message, {time: 1000, icon:1}, function () {
                             if (refreshPjaxContainer) {
                                 $.pjax.reload({container:'#' + refreshPjaxContainer});
                             }

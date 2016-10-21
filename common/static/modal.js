@@ -29,6 +29,9 @@ $.extend({
                 layer.close(index);
             });
         },
+        tips: function (message) {
+            layer.msg(message);
+        },
         loading:function () {
             return layer.load();
         },

@@ -15,7 +15,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": ">=2.0.8",
+        "yiisoft/yii2": "2.0.9",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
@@ -41,8 +41,7 @@
         "fabpot/goutte": "^3.1",
         "kartik-v/yii2-widget-select2": "*",
         "udokmeci/yii2-beanstalk": "dev-master",
-        "hightman/xunsearch": "*@beta",
-        "bower-asset/pace": "^1.0"
+        "hightman/xunsearch": "*@beta"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

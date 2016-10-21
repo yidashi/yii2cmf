@@ -42,8 +42,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         'buttons' => [
                             'ban' => function($url, $model, $key) {
                                 return Html::a(Html::icon('ban'),
-                                    ['/user/ban'],
-                                    ['title' => '封禁用户', 'data-method' => 'post', 'data-params' => ['id' => $model->user_id]]
+                                    ['/user/admin/block', 'id' => $model->user_id],
+                                    [
+                                        'title' => '封禁用户',
+                                        'data-confirm' => '确定要封禁用户吗?',
+                                        'data-ajax' => '1',
+                                        'data-method' => 'post'
+                                    ]
                                 );
                             }
                         ]

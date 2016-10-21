@@ -9,7 +9,6 @@ use yii\widgets\Breadcrumbs;
 use frontend\themes\basic\assets\AppAsset;
 
 AppAsset::register($this);
-\common\assets\PaceAsset::register($this);
 $this->registerMetaTag([
     'name' => 'keywords',
     'content' => isset($this->params['SEO_SITE_KEYWORDS']) ? $this->params['SEO_SITE_KEYWORDS'] : Yii::$app->config->get('SEO_SITE_KEYWORDS')
@@ -40,7 +39,7 @@ $this->registerMetaTag([
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= \common\widgets\AlertPlus::widget()?>
+        <?= \common\widgets\Alert::widget()?>
         <?= $content ?>
     </div>
 </div>
