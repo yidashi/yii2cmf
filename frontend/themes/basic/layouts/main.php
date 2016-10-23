@@ -33,15 +33,13 @@ $this->registerMetaTag([
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?= $this->render('_nav') ?>
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= \common\widgets\Alert::widget()?>
-        <?= $content ?>
-    </div>
+<?= $this->render('_nav') ?>
+<div class="container">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= \common\widgets\Alert::widget()?>
+    <?= $content ?>
 </div>
 <?= $this->render('_footer') ?>
 <!--回到顶部-->

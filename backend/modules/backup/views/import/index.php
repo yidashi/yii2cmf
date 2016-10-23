@@ -49,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data-method' => 'post',
                                         'data-ajax' => 1,
                                         'data-params' => ['time' => $model['time']],
-                                        'data-confirm' => '删除后不能恢复,确定要删除吗?'
+                                        'data-confirm' => '删除后不能恢复,确定要删除吗?',
+                                        'data-refresh' => '1'
                                     ]
                                 );
                             }
@@ -89,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         window.onbeforeunload = function(){ return null; }
                     }
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                 }
             }
         });

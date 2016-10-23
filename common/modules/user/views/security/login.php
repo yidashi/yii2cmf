@@ -11,8 +11,6 @@ $this->title = Yii::t('common', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
 
     <div class="row">
         <div class="col-lg-5">
@@ -41,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ?>
                     <?= Html::submitButton('登录', $loginOptions) ?>
 
-                    <?= Html::a('去注册', ['/user/registration/signup'], ['class' => 'btn btn-warning']) ?>
+                    &nbsp;&nbsp;还没有帐号? <?= Html::a('马上注册', ['/user/registration/signup']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
             <?php $this->trigger('afterLogin'); ?>

@@ -108,12 +108,13 @@ $(function(){
 $('.view-content a').attr('target', '_blank');
 
 
-$(document).ajaxError(function(event,XMLHttpRequest,options,exc){
-    if(XMLHttpRequest.status == 302){
-        $.modal.load(XMLHttpRequest.getResponseHeader('X-Redirect'));
-    } else if(XMLHttpRequest.status == 403){
+$(document).ajaxError(function(event,xhr,options,exc){
+    if(xhr.status == 302){
+        $.modal.load(xhr.getResponseHeader('X-Redirect'));
+    } else if(xhr.status == 403){
         $.modal.login();
     } else {
-        alert(XMLHttpRequest.responseJSON.message);
+        var message = xhr.responseJSON ? xhr.responseJSON.message : '操作失败';
+        $.modal.error(message);
     }
 });

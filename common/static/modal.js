@@ -18,10 +18,10 @@ $.extend({
             this.alert(message, 0);
         },
         success: function (message) {
-            this.alert(message, 1);
+            this.msg(message, 1);
         },
         error: function (message) {
-            this.alert(message, 2);
+            this.msg(message, 0);
         },
         confirm: function (message, ok, cancel) {
             layer.confirm(message, {icon: 3, title:'提示'}, function(index){
@@ -29,8 +29,8 @@ $.extend({
                 layer.close(index);
             });
         },
-        tips: function (message) {
-            layer.msg(message);
+        msg: function (message, success) {
+            layer.msg(message, {icon: success ? 1 : 2});
         },
         loading:function () {
             return layer.load();
@@ -46,7 +46,7 @@ $.extend({
                     index = layer.open({
                         type: 1,
                         title:message,
-                        area:['900px'],
+                        area:['700px'],
                         content: '<div class="container-fluid">' + str + '</div>',
                     });
                 }

@@ -7,6 +7,7 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
+use common\modules\user\traits\AjaxValidationTrait;
 use yii\base\Exception;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -39,11 +40,10 @@ class CommentController extends Controller
         \Yii::$app->response->format = 'json';
         $model = new Comment();
         $model->load(\Yii::$app->request->post());
-        $model->user_id = \Yii::$app->user->id;
         if ($model->save()) {
             return ['message' => '评论成功'];
         } else {
-            throw new Exception('评论失败');
+            return ['status' => 0, 'message' => '评论失败'];
         }
     }
     // 图文弹幕

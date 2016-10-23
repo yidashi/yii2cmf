@@ -113,14 +113,18 @@ class ArticleController extends Controller
         // 评论框
         $commentModel = new Comment();
         $commentModel->type = 'article';
-
+        // 上下一篇
+        $next = Article::find()->where(['>', 'id', $id])->published()->one();
+        $prev = Article::find()->where(['<', 'id', $id])->published()->orderBy('id desc')->one();
         return $this->render($model->module . '/view', [
             'model' => $model,
             'commentModel' => $commentModel,
             'commentModels' => $commentModels,
             'pages' => $pages,
             'hots' => $hots,
-            'commentDataProvider' => $commentDataProvider
+            'commentDataProvider' => $commentDataProvider,
+            'next' => $next,
+            'prev' => $prev
         ]);
     }
 

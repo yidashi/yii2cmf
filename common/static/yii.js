@@ -254,39 +254,49 @@ yii = (function ($) {
                 })
             }
             if (ajax !== undefined) {
-                $form.on('submit', function (e) {
-                    e.preventDefault();
-                });
-                var loading = $.modal.loading();
-                $.ajax({
-                    url: $form.attr('action'),
-                    method: $form.attr('method'),
-                    data: $form.serialize(),
-                    dataType: 'json',
-                    success: function (res) {
-                        if (res.status != undefined && res.status == 0) {
-                            $.modal.error(res.message || '操作失败');
-                            return;
+                if (activeFormData) {
+                    $form.off('beforeSubmit').on('beforeSubmit', function () {
+                        handlerAjax();
+                        return false;
+                    })
+                } else {
+                    $form.off('submit').on('submit', function (e) {
+                        handlerAjax();
+                        return false;
+                    });
+                }
+                function handlerAjax() {
+                    var loading = $.modal.loading();
+                    $.ajax({
+                        url: $form.attr('action'),
+                        method: $form.attr('method'),
+                        data: $form.serialize(),
+                        dataType: 'json',
+                        success: function (res) {
+                            if (res.status != undefined && res.status == 0) {
+                                $.modal.error(res.message || '操作失败');
+                                return;
+                            }
+                            if (!res.message) {
+                                res.message = '操作成功';
+                            }
+                            layer.msg(res.message, {time: 1000, icon:1}, function () {
+                                if (refreshPjaxContainer) {
+                                    $.pjax.reload({container:'#' + refreshPjaxContainer});
+                                }
+                                if (refresh) {
+                                    location.reload();
+                                }
+                                if (callback) {
+                                    eval(callback);
+                                }
+                            });
+                        },
+                        complete: function () {
+                            $.modal.close(loading);
                         }
-                        if (!res.message) {
-                            res.message = '操作成功';
-                        }
-                        layer.msg(res.message, {time: 1000, icon:1}, function () {
-                            if (refreshPjaxContainer) {
-                                $.pjax.reload({container:'#' + refreshPjaxContainer});
-                            }
-                            if (refresh) {
-                                location.reload();
-                            }
-                            if (callback) {
-                                eval(callback);
-                            }
-                        });
-                    },
-                    complete: function () {
-                        $.modal.close(loading);
-                    }
-                });
+                    });
+                }
             }
             $form.trigger('submit');
             $.when($form.data('yiiSubmitFinalizePromise')).then(

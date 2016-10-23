@@ -19,7 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
     </div>
     <div class="box box-primary">
-        <div class="box-header"><h2 class="box-title">文章列表</h2></div>
+        <div class="box-header with-border">
+            <h2 class="box-title">文章列表</h2>
+            <div class="box-tools"><?= Html::a('置顶', ['top'], ['class' => 'btn btn-box-tool']) ?></div>
+        </div>
         <div class="box-body">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,

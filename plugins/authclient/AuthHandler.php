@@ -56,6 +56,7 @@ class AuthHandler
                         'email' => $email,
                         'password' => $password,
                     ]);
+                    $user->scenario = 'create';
                     $user->generateAuthKey();
                     $user->generatePasswordResetToken();
 

@@ -3,6 +3,8 @@
 /* @var $commentModel common\models\Comment */
 /* @var $hots common\models\Article */
 /* @var $model common\models\Article */
+/* @var $prev common\models\Article */
+/* @var $next common\models\Article */
 /* @var $commentModels common\models\Comment */
 /* @var $pages yii\data\Pagination */
 use yii\helpers\Html;
@@ -48,7 +50,20 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     <!--内容-->
     <div class="view-content"><?= $model->data->processedContent ?></div>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
-
+    <nav>
+        <ul class="pager">
+            <?php if ($prev != null): ?>
+                <li class="previous"><a href="<?= Url::to(['view', 'id' => $prev->id]) ?>">&larr; 上一篇</a></li>
+            <?php else: ?>
+                <li class="previous"><a href="javascript:;">&larr; 已经是第一篇</a></li>
+            <?php endif; ?>
+            <?php if ($next != null): ?>
+                <li class="next"><a href="<?= Url::to(['view', 'id' => $next->id]) ?>">下一篇 &rarr;</a></li>
+            <?php else: ?>
+                <li class="next"><a href="javascript:;">&larr; 已经是最后一篇</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
     <!-- 评论   -->
