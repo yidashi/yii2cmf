@@ -38,20 +38,6 @@ class ArticleController extends Controller
             throw new NotFoundHttpException('not found');
         }
         $model->addView();
-        $model = $model->toArray([], ['data']);
-        $model['data']['content'] = \yii\helpers\Markdown::process($model['data']['content'], 'gfm');
-        $css = Url::to('/', true) . \Yii::getAlias('@web') . '/article.css';
-        $html = <<<CONTENT
-    <div class="view-title">
-        <h1>{$model['title']}</h1>
-    </div>
-    <div class="action">
-        <span class="views">{$model['view']}次浏览</span>
-    </div>
-    <div class="view-content">{$model['data']['content']}</div>
-CONTENT;
-        $model['css'] = $css;
-        $model['html'] = $html;
         return $model;
     }
 }

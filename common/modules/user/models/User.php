@@ -18,6 +18,8 @@ use yii\web\IdentityInterface;
  * @property string $username
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $access_token
+ * @property int $expired_at
  * @property string $email
  * @property string $auth_key
  * @property int $status
@@ -247,6 +249,17 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+        $this->expired_at = 60 * 60 * 24 * 365;
+    }
+
+    public function removeAccessToken()
+    {
+        $this->access_token = null;
+        $this->expired_at = null;
+    }
     public function create()
     {
         if ($this->getIsNewRecord() == false) {
@@ -337,8 +350,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function afterInsertInternal($event)
     {
         $profile = new Profile();
-        $profile->user_id = $event->sender->id;
-        $profile->save();
+        $this->link('profile', $profile);
     }
 
     /**

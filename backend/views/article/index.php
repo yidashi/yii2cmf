@@ -21,7 +21,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-primary">
         <div class="box-header with-border">
             <h2 class="box-title">文章列表</h2>
-            <div class="box-tools"><?= Html::a('置顶', ['top'], ['class' => 'btn btn-box-tool']) ?></div>
         </div>
         <div class="box-body">
             <?= GridView::widget([
@@ -45,6 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'backend\widgets\grid\SwitcherColumn',
                         'attribute' => 'status'
                     ],
+                    'user_id:admin',
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'template' => '{update} {delete}'

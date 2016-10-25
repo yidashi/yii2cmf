@@ -35,7 +35,25 @@ return [
             ],
         ],
         'response' => [
-            'on afterSend' => function($event) {
+            'on beforeSend' => function($event) {
+                $response = $event->sender;
+                if ($response->data !== null) {
+                    if (!$response->isSuccessful) {
+                        $result = $response->data;
+                        $response->data = [
+                            'errcode' => isset($result['status']) ? $result['status'] : $result['code'],
+                            'errmsg' => $result['message'],
+                            'data' => (object) []
+                        ];
+                        $response->statusCode = 200;
+                    } else {
+                        $result = $response->data;
+                        $response->data = array_merge($result, [
+                            'errcode' => 0,
+                            'errmsg' => 'ok',
+                        ]);
+                    }
+                }
             }
         ]
     ],

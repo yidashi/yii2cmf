@@ -25,7 +25,9 @@ class m160726_093217_create_user_table extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'login_at' => Schema::TYPE_INTEGER . "(11) NULL",
             'blocked_at' => $this->integer()->null(),
-            'confirmed_at' => $this->integer()->null()
+            'confirmed_at' => $this->integer()->null(),
+            'access_token' => $this->string(32)->null(),
+            'expired_at' => $this->integer()->null()
         ]);
         // profile
         $this->createTable('{{%profile}}', [

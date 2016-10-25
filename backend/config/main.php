@@ -48,6 +48,7 @@ return [
             'errorAction' => 'site/error',
         ],
         'formatter' => [
+            'class' => 'backend\components\Formatter',
             'booleanFormat' => ['<i class="fa fa-times"></i>', '<i class="fa fa-check"></i>']
         ],
         'i18n' => [

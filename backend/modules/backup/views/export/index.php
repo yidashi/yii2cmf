@@ -80,9 +80,9 @@ $this->params['breadcrumbs'][] = $this->title;
         $optimize.add($repair).click(function(){
             $.post(this.href, $form.serialize(), function(data){
                 if(data.status){
-                    updateAlert(data.info,'alert-success');
+                    $.modal.success(data.info);
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                 }
                 setTimeout(function(){
                     $('#top-alert').find('button').click();
@@ -105,11 +105,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         backup(data.tab);
                         window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
                     } else {
-                        updateAlert(data.info,'alert-error');
+                        $.modal.error(data.info);
                         $export.parent().children().removeClass("disabled");
                         $export.html("立即备份");
                         setTimeout(function(){
-                            $('#top-alert').find('button').click();
                             $(that).removeClass('disabled').prop('disabled',false);
                         },1500);
                     }
@@ -133,11 +132,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     backup(data.tab, tab.id != data.tab.id);
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                     $export.parent().children().removeClass("disabled");
                     $export.html("立即备份");
                     setTimeout(function(){
-                        $('#top-alert').find('button').click();
                         $(that).removeClass('disabled').prop('disabled',false);
                     },1500);
                 }
