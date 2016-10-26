@@ -96,9 +96,9 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
             </div>
         </div>
     </div>
-    <a class="btn btn-success btn-block" href="<?= url(['/user/create-article']) ?>"><i class="fa fa-plus"></i> 发布</a>
+    <a class="btn btn-success btn-block" href="<?= url(['/user/default/create-article']) ?>"><i class="fa fa-plus"></i> 发布</a>
     <?php if (Yii::$app->user->id == $model->user_id) : ?>
-    <a class="btn btn-primary btn-block" href="<?= url(['/user/update-article', 'id' => $model->id]) ?>"><i class="fa fa-pencil"></i> 修改</a>
+    <a class="btn btn-primary btn-block" href="<?= url(['/user/default/update-article', 'id' => $model->id]) ?>"><i class="fa fa-pencil"></i> 修改</a>
     <?php endif; ?>
     <div class="panel panel-default">
         <div class="panel-heading">带到手机上看</div>

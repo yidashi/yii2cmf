@@ -2,6 +2,8 @@
 use yii\widgets\Breadcrumbs;
 
 ?>
+
+
 <div class="content-wrapper">
     <section class="content-header">
         <?php if (isset($this->blocks['content-header'])) { ?>
@@ -29,10 +31,19 @@ use yii\widgets\Breadcrumbs;
     </section>
 
     <section class="content">
+        <?php if (array_key_exists('demo', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))): ?>
+        <?php Yii::$app->session->setFlash('warning', '演示组权限有限,少很多功能,需要看全部功能请下载本源码') ?>
+        <?php endif; ?>
         <?= \common\widgets\Alert::widget()?>
         <?= $content ?>
     </section>
 </div>
+<?php \yii\bootstrap\Modal::begin([
+    'id' => 'alert-info',
+    'header' => '<h3>提示</h3>',
+    'footer' => \yii\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
+])?>
+<?php \yii\bootstrap\Modal::end()?>
 <footer class="main-footer">
     <?= Yii::powered()?>
 </footer>

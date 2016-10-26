@@ -92,7 +92,6 @@ return [
                     'viewPath' => '@backend/views/site'
                 ]
             ],
-            'admins' => ['superAdmin', 'demo']
         ]
     ],
     'aliases' => [

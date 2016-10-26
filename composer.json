@@ -25,7 +25,7 @@
         "yiisoft/yii2-redis": "*",
         "mobiledetect/mobiledetectlib": "^2.8",
         "yiisoft/yii2-composer": "2.0.4",
-        "yidashi/yii2-bootstrap-markdown": "2.0.1",
+        "yidashi/yii2-bootstrap-markdown": "2.0.2",
         "yidashi/yii2-webuploader": "^1.4.2",
         "yidashi/yii2-ueditor": "1.0.1",
         "mihaildev/yii2-elfinder": "^1.0",

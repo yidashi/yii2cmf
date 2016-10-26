@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use rbac\components\MenuHelper;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -19,9 +20,6 @@ $logCount = \backend\models\SystemLog::find()->count();
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li>
-                    <?= Html::a('<i class="fa fa-cogs"></i>', ['/system/config']) ?>
-                </li>
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>
@@ -59,11 +57,48 @@ $logCount = \backend\models\SystemLog::find()->count();
                         <i class="fa fa-user"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= \yii\helpers\Url::to(['/user/admin/reset-password', 'id' => \Yii::$app->user->id]) ?>">修改密码</a></li>
+                        <li><a href="<?= \yii\helpers\Url::to(['/user/security/reset-password', 'id' => \Yii::$app->user->id]) ?>">修改密码</a></li>
                         <li><a href="<?= \yii\helpers\Url::to(['/user/security/logout']) ?>" data-method="post">退出</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
+        <div class="navbar-header">
+            <button class="btn btn-default  btn-sm navbar-toggle collapsed"
+                    type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="caret"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse collapse" role="navigation">
+            <?php
+//            p(MenuHelper::getAssignedMenu(Yii::$app->user->id));
+            echo \yii\bootstrap\Nav::widget([
+                'items' => array_map(function($val){
+                    $firstMenu = MenuHelper::getFirstMenu($val['items']);
+                    $val['url'] = $firstMenu['url'];
+                    unset($val['items']);
+//                    p($val);
+                    return $val;
+                }, MenuHelper::getAssignedMenu(Yii::$app->user->id)),
+                'options' => [
+                    'class' => ' navbar-nav'
+                ],
+                'encodeLabels' => false
+            ])?>
+        </div>
     </nav>
 </header>
+
+<?php
+
+/*MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function($menu){
+    $navs = MenuHelper::getAssignedMenu(\Yii::$app->user->id, $menu['id']);
+    $nav = MenuHelper::getFirstMenu($navs);
+    return [
+        'label' => Html::icon($menu['icon']) . ' ' . $menu['name'],
+        'url' => url($nav['url']),
+        'active' => isset($this->params['menuGroup']) ? $menu['name'] == $this->params['menuGroup'] : false
+    ];
+})*/
+?>

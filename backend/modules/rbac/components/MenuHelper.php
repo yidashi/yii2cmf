@@ -9,7 +9,7 @@ use rbac\models\Menu;
 /**
  * MenuHelper used to generate menu depend of user role.
  * Usage.
- *
+ * 
  * ~~~
  * use rbac\components\MenuHelper;
  * use yii\bootstrap\Nav;
@@ -18,9 +18,9 @@ use rbac\models\Menu;
  *    'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
  * ]);
  * ~~~
- *
+ * 
  * To reformat returned, provide callback to method.
- *
+ * 
  * ~~~
  * $callback = function ($menu) {
  *    $data = eval($menu['data']);
@@ -51,7 +51,7 @@ class MenuHelper
      * @param int      $root
      * @param \Closure $callback use to reformat output.
      *                           callback should have format like
-     *
+     * 
      * ~~~
      * function ($menu) {
      *    return [
@@ -73,7 +73,7 @@ class MenuHelper
 
         /* @var $manager \yii\rbac\BaseManager */
         $manager = Yii::$app->getAuthManager();
-        $menus = Menu::find()->asArray()->indexBy('id')->orderBy('order')->all();
+        $menus = Menu::find()->asArray()->indexBy('id')->all();
         $key = [__METHOD__, $userId, $manager->defaultRoles];
         $cache = $config->cache;
 
@@ -152,7 +152,7 @@ class MenuHelper
     public static function getFirstMenu($navs)
     {
         foreach ($navs as $nav) {
-            if (array_key_exists('url', $nav)) {
+            if (array_key_exists('url', $nav) && $nav['url'] != '#') {
                 return $nav;
             }
 
@@ -182,9 +182,17 @@ class MenuHelper
         return [];
     }
 
-    public static function getRootMenu()
+    public static function getRootMenu($nav)
     {
-
+        if ($nav['parent'] == null) {
+            return $nav;
+        }
+        $parent = Menu::find()->where(['id' => $nav['parent']])->one();
+        if ($parent['parent'] != null) {
+            return static::getRootMenu($parent);
+        } else {
+            return $parent;
+        }
     }
     /**
      * Ensure all item menu has parent.
