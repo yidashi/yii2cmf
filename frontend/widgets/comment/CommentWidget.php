@@ -48,6 +48,8 @@ class CommentWidget extends Widget
         $commentModel->type_id = $this->type_id;
 
         return $this->render('index', [
+            'type' => $this->type,
+            'typeId' => $this->type_id,
             'comment' => $comment,
             'commentModel' => $commentModel,
             'dataProvider' => $dataProvider,

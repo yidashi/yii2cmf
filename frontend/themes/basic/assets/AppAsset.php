@@ -24,10 +24,10 @@ class AppAsset extends AssetBundle
         'js/site.js',
     ];
     public $depends = [
-        'common\assets\ModalAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'common\assets\FontAwesomeAsset'
+        'common\assets\FontAwesomeAsset',
+        'common\assets\ModalAsset',
     ];
 }

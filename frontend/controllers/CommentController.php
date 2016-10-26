@@ -11,6 +11,8 @@ use common\modules\user\traits\AjaxValidationTrait;
 use yii\base\Exception;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
+use yii\helpers\Markdown;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -50,25 +52,32 @@ class CommentController extends Controller
     public function actionDm()
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
-        $article_id = \Yii::$app->request->post('article_id');
+        $typeId = \Yii::$app->request->post('type_id');
+        $type = \Yii::$app->request->post('type');
         $time = \Yii::$app->request->post('time');
         $page = \Yii::$app->request->post('page');
-        $query = Comment::find()->where(['type' => 'article', 'type_id' => $article_id]);
+        $query = Comment::find()->where(['type' => $type, 'type_id' => $typeId]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
-        $models = $query->offset($pages->offset)
+        $models = $query->alias('comment')->offset($pages->offset)
             ->orderBy('created_at desc')
             ->limit($pages->limit)
             ->with('user')
-            ->asArray()
             ->all();
+        $list = array_map(function ($value) {
+            $item['id'] = $value->id;
+            $item['avatar'] = Url::to($value->user->getAvatar(96), true);
+            $item['nickname'] = $value->user->username;
+            $item['content'] = preg_replace('/(@\S+?\s)/', '', $value->content);
+            $item['isRe'] = preg_match('/(@\S+?\s)/', $value->content, $matches);
+            return $item;
+        }, $models);
         $hasNext = 0;
         if ($page < $pages->pageCount) {
             $hasNext = 1;
         }
-
         return [
-            'list' => $models,
+            'list' => $list,
             'hasNext' => $hasNext,
             'time' => $time,
         ];

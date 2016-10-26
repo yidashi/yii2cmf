@@ -21,11 +21,11 @@ class AppAsset extends AssetBundle
         'js/site.js'
     ];
     public $depends = [
-        'common\assets\ModalAsset',
-        'common\assets\FontAwesomeAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
+        'common\assets\ModalAsset',
+        'common\assets\FontAwesomeAsset'
     ];
 
     /**

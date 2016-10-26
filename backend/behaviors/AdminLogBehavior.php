@@ -34,8 +34,7 @@ class AdminLogBehavior extends Behavior
 
     public function log($event)
     {
-        // 显示详情有待优化,不过基本功能完整齐全
-        if($event->sender instanceof AdminLog) {
+        if($event->sender instanceof AdminLog || !$event->sender->primaryKey()) {
             return;
         }
         if ($event->name == ActiveRecord::EVENT_AFTER_INSERT) {
@@ -56,7 +55,7 @@ class AdminLogBehavior extends Behavior
         }
         $userName = Yii::$app->user->identity->username;
         $tableName = $event->sender->tableSchema->name;
-        $description = sprintf($description, $userName, $tableName, $event->sender->primaryKey()[0], $event->sender->getPrimaryKey(), $desc);
+        $description = sprintf($description, $userName, $tableName, $event->sender->primaryKey()[0], is_array($event->sender->getPrimaryKey()) ? current($event->sender->getPrimaryKey()) : $event->sender->getPrimaryKey(), $desc);
 
         $route = Url::to();
         $userId = Yii::$app->user->id;

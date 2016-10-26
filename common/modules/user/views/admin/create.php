@@ -49,10 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="alert alert-info">
                     <?= Yii::t('app', 'A password will be generated 111111 if not provided') ?>.
                 </div>
-                <?php $form = ActiveForm::begin([
-                    'enableAjaxValidation'   => true,
-                    'enableClientValidation' => false
-                ]); ?>
+                <?php $form = ActiveForm::begin(); ?>
 
                 <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 

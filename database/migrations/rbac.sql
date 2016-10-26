@@ -40,15 +40,15 @@ LOCK TABLES {{%menu}} WRITE;
 /*!40000 ALTER TABLE {{%menu}} DISABLE KEYS */;
 INSERT INTO {{%menu}} (`id`, `name`, `parent`, `route`, `order`, `data`, `icon`)
 VALUES
-	(24, '系统管理', NULL, NULL, 2, NULL, 'cog'),
+	(24, '系统管理', NULL, NULL, 1, NULL, 'cog'),
 	(30, '数据库备份', NULL, NULL, 5, NULL, 'book'),
-	(33, '权限管理', NULL, NULL, 1, NULL, 'users'),
+	(33, '权限管理', NULL, NULL, 2, NULL, 'users'),
 	(39, '内容管理', NULL, NULL, 3, NULL, 'edit'),
 	(44, '插件管理', NULL, NULL, 4, NULL, 'plug'),
 	(46, '外观', NULL, NULL, 6, NULL, 'tv'),
-	(25, '网站设置', 24, '/system/config', 1, NULL, ''),
-	(26, '配置管理', 24, '/config/index', 2, NULL, ''),
-	(37, '操作记录', 24, '/admin-log/index', 3, NULL, ''),
+	(25, '网站设置', 24, '/system/config', 2, NULL, ''),
+	(26, '配置管理', 24, '/config/index', 3, NULL, ''),
+	(37, '操作记录', 24, '/admin-log/index', 4, NULL, ''),
 	(31, '备份', 30, '/backup/export/index', NULL, NULL, ''),
 	(32, '还原', 30, '/backup/import/index', NULL, NULL, ''),
 	(15, '用户管理', 33, '/user/admin/index', NULL, NULL, ''),
@@ -68,6 +68,8 @@ VALUES
 	(49, '导航', 46, '/nav/index', 5, NULL, ''),
 	(50, '区域', 46, '/area/index', 1, NULL, ''),
 	(51, '区块', 46, '/block/index', 2, NULL, ''),
-	(52, '群发站内信', 24, '/message/admin/create', 4, NULL, '');
+	(52, '群发站内信', 24, '/message/admin/create', 5, NULL, '');
+	(52, '控制面板', 24, '/site/index', 6, NULL, '');
+	(52, '系统日志', 24, '/log/index', 4, NULL, '');
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;

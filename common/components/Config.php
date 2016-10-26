@@ -62,6 +62,7 @@ class Config extends Component
         switch ($type) {
             case ConfigModel::TYPE_ARRAY:
                 $return = [];
+                $value = trim($value, "\r\n");
                 foreach (explode("\r\n", $value) as $val) {
                     if (strpos($val, '=>') !== false) {
                         list($k, $v) = explode('=>', $val);

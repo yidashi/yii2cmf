@@ -112,7 +112,7 @@ class UploadAction extends Action
             $files = UploadedFile::getInstancesByName($this->uploadParam);
 //            p($files);
             if (!$this->multiple) {
-                $res = [$this->uploadOne($files[0])];
+                $res = [$this->uploadOne($files)];
             } else {
                 $res = $this->uploadMore($files);
             }
@@ -131,6 +131,7 @@ class UploadAction extends Action
     private function uploadMore($files) {
         $res = [];
         foreach ($files as $file) {
+
             $result = $this->uploadOne($file);
             $res[] = $result;
         }
@@ -152,7 +153,7 @@ class UploadAction extends Action
                         $model->file->name = uniqid() . '.' . $model->file->extension;
                     }
                     if ($model->file->saveAs($this->path . $model->file->name)) {
-                        $attachment = $this->modelClass;
+                        $attachment = new $this->modelClass;
                         $attachment->url = $this->url . $model->file->name;
                         $attachment->name = $model->file->name;
                         $attachment->extension = $model->file->extension;

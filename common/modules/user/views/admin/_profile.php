@@ -14,10 +14,7 @@ use common\modules\city\widgets\CityWidget;
 
 <?php $this->beginContent('@common/modules/user/views/admin/update.php', ['user' => $user]) ?>
 
-<?php $form = ActiveForm::begin([
-    'enableAjaxValidation' => true,
-    'enableClientValidation' => false
-]); ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($profile, 'qq')->textInput() ?>
 <?= $form->field($profile, 'phone')->textInput() ?>

@@ -41,4 +41,4 @@
     })
 </script>
 <?php $this->endBlock() ?>
-<?php $this->trigger('afterComment') ?>
+<?php $this->trigger('afterComment', new \frontend\widgets\comment\CommentEvent(['type' => $type, 'typeId' => $typeId])) ?>

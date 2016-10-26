@@ -78,8 +78,6 @@ class AdminController extends Controller
             'scenario' => 'create',
         ]);
 
-        $this->performAjaxValidation($user);
-
         if ($user->load(\Yii::$app->request->post()) && $user->create()) {
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
             return $this->redirect(['update', 'id' => $user->id]);
@@ -101,8 +99,6 @@ class AdminController extends Controller
         Url::remember('', 'actions-redirect');
         $user = $this->findModel($id);
         $user->scenario = 'update';
-
-        $this->performAjaxValidation($user);
 
         if ($user->load(\Yii::$app->request->post()) && $user->save()) {
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Account details have been updated'));
@@ -169,9 +165,6 @@ class AdminController extends Controller
             $profile = \Yii::createObject(Profile::className());
             $profile->link('user', $user);
         }
-
-        $this->performAjaxValidation($profile);
-
 
         if ($profile->load(\Yii::$app->request->post()) && $profile->save()) {
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'Profile details have been updated'));

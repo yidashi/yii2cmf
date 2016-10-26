@@ -21,10 +21,7 @@ use yii\helpers\Html;
 
 <?php $this->beginContent("@common/modules/user/views/admin/update.php", ['user' => $user]) ?>
 
-<?php $form = ActiveForm::begin([
-    'enableAjaxValidation'   => true,
-    'enableClientValidation' => false
-]); ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 
