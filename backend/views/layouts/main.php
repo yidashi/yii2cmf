@@ -1,7 +1,7 @@
 <?php
-use yii\helpers\Html;
-use rbac\models\Menu;
 use rbac\components\MenuHelper;
+use rbac\models\Menu;
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

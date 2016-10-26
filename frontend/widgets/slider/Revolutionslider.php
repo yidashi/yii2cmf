@@ -2,11 +2,11 @@
 
 namespace frontend\widgets\slider;
 
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
+use common\models\Carousel as CarouselModel;
 use common\models\CarouselItem;
 use yii\base\InvalidConfigException;
-use common\models\Carousel as CarouselModel;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 class Revolutionslider extends \yii\base\Widget{
 

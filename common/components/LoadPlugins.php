@@ -9,11 +9,11 @@
 namespace common\components;
 
 use common\models\Module;
+use plugins\Plugins;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
 use yii\caching\DbDependency;
-use plugins\Plugins;
 
 class LoadPlugins extends Component implements BootstrapInterface
 {

@@ -2,10 +2,9 @@
 
 namespace backend\components\gii\model;
 
-use Yii;
-use yii\db\Schema;
-use yii\base\NotSupportedException;
 use ReflectionClass;
+use yii\base\NotSupportedException;
+use yii\db\Schema;
 
 
 class Generator extends \yii\gii\generators\model\Generator

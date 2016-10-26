@@ -7,9 +7,8 @@
 namespace frontend\behaviors;
 
 use Detection\MobileDetect;
-use yii\base\ActionFilter;
 use Yii;
-use yii\web\Cookie;
+use yii\base\ActionFilter;
 
 class ThemeBehavior extends ActionFilter
 {

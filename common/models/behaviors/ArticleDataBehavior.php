@@ -8,13 +8,11 @@
 
 namespace common\models\behaviors;
 
+use common\models\Article;
 use frontend\models\Search;
-use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use common\models\Article;
 use yii\helpers\StringHelper;
-use yii\helpers\Markdown;
 
 
 class ArticleDataBehavior extends Behavior

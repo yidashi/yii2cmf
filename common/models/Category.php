@@ -3,11 +3,10 @@
 namespace common\models;
 
 use common\behaviors\MetaBehavior;
+use common\helpers\Tree;
 use common\models\behaviors\CategoryBehavior;
 use Yii;
-use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use common\helpers\Tree;
 
 /**
  * This is the model class for table "{{%article}}".

@@ -1,7 +1,6 @@
 <?php
 namespace common\assets;
 
-use yii\base\Exception;
 use yii\web\AssetBundle;
 
 

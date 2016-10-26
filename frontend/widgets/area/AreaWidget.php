@@ -2,8 +2,8 @@
 namespace frontend\widgets\area;
 
 use common\models\Area;
-use yii\base\Widget;
 use yii\base\InvalidConfigException;
+use yii\base\Widget;
 use yii\helpers\Html;
 
 

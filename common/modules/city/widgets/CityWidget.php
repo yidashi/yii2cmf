@@ -9,9 +9,9 @@
 namespace common\modules\city\widgets;
 
 
+use common\models\City;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
-use common\models\City;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\widgets\InputWidget;

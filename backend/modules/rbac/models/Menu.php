@@ -2,10 +2,10 @@
 
 namespace rbac\models;
 
-use Yii;
-use rbac\components\Configs;
-use yii\helpers\Html;
 use backend\behaviors\PositionBehavior;
+use rbac\components\Configs;
+use Yii;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "menu".

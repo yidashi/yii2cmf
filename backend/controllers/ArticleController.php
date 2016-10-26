@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
+use backend\models\search\Article as ArticleSearch;
+use common\models\Article;
 use common\models\ArticleData;
 use common\models\ArticleModule;
 use Yii;
-use common\models\Article;
-use backend\models\search\Article as ArticleSearch;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**

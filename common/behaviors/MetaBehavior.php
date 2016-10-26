@@ -10,9 +10,9 @@ namespace common\behaviors;
 
 
 use common\models\Meta;
+use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use Yii;
 
 class MetaBehavior extends Behavior
 {

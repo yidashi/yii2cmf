@@ -9,9 +9,9 @@
 namespace common\behaviors;
 
 
-use yii\base\Behavior;
-use Yii;
 use common\models\Vote;
+use Yii;
+use yii\base\Behavior;
 
 class VoteBehavior extends Behavior
 {

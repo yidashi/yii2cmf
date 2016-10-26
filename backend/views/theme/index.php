@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Url;
+
 /* @var $theme \frontend\themes\Theme */
 $this->title = '主题';
 $this->params['breadcrumbs'][] = $this->title;

@@ -3,7 +3,6 @@
 namespace common\models;
 
 use common\modules\user\behaviors\UserBehavior;
-use Yii;
 
 /**
  * This is the model class for table "pop_sign".

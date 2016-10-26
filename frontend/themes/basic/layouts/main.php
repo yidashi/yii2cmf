@@ -3,10 +3,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use frontend\themes\basic\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use frontend\themes\basic\assets\AppAsset;
 
 AppAsset::register($this);
 $this->registerMetaTag([

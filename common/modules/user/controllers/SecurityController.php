@@ -11,14 +11,12 @@ namespace common\modules\user\controllers;
 use common\modules\user\models\LoginForm;
 use common\modules\user\models\PasswordResetRequestForm;
 use common\modules\user\models\ResetPasswordForm;
-
-use common\modules\user\models\User;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\BadRequestHttpException;
-use yii\base\InvalidParamException;
 use Yii;
+use yii\base\InvalidParamException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
 
 class SecurityController extends Controller
 {

@@ -2,7 +2,6 @@
 namespace common\components;
 
 use yii\base\Component;
-use yii\base\InvalidConfigException;
 use yii\helpers\FileHelper;
 
 class PackageManager extends Component

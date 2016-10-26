@@ -9,10 +9,10 @@
 namespace frontend\behaviors;
 
 
+use Yii;
 use yii\base\Behavior;
 use yii\caching\DbDependency;
 use yii\web\Application;
-use Yii;
 
 class RouteBehavior extends Behavior
 {

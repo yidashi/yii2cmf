@@ -9,13 +9,12 @@
 namespace common\models\behaviors;
 
 
+use common\behaviors\SoftDeleteBehavior;
+use common\models\Category;
 use common\models\Favourite;
 use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use common\behaviors\SoftDeleteBehavior;
-use Yii;
-use common\models\Category;
 
 class ArticleBehavior extends Behavior
 {

@@ -4,9 +4,9 @@
  * Date: 2015/12/3
  * Time: 10:59.
  */
+use common\behaviors\TagBehavior;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\behaviors\TagBehavior;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */

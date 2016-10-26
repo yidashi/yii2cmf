@@ -12,8 +12,6 @@ use common\models\Module;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yii\caching\DbDependency;
-use plugins\Plugins;
 use yii\helpers\ArrayHelper;
 
 class LoadModule extends Component implements BootstrapInterface

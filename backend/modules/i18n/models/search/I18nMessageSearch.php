@@ -2,10 +2,9 @@
 
 namespace backend\modules\i18n\models\search;
 
-use Yii;
+use backend\modules\i18n\models\I18nMessage;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\i18n\models\I18nMessage;
 
 /**
  * I18nMessageSearch represents the model behind the search form about `backend\modules\i18n\models\I18nMessage`.

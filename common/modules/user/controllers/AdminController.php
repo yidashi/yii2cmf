@@ -10,10 +10,9 @@ namespace common\modules\user\controllers;
 
 
 use common\modules\user\models\Profile;
+use common\modules\user\models\User;
 use common\modules\user\traits\AjaxValidationTrait;
 use Yii;
-use common\modules\user\models\User;
-use yii\base\UserException;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;

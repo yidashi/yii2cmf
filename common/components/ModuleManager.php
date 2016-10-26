@@ -9,8 +9,6 @@
 namespace common\components;
 
 
-use plugins\Plugins;
-
 class ModuleManager extends PackageManager
 {
     public $paths = [

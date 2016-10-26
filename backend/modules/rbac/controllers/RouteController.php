@@ -2,16 +2,16 @@
 
 namespace rbac\controllers;
 
-use Yii;
-use rbac\models\Route;
-use rbac\components\MenuHelper;
-use yii\caching\TagDependency;
-use yii\web\Response;
-use rbac\components\RouteRule;
+use Exception;
 use rbac\components\Configs;
+use rbac\components\MenuHelper;
+use rbac\components\RouteRule;
+use rbac\models\Route;
+use Yii;
+use yii\caching\TagDependency;
 use yii\helpers\Inflector;
 use yii\helpers\VarDumper;
-use Exception;
+use yii\web\Response;
 
 /**
  * Description of RuleController.

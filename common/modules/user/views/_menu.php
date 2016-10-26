@@ -1,5 +1,6 @@
 <?php
 use yii\widgets\Menu;
+
 $user = Yii::$app->user->identity;
 ?>
 <div class="panel panel-default">

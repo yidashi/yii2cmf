@@ -6,6 +6,7 @@
  */
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
+
 $this->title = '重置密码';
  ?>
 <div >

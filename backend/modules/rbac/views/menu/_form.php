@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use rbac\models\Menu;
-use yii\helpers\Json;
 use rbac\AutocompleteAsset;
+use rbac\models\Menu;
+use yii\helpers\Html;
+use yii\helpers\Json;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model rbac\models\Menu */

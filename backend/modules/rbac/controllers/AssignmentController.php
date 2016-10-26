@@ -2,13 +2,13 @@
 
 namespace rbac\controllers;
 
-use Yii;
+use rbac\components\MenuHelper;
 use rbac\models\Assignment;
 use rbac\models\searchs\Assignment as AssignmentSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use rbac\components\MenuHelper;
 use yii\web\Response;
 
 /**

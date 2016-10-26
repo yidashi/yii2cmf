@@ -2,12 +2,11 @@
 
 namespace common\models;
 
-use common\modules\user\behaviors\UserBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\behaviors\CommentBehavior;
+use common\modules\user\behaviors\UserBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
-use Yii;
 
 /**
  * This is the model class for table "{{%comment}}".

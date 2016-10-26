@@ -9,12 +9,12 @@
 namespace common\modules\user\controllers;
 
 
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use common\modules\user\models\Profile;
-use yii\imagine\Image;
 use common\models\Attachment;
+use common\modules\user\models\Profile;
 use Yii;
+use yii\filters\AccessControl;
+use yii\imagine\Image;
+use yii\web\Controller;
 
 class SettingsController extends Controller
 {

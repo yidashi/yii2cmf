@@ -8,8 +8,6 @@
 
 namespace common\modules\city;
 
-use Yii;
-
 class Module extends \yii\base\Module
 {
     public function init()

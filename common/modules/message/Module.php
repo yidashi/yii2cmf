@@ -9,10 +9,10 @@
 namespace common\modules\message;
 
 
+use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Event;
 use yii\web\User;
-use Yii;
 
 class Module extends \yii\base\Module implements BootstrapInterface
 {

@@ -7,11 +7,8 @@
 namespace frontend\controllers;
 
 use common\models\Comment;
-use common\modules\user\traits\AjaxValidationTrait;
-use yii\base\Exception;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
-use yii\helpers\Markdown;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;

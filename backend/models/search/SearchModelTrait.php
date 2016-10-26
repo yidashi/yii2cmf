@@ -3,6 +3,7 @@
 namespace backend\models\search;
 
 use Yii;
+
 trait SearchModelTrait
 {
 

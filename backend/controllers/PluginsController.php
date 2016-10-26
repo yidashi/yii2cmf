@@ -3,13 +3,13 @@
 namespace backend\controllers;
 
 use backend\models\PluginsConfig;
-use Yii;
 use common\models\Module;
+use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
+use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 
 /**
  * ModuleController implements the CRUD actions for Module model.

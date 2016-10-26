@@ -2,9 +2,8 @@
 
 namespace common\models;
 
-use common\modules\user\behaviors\UserBehavior;
 use common\components\notify\Parser;
-use Yii;
+use common\modules\user\behaviors\UserBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
 

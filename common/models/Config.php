@@ -3,7 +3,6 @@
 namespace common\models;
 use common\behaviors\CacheInvalidateBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\caching\DbDependency;
 
 /**
  * This is the model class for table "{{%config}}".

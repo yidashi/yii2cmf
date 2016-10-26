@@ -2,12 +2,11 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\AdminLog;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * AdminLogController implements the CRUD actions for AdminLog model.

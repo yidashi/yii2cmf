@@ -3,7 +3,6 @@
 namespace common\models;
 
 use common\models\behaviors\FavouriteBehavior;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**

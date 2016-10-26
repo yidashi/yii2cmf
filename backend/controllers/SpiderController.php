@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Spider;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * SpiderController implements the CRUD actions for Spider model.

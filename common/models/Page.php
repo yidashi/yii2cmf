@@ -2,7 +2,6 @@
 
 namespace common\models;
 use common\behaviors\MetaBehavior;
-use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\StringHelper;
 

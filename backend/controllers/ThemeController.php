@@ -11,9 +11,9 @@ namespace backend\controllers;
 
 use backend\models\ThemezipForm;
 use Distill\Distill;
+use Yii;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
-use Yii;
 use yii\web\UploadedFile;
 
 class ThemeController extends Controller

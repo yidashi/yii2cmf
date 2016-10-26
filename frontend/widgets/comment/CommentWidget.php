@@ -9,10 +9,10 @@
 namespace frontend\widgets\comment;
 
 
+use common\models\Comment;
 use frontend\models\Article;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
-use common\models\Comment;
 
 class CommentWidget extends Widget
 {

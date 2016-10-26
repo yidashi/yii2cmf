@@ -3,16 +3,16 @@
 namespace rbac\components;
 
 use Yii;
+use yii\caching\Cache;
+use yii\caching\TagDependency;
 use yii\db\Connection;
 use yii\db\Query;
 use yii\di\Instance;
+use yii\rbac\Assignment;
 use yii\rbac\Item;
 use yii\rbac\Permission;
-use yii\rbac\Assignment;
 use yii\rbac\Role;
 use yii\rbac\Rule;
-use yii\caching\Cache;
-use yii\caching\TagDependency;
 
 /**
  * DbManager represents an authorization manager that stores authorization information in database.

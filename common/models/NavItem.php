@@ -2,8 +2,8 @@
 
 namespace common\models;
 
-use Yii;
 use backend\behaviors\PositionBehavior;
+use Yii;
 
 /**
  * This is the model class for table "{{%nav_item}}".

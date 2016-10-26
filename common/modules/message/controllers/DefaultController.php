@@ -11,10 +11,10 @@ namespace common\modules\message\controllers;
 
 use common\modules\message\models\Message;
 use common\modules\message\models\MessageForm;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use Yii;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller

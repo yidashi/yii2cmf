@@ -2,9 +2,9 @@
 
 namespace backend\models\search;
 
+use common\models\Article as ArticleModel;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Article as ArticleModel;
 
 /**
  * Article represents the model behind the search form about `common\models\Article`.

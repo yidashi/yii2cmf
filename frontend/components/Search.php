@@ -10,8 +10,8 @@ namespace frontend\components;
 
 
 use common\models\Article;
-use yii\base\Component;
 use common\models\Search as SearchModel;
+use yii\base\Component;
 use yii\data\ActiveDataProvider;
 
 class Search extends Component

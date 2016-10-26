@@ -6,8 +6,8 @@
  */
 namespace backend\controllers;
 
-use Yii;
 use common\models\Config;
+use Yii;
 use yii\base\Model;
 use yii\caching\TagDependency;
 use yii\data\ActiveDataProvider;

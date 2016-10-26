@@ -9,8 +9,8 @@
 namespace common\components;
 
 
-use yii\base\Component;
 use common\models\Config as ConfigModel;
+use yii\base\Component;
 use yii\caching\TagDependency;
 use yii\helpers\VarDumper;
 

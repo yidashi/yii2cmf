@@ -2,13 +2,13 @@
 
 namespace rbac\controllers;
 
-use Yii;
-use rbac\models\BizRule;
-use yii\web\Controller;
-use rbac\models\searchs\BizRule as BizRuleSearch;
-use yii\filters\VerbFilter;
-use yii\web\NotFoundHttpException;
 use rbac\components\MenuHelper;
+use rbac\models\BizRule;
+use rbac\models\searchs\BizRule as BizRuleSearch;
+use Yii;
+use yii\filters\VerbFilter;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 /**
  * Description of RuleController.

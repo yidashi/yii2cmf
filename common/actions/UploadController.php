@@ -11,8 +11,8 @@ namespace common\actions;
 
 use common\models\Attachment;
 use vova07\imperavi\actions\GetAction;
-use yii\web\Controller;
 use Yii;
+use yii\web\Controller;
 
 class UploadController extends Controller
 {

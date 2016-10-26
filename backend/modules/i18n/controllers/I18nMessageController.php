@@ -2,15 +2,15 @@
 
 namespace backend\modules\i18n\controllers;
 
-use backend\modules\i18n\models\I18nSourceMessage;
-use Yii;
 use backend\modules\i18n\models\I18nMessage;
+use backend\modules\i18n\models\I18nSourceMessage;
 use backend\modules\i18n\models\search\I18nMessageSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * I18nMessageController implements the CRUD actions for I18nMessage model.

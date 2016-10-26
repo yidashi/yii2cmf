@@ -1,9 +1,10 @@
 <?php
 namespace common\models;
 
+use common\enums\BooleanEnum;
 use Yii;
 use yii\behaviors\SluggableBehavior;
-use common\enums\BooleanEnum;
+
 /**
  * This is the model class for table "{{%area_block}}".
  *

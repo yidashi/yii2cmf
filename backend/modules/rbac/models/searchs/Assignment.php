@@ -2,9 +2,9 @@
 
 namespace rbac\models\searchs;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use Yii;
 
 /**
  * AssignmentSearch represents the model behind the search form about Assignment.

@@ -2,7 +2,6 @@
 namespace backend\widgets\nestedsortable;
 
 use backend\widgets\nestedsortable\assets\NestedSortableAsset;
-use yii;
 
 
 class NestedSortable extends \yii\base\Widget

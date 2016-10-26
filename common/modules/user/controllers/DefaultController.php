@@ -10,15 +10,15 @@ namespace common\modules\user\controllers;
 
 
 use common\models\ArticleData;
-use common\modules\user\models\User;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use Yii;
-use yii\filters\AccessControl;
 use common\models\Favourite;
 use common\models\Vote;
+use common\modules\user\models\User;
 use frontend\models\Article;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 
 class DefaultController extends Controller

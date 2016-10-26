@@ -3,8 +3,8 @@
 
 namespace common\modules\message\filters;
 
-use yii\web\NotFoundHttpException;
 use yii\base\ActionFilter;
+use yii\web\NotFoundHttpException;
 
 class BackendFilter extends ActionFilter
 {

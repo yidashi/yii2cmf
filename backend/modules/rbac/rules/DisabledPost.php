@@ -1,8 +1,8 @@
 <?php
 namespace rbac\rules;
 
-use yii\rbac\Rule;
 use yii\rbac\Item;
+use yii\rbac\Rule;
 
 class DisabledPost extends Rule
 {

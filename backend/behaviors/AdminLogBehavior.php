@@ -9,13 +9,13 @@
 namespace backend\behaviors;
 
 
+use common\models\AdminLog;
+use Yii;
 use yii\base\Application;
 use yii\base\Behavior;
-use Yii;
-use yii\helpers\Url;
 use yii\base\Event;
 use yii\db\ActiveRecord;
-use common\models\AdminLog;
+use yii\helpers\Url;
 
 class AdminLogBehavior extends Behavior
 {

@@ -2,8 +2,8 @@
 
 namespace rbac\models;
 
-use yii\rbac\Rule;
 use Yii;
+use yii\rbac\Rule;
 
 /**
  * BizRule.

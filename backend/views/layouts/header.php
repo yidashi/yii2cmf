@@ -1,6 +1,6 @@
 <?php
-use yii\helpers\Html;
 use rbac\components\MenuHelper;
+use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */

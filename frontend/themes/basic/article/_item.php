@@ -1,7 +1,8 @@
 <?php
 /* @var $this \yii\web\View */
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Url;
+
 ?>
 <div class="media-body">
     <h4 class="media-heading">

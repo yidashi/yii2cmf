@@ -1,9 +1,9 @@
 <?php
 
-use yii\grid\GridView;
 use yii\data\ArrayDataProvider;
-use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /*
  * To change this template, choose Tools | Templates

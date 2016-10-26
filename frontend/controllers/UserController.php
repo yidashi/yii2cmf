@@ -10,19 +10,19 @@ namespace frontend\controllers;
 
 
 use common\models\ArticleData;
-use common\models\User;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
-use Yii;
-use common\models\Profile;
-use yii\imagine\Image;
 use common\models\Attachment;
-use yii\filters\AccessControl;
 use common\models\Favourite;
+use common\models\Profile;
+use common\models\User;
 use common\models\Vote;
 use frontend\models\Article;
 use frontend\models\ArticleForm;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\imagine\Image;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 
 class UserController extends Controller

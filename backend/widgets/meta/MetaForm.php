@@ -2,7 +2,6 @@
 namespace backend\widgets\meta;
 
 use yii\widgets\InputWidget;
-use yii\helpers\Html;
 
 class MetaForm extends InputWidget
 {

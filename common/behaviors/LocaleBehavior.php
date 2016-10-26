@@ -2,8 +2,8 @@
 
 namespace common\behaviors;
 
-use yii\base\Behavior;
 use Yii;
+use yii\base\Behavior;
 use yii\web\Application;
 
 /**

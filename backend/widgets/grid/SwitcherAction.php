@@ -1,8 +1,8 @@
 <?php
 namespace backend\widgets\grid;
 
-use Yii;
 use backend\actions\Action;
+use Yii;
 
 class SwitcherAction extends Action
 {

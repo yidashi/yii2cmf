@@ -2,8 +2,6 @@
 namespace common\widgets\tag;
 
 use kartik\select2\Select2;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\web\JsExpression;
 

@@ -9,7 +9,6 @@
 namespace common\actions;
 
 use Yii;
-use yii\base\Action;
 use yii\base\DynamicModel;
 use yii\base\Exception;
 

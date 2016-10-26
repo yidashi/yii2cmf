@@ -9,10 +9,10 @@
 namespace common\models\behaviors;
 
 
-use yii\helpers\Html;
+use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use Yii;
+use yii\helpers\Html;
 
 class FavouriteBehavior extends Behavior
 {

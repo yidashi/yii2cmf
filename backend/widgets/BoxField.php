@@ -1,8 +1,8 @@
 <?php
 namespace backend\widgets;
 
-use yii\widgets\ActiveField;
 use yii\helpers\Html;
+use yii\widgets\ActiveField;
 
 class BoxField extends ActiveField
 {

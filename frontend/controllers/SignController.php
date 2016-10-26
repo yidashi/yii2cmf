@@ -10,10 +10,10 @@ namespace frontend\controllers;
 
 
 use common\models\Sign;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use Yii;
 use yii\web\MethodNotAllowedHttpException;
 
 class SignController extends Controller

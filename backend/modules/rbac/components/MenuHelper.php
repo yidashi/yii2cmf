@@ -2,9 +2,9 @@
 
 namespace rbac\components;
 
+use rbac\models\Menu;
 use Yii;
 use yii\caching\TagDependency;
-use rbac\models\Menu;
 
 /**
  * MenuHelper used to generate menu depend of user role.

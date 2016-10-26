@@ -10,11 +10,11 @@ namespace common\components\notify;
 
 
 
+use common\models\Notify;
 use common\models\NotifyCategory;
+use Yii;
 use yii\base\Object;
 use yii\data\ActiveDataProvider;
-use common\models\Notify;
-use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
 

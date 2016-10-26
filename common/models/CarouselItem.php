@@ -2,11 +2,11 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
 use common\behaviors\CacheInvalidateBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use backend\behaviors\PositionBehavior;
 
 /**
  * This is the model class for table "carousel_item".

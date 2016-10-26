@@ -3,7 +3,6 @@
 namespace backend\widgets\nestedsortable\assets;
 
 use yii\web\AssetBundle;
-use yii;
 
 class NestedSortableAsset extends AssetBundle
 {

@@ -6,10 +6,10 @@
  */
 namespace frontend\controllers;
 
-use common\models\Comment;
-use frontend\models\Tag;
-use frontend\models\Article;
 use common\models\Category;
+use common\models\Comment;
+use frontend\models\Article;
+use frontend\models\Tag;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

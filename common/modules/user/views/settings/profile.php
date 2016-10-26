@@ -1,8 +1,8 @@
 <?php
 
+use common\modules\city\widgets\CityWidget;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\modules\city\widgets\CityWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\modules\user\models\Profile */

@@ -2,11 +2,11 @@
 
 namespace rbac\models\searchs;
 
+use rbac\components\RouteRule;
+use rbac\models\BizRule as MBizRule;
 use Yii;
 use yii\base\Model;
 use yii\data\ArrayDataProvider;
-use rbac\models\BizRule as MBizRule;
-use rbac\components\RouteRule;
 
 /**
  * Description of BizRule.

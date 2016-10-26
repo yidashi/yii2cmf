@@ -5,7 +5,6 @@ namespace common\modules\user\models;
 use common\models\City;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%profile}}".

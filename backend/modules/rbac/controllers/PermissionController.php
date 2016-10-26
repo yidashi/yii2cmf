@@ -2,14 +2,14 @@
 
 namespace rbac\controllers;
 
+use rbac\components\MenuHelper;
 use rbac\models\AuthItem;
 use rbac\models\searchs\AuthItem as AuthItemSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\rbac\Item;
-use Yii;
-use rbac\components\MenuHelper;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
 /**

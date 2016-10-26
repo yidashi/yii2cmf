@@ -6,6 +6,7 @@
  * Time: 下午4:57
  */
 use yii\helpers\Html;
+
 ?>
 
 <span><a href="" data-toggle="modal" data-target="#rewardModal"><?= Html::icon('cny')?> 打赏作者</a></span>

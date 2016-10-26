@@ -3,8 +3,6 @@
 namespace frontend\models;
 
 use common\models\ArticleExhibition;
-use common\models\Category;
-use yii\behaviors\BlameableBehavior;
 
 /**
  * This is the model class for table "{{%article}}".

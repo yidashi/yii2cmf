@@ -9,14 +9,14 @@
 namespace common\models\behaviors;
 
 
-use yii\helpers\Html;
-use yii\base\Behavior;
-use yii\db\ActiveRecord;
-use yii\helpers\Url;
 use common\models\Article;
 use Yii;
-use yii\helpers\StringHelper;
+use yii\base\Behavior;
+use yii\db\ActiveRecord;
+use yii\helpers\Html;
 use yii\helpers\Markdown;
+use yii\helpers\StringHelper;
+use yii\helpers\Url;
 
 class CommentBehavior extends Behavior
 {

@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use common\widgets\upload\AvatarUploadAsset;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\ActiveForm;

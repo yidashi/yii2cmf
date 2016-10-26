@@ -3,8 +3,6 @@
 namespace common\models;
 use common\behaviors\XsBehavior;
 use common\models\behaviors\ArticleDataBehavior;
-use yii\helpers\Markdown;
-use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%article_data}}".

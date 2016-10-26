@@ -3,12 +3,12 @@
 namespace backend\controllers;
 
 use common\models\Nav;
-use Yii;
 use common\models\NavItem;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * NavController implements the CRUD actions for Nav model.

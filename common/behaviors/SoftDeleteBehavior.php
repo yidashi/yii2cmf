@@ -5,6 +5,7 @@ use yii\base\Behavior;
 use yii\base\InvalidConfigException;
 use yii\base\ModelEvent;
 use yii\db\BaseActiveRecord;
+
 /**
  * SoftDeleteBehavior provides support for "soft" delete of ActiveRecord models as well as restoring them
  * from "deleted" state.

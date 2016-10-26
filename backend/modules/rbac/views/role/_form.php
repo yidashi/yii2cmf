@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use yii\helpers\Json;
-use rbac\AutocompleteAsset;
 
 /* @var $this yii\web\View */
 /* @var $model rbac\models\AuthItem */

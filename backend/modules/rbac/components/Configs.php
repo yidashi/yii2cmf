@@ -3,8 +3,8 @@
 namespace rbac\components;
 
 use Yii;
-use yii\db\Connection;
 use yii\caching\Cache;
+use yii\db\Connection;
 use yii\helpers\ArrayHelper;
 
 /**

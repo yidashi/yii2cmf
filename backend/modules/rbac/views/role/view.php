@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\DetailView;
 use rbac\AdminAsset;
+use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
+use yii\widgets\DetailView;
 
 /*
  * @var yii\web\View $this

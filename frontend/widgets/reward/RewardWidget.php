@@ -9,8 +9,8 @@
 namespace frontend\widgets\reward;
 
 
-use yii\base\Widget;
 use Yii;
+use yii\base\Widget;
 
 class RewardWidget extends Widget
 {

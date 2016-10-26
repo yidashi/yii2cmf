@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
 use backend\widgets\ActiveForm;
 use backend\widgets\meta\MetaForm;
-use common\widgets\tag\TagsInput;
 use common\behaviors\TagBehavior;
+use common\widgets\tag\TagsInput;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */

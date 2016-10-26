@@ -1,9 +1,9 @@
 <?php
 namespace backend\widgets\grid;
 
+use common\enums\StatusEnum;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
-use common\enums\StatusEnum;
 use yii\helpers\Url;
 
 class SwitcherColumn extends  DataColumn

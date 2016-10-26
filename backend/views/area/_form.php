@@ -1,6 +1,7 @@
 <?php
-use yii\helpers\Html;
 use backend\widgets\ActiveForm;
+use yii\helpers\Html;
+
 ?>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true

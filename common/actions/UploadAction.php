@@ -8,6 +8,7 @@
 
 namespace common\actions;
 
+use Yii;
 use yii\base\Action;
 use yii\base\DynamicModel;
 use yii\base\Exception;
@@ -18,7 +19,6 @@ use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
 use yii\web\UploadedFile;
-use Yii;
 
 
 class UploadAction extends Action

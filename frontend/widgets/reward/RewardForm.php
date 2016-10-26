@@ -13,7 +13,6 @@ use common\models\Article;
 use common\models\Reward;
 use yii\base\Exception;
 use yii\base\Model;
-use yii\validators\InlineValidator;
 
 class RewardForm extends Model
 {

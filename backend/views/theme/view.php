@@ -1,7 +1,5 @@
 <?php
 
-use yii\bootstrap\Html;
-
 /* @var $model \frontend\themes\Theme */
 $this->title = '主题详情';
 $this->params['breadcrumbs'][] = [

@@ -2,15 +2,14 @@
 
 namespace rbac\controllers;
 
-use common\helpers\Tree;
-use Yii;
+use rbac\components\MenuHelper;
 use rbac\models\Menu;
 use rbac\models\searchs\Menu as MenuSearch;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use rbac\components\MenuHelper;
 
 /**
  * MenuController implements the CRUD actions for Menu model.

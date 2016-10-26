@@ -3,13 +3,13 @@
 namespace backend\controllers;
 
 use common\models\Carousel;
-use Yii;
 use common\models\CarouselItem;
+use Yii;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CarouselItemController implements the CRUD actions for CarouselItem model.

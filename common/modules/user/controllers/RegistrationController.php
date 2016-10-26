@@ -9,11 +9,11 @@
 namespace common\modules\user\controllers;
 
 
-use yii\web\Controller;
 use common\modules\user\models\SignupForm;
-use yii\widgets\ActiveForm;
-use yii\web\Response;
 use Yii;
+use yii\web\Controller;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class RegistrationController extends Controller
 {

@@ -12,8 +12,8 @@ namespace common\widgets;
 use vova07\imperavi\Widget;
 use yidashi\markdown\Markdown;
 use yii\base\InvalidParamException;
-use yii\widgets\InputWidget;
 use yii\helpers\Url;
+use yii\widgets\InputWidget;
 
 class EditorWidget extends InputWidget
 {

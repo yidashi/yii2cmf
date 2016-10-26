@@ -9,10 +9,10 @@
 namespace common\models\behaviors;
 
 
-use yii\helpers\Html;
 use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Html;
 
 class VoteBehavior extends Behavior
 {

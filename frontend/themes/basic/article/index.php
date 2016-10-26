@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-
 /* @var $this yii\web\View */
 /* @var $models array */
 /* @var $pages array */
