@@ -13,7 +13,7 @@ use yii\base\Action;
 use yii\base\DynamicModel;
 use yii\base\Exception;
 
-class AjaxUpdateFieldAction extends \yii2tech\admin\actions\Action
+class AjaxUpdateFieldAction extends \backend\actions\Action
 {
     public $allowFields = [];
 

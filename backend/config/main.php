@@ -59,10 +59,6 @@ return [
                     'fileMap' => ['app' => 'backend.php'],
                     'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
                 ],
-                'yii2tech-admin' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@yii2tech/admin/messages',
-                ]
             ],
         ],
         'themeManager' => [

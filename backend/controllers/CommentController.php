@@ -26,13 +26,6 @@ class CommentController extends Controller
         ];
     }
 
-    public function actions()
-    {
-        return [
-            'delete' => 'yii2tech\\admin\\actions\\Delete'
-        ];
-    }
-
     /**
      * Lists all Comment models.
      * @return mixed
@@ -64,6 +57,20 @@ class CommentController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Deletes an existing Comment model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     *
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**

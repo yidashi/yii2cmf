@@ -95,6 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $export.click(function(){
             $export.parent().children().addClass("disabled");
             $export.html("正在发送备份请求...");
+            var that = this;
             $.post(
                 $form.attr("action"),
                 $form.serialize(),
@@ -102,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(data.status){
                         tables = data.tables;
                         $export.html(data.info + "开始备份，请不要关闭本页面！");
-                        backup(data.tab);
+                        backup.call(that, data.tab);
                         window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
                     } else {
                         $.modal.error(data.info);
@@ -136,7 +137,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     $export.parent().children().removeClass("disabled");
                     $export.html("立即备份");
                     setTimeout(function(){
-                        $(that).removeClass('disabled').prop('disabled',false);
+                        $(this).removeClass('disabled').prop('disabled',false);
                     },1500);
                 }
             }, "json");

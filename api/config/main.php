@@ -10,7 +10,7 @@ return [
     'controllerNamespace' => 'api\common\controllers',
     'components' => [
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'common\modules\user\models\User',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -59,11 +59,10 @@ return [
     ],
     'modules' => [
         'v1' => [
-            'basePath' => '@api/modules/v1',
-            'class' => api\modules\v1\Module::className()
+            'class' => '\api\modules\v1\Module'
         ],
         'v2' => [
-            'basePath' => '@api/modules/v2',
+            'class' => '\api\modules\v2\Module'
         ],
     ],
     'params' => $params
