@@ -23,12 +23,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title',
                     'domain',
                     'page_dom',
-                    // 'list_dom',
-                    // 'time_dom',
-                    // 'content_dom',
-                    // 'title_dom',
-                    // 'target_category',
-                    // 'target_category_url:url',
+                     'list_dom',
+                     'time_dom',
+                     'content_dom',
+                     'title_dom',
+                     'target_category',
+//                     'target_category_url',
 
                     [
                         'class' => 'yii\grid\ActionColumn',

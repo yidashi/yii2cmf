@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'created_at:datetime',
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {delete} {ban}',
+                        'template' => '{update} {delete} {ban}',
                         'buttons' => [
                             'ban' => function($url, $model, $key) {
                                 return Html::a(Html::icon('ban'),

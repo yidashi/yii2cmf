@@ -25,7 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'sort',
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{create} {update} {delete}'
+                    'template' => '{create} {update} {delete}',
+                    'buttons' => [
+                        'create' => function($url, $model) {
+                            try {
+                                return Html::a(Html::icon('plus'), ['create', 'id' => $model['id']]);
+                            }catch (\Exception $e) {
+                                p($e);
+                            }
+                        }
+                    ]
                 ],
             ],
         ]); ?>
