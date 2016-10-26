@@ -1,11 +1,6 @@
 /**
  * Created by yidashi on 16/7/28.
  */
-$.extend(yii, {
-    confirm: function (message, ok, cancel) {
-        $.modal.confirm(message, ok, cancel);
-    }
-});
 $(function () {
     $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
         var url = $(this).data('remote-modal-url') || $(this).attr('href');
