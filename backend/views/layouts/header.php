@@ -20,6 +20,7 @@ $logCount = \backend\models\SystemLog::find()->count();
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li><?= Html::a('<i class="fa  fa-home"></i>', Yii::$app->config->get('FRONTEND_URL'), ['target' => '_blank']) ?></li>
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>
@@ -51,16 +52,34 @@ $logCount = \backend\models\SystemLog::find()->count();
                         </li>
                     </ul>
                 </li>
-                <li><a href="<?= \yii\helpers\Url::to(['/site/demo', 'view' => 'icons'])?>">icons list</a></li>
-                <li class="dropdown system-menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-user"></i>
+                <li class="dropdown user user-menu"><a href="#"
+                                                       class="dropdown-toggle" data-toggle="dropdown"> <img
+                            src="<?= Yii::$app->user->identity->getAvatar(96) ;?>" class="user-image"
+                            alt="User Image" /> <span class="hidden-xs"><?= Yii::$app->user->identity->username ?></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?= \yii\helpers\Url::to(['/user/security/reset-password', 'id' => \Yii::$app->user->id]) ?>">修改密码</a></li>
-                        <li><a href="<?= \yii\helpers\Url::to(['/user/security/logout']) ?>" data-method="post">退出</a></li>
+                        <!-- User image -->
+                        <li class="user-header"><img
+                                src="<?=  Yii::$app->user->identity->getAvatar(96) ;?>" class="img-circle"
+                                alt="User Image" />
+
+                            <p>
+                                <?= Yii::$app->user->identity->username ?> - <?= current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))->description ?>
+                                <small>注册时间:<?= Yii::$app->formatter->asDate(Yii::$app->user->identity->created_at) ?></small>
+                            </p></li>
+
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat' ] )?>
+                            </div>
+                            <div class="pull-right">
+                                <?= Html::a('登出', ['/user/security/logout' ], ['data-method' => 'post','class' => 'btn btn-default btn-flat' ] )?>
+                            </div>
+                        </li>
                     </ul>
                 </li>
+                <li><?= Html::a('<i class="fa  fa-sign-out"></i>', ['/user/security/logout'], ['data-method' => 'post']) ?></li>
             </ul>
         </div>
         <div class="navbar-header">

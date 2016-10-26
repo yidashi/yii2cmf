@@ -79,6 +79,12 @@ return [
             'class' => 'backend\modules\i18n\Module',
             'defaultRoute'=>'i18n-message/index'
         ],
+        'gii' => [
+            'class' => 'gii\Module'
+        ],
+        'migration' => [
+            'class' => 'migration\Module',
+        ],
         'user' => [
             'defaultRoute' => 'admin',
             'controllerMap' => [
@@ -93,6 +99,8 @@ return [
     'aliases' => [
         '@rbac' => '@backend/modules/rbac',
         '@backup' => '@backend/modules/backup',
+        '@gii' => '@backend/modules/gii',
+        '@migration' => '@backend/modules/migration',
     ],
     'as access' => [
         'class' => 'rbac\components\AccessControl',

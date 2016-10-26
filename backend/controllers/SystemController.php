@@ -41,7 +41,7 @@ class SystemController extends Controller
                 $config->save(false);
             }
             TagDependency::invalidate(\Yii::$app->cache,  Yii::$app->config->cacheTag);
-            return $this->redirect('config');
+            return $this->redirect(['config', 'group' => $group]);
         }
     }
 }

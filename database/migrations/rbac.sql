@@ -68,8 +68,10 @@ VALUES
 	(49, '导航', 46, '/nav/index', 5, NULL, ''),
 	(50, '区域', 46, '/area/index', 1, NULL, ''),
 	(51, '区块', 46, '/block/index', 2, NULL, ''),
-	(52, '群发站内信', 24, '/message/admin/create', 5, NULL, '');
-	(52, '控制面板', 24, '/site/index', 6, NULL, '');
-	(52, '系统日志', 24, '/log/index', 4, NULL, '');
+	(52, '群发站内信', 24, '/message/admin/create', 5, NULL, ''),
+	(53, '控制面板', 24, '/site/index', 6, NULL, ''),
+	(54, '系统日志', 24, '/log/index', 7, NULL, ''),
+	(55, 'GII', 24, '/gii/default/index', 8, NULL, ''),
+	(52, '迁移', 24, '/migration/default/index', 9, NULL, '');
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;

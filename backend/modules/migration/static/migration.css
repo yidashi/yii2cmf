@@ -1,0 +1,53 @@
+ .title {
+        display    : block;
+        font-size  : 2em;
+        margin-top : 20px;
+        color      : #e7ad24;
+    }
+
+    label[for=migrationutility-databasetables] {
+        display : block;
+    }
+
+    .inline-elements {
+        display : table;
+        width   : 100%;
+    }
+
+    .inline-elements > div {
+        display        : table-cell;
+        vertical-align : top;
+    }
+
+    .inline-elements > div:first-of-type {
+        width : 30%;
+    }
+
+    .inline-elements > div:last-of-type {
+        width : 70%;
+    }
+
+    .inline-elements select {
+        min-width : 100%;
+    }
+
+    .inline-elements input {
+        min-width : 100%;
+    }
+
+    .button-style {
+        display               : inline-block;
+        padding               : 2px 10px;
+        margin                : 0;
+        margin-left           : 20px;
+
+        font-size             : 0.9em;
+        font-weight           : normal;
+
+        background-color      : rgba(155, 202, 242, 0.56);
+        -webkit-border-radius : 5px;
+        -moz-border-radius    : 5px;
+        border-radius         : 5px;
+
+        cursor                : pointer;
+    }
