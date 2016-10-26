@@ -53,7 +53,9 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
     ];
-
+    $config['aliases'] = [
+        '@gii' => '@backend/modules/gii',
+    ];
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
@@ -62,11 +64,11 @@ if (YII_ENV_DEV) {
                 'class' => 'yii\gii\generators\crud\Generator',
                 'enableI18N' => true,
                 'templates' => [
-                    'default' => '@backend/components/gii/crud/default'
+                    'default' => '@gii/generators/crud/default'
                 ]
             ],
             'model' => [
-                'class' => 'backend\\components\\gii\\model\\Generator',
+                'class' => 'gii\\generators\model\\Generator',
                 'enableI18N' => true,
                 'useTablePrefix' => true,
                 'ns' => 'common\\models'

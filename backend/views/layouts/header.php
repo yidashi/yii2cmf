@@ -108,16 +108,3 @@ $logCount = \backend\models\SystemLog::find()->count();
         </div>
     </nav>
 </header>
-
-<?php
-
-/*MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function($menu){
-    $navs = MenuHelper::getAssignedMenu(\Yii::$app->user->id, $menu['id']);
-    $nav = MenuHelper::getFirstMenu($navs);
-    return [
-        'label' => Html::icon($menu['icon']) . ' ' . $menu['name'],
-        'url' => url($nav['url']),
-        'active' => isset($this->params['menuGroup']) ? $menu['name'] == $this->params['menuGroup'] : false
-    ];
-})*/
-?>

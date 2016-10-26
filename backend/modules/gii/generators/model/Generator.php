@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\components\gii\model;
+namespace gii\generators\model;
 
 use ReflectionClass;
 use yii\base\NotSupportedException;

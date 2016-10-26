@@ -11,12 +11,15 @@ $leftMenuItems = [];
 if (!isset($this->params['menuGroup'])) {
     $route = '/' . $this->context->uniqueId . '/' . ($this->context->action->id ?: $this->context->defaultAction);
     $menu = Menu::findOne(['route' => $route]);
+    if ($menu == null) {
+        $route = '/' . $this->context->uniqueId . '/' . $this->context->defaultAction;
+        $menu = Menu::findOne(['route' => $route]);
+    }
     if ($menu != null) {
         $groupMenu = MenuHelper::getRootMenu($menu);
         $this->params['menuGroup'] = $groupMenu->name;
         $leftMenuItems = MenuHelper::getAssignedMenu(\Yii::$app->user->id, $groupMenu['id']);
     }
-
 }
 ?>
 <?php $this->beginPage() ?>

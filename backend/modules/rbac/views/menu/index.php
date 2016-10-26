@@ -43,6 +43,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'template' => '{create} {view} {update} {delete}',
+                        'buttons' => [
+                            'create' => function($url, $model) {
+                                return Html::a(Html::icon('plus'), ['create', 'id' => $model->id]);
+                            }
+                        ]
                     ],
                 ],
             ]);
