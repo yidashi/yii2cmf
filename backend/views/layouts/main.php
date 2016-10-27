@@ -5,18 +5,20 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+/* @var $context \yii\web\Controller */
 
 backend\assets\AppAsset::register($this);
 $leftMenuItems = [];
 if (!isset($this->params['menuGroup'])) {
-    $route = '/' . $this->context->uniqueId . '/' . ($this->context->action->id ?: $this->context->defaultAction);
-    $menu = Menu::findOne(['route' => $route]);
-    if ($menu == null) {
-        $route = '/' . $this->context->uniqueId . '/' . $this->context->defaultAction;
-        $menu = Menu::findOne(['route' => $route]);
+    $context = $this->context;
+    $route = '/' . $context->uniqueId . '/' . ($context->action->id ?: $context->defaultAction);
+    $leftMenu = Menu::findOne(['route' => $route]);
+    if ($leftMenu == null) {
+        $route = '/' . $context->uniqueId . '/' . $context->defaultAction;
+        $leftMenu = Menu::findOne(['route' => $route]);
     }
-    if ($menu != null) {
-        $groupMenu = MenuHelper::getRootMenu($menu);
+    if ($leftMenu != null) {
+        $groupMenu = MenuHelper::getRootMenu($leftMenu);
         $this->params['menuGroup'] = $groupMenu->name;
         $leftMenuItems = MenuHelper::getAssignedMenu(\Yii::$app->user->id, $groupMenu['id']);
     }

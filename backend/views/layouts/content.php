@@ -32,18 +32,12 @@ use yii\widgets\Breadcrumbs;
 
     <section class="content">
         <?php if (array_key_exists('demo', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))): ?>
-        <?php Yii::$app->session->setFlash('warning', '演示组权限有限,少很多功能,需要看全部功能请下载本源码') ?>
+        <?php Yii::$app->session->setFlash('warning', '演示组权限有限,只能看不能提交修改,需要全部功能请<a href="http://www.51siyuan.cn/code.html" target="_blank">下载源码</a>') ?>
         <?php endif; ?>
         <?= \common\widgets\Alert::widget()?>
         <?= $content ?>
     </section>
 </div>
-<?php \yii\bootstrap\Modal::begin([
-    'id' => 'alert-info',
-    'header' => '<h3>提示</h3>',
-    'footer' => \yii\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
-])?>
-<?php \yii\bootstrap\Modal::end()?>
 <footer class="main-footer">
     <?= Yii::powered()?>
 </footer>

@@ -1,6 +1,7 @@
 <?php
 use rbac\components\MenuHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -39,20 +40,23 @@ $logCount = \backend\models\SystemLog::find()->count();
                             <ul class="menu">
                                 <?php foreach(\backend\models\SystemLog::find()->orderBy(['log_time'=>SORT_DESC])->limit(5)->all() as $logEntry): ?>
                                     <li>
-                                        <a href="<?php echo Yii::$app->urlManager->createUrl(['/log/view', 'id'=>$logEntry->id]) ?>">
-                                            <i class="fa fa-warning <?php echo $logEntry->level == \yii\log\Logger::LEVEL_ERROR ? 'text-red' : 'text-yellow' ?>"></i>
-                                            <?php echo $logEntry->category ?>
+                                        <a href="<?= Url::to(['/log/view', 'id'=>$logEntry->id]) ?>">
+                                            <i class="fa fa-warning <?= $logEntry->level == \yii\log\Logger::LEVEL_ERROR ? 'text-red' : 'text-yellow' ?>"></i>
+                                            <?= $logEntry->category ?>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
                         </li>
                         <li class="footer">
-                            <?php echo Html::a('查看全部', ['/log/index']) ?>
+                            <div class="pull-left"><?= Html::a('查看全部', ['/log/index'], ['class' => 'btn btn-primary btn-flat']) ?></div>
+                            <div class="pull-right"><?= Html::a('清空', ['/log/index'], ['data-method' => 'delete', 'class' => 'btn btn-danger btn-flat']) ?></div>
+
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown user user-menu"><a href="#"
+                <li class="dropdown user user-menu">
+                    <a href="#"
                                                        class="dropdown-toggle" data-toggle="dropdown"> <img
                             src="<?= Yii::$app->user->identity->getAvatar(96) ;?>" class="user-image"
                             alt="User Image" /> <span class="hidden-xs"><?= Yii::$app->user->identity->username ?></span>
@@ -71,10 +75,10 @@ $logCount = \backend\models\SystemLog::find()->count();
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat' ] )?>
+                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat'])?>
                             </div>
                             <div class="pull-right">
-                                <?= Html::a('登出', ['/user/security/logout' ], ['data-method' => 'post','class' => 'btn btn-default btn-flat' ] )?>
+                                <?= Html::a('登出', ['/user/security/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>
                             </div>
                         </li>
                     </ul>
