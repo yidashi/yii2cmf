@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{create} {view} {update} {delete}',
                         'buttons' => [
                             'create' => function($url, $model) {
-                                return Html::a(Html::icon('plus'), ['create', 'id' => $model->id]);
+                                return Html::a(Html::icon('plus'), ['create', 'id' => $model->id], ['class' => 'btn btn-default btn-xs']);
                             }
                         ]
                     ],
