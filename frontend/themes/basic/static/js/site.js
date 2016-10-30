@@ -1,7 +1,19 @@
 /**
  * Created by yidashi on 16/7/28.
  */
-$(function () {
+$.extend($.modal, {
+    login: function () {
+        layer.open({
+            type:1,
+            title: '<span style="color: #e26005;font-size: 18px;">登录</span>',
+            content:$('#login-modal'),
+            area:['360px'],
+            shadeClose:true
+        })
+    }
+});
+$(function(){
+    $("[data-toggle=tooltip]").tooltip({container: 'body'});
     $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
         var url = $(this).data('remote-modal-url') || $(this).attr('href');
         var title = $(this).data('remote-modal-title') || $(this).text();
@@ -9,10 +21,6 @@ $(function () {
         $.modal.load(url, title, data);
         return false;
     });
-})
-$(function(){
-    $("[data-toggle=tooltip]").tooltip({container: 'body'});
-
     //投票
     $('.vote a').on('click', function() {
         var a = $(this);
@@ -72,12 +80,16 @@ $(function(){
     $(".btn-registration").click(function(){
         var button = $(this);
         var url = button.attr('href');
+        var loading = $.modal.loading();
         $.ajax({
             url: url,
             dataType: 'json',
             method:'post',
             success: function(html){
                 button.html("<i class=\"fa fa-calendar-check-o\"></i> 今日已签到<br />已连续" + html.days + "天").removeClass('btn-registration').addClass('disabled');
+            },
+            complete: function () {
+                $.modal.close(loading);
             }
         });
         return false;

@@ -27,7 +27,7 @@ $this->registerMetaTag([
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link type="image/x-icon" href="<?= Yii::getAlias('@web') ?>favicon.ico" rel="shortcut icon">
-    <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';var LOGIN_URL = "<?= Url::to(['/user/security/login']) ?>"</script>
+    <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';</script>
     <?php $this->head() ?>
 </head>
 <body>
@@ -42,6 +42,9 @@ $this->registerMetaTag([
     <?= $content ?>
 </div>
 <?= $this->render('_footer') ?>
+<?php if(Yii::$app->user->isGuest): ?>
+    <?= $this->render('_login') ?>
+<?php endif; ?>
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
 <?= Yii::$app->config->get('FOOTER')?>

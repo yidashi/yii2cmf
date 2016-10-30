@@ -52,9 +52,6 @@ $.extend({
                 }
             });
         },
-        login: function() {
-            this.load(LOGIN_URL, '登录');
-        },
         close: function (index) {
             if (index != undefined) {
                 layer.close(index);

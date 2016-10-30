@@ -102,7 +102,11 @@ yii = (function ($) {
          * @param cancel a callback to be called when the user cancels the confirmation
          */
         confirm: function (message, ok, cancel) {
-            $.modal.confirm(message, ok, cancel);
+            if (confirm(message)) {
+                !ok || ok();
+            } else {
+                !cancel || cancel();
+            }
         },
 
         /**
@@ -144,7 +148,7 @@ yii = (function ($) {
                 method = !$e.data('method') && $form ? $form.attr('method') : $e.data('method'),
                 action = $e.attr('href'),
                 params = $e.data('params'),
-                ajax = $e.data('ajax'),
+                ajax = !!$e.data('ajax'),
                 refresh = !!$e.data('refresh'),
                 callback = $e.data('callback'),
                 refreshPjaxContainer = $e.data('refresh-pjax-container'),
@@ -159,7 +163,7 @@ yii = (function ($) {
                 pjaxContainer,
                 pjaxOptions = {};
 
-            if (pjax !== undefined && $.support.pjax) {
+            if (pjax && $.support.pjax) {
                 if ($e.data('pjax-container')) {
                     pjaxContainer = $e.data('pjax-container');
                 } else {
@@ -185,18 +189,19 @@ yii = (function ($) {
 
             if (method === undefined) {
                 if (action && action != '#') {
-                    if (pjax !== undefined && $.support.pjax) {
+                    if (pjax && $.support.pjax) {
                         $.pjax.click(event, pjaxOptions);
                     } else {
                         window.location = action;
                     }
                 } else if ($e.is(':submit') && $form.length) {
-                    if (pjax !== undefined && $.support.pjax) {
+                    if (pjax && $.support.pjax) {
                         $form.on('submit',function(e){
                             $.pjax.submit(e, pjaxOptions);
                         })
+                    } else {
+                        $form.trigger('submit');
                     }
-                    $form.trigger('submit');
                 }
                 return;
             }
@@ -244,12 +249,12 @@ yii = (function ($) {
                 oldAction = $form.attr('action');
                 $form.attr('action', action);
             }
-            if (pjax !== undefined && $.support.pjax) {
+            if (pjax && $.support.pjax) {
                 $form.on('submit',function(e){
                     $.pjax.submit(e, pjaxOptions);
                 })
             }
-            if (ajax !== undefined) {
+            if (ajax) {
                 if (activeFormData) {
                     $form.off('beforeSubmit').on('beforeSubmit', function () {
                         handlerAjax();
@@ -277,8 +282,9 @@ yii = (function ($) {
                                 res.message = '操作成功';
                             }
                             layer.msg(res.message, {time: 1000, icon:1}, function () {
+                                $form.trigger('reset');
                                 if (refreshPjaxContainer) {
-                                    $.pjax.reload({container:'#' + refreshPjaxContainer});
+                                    $.pjax.reload({container:'#' + refreshPjaxContainer, timeout: 0});
                                 }
                                 if (refresh) {
                                     location.reload();
