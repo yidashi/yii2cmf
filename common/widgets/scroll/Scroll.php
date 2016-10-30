@@ -69,7 +69,6 @@ CSS
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
     $('.qrcode').popover({
-        trigger:'hover',
         placement:'left',
         html:true,
         title:'关注公众号',

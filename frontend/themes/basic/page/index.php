@@ -17,3 +17,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
 <div class="page-content">
     <?= $page->content?>
 </div>
+<?= \frontend\widgets\comment\CommentWidget::widget([
+    'type' => 'page',
+    'type_id' => $page->id,
+]) ?>
