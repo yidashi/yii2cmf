@@ -60,9 +60,40 @@ class m160728_025849_create_rbac_table extends Migration
         $this->addForeignKey('fk_auth_item_child_parent', '{{%auth_item_child}}', 'parent', '{{%auth_item}}', 'name');
         $this->addForeignKey('fk_auth_item_child_child', '{{%auth_item_child}}', 'child', '{{%auth_item}}', 'name');
 
-// fk: menu
-        $this->addForeignKey('fk_menu_parent', '{{%menu}}', 'parent', '{{%menu}}', 'id');
-        $this->execute(file_get_contents(__DIR__ .'/rbac.sql'));
+        $sql = <<<sql
+--
+-- Dumping data for table {{%auth_item}}
+--
+
+LOCK TABLES {{%auth_item}} WRITE;
+/*!40000 ALTER TABLE {{%auth_item}} DISABLE KEYS */;
+INSERT INTO {{%auth_item}} VALUES ('superAdmin',1,'超级管理员',NULL,NULL,1443080982,1443408507),('/*',2,NULL,NULL,NULL,1458640575,1458640575);
+/*!40000 ALTER TABLE {{%auth_item}} ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
+-- Dumping data for table {{%auth_assignment}}
+--
+
+LOCK TABLES {{%auth_assignment}} WRITE;
+/*!40000 ALTER TABLE {{%auth_assignment}} DISABLE KEYS */;
+INSERT INTO {{%auth_assignment}} VALUES ('superAdmin','1',1443080982);
+/*!40000 ALTER TABLE {{%auth_assignment}} ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table {{%auth_item_child}}
+--
+
+LOCK TABLES {{%auth_item_child}} WRITE;
+/*!40000 ALTER TABLE {{%auth_item_child}} DISABLE KEYS */;
+INSERT INTO {{%auth_item_child}} VALUES ('superAdmin','/*');
+/*!40000 ALTER TABLE {{%auth_item_child}} ENABLE KEYS */;
+UNLOCK TABLES;
+sql;
+
+        $this->execute($sql);
         $this->execute('SET foreign_key_checks = 1');
     }
 

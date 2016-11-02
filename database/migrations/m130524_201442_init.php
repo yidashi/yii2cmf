@@ -49,6 +49,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%article_data}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL",
+            'mardown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
             'PRIMARY KEY (id)',
         ], $this->tableOptions);
 
@@ -109,17 +110,6 @@ class m130524_201442_init extends Migration
             'url_org' => Schema::TYPE_STRING . "(255) NOT NULL",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-        ], $this->tableOptions);
-
-// menu
-        $this->createTable('{{%menu}}', [
-            'id' => Schema::TYPE_PK,
-            'name' => Schema::TYPE_STRING . "(128) NOT NULL",
-            'parent' => Schema::TYPE_INTEGER . "(11) NULL",
-            'route' => Schema::TYPE_STRING . "(256) NULL",
-            'order' => Schema::TYPE_INTEGER . "(11) NULL",
-            'data' => Schema::TYPE_TEXT . " NULL",
-            'icon' => Schema::TYPE_STRING . "(50) NOT NULL DEFAULT ''",
         ], $this->tableOptions);
 
 // page
