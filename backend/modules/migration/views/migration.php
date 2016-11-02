@@ -15,7 +15,6 @@ class <?= $className ?> extends Migration
     public function up()
     {
 		<?= $up ?>
-        return true;
     }
 
     public function down()
@@ -26,8 +25,6 @@ class <?= $className ?> extends Migration
 		<?php else:?>
 		echo "<?= $className ?> cannot be reverted.\n";
 		<?php endif;?>
-		
-        return false;
     }
 
     /*

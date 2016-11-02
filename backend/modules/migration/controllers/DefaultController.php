@@ -166,7 +166,7 @@ class DefaultController extends Controller
         $downStr->addStr('$this->execute(\'SET foreign_key_checks = 0\');');
         foreach ($tables as $table) {
             if (! empty($table)) {
-                $downStr->addStr('$this->execute(\'DROP TABLE IF EXISTS `' . $table . '`\');');
+                $downStr->addStr('$this->dropTable(\'{{%' . $tablePrepared . '}}\');');
             }
         }
         $downStr->addStr('$this->execute(\'SET foreign_key_checks = 1;\');');
@@ -192,14 +192,20 @@ class DefaultController extends Controller
             $upStr->addStr('/* Table ' . $table . ' */');
             $tableSchema = \Yii::$app->db->getTableSchema($table);
             $data = Yii::$app->db->createCommand('SELECT * FROM `' . $table . '`')->queryAll();
-            foreach ($data as $row) {
-                $out = '$this->insert(\'{{%' . $tablePrepared . '}}\',[';
-                foreach ($tableSchema->columns as $column) {
-                    $out .= "'" . $column->name . "'=>'" . addslashes($row[$column->name]) . "',";
-                }
-                $out = rtrim($out, ',') . ']);';
-                $upStr->addStr($out);
+            $out = '$this->batchInsert(\'{{%' . $tablePrepared . '}}\',[';
+            foreach ($tableSchema->columns as $column) {
+                $out .= "'" . $column->name . "',";
             }
+            $out = rtrim($out, ',') . '],[';
+            foreach ($data as $row) {
+                $out .= '[';
+                foreach ($row as $field) {
+                    $out .= "'" . $field . "',";
+                }
+                $out = rtrim($out, ',') . "],\n";
+            }
+            $out = rtrim($out, ',') . ']);';
+            $upStr->addStr($out);
             $upStr->addStr(' ');
         }
         $upStr->addStr('$this->execute(\'SET foreign_key_checks = 1;\');');

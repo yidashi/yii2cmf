@@ -2,13 +2,15 @@
 
 进入项目根目录
 
-1. `composer install` 
+1 `composer global require "fxp/composer-asset-plugin:^1.2.0"`
 
-2. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可)
+2. `composer install` 
 
-3. `php yii serve`
+3. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可)
 
-4. 收工
+4. `php yii serve`
+
+5. 收工
 
     前台访问地址: `http://localhost:8080/`
 
@@ -17,10 +19,10 @@
 ## 目录结构
 
 ```
-api             api
+api             接口
 backend         后台
 common          核心
-console         命令
+console         控制台
 database        数据库（迁移 填充）
 frontend        前台
 plugins         插件
@@ -32,22 +34,6 @@ wechat          微信
 .env            基本配置文件
 helpers         基本工具函数（自动加载）
 ```
-
-## 现有功能:
-
-* rbac权限管理
-
-* 系统配置,管理员操作日志等
-
-* 文章,单页,评论,弹幕等
-
-* 数据库备份还原
-
-* 国际化 主题 皮肤
-
-* 可拆卸插件
-
-* todo
 
 ## demo
 
