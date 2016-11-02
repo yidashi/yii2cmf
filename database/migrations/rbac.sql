@@ -72,6 +72,6 @@ VALUES
 	(53, '控制面板', 24, '/site/index', 6, NULL, ''),
 	(54, '系统日志', 24, '/log/index', 7, NULL, ''),
 	(55, 'GII', 24, '/gii/default/index', 8, NULL, ''),
-	(52, '迁移', 24, '/migration/default/index', 9, NULL, '');
+	(56, '迁移', 24, '/migration/default/index', 9, NULL, '');
 /*!40000 ALTER TABLE {{%menu}} ENABLE KEYS */;
 UNLOCK TABLES;
