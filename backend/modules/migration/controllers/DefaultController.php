@@ -22,33 +22,34 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        set_time_limit(0);
         $model = new MigrationUtility();
         $upStr = new OutputString();
         $downStr = new OutputString();
-        
+
         if ($model->load(\Yii::$app->getRequest()
             ->post())) {
-            
+
             if (! empty($model->tableSchemas)) {
                 list ($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
-            
+
             if (! empty($model->tableDatas)) {
                 list ($up, $down) = $this->generalTableDatas($model->tableDatas);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
-            
+
             $path = Yii::getAlias($model->migrationPath);
             if (! is_dir($path)) {
                 FileHelper::createDirectory($path);
             }
-            
+
             $name = 'm' . gmdate('ymd_His') . '_' . $model->migrationName;
             $file = $path . DIRECTORY_SEPARATOR . $name . '.php';
-            
+
             $content = $this->renderFile(Yii::getAlias("@backend/modules/migration/views/migration.php"), [
                 'className' => $name,
                 'up' => $upStr->output(),
@@ -57,11 +58,11 @@ class DefaultController extends Controller
             file_put_contents($file, $content);
             Yii::$app->session->setFlash("success", "迁移成功，保存在" . $file);
         }
-        
+
         if ($model->migrationPath == null) {
             $model->migrationPath = $this->module->migrationPath;
         }
-        
+
         return $this->render('index', [
             'model' => $model
         ]);
@@ -70,7 +71,7 @@ class DefaultController extends Controller
     public function getTableName($name)
     {
         $prefix = \Yii::$app->db->tablePrefix;
-        
+
         return str_replace($prefix, '', $name);
     }
 
@@ -80,19 +81,19 @@ class DefaultController extends Controller
         $upStr = new OutputString([
             'tabLevel' => $initialTabLevel
         ]);
-        
+
         $upStr->addStr('$this->execute(\'SET foreign_key_checks = 0\');');
         $upStr->addStr(' ');
         foreach ($tables as $table) {
             $upStr->tabLevel = $initialTabLevel;
-            
+
             $tablePrepared = $this->getTableName($table);
-            
+
             // 添加表结构
             $upStr->addStr('$this->createTable(\'{{%' . $tablePrepared . '}}\', [');
             $upStr->tabLevel ++;
             $tableSchema = \Yii::$app->db->getTableSchema($table);
-            
+
             foreach ($tableSchema->columns as $column) {
                 $appUtility = new AppUtility($column);
                 $upStr->addStr($appUtility->string . "',");
@@ -100,10 +101,10 @@ class DefaultController extends Controller
             if (! empty($tableSchema->primaryKey)) {
                 $upStr->addStr("'PRIMARY KEY (`" . implode("`,`", $tableSchema->primaryKey) . "`)'");
             }
-            
+
             $upStr->tabLevel --;
             $upStr->addStr('], "' . $tableOption . '");');
-            
+
 
             // 添加索引
             $tableIndexes = Yii::$app->db->createCommand('SHOW INDEX FROM `' . $table . '`')->queryAll();
@@ -118,19 +119,19 @@ class DefaultController extends Controller
                 }
                 $indexs[$item["Key_name"]]["columns"][] = $item['Column_name'];
             }
-            
+
             if (! empty($indexs)) {
                 $upStr->addStr(' ');
             }
-            
+
             foreach ($indexs as $index => $item) {
                 $str = '$this->createIndex(\'' . $index . '\',\'{{%' . $tablePrepared . '}}\',\'' . implode(', ', $item['columns']) . '\',' . $item['unique'] . ');';
                 $upStr->addStr($str);
             }
-            
+
             $upStr->addStr(' ');
         }
-        
+
         //添加外键
         $sql = "SELECT tb1.CONSTRAINT_NAME, tb1.TABLE_NAME, tb1.COLUMN_NAME,
             tb1.REFERENCED_TABLE_NAME, tb1.REFERENCED_COLUMN_NAME, tb2.MATCH_OPTION,
@@ -157,10 +158,10 @@ class DefaultController extends Controller
             $upStr->addStr($str);
         }
 
-        
+
         $upStr->addStr(' ');
         $upStr->addStr('$this->execute(\'SET foreign_key_checks = 1;\');');
-        
+
         $downStr = new OutputString();
         /* DROP TABLE */
         $downStr->addStr('$this->execute(\'SET foreign_key_checks = 0\');');
@@ -170,7 +171,7 @@ class DefaultController extends Controller
             }
         }
         $downStr->addStr('$this->execute(\'SET foreign_key_checks = 1;\');');
-        
+
         return [
             $upStr,
             $downStr
@@ -186,9 +187,9 @@ class DefaultController extends Controller
         $upStr->addStr('$this->execute(\'SET foreign_key_checks = 0\');');
         $upStr->addStr(' ');
         foreach ($tables as $table) {
-            
+
             $tablePrepared = $this->getTableName($table);
-            
+
             $upStr->addStr('/* Table ' . $table . ' */');
             $tableSchema = \Yii::$app->db->getTableSchema($table);
             $data = Yii::$app->db->createCommand('SELECT * FROM `' . $table . '`')->queryAll();
@@ -200,7 +201,11 @@ class DefaultController extends Controller
             foreach ($data as $row) {
                 $out .= '[';
                 foreach ($row as $field) {
-                    $out .= "'" . $field . "',";
+                    if ($field == null) {
+                        $out .= "null,";
+                    } else {
+                        $out .= "'" . addslashes($field) . "',";
+                    }
                 }
                 $out = rtrim($out, ',') . "],\n";
             }
@@ -221,7 +226,7 @@ class DefaultController extends Controller
  * Class OutputString
  *
  * @author Nils Lindentals <nils@dfworks.lv>
- *        
+ *
  * @package c006\utility\migration\controllers
  */
 class OutputString extends Object

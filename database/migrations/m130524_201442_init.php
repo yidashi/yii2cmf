@@ -49,7 +49,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%article_data}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL",
-            'mardown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
+            'markdown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
             'PRIMARY KEY (id)',
         ], $this->tableOptions);
 
