@@ -204,7 +204,7 @@ class DefaultController extends Controller
                     if ($field == null) {
                         $out .= "null,";
                     } else {
-                        $out .= "'" . addslashes($field) . "',";
+                        $out .= "'" . addcslashes($field, "'") . "',";
                     }
                 }
                 $out = rtrim($out, ',') . "],\n";
