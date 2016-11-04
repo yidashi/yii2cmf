@@ -15,22 +15,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-primary">
     <div class="box-body">
-        <?= GridView::widget([
+        <?= \backend\widgets\grid\TreeGrid::widget([
             'dataProvider' => $dataProvider,
+            'keyColumnName' => 'id',
+            'parentColumnName' => 'pid',
+            'parentRootValue' => 0, //first parentId value
+            'pluginOptions' => [
+                'initialState' => 'expanded',
+            ],
             'columns' => [
-                'id:text:ID',
-                'title:html:分类名',
-                'slug:text:标识',
-                'article:text:文章数',
-                'sort',
+                'title',
+                [
+                    'class' => 'backend\widgets\grid\PositionColumn',
+                    'attribute' => 'sort'
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template' => '{create} {update} {delete}',
-                    'buttons' => [
-                        'create' => function($url, $model) {
-                            return Html::a(Html::icon('plus'), ['create', 'id' => $model['id']], ['class' => 'btn btn-default btn-xs']);
-                        }
-                    ]
+                    'template' => '{create} {view} {update} {delete}',
                 ],
             ],
         ]); ?>

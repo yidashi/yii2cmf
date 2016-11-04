@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Category;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -33,10 +34,7 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => Category::treeList(null, $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
-            'key' => 'id'
-        ]);
+        $dataProvider = new ActiveDataProvider(['query' => Category::find()]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

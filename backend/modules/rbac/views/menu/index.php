@@ -15,17 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->endBlock() ?>
     <div class="box box-primary">
         <div class="box-body">
-            <?= GridView::widget([
+            <?= \backend\widgets\grid\TreeGrid::widget([
                 'dataProvider' => $dataProvider,
-                'filterModel' => $searchModel,
+                'keyColumnName' => 'id',
+                'parentColumnName' => 'parent',
+                'parentRootValue' => null, //first parentId value
+                'pluginOptions' => [
+                    'initialState' => 'expanded',
+                ],
                 'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
                     'name',
                     [
                         'attribute' => 'menuParent.name',
-                        'filter' => Html::activeTextInput($searchModel, 'parent_name', [
-                            'class' => 'form-control', 'id' => null,
-                        ]),
                         'label' => Yii::t('rbac', 'Parent'),
                     ],
                     'route',

@@ -4,8 +4,8 @@ namespace rbac\controllers;
 
 use rbac\components\MenuHelper;
 use rbac\models\Menu;
-use rbac\models\searchs\Menu as MenuSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -55,12 +55,14 @@ class MenuController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MenuSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
+        $query = Menu::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => false
+        ]);
 
         return $this->render('index', [
-                'dataProvider' => $dataProvider,
-                'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
     }
     /**
