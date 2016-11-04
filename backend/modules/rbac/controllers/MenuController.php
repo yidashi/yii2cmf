@@ -55,7 +55,7 @@ class MenuController extends Controller
      */
     public function actionIndex()
     {
-        $query = Menu::find();
+        $query = Menu::find()->orderBy('order asc');
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => false

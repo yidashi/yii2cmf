@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
 
-    <?= $form->field($model, 'icon')->textInput(['id' => 'icon']) ?>
+    <?= $form->field($model, 'icon')->widget(\backend\widgets\iconpicker\IconPickerWidget::className()) ?>
 
     <?= $form->field($model, 'order')->input('number') ?>
 

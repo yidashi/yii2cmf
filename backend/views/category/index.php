@@ -25,6 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'columns' => [
                 'title',
+                'slug',
+                'article',
                 [
                     'class' => 'backend\widgets\grid\PositionColumn',
                     'attribute' => 'sort'

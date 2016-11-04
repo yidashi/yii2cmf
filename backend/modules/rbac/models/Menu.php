@@ -119,13 +119,6 @@ class Menu extends \yii\db\ActiveRecord
         ];
     }
 
-    public function attributeHints()
-    {
-        return [
-            'icon' => '（参考' . Html::a('icon list', ['/site/demo', 'view' => 'icons'], ['target' => '_blank']). ',只需要fa-后边的字符,不填默认箭头）'
-        ];
-    }
-
     /**
      * Get menu parent.
      *

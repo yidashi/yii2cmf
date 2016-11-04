@@ -12,7 +12,11 @@ class Html extends BaseHtml
 {
     public static function icon($name)
     {
-        $options = ['class' => 'fa fa-' . $name];
+        $options = ['class' => 'fa'];
+        if (!StringHelper::startsWith($name, 'fa-')) {
+            $name = 'fa-' . $name;
+        }
+        self::addCssClass($options, $name);
         return self::tag('i', '', $options);
     }
 

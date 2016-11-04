@@ -25,10 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'columns' => [
                     'name',
-                    [
-                        'attribute' => 'menuParent.name',
-                        'label' => Yii::t('rbac', 'Parent'),
-                    ],
                     'route',
                     [
                         'attribute' => 'icon',
