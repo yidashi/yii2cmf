@@ -1,8 +1,10 @@
 <?php
 
-namespace backend\controllers;
+namespace config\controllers;
 
-use common\models\Config;
+use config\models\Config;
+use config\models\DatabaseConfigForm;
+use config\models\MailConfigForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -11,7 +13,7 @@ use yii\web\NotFoundHttpException;
 /**
  * ConfigController implements the CRUD actions for Config model.
  */
-class ConfigController extends Controller
+class DefaultController extends Controller
 {
     /**
      * Lists all Config models.
@@ -115,5 +117,29 @@ class ConfigController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionDatabase()
+    {
+        $model = new DatabaseConfigForm();
+        $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect('database');
+        }
+        return $this->render('database', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionMail()
+    {
+        $model = new MailConfigForm();
+        $model->loadDefaultValues();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect('mail');
+        }
+        return $this->render('mail', [
+            'model' => $model
+        ]);
     }
 }

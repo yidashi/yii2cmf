@@ -4,32 +4,35 @@
  * Date: 2016/1/11
  * Time: 17:59.
  */
-namespace backend\controllers;
+namespace config\controllers;
 
-use common\models\Config;
+use config\models\Config;
 use Yii;
 use yii\base\Model;
 use yii\caching\TagDependency;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
-class SystemController extends Controller
+class CustomController extends Controller
 {
-    public function actionConfig($group = 'site')
+    public function actionIndex()
     {
         $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $group = Yii::$app->request->get('group', current(array_keys($groups)));
         $dataProvider = new ActiveDataProvider([
             'query' => Config::find()->where(['group' => $group]),
             'pagination' => false
         ]);
-        return $this->render('config', [
+        return $this->render('index', [
             'groups' => $groups,
             'group' => $group,
             'dataProvider' => $dataProvider
         ]);
     }
-    public function actionStoreConfig($group = 'site')
+    public function actionStore()
     {
+        $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $group = Yii::$app->request->get('group', current(array_keys($groups)));
         $dataProvider = new ActiveDataProvider([
             'query' => Config::find()->where(['group' => $group]),
             'pagination' => false
@@ -41,7 +44,7 @@ class SystemController extends Controller
                 $config->save(false);
             }
             TagDependency::invalidate(\Yii::$app->cache,  Yii::$app->config->cacheTag);
-            return $this->redirect(['config', 'group' => $group]);
+            return $this->redirect(['index', 'group' => $group]);
         }
     }
 }

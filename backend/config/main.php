@@ -109,6 +109,9 @@ return [
                     'viewPath' => '@backend/views/site'
                 ]
             ],
+        ],
+        'config' => [
+            'class' => 'config\Module'
         ]
     ],
     'aliases' => [

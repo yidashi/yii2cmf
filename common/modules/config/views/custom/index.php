@@ -13,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
         <?php foreach($groups as $k => $g): ?>
-            <li<?php if ($k == $group): ?> class="active"<?php endif; ?>><?= \yii\helpers\Html::a($g, ['config', 'group' => $k]) ?></li>
+            <li<?php if ($k == $group): ?> class="active"<?php endif; ?>><?= Html::a($g, ['index', 'group' => $k]) ?></li>
         <?php endforeach; ?>
     </ul>
     <div class="tab-content">
         <?php
-        $form = ActiveForm::begin(['action' => ['store-config', 'group' => $group]]);
+        $form = ActiveForm::begin(['action' => ['store', 'group' => $group]]);
         echo \yii\grid\GridView::widget([
             'dataProvider' => $dataProvider,
             'layout' => '{items}',

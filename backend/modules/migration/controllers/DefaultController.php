@@ -1,7 +1,4 @@
 <?php
-/**
- * author zhepama
- */
 namespace migration\controllers;
 
 use migration\AppUtility;

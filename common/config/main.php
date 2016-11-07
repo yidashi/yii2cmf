@@ -50,16 +50,13 @@ return [
             ],
         ],
         'config' => [ //动态配置
-            'class' => 'common\\components\\Config',
+            'class' => 'config\\components\\Config',
             'localConfigFile' => '@common/config/main-local.php'
         ],
         'storage' => [
             'class' => 'common\\components\\Storage',
             'basePath' => '@storagePath/upload',
             'baseUrl' => '@storageUrl/upload'
-        ],
-        'queue' => [
-            'class' => \common\components\Queue::className(),
         ],
         'log' => [
             'targets' => [
@@ -80,6 +77,9 @@ return [
         'moduleManager' => [
             'class' => 'common\\components\\ModuleManager'
         ]
+    ],
+    'aliases' => [
+        '@config' => '@common/modules/config',
     ],
     'as locale' => [
         'class' => 'common\behaviors\LocaleBehavior',

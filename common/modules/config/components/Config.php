@@ -6,10 +6,10 @@
  * Time: 下午4:07
  */
 
-namespace common\components;
+namespace config\components;
 
-
-use common\models\Config as ConfigModel;
+use Yii;
+use config\models\Config as ConfigModel;
 use yii\base\Component;
 use yii\caching\TagDependency;
 use yii\helpers\VarDumper;
@@ -20,7 +20,9 @@ class Config extends Component
 
     public $cacheTag = 'systemConfig';
 
-    public $localConfigFile;
+    public $localConfigFile = '@common/config/main-local.php';
+
+    public $envFile = '@root/.env';
 
     public function init()
     {
@@ -44,11 +46,15 @@ class Config extends Component
     }
     public function set($name, $value)
     {
-        $result = ConfigModel::updateAll(['value' => $value], ['name' => $name]);
-        if ($result === false) {
-            return false;
+        if (ConfigModel::findOne(['name' => $name]) != null) {
+            $result = ConfigModel::updateAll(['value' => $value], ['name' => $name]);
+            if ($result === false) {
+                return false;
+            }
+            TagDependency::invalidate(\Yii::$app->cache, $this->cacheTag);
+        } else {
+            $this->setEnv($name, $value);
         }
-        TagDependency::invalidate(\Yii::$app->cache, $this->cacheTag);
         return true;
     }
     /**
@@ -100,5 +106,12 @@ class Config extends Component
         $content .= ";";
 
         file_put_contents($this->localConfigFile, $content);
+    }
+
+    public function setEnv($name, $value)
+    {
+        $file = Yii::getAlias($this->envFile);
+        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1 {$value}", file_get_contents($file));
+        file_put_contents($file, $content);
     }
 }
