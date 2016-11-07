@@ -104,6 +104,7 @@ class AppController extends Controller
             ])
         );
     }
+
     public function testConnect($dsn = '', $dbname, $username = '', $password = '')
     {
         try{
@@ -117,6 +118,7 @@ class AppController extends Controller
         }
         return true;
     }
+
     public function setEnv($name, $value)
     {
         $file = Yii::getAlias($this->envPath);
@@ -127,6 +129,16 @@ class AppController extends Controller
     public function checkInstalled()
     {
         return file_exists(Yii::getAlias($this->installFile));
+    }
+
+    public function setInstalled()
+    {
+        file_put_contents(Yii::getAlias($this->installFile), time());
+    }
+
+    public function resetInstall()
+    {
+        @unlink(Yii::getAlias($this->installFile));
     }
 
     public function actionInstall()
@@ -154,9 +166,11 @@ STR;
         $appStatus = $this->select('设置当前应用模式', ['dev' => 'dev', 'prod' => 'prod']);
         $this->setEnv('YII_DEBUG', $appStatus == 'prod' ? 'false' : 'true');
         $this->setEnv('YII_ENV', $appStatus);
+        // 迁移
         Yii::$app->runAction('migrate/up', ['interactive' => false]);
+        // 清缓存
         Yii::$app->runAction('cache/flush-all', ['interactive' => false]);
-        file_put_contents(Yii::getAlias($this->installFile), time());
+        $this->setInstalled();
         $end = <<<STR
 +=================================================+
 | Installation completed successfully, Thanks you |
@@ -173,14 +187,15 @@ STR;
 
     public function actionReset()
     {
-        @unlink(Yii::getAlias('@root/web/storage/install.txt'));
+        if ($this->confirm('确定要重置安装状态吗？')) {
+            $this->resetInstall();
+        }
     }
 
     public function actionUpdate()
     {
         \Yii::$app->runAction('migrate/up', ['interactive' => $this->interactive]);
     }
-
 
 }
 
