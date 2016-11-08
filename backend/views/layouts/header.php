@@ -78,12 +78,12 @@ $logCount = \backend\models\SystemLog::find()->count();
                                 <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat'])?>
                             </div>
                             <div class="pull-right">
-                                <?= Html::a('登出', ['/user/security/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>
+                                <?= Html::a('登出', ['/user/admin/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>
                             </div>
                         </li>
                     </ul>
                 </li>
-                <li><?= Html::a('<i class="fa  fa-sign-out"></i>', ['/user/security/logout'], ['data-method' => 'post']) ?></li>
+                <li><?= Html::a('<i class="fa  fa-sign-out"></i>', ['/user/admin/logout'], ['data-method' => 'post']) ?></li>
             </ul>
         </div>
         <div class="navbar-header">

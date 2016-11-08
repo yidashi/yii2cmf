@@ -21,54 +21,22 @@ class MailConfigForm extends Model
     {
         return [
             // Host
-            [
-                'mailHost',
-                'required'
-            ],
-            [
-                'mailHost',
-                'string',
-                'max' => 255
-            ],
-
+            ['mailHost', 'required'],
+            ['mailHost', 'string', 'max' => 255],
             // Username
-            [
-                'mailUsername',
-                'required'
-            ],
-            [
-                'mailUsername',
-                'string',
-                'max' => 255
-            ],
+            ['mailUsername', 'required'],
+            ['mailUsername', 'string', 'max' => 255],
 
             // Password
-            [
-                'mailPassword',
-                'required'
-            ],
-            [
-                'mailPassword',
-                'string',
-                'max' => 255
-            ],
+            ['mailPassword', 'required'],
+            ['mailPassword', 'string', 'max' => 255],
 
             // Port
-            [
-                'mailPort',
-                'required'
-            ],
-            [
-                'mailPort',
-                'integer'
-            ],
+            ['mailPort', 'required'],
+            ['mailPort', 'integer'],
 
             // Encryption
-            [
-                'mailEncryption',
-                'string',
-                'max' => 10
-            ],
+            ['mailEncryption', 'string', 'max' => 10],
         ];
     }
 

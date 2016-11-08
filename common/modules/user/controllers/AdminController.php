@@ -9,6 +9,7 @@
 namespace common\modules\user\controllers;
 
 
+use common\modules\user\models\LoginForm;
 use common\modules\user\models\Profile;
 use common\modules\user\models\User;
 use common\modules\user\traits\AjaxValidationTrait;
@@ -37,6 +38,35 @@ class AdminController extends Controller
                 ],
             ],
         ];
+    }
+    public function actionLogin()
+    {
+        $this->layout = '@common/modules/user/views/admin/main-login.php';
+        if (!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->loginAdmin()) {
+            return $this->goBack();
+        } else {
+            if (Yii::$app->request->isAjax) {
+                return $this->renderAjax('login', [
+                    'model' => $model,
+                ]);
+            }
+
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
     }
     /**
      * Lists all User models.

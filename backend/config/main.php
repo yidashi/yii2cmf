@@ -100,16 +100,6 @@ return [
         'migration' => [
             'class' => 'migration\Module',
         ],
-        'user' => [
-            'defaultRoute' => 'admin',
-            'controllerMap' => [
-                'security' => [
-                    'class' => 'common\modules\user\controllers\SecurityController',
-                    'layout' => '@backend/views/layouts/main-login',
-                    'viewPath' => '@backend/views/site'
-                ]
-            ],
-        ],
         'config' => [
             'class' => 'config\Module'
         ]
@@ -123,7 +113,7 @@ return [
     'as access' => [
         'class' => 'rbac\components\AccessControl',
         'allowActions' => [
-            'user/security/logout'
+            'user/admin/logout'
         ],
     ],
     'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',

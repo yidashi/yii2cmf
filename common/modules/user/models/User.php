@@ -73,7 +73,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['username', 'required', 'on' => 'create'],
+            ['username', 'unique', 'on' => 'create'],
             ['email', 'required', 'on' => 'create'],
+            ['email', 'unique', 'on' => 'create'],
             ['password', 'required', 'on' => ['register']],
         ];
     }
@@ -362,7 +364,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return
             (\Yii::$app->getAuthManager() && $this->module->adminPermission ?
-                \Yii::$app->user->can($this->module->adminPermission) : false)
+                Yii::$app->getAuthManager()->checkAccess($this->getId(), $this->module->adminPermission) : false)
             || in_array($this->username, $this->module->admins);
     }
 

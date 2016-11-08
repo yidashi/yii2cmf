@@ -42,12 +42,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
     public $urlPrefix = 'user';
 
-    public $urlRules = [
-        '<id:\d+>' => 'default/index',
-        '<action:(login|logout)>' => 'security/<action>',
-        '<action:(signup)>' => 'registration/<action>',
-        '<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'default/<action>',
-    ];
+    public $urlRules = [];
 
     public function init()
     {
@@ -62,27 +57,41 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
     public function bootstrap($app)
     {
-        Yii::$app->set('user', [
-            'class' => 'yii\web\User',
-            'identityClass' => 'common\modules\user\models\User',
-            'loginUrl' => ['/user/security/login'],
-            'enableAutoLogin' => true,
-            'on afterLogin' => function($event) {
-                $event->identity->touch('login_at');
-            }
-        ]);
-
         if ($app->id == 'app-frontend') {
             $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
-        } elseif ($app->id == 'app-backend') {
+        }
+        if ($app->id == 'app-backend') {
             $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
-            Yii::$container->set('yii\web\User', [
+            Yii::$app->set('user', [
+                'class' => 'yii\web\User',
+                'identityClass' => 'common\modules\user\models\User',
+                'loginUrl' => ['/user/admin/login'],
+                'enableAutoLogin' => true,
+                'on afterLogin' => function($event) {
+                    $event->identity->touch('login_at');
+                },
                 'idParam' => '__idBackend',
                 'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
             ]);
             $app->urlManager->addRules([
                 'user/<action:\S+>' => 'user/admin/<action>',
             ], false);
+        } else {
+            Yii::$app->set('user', [
+                'class' => 'yii\web\User',
+                'identityClass' => 'common\modules\user\models\User',
+                'loginUrl' => ['/user/security/login'],
+                'enableAutoLogin' => true,
+                'on afterLogin' => function($event) {
+                    $event->identity->touch('login_at');
+                }
+            ]);
+            $this->urlRules = [
+                '<id:\d+>' => 'default/index',
+                '<action:(login|logout)>' => 'security/<action>',
+                '<action:(signup)>' => 'registration/<action>',
+                '<action:(up|article-list|create-article|update-article|notice|favourite)>' => 'default/<action>',
+            ];
         }
 
         $configUrlRule = [

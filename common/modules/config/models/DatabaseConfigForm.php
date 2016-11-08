@@ -22,23 +22,8 @@ class DatabaseConfigForm extends Model
     public function rules()
     {
         return [
-            [
-                [
-                    'hostname',
-                    'username',
-                    'database'
-                ],
-                'required'
-            ],
-            [
-                [
-                    'hostname',
-                    'username',
-                    'database',
-                    "password"
-                ],
-                'checkDb'
-            ]
+            [['hostname', 'username', 'database'], 'required'],
+            [['hostname', 'username', 'database', 'password'], 'checkDb']
         ];
     }
 
@@ -79,10 +64,10 @@ class DatabaseConfigForm extends Model
     public function attributeLabels()
     {
         return [
-            'hostname' => 'Hostname',
-            'username' => 'Username',
-            'password' => 'Password',
-            'database' => 'Name of Database'
+            'hostname' => '数据库地址',
+            'username' => '数据库用户名',
+            'password' => '数据库密码',
+            'database' => '数据库名字'
         ];
     }
 
@@ -103,10 +88,30 @@ class DatabaseConfigForm extends Model
         }
 
         $config = $this->getConfig();
-        $config->setEnv('DB_DSN', "mysql:host=" . $this->hostname . ";dbname=" . $this->database.";port=3306");
-        $config->setEnv('DB_USERNAME', $this->username);
-        $config->setEnv('DB_PASSWORD', $this->password);
+        $config->set('DB_DSN', "mysql:host=" . $this->hostname . ";dbname=" . $this->database.";port=3306");
+        $config->set('DB_USERNAME', $this->username);
+        $config->set('DB_PASSWORD', $this->password);
 
+        return true;
+    }
+
+    // 不用env的用这个方法
+    public function save2($runValidation = true, $attributeNames = null)
+    {
+        if ($runValidation && ! $this->validate($attributeNames)) {
+            return false;
+        }
+
+        $config = $this->getConfig();
+        $db = [];
+        $db['class'] = 'yii\db\Connection';
+        $db['dsn'] = "mysql:host=" . $this->hostname . ";dbname=" . $this->database.";port=3306";
+        $db['username'] = $this->username;
+        $db['password'] = $this->password;
+        $localConfig = $config->getConfigFromLocal();
+        $localConfig['components']['db'] = $db;
+        $config->setConfigToLocal($localConfig);
+        Yii::$app->set('db', $db);
         return true;
     }
 }
