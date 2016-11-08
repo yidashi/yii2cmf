@@ -75,5 +75,11 @@ class Alert extends \yii\bootstrap\Widget
                 $session->removeFlash($type);
             }
         }
+        $this->view->registerJs(<<<js
+setTimeout(function() {
+    $('#{$this->options['id']}').slideUp();
+}, 3000);
+js
+        );
     }
 }
