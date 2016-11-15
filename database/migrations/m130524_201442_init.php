@@ -44,7 +44,7 @@ class m130524_201442_init extends Migration
             'favourite' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'published_at' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
         ], $this->tableOptions);
-
+        $this->createIndex('index_published_at', '{{%article}}', 'published_at');
 // article_data
         $this->createTable('{{%article_data}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",

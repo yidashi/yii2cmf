@@ -11,7 +11,7 @@ use yii\web\View;
  * @var $dataProvider \yii\data\ActiveDataProvider
  */
 
-$this->title = 'Areas';
+$this->title = '区域';
 $this->params['breadcrumbs'][] = $this->title;
 AreaAsset::register($this);
 

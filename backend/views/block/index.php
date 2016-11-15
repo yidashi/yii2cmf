@@ -9,7 +9,7 @@ use yii\helpers\Url;
  * @var $dataProvider \yii\data\ActiveDataProvider
  */
 
-$this->title = 'Blocks';
+$this->title = '区块';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

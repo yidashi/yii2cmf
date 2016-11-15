@@ -84,12 +84,12 @@ class Block extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'block_id' => Yii::t('backend', 'Block ID'),
-            'title' => Yii::t('backend', 'Title'),
-            'slug' => Yii::t('backend', 'Slug'),
+            'block_id' => 'ID',
+            'title' => '区块名',
+            'slug' => '标识',
             'config' => Yii::t('backend', 'Config'),
             'template' => Yii::t('backend', 'Template'),
-            'cache' => Yii::t('backend', 'Cache'),
+            'cache' => '是否缓存',
             "type"=>Yii::t('backend', 'Type'),
             'used' => Yii::t('backend', 'used'),
             'widget' => Yii::t('backend', 'Widget'),

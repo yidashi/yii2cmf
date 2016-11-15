@@ -5,7 +5,7 @@
 
 $this->title = 'Create Area ';
 $this->params['breadcrumbs'][] = ['label' => 'Areas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'create Area';
+$this->params['breadcrumbs'][] = '添加新区域';
 ?>
 
 

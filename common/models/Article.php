@@ -24,8 +24,10 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  * @property int $status
  * @property int $category_id
+ * @property string $category
  * @property string $cover
  * @property string $source
+ * @property string $description
  * @property int $view
  * @property string $published_at
  * @property int $is_top
@@ -68,7 +70,7 @@ class Article extends \yii\db\ActiveRecord
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category'], 'string', 'max' => 50],
             [['cover', 'source'], 'string', 'max' => 255],
-            [['description'], 'safe']
+            [['description'], 'string']
         ];
     }
     public function setCategory($attribute, $params)
@@ -101,6 +103,7 @@ class Article extends \yii\db\ActiveRecord
             'category' => '分类',
             'source' => '来源连接',
             'view' => '浏览量',
+            'trueView' => '浏览量',
             'description' => '摘要',
             'tagNames' => '标签',
             'user_id' => '作者',
@@ -183,10 +186,10 @@ class Article extends \yii\db\ActiveRecord
         $model =  $this->getMetaModel();
 
         $title = $model->title ? : $this->title;
-        $description =$model->description ? : $this->description;
         $keywords = $model->keywords ? : $this->getTagNames(',');
+        $description =$model->description ? : $this->description;
 
-        return [$title,$description,$keywords];
+        return [$title, $keywords, $description];
     }
 
     public function getData()

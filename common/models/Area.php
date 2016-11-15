@@ -44,10 +44,10 @@ class Area extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'area_id' => Yii::t('backend', 'Area ID'),
-            'title' => Yii::t('backend', 'Title'),
-            'slug' => Yii::t('backend', 'Slug'),
-            'description' => Yii::t('backend', 'Description'),
+            'area_id' => 'ID',
+            'title' => '区域名',
+            'slug' => '标识',
+            'description' => '区域说明',
             'blocks' => Yii::t('backend', 'Blocks'),
         ];
     }

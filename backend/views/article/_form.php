@@ -33,7 +33,7 @@ use yii\helpers\Html;
 
                     <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), ['type' => $dataModel->markdown ? 'markdown' : null]); ?>
 
-                    <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
+                    <?= $form->boxField($model, 'meta', ["collapsed" => true])->widget(MetaForm::className())->header("SEO"); ?>
                 </div>
                 <?php if ($moduleModel): ?>
                 <div class="tab-pane" id="tab_2">
@@ -57,7 +57,8 @@ use yii\helpers\Html;
                 'type' => 1,
                 'options' => [
                     'value' => !empty($model->published_at) ? date('Y-m-d H:i:s', $model->published_at) : ''
-                ]
+                ],
+                'pluginOptions' => ['autoclose' => true]
             ]
         ) ?>
         <?= $form->boxField($model, 'cover', ['collapsed' => true])->widget(\common\widgets\upload\SingleWidget::className()) ?>

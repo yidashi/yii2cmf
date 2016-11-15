@@ -102,7 +102,7 @@ class DynamicInputWidget extends InputWidget
                     'value' => $this->value,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d']
+                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
                 ]);
                 break;
             case 'datetime': // 时间
@@ -111,7 +111,7 @@ class DynamicInputWidget extends InputWidget
                     'value' => $this->value,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
+                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
                 ]);
                 break;
         }
@@ -160,7 +160,7 @@ class DynamicInputWidget extends InputWidget
                     'attribute' => $this->attribute,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d']
+                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
                 ]);
                 break;
             case 'datetime': // 时间
@@ -169,7 +169,7 @@ class DynamicInputWidget extends InputWidget
                         'attribute' => $this->attribute,
                         'type' => 2,
                         'convertFormat' => true,
-                        'pluginOptions' => ['format' => 'php:Y-m-d H:i:s']
+                        'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
                     ]);
                 break;
         }

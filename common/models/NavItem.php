@@ -29,6 +29,7 @@ class NavItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title', 'url'], 'required'],
             [['status', 'nav_id', 'order'], 'integer'],
             [['title', 'url'], 'string', 'max' => 128],
         ];
@@ -71,6 +72,6 @@ class NavItem extends \yii\db\ActiveRecord
 
     public function getNav()
     {
-        return $this->hasMany(Nav::className(), ['id' => 'nav_id']);
+        return $this->hasOne(Nav::className(), ['id' => 'nav_id']);
     }
 }

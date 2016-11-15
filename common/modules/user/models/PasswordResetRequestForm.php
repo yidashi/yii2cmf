@@ -23,7 +23,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'exist',
                 'targetClass' => '\common\models\User',
                 'filter' => ['status' => User::STATUS_ACTIVE],
-                'message' => 'There is no user with such email.',
+                'message' => '邮箱不存在',
             ],
         ];
     }
@@ -52,7 +52,7 @@ class PasswordResetRequestForm extends Model
                 $mailer = \Yii::$app->mailer;
                 $mailer->viewPath = '@common/modules/user/mail';
                 return $mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
-                    ->setFrom([\Yii::$app->config->get('ADMIN_EMAIL') => \Yii::$app->config->get('SITE_NAME').' robot'])
+                    ->setFrom([\Yii::$app->config->get('MAIL_USERNAME') => \Yii::$app->config->get('SITE_NAME').' robot'])
                     ->setTo($this->email)
                     ->setSubject('重置密码 -' . \Yii::$app->config->get('SITE_NAME'))
                     ->send();

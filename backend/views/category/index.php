@@ -34,6 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{create} {view} {update} {delete}',
+                    'buttons' => [
+                        'create' => function($url, $model, $key) {
+                            return Html::a('<i class="fa fa-plus"></i>', ['create', 'id' => $model->id], ['class' => 'btn btn-xs btn-default', 'data-toggle' => 'tooltip', 'title' => '添加子分类']);
+                        }
+                    ]
                 ],
             ],
         ]); ?>

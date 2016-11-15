@@ -3,9 +3,9 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'Update Area ';
-$this->params['breadcrumbs'][] = ['label' => 'Areas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = 'Update Area';
+$this->title = '修改区域';
+$this->params['breadcrumbs'][] = ['label' => '区域', 'url' => ['index']];
+$this->params['breadcrumbs'][] = '修改区域';
 ?>
 
 

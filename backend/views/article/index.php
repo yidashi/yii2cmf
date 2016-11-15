@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
 //                    'module',
                     'category',
-                    'view',
+                    'trueView',
                     [
                         'class' => 'backend\widgets\grid\SwitcherColumn',
                         'attribute' => 'is_top'

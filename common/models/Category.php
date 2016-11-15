@@ -12,8 +12,10 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%article}}".
  *
  * @property int $id
+ * @property int $pid
  * @property string $title
  * @property string $slug
+ * @property string $description
  * @property int $created_at
  * @property int $updated_at
  */
@@ -88,9 +90,10 @@ class Category extends \yii\db\ActiveRecord
         $model =  $this->getMetaModel();
 
         $title = $model->title ? : $this->title;
+        $keywords = $model->keywords;
         $description =$model->description ? : $this->description;
 
-        return [$title,$description,$model->keywords];
+        return [$title, $keywords, $description];
     }
     /**
      * 获取分类名

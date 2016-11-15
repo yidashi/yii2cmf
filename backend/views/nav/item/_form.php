@@ -11,16 +11,14 @@ use yii\helpers\Html;
 <div class="Nav-item-form">
 
     <?php $form = ActiveForm::begin(); ?>
-            <?php echo $form->errorSummary($model) ?>
+            <?= $form->field($model, 'title') ?>
 
-            <?php echo $form->field($model, 'title') ?>
+            <?= $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
 
-            <?php echo $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
-
-            <?php echo $form->field($model, 'status')->checkbox() ?>
+            <?= $form->field($model, 'status')->checkbox() ?>
 
             <div class="form-group">
-                <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
         </div>
     <?php ActiveForm::end(); ?>

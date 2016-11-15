@@ -17,7 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     'id',
                     'route',
-                    'user_id',
+                    [
+                        'attribute' => 'user_id',
+                        'value' => function($model) {
+                            return \common\modules\user\models\User::findOne($model->user_id)->username;
+                        }
+                    ],
                     [
                         'attribute' => 'ip',
                         'value' => function($model) {
