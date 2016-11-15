@@ -8,6 +8,7 @@
 
 namespace frontend\themes\basic;
 
+use Yii;
 
 class Theme extends \frontend\themes\Theme
 {
@@ -19,4 +20,14 @@ class Theme extends \frontend\themes\Theme
         'description' => '基础主题',
         'keywords' => '基础 经典'
     ];
+
+    public function bootstrap()
+    {
+        Yii::$container->set('yii\bootstrap\BootstrapAsset', [
+            'sourcePath' => '@frontend/themes/basic/static',
+            'css' => [
+                YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+            ]
+        ]);
+    }
 }

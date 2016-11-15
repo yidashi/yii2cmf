@@ -20,6 +20,12 @@ abstract class ArticleModuleContract extends ActiveRecord
         return isset($types[$attribute]) ? $types[$attribute] : 'text';
     }
 
+    public function getAttributeExtra($attribute)
+    {
+        $extra = $this->attributeExtra();
+        return isset($extra[$attribute]) ? $extra[$attribute] : [];
+    }
+
     public function formAttributes()
     {
         $attributes = $this->attributes();

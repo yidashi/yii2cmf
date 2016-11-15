@@ -3,24 +3,11 @@
  */
 $.extend($.modal, {
     login: function () {
-        layer.open({
-            type:1,
-            title: '<span style="color: #e26005;font-size: 18px;">登录</span>',
-            content:$('#login-modal'),
-            area:['360px'],
-            shadeClose:true
-        })
+        $('#modal-login').modal('show');
     }
 });
 $(function(){
     $("[data-toggle=tooltip]").tooltip({container: 'body'});
-    $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
-        var url = $(this).data('remote-modal-url') || $(this).attr('href');
-        var title = $(this).data('remote-modal-title') || $(this).text();
-        var data = $(this).data('remote-modal-params') || {};
-        $.modal.load(url, title, data);
-        return false;
-    });
     //投票
     $('.vote a').on('click', function() {
         var a = $(this);

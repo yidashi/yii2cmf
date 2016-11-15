@@ -52,8 +52,14 @@ class ThemeBehavior extends ActionFilter
                     '@frontend/themes/' . $themeName,
                     '@frontend/themes/basic',
                 ],
+                '@frontend/widgets' => [
+                    '@frontend/themes/' . $themeName . '/widgets',
+                    '@frontend/themes/basic/widgets'
+                ],
             ],
         ];
         \Yii::$app->view->theme = \Yii::createObject($theme);
+        $themeClass = Yii::createObject('frontend\\themes\\' . $themeName . '\\Theme');
+        $themeClass->bootstrap();
     }
 }

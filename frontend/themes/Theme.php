@@ -11,6 +11,7 @@ namespace frontend\themes;
 
 use common\components\PackageInfo;
 use common\components\ThemeManager;
+use ReflectionClass;
 
 abstract class Theme extends PackageInfo
 {
@@ -24,5 +25,16 @@ abstract class Theme extends PackageInfo
     public function isActive()
     {
         return $this->getPackage() == $this->manager->getDefaultTheme();
+    }
+
+    public function getThemePath()
+    {
+        $class = new ReflectionClass($this);
+
+        return dirname($class->getFileName());
+    }
+
+    public function bootstrap()
+    {
     }
 }
