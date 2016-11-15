@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'parentColumnName' => 'parent',
                 'parentRootValue' => null, //first parentId value
                 'pluginOptions' => [
-                    'initialState' => 'expanded',
+//                    'initialState' => 'expanded',
                 ],
                 'columns' => [
                     'name',
