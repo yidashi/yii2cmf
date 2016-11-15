@@ -21,7 +21,7 @@ use yii\helpers\Html;
         ->passwordInput(['placeholder' => $loginFormModel->getAttributeLabel('password')]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('登录', ['class' => 'btn btn-primary btn-block', 'data-ajax' => '1', 'data-refresh-pjax-container' => 'header-container', 'data-callback' => '$.modal.close()']) ?>
+        <?= Html::submitButton('登录', ['class' => 'btn btn-primary btn-block', 'data-ajax' => '1', 'data-refresh-pjax-container' => 'header-container', 'data-callback' => '$("#modal-login").modal("hide")']) ?>
     </div>
     <?php \yii\widgets\ActiveForm::end();$this->trigger('afterLogin'); ?>
 <?php \yii\bootstrap\Modal::end() ?>
