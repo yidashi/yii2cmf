@@ -2,7 +2,7 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
-    'runtimePath' => '@root/runtime',
+    'runtimePath' => '@app/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',
     'components' => [

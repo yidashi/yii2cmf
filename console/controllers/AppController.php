@@ -18,10 +18,13 @@ class AppController extends Controller
     public $defaultAction = 'install';
 
     public $writablePaths = [
-        '@root/runtime',
         '@root/web/assets',
         '@root/web/admin/assets',
-        '@root/web/storage'
+        '@root/web/storage',
+        '@api/runtime',
+        '@backend/runtime',
+        '@frontend/runtime',
+        '@wechat/runtime',
     ];
 
     public $executablePaths = [
