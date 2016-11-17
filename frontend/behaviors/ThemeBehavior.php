@@ -33,7 +33,7 @@ class ThemeBehavior extends ActionFilter
                 //最后读系统默认
                 $isMobile = (new MobileDetect())->isMobile();
                 if ($isMobile) {
-                    $themeName = \Yii::$app->config->get('MOBILE_THEME_NAME', 'mobile');
+                    $themeName = \Yii::$app->config->get('MOBILE_THEME_NAME', 'basic');
                 } else {
                     $themeName = \Yii::$app->config->get('THEME_NAME', 'basic');
                 }
@@ -59,7 +59,9 @@ class ThemeBehavior extends ActionFilter
             ],
         ];
         \Yii::$app->view->theme = \Yii::createObject($theme);
-        $themeClass = Yii::createObject('frontend\\themes\\' . $themeName . '\\Theme');
-        $themeClass->bootstrap();
+        if (class_exists('frontend\\themes\\' . $themeName . '\\Theme')) {
+            $themeClass = Yii::createObject('frontend\\themes\\' . $themeName . '\\Theme');
+            $themeClass->bootstrap();
+        }
     }
 }
