@@ -125,7 +125,7 @@ class AppController extends Controller
     public function setEnv($name, $value)
     {
         $file = Yii::getAlias($this->envPath);
-        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1$value", file_get_contents($file));
+        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\${1}$value", file_get_contents($file));// \${1}修复后边跟数字的bug
         file_put_contents($file, $content);
     }
 
