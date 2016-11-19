@@ -31,8 +31,10 @@ class UploadController extends Controller
                 'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
-                    return [
+                    return !isset($result['files'][0]['error']) ? [
                         'filelink' => $result['files'][0]['url']
+                    ] : [
+                        'error' => $result['files'][0]['error']
                     ];
                 }
             ],
@@ -49,9 +51,11 @@ class UploadController extends Controller
                 'uploadOnlyImage' => false,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
-                    return [
+                    return !isset($result['files'][0]['error']) ? [
                         'filelink' => $result['files'][0]['url'],
                         'filename' => $result['files'][0]['filename']
+                    ] : [
+                        'error' => $result['files'][0]['error']
                     ];
                 }
             ],
