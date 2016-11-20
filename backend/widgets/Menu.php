@@ -31,20 +31,21 @@ class Menu extends \yii\widgets\Menu
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
+                '{icon}' => Html::icon($item['icon'])
             ] : [
                 '{url}' => Url::to($item['url']),
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => null,
+                '{icon}' => Html::icon('circle-o'),
             ];
             return strtr($template, $replace);
         } else {
             $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
             $replace = !empty($item['icon']) ? [
                 '{label}' => '<span>'.$item['label'].'</span>',
-                '{icon}' => '<i class="' . $item['icon'] . '"></i> '
+                '{icon}' => Html::icon($item['icon'])
             ] : [
                 '{label}' => '<span>'.$item['label'].'</span>',
+                '{icon}' => Html::icon('circle-o'),
             ];
             return strtr($template, $replace);
         }

@@ -17,7 +17,7 @@ $this->title = '控制面板';
                         <p>当前内容(文章)</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-document"></i>
+                        <i class="fa fa-book"></i>
                     </div>
                     <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
@@ -30,7 +30,7 @@ $this->title = '控制面板';
                         <p>待审内容(文章)</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-document"></i>
+                        <i class="fa fa-book"></i>
                     </div>
                     <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
@@ -43,7 +43,7 @@ $this->title = '控制面板';
                         <p>当前注册用户</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-person-add"></i>
+                        <i class="fa fa-user"></i>
                     </div>
                     <a href="<?= Url::to(['/user/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>

@@ -9,6 +9,7 @@ namespace backend\actions;
 
 use Yii;
 use yii\web\BadRequestHttpException;
+use yii\web\MethodNotAllowedHttpException;
 use yii\web\Response;
 
 /**
@@ -33,9 +34,13 @@ class Position extends Action
      * @param mixed $id id of the model to be deleted.
      * @return mixed response.
      * @throws BadRequestHttpException on invalid request.
+     * @throws MethodNotAllowedHttpException on invalid request.
      */
     public function run($id)
     {
+        if (!Yii::$app->request->isPost) {
+            throw new MethodNotAllowedHttpException('Method Not Allowed. This url can only handle post');
+        }
         $position = Yii::$app->request->getQueryParam($this->positionParam, null);
         if (empty($position)) {
             throw new BadRequestHttpException(Yii::t('yii', '{attribute} cannot be blank.', ['attribute' => $this->positionParam]));
@@ -49,7 +54,7 @@ class Position extends Action
     }
 
     /**
-     * @param \yii\db\ActiveRecordInterface|\yii2tech\ar\position\PositionBehavior $model
+     * @param \yii\db\ActiveRecordInterface|\backend\behaviors\PositionBehavior $model
      * @param $position
      * @throws BadRequestHttpException
      */
