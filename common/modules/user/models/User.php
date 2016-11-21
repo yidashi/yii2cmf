@@ -26,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property int $created_at
  * @property int $updated_at
  * @property string $password write-only password
+ * @property Profile $profile write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -328,7 +329,8 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return $this->getDefaultAvatar($width, $height);
     }
-    public static  function getDefaultAvatar($width, $height)
+
+    public static function getDefaultAvatar($width, $height)
     {
         list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");
 
@@ -339,6 +341,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return $baseUrl . "/" . "avatar_200x200.png";
     }
+
     public function saveAvatar($avatar)
     {
         $this->profile->avatar = $avatar;

@@ -23,6 +23,7 @@ class m160716_091753_create_nav_table extends Migration
             'nav_id' => $this->integer(11),
             'title' => $this->string(128),
             'url' => $this->string(128),
+            'target' => $this->smallInteger(1)->comment('是否新窗口打开')->defaultValue(0),
             'order' => $this->smallInteger(1),
             'status' => $this->smallInteger(1)->notNull()->defaultValue(0)
         ]);

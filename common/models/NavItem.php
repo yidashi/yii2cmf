@@ -30,7 +30,7 @@ class NavItem extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'url'], 'required'],
-            [['status', 'nav_id', 'order'], 'integer'],
+            [['status', 'nav_id', 'order', 'target'], 'integer'],
             [['title', 'url'], 'string', 'max' => 128],
         ];
     }
@@ -45,6 +45,7 @@ class NavItem extends \yii\db\ActiveRecord
             'nav_id' => Yii::t('common', 'NAV ID'),
             'title' => Yii::t('common', 'Title'),
             'url' => Yii::t('common', 'Url'),
+            'target' => '是否新窗口打开',
             'status' => Yii::t('common', 'Status'),
             'order' => Yii::t('common', 'Order'),
         ];

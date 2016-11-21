@@ -15,6 +15,8 @@ use yii\helpers\Html;
 
             <?= $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
 
+            <?= $form->field($model, 'target')->checkbox() ?>
+
             <?= $form->field($model, 'status')->checkbox() ?>
 
             <div class="form-group">

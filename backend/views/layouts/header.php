@@ -49,9 +49,7 @@ $logCount = \backend\models\SystemLog::find()->count();
                             </ul>
                         </li>
                         <li class="footer">
-                            <div class="pull-left"><?= Html::a('查看全部', ['/log/index'], ['class' => 'btn btn-primary btn-flat']) ?></div>
-                            <div class="pull-right"><?= Html::a('清空', ['/log/index'], ['data-method' => 'delete', 'class' => 'btn btn-danger btn-flat']) ?></div>
-
+                            <?php echo Html::a('查看全部', ['/log/index']) ?>
                         </li>
                     </ul>
                 </li>

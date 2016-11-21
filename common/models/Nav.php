@@ -55,12 +55,15 @@ class Nav extends \yii\db\ActiveRecord
         if ($nav == null) {
             return [];
         }
-        $items = NavItem::find()->select('title label, url')
-            ->where(['nav_id' => $nav->id])
+        $items = NavItem::find()->select('title label, url, target')
+            ->where(['nav_id' => $nav->id, 'status' => 1])
             ->orderBy(['order' => SORT_ASC])
             ->asArray()->all();
         return array_map(function($value){
             $value['url'] = Util::parseUrl($value['url']);
+            if ($value['target'] == 1) {
+                $value['linkOptions'] = ['target' => '_blank'];
+            }
             return $value;
         }, $items);
     }

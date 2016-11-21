@@ -15,6 +15,7 @@ use common\widgets\upload\SingleWidget;
 use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
 use yii\base\InvalidParamException;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\InputWidget;
 
@@ -97,22 +98,23 @@ class DynamicInputWidget extends InputWidget
                 return EditorWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
             case 'date': // 日期
-                return DatePicker::widget([
+                return DatePicker::widget(ArrayHelper::merge([
                     'name' => $this->name,
                     'value' => $this->value,
                     'type' => 2,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
-                ]);
+                ], $this->options));
+
                 break;
             case 'datetime': // 时间
-                return DateTimePicker::widget([
+                return DateTimePicker::widget(ArrayHelper::merge([
                     'name' => $this->name,
                     'value' => $this->value,
                     'type' => 2,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
-                ]);
+                ], $this->options));
                 break;
         }
     }
@@ -155,22 +157,22 @@ class DynamicInputWidget extends InputWidget
                 return EditorWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
             case 'date': // 日期
-                return DatePicker::widget([
+                return DatePicker::widget(ArrayHelper::merge([
                     'model' => $this->model,
                     'attribute' => $this->attribute,
                     'type' => 2,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
-                ]);
+                ], $this->options));
                 break;
             case 'datetime': // 时间
-                return DateTimePicker::widget([
-                        'model' => $this->model,
-                        'attribute' => $this->attribute,
-                        'type' => 2,
-                        'convertFormat' => true,
-                        'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
-                    ]);
+                return DateTimePicker::widget(ArrayHelper::merge([
+                    'model' => $this->model,
+                    'attribute' => $this->attribute,
+                    'type' => 2,
+                    'convertFormat' => true,
+                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
+                ], $this->options));
                 break;
         }
     }
