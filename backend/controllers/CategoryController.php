@@ -5,7 +5,7 @@ namespace backend\controllers;
 use common\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
+use yii\helpers\Url;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -27,6 +27,15 @@ class CategoryController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'position' => [
+                'class' => 'backend\\actions\\Position',
+                'returnUrl' => Url::current()
+            ]
+        ];
+    }
     /**
      * Lists all Category models.
      *
@@ -120,7 +129,7 @@ class CategoryController extends Controller
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Category::findOne($id)) !== null) {
             return $model;

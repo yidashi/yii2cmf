@@ -5,7 +5,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 
 ?>
-
+<div class="row">
     <div class="col-md-9">
         <?= \frontend\widgets\slider\CarouselWidget::widget([
             'key'=>'index',
@@ -62,3 +62,4 @@ use yii\helpers\Url;
         </div>
         <?php $this->trigger('indexSideBar') ?>
     </div>
+</div>

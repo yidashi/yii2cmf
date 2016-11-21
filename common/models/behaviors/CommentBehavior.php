@@ -37,7 +37,7 @@ class CommentBehavior extends Behavior
         $fromUid = $event->sender->user_id;
         // 如果是回复,发站内信,通知什么的
         if ($event->sender->parent_id > 0) {
-            $toUid = $event->sender->parent->user_id;
+            $toUid = $event->sender->reply_uid ?: $event->sender->parent->user_id;
             $extra = ['comment' => $this->generateMsgContent($event->sender->content)];
             switch ($event->sender->type) {
                 case 'article':

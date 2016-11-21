@@ -27,7 +27,7 @@ $(document).ready(
 								{
 									return;
 								}
-								$.modal.msg(msg.status, msg.msg);
+								$.modal.msg(msg.msg, msg.status);
 							});
 						}
 

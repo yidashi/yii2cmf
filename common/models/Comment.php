@@ -5,8 +5,10 @@ namespace common\models;
 use common\behaviors\VoteBehavior;
 use common\models\behaviors\CommentBehavior;
 use common\modules\user\behaviors\UserBehavior;
+use common\modules\user\models\User;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\Html;
 
 /**
  * This is the model class for table "{{%comment}}".
@@ -16,6 +18,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $content
  * @property string $type
  * @property int $type_id
+ * @property int $parent_id
+ * @property int $reply_uid
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -34,9 +38,22 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             [['type', 'type_id', 'content'], 'required'],
-            [['type_id', 'user_id', 'parent_id', 'up', 'down', 'is_top'], 'integer'],
+            [['type_id', 'user_id', 'parent_id', 'up', 'down', 'is_top', 'parent_id', 'reply_uid'], 'integer'],
             [['content'], 'string'],
+            ['content', 'setReplyUid'],
+            ['parent_id', function($attribute){
+                $this->reply_uid = $this->parent->user_id;
+            }],
         ];
+    }
+
+    public function setReplyUid($attribute)
+    {
+        if (preg_match('/@(\S+?)\s/', $this->$attribute, $matches) > 0) {
+            $replyUserName = $matches[1];
+            $replyUserId = User::find()->select('id')->where(['username' => $replyUserName])->scalar();
+            $this->reply_uid = $replyUserId;
+        }
     }
 
     /**
@@ -93,10 +110,22 @@ class Comment extends \yii\db\ActiveRecord
     {
         return $this->hasOne(self::className(), ['id' => 'parent_id']);
     }
+
     public function transactions()
     {
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public static function process($data)
+    {
+        preg_match('/@(\S+?)\s/', $data, $matches);
+        if (!empty($matches)) {
+            $replyUserName = $matches[1];
+            $replyUserId = User::find()->select('id')->where(['username' => $replyUserName])->scalar();
+            $data = preg_replace('/(@\S+?\s)/', Html::a('$1', ['/user/default/index', 'id' => $replyUserId]), $data);
+        }
+        return $data;
     }
 }

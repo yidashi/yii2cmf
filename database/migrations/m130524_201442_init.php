@@ -87,6 +87,7 @@ class m130524_201442_init extends Migration
             'type_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '内容'",
             'parent_id' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
+            'reply_uid' => $this->integer(11)->defaultValue('0'),
             'up' => Schema::TYPE_INTEGER . "(1) NOT NULL DEFAULT '0'",
             'down' => Schema::TYPE_INTEGER . "(1) NOT NULL DEFAULT '0'",
             'is_top' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",

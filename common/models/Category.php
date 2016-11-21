@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
 use common\behaviors\MetaBehavior;
 use common\helpers\Tree;
 use common\models\behaviors\CategoryBehavior;
@@ -81,7 +82,14 @@ class Category extends \yii\db\ActiveRecord
                 'class' => MetaBehavior::className(),
                 'type' => 'category'
             ],
-            CategoryBehavior::className()
+            CategoryBehavior::className(),
+            'positionBehavior' => [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'sort',
+                'groupAttributes' => [
+                    'pid'
+                ],
+            ],
         ];
     }
 
