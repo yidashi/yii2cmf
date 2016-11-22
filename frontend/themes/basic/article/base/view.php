@@ -72,7 +72,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
             <div class="media media-user">
                 <div class="media-left">
                     <a href="<?= url(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::img($model->user->getAvatar(), ['class' => 'media-object', 'alt' => $model->user->username]) ?></a>
-                    <div class="label label-primary"><?= $model->user->getBadge() ?></div>
+                    <div class="label label-primary"><?= $model->user->getLevel()['nick'] ?></div>
                 </div>
                 <div class="media-body">
                     <h2 class="media-heading">

@@ -3,6 +3,7 @@
 namespace common\modules\user\models;
 
 use common\models\Sign;
+use common\models\UserLevel;
 use common\modules\user\traits\ModuleTrait;
 use Yii;
 use yii\base\NotSupportedException;
@@ -409,11 +410,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * TODO
      * @return string
      */
-    public function getBadge()
+    public function getLevel()
     {
-        return '土豪';
+        return UserLevel::getLevel($this->profile->money);
     }
 }

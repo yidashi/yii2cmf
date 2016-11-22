@@ -30,7 +30,7 @@ class Article extends \common\models\Article
             ->where(['category_id' => $categoryId])
             ->normal()
             ->limit($size)
-            ->orderBy('view desc')
+            ->orderBy('is_hot desc, view desc')
             ->all();
     }
     public function getSameCityExhibition()
