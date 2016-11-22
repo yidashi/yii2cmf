@@ -40,10 +40,10 @@ class Comment extends \yii\db\ActiveRecord
             [['type', 'type_id', 'content'], 'required'],
             [['type_id', 'user_id', 'parent_id', 'up', 'down', 'is_top', 'parent_id', 'reply_uid'], 'integer'],
             [['content'], 'string'],
-            ['content', 'setReplyUid'],
             ['parent_id', function($attribute){
                 $this->reply_uid = $this->parent->user_id;
             }],
+            ['content', 'setReplyUid'],
         ];
     }
 
