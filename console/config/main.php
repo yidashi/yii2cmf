@@ -13,12 +13,8 @@ return [
     'controllerMap' => [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
-            'templateFile' => '@jamband/schemadump/template.php',
             'useTablePrefix' => true,
             'migrationPath' => '@database/migrations',
-        ],
-        'schemadump' => [
-            'class' => 'jamband\schemadump\SchemaDumpController',
         ],
         'schedule' => [
             'class' => \omnilight\scheduling\ScheduleController::className(),

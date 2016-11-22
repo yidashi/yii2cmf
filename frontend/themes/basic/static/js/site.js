@@ -53,13 +53,17 @@ $(function(){
     });
     //回复
     $(document).on("click", ".reply-btn", function(){
-        $('.reply-form').removeClass('hidden');
-        $('.reply-form').appendTo($(this).closest('.media-body'));
-        $('.reply-form').find('.parent_id').val($(this).parents('li').attr('data-key'));
-        if($(this).parents('div.media').length > 0) {
-            $('.reply-form').find('textarea').val('@' + $(this).closest('.media-body').find('[rel=author]').first().html() + ' ');
+        if ($(this).closest('.media-body').children('.reply-form:visible').size() > 0) {
+            $('.reply-form').addClass('hidden');
         } else {
-            $('.reply-form').find('textarea').val('');
+            $('.reply-form').removeClass('hidden');
+            $('.reply-form').appendTo($(this).closest('.media-body'));
+            $('.reply-form').find('.parent_id').val($(this).parents('li').attr('data-key'));
+            if($(this).parents('div.media').length > 0) {
+                $('.reply-form').find('textarea').val('@' + $(this).closest('.media-body').find('[rel=author]').first().html() + ' ');
+            } else {
+                $('.reply-form').find('textarea').val('');
+            }
         }
         return false;
     });
