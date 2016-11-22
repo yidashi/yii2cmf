@@ -1,6 +1,8 @@
 <?php
 
 namespace common\models;
+use backend\behaviors\DynamicFormBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%article_exhibition}}".
@@ -11,7 +13,7 @@ namespace common\models;
  * @property string $city
  * @property string $address
  */
-class ArticleExhibition extends ArticleModuleContract
+class ArticleExhibition extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -49,14 +51,19 @@ class ArticleExhibition extends ArticleModuleContract
             'address' => '地址',
         ];
     }
-    public function attributeTypes()
+
+    public function behaviors()
     {
         return [
-            'start_at' => 'datetime',
-            'end_at' => 'datetime',
-            'city' => 'text',
-            'address' => 'text'
+            [
+                'class' => DynamicFormBehavior::className(),
+                'formAttributes' => [
+                    'start_at' => 'datetime',
+                    'end_at' => 'datetime',
+                    'city' => 'text',
+                    'address' => 'text'
+                ]
+            ]
         ];
     }
-
 }

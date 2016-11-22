@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
 /* @var $dataModel common\models\ArticleData */
-/* @var $moduleModel common\models\ArticleModuleContract */
+/* @var $moduleModel common\models\ArticleExhibition */
 /* @var $form backend\widgets\ActiveForm */
 ?>
 <div class="row">
@@ -38,7 +38,7 @@ use yii\helpers\Html;
                 <?php if ($moduleModel): ?>
                 <div class="tab-pane" id="tab_2">
                     <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
-                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute)]) ?>
+                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
                     <?php endforeach; ?>
                 </div>
                 <?php endif; ?>

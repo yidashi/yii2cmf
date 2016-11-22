@@ -9,6 +9,7 @@
 namespace common\widgets\dynamicInput;
 
 
+use common\modules\city\widgets\CityWidget;
 use common\widgets\EditorWidget;
 use common\widgets\upload\FileWidget;
 use common\widgets\upload\SingleWidget;
@@ -36,7 +37,8 @@ class DynamicInputWidget extends InputWidget
         'editor',
         'date',
         'datetime',
-        'file'
+        'file',
+        'city'
     ];
     public $type;
     public $data;
@@ -103,9 +105,8 @@ class DynamicInputWidget extends InputWidget
                     'value' => $this->value,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
+                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true],
                 ], $this->options));
-
                 break;
             case 'datetime': // 时间
                 return DateTimePicker::widget(ArrayHelper::merge([
@@ -114,6 +115,12 @@ class DynamicInputWidget extends InputWidget
                     'type' => 2,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
+                ], $this->options));
+                break;
+            case 'city': //城市联动
+                return CityWidget::widget(ArrayHelper::merge([
+                    'name' => $this->name,
+                    'value' => $this->value,
                 ], $this->options));
                 break;
         }
@@ -162,7 +169,7 @@ class DynamicInputWidget extends InputWidget
                     'attribute' => $this->attribute,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true]
+                    'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true],
                 ], $this->options));
                 break;
             case 'datetime': // 时间
@@ -171,7 +178,13 @@ class DynamicInputWidget extends InputWidget
                     'attribute' => $this->attribute,
                     'type' => 2,
                     'convertFormat' => true,
-                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
+                    'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true],
+                ], $this->options));
+                break;
+            case 'city': //城市联动
+                return CityWidget::widget(ArrayHelper::merge([
+                    'model' => $this->model,
+                    'attribute' => $this->attribute,
                 ], $this->options));
                 break;
         }
