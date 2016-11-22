@@ -8,8 +8,10 @@
 
 namespace common\modules\user;
 
+use common\behaviors\UserBehaviorBehavior;
 use Yii;
 use yii\base\BootstrapInterface;
+use yii\web\User;
 
 class Module extends \yii\base\Module implements BootstrapInterface
 {
@@ -84,7 +86,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'enableAutoLogin' => true,
                 'on afterLogin' => function($event) {
                     $event->identity->touch('login_at');
-                }
+                },
+                'as userBehavior' => [
+                    'class' => UserBehaviorBehavior::className(),
+                    'eventName' => User::EVENT_AFTER_LOGIN,
+                    'name' => 'login',
+                    'rule' => [
+                        'cycle' => 24,
+                        'max' => 1,
+                        'counter' => 10,
+                    ],
+                    'content' => '{user.username}在{extra.time}登录了系统',
+                    'data' => [
+                        'extra' => [
+                            'time' => date('Y-m-d H:i:s')
+                        ]
+                    ]
+                ]
             ]);
             $this->urlRules = [
                 '<id:\d+>' => 'default/index',
