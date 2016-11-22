@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a(Html::icon('ban'),
                                     ['/user/admin/block', 'id' => $model->user_id],
                                     [
+                                        'class' => 'btn btn-default btn-xs',
                                         'title' => '封禁用户',
                                         'data-confirm' => '确定要封禁用户吗?',
                                         'data-ajax' => '1',
