@@ -32,7 +32,9 @@ class AreaWidget extends Widget
     public function run()
     {
         $model = Area::findByIdOrSlug($this->slug);
-
+        if ($model == null) {
+            return '';
+        }
         $blocks = $model->getBlocks();
         $result = "";
         foreach ($blocks as $block) {

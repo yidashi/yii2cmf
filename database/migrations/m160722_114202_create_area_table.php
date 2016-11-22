@@ -42,13 +42,19 @@ class m160722_114202_create_area_table extends Migration
             'blocks' => ''
         ]);
         $this->insert('{{%area}}', [
-            'area_id' => '3',
-            'title' => '侧边栏',
-            'slug' => 'sidebar',
-            'description' => '侧边栏',
+            'area_id' => '2',
+            'title' => '首页侧边栏',
+            'slug' => 'site-index-sidebar',
+            'description' => '首页侧边栏',
             'blocks' => ''
         ]);
-
+        $this->insert('{{%area}}', [
+            'area_id' => '3',
+            'title' => '文章列表侧边栏',
+            'slug' => 'article-index-sidebar',
+            'description' => '文章列表侧边栏',
+            'blocks' => ''
+        ]);
         $this->insert('{{%area_block}}', [
             'block_id' => '7',
             'title' => '公告',

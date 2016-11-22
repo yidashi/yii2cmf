@@ -17,9 +17,6 @@ use yii\behaviors\SluggableBehavior;
  * @property integer $template
  * @property integer $cache
  * @property integer $used
- * @package hass\package_name
- * @author zhepama <zhepama@gmail.com>
- * @since 0.1.0
  */
 class Block extends \yii\db\ActiveRecord
 {

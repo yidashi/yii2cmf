@@ -17,7 +17,7 @@ if(isset($category)) {
 }
 
 ?>
-<div class="col-lg-8">
+<div class="col-lg-9">
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
@@ -41,7 +41,13 @@ if(isset($category)) {
     ]); ?>
     <?php endif;?>
 </div>
-<div class="col-lg-4">
+<div class="col-lg-3">
+    <?= \frontend\widgets\area\AreaWidget::widget([
+        'slug' => 'article-index-sidebar',
+        "blockClass"=>"panel panel-default",
+        "headerClass"=>"panel-heading",
+        "bodyClass"=>"panel-body",
+    ])?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h5>热门标签</h5>

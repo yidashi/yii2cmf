@@ -12,9 +12,6 @@ use Yii;
  * @property string $slug
  * @property string $description
  * @property string $blocks
- * @package hass\package_name
- * @author zhepama <zhepama@gmail.com>
- * @since 0.1.0
  */
 class Area extends \yii\db\ActiveRecord
 {
@@ -34,7 +31,7 @@ class Area extends \yii\db\ActiveRecord
         return [
             [['title', 'slug', 'description'], 'required'],
             [['title', 'slug', 'description'], 'string'],
-            ["blocks","safe"]
+            ["blocks", "safe"]
         ];
     }
 
@@ -48,7 +45,7 @@ class Area extends \yii\db\ActiveRecord
             'title' => '区域名',
             'slug' => '标识',
             'description' => '区域说明',
-            'blocks' => Yii::t('backend', 'Blocks'),
+            'blocks' => '区块',
         ];
     }
 
@@ -70,8 +67,7 @@ class Area extends \yii\db\ActiveRecord
     }
 
     public function getBlocks() {
-        if(!empty($this->blocks))
-        {
+        if(!empty($this->blocks)) {
             $query =   Block::find()->where(['block_id' => $this->blocks])->orderBy([new \yii\db\Expression('FIELD (block_id, ' . implode(', ', $this->blocks) . ')')]);
             return $query->all();
         }

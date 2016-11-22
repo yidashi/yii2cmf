@@ -24,10 +24,10 @@ class Article extends \common\models\Article
         return $rules;
     }
 
-    public static function hots($categoryId, $size = 10)
+    public static function hots($categoryId = null, $size = 10)
     {
         return self::find()
-            ->where(['category_id' => $categoryId])
+            ->filterWhere(['category_id' => $categoryId])
             ->normal()
             ->limit($size)
             ->orderBy('is_hot desc, view desc')

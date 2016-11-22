@@ -3,9 +3,7 @@ use backend\widgets\ActiveForm;
 use yii\helpers\Html;
 
 ?>
-<?php $form = ActiveForm::begin([
-    'enableAjaxValidation' => true
-]); ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <div class="box box-solid">
 <div class="box-body">
