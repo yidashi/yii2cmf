@@ -30,6 +30,8 @@ class TagsInput extends Select2
         parent::init();
         $this->pluginOptions['ajax'] = [
             'url' => Url::to($this->ajaxUrl),
+            'delay' => 500,
+            'minimumInputLength' => 2,
             'dataType' => 'json',
             'data' => new JsExpression('function(params) { return {q:params.term}; }')
         ];

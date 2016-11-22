@@ -50,8 +50,7 @@ class BoxField extends ActiveField
     public function begin()
     {
 
-        if($this->collapsed == true)
-        {
+        if($this->collapsed == true) {
             $this->options["class"] .= " collapsed-box";
         }
 
@@ -77,16 +76,11 @@ class BoxField extends ActiveField
 
 
 
-        if($this->collapsed == true)
-        {
+        if($this->collapsed == true) {
             $faclass= "fa-plus";
-        }
-        else
-        {
+        } else {
             $faclass= "fa-minus";
         }
-
-
 
         $content = '<h3 class="box-title">' . $title . '</h3>
                   <div class="box-tools pull-right">
