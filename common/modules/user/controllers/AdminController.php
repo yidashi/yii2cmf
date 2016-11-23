@@ -74,11 +74,11 @@ class AdminController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => User::find(),
-        ]);
+        $searchModel = new User(['scenario' => 'search']);
+        $dataProvider = new ActiveDataProvider(['query' => $searchModel->search(['username'])]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

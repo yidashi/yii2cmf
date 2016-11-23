@@ -2,6 +2,7 @@
 
 namespace common\modules\user\models;
 
+use backend\models\search\SearchModelTrait;
 use common\models\Sign;
 use common\models\UserLevel;
 use common\modules\user\traits\ModuleTrait;
@@ -26,12 +27,15 @@ use yii\web\IdentityInterface;
  * @property int $status
  * @property int $created_at
  * @property int $updated_at
+ * @property int $confirmed_at
+ * @property int $blocked_at
  * @property string $password write-only password
  * @property Profile $profile write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
+    use SearchModelTrait;
 
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
@@ -74,6 +78,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['username', 'string', 'on' => 'search'],
             ['username', 'required', 'on' => 'create'],
             ['username', 'unique', 'on' => 'create'],
             ['email', 'required', 'on' => 'create'],

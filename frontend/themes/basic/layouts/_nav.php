@@ -55,7 +55,7 @@ if ($noticeNums > 0) {
         'items' => [
             [
                 'label' => $noticeNums . '条新消息',
-                'url' => ['/user/notice']
+                'url' => ['/user/default/notice']
             ]
         ]
     ];
