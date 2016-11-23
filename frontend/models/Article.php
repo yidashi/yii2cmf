@@ -20,7 +20,7 @@ class Article extends \common\models\Article
     public function rules()
     {
         $rules = parent::rules();
-        $rules[] = ['status', 'default', 'value' => \Yii::$app->config->get('FRONTEND_PUB_CHECK', self::STATUS_ACTIVE)];
+        $rules[] = ['status', 'default', 'value' => 1 - \Yii::$app->config->get('FRONTEND_PUB_CHECK', self::STATUS_ACTIVE)];
         return $rules;
     }
 
