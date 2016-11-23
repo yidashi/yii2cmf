@@ -14,17 +14,17 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
 <style>
     .page-content img{max-width:95%;display:block;margin:0 auto;}
 </style>
-<div class="page-header text-center">
-    <h1><?= $page->title?></h1>
-</div>
 <div class="col-md-9">
-<div class="page-content">
-    <?= $page->content?>
-</div>
-<?= \frontend\widgets\comment\CommentWidget::widget([
-    'type' => 'page',
-    'type_id' => $page->id,
-]) ?>
+    <div class="page-header text-center">
+        <h1><?= $page->title?></h1>
+    </div>
+    <div class="page-content">
+        <?= $page->content?>
+    </div>
+    <?= \frontend\widgets\comment\CommentWidget::widget([
+        'type' => 'page',
+        'type_id' => $page->id,
+    ]) ?>
 </div>
 <div class="col-md-3">
     <div class="panel panel-default">

@@ -66,7 +66,6 @@ class EditorWidget extends InputWidget
             'fileManagerJson' => Url::to(['/upload/redactor-files-get']),
             'fileUpload' => Url::to(['/upload/redactor-file-upload']),
             'plugins' => [
-                'clips',
                 'fullscreen',
                 'imagemanager',
                 'filemanager'
