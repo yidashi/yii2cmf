@@ -28,6 +28,9 @@ class m160622_073825_create_notify extends Migration
             'read' => $this->boolean()->notNull()->defaultValue(0),
             'link' => $this->string(255)
         ], $tableOptions);
+        $this->createIndex('notify_from_uid_index', '{{%notify}}', 'from_uid');
+        $this->createIndex('notify_to_uid_index', '{{%notify}}', 'to_uid');
+        $this->createIndex('notify_category_id_index', '{{%notify}}', 'category_id');
         // notify_category
         $this->createTable('{{%notify_category}}', [
             'id' => $this->primaryKey(),
