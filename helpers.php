@@ -77,24 +77,7 @@ if (! function_exists('array_get')) {
      */
     function array_get($array, $key, $default = null)
     {
-        if (is_null($key)) {
-            return $array;
-        }
-
-        if (isset($array[$key])) {
-            return $array[$key];
-        }
-
-        foreach (explode('.', $key) as $segment) {
-
-            if (isset($array[$segment])) {
-                $array = $array[$segment];
-            } else {
-                return value($default);
-            }
-        }
-
-        return $array;
+        return \yii\helpers\ArrayHelper::getValue($array, $key, $default);
     }
 }
 
@@ -106,5 +89,21 @@ if (! function_exists('p')) {
         if ($die) {
             die;
         }
+    }
+}
+
+if (! function_exists('config')) {
+
+    function config($key = null, $default = null)
+    {
+        if (is_null($key)) {
+            return Yii::$app->config;
+        }
+
+        if (is_array($key)) {
+            return Yii::$app->config->set($key[0], $key[1]);
+        }
+
+        return Yii::$app->config->get($key, $default);
     }
 }

@@ -212,6 +212,13 @@ class m130524_201442_init extends Migration
             'created_at' => 1441766741,
             'updated_at' => 1441766741
         ]);
+
+        $this->insert('{{%category}}', [
+            'slug' => 'default',
+            'title' => '默认',
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
         $this->execute('SET foreign_key_checks = 1');
     }
 

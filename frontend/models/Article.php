@@ -17,12 +17,6 @@ use common\models\ArticleExhibition;
  */
 class Article extends \common\models\Article
 {
-    public function rules()
-    {
-        $rules = parent::rules();
-        $rules[] = ['status', 'default', 'value' => 1 - \Yii::$app->config->get('FRONTEND_PUB_CHECK', self::STATUS_ACTIVE)];
-        return $rules;
-    }
 
     public static function hots($categoryId = null, $size = 10)
     {

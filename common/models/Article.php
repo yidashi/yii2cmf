@@ -57,7 +57,6 @@ class Article extends \yii\db\ActiveRecord
             [['title', 'category_id'], 'required'],
             [['title'], 'trim'],
             [['status', 'category_id', 'view', 'up', 'down', 'is_top', 'is_hot', 'is_best'], 'integer'],
-            [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
             ['published_at', 'default', 'value' => function(){
                 return date('Y-m-d H:i:s', time());
             }],
@@ -70,7 +69,8 @@ class Article extends \yii\db\ActiveRecord
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category'], 'string', 'max' => 50],
             [['cover', 'source'], 'string', 'max' => 255],
-            [['description'], 'string']
+            [['description'], 'string'],
+            [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
         ];
     }
     public function setCategory($attribute, $params)
