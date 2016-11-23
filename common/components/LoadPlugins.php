@@ -13,18 +13,12 @@ use plugins\Plugins;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yii\caching\DbDependency;
 
 class LoadPlugins extends Component implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        $models = Yii::$app->cache->get('plugins');
-        if ($models === false) {
-            $models = Module::findOpenModules(Module::TYPE_PLUGIN);
-            Yii::$app->cache->set('plugins', $models, 0, new DbDependency(['sql' => 'SELECT MAX(`updated_at`) FROM {{%module}}']));
-        }
-
+        $models = Module::findOpenModules(Module::TYPE_PLUGIN);
         foreach ($models as $model) {
             /* @var $plugins Plugins*/
             $plugins = Yii::$app->pluginManager->findOne($model->id);

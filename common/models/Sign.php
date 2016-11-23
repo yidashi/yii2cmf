@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\behaviors\UserBehaviorBehavior;
 use common\modules\user\behaviors\UserBehavior;
 
 /**
@@ -52,7 +53,23 @@ class Sign extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            UserBehavior::class
+            UserBehavior::class,
+            [
+                'class' => UserBehaviorBehavior::className(),
+                'eventName' => [self::EVENT_AFTER_UPDATE, self::EVENT_AFTER_INSERT],
+                'name' => 'sign',
+                'rule' => [
+                    'cycle' => 24,
+                    'max' => 1,
+                    'counter' => 10,
+                ],
+                'content' => '{user.username}在{extra.time}签到',
+                'data' => [
+                    'extra' => [
+                        'time' => date('Y-m-d H:i:s')
+                    ]
+                ]
+            ]
         ];
     }
 }

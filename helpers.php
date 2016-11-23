@@ -107,3 +107,17 @@ if (! function_exists('config')) {
         return Yii::$app->config->get($key, $default);
     }
 }
+
+if (! function_exists('request')) {
+
+    function request($name = null, $defaultValue = null)
+    {
+        if (is_null($name)) {
+            return Yii::$app->request;
+        }
+
+        $params = Yii::$app->request->getQueryParams() + Yii::$app->request->getBodyParams();
+
+        return isset($params[$name]) ? $params[$name] : $defaultValue;
+    }
+}

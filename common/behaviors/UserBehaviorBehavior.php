@@ -22,7 +22,7 @@ class UserBehaviorBehavior extends Behavior
 
     public $name;
 
-    public $eventName;
+    public $eventName = [];
 
     /**
      * @var array 触发规则
@@ -46,9 +46,12 @@ class UserBehaviorBehavior extends Behavior
 
     public function events()
     {
-        return [
-            $this->eventName => 'execute'
-        ];
+        $events = [];
+        $this->eventName = (array) $this->eventName;
+        foreach ($this->eventName as $eventName) {
+            $events[$eventName] = 'execute';
+        }
+        return $events;
     }
 
     public function execute()

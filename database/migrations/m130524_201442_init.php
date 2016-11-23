@@ -234,7 +234,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%comment}}');
         $this->dropTable('{{%favourite}}');
         $this->dropTable('{{%gather}}');
-        $this->dropTable('{{%menu}}'); // fk: parent
         $this->dropTable('{{%page}}');
         $this->dropTable('{{%reward}}');
         $this->dropTable('{{%sign}}');

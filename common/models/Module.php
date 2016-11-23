@@ -2,7 +2,10 @@
 
 namespace common\models;
 
+use common\behaviors\CacheInvalidateBehavior;
+use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\caching\TagDependency;
 
 /**
  * This is the model class for table "{{%module}}".
@@ -24,6 +27,7 @@ class Module extends \yii\db\ActiveRecord
 
     const TYPE_CORE = 1;
     const TYPE_PLUGIN = 2;
+
     /**
      * @inheritdoc
      */
@@ -67,17 +71,26 @@ class Module extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'keys' => [
+                    ['modules', self::TYPE_CORE],
+                    ['modules', self::TYPE_PLUGIN]
+                ]
+            ]
         ];
     }
 
     public static function findOpenModules($type = null)
     {
-        $query = static::find();
-        return $query->where([
-            "status" => self::STATUS_OPEN
-        ])->andFilterWhere(['type' => $type])
-            ->all();
+        $modules = Yii::$app->cache->get(['modules', $type]);
+        if ($modules === false) {
+            $query = static::find();
+            $modules = $query->where(['status' => self::STATUS_OPEN])->andFilterWhere(['type' => $type])->all();
+            Yii::$app->cache->set(['modules', $type], $modules, 0);
+        }
+        return $modules;
     }
 
     public function loadDefaultValues($skipIfSet = true)
