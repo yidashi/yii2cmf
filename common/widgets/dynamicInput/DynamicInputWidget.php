@@ -15,6 +15,7 @@ use common\widgets\upload\FileWidget;
 use common\widgets\upload\SingleWidget;
 use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
+use kartik\select2\Select2;
 use yii\base\InvalidParamException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -31,6 +32,7 @@ class DynamicInputWidget extends InputWidget
         'password',
         'textarea',
         'select',
+        'multipleSelect',
         'checkbox',
         'radio',
         'image',
@@ -83,6 +85,14 @@ class DynamicInputWidget extends InputWidget
             case 'select': // 下拉
                 $options = array_merge($this->inputOptions, $this->options);
                 return Html::dropDownList($this->name, $this->value, $this->data, $options);
+                break;
+            case 'multipleSelect': // 多选下拉
+                return Select2::widget(ArrayHelper::merge([
+                    'name' => $this->name,
+                    'value' => $this->value,
+                    'data' => $this->data,
+                    'options' => ['multiple' => true]
+                ], $this->options));
                 break;
             case 'checkbox': // 多选
                 return Html::checkboxList($this->name, $this->value, $this->data, $this->options);
@@ -147,6 +157,14 @@ class DynamicInputWidget extends InputWidget
             case 'select': // 下拉
                 $options = array_merge($this->inputOptions, $this->options);
                 return Html::activeDropDownList($this->model, $this->attribute, $this->data, $options);
+                break;
+            case 'multipleSelect': // 多选下拉
+                return Select2::widget(ArrayHelper::merge([
+                    'model' => $this->model,
+                    'attribute' => $this->attribute,
+                    'data' => $this->data,
+                    'options' => ['multiple' => true]
+                ], $this->options));
                 break;
             case 'checkbox': // 多选
                 return Html::activeCheckboxList($this->model, $this->attribute, $this->data, $this->options);

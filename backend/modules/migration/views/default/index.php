@@ -25,7 +25,7 @@ $this->title = Yii::t('backend', '迁移');
 <?= $form->boxField($model, "tableDatas")->checkboxList(MigrationUtility::getTableNames())->header("迁移表数据")->hint(Html::a("全选",'javascript:void(0)',['class'=>"select-all"]))?>
 
 <div class="form-group">
-     <?= Html::submitButton('迁移', ['class' => 'btn bg-maroon btn-flat btn-block ', 'name' => 'button-submit', 'id' => 'button-submit'])?>
+     <?= Html::submitButton('生成迁移文件', ['class' => 'btn bg-maroon btn-flat btn-block ', 'name' => 'button-submit', 'id' => 'button-submit'])?>
 </div>
 <?php ActiveForm::end()?>
 
