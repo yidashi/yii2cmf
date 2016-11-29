@@ -6,16 +6,16 @@ class m161102_090614_city extends Migration
 {
     public function up()
     {
-$this->createTable('{{%city}}', [
-	'id' => 'INT(11) NOT NULL AUTO_INCREMENT',
-	'name' => 'VARCHAR(255) NULL',
-	'parent_id' => 'INT(11) NULL',
-	'sort' => 'SMALLINT(1) NULL',
-	'deep' => 'SMALLINT(1) NULL',
-	'PRIMARY KEY (`id`)'
-], "CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB");
- 
-$this->createIndex('parent_id','{{%city}}','parent_id',0);
+        $this->createTable('{{%city}}', [
+            'id' => 'INT(11) NOT NULL AUTO_INCREMENT',
+            'name' => 'VARCHAR(255) NULL',
+            'parent_id' => 'INT(11) NULL',
+            'sort' => 'SMALLINT(1) NULL',
+            'deep' => 'SMALLINT(1) NULL',
+            'PRIMARY KEY (`id`)'
+        ], "CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB");
+
+        $this->createIndex('parent_id','{{%city}}','parent_id',0);
 
 
         /* Table yii2cmf_city */

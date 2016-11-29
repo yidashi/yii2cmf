@@ -58,7 +58,15 @@ class m130524_201442_init extends Migration
             'article_id' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'tag_id' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
-
+// meta
+        $this->createTable('{{%meta}}', [
+            'id' => $this->primaryKey(),
+            'title' => $this->string(128),
+            'keywords' => $this->string(128),
+            'description' => $this->string(128),
+            'type' => $this->string(128),
+            'type_id' => $this->integer()
+        ], $this->tableOptions);
 // auth
         $this->createTable('{{%auth}}', [
             'id' => Schema::TYPE_PK,
@@ -229,6 +237,7 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%article}}');
         $this->dropTable('{{%article_data}}');
         $this->dropTable('{{%article_tag}}');
+        $this->dropTable('{{%meta}}');
         $this->dropTable('{{%auth}}');
         $this->dropTable('{{%category}}');
         $this->dropTable('{{%comment}}');

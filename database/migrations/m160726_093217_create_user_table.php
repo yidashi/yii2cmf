@@ -13,6 +13,10 @@ class m160726_093217_create_user_table extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         // user
         $this->createTable('{{%user}}', [
             'id' => Schema::TYPE_PK,
@@ -28,7 +32,7 @@ class m160726_093217_create_user_table extends Migration
             'confirmed_at' => $this->integer()->null(),
             'access_token' => $this->string(32)->null(),
             'expired_at' => $this->integer()->null()
-        ]);
+        ], $tableOptions);
         // profile
         $this->createTable('{{%profile}}', [
             'user_id' => Schema::TYPE_PK,
@@ -44,7 +48,7 @@ class m160726_093217_create_user_table extends Migration
             'locale' => Schema::TYPE_STRING . "(32) NOT NULL DEFAULT 'zh-CN'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
-        ]);
+        ], $tableOptions);
 
         $this->insert('{{%user}}', [
             'username' => 'hehe',

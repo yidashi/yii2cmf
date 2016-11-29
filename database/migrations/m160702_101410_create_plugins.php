@@ -12,6 +12,10 @@ class m160702_101410_create_plugins extends Migration
      */
     public function up()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%module}}', [
             'id' => $this->string(50)->notNull()->unique()->comment('标识'),
             'name' => $this->string(50)->notNull(),
@@ -22,7 +26,7 @@ class m160702_101410_create_plugins extends Migration
             'config' => $this->text()->comment('配置'),
             'created_at' => $this->integer(10)->notNull(),
             'updated_at' => $this->integer(10)->notNull(),
-        ]);
+        ], $tableOptions);
         $this->addPrimaryKey('id', '{{%module}}', 'id');
         $this->insert('{{%module}}', [
             'id' => 'user',

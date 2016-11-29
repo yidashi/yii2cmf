@@ -7,6 +7,7 @@ use yii\db\Migration;
  */
 class m160912_051818_create_album_table extends Migration
 {
+    public $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     /**
      * @inheritdoc
      */
@@ -20,11 +21,11 @@ class m160912_051818_create_album_table extends Migration
             'user_id' => $this->integer(11)->notNull()->comment('创建者'),
             'created_at' => $this->integer(10)->notNull(),
             'updated_at' => $this->integer(10)->notNull()
-        ]);
+        ], $this->tableOptions);
         $this->createTable('{{%album_attachment}}', [
             'album_id' => $this->integer(11)->notNull()->comment('相册ID'),
             'attachment_id' => $this->integer(11)->notNull()->comment('附件ID'),
-        ]);
+        ], $this->tableOptions);
     }
 
     /**

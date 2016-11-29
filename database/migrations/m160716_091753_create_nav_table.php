@@ -12,11 +12,15 @@ class m160716_091753_create_nav_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
         $this->createTable('{{%nav}}', [
             'id' => $this->primaryKey(),
             'key' => $this->string(128),
             'title' => $this->string(128)
-        ]);
+        ], $tableOptions);
 
         $this->createTable('{{%nav_item}}', [
             'id' => $this->primaryKey(),
@@ -26,7 +30,7 @@ class m160716_091753_create_nav_table extends Migration
             'target' => $this->smallInteger(1)->comment('是否新窗口打开')->defaultValue(0),
             'order' => $this->smallInteger(1),
             'status' => $this->smallInteger(1)->notNull()->defaultValue(0)
-        ]);
+        ], $tableOptions);
         $this->insert('{{%nav}}', [
             'id' => 1,
             'key' => 'header',
