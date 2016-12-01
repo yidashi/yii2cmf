@@ -1,8 +1,24 @@
+body {
+    font-size:13px;
+}
 div.required label.control-label:after {
      content: " *";
      color: red;
  }
 td{word-break: break-all}
+.alert a {text-decoration: none!important;}
+.sidebar-menu .treeview-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+}
+.sidebar-menu .treeview-menu>li>a {
+    padding: 5px 5px 5px 15px;
+    display: block;
+    font-size: 13px;
+}
 /*主题*/
 .theme {
     position: relative;

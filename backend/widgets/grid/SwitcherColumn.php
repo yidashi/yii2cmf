@@ -1,9 +1,9 @@
 <?php
 namespace backend\widgets\grid;
 
-use common\enums\StatusEnum;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
+use common\enums\StatusEnum;
 use yii\helpers\Url;
 
 class SwitcherColumn extends  DataColumn
@@ -58,13 +58,10 @@ EOT;
 
         $value = $this->getDataCellValue($model, $key, $index) ;
 
-        
-        if(is_string($value))
-        {
+
+        if(is_string($value)) {
             $result =  $value;
-        }
-        else
-        {
+        } else {
             $this->registerClientScript();
             $result =  Html::checkbox('', $value == StatusEnum::STATUS_ON, [
                 'class' => 'js-switch',
@@ -73,7 +70,7 @@ EOT;
                 'data-reload' => $this->reload
             ]);
         }
-        
+
 
         return $result;
     }
