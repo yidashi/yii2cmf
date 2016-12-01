@@ -6,9 +6,9 @@ use yii\web\AssetBundle;
 
 class LayerAsset extends AssetBundle
 {
-    public $sourcePath = '@common/static/layer';
+    public $sourcePath = '@common/static';
     public $js = [
-        'layer.js'
+        'layer/layer.js'
     ];
     public $depends = [
         'yii\web\JqueryAsset',
