@@ -26,7 +26,6 @@ console         控制台
 database        数据库（迁移 填充）
 frontend        前台
 plugins         插件
-tests           测试
 vendor          扩展
 web             web统一入口（web服务器可只开放该目录,保证安全）
 wechat          微信

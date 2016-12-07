@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d87f9f0450394741393949890418a767",
+    "hash": "43f89de9d5f63063cd432a1a2d656f2b",
+    "content-hash": "98c136fbc32ba69b7eedf0b161e705d2",
     "packages": [
         {
             "name": "2amigos/yii2-editable-widget",
@@ -48,7 +49,7 @@
                 "x-editable",
                 "yii"
             ],
-            "time": "2015-02-20T15:13:36+00:00"
+            "time": "2015-02-20 15:13:36"
         },
         {
             "name": "aferrandini/phpqrcode",
@@ -92,7 +93,7 @@
                 "php",
                 "qrcode"
             ],
-            "time": "2013-07-08T09:39:08+00:00"
+            "time": "2013-07-08 09:39:08"
         },
         {
             "name": "bower-asset/blueimp-canvas-to-blob",
@@ -252,6 +253,42 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/editor.md",
+            "version": "v1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pandao/editor.md.git",
+                "reference": "af08536772e34f6ef95870bb4cfd85d09bf1c932"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pandao/editor.md/zipball/af08536772e34f6ef95870bb4cfd85d09bf1c932",
+                "reference": "af08536772e34f6ef95870bb4cfd85d09bf1c932",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "research",
+                    "docs",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Open source online markdown editor.",
+            "keywords": [
+                "editor",
+                "editor.md",
+                "markdown"
             ]
         },
         {
@@ -541,7 +578,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2016-09-14T20:40:20+00:00"
+            "time": "2016-09-14 20:40:20"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -585,7 +622,7 @@
             "keywords": [
                 "html"
             ],
-            "time": "2016-07-16T12:58:58+00:00"
+            "time": "2016-07-16 12:58:58"
         },
         {
             "name": "fabpot/goutte",
@@ -634,7 +671,7 @@
             "keywords": [
                 "scraper"
             ],
-            "time": "2015-11-05T12:58:44+00:00"
+            "time": "2015-11-05 12:58:44"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -696,7 +733,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-10-08T15:01:37+00:00"
+            "time": "2016-10-08 15:01:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -747,7 +784,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-05-18T16:56:05+00:00"
+            "time": "2016-05-18 16:56:05"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -805,7 +842,7 @@
                 "stream",
                 "uri"
             ],
-            "time": "2016-06-24T23:00:38+00:00"
+            "time": "2016-06-24 23:00:38"
         },
         {
             "name": "hightman/xunsearch",
@@ -863,7 +900,7 @@
                 "yii",
                 "yii2"
             ],
-            "time": "2016-03-23T15:34:06+00:00"
+            "time": "2016-03-23 15:34:06"
         },
         {
             "name": "imagine/imagine",
@@ -915,7 +952,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2013-07-10T17:25:36+00:00"
+            "time": "2013-07-10 17:25:36"
         },
         {
             "name": "kartik-v/yii2-krajee-base",
@@ -966,7 +1003,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04T09:25:29+00:00"
+            "time": "2016-09-04 09:25:29"
         },
         {
             "name": "kartik-v/yii2-widget-datepicker",
@@ -1020,7 +1057,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-09-04T10:52:50+00:00"
+            "time": "2016-09-04 10:52:50"
         },
         {
             "name": "kartik-v/yii2-widget-datetimepicker",
@@ -1069,7 +1106,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-01-10T12:18:38+00:00"
+            "time": "2016-01-10 12:18:38"
         },
         {
             "name": "kartik-v/yii2-widget-select2",
@@ -1122,7 +1159,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-02-17T11:49:30+00:00"
+            "time": "2016-02-17 11:49:30"
         },
         {
             "name": "mihaildev/yii2-elfinder",
@@ -1173,7 +1210,7 @@
                 "filemanager",
                 "yii"
             ],
-            "time": "2016-06-30T12:03:17+00:00"
+            "time": "2016-06-30 12:03:17"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -1227,7 +1264,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2016-04-24T09:47:16+00:00"
+            "time": "2016-04-24 09:47:16"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -1271,7 +1308,7 @@
                 "cron",
                 "schedule"
             ],
-            "time": "2016-01-26T21:23:30+00:00"
+            "time": "2016-01-26 21:23:30"
         },
         {
             "name": "omnilight/yii2-scheduling",
@@ -1318,7 +1355,7 @@
                 "scheduling",
                 "yii"
             ],
-            "time": "2016-07-09T17:56:42+00:00"
+            "time": "2016-07-09 17:56:42"
         },
         {
             "name": "pda/pheanstalk",
@@ -1368,7 +1405,7 @@
             "keywords": [
                 "beanstalkd"
             ],
-            "time": "2015-08-07T21:42:41+00:00"
+            "time": "2015-08-07 21:42:41"
         },
         {
             "name": "pimple/pimple",
@@ -1414,7 +1451,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2015-09-11T15:10:35+00:00"
+            "time": "2015-09-11 15:10:35"
         },
         {
             "name": "psr/http-message",
@@ -1464,7 +1501,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "raulfraile/distill",
@@ -1533,7 +1570,7 @@
                 "xz",
                 "zip"
             ],
-            "time": "2015-12-15T06:50:39+00:00"
+            "time": "2015-12-15 06:50:39"
         },
         {
             "name": "studio-42/elfinder",
@@ -1591,7 +1628,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-10-11T04:44:07+00:00"
+            "time": "2016-10-11 04:44:07"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1644,7 +1681,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-07-08T11:51:25+00:00"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/browser-kit",
@@ -1701,7 +1738,7 @@
             ],
             "description": "Symfony BrowserKit Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-06T11:02:40+00:00"
+            "time": "2016-09-06 11:02:40"
         },
         {
             "name": "symfony/css-selector",
@@ -1754,7 +1791,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-06T11:02:40+00:00"
+            "time": "2016-09-06 11:02:40"
         },
         {
             "name": "symfony/dom-crawler",
@@ -1810,7 +1847,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2016-08-05T08:37:39+00:00"
+            "time": "2016-08-05 08:37:39"
         },
         {
             "name": "symfony/filesystem",
@@ -1859,7 +1896,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2016-09-14T00:18:46+00:00"
+            "time": "2016-09-14 00:18:46"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1918,7 +1955,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18T14:26:46+00:00"
+            "time": "2016-05-18 14:26:46"
         },
         {
             "name": "symfony/process",
@@ -1968,7 +2005,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-06-30T16:10:16+00:00"
+            "time": "2015-06-30 16:10:16"
         },
         {
             "name": "udokmeci/yii2-beanstalk",
@@ -2072,7 +2109,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2016-09-01T10:05:43+00:00"
+            "time": "2016-09-01 10:05:43"
         },
         {
             "name": "vova07/yii2-imperavi-widget",
@@ -2134,61 +2171,7 @@
                 "yii 2",
                 "yii2"
             ],
-            "time": "2015-12-10T21:16:23+00:00"
-        },
-        {
-            "name": "yidashi/yii2-bootstrap-markdown",
-            "version": "v2.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidashi/yii2-bootstrap-markdown.git",
-                "reference": "9df58be2387f77afe6f7ea508b0a992bf8093289"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/yidashi/yii2-bootstrap-markdown/9df58be2387f77afe6f7ea508b0a992bf8093289.zip",
-                "reference": "9df58be2387f77afe6f7ea508b0a992bf8093289",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "yidashi\\markdown\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "yii2-bootstrap-markdown",
-            "time": "2016-11-25T02:32:25+00:00"
-        },
-        {
-            "name": "yidashi/yii2-webuploader",
-            "version": "v1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yidashi/yii2-webuploader.git",
-                "reference": "196a7bfe3c1a28af08f86f128bbb4c39e4a7f14f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yidashi/yii2-webuploader/zipball/196a7bfe3c1a28af08f86f128bbb4c39e4a7f14f",
-                "reference": "196a7bfe3c1a28af08f86f128bbb4c39e4a7f14f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "yidashi\\webuploader\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "yii2-webuploader",
-            "time": "2016-07-14T11:02:43+00:00"
+            "time": "2015-12-10 21:16:23"
         },
         {
             "name": "yiisoft/yii2",
@@ -2282,7 +2265,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-07-11T13:36:42+00:00"
+            "time": "2016-07-11 13:36:42"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2330,7 +2313,7 @@
                 "oauth",
                 "yii2"
             ],
-            "time": "2016-07-08T13:58:12+00:00"
+            "time": "2016-07-08 13:58:12"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -2380,7 +2363,7 @@
                 "bootstrap",
                 "yii2"
             ],
-            "time": "2016-03-17T03:29:28+00:00"
+            "time": "2016-03-17 03:29:28"
         },
         {
             "name": "yiisoft/yii2-composer",
@@ -2427,7 +2410,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2016-02-06T00:49:24+00:00"
+            "time": "2016-02-06 00:49:24"
         },
         {
             "name": "yiisoft/yii2-imagine",
@@ -2475,7 +2458,7 @@
                 "imagine",
                 "yii2"
             ],
-            "time": "2016-09-04T15:14:08+00:00"
+            "time": "2016-09-04 15:14:08"
         },
         {
             "name": "yiisoft/yii2-jui",
@@ -2525,7 +2508,7 @@
                 "jQuery UI",
                 "yii2"
             ],
-            "time": "2016-07-22T22:26:59+00:00"
+            "time": "2016-07-22 22:26:59"
         },
         {
             "name": "yiisoft/yii2-redis",
@@ -2573,7 +2556,7 @@
                 "session",
                 "yii2"
             ],
-            "time": "2016-03-17T04:11:03+00:00"
+            "time": "2016-03-17 04:11:03"
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
@@ -2623,7 +2606,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-09-09T11:48:11+00:00"
+            "time": "2016-09-09 11:48:11"
         }
     ],
     "packages-dev": [
@@ -2700,7 +2683,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2016-04-29T12:21:54+00:00"
+            "time": "2016-04-29 12:21:54"
         },
         {
             "name": "phpspec/php-diff",
@@ -2738,53 +2721,7 @@
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
-            "time": "2016-04-07T12:29:16+00:00"
-        },
-        {
-            "name": "yiisoft/yii2-codeception",
-            "version": "2.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yiisoft/yii2-codeception.git",
-                "reference": "c916a36d09fc128b05a374e7922bc56854334d56"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/c916a36d09fc128b05a374e7922bc56854334d56",
-                "reference": "c916a36d09fc128b05a374e7922bc56854334d56",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": ">=2.0.4"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "yii\\codeception\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Mark Jebri",
-                    "email": "mark.github@yandex.ru"
-                }
-            ],
-            "description": "The Codeception integration for the Yii framework",
-            "keywords": [
-                "codeception",
-                "yii2"
-            ],
-            "abandoned": "codeception/codeception",
-            "time": "2016-03-17T03:41:26+00:00"
+            "time": "2016-04-07 12:29:16"
         },
         {
             "name": "yiisoft/yii2-debug",
@@ -2831,7 +2768,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2016-03-17T03:50:19+00:00"
+            "time": "2016-03-17 03:50:19"
         },
         {
             "name": "yiisoft/yii2-faker",
@@ -2878,7 +2815,7 @@
                 "faker",
                 "yii2"
             ],
-            "time": "2015-03-01T06:22:44+00:00"
+            "time": "2015-03-01 06:22:44"
         },
         {
             "name": "yiisoft/yii2-gii",
@@ -2931,7 +2868,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-03-18T14:09:46+00:00"
+            "time": "2016-03-18 14:09:46"
         }
     ],
     "aliases": [],

@@ -79,6 +79,21 @@ class UploadController extends Controller
                 'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
+            'md-image-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment',
+                'callback' => function($result) {
+                    return !isset($result['files'][0]['error']) ? [
+                        'success' => 1,
+                        'url' => $result['files'][0]['url']
+                    ] : [
+                        'success' => 0,
+                        'message' => $result['files'][0]['error']
+                    ];
+                }
+            ],
         ];
     }
 

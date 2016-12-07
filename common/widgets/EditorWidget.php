@@ -9,11 +9,11 @@
 namespace common\widgets;
 
 
+use common\widgets\editormd\Editormd;
 use vova07\imperavi\Widget;
-use yidashi\markdown\Markdown;
 use yii\base\InvalidParamException;
-use yii\helpers\Url;
 use yii\widgets\InputWidget;
+use yii\helpers\Url;
 
 class EditorWidget extends InputWidget
 {
@@ -43,13 +43,13 @@ class EditorWidget extends InputWidget
     public function markdown()
     {
         if ($this->hasModel()) {
-            return Markdown::widget([
+            return Editormd::widget([
                 'model' => $this->model,
                 'attribute' => $this->attribute,
                 'options' => $this->options
             ]);
         } else {
-            return Markdown::widget([
+            return Editormd::widget([
                 'name' => $this->name,
                 'value' => $this->value,
                 'options' => $this->options
@@ -66,6 +66,7 @@ class EditorWidget extends InputWidget
             'fileManagerJson' => Url::to(['/upload/redactor-files-get']),
             'fileUpload' => Url::to(['/upload/redactor-file-upload']),
             'plugins' => [
+                'clips',
                 'fullscreen',
                 'imagemanager',
                 'filemanager'

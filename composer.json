@@ -20,18 +20,13 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-authclient": "^2.0",
         "yiisoft/yii2-redis": "*",
-        "yiisoft/yii2-composer": "2.0.4",
         "yiisoft/yii2-imagine": "^2.0",
-        "yidashi/yii2-bootstrap-markdown": "2.0.3",
-        "yidashi/yii2-webuploader": "^1.4.2",
         "aferrandini/PHPQRCode": "1.0.1",
         "mobiledetect/mobiledetectlib": "^2.8",
         "mihaildev/yii2-elfinder": "^1.0",
         "omnilight/yii2-scheduling": "*",
         "vlucas/phpdotenv": "^2.0",
         "vova07/yii2-imperavi-widget": "*",
-        "bower-asset/blueimp-file-upload" : "*",
-        "bower-asset/font-awesome": "^4.0",
         "2amigos/yii2-editable-widget": "0.1.*",
         "raulfraile/distill": "@stable",
         "fabpot/goutte": "^3.1",
@@ -39,10 +34,12 @@
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
         "kartik-v/yii2-widget-datepicker": "^1.3",
         "udokmeci/yii2-beanstalk": "dev-master",
-        "hightman/xunsearch": "*@beta"
+        "hightman/xunsearch": "*@beta",
+        "bower-asset/blueimp-file-upload" : "*",
+        "bower-asset/font-awesome": "^4.0",
+        "bower-asset/editor.md": "*"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*"
