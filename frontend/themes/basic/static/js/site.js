@@ -9,7 +9,7 @@ $.extend($.modal, {
 $(function(){
     $("[data-toggle=tooltip]").tooltip({container: 'body'});
     //投票
-    $('.vote a').on('click', function() {
+    $(document).on('click', '.vote a', function() {
         var a = $(this);
         var title = a.attr('data-original-title');
         $.ajax({
@@ -28,7 +28,7 @@ $(function(){
         return false;
     });
     //详细页收藏
-    $('.favourites a').on('click', function() {
+    $(document).on('click', '.favourites a', function() {
         var a = $(this);
         var i = a.find('i');
         var em = a.find('em');
@@ -68,7 +68,7 @@ $(function(){
         return false;
     });
     // 签到
-    $(".btn-registration").click(function(){
+    $(document).on('click', ".btn-registration", function(){
         var button = $(this);
         var url = button.attr('href');
         var loading = $.modal.loading();
