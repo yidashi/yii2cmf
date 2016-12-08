@@ -71,12 +71,12 @@ class DefaultController extends Controller
     {
         $model = new Article();
         $dataModel = new ArticleData();
-        if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            $dataModel->load(\Yii::$app->request->post());
+        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post()) && $model->validate() && $dataModel->validate() && $model->save(false)) {
             $dataModel->id = $model->id;
-            $dataModel->save();
-            \Yii::$app->session->setFlash('success', '发布成功！');
-            return $this->redirect(['create-article']);
+            if ($dataModel->save(false)) {
+                \Yii::$app->session->setFlash('success', '发布成功！');
+                return $this->redirect(['create-article']);
+            }
         }
 
         return $this->render('/article/create', [
@@ -92,10 +92,12 @@ class DefaultController extends Controller
         }
         $dataModel = $model->data;
         if (
-            $model->load(\Yii::$app->request->post()) &&
-            $model->save() &&
-            $dataModel->load(\Yii::$app->request->post()) &&
-            $dataModel->save()
+            $model->load(\Yii::$app->request->post())
+            && $model->validate()
+            && $dataModel->load(\Yii::$app->request->post())
+            && $dataModel->validate()
+            && $model->save(false)
+            && $dataModel->save(false)
         ) {
             \Yii::$app->session->setFlash('success', '修改成功！');
             return $this->redirect(['update-article', 'id' => $id]);

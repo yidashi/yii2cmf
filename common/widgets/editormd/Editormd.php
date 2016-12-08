@@ -10,6 +10,7 @@ namespace common\widgets\editormd;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 class Editormd extends InputWidget
@@ -33,7 +34,7 @@ class Editormd extends InputWidget
     public function init()
     {
         parent::init();
-        $this->options = array_merge([
+        $this->clientOptions = array_merge([
             'height' => '300',
             'dialogLockScreen' => false,
             'autoFocus' => false,
@@ -43,19 +44,18 @@ class Editormd extends InputWidget
             'syncScrolling' => 'single',
             'imageUpload' => true,
             'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp", "JPG", "JPEG", "GIF", "PNG", "BMP", "WEBP"],
-            'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute)
-        ], $this->options);
+            'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute),
+        ], $this->clientOptions);
 
         if ($this->mode == 'mini') {
-            $this->options['toolbarIcons'] = ["bold", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "link", "image", "code-block"];
+            $this->clientOptions['toolbarIcons'] = ["bold", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "link", "image", "code-block"];
         }
     }
 
     public function run()
     {
         if ($this->hasModel()) {
-            $this->name = empty($this->options['name']) ? Html::getInputName($this->model, $this->attribute) :
-                $this->options['name'];
+            $this->name = Html::getInputName($this->model, $this->attribute);
             $this->value = Html::getAttributeValue($this->model, $this->attribute);
         }
         echo Html::tag('div', '', $this->options);
@@ -67,11 +67,11 @@ class Editormd extends InputWidget
         $view = $this->getView();
         $editormd = EditormdAsset::register($view);
         $id = $this->options['id'];
-        $this->options['value'] = $this->value ? $this->value : '';
-        $this->options['name'] = $this->name;
-        $this->options['path'] = $editormd->baseUrl . '/lib/';
-        $options = Json::encode($this->options);
-        $js = 'var editor = editormd("' . $id . '", ' . $options . ');';
+        $this->clientOptions['value'] = $this->value ? $this->value : '';
+        $this->clientOptions['name'] = $this->name;
+        $this->clientOptions['path'] = $editormd->baseUrl . '/lib/';
+        $clientOptions = Json::encode($this->clientOptions);
+        $js = 'var editor = editormd("' . $id . '", ' . $clientOptions . ');';
         $view->registerJs($js);
     }
 }

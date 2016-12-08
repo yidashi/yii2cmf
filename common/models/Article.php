@@ -34,6 +34,7 @@ use yii\behaviors\TimestampBehavior;
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
  * @property boolean $isFavourite read-only
+ * @property ArticleData $data
  */
 class Article extends \yii\db\ActiveRecord
 {
