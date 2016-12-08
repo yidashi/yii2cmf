@@ -35,6 +35,7 @@ class Editormd extends InputWidget
         parent::init();
         $this->options = array_merge([
             'height' => '300',
+            'dialogLockScreen' => false,
             'autoFocus' => false,
             'emoji' => true,
             'watch' => false,
@@ -45,7 +46,7 @@ class Editormd extends InputWidget
             'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute)
         ], $this->options);
 
-        if ($this->mode = 'mini') {
+        if ($this->mode == 'mini') {
             $this->options['toolbarIcons'] = ["bold", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "link", "image", "code-block"];
         }
     }
