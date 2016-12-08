@@ -37,9 +37,6 @@ class SiteController extends Controller
             'demo' => [
                 'class' => 'yii\web\ViewAction',
             ],
-            'webupload' => [
-                'class' => \yidashi\webuploader\Action::className()
-            ],
         ];
     }
 
