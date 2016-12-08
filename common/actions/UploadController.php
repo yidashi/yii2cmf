@@ -16,6 +16,7 @@ use yii\web\Controller;
 
 class UploadController extends Controller
 {
+    public $enableCsrfValidation = false;
     public function actions()
     {
         return [
