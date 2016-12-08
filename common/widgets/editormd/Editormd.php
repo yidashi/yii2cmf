@@ -27,11 +27,15 @@ class Editormd extends InputWidget
         '/upload/md-image-upload',
         'fileparam' => 'editormd-image-file'
     ];
+
+    public $mode = 'full';
+
     public function init()
     {
         parent::init();
         $this->options = array_merge([
             'height' => '300',
+            'autoFocus' => false,
             'emoji' => true,
             'watch' => false,
             'placeholder' => '本编辑器支持Markdown编辑，左边编写，右边预览',
@@ -40,6 +44,10 @@ class Editormd extends InputWidget
             'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp", "JPG", "JPEG", "GIF", "PNG", "BMP", "WEBP"],
             'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute)
         ], $this->options);
+
+        if ($this->mode = 'mini') {
+            $this->options['toolbarIcons'] = ["bold", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "link", "image", "code-block"];
+        }
     }
 
     public function run()
