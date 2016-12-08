@@ -35,9 +35,11 @@ $this->registerMetaTag([
 
 <?= $this->render('_nav') ?>
 <div class="container">
+    <?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
     <?= Breadcrumbs::widget([
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]) ?>
+    <?php endif; ?>
     <?= \common\widgets\Alert::widget()?>
     <?= $content ?>
 </div>

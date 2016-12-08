@@ -40,11 +40,18 @@ class Editormd extends InputWidget
             'autoFocus' => false,
             'emoji' => true,
             'watch' => false,
-            'placeholder' => '本编辑器支持Markdown编辑，左边编写，右边预览',
+            'placeholder' => '',
             'syncScrolling' => 'single',
             'imageUpload' => true,
             'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp", "JPG", "JPEG", "GIF", "PNG", "BMP", "WEBP"],
             'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute),
+            'onchange' => new JsExpression(<<<js
+function () {
+    console.log(this.id);
+    $('#' + this.id).blur();
+}
+js
+)
         ], $this->clientOptions);
 
         if ($this->mode == 'mini') {
@@ -54,11 +61,13 @@ class Editormd extends InputWidget
 
     public function run()
     {
+        echo Html::beginTag('div', ['id' => $this->getId()]);
         if ($this->hasModel()) {
-            $this->name = Html::getInputName($this->model, $this->attribute);
-            $this->value = Html::getAttributeValue($this->model, $this->attribute);
+            echo Html::activeTextarea($this->model, $this->attribute, ['id' => Html::getInputId($this->model, $this->attribute)]);
+        } else {
+            echo Html::textarea($this->name, $this->value, $this->options);
         }
-        echo Html::tag('div', '', $this->options);
+        echo Html::endTag('div');
         $this->registerClientScript();
     }
 
@@ -66,12 +75,9 @@ class Editormd extends InputWidget
     {
         $view = $this->getView();
         $editormd = EditormdAsset::register($view);
-        $id = $this->options['id'];
-        $this->clientOptions['value'] = $this->value ? $this->value : '';
-        $this->clientOptions['name'] = $this->name;
         $this->clientOptions['path'] = $editormd->baseUrl . '/lib/';
         $clientOptions = Json::encode($this->clientOptions);
-        $js = 'var editor = editormd("' . $id . '", ' . $clientOptions . ');';
+        $js = 'var editor = editormd("' . $this->getId() . '", ' . $clientOptions . ');';
         $view->registerJs($js);
     }
 }
