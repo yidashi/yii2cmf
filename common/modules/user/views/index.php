@@ -19,6 +19,7 @@ $this->title = '个人中心';
                     <?= Html::img($user->getAvatar(96), ['class' => 'avatar']) ?>
                 </a>
                 <h1><?= $user->username?></h1>
+                <span class="label label-primary"><?= $user->getLevel()['nick'] ?></span>
                 <p><?= $user->profile->signature?></p>
                 <div class="button">
                     <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($user->id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($user->id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $user->id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($user->id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>

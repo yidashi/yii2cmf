@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
-        <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), ['type' => $dataModel->markdown ? 'markdown' : null]); ?>
+        <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? [] : ['isMarkdown' => $dataModel->markdown]); ?>
 
     </div>
     <div class="col-lg-3">

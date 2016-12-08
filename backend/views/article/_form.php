@@ -31,7 +31,7 @@ use yii\helpers\Html;
 
                     <?= $form->boxField($model, 'description')->textarea()?>
 
-                    <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), ['type' => $dataModel->markdown ? 'markdown' : null]); ?>
+                    <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? [] : ['isMarkdown' => $dataModel->markdown]); ?>
 
                     <?= $form->boxField($model, 'meta', ["collapsed" => true])->widget(MetaForm::className())->header("SEO"); ?>
                 </div>

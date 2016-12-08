@@ -17,6 +17,9 @@ use yii\helpers\Url;
 
 class EditorWidget extends InputWidget
 {
+
+    public $isMarkdown;
+
     public $typeEnum = ['redactor', 'markdown'];
     /**
      * @var string 编辑器类型
@@ -27,6 +30,13 @@ class EditorWidget extends InputWidget
 
     public function init()
     {
+        if (isset($this->isMarkdown)) {
+            if ($this->isMarkdown) {
+                $this->type = 'markdown';
+            } else {
+                $this->type = 'redactor';
+            }
+        }
         if (empty($this->type)) {
             $this->type = \Yii::$app->config->get('EDITOR_TYPE');
         }
