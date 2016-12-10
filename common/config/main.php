@@ -8,7 +8,8 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
-            'cachePath' => '@root/cache'
+            'cachePath' => '@root/cache',
+            'dirMode' => 0777 // 防止console生成的目录导致web账户没写权限
         ],
         'formatter' => [
             'dateFormat' => 'yyyy-MM-dd',
