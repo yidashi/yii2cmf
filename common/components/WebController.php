@@ -9,7 +9,16 @@
 namespace common\components;
 
 
+use yii\helpers\ArrayHelper;
+
 class WebController extends \yii\web\Controller
 {
-
+    public function renderJson($status, $message, $data = [])
+    {
+        \Yii::$app->response->format = 'json';
+        return ArrayHelper::merge([
+            'status' => $status,
+            'message' => $message,
+        ], $data);
+    }
 }

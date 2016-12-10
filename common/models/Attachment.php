@@ -5,12 +5,15 @@ namespace common\models;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\StringHelper;
+use yii\imagine\Image;
 
 /**
- * This is the model class for table "pop_attachment".
+ * This is the model class for table 'pop_attachment'.
  *
  * @property integer $id
  * @property integer $user_id
+ * @property string $name
  * @property string $title
  * @property string $description
  * @property string $hash
@@ -77,6 +80,96 @@ class Attachment extends \yii\db\ActiveRecord
         return Yii::$app->storage->basePath . DIRECTORY_SEPARATOR . $this->name;
     }
 
+    public function getAbsolutePath()
+    {
+        return Yii::$app->storage->basePath . DIRECTORY_SEPARATOR . $this->name;
+    }
+
+    public function getFile()
+    {
+        return Yii::$app->fs->get($this->name);
+    }
+
+    public function getThumb($width, $height, $options = [])
+    {
+        $width = (int) $width;
+        $height = (int) $height;
+
+        $options = $this->getDefaultThumbOptions($options);
+
+        $thumbFile = $this->getThumbFilename($width, $height, $options);
+        $thumbPath = \Yii::$app->storage->getPath($thumbFile);
+
+        if (!\Yii::$app->get('fs')->has($thumbPath)) {
+            $this->makeThumbStorage($thumbFile, $thumbPath, $width, $height, $options);
+        }
+        return \Yii::$app->storage->path2url($thumbPath);
+    }
+
+    protected function makeThumbStorage($thumbFile, $thumbPath, $width, $height, $options)
+    {
+        Image::thumbnail($this->getFilePath(), $width, $height)->save($thumbPath);
+
+    }
+    
+    protected function getThumbFilename($width, $height, $options)
+    {
+        return 'thumb_' . $this->primaryKey . '_' . $width . 'x' . $height . '_' . $options['offset'][0] . '_' . $options['offset'][1] . '_' . $options['mode'] . '.' . $options['extension'];
+    }
+
+    protected function getDefaultThumbOptions($overrideOptions = [])
+    {
+        $defaultOptions = [
+            'mode' => 'auto',
+            'offset' => [
+                0,
+                0
+            ],
+            'quality' => 95,
+            'extension' => 'jpg'
+        ];
+
+        if (! is_array($overrideOptions)) {
+            $overrideOptions = [
+                'mode' => $overrideOptions
+            ];
+        }
+
+        $options = array_merge($defaultOptions, $overrideOptions);
+
+        $options['mode'] = strtolower($options['mode']);
+
+        if ((strtolower($options['extension'])) == 'auto') {
+            $options['extension'] = strtolower($this->extension);
+        }
+
+        return $options;
+    }
+
+    public function deleteThumbs()
+    {
+        $collection = $this->getThumbs();
+        if (!empty($collection)) {
+            foreach ($collection as $item) {
+                Yii::$app->fs->delete($item);
+            }
+        }
+    }
+
+    public function getThumbs()
+    {
+        $pattern = 'thumb_' . $this->primaryKey . '_';
+
+        $allFiles = \Yii::$app->fs->listContents();
+
+        $collection = [];
+        foreach ($allFiles as $file) {
+            if (StringHelper::startsWith($file['basename'], $pattern)) {
+                $collection[] = $file['path'];
+            }
+        }
+        return $collection;
+    }
     public function afterDelete()
     {
         parent::afterDelete();
@@ -84,4 +177,5 @@ class Attachment extends \yii\db\ActiveRecord
         $filePath = $this->getFilePath();
         @unlink($filePath);
     }
+
 }

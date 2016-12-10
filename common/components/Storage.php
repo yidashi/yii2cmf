@@ -10,6 +10,7 @@ namespace common\components;
 
 
 use yii\base\Component;
+use creocoder\flysystem\LocalFilesystem;
 
 class Storage extends Component
 {
@@ -31,5 +32,15 @@ class Storage extends Component
     public function url2path($url)
     {
         return str_replace($this->baseUrl, $this->basePath, $url);
+    }
+
+    public function getPath($filename)
+    {
+        return $this->basePath . '/' . $filename;
+    }
+
+    public function getUrl($filename)
+    {
+        return $this->baseUrl . '/' . $filename;
     }
 }

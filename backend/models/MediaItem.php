@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2016-2099 Hassium Software LLC.
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  */
-namespace hass\attachment\helpers;
-use hass\attachment\models\Attachment;
+namespace backend\models;
+use common\models\Attachment;
 
 /**
  *
@@ -87,7 +87,7 @@ class MediaItem
     public static function createFromAttachment($attachment)
     {
         $file = $attachment->getFile();
-        $item = new static($attachment->getAbsolutePath(),$file->getSize(),$file->getTimestamp(),$file->getType(),$attachment->getUrl());
+        $item = new static($attachment->getAbsolutePath(),$file->getSize(),$file->getTimestamp(),$file->getType(),$attachment->url);
         return $item;
     }
 

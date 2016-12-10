@@ -6,5 +6,5 @@ use yii\helpers\Html;
 /** @var \hass\attachment\helpers\MediaItem $media */
 ?>
 <div class=" attachment_audio">
-<?php echo Html::tag("audio","Your browser does not support the audio tag.",["src"=>$model->getUrl(), "controls"=>"controls"])?>
+<?php echo Html::tag("audio","Your browser does not support the audio tag.",["src"=>$model->url, "controls"=>"controls"])?>
 </div>

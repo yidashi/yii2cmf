@@ -72,6 +72,8 @@ class UploadAction extends Action
 
     public $callback;
 
+    public $itemCallback;
+
     /**
      * @inheritdoc
      */
@@ -175,6 +177,9 @@ class UploadAction extends Action
                 ];
                 if ($this->uploadOnlyImage !== true) {
                     $result['filename'] = $attachment->name;
+                }
+                if ($this->itemCallback != null) {
+                    $result = call_user_func($this->itemCallback, $result);
                 }
             }
         }catch (Exception $e) {

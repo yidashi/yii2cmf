@@ -36,7 +36,7 @@ $(document).ready(function() {
 
         jcrop_api.newSelection();
 
-        var bound =getRandom();
+        var bound = getRandom();
         jcrop_api.setSelect(bound);
         
         $('#crop-x').val(bound[0]);

@@ -53,6 +53,10 @@ return [
             'class' => 'config\\components\\Config',
             'localConfigFile' => '@common/config/main-local.php'
         ],
+        'fs' => [
+            'class' => 'creocoder\flysystem\LocalFilesystem',
+            'path' => '@storagePath/upload',
+        ],
         'storage' => [
             'class' => 'common\\components\\Storage',
             'basePath' => '@storagePath/upload',

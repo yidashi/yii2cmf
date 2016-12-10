@@ -28,7 +28,7 @@ $(document).ready(function() {
             item.append($('<a  class="edit-attachment" target="_blank" href="'+file.updateUrl+'">编辑</a>'));
             
             var title =  $('<div>', {"class": "filename new"}) 
-            .html('<span class="title">'+file.name+'</span>');
+            .html('<span class="title">'+file.filename+'</span>');
             
             item.append(title);
             

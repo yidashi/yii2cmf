@@ -12,6 +12,7 @@ namespace common\actions;
 use common\models\Attachment;
 use vova07\imperavi\actions\GetAction;
 use Yii;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 class UploadController extends Controller
@@ -80,6 +81,18 @@ class UploadController extends Controller
                 'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
+            'backend-files-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'multiple' => true,
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment',
+                'uploadOnlyImage' => false,
+                'itemCallback' => function ($result) {
+                    $result['updateUrl'] = Url::to(['/attachment/update', 'id' => $result['id']]);
+                    return $result;
+                }
+            ],
             'md-image-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'url' => Yii::$app->storage->baseUrl,
@@ -100,11 +113,6 @@ class UploadController extends Controller
 
     public function actionDelete($id)
     {
-        $attachment = Attachment::findOne($id);
-        if ($attachment) {
-            if ($attachment->user_id == \Yii::$app->user->id){
-                $attachment->delete();
-            }
-        }
+
     }
 }

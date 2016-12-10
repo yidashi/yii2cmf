@@ -1,18 +1,20 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-use hass\attachment\assets\AttachmentIndexAsset;
-use hass\attachment\helpers\MediaItem;
-/* @var $this yii\web\View */
-/* @var $searchModel hass\attachment\models\AttachmentSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-/** @var \hass\attachment\models\Attachment $model */
+use backend\assets\AttachmentIndexAsset;
+use backend\models\MediaItem;
+use common\models\Attachment;
 
-$this->title = Yii::t('hass/attachment', 'Attachments');
+/* @var $this yii\web\View */
+/* @var $searchModel Attachment */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var Attachment $model */
+
+$this->title = '附件';
 $this->params['breadcrumbs'][] = $this->title;
 
 
-/** @var \hass\attachment\assets\AttachmentIndexAsset $bundle */
+/** @var AttachmentIndexAsset $bundle */
 $bundle = AttachmentIndexAsset::register($this);
 
 
@@ -30,10 +32,10 @@ $bundle = AttachmentIndexAsset::register($this);
         $media = MediaItem::createFromAttachment($model);
         switch ($media->getFileType()) {
             case MediaItem::FILE_TYPE_IMAGE:
-                echo Html::a(Html::img($model->getUrl()), $model->getUrl());
+                echo Html::a(Html::img($model->url), $model->url);
                 break;
             default:
-                echo Html::a(Html::img($bundle->baseUrl."/images/".$media->getFileType().".png"), $model->getUrl());
+                echo Html::a(Html::img($bundle->baseUrl."/images/".$media->getFileType().".png"), $model->url);
         }
         ?>
                     <span class="checked glyphicon glyphicon-check"></span>
@@ -58,7 +60,7 @@ $bundle = AttachmentIndexAsset::register($this);
 			</div>
 			<div class="box-body">
 				<div id="attachment-info">
-					<h6>Please, select file to view details.</h6>
+					<h6>选择文件查看详情.</h6>
 				</div>
 			</div>
 		</div>

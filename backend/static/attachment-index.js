@@ -3,7 +3,7 @@ $(document).ready(function() {
 		$("#attachment-info").html('<div class="loading"><i class="fa fa-spinner fa-pulse fa-5x"></i></div>');
 	}
 
-	$('#attachment-list').on("click", "a", function(e) {
+	$(document).on("click", "#attachment-list a", function(e) {
 		e.preventDefault();
 		e.stopImmediatePropagation();
 
@@ -21,10 +21,10 @@ $(document).ready(function() {
 				setAjaxLoader();
 			},
 			success: function(msg) {
-				if (msg.status == false) {
-					alert(msg.content);
+				if (msg.status == 0) {
+					alert(msg.message);
 				} else {
-					$("#attachment-info").html(msg.content);
+					$("#attachment-info").html(msg.message);
 				}
 
 			}
@@ -40,21 +40,21 @@ $(document).ready(function() {
 		var url = $(this).attr("href");
 		var confirmMessage = $(this).data("confirm-msg");
         var id = $(this).data("item-id");
+        if (!confirm(confirmMessage)) {
+            return false;
+        }
 		$.ajax({
 			type: "POST",
 			url: url,
 			beforeSend: function() {
-				if (!confirm(confirmMessage)) {
-					return false;
-				}
 				setAjaxLoader();
 			},
-			success: function(msg) {
-				if (msg.status == true) {
+			success: function(res) {
+				if (res.status == 1) {
 					$("#attachment-info").html("");
 					$('#attachment-list .item[data-item-id="' + id + '"]').fadeOut();
 				}
-				notify.msg(msg.status, msg.content);
+                $.modal.msg(res.message, res.status);
 			}
 		});
 
@@ -74,12 +74,12 @@ $(document).ready(function() {
 			beforeSend: function() {
 				setAjaxLoader();
 			},
-			success: function(msg) {
-                if (msg.status == false) {
-                    alert(msg.content);
+			success: function(res) {
+                if (res.status == false) {
+                    $.modal.error(res.message);
                 } else {
-                    $("#attachment-info").html(msg.content);
-                    notify.msg(msg.status, "更新成功");
+                    $("#attachment-info").html(res.message);
+                    $.modal.success("更新成功");
                 }
 			}
 		});
