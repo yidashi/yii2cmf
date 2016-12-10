@@ -34,6 +34,11 @@ class m160718_040058_create_article_module_table extends Migration
         $moduleColumn->defaultValue('base');// 默认普通文章
         $this->addColumn('{{%article}}', 'module', $moduleColumn);
         $this->addColumn('{{%category}}', 'module', $moduleColumn);
+        $this->insert('{{%article_module}}', [
+            'name' => 'exhibition',
+            'title' => '展会',
+            'model' => 'common\models\ArticleExhibition'
+        ]);
     }
 
     /**

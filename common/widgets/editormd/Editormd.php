@@ -55,7 +55,7 @@ js
         ], $this->clientOptions);
 
         if ($this->mode == 'mini') {
-            $this->clientOptions['toolbarIcons'] = ["bold", "h1", "h2", "h3", "h4", "h5", "h6", "list-ul", "list-ol", "link", "image", "code-block"];
+            $this->clientOptions['toolbarIcons'] = ["bold", "list-ul", "list-ol", "link", "image", "code-block"];
         }
     }
 
