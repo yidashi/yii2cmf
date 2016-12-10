@@ -35,7 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                                 return Html::a('开启', ['open'], [
                                     'data-method' => 'post',
-                                    'data-params' => ['id' => $model->package]
+                                    'data-params' => ['id' => $model->package],
+                                    'class' => 'btn btn-default btn-xs'
                                 ]);
                             },
                             'close' => function($url, $model, $key) {
@@ -47,7 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                                 return Html::a('关闭', ['close'], [
                                     'data-method' => 'post',
-                                    'data-params' => ['id' => $model->package]
+                                    'data-params' => ['id' => $model->package],
+                                    'class' => 'btn btn-default btn-xs'
                                 ]);
                             },
                             'install' => function($url, $model, $key) {
@@ -56,7 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                                 return Html::a('安装', ['install'], [
                                     'data-method' => 'post',
-                                    'data-params' => ['id' => $model->package]
+                                    'data-params' => ['id' => $model->package],
+                                    'class' => 'btn btn-default btn-xs'
                                 ]);
                             },
                             'uninstall' => function($url, $model, $key) {
@@ -66,14 +69,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 return Html::a('卸载', ['uninstall'], [
                                     'data-method' => 'post',
                                     'data-confirm' => '确定要卸载该插件吗?',
-                                    'data-params' => ['id' => $model->package]
+                                    'data-params' => ['id' => $model->package],
+                                    'class' => 'btn btn-default btn-xs'
                                 ]);
                             },
                             'config' => function($url, $model, $key) {
                                 if (!$model->install) {
                                     return false;
                                 }
-                                return Html::a('配置', ['config', 'id' => $model->package]);
+                                return Html::a('配置', ['config', 'id' => $model->package], ['class' => 'btn btn-default btn-xs']);
                             }
                         ]
                     ],

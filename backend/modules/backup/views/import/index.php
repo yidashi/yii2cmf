@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'a' => function ($url, $model, $key) {
                                 return Html::a('还原',
                                     ['init', 'time' => $model['time']],
-                                    ['class' => 'db-import']
+                                    ['class' => 'btn btn-default btn-xs db-import']
                                 );
                             },
                             'b' => function ($url, $model, $key) {
@@ -50,7 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data-ajax' => 1,
                                         'data-params' => ['time' => $model['time']],
                                         'data-confirm' => '删除后不能恢复,确定要删除吗?',
-                                        'data-refresh' => '1'
+                                        'data-refresh' => '1',
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             }

@@ -21,6 +21,7 @@ class AppController extends Controller
         '@root/web/assets',
         '@root/web/admin/assets',
         '@root/web/storage',
+        '@root/cache',
         '@api/runtime',
         '@backend/runtime',
         '@frontend/runtime',

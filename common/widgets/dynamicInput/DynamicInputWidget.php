@@ -113,7 +113,7 @@ class DynamicInputWidget extends InputWidget
                 return DatePicker::widget(ArrayHelper::merge([
                     'name' => $this->name,
                     'value' => $this->value,
-                    'type' => 2,
+                    'type' => 1,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true],
                 ], $this->options));
@@ -122,7 +122,7 @@ class DynamicInputWidget extends InputWidget
                 return DateTimePicker::widget(ArrayHelper::merge([
                     'name' => $this->name,
                     'value' => $this->value,
-                    'type' => 2,
+                    'type' => 1,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true]
                 ], $this->options));
@@ -185,7 +185,7 @@ class DynamicInputWidget extends InputWidget
                 return DatePicker::widget(ArrayHelper::merge([
                     'model' => $this->model,
                     'attribute' => $this->attribute,
-                    'type' => 2,
+                    'type' => 1,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d', 'autoclose' => true],
                 ], $this->options));
@@ -194,7 +194,7 @@ class DynamicInputWidget extends InputWidget
                 return DateTimePicker::widget(ArrayHelper::merge([
                     'model' => $this->model,
                     'attribute' => $this->attribute,
-                    'type' => 2,
+                    'type' => 1,
                     'convertFormat' => true,
                     'pluginOptions' => ['format' => 'php:Y-m-d H:i:s', 'autoclose' => true],
                 ], $this->options));

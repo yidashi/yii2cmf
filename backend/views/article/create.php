@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\bootstrap\Nav;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -14,13 +15,25 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->beginBlock('content-header') ?>
 <?= $this->title . ' ' . Html::a('文章', ['index'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
 <?php $this->endBlock() ?>
-<div class="article-create">
-
-    <?= $this->render('_form', [
-        'model' => $model,
-        'dataModel' => $dataModel,
-        'moduleModel' => $moduleModel,
-        'module' => $module
-    ]) ?>
-
+<div class="row">
+    <div class="col-md-2">
+        <div class="box box-solid">
+            <div class="box-body no-padding">
+                <?= Nav::widget([
+                    'options' => [
+                        'class' => 'nav nav-pills nav-stacked',
+                    ],
+                    'items' => $articleModuleItems
+                ]) ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <?= $this->render('_form', [
+            'model' => $model,
+            'dataModel' => $dataModel,
+            'moduleModel' => $moduleModel,
+            'module' => $module
+        ]) ?>
+    </div>
 </div>

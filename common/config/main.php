@@ -8,6 +8,7 @@ return [
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath' => '@root/cache'
         ],
         'formatter' => [
             'dateFormat' => 'yyyy-MM-dd',

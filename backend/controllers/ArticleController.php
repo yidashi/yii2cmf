@@ -186,11 +186,26 @@ class ArticleController extends Controller
             }
             return $this->redirect(['index']);
         }
+        $articleModuleItems = [];
+        $articleModuleItems[] = [
+            'label' => '文章',
+            'url' => ['/article/create'],
+            'active' => $module == 'base'
+        ];
+        $articleModules = ArticleModule::find()->all();
+        foreach($articleModules as $articleModule) {
+            $articleModuleItem = [];
+            $articleModuleItem['label'] = $articleModule->title;
+            $articleModuleItem['url'] = ['/article/create', 'module' => $articleModule->name];
+            $articleModuleItem['active'] = $module == $articleModule->name;
+            $articleModuleItems[] = $articleModuleItem;
+        }
         return $this->render('create', [
             'model' => $model,
             'dataModel' => $dataModel,
             'moduleModel' => $moduleModel,
-            'module' => $module
+            'module' => $module,
+            'articleModuleItems' => $articleModuleItems
         ]);
     }
     public function findModule($name)

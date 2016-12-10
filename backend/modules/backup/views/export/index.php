@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data' => [
                                             'ajax' => 1,
                                             'method' => 'get'
-                                        ]
+                                        ],
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             },
@@ -58,7 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data' => [
                                             'ajax' => 1,
                                             'method' => 'get'
-                                        ]
+                                        ],
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             }

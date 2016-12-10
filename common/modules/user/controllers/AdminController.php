@@ -24,7 +24,7 @@ use yii\web\NotFoundHttpException;
 class AdminController extends Controller
 {
     use AjaxValidationTrait;
-    public $defaultAction = 'index';
+
     /** @inheritdoc */
     public function behaviors()
     {

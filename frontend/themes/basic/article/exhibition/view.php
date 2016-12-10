@@ -44,8 +44,8 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <?php endforeach; ?>
     </ul>
     <div class="exhibition-info well">
-        <div class="exhibition-address"><?= Html::icon('map-pin') ?> <?= $model->extend->city ?> <?= $model->extend->address ?></div>
-        <div class="exhibition-time"><?= Html::icon('clock-o') ?> <?= $model->extend->start_at ?> - <?= $model->extend->end_at ?></div>
+        <p class="exhibition-address"><?= Html::icon('map-pin') ?> <?= $model->extend->city ?> <?= $model->extend->address ?></p>
+        <p class="exhibition-time"><?= Html::icon('clock-o') ?> <?= $model->extend->start_at ?> 至 <?= $model->extend->end_at ?></p>
     </div>
     <!--内容-->
     <div class="view-content"><?= $model->data->processedContent ?></div>
