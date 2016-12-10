@@ -22,20 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     'name',
                     'title',
                     'domain',
-                    'page_dom',
-                     'list_dom',
-                     'time_dom',
-                     'content_dom',
-                     'title_dom',
-                     'target_category',
+                    'target_category',
 //                     'target_category_url',
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {update} {delete} {craw}',
+                        'template' => '{view} {update} {delete} {crawl}',
                         'buttons' => [
-                            'craw' => function($url, $model, $key) {
-                                return Html::a('采集', ['craw', 'id' => $model->id], ['data-method' => 'post', 'data-ajax' => 1]);
+                            'crawl' => function($url, $model, $key) {
+                                return Html::a('采集', $url, ['data-method' => 'post', 'data-ajax' => 1, 'class' => 'btn btn-default btn-xs']);
                             }
                         ]
                     ],

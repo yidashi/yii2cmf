@@ -122,12 +122,12 @@ class SpiderController extends Controller
         }
     }
 
-    public function actionCraw($id)
+    public function actionCrawl($id)
     {
         set_time_limit(0);
         Yii::$app->response->format = 'json';
         $spider = $this->findModel($id);
-        $spider->craw();
+        $spider->crawl();
         return ['message' => '采集成功'];
     }
 }

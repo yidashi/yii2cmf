@@ -67,7 +67,7 @@ class Spider extends \yii\db\ActiveRecord
         ];
     }
 
-    public function craw()
+    public function crawl()
     {
         $transaction = Yii::$app->db->beginTransaction();
         $spider = $this;

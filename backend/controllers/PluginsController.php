@@ -39,7 +39,7 @@ class PluginsController extends Controller
     {
         $plugins = Yii::$app->get("pluginManager")->findAll();
         $dataProvider = new ArrayDataProvider([
-            'models' => $plugins
+            'allModels' => $plugins
         ]);
 
         return $this->render('index', [

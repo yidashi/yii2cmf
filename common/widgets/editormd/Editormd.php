@@ -35,7 +35,7 @@ class Editormd extends InputWidget
     {
         parent::init();
         $this->clientOptions = array_merge([
-            'height' => '300',
+            'height' => '500',
             'dialogLockScreen' => false,
             'autoFocus' => false,
             'emoji' => true,
@@ -47,7 +47,6 @@ class Editormd extends InputWidget
             'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute),
             'onchange' => new JsExpression(<<<js
 function () {
-    console.log(this.id);
     $('#' + this.id).blur();
 }
 js
@@ -56,6 +55,7 @@ js
 
         if ($this->mode == 'mini') {
             $this->clientOptions['toolbarIcons'] = ["bold", "list-ul", "list-ol", "link", "image", "code-block"];
+            $this->clientOptions['height'] = '300';
         }
     }
 

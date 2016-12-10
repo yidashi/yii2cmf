@@ -12,7 +12,7 @@ namespace console\controllers;
 use common\models\Spider;
 use yii\console\Controller;
 
-class CrawController extends Controller
+class CrawlController extends Controller
 {
     public function actionIndex($name = 'jianshu')
     {
@@ -20,7 +20,7 @@ class CrawController extends Controller
         if ($spider == null) {
             die('蜘蛛不存在');
         }
-        $spider->craw();
+        $spider->crawl();
         \Yii::info('采集' . $spider->title . '成功');
         die('ok');
     }

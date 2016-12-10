@@ -28,7 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'type' => $model->type
                     ]);
                 },
-                'format' => 'raw'
+                'format' => 'raw',
+                'options' => ['style' => 'width:60%']
             ],
             'name:text:配置名'
         ]

@@ -49,7 +49,7 @@ return [
         ],
         'formatter' => [
             'class' => 'backend\components\Formatter',
-            'booleanFormat' => ['<i class="fa fa-times"></i>', '<i class="fa fa-check"></i>']
+            'booleanFormat' => ['<i class="fa fa-times text-danger"></i>', '<i class="fa fa-check text-success"></i>']
         ],
         'i18n' => [
             'translations' => [

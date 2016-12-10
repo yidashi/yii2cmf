@@ -25,7 +25,8 @@ class m161102_090053_menu extends Migration
         $this->execute('SET foreign_key_checks = 0');
 
         /* Table yii2cmf_menu */
-        $this->batchInsert('{{%menu}}',['id','name','parent','route','order','data','icon'],[['15','用户管理','33','/user/admin/index','1','','fa-user'],
+        $this->batchInsert('{{%menu}}',['id','name','parent','route','order','data','icon'],[
+            ['15','用户管理','33','/user/admin/index','1','','fa-user'],
             ['16','路由管理','33','/rbac/route/index','3','','fa-link'],
             ['17','角色管理','33','/rbac/role/index','2','','fa-user-md'],
             ['22','文章列表','39','/article/index','1','',''],
@@ -41,7 +42,7 @@ class m161102_090053_menu extends Migration
             ['34','菜单管理','24','/rbac/menu/index','3','','fa-navicon'],
             ['37','操作记录','24','/admin-log/index','5','','fa-envelope-o'],
             ['39','内容','','','4','','fa-edit'],
-            ['40','发布文章','39','/article/create','2','',''],
+            ['40','发布文章','39','/article/create','2','','fa-plus'],
             ['41','回收站','39','/article/trash','3','',''],
             ['42','评论管理','39','/comment/index','6','',''],
             ['43','留言板','39','/suggest/index','7','',''],
