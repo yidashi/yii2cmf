@@ -65,14 +65,14 @@ class DynamicFormBehavior extends Behavior
     public function getAttributeItems($attribute)
     {
         if(isset($this->formAttributes[$attribute])) {
-            return $this->formAttributes[$attribute]['items'] ? $this->formAttributes[$attribute]['items'] : [];
+            return ArrayHelper::getValue($this->formAttributes[$attribute], 'items', []);
         }
     }
 
     public function getAttributeOptions($attribute)
     {
         if(isset($this->formAttributes[$attribute])) {
-            return isset($this->formAttributes[$attribute]['options']) ? $this->formAttributes[$attribute]['options'] : [];
+            return ArrayHelper::getValue($this->formAttributes[$attribute], 'options', []);
         }
     }
 
