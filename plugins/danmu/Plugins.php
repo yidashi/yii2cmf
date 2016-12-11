@@ -12,6 +12,7 @@ namespace plugins\danmu;
 use yii\base\BootstrapInterface;
 use yii\web\View;
 use yii\base\Event;
+use plugins\danmu\controllers\DefaultController;
 
 class Plugins extends \plugins\Plugins implements BootstrapInterface
 {
@@ -23,9 +24,12 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'description' => '文章评论弹幕'
     ];
 
-    public function bootstrap($app)
+    public function frontend($app)
     {
         Event::on(View::className(), 'afterComment', ['plugins\danmu\Danmu', 'handle']);
+        $app->controllerMap['danmu'] = [
+            'class' => DefaultController::className(),
+        ];
     }
 
 }

@@ -17,7 +17,7 @@ class DanmuWidget extends \yii\base\Widget
     public function init()
     {
         parent::init();
-        $this->listUrl = $this->listUrl ?: Url::to(['/comment/dm']);
+        $this->listUrl = $this->listUrl ?: Url::to(['/danmu/index']);
     }
     public function run()
     {
