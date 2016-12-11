@@ -19,7 +19,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <h1><?= $page->title?></h1>
     </div>
     <div class="page-content">
-        <?= $page->content?>
+        <?= $page->getProcessedContent()?>
     </div>
     <?= \frontend\widgets\comment\CommentWidget::widget([
         'type' => 'page',

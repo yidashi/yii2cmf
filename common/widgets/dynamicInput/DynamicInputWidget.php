@@ -56,6 +56,9 @@ class DynamicInputWidget extends InputWidget
 
     public function run()
     {
+        if (is_string($this->data)) {
+            $this->data = config($this->data);
+        }
 
         if($this->hasModel()) {
             return $this->parseActive();

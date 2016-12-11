@@ -37,9 +37,6 @@ class EditorWidget extends InputWidget
                 $this->type = 'redactor';
             }
         }
-        if (empty($this->type)) {
-            $this->type = \Yii::$app->config->get('EDITOR_TYPE');
-        }
         if(!in_array($this->type, $this->typeEnum)) {
             throw new InvalidParamException('编辑器类型不存在');
         }

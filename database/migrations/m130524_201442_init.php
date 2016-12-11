@@ -128,6 +128,7 @@ class m130524_201442_init extends Migration
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '内容'",
             'title' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '标题'",
             'slug' => Schema::TYPE_STRING . "(50) NOT NULL DEFAULT ''",
+            'markdown' => $this->smallInteger(1)->defaultValue(0)->comment('是否markdown格式'),
             'created_at' => Schema::TYPE_INTEGER . "(10) NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NULL",
         ], $this->tableOptions);

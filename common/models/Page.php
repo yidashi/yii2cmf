@@ -12,6 +12,7 @@ use yii\helpers\StringHelper;
  * @property int $use_layout
  * @property string $content
  * @property string $title
+ * @property integer $markdown
  */
 class Page extends \yii\db\ActiveRecord
 {
@@ -31,9 +32,24 @@ class Page extends \yii\db\ActiveRecord
         return [
             [['content', 'title', 'slug'], 'required'],
             [['content'], 'string'],
+            ['markdown', 'default', 'value' => $this->getIsMarkdown()],
             [['use_layout'], 'in', 'range' => [0, 1]],
             [['title'], 'string', 'max' => 50],
         ];
+    }
+
+    /**
+     * 没有指定markdown情况下默认编辑器是否为markdown
+     * @return int
+     */
+    public function getIsMarkdown()
+    {
+        return \Yii::$app->config->get('editor.type_article') == 'markdown' ? 1 : 0;
+    }
+
+    public function getProcessedContent()
+    {
+        return $this->markdown ? \yii\helpers\Markdown::process($this->content, 'gfm') : $this->content;
     }
 
     /**

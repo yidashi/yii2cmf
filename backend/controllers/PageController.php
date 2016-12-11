@@ -64,7 +64,8 @@ class PageController extends Controller
     public function actionCreate()
     {
         $model = new Page();
-
+        $editor = request('editor') ? : config('editor.type_page');
+        $model->markdown = $editor == 'markdown' ? 1 : 0;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {

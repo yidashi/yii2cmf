@@ -14,3 +14,16 @@ $(function () {
         return false;
     });
 })
+String.prototype.addQueryParams = function(params) {
+    var split = '?';
+    if (this.indexOf('?') > -1) {
+        split = '&';
+    }
+
+    var queryParams = '';
+    for(var i in params) {
+        queryParams += i + '=' + params[i] + '&';
+    }
+    queryParams = queryParams.substr(0, queryParams.length -1)
+    return this + split + queryParams;
+}

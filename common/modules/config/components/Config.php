@@ -111,7 +111,7 @@ class Config extends Component
     public function setEnv($name, $value)
     {
         $file = Yii::getAlias($this->envFile);
-        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\\1 {$value}", file_get_contents($file));
+        $content = preg_replace("/({$name}\s*=)\s*(.*)/", "\${1}$value", file_get_contents($file));// \${1}修复后边跟数字的bug
         file_put_contents($file, $content);
     }
 }

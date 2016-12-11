@@ -46,7 +46,9 @@ INSERT INTO {{%config}} VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数
 (9,'THEME_NAME','basic','','主题名','text',0,1467882452,'site'),
 (10,'BACKEND_SKIN','skin-purple','skin-black=>skin-black\r\nskin-black-light=>skin-black-light\r\nskin-blue=>skin-blue\r\nskin-blue-light=>skin-blue-light\r\nskin-green=>skin-green\r\nskin-green-light=>skin-green-light\r\nskin-purple=>skin-purple\r\nskin-pruple-light=>skin-purple-light\r\nskin-red=>skin-red\r\nskin-red-light=>skin-red-light\r\nskin-yellow=>skin-yellow\r\nskin-yellow-light=>skin-yellow-light','后台皮肤','select',1461931367,1461937892,'system'),
 (11,'wx_token','','','微信token','text',0,1468406411,'wechat'),
-(12,'EDITOR_TYPE','redactor','markdown=>markdown\r\nredactor=>redactor','编辑器','select',0,1468406411,'system');
+(12,'editor.type_list','markdown=>markdown\r\nredactor=>redactor','','','array',0,1468406411,'system'),
+(13,'editor.type_article','redactor','editor.type_list','文章编辑器','select',0,1468406411,'system'),
+(14,'editor.type_page','redactor','editor.type_list','单页编辑器','select',0,1468406411,'system');
 /*!40000 ALTER TABLE {{%config}} ENABLE KEYS */;
 UNLOCK TABLES;
 SQL
