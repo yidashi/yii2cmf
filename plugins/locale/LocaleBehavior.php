@@ -1,6 +1,6 @@
 <?php
 
-namespace common\behaviors;
+namespace plugins\locale;
 
 use Yii;
 use yii\base\Behavior;
@@ -68,6 +68,6 @@ class LocaleBehavior extends Behavior
      */
     protected function getAvailableLocales()
     {
-        return array_keys(Yii::$app->params['availableLocales']);
+        return array_keys(Plugins::$language);
     }
 }

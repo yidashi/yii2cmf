@@ -31,7 +31,7 @@ echo Nav::widget([
     'items' => $menuItems,
     'encodeLabels' => false
 ]);
-$searchUrl = url(['/search']);
+$searchUrl = url(['/search/index']);
 $q = Yii::$app->request->get('q', '全站搜索');
 echo <<<SEARCH
 <form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
@@ -103,19 +103,12 @@ if (Yii::$app->user->isGuest) {
         ]
     ];
 }
-$rightMenuItems[] = [
-    'label'=>Yii::t('frontend', 'Language'),
-    'items'=>array_map(function ($code) {
-        return [
-            'label' => Yii::$app->params['availableLocales'][$code],
-            'url' => ['/site/set-locale', 'locale'=>$code],
-            'active' => Yii::$app->language === $code
-        ];
-    }, array_keys(Yii::$app->params['availableLocales']))
-];
+
+$this->params['rightMenuItems'] = $rightMenuItems;
+$this->trigger('beforeRenderRightMenu');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
-    'items' => $rightMenuItems,
+    'items' => $this->params['rightMenuItems'],
     'encodeLabels' => false
 ]);
 NavBar::end();

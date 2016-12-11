@@ -1,39 +1,20 @@
 <?php
 /**
- * Author: Eugine Terentev <eugine@terentev.net>
+ * Created by PhpStorm.
+ * User: yidashi
+ * Date: 2016/12/11
+ * Time: 下午7:14
  */
 
-namespace common\actions;
+namespace plugins\locale\controllers;
 
+
+use yii\web\Controller;
 use Yii;
-use yii\base\Action;
 use yii\base\InvalidParamException;
 use yii\web\Cookie;
 
-/**
- * Class SetLocaleAction
- * @package common\actions
- *
- * Example:
- *
- *   public function actions()
- *   {
- *       return [
- *           'set-locale'=>[
- *               'class'=>'common\actions\SetLocaleAction',
- *               'locales'=>[
- *                   'en-US', 'ru-RU', 'ua-UA'
- *               ],
- *               'localeCookieName'=>'_locale',
- *               'callback'=>function($action){
- *                   return $this->controller->redirect(/.. some url ../)
- *               }
- *           ]
- *       ];
- *   }
-*/
-
-class SetLocaleAction extends Action
+class DefaultController extends Controller
 {
     /**
      * @var array List of available locales
@@ -60,12 +41,7 @@ class SetLocaleAction extends Action
      */
     public $callback;
 
-
-    /**
-     * @param $locale
-     * @return mixed|static
-     */
-    public function run($locale)
+    public function actionSet($locale)
     {
         if (!is_array($this->locales) || !in_array($locale, $this->locales, true)) {
             throw new InvalidParamException('Unacceptable locale');
@@ -83,6 +59,6 @@ class SetLocaleAction extends Action
                 $locale
             ]);
         }
-        return Yii::$app->response->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
+        return $this->redirect(Yii::$app->request->referrer ?: Yii::$app->homeUrl);
     }
 }

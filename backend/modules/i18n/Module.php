@@ -19,6 +19,8 @@ class Module extends \yii\base\Module
      */
     public static function missingTranslation($event)
     {
+        // TODO不翻译了
+        return;
         //http://fanyi.baidu.com/v2transapi?from=zh&query=世界&to=en
         // 当语言没命中的时候用百度翻译并保存到数据库
         $model = I18nSourceMessage::find()->where(['category' => $event->category, 'message' => $event->message])->one();
