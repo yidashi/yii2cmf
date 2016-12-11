@@ -22,7 +22,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'email'],
             ['email', 'exist',
                 'targetClass' => '\common\modules\user\models\User',
-                'filter' => ['status' => User::STATUS_ACTIVE],
+                'filter' => ['blocked_at' => null],
                 'message' => '邮箱不存在',
             ],
         ];

@@ -24,7 +24,6 @@ use yii\web\IdentityInterface;
  * @property int $expired_at
  * @property string $email
  * @property string $auth_key
- * @property int $status
  * @property int $created_at
  * @property int $updated_at
  * @property int $confirmed_at
@@ -36,9 +35,6 @@ class User extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
     use SearchModelTrait;
-
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
 
     public $password;
     /**
@@ -93,17 +89,8 @@ class User extends ActiveRecord implements IdentityInterface
             'username' => '用户名',
             'password' => '密码',
             'email' => '邮箱',
-            'status' => '状态',
             'created_at' => '注册时间',
             'login_at' => '最后登录时间'
-        ];
-    }
-
-    public static function getStatusList()
-    {
-        return [
-            self::STATUS_ACTIVE => '正常',
-            self::STATUS_DELETED => '禁用'
         ];
     }
 
