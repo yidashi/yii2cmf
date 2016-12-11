@@ -29,7 +29,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
 <div class="col-md-3">
     <div class="panel panel-default">
         <div class="panel-heading">
-            最热文章
+            热门文章
         </div>
         <div class="panel-body">
             <ul class="post-list">

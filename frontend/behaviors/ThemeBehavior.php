@@ -61,7 +61,9 @@ class ThemeBehavior extends ActionFilter
         \Yii::$app->view->theme = \Yii::createObject($theme);
         if (class_exists('frontend\\themes\\' . $themeName . '\\Theme')) {
             $themeClass = Yii::createObject('frontend\\themes\\' . $themeName . '\\Theme');
-            $themeClass->bootstrap();
+            if (method_exists($themeClass, 'bootstrap')) {
+                $themeClass->bootstrap();
+            }
         }
     }
 }

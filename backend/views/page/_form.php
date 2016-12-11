@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
         <?php if ($model->isNewRecord): ?>
             <?= Html::dropDownList('choose-editor', request('editor') ? : config('editor.type_page'), config('editor.type_list'), ['id' => 'choose-editor']) ?>
         <?php endif; ?>
-        <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className(), $model->isNewRecord ? ['type' => config('editor.type_page')] : ['isMarkdown' => $model->markdown]) ?>
+        <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className(), $model->isNewRecord ? ['type' => request('editor') ? : config('editor.type_page')] : ['isMarkdown' => $model->markdown]) ?>
 
     </div>
     <div class="col-lg-3">

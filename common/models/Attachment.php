@@ -101,12 +101,12 @@ class Attachment extends \yii\db\ActiveRecord
         $thumbPath = \Yii::$app->storage->getPath($thumbFile);
 
         if (!\Yii::$app->get('fs')->has($thumbPath)) {
-            $this->makeThumbStorage($thumbFile, $thumbPath, $width, $height, $options);
+            $this->makeThumbStorage($thumbPath, $width, $height, $options);
         }
         return \Yii::$app->storage->path2url($thumbPath);
     }
-
-    protected function makeThumbStorage($thumbFile, $thumbPath, $width, $height, $options)
+    // TODO 这里只能用localFilesystem
+    protected function makeThumbStorage($thumbPath, $width, $height, $options)
     {
         Image::thumbnail($this->getFilePath(), $width, $height)->save($thumbPath);
 

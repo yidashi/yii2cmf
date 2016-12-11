@@ -50,7 +50,7 @@ class Profile extends \yii\db\ActiveRecord
             [['phone'], 'match', 'pattern' => '/^1[0-9]{10}$/'],
             [['avatar'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
-            ['locale', 'in', 'range' => array_keys(Yii::$app->params['availableLocales'])],
+            ['locale', 'in', 'range' => array_keys(self::getLocaleList())],
         ];
     }
 
@@ -91,7 +91,9 @@ class Profile extends \yii\db\ActiveRecord
 
     public static function getLocaleList()
     {
-        return Yii::$app->params['availableLocales'];
+        return [
+            'zh-CN' => '简体中文'
+        ];
     }
 
     /**不应该依赖City
