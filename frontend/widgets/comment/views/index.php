@@ -8,12 +8,6 @@
 </style>
 <div id="comments">
     <h4>共 <span class="text-danger"><?= $comment ?></span> 条<?= $listTitle ?></h4>
-    <div class="col-4">
-        <ul class="media-list">
-        </ul>
-    </div>
-</div>
-<div class="col-4">
     <?php \yii\widgets\Pjax::begin(['id' => 'comment-container']) ?>
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
