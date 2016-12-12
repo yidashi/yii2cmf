@@ -38,13 +38,20 @@ class Editormd extends InputWidget
             'height' => '500',
             'dialogLockScreen' => false,
             'autoFocus' => false,
-            'emoji' => true,
+//            'emoji' => true,
             'watch' => false,
             'placeholder' => '',
             'syncScrolling' => 'single',
             'imageUpload' => true,
             'imageFormats' => ["jpg", "jpeg", "gif", "png", "bmp", "webp", "JPG", "JPEG", "GIF", "PNG", "BMP", "WEBP"],
             'imageUploadURL' => \yii\helpers\Url::to($this->imageUploadRoute),
+            'toolbarIcons' => [
+                "bold", "del", "italic", "quote", "uppercase", "lowercase", "|",
+                "h1", "h2", "h3", "h4", "h5", "h6", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "link", "image", "code", "preformatted-text", "code-block", "|",
+                "watch", "preview", "fullscreen", "|", "help"
+            ],
             'onchange' => new JsExpression(<<<js
 function () {
     $('#' + this.id).blur();
@@ -54,7 +61,7 @@ js
         ], $this->clientOptions);
 
         if ($this->mode == 'mini') {
-            $this->clientOptions['toolbarIcons'] = ["bold", "list-ul", "list-ol", "link", "image", "code-block"];
+            $this->clientOptions['toolbarIcons'] = ["bold", "list-ul", "list-ol", "link", "image", "code-block", "|", "help"];
             $this->clientOptions['height'] = '300';
         }
     }

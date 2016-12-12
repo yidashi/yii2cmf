@@ -13,11 +13,24 @@ use backend\models\ThemezipForm;
 use Distill\Distill;
 use Yii;
 use yii\data\ArrayDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
 class ThemeController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'open' => ['post'],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $packages = Yii::$app->get("themeManager")->findAll();
