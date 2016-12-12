@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 AvatarUploadAsset::register($this);
 
 $this->registerJs("var uploadUrl='" . Url::to([
-    "/upload/image-upload",
+    "/upload/avatar-upload",
     'fileparam' => "avatar"
 ]) . "'", View::POS_HEAD);
 

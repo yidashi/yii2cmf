@@ -67,6 +67,13 @@ class UploadController extends Controller
                 'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
+            'avatar-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment',
+                'validatorOptions' => ['minWidth' => 200, 'minHeight' => 200, 'underWidth' => '图片宽高不要小于200x200', 'underHeight' => '图片宽高不要小于200x200']
+            ],
             'file-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'url' => Yii::$app->storage->baseUrl,
