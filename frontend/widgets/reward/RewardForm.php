@@ -29,8 +29,23 @@ class RewardForm extends Model
         ];
         if (!\Yii::$app->user->isGuest) {
             $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<=', 'message' => '打赏额不能大于自身账户余额'];
+            $rules[] = ['article_id', 'checkIsAuthor'];
         }
         return $rules;
+    }
+
+    public function checkIsAuthor($attribute)
+    {
+        $article = Article::findOne($this->$attribute);
+        if ($article == null) {
+            $this->addError($attribute, '文章不存在');
+            return false;
+        }
+        if ($article->user_id == \Yii::$app->user->id) {
+            $this->addError($attribute, '不能给自己的文章打赏');
+            return false;
+        }
+        return true;
     }
 
     public function attributeLabels()
