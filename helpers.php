@@ -93,7 +93,14 @@ if (! function_exists('p')) {
 }
 
 if (! function_exists('config')) {
-
+    /**
+     * `config()`获取config组件
+     * `config('key')` 获取配置key的值
+     * `config([key,value])` 设置配置key的值为value
+     * @param null $key
+     * @param null $default
+     * @return array|bool|\config\components\Config|mixed
+     */
     function config($key = null, $default = null)
     {
         if (is_null($key)) {

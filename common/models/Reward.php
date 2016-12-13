@@ -14,6 +14,7 @@ use yii\helpers\Html;
  * @property integer $article_id
  * @property integer $user_id
  * @property integer $money
+ * @property string $comment
  * @property integer $created_at
  * @property integer $updated_at
  */
@@ -35,6 +36,7 @@ class Reward extends \yii\db\ActiveRecord
         return [
             [['article_id', 'money'], 'required'],
             [['article_id', 'money'], 'integer'],
+            ['comment', 'string', 'max' => 50],
             ['money', 'compare', 'operator' => '>', 'compareValue' => 0]
         ];
     }
@@ -79,7 +81,7 @@ class Reward extends \yii\db\ActiveRecord
             Yii::$app->notify->category('reward')
                 ->from($this->user_id)
                 ->to($article->user_id)
-                ->extra(['article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id]), 'money' => $this->money])
+                ->extra(['article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id]), 'money' => $this->money, 'comment' => $this->comment])
                 ->send();
         }
     }

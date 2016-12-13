@@ -36,16 +36,25 @@ class AppController extends Controller
 
     public $installFile = '@root/web/storage/install.txt';
 
+    /**
+     * 设置可写
+     */
     public function actionSetWritable()
     {
         $this->setWritable($this->writablePaths);
     }
 
+    /**
+     * 设置可执行
+     */
     public function actionSetExecutable()
     {
         $this->setExecutable($this->executablePaths);
     }
 
+    /**
+     * 设置cookie加密key
+     */
     public function actionSetKeys()
     {
         $this->setKeys($this->envPath);
@@ -82,6 +91,10 @@ class AppController extends Controller
         file_put_contents($file, $content);
     }
 
+    /**
+     * 设置数据库
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionSetDb()
     {
         do {

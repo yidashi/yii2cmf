@@ -139,6 +139,7 @@ class m130524_201442_init extends Migration
             'article_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'money' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'comment' => $this->string(50)->defaultValue('')->comment('留言'),
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);

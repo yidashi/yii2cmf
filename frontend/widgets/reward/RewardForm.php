@@ -66,6 +66,7 @@ class RewardForm extends Model
                 $reward = new Reward();
                 $reward->article_id = $this->article_id;
                 $reward->money = $this->money;
+                $reward->comment = $this->comment;
                 if($reward->save() === false) {
                     throw new Exception('打赏失败');
                 }
