@@ -32,35 +32,28 @@ class BlockController extends Controller
     /**
      * Creates a new Area model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param string $type
      * @return mixed
      */
-    public function actionCreate($type=null)
+    public function actionCreate($type = 'text')
     {
-        if($type == null)
-        {
-            $type = 'text';
-        }
-
-//        list($title,$model,$view,$widget) = AreaHelp::getBlockHook($type);
-
-//        $model = \Yii::createObject($model);
         $model = new Block();
         $model->loadDefaultValues();
         $model->type = $type;
-        $model->widget = TextWidget::className();
-        $this->performAjaxValidation($model);
+        $model->widget = $model->getWidget();
 
-        if ($model->load(Yii::$app->request->post()))
-        {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('common', 'created success'));
+                Yii::$app->session->setFlash('success', '操作成功');
             } else {
-                Yii::$app->session->setFlash('error', Yii::t('common', 'created error. {0}', $model->formatErrors()));
+                Yii::$app->session->setFlash('error', current($model->getFirstErrors()));
             }
             return  $this->refresh();
         }
 
-        return $this->render('create',["model"=>$model]);
+        return $this->render('create',[
+            'model' => $model,
+        ]);
     }
 
 
@@ -69,15 +62,14 @@ class BlockController extends Controller
     /**
      * Creates a new Area model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        $this->performAjaxValidation($model);
-        if ($model->load(Yii::$app->request->post()))
-        {
+        if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
                 Yii::$app->session->setFlash('success', Yii::t('common', 'updated success'));
             } else {

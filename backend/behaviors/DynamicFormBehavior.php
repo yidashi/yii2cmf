@@ -57,7 +57,7 @@ class DynamicFormBehavior extends Behavior
             if(is_string($this->formAttributes[$attribute])) {
                 return $this->formAttributes[$attribute];
             } else {
-                return isset($this->formAttributes[$attribute]['type']) ? $this->formAttributes[$attribute]['type'] : 'text';
+                return ArrayHelper::getValue($this->formAttributes[$attribute], 'type', 'text');
             }
         }
     }

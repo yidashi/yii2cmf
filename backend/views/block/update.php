@@ -6,4 +6,4 @@ $this->params['breadcrumbs'][] = $this->title;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 ?>
 
-<?= $this->render("_form",['model' => $model])?>
+<?= $this->render("_form", ['model' => $model])?>

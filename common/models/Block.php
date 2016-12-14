@@ -42,7 +42,8 @@ class Block extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['cache', 'used'], 'integer'],
-            [['title', 'config', 'template', 'slug',"type","widget"], 'string'],
+            [['title', 'config', 'slug',"type","widget"], 'string'],
+            ['template', 'safe']
         ];
     }
 
@@ -64,6 +65,7 @@ class Block extends \yii\db\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
+            $this->template = serialize($this->template);
             if ($insert == true) {
                 $this->used = BooleanEnum::FLASE;
                 return true;
@@ -74,6 +76,11 @@ class Block extends \yii\db\ActiveRecord
         }
     }
 
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->template = unserialize($this->template);
+    }
 
     /**
      * @inheritdoc
@@ -87,11 +94,24 @@ class Block extends \yii\db\ActiveRecord
             'config' => Yii::t('backend', 'Config'),
             'template' => Yii::t('backend', 'Template'),
             'cache' => '是否缓存',
-            "type"=>Yii::t('backend', 'Type'),
+            "type" => Yii::t('backend', 'Type'),
             'used' => Yii::t('backend', 'used'),
             'widget' => Yii::t('backend', 'Widget'),
         ];
     }
 
+    public function getWidget()
+    {
+        $namespace = 'frontend\widgets\area\\';
+        $widget = $namespace . ucfirst($this->type) . 'Widget';
+        return $widget;
+    }
 
+    public static function widgetTypeEnum()
+    {
+        return [
+            'text' => '文本块',
+            'article' => '文章块'
+        ];
+    }
 }

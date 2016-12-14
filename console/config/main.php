@@ -12,7 +12,7 @@ return [
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
+            'class' => 'backend\modules\migration\console\MigrateController',
             'useTablePrefix' => true,
             'migrationPath' => '@database/migrations',
         ],
@@ -42,6 +42,7 @@ return [
         ]
     ],
     'aliases' => [
+        '@migration' => '@backend/modules/migration',
     ],
     'params' => $params,
 ];

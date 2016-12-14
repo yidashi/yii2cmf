@@ -27,18 +27,6 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     ]) ?>
 </div>
 <div class="col-md-3">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            热门文章
-        </div>
-        <div class="panel-body">
-            <ul class="post-list">
-                <?php foreach (\frontend\models\Article::hots() as $item):?>
-                    <li><?= Html::a($item->title, ['/article/view', 'id' => $item->id])?></li>
-                <?php endforeach;?>
-            </ul>
-        </div>
-    </div>
     <?= \frontend\widgets\area\AreaWidget::widget([
         'slug' => 'page-index-sidebar',
         "blockClass"=>"panel panel-default",

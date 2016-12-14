@@ -63,4 +63,13 @@ class ArticleQuery extends ActiveQuery
     {
         return $this->andWhere(['user_id' => \Yii::$app->user->id]);
     }
+
+    public function module($module)
+    {
+        $this->andWhere(['module' => $module]);
+        if ($module == 'book') {
+            $this->andWhere(['type' => 0]);
+        }
+        return $this;
+    }
 }

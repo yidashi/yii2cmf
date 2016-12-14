@@ -12,15 +12,11 @@ use yii\helpers\Html;
 /* @var $moduleModel common\models\ArticleExhibition */
 /* @var $form backend\widgets\ActiveForm */
 ?>
-<div class="row">
     <?php $form = ActiveForm::begin(); ?>
-    <div class="col-lg-9">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">通用</a></li>
-                <?php if ($moduleModel): ?>
                 <li><a href="#tab_2" data-toggle="tab" aria-expanded="true">扩展</a></li>
-                <?php endif; ?>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="tab_1">
@@ -29,54 +25,51 @@ use yii\helpers\Html;
 
                     <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
 
-                    <?= $form->boxField($model, 'description')->textarea()?>
-
                     <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $dataModel->markdown]); ?>
 
+                    <?= $form->boxField($model, 'description')->textarea()?>
+
                     <?= $form->boxField($model, 'meta', ["collapsed" => true])->widget(MetaForm::className())->header("SEO"); ?>
+
                 </div>
-                <?php if ($moduleModel): ?>
+
                 <div class="tab-pane" id="tab_2">
+                    <?= $form->field($model, 'published_at')->widget(
+                        \kartik\datetime\DateTimePicker::className(),
+                        [
+                            'type' => 1,
+                            'options' => [
+                                'value' => !empty($model->published_at) ? date('Y-m-d H:i:s', $model->published_at) : ''
+                            ],
+                            'pluginOptions' => ['autoclose' => true]
+                        ]
+                    ) ?>
+                    <?= $form->boxField($model, 'cover', ['collapsed' => true])->widget(\common\widgets\upload\SingleWidget::className()) ?>
+
+                    <?= $form->field($model, 'is_top')->checkbox() ?>
+
+                    <?= $form->field($model, 'is_hot')->checkbox() ?>
+
+                    <?= $form->field($model, 'is_best')->checkbox() ?>
+
+                    <?= $form->field($model, 'status')->checkbox() ?>
+
+                    <?= $form->field($model, 'view')->textInput() ?>
+
+                    <?= $form->boxField($model, TagBehavior::$formName)->widget(TagsInput::className())->header(TagBehavior::$formLable); ?>
+
+                    <?= $form->field($model, 'source')->textInput() ?>
+                    <?php if ($moduleModel): ?>
                     <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
                         <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
                     <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
-                <?php endif; ?>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3">
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '发布' : '更新', ['class' => 'btn bg-maroon btn-flat btn-block']) ?>
         </div>
 
-        <?= $form->field($model, 'published_at')->widget(
-            \kartik\datetime\DateTimePicker::className(),
-            [
-                'type' => 1,
-                'options' => [
-                    'value' => !empty($model->published_at) ? date('Y-m-d H:i:s', $model->published_at) : ''
-                ],
-                'pluginOptions' => ['autoclose' => true]
-            ]
-        ) ?>
-        <?= $form->boxField($model, 'cover', ['collapsed' => true])->widget(\common\widgets\upload\SingleWidget::className()) ?>
-
-        <?= $form->field($model, 'is_top')->checkbox() ?>
-
-        <?= $form->field($model, 'is_hot')->checkbox() ?>
-
-        <?= $form->field($model, 'is_best')->checkbox() ?>
-
-        <?= $form->field($model, 'status')->checkbox() ?>
-
-        <?= $form->field($model, 'view')->textInput() ?>
-
-        <?= $form->boxField($model, TagBehavior::$formName)->widget(TagsInput::className())->header(TagBehavior::$formLable); ?>
-
-        <?= $form->field($model, 'source')->textInput() ?>
-
-    </div>
     <?php ActiveForm::end(); ?>
-</div>

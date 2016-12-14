@@ -66,7 +66,7 @@ class SiteController extends Controller
             ->limit(10)
             ->all();
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->published(),
+            'query' => Article::find()->published()->module('base'),
             'sort' => [
                 'defaultOrder' => [
                     'is_top' => SORT_DESC,
@@ -74,13 +74,13 @@ class SiteController extends Controller
                 ]
             ]
         ]);
-        $categorys = Category::find()->all();
+        $categories = Category::find()->all();
         $hotTags = Tag::hot();
         return $this->render('index', [
             'slider' => $slider,
             'recommend' => $recommend,
             'dataProvider' => $dataProvider,
-            'categorys' => $categorys,
+            'categories' => $categories,
             'hotTags' => $hotTags
         ]);
     }

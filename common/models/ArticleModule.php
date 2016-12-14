@@ -43,4 +43,9 @@ class ArticleModule extends \yii\db\ActiveRecord
             'model' => 'Model',
         ];
     }
+
+    public static function getTypeEnum()
+    {
+        return ['base' => '普通'] + self::find()->select('title')->indexBy('name')->column();
+    }
 }

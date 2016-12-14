@@ -8,7 +8,7 @@ use yii\web\JsExpression;
 class TagsInput extends Select2
 {
 
-    public  $options =  ['placeholder' => '选择一个标签 ...', 'multiple' => true];
+    public  $options =  ['placeholder' => '标签 ...', 'multiple' => true];
 
     public $pluginOptions =  [
         'tags' => true,

@@ -181,8 +181,10 @@ class ArticleController extends Controller
                 }
 
                 $transaction->commit();
+                Yii::$app->session->setFlash('success', '发布成功');
             } catch (\Exception $e) {
                 $transaction->rollBack();
+                Yii::$app->session->setFlash('error', $e->getMessage());
             }
             return $this->redirect(['index']);
         }

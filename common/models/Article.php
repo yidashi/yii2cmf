@@ -111,7 +111,7 @@ class Article extends \yii\db\ActiveRecord
             'is_top' => '置顶',
             'is_hot' => '热门',
             'is_best' => '精华',
-            'module' => '类型',
+            'module' => '文档类型',
             'content' => '内容'
         ];
     }
