@@ -10,7 +10,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\Attachment;
-use common\components\WebController as Controller;
+use common\core\WebController as Controller;
 use yii\imagine\Image;
 use yii\web\NotFoundHttpException;
 use yii\data\ActiveDataProvider;

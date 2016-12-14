@@ -6,7 +6,7 @@
  * Time: 下午7:05
  */
 
-namespace common\components;
+namespace common\core;
 
 
 use yii\helpers\ArrayHelper;
@@ -20,5 +20,10 @@ class WebController extends \yii\web\Controller
             'status' => $status,
             'message' => $message,
         ], $data);
+    }
+
+    public function setFlash($key, $value = true, $removeAfterAccess = true)
+    {
+        \Yii::$app->session->setFlash($key, $value, $removeAfterAccess);
     }
 }
