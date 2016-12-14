@@ -12,12 +12,12 @@ use yii\helpers\Url;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('slug')->scalar()]];
-$this->params['breadcrumbs'][] = $model->title;
+$this->params['breadcrumbs'][] = Html::encode($model->title);
 list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $model->getMetaData();
 ?>
 <div class="col-lg-9">
     <div class="view-title">
-        <h1><?= $model->title ?></h1>
+        <h1><?= Html::encode($model->title) ?></h1>
     </div>
     <div class="action">
         <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
@@ -48,7 +48,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <p class="exhibition-time"><?= Html::icon('clock-o') ?> <?= $model->extend->start_at ?> 至 <?= $model->extend->end_at ?></p>
     </div>
     <!--内容-->
-    <div class="view-content"><?= $model->data->processedContent ?></div>
+    <div class="view-content"><?= \yii\helpers\HtmlPurifier::process($model->data->processedContent) ?></div>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
     <nav>
         <ul class="pager">

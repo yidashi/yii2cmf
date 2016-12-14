@@ -11,6 +11,7 @@ namespace plugins\danmu\controllers;
 use common\components\WebController as Controller;
 use common\models\Comment;
 use yii\data\Pagination;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\Url;
 use Yii;
 
@@ -36,7 +37,7 @@ class DefaultController extends Controller
             $item['id'] = $value->id;
             $item['avatar'] = Url::to($value->user->getAvatar(96), true);
             $item['nickname'] = $value->user->username;
-            $item['content'] = preg_replace('/(@\S+?\s)/', '', $value->content);
+            $item['content'] = HtmlPurifier::process(preg_replace('/(@\S+?\s)/', '', $value->content));
             $item['isRe'] = preg_match('/(@\S+?\s)/', $value->content, $matches);
             return $item;
         }, $models);
