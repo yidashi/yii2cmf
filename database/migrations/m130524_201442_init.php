@@ -227,6 +227,8 @@ class m130524_201442_init extends Migration
         $this->insert('{{%category}}', [
             'slug' => 'default',
             'title' => '默认',
+            'allow_publish' => '2',
+            'module' => 'base',
             'created_at' => time(),
             'updated_at' => time()
         ]);

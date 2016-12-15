@@ -18,8 +18,20 @@ $this->params['breadcrumbs'][] = $this->title;
             <ul class="post-list">
                 <?php foreach ($models as $key => $item):?>
                     <li>
-                        <a href="<?php if ($item->status == 1):?><?=\yii\helpers\Url::to(['/article/view', 'id' => $item->id])?><?php else:?><?=\yii\helpers\Url::to(['/user/update-article', 'id' => $item->id])?><?php endif;?>"><?=$item->title?></a>
-                        <span class="pull-right"><?php if ($item->status == 1):?>审核通过<?php elseif ($item->status == 0):?>待审核<?php else :?>未审核通过<?php endif;?></span>
+                        <a href="<?php if ($item->status == 1):?><?=\yii\helpers\Url::to(['/article/view', 'id' => $item->id])?><?php else:?><?=\yii\helpers\Url::to(['/user/default/update-article', 'id' => $item->id])?><?php endif;?>"><?=$item->title?></a>
+                        <div class="pull-right">
+                            <?php if ($item->status == 1):?>
+                                审核通过
+                            <?php elseif ($item->status == 0):?>
+                                待审核
+                            <?php else :?>
+                                未审核通过
+                            <?php endif;?>
+
+                            <?php if ($item->status != 1):?>
+                                <?= \yii\helpers\Html::a('删除', ['/user/default/delete-article', 'id' => $item->id], ['class' => 'btn btn-danger btn-xs', 'data-confirm' => '确定要删除吗?']) ?>
+                            <?php endif; ?>
+                        </div>
                     </li>
                 <?php endforeach;?>
             </ul>

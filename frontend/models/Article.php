@@ -19,15 +19,6 @@ use common\models\query\ArticleQuery;
 class Article extends \common\models\Article
 {
 
-    /**
-     * @inheritdoc
-     * @return ArticleQuery the newly created [[ActiveQuery]] instance.
-     */
-    public static function find()
-    {
-        return parent::find()->published();
-    }
-
     public static function hots($categoryId = null, $size = 10)
     {
         return self::find()

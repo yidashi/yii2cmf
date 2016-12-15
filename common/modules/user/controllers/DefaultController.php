@@ -109,6 +109,18 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function actionDeleteArticle($id)
+    {
+        $model = Article::find()->where(['id' => $id])->my()->one();
+        if ($model == null) {
+            throw new NotFoundHttpException('文章不存在或者不属于你');
+        }
+        if ($model->softDelete()) {
+            \Yii::$app->session->setFlash('success', '删除成功！');
+            return $this->redirect(['article-list']);
+        }
+    }
+
     public function actionUp()
     {
         $userId = \Yii::$app->user->id;
