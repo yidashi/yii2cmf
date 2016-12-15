@@ -38,7 +38,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             [['title', 'slug'], 'required'],
             ['module', 'string'],
-            [['pid', 'sort'], 'integer'],
+            [['pid', 'sort', 'allow_publish'], 'integer'],
             ['pid', 'default', 'value' => 0],
             [['sort'], 'default', 'value' => 0]
         ];
@@ -59,15 +59,9 @@ class Category extends \yii\db\ActiveRecord
             'article' => '文章数', //冗余字段,方便查询
             'sort' => '排序',
             'module' => '文档类型',
+            'allow_publish' => '是否允许发布内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
-        ];
-    }
-
-    public function attributeHints()
-    {
-        return [
-            'name' => '(url里显示)'
         ];
     }
 
@@ -111,14 +105,13 @@ class Category extends \yii\db\ActiveRecord
         return static::find()->select('title')->where(['id' => $this->pid])->scalar();
     }
 
-    public static function lists()
+    public static function lists($module = null)
     {
-        $list = Yii::$app->cache->get('categoryList');
+        $list = Yii::$app->cache->get(['categoryList', $module]);
         if ($list === false) {
-            $list = static::find()->select('title')->indexBy('id')->column();
-            Yii::$app->cache->set('categoryList', $list);
+            $list = static::find()->filterWhere(['module' => $module])->asArray()->all();
+            Yii::$app->cache->set(['categoryList', $module], $list);
         }
-
         return $list;
     }
 
@@ -147,14 +140,8 @@ class Category extends \yii\db\ActiveRecord
         }
         return $result;
     }
-    /**
-     * 分类名下拉列表
-     */
-    public static function getDropDownlist($tree = [], &$result = [], $deep = 0, $separator = '--')
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '--')
     {
-        if (empty($tree)) {
-            $tree = self::tree();
-        }
         $deep++;
         foreach($tree as $list) {
             $result[$list['id']] = str_repeat($separator, $deep-1) . $list['title'];
@@ -190,5 +177,14 @@ class Category extends \yii\db\ActiveRecord
         }
 
         return static::findOne($condition);
+    }
+
+    public static function getAllowPublishEnum()
+    {
+        return [
+            '不允许',
+            '只允许后台',
+            '允许前后台'
+        ];
     }
 }

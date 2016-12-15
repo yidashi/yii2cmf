@@ -23,6 +23,10 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'module')->radioList(\common\models\ArticleModule::getTypeEnum()) ?>
+
+    <?= $form->field($model, 'allow_publish')->radioList($model::getAllowPublishEnum()) ?>
+
     <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
 
     <div class="form-group">

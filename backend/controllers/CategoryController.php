@@ -71,6 +71,7 @@ class CategoryController extends Controller
     public function actionCreate($id = 0)
     {
         $model = new Category();
+        $model->loadDefaultValues();
         $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->cache->delete('categoryList');

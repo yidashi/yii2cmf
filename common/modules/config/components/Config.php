@@ -57,6 +57,11 @@ class Config extends Component
         }
         return true;
     }
+
+    public function has($name)
+    {
+        return !is_null(ConfigModel::find()->where(['name' => $name])->one()) || getenv($name) !== false;
+     }
     /**
      * 解析数组类型配置
      * @param $type

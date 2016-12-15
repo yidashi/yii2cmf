@@ -32,9 +32,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         'value' => function($model) {
                             return Html::a($model->title, Yii::$app->config->get('SITE_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
                         },
-                        'format' => 'raw'
+                        'format' => 'raw',
+                        'enableSorting' => false
                     ],
-//                    'module',
+                    [
+                        'attribute' => 'module',
+                        'value' => function($model) {
+                            return array_get(\common\models\ArticleModule::getTypeEnum(), $model->module);
+                        },
+                        'enableSorting' => false
+                    ],
                     'category',
                     'trueView',
                     [

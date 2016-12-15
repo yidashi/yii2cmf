@@ -5,6 +5,8 @@ use backend\widgets\meta\MetaForm;
 use common\behaviors\TagBehavior;
 use common\widgets\tag\TagsInput;
 use yii\helpers\Html;
+use common\models\Category;
+use common\helpers\Tree;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -23,7 +25,7 @@ use yii\helpers\Html;
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-                    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::getDropDownlist()) ?>
+                    <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists($model->module)))) ?>
 
                     <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $dataModel->markdown]); ?>
 

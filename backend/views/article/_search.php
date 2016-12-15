@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\Category;
+use common\helpers\Tree;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\Article */
@@ -22,7 +24,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::lists(), ['prompt' => '全部']) ?>
+    <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists())), ['prompt' => '全部']) ?>
 
     <?= $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
 

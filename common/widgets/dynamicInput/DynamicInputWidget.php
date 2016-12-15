@@ -51,7 +51,9 @@ class DynamicInputWidget extends InputWidget
         if (!in_array($this->type, $this->types)) {
             throw new InvalidParamException('不支持的类型');
         }
-        $this->data = $this->parseExtra($this->data);
+        if (isset($this->data) && !empty($this->data)) {
+            $this->data = $this->parseExtra($this->data);
+        }
     }
 
     public function run()
@@ -220,6 +222,9 @@ class DynamicInputWidget extends InputWidget
         $return = [];
         if (is_array($value)) {
             return $value;
+        }
+        if (config()->has($value)) {
+            return config($value);
         }
         foreach (explode("\r\n", $value) as $val) {
             if (strpos($val, '=>') !== false) {

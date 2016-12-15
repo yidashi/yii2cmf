@@ -31,6 +31,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $view
  * @property string $published_at
  * @property int $is_top
+ * @property string $module
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
  * @property boolean $isFavourite read-only
@@ -255,5 +256,4 @@ class Article extends \yii\db\ActiveRecord
     {
         return !empty($this->source);
     }
-
 }

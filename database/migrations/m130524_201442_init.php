@@ -86,6 +86,7 @@ class m130524_201442_init extends Migration
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
             'article' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
+            'allow_publish' => $this->smallInteger(1)->defaultValue('1')->comment('是否允许发布内容')
         ], $this->tableOptions);
 
 // comment

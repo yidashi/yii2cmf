@@ -28,6 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'slug',
                 'article',
                 [
+                    'attribute' => 'module',
+                    'value' => function($model) {
+                        return array_get(\common\models\ArticleModule::getTypeEnum(), $model->module);
+                    }
+                ],
+                [
                     'class' => 'backend\widgets\grid\PositionColumn',
                     'attribute' => 'sort'
                 ],

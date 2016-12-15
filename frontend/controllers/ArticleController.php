@@ -18,6 +18,9 @@ class ArticleController extends Controller
 {
     /**
      * 分类文章列表
+     * @param mixed $cate
+     * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionIndex($cate = null)
     {

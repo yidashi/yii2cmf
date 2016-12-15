@@ -152,6 +152,7 @@ class ArticleController extends Controller
     {
         $model = new Article();
         $model->status = Article::STATUS_ACTIVE;
+        $model->module = $module;
         $dataModel = new ArticleData();
         if ($module != 'base') {
             $moduleModelClass = $this->findModule($module);
@@ -163,7 +164,6 @@ class ArticleController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             try{
                 $model->load(Yii::$app->request->post());
-                $model->module = $module;
                 $model->save();
                 $dataModel->load(Yii::$app->request->post());
                 $dataModel->id = $model->id;

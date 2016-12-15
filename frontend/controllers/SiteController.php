@@ -66,7 +66,7 @@ class SiteController extends Controller
             ->limit(10)
             ->all();
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->published()->module('base'),
+            'query' => Article::find()->published(),
             'sort' => [
                 'defaultOrder' => [
                     'is_top' => SORT_DESC,
