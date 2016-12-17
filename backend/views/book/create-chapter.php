@@ -15,7 +15,7 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Markdown;
 use backend\widgets\ActiveForm;
 
-$this->title = $model->chapter_name;
+$this->title = $model->book->book_name . ':新增章节';
 $this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['/book/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->book->book_name, 'url' => ['/book/view', 'id' => $model->book->id]];
 $this->params['breadcrumbs'][] = Html::encode($model->chapter_name);

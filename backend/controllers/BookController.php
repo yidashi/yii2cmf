@@ -9,14 +9,30 @@
 namespace backend\controllers;
 
 
+use backend\actions\Position;
 use common\models\Book;
 use common\models\BookChapter;
+use yii\base\InvalidParamException;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use Yii;
 
 class BookController extends Controller
 {
+
+    public function actions()
+    {
+        return [
+            'move-chapter' => [
+                'class' => Position::className(),
+                'returnUrl' => request()->referrer,
+                'findModel' => function($id) {
+                    return BookChapter::findOne($id);
+                }
+            ]
+        ];
+    }
 
     public function actionIndex()
     {
@@ -92,5 +108,12 @@ class BookController extends Controller
         return $this->render('update-chapter', [
             'model' => $model
         ]);
+    }
+
+    public function actionDeleteChapter($id)
+    {
+        $model = BookChapter::findOne($id);
+        $model->delete();
+        return $this->redirect('index');
     }
 }

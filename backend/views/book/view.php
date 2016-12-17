@@ -18,9 +18,7 @@ $this->title = $model->book_name;
 $this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['/book/index']];
 $this->params['breadcrumbs'][] = Html::encode($model->book_name);
 ?>
-<?php $this->beginContent('@backend/views/book/_layout.php', ['book' => $model]) ?>
     <div class="view-title">
         <h1><?= Html::encode($model->book_name) ?></h1>
     </div>
     <div class="view-content"><?= HtmlPurifier::process(Markdown::process($model->book_description)) ?></div>
-<?php $this->endContent() ?>

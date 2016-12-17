@@ -12,7 +12,7 @@ namespace rbac\models;
 class Route extends \yii\base\Model
 {
     /**
-     * @var string Route value. 
+     * @var string Route value.
      */
     public $route;
 
@@ -21,8 +21,15 @@ class Route extends \yii\base\Model
      */
     public function rules()
     {
-        return[
+        return [
             [['route'], 'safe'],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'route' => '路由'
         ];
     }
 }

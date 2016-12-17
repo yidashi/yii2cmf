@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\behaviors\PositionBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -59,7 +60,12 @@ class BookChapter extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'sort',
+                'groupAttributes' => ['book_id', 'pid']
+            ]
         ];
     }
 

@@ -20,7 +20,8 @@
         'options' => [
             'class' => 'media-list',
             'tag' => 'ul'
-        ]
+        ],
+        'emptyText' => ''
     ])?>
     <?= $this->render('create', ['model' => $commentModel, 'createTitle' => $createTitle]); ?>
     <?php \yii\widgets\Pjax::end() ?>

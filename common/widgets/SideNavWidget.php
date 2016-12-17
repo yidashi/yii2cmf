@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace frontend\widgets;
+namespace common\widgets;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -148,10 +148,13 @@ class SideNavWidget extends Widget
         }
 
         if ($items !== null) {
-//            $linkOptions['data-toggle'] = 'collapse';
-//            $linkOptions['data-parent'] = '#' . $this->id;
+
             $id = $this->id . '-' . static::$counter++;
-//            $url = '#' . $id;
+            if ($url == '#') {
+                $url = '#' . $id;
+                $linkOptions['data-toggle'] = 'collapse';
+                $linkOptions['data-parent'] = '#' . $this->id;
+            }
             $label = Html::tag('b', '', ['class' => 'caret', 'data-toggle' => 'collapse', 'data-parent' => '#' . $this->id, 'href' => '#' . $id]) . ' ' . $label;
             if (is_array($items)) {
                 if ($active === false) {

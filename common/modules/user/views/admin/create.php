@@ -18,8 +18,8 @@ use yii\helpers\Html;
  * @var dektrium\user\models\User 	$user
  */
 
-$this->title = Yii::t('app', 'Create a user account');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Users'), 'url' => ['index']];
+$this->title = '新建用户';
+$this->params['breadcrumbs'][] = ['label' => '用户', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -47,14 +47,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="alert alert-info">
-                    <?= Yii::t('app', 'A password will be generated 111111 if not provided') ?>.
+                    默认密码 111111
                 </div>
                 <?php $form = ActiveForm::begin(); ?>
 
                 <?= $this->render('_user', ['form' => $form, 'user' => $user]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton( Yii::t('app', 'Create'), ['class' => 'btn bg-maroon btn-flat btn-block']) ?>
+                    <?= Html::submitButton( '创建', ['class' => 'btn bg-maroon btn-flat btn-block']) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

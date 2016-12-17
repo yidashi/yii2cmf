@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = '书';
                 [
                     'attribute' => 'book_name',
                     'value' => function ($model) {
-                        return \yii\helpers\Html::a($model->book_name, ['update-chapter', 'id' => $model->id]);
+                        return \yii\helpers\Html::a($model->book_name, ['create-chapter', 'id' => $model->id]);
                     },
                     'format' => 'html'
                 ],

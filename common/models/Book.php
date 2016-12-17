@@ -19,6 +19,7 @@ use yii\helpers\Url;
  * @property integer $view
  * @property integer $created_at
  * @property integer $updated_at
+ * @property BookChapter $firstChapters
  * @property BookChapter[] $chapters
  */
 class Book extends \yii\db\ActiveRecord
@@ -67,9 +68,15 @@ class Book extends \yii\db\ActiveRecord
             TimestampBehavior::className()
         ];
     }
+
+    public function getFirstChapter()
+    {
+        return $this->hasOne(BookChapter::className(), ['book_id' => 'id'])->orderBy(['sort' => SORT_ASC]);
+    }
+
     public function getChapters()
     {
-        return $this->hasMany(BookChapter::className(), ['book_id' => 'id']);
+        return $this->hasMany(BookChapter::className(), ['book_id' => 'id'])->orderBy(['sort' => SORT_ASC]);
     }
 
     public function getMenuItems()
@@ -79,7 +86,7 @@ class Book extends \yii\db\ActiveRecord
         foreach ($chapters as $chapter) {
             $item = [];
             $item['label'] = $chapter->chapter_name;
-            $item['url'] = ['/book/chapter', 'id' => $chapter->id];
+            $item['url'] = empty($chapter->chapter_body) ? '#' : ['/book/chapter', 'id' => $chapter->id];
             $item['active'] = request('id') == $chapter->id && Yii::$app->controller->action->id == 'chapter';
             $item['id'] = $chapter->id;
             $item['pid'] = $chapter->pid;
@@ -100,6 +107,7 @@ class Book extends \yii\db\ActiveRecord
             $item['active'] = (request('id') == $chapter->id && Yii::$app->controller->action->id == 'update-chapter') || (request('chapter_id') == $chapter->id && Yii::$app->controller->action->id == 'create-chapter');
             $item['id'] = $chapter->id;
             $item['pid'] = $chapter->pid;
+            $item['linkOptions'] = ['data-id' => $chapter->id, 'data-pid' => $chapter->pid];
             $items[] = $item;
         }
         $tree = Tree::build($items, 'id', 'pid', 'items');

@@ -44,7 +44,7 @@ return [
     'Create Permission' => '新增权限',
     'Create Permissions' => '新增权限列表',
     'Routes' => '路由列表',
-    'Create route' => '新增路由',
+    'Create Route' => '新增路由',
     'New' => '新增',
     'Generate Routes' => '生成路由',
     'Append' => '追加',
