@@ -31,9 +31,6 @@ use yii\widgets\Breadcrumbs;
     </section>
 
     <section class="content">
-        <?php if (array_key_exists('demo', Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))): ?>
-        <?php Yii::$app->session->setFlash('warning', '演示组权限有限,只能看不能提交修改,需要全部功能请<a href="http://www.51siyuan.cn/code.html" target="_blank">下载源码</a>') ?>
-        <?php endif; ?>
         <?= \common\widgets\Alert::widget()?>
         <?= $content ?>
     </section>

@@ -96,6 +96,7 @@ class SideNavWidget extends Widget
      */
     public function run()
     {
+        $this->view->registerCss(".submenu .list-group-item{padding-left:60px;}");
         echo $this->renderItems();
         BootstrapAsset::register($this->getView());
     }
@@ -147,11 +148,11 @@ class SideNavWidget extends Widget
         }
 
         if ($items !== null) {
-            $linkOptions['data-toggle'] = 'collapse';
-            $linkOptions['data-parent'] = '#' . $this->id;
+//            $linkOptions['data-toggle'] = 'collapse';
+//            $linkOptions['data-parent'] = '#' . $this->id;
             $id = $this->id . '-' . static::$counter++;
-            $url = '#' . $id;
-            $label .= ' ' . Html::tag('b', '', ['class' => 'caret']);
+//            $url = '#' . $id;
+            $label = Html::tag('b', '', ['class' => 'caret', 'data-toggle' => 'collapse', 'data-parent' => '#' . $this->id, 'href' => '#' . $id]) . ' ' . $label;
             if (is_array($items)) {
                 if ($active === false) {
                     foreach ($items as $subItem) {

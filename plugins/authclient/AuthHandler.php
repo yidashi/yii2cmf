@@ -32,6 +32,7 @@ class AuthHandler
         $email = ArrayHelper::getValue($attributes, 'email');
         $id = ArrayHelper::getValue($attributes, 'id');
         $nickname = ArrayHelper::getValue($attributes, 'login');
+        $avatar = ArrayHelper::getValue($attributes, 'avatar');
 
         /** @var Auth $auth */
         $auth = Auth::find()->where([
@@ -52,17 +53,21 @@ class AuthHandler
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
+                        'scenario' => 'create',
                         'username' => $nickname,
                         'email' => $email,
                         'password' => $password,
                     ]);
-                    $user->scenario = 'create';
                     $user->generateAuthKey();
                     $user->generatePasswordResetToken();
 
                     $transaction = User::getDb()->beginTransaction();
 
                     if ($user->save()) {
+                        if (!empty($avatar)) {
+                            $user->profile->avatar = $avatar;
+                            $user->profile->save(false);
+                        }
                         $auth = new Auth([
                             'user_id' => $user->id,
                             'source' => $this->client->getId(),

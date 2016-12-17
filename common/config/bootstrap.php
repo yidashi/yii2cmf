@@ -1,5 +1,6 @@
 <?php
 Yii::$classMap['yii\helpers\Html'] = '@common/helpers/Html.php';
+Yii::$classMap['yii\helpers\Markdown'] = '@common/helpers/Markdown.php';
 
 Yii::setAlias('root', dirname(dirname(__DIR__)));
 Yii::setAlias('common', dirname(__DIR__));

@@ -7,6 +7,7 @@ div.required label.control-label:after {
  }
 td{word-break: break-all}
 .alert a {text-decoration: none!important;}
+.editormd-fullscreen {z-index:99999!important;}
 .sidebar-menu .treeview-menu {
     display: none;
     list-style: none;

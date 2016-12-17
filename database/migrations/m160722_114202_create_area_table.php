@@ -62,7 +62,7 @@ class m160722_114202_create_area_table extends Migration
             'widget' => 'frontend\\widgets\\area\\TextWidget',
             'slug' => 'gong-gao',
             'config' => '',
-            'template' => '<p>这里是公告</p>',
+            'template' => serialize('<p>这里是公告</p>'),
             'cache' => '0',
             'used' => '0'
         ]);
@@ -73,7 +73,7 @@ class m160722_114202_create_area_table extends Migration
             'widget' => 'frontend\\widgets\\area\\TextWidget',
             'slug' => 'qu-yu-ce-shi',
             'config' => '',
-            'template' => '<p>这里是侧边栏的区域中的一个区块</p>',
+            'template' => serialize('<p>这里是侧边栏的区域中的一个区块</p>'),
             'cache' => '0',
             'used' => '0'
         ]);

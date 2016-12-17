@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'type')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'type_id')->hiddenInput()->label(false) ?>
     <div class="form-group">
-        <?= Html::submitButton('提交', [
+        <?= Html::submitButton('发射', [
             'class' => 'btn btn-primary',
             'data-ajax' => '1',
             'data-refresh-pjax-container' => 'comment-container'

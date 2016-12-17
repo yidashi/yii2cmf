@@ -11,6 +11,8 @@ class Generator extends \yii\gii\generators\model\Generator
 {
     public $skipRuleColumns = ['created_at', 'updated_at'];
 
+    public $generateLabelsFromComments = true;
+
     /**
      * Generates validation rules for the specified table.
      * @param \yii\db\TableSchema $table the table schema
