@@ -15,10 +15,13 @@ $config = [
                     'route' => 'article/view',
                     'suffix' => '.html'
                 ],
+                'tag/search' => '/tag/search',
+                'tag/<name:\S+>' => '/article/tag',
+                'books' => '/book/index',
+                'book/<id:\d+>' => '/book/view',
+                'book/chapter/<id:\d>' => '/book/chapter',
                 '/' => 'site/index',
                 '<controller:\w+>' => '<controller>/index',
-                'tag/search' => '/tag/search',
-                'tag/<name:\S+>' => '/article/tag'
             ],
         ]
     ],

@@ -15,7 +15,7 @@ class WeiboAuth extends OAuth2
 
     /**
      *
-     * @return []
+     * @return array
      * @see http://open.weibo.com/wiki/Oauth2/get_token_info
      * @see http://open.weibo.com/wiki/2/users/show
      */
@@ -27,6 +27,7 @@ class WeiboAuth extends OAuth2
         ]);
         $result['login'] = $result['name'];
         $result['email'] = $result['name'] . '@weibo.com';
+        $result['avatar'] = $result['avatar_large'];
         return $result;
     }
 

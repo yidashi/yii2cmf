@@ -8,6 +8,7 @@ $.extend($.modal, {
 });
 $(function(){
     $("[data-toggle=tooltip]").tooltip({container: 'body'});
+    $(".content-wrapper").css("min-height", $(window).height()-$(".footer").outerHeight()-60);
     //投票
     $(document).on('click', '.vote a', function() {
         var a = $(this);
@@ -103,9 +104,6 @@ $(function(){
         return false;
     });
 });
-$('.view-content a').attr('target', '_blank');
-
-
 $(document).ajaxError(function(event,xhr,options,exc){
     if(xhr.status == 302){
         $.modal.load(xhr.getResponseHeader('X-Redirect'));

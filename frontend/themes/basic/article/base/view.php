@@ -116,3 +116,4 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         </div>
     </div>
 </div>
+<?php $this->registerJs("$('.view-content a').attr('target', '_blank');") ?>

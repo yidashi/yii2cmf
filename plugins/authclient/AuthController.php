@@ -23,6 +23,7 @@ class AuthController extends Controller
             'index' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
+                'redirectView' => '@plugins/authclient/redirect.php'
             ],
         ];
     }

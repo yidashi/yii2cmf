@@ -86,7 +86,7 @@ class CommentBehavior extends Behavior
     }
     private function generateMsgContent($content)
     {
-        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content, 'gfm'))), 50);
+        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content))), 50);
     }
 
     /**

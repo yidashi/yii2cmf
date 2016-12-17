@@ -49,7 +49,7 @@ class Page extends \yii\db\ActiveRecord
 
     public function getProcessedContent()
     {
-        return $this->markdown ? \yii\helpers\Markdown::process($this->content, 'gfm') : $this->content;
+        return $this->markdown ? \yii\helpers\Markdown::process($this->content) : $this->content;
     }
 
     /**

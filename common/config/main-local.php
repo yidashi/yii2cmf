@@ -62,14 +62,12 @@ if (YII_ENV_DEV) {
         'generators' => [
             'crud' => [
                 'class' => 'yii\gii\generators\crud\Generator',
-                'enableI18N' => true,
                 'templates' => [
                     'default' => '@gii/generators/crud/default'
                 ]
             ],
             'model' => [
                 'class' => 'gii\\generators\model\\Generator',
-                'enableI18N' => true,
                 'useTablePrefix' => true,
                 'ns' => 'common\\models'
             ]

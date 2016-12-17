@@ -29,6 +29,7 @@ class QqAuth extends OAuth2
         $qquser['id'] = $qquser['openid'];
         $qquser['login'] = $qquser['nickname'];
         $qquser['email'] = $qquser['nickname'] . '@qq.com';
+        $qquser['avatar'] = $qquser['figureurl_qq_2'];
         return $qquser;
     }
 
