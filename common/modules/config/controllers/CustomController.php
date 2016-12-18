@@ -45,6 +45,9 @@ class CustomController extends Controller
             }
             TagDependency::invalidate(\Yii::$app->cache,  Yii::$app->config->cacheTag);
             return $this->redirect(['index', 'group' => $group]);
+        } else {
+            Yii::$app->session->setFlash('error', '保存失败');
+            return $this->redirect(['index', 'group' => $group]);
         }
     }
 }
