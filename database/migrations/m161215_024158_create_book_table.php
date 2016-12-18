@@ -29,6 +29,7 @@ class m161215_024158_create_book_table extends Migration
             'chapter_name' => $this->string(80)->notNull()->comment('章节标题'),
             'chapter_body' => $this->text()->comment('章节正文'),
             'pid' => $this->integer(11)->notNull()->defaultValue(0),
+            'sort' => $this->smallInteger(1)->notNull()->defaultValue(0),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
