@@ -72,6 +72,15 @@ class Menu extends \yii\db\ActiveRecord
                 'range' => static::find()->select(['name'])->column(),
                 'message' => 'Menu "{value}" not found.', ],
             [['parent', 'route', 'data', 'order'], 'default'],
+            ['route', function($attribute){
+                if (!empty($this->$attribute)) {
+                    $this->addError('route', '一级菜单不能有地址');
+                    return false;
+                }
+                return true;
+            }, 'when' => function($model){
+                return is_null($model->parent);
+            }],
             ['icon', 'string'],
             [['order'], 'integer'],
             [['route'], 'in',
