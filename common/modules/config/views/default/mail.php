@@ -5,10 +5,9 @@ use yii\helpers\Html;
 /**
  * @var $this \yii\web\View
  */
+
+$this->title = '邮箱配置';
 ?>
-<?php $this->beginBlock('content-header') ?>
-<h1>邮箱配置</h1>
-<?php $this->endBlock() ?>
 <?php $form = ActiveForm::begin([
     'id' => 'mail-setting-form',
 ]); ?>

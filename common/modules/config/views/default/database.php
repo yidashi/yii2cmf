@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /**
  * @var $this \yii\web\View
  */
+
+$this->title = '数据库配置';
 ?>
-<?php $this->beginBlock('content-header') ?>
-    <h1>数据库配置</h1>
-<?php $this->endBlock() ?>
+
 <?php $form = ActiveForm::begin([
     'id' => 'db-setting-form',
 ]);
