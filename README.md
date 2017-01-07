@@ -49,9 +49,4 @@ helpers         基本工具函数（自动加载）
 
 `$schedule->exec('craw jianshu')->daily();`
 
-相关前端项目,基于本项目api
------------------------
-
-[vue-yii2cmf](https://github.com/yidashi/vue-yii2cmf)
-
 
