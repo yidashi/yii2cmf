@@ -8,7 +8,7 @@
 
 3. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可)
 
-4. `php yii serve`
+4. `php yii serve` (自有服务器就不需要这一步了,下边的访问地址根据自己的服务器来)
 
 5. 收工
 
@@ -39,7 +39,7 @@ helpers         基本工具函数（自动加载）
 
 后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
-## 定时采集：
+## 定时任务
 
 `crontab -e` 添加
 
@@ -48,10 +48,5 @@ helpers         基本工具函数（自动加载）
 `console/schedule.php` 里添加
 
 `$schedule->exec('craw jianshu')->daily();`
-
-相关前端项目,基于本项目api
------------------------
-
-[vue-yii2cmf](https://github.com/yidashi/vue-yii2cmf)
 
 
