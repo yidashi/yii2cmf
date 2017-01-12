@@ -9,6 +9,7 @@ namespace common\modules\user\models;
  * @property int $user_id
  * @property string $source
  * @property string $source_id
+ * @property User $user
  */
 class Auth extends \yii\db\ActiveRecord
 {

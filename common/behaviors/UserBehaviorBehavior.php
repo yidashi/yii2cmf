@@ -57,12 +57,12 @@ class UserBehaviorBehavior extends Behavior
     public function execute()
     {
         //执行行为规则
-        $execCount = Log::find()->where(['behavior_name' => $this->name, 'user_id' => Yii::$app->user->id])->andWhere(['>', 'created_at', time() - intval($this->rule['cycle']) * 3600])->count();
+        $execCount = Log::find()->where(['behavior_name' => $this->name, 'user_id' => Yii::$app->user->identity->id])->andWhere(['>', 'created_at', time() - intval($this->rule['cycle']) * 3600])->count();
         if($execCount >= $this->rule['max']){
             return;
         }
         // TODO 暂时只支持更新money字段
-        Profile::updateAllCounters(['money' => $this->rule['counter']], ['user_id' => Yii::$app->user->id]);
+        Profile::updateAllCounters(['money' => $this->rule['counter']], ['user_id' => Yii::$app->user->identity->id]);
         //记录日志
         $this->log();
     }
@@ -72,7 +72,7 @@ class UserBehaviorBehavior extends Behavior
         $this->parseContent($this->data);
         $log = new Log();
         $log->behavior_name = $this->name;
-        $log->user_id = Yii::$app->user->id;
+        $log->user_id = Yii::$app->user->identity->id;
         $log->content = $this->content;
         $log->save(false);
     }
