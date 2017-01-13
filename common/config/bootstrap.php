@@ -19,6 +19,5 @@ Yii::setAlias('storagePath', '@root/web/storage');
 Yii::setAlias('storageUrl', env('STORAGE_URL', env('FRONTEND_URL/storage')));
 
 
-Yii::$container->set('yidashi\markdown\Markdown', ['useUploadImage' => true]);
-Yii::$container->set('yii\widgets\LinkPager', ['firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
+Yii::$container->set('yii\widgets\LinkPager', ['maxButtonCount' => 5, 'firstPageLabel' => '首页', 'lastPageLabel' => '末页']);
 Yii::$container->set('yii\widgets\Pjax', ['timeout' => false]);

@@ -6,6 +6,29 @@ div.required label.control-label:after {
      color: red;
  }
 td{word-break: break-all}
+.table thead tr th {
+    padding: 8px 8px;
+    font-weight: normal;
+    color:#333;
+    border-bottom: 1px solid #e1e6eb;
+    background-color: #F5F6FA;
+}
+.table thead tr th a{
+    color:#333;
+}
+.pagination-summary {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+    padding: 0 16px;
+    color: #888;
+}
+.pagination {
+    margin: 0;
+    vertical-align: middle;
+    border-radius: 0;
+}
 .alert a {text-decoration: none!important;}
 .editormd-fullscreen {z-index:99999!important;}
 .sidebar-menu .treeview-menu {
