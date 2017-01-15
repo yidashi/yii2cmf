@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $this->beginBlock('content-header'); ?>
 <h1>
-	<?php echo $this->title?> <a class="btn btn-primary btn-flat btn-xs "
-		href="<?= Url::to(['create']) ?>"> <?= Yii::t('backend', '新区块') ?>
+	<?= $this->title?> <a class="btn btn-primary btn-flat btn-xs "
+		href="<?= Url::to(['create']) ?>">新区块
 	</a>
 </h1>
 <?php $this->endBlock(); ?>
@@ -43,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 ],
                 'slug',
+                'type',
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template'=>"{update} {delete}"

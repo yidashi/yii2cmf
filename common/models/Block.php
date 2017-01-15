@@ -94,7 +94,7 @@ class Block extends \yii\db\ActiveRecord
             'config' => Yii::t('backend', 'Config'),
             'template' => Yii::t('backend', 'Template'),
             'cache' => '是否缓存',
-            "type" => Yii::t('backend', 'Type'),
+            "type" => '类型',
             'used' => Yii::t('backend', 'used'),
             'widget' => Yii::t('backend', 'Widget'),
         ];

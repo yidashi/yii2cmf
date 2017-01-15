@@ -16,6 +16,22 @@ td{word-break: break-all}
 .table thead tr th a{
     color:#333;
 }
+.table thead .sorting:after,
+.table thead .sorting_asc:after,
+.table thead .sorting_desc:after {
+    font-family: 'Glyphicons Halflings';
+    opacity: 0.5;
+    margin-left:5px;
+}
+.table thead .sorting:after {
+    content: "\e150";
+}
+.table thead .sorting.asc:after {
+    content: "\e155"; /* sort-by-attributes */
+}
+.table thead .sorting.desc:after {
+    content: "\e156"; /* sort-by-attributes-alt */
+}
 .pagination-summary {
     display: -moz-inline-stack;
     display: inline-block;

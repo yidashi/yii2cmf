@@ -54,7 +54,7 @@ class AuthHandler
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
                         'scenario' => 'create',
-                        'username' => $nickname,
+                        'username' => User::findByUsername($nickname) ? $nickname . '_' . mt_rand(1000, 9999) : $nickname,
                         'email' => $email,
                         'password' => $password,
                     ]);

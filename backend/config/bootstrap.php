@@ -6,3 +6,6 @@ Yii::$container->set('yii\grid\GridView', [
     'layout' => "{items}\n<div class='clearfix'><div class='pull-right'>{summary}\n{pager}</div></div>",
     'summaryOptions' => ['class' => 'pagination-summary'],
 ]);
+Yii::$container->set('yii\grid\DataColumn', [
+    'sortLinkOptions' => ['class' => 'sorting'],
+]);

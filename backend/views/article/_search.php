@@ -13,7 +13,7 @@ use common\helpers\Tree;
 <div class="article-search">
 
     <?php
-    Yii::$container->set(\yii\widgets\ActiveField::className(), ['template' => "{label}\n{input}\n{hint}"]);
+    Yii::$container->set(\yii\widgets\ActiveField::className(), ['template' => "{label}\n{input}"]);
     $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
@@ -30,8 +30,7 @@ use common\helpers\Tree;
 
     <?= $form->field($model, 'module')->dropDownList(\common\models\ArticleModule::getTypeEnum(), ['prompt' => '全部']) ?>
 
-    <?= Html::submitButton('搜索', ['class' => 'btn btn-primary btn-flat']) ?>
-    <?= Html::resetButton('重置', ['class' => 'btn btn-default']) ?>
+    <?= Html::submitButton(Html::icon('search'), ['class' => 'btn btn-primary btn-flat']) ?>
     <div class="error-summary hide"><ul></ul></div>
 
     <?php ActiveForm::end(); ?>

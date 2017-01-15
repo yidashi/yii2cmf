@@ -12,8 +12,6 @@ namespace api\modules\v1\controllers;
 use api\common\controllers\Controller;
 use api\modules\v1\models\Article;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
-use common\events\ArticleEvent;
 use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller
