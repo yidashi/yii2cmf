@@ -32,7 +32,6 @@ class AuthHandler
         $email = ArrayHelper::getValue($attributes, 'email');
         $id = ArrayHelper::getValue($attributes, 'id');
         $nickname = ArrayHelper::getValue($attributes, 'login');
-        $avatar = ArrayHelper::getValue($attributes, 'avatar');
 
         /** @var Auth $auth */
         $auth = Auth::find()->where([
@@ -64,10 +63,6 @@ class AuthHandler
                     $transaction = User::getDb()->beginTransaction();
 
                     if ($user->save()) {
-                        if (!empty($avatar)) {
-                            $user->profile->avatar = $avatar;
-                            $user->profile->save(false);
-                        }
                         $auth = new Auth([
                             'user_id' => $user->id,
                             'source' => $this->client->getId(),
