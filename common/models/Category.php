@@ -3,11 +3,13 @@
 namespace common\models;
 
 use backend\behaviors\PositionBehavior;
+use common\behaviors\CacheInvalidateBehavior;
 use common\behaviors\MetaBehavior;
 use common\helpers\Tree;
 use common\models\behaviors\CategoryBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\caching\TagDependency;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -84,6 +86,13 @@ class Category extends \yii\db\ActiveRecord
                     'pid'
                 ],
             ],
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'tags' => [
+                    'categoryList'
+                ]
+
+            ]
         ];
     }
 
@@ -110,7 +119,7 @@ class Category extends \yii\db\ActiveRecord
         $list = Yii::$app->cache->get(['categoryList', $module]);
         if ($list === false) {
             $list = static::find()->filterWhere(['module' => $module])->asArray()->all();
-            Yii::$app->cache->set(['categoryList', $module], $list);
+            Yii::$app->cache->set(['categoryList', $module], $list, new TagDependency(['tags' => ['categoryList']]));
         }
         return $list;
     }
