@@ -107,7 +107,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::find()->where(['access_token' => $token])->andWhere(['>', 'expired_at', time()])->one();
     }
 
     /**
@@ -248,7 +248,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateAccessToken()
     {
         $this->access_token = Yii::$app->security->generateRandomString();
-        $this->expired_at = 60 * 60 * 24 * 365;
+        $this->expired_at = time() + 60 * 60 * 24 * 365;
     }
 
     public function removeAccessToken()
@@ -315,17 +315,22 @@ class User extends ActiveRecord implements IdentityInterface
             $avatarFile = Yii::$app->storage->url2path($this->profile->avatar);
             $info = pathinfo($avatarFile);
             $thumbFile = $info['dirname'] . DIRECTORY_SEPARATOR . $info['filename'] . '_' . $width . '_' . $height . '.' . $info['extension'];
-            if (!is_file($thumbFile)) {
-                Image::thumbnail($avatarFile, $width, $height, 'inset')->save($thumbFile);
+            if (is_file($avatarFile)) {
+                if (!is_file($thumbFile)) {
+                    Image::thumbnail($avatarFile, $width, $height, 'inset')->save($thumbFile);
+                }
+                return Yii::$app->storage->path2url($thumbFile);
+            } else {
+                return $this->profile->avatar;
             }
-            return Yii::$app->storage->path2url($thumbFile);
         }
         return $this->getDefaultAvatar($width, $height);
     }
 
     public static function getDefaultAvatar($width, $height)
     {
-        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");
+//        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");
+        list ($basePath, $baseUrl) = [Yii::getAlias('@storagePath/avatars'), Yii::getAlias('@storageUrl/avatars')];
 
         $name = "avatar_" . $width."x".$height. ".png";
         if(file_exists($basePath . DIRECTORY_SEPARATOR . $name))
