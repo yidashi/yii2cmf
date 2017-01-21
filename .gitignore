@@ -32,3 +32,9 @@ dump.rdb
 
 # env
 /.env
+api/runtime/
+backend/runtime/
+cache/
+console/runtime/
+frontend/runtime/
+web/storage/install.txt
