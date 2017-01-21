@@ -36,8 +36,8 @@ class SiteController extends Controller
         $timestamp = Yii::$app->request->get('timestamp');
         $nonce = Yii::$app->request->get('nonce');
 
-        $token = Yii::$app->config->get('wx_token');
-        $token ='kYFTplb8f38boTJXl9QHcJbTLpPEYlhO';
+        $token = Yii::$app->config->get('wx_token');    //从系统配置中读取token
+        $token ='kYFTplb8f38boTJXl9QHcJbTLpPEYlhO';//写死token
         $tmpArr = [$token, $timestamp, $nonce];
         sort($tmpArr, SORT_STRING);
         $tmpStr = implode($tmpArr);
