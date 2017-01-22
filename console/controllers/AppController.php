@@ -152,12 +152,14 @@ class AppController extends Controller
     {
         file_put_contents(Yii::getAlias($this->installFile), time());
     }
-
+    // 重置安装
     public function resetInstall()
     {
+        $this->run('/migrate/down', ['interactive' => false]);
         @unlink(Yii::getAlias($this->installFile));
+        @unlink(Yii::getAlias($this->envPath));
     }
-
+    // 安装
     public function actionInstall()
     {
         if ($this->checkInstalled()) {
