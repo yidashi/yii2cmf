@@ -327,6 +327,10 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->getDefaultAvatar($width, $height);
     }
 
+    public function getSignature()
+    {
+        return $this->profile->signature;
+    }
     public static function getDefaultAvatar($width, $height)
     {
 //        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");

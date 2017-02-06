@@ -85,7 +85,7 @@ class MultipleWidget extends InputWidget
             $this->value = [];
             if ($attachments) {
                 foreach ($attachments as $attachment) {
-                    $value = $this->formartAttachment($attachment);
+                    $value = $this->formatAttachment($attachment);
                     if ($value) {
                         $this->value[] = $value;
                     }
@@ -112,7 +112,7 @@ class MultipleWidget extends InputWidget
 
     }
 
-    protected function formartAttachment($attachment)
+    protected function formatAttachment($attachment)
     {
         if (is_string($attachment) && !empty($attachment)) {
             return [
