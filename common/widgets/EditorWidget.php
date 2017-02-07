@@ -37,6 +37,9 @@ class EditorWidget extends InputWidget
                 $this->type = 'redactor';
             }
         }
+        if ($this->type === null) {
+            $this->type = 'redactor';
+        }
         if(!in_array($this->type, $this->typeEnum)) {
             throw new InvalidParamException('编辑器类型不存在');
         }
