@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 [
                     'attribute' => 'module',
                     'value' => function($model) {
-                        return array_get(\common\models\ArticleModule::getTypeEnum(), $model->module);
+                        return $model->renderModule();
                     }
                 ],
                 [

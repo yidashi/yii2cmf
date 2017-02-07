@@ -2,7 +2,7 @@
 
 namespace rbac\models;
 
-use backend\behaviors\PositionBehavior;
+use common\behaviors\PositionBehavior;
 use rbac\components\Configs;
 use Yii;
 use yii\helpers\Html;

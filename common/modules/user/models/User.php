@@ -115,7 +115,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $username
      *
-     * @return static|null
+     * @return mixed
      */
     public static function findByUsername($username)
     {
@@ -337,8 +337,7 @@ class User extends ActiveRecord implements IdentityInterface
         list ($basePath, $baseUrl) = [Yii::getAlias('@storagePath/avatars'), Yii::getAlias('@storageUrl/avatars')];
 
         $name = "avatar_" . $width."x".$height. ".png";
-        if(file_exists($basePath . DIRECTORY_SEPARATOR . $name))
-        {
+        if(file_exists($basePath . DIRECTORY_SEPARATOR . $name)) {
             return $baseUrl . "/" . $name;
         }
         return $baseUrl . "/" . "avatar_200x200.png";

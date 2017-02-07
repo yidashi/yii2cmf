@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use backend\behaviors\PositionBehavior;
+use common\behaviors\PositionBehavior;
 use common\behaviors\CacheInvalidateBehavior;
 use common\behaviors\MetaBehavior;
 use common\helpers\Tree;
@@ -10,6 +10,7 @@ use common\models\behaviors\CategoryBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\caching\TagDependency;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%article}}".
@@ -21,6 +22,9 @@ use yii\caching\TagDependency;
  * @property string $description
  * @property int $created_at
  * @property int $updated_at
+ * @property string $module
+ * @property string $cover
+ * @property int $allow_publish
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -38,8 +42,12 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'slug'], 'required'],
-            ['module', 'string'],
+            [['title'], 'required'],
+            //中文没法自动生成slug，又没必要必填
+            ['slug', 'default', 'value' => function ($model) {
+                return $model->title;
+            }],
+            ['module', 'safe'],
             [['pid', 'sort', 'allow_publish'], 'integer'],
             ['pid', 'default', 'value' => 0],
             [['sort'], 'default', 'value' => 0]
@@ -60,7 +68,7 @@ class Category extends \yii\db\ActiveRecord
             'description' => '分类介绍',
             'article' => '文章数', //冗余字段,方便查询
             'sort' => '排序',
-            'module' => '文档类型',
+            'module' => '支持的文档类型',
             'allow_publish' => '是否允许发布内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
@@ -118,8 +126,12 @@ class Category extends \yii\db\ActiveRecord
     {
         $list = Yii::$app->cache->get(['categoryList', $module]);
         if ($list === false) {
-            $list = static::find()->filterWhere(['module' => $module])->asArray()->all();
-            Yii::$app->cache->set(['categoryList', $module], $list, new TagDependency(['tags' => ['categoryList']]));
+            $query = static::find();
+            if ($module) {
+                $query->where(new Expression("FIND_IN_SET('{$module}', module) "));
+            }
+            $list = $query->asArray()->all();
+            Yii::$app->cache->set(['categoryList', $module], $list, 0, new TagDependency(['tags' => ['categoryList']]));
         }
         return $list;
     }
@@ -155,7 +167,7 @@ class Category extends \yii\db\ActiveRecord
         foreach($tree as $list) {
             $result[$list['id']] = str_repeat($separator, $deep-1) . $list['title'];
             if (isset($list['children'])) {
-                self::getDropDownlist($list['children'], $result, $deep);
+                self::getDropDownList($list['children'], $result, $deep);
             }
         }
         return $result;
@@ -195,5 +207,28 @@ class Category extends \yii\db\ActiveRecord
             '只允许后台',
             '允许前后台'
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->module = implode(',', $this->module);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->module = explode(',', $this->module);
+    }
+
+    public function renderModule($separator = ',')
+    {
+        return join($separator, array_map(function ($val) {
+            return array_get(ArticleModule::getTypeEnum(), $val);
+        }, $this->module));
     }
 }

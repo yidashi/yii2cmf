@@ -14,7 +14,7 @@ use common\models\Category;
     <div class="box-body">
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'pid')->dropDownList(Category::getDropDownlist(Category::tree()), ['prompt' => '请选择']) ?>
+        <?= $form->field($model, 'pid')->dropDownList(Category::getDropDownList(Category::tree()), ['prompt' => '请选择']) ?>
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
@@ -24,11 +24,11 @@ use common\models\Category;
 
         <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'module')->radioList(\common\models\ArticleModule::getTypeEnum()) ?>
+        <?= $form->field($model, 'module')->checkboxList(\common\models\ArticleModule::getTypeEnum()) ?>
 
-    <?= $form->field($model, 'allow_publish')->radioList($model::getAllowPublishEnum()) ?>
+        <?= $form->field($model, 'allow_publish')->radioList($model::getAllowPublishEnum()) ?>
 
-    <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
+        <?= $form->boxField($model, 'meta',["collapsed"=>true])->widget(MetaForm::className())->header("SEO"); ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success btn-flat btn-block' : 'btn btn-primary btn-flat btn-block']) ?>

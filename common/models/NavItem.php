@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use backend\behaviors\PositionBehavior;
+use common\behaviors\PositionBehavior;
 use Yii;
 
 /**

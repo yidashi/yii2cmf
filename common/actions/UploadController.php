@@ -115,6 +115,46 @@ class UploadController extends Controller
                     ];
                 }
             ],
+            'im-image-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment',
+                'callback' => function($result) {
+                    return !isset($result['files'][0]['error']) ? [
+                        'code' => 0,
+                        'msg' => '',
+                        'data' => [
+                            'src' => $result['files'][0]['url']
+                        ]
+                    ] : [
+                        'code' => 0,
+                        'msg' => $result['files'][0]['error'],
+                        'data' => (object)[]
+                    ];
+                }
+            ],
+            'im-file-upload' => [
+                'class' => 'common\actions\UploadAction',
+                'url' => Yii::$app->storage->baseUrl,
+                'path' => Yii::$app->storage->basePath,
+                'modelClass' => 'common\models\Attachment',
+                'uploadOnlyImage' => false,
+                'callback' => function($result) {
+                    return !isset($result['files'][0]['error']) ? [
+                        'code' => 0,
+                        'msg' => '',
+                        'data' => [
+                            'src' => $result['files'][0]['url'],
+                            'name' => $result['files'][0]['filename']
+                        ]
+                    ] : [
+                        'code' => 0,
+                        'msg' => $result['files'][0]['error'],
+                        'data' => (object)[]
+                    ];
+                }
+            ],
         ];
     }
 
