@@ -8,7 +8,6 @@ defined('YII_ENV') or define('YII_ENV', env('YII_ENV', 'prod'));
 
 class Yii extends \yii\BaseYii
 {
-    public static $installFile = '@root/web/storage/install.txt';
     /**
      * @var BaseApplication|WebApplication|ConsoleApplication the application instance
      */
@@ -23,10 +22,6 @@ class Yii extends \yii\BaseYii
         return 'Powered by ' . '<a href="http://www.51siyuan.cn/" rel="external">Yii2 CMF</a>';
     }
 
-    public static function checkInstalled()
-    {
-        return file_exists(Yii::getAlias(self::$installFile));
-    }
 }
 
 spl_autoload_register(['Yii', 'autoload'], true, true);

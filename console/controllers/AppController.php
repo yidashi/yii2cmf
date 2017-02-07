@@ -145,7 +145,7 @@ class AppController extends Controller
 
     public function checkInstalled()
     {
-        return Yii::checkInstalled();
+        return file_exists(Yii::getAlias($this->installFile));
     }
 
     public function setInstalled()
