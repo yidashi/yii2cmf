@@ -105,7 +105,15 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
         $this->createIndex('type', '{{%comment}}', ['type', 'type_id']);
-
+// comment_info
+        $this->createTable('{{%comment_info}}', [
+            'id' => Schema::TYPE_PK,
+            'type' => $this->string(80)->notNull(),
+            'type_id' => $this->integer(11)->notNull(),
+            'status' => $this->boolean()->notNull()->defaultValue(1),
+            'total' => $this->integer(11)->notNull()
+        ], $this->tableOptions);
+        $this->createIndex('type', '{{%comment_info}}', ['type', 'type_id']);
 // favourite
         $this->createTable('{{%favourite}}', [
             'id' => Schema::TYPE_PK,
