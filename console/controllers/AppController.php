@@ -145,7 +145,7 @@ class AppController extends Controller
 
     public function checkInstalled()
     {
-        return file_exists(Yii::getAlias($this->installFile));
+        return Yii::checkInstalled();
     }
 
     public function setInstalled()
@@ -206,6 +206,10 @@ STR;
 
     public function actionReset()
     {
+        if (!$this->checkInstalled()) {
+            $this->stdout("\n  ... 还没安装.\n\n", Console::FG_RED);
+            die;
+        }
         if ($this->confirm('确定要重置安装状态吗？')) {
             $this->resetInstall();
         }

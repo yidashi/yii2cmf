@@ -15,6 +15,8 @@
     前台访问地址: `http://localhost:8080/`
 
     后台访问地址: `http://localhost:8080/admin/` 管理员 帐号 `hehe` 密码 `111111`
+    
+> 如果使用自己的服务器，修改下.env文件里 `SITE_URL` `FRONTEND_URL` `BACKEND_URL` `STORAGE_URL` 这几个配置
 
 ## 目录结构
 
