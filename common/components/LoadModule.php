@@ -19,7 +19,7 @@ class LoadModule extends Component implements BootstrapInterface
     public function bootstrap($app)
     {
         // 先判断是否安装，没安装不操作~
-        if (!file_exists(Yii::getAlias('@root/web/storage/install.txt'))) {
+        if (!Yii::checkInstalled()) {
             return;
         }
         $models = Module::findOpenModules(Module::TYPE_CORE);
