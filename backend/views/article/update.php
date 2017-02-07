@@ -4,7 +4,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
 /* @var $moduleModel yii\db\ActiveRecord */
 
 $this->title = '更新文章';
@@ -19,7 +18,6 @@ $this->params['breadcrumbs'][] = '更新';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'dataModel' => $dataModel,
         'moduleModel' => $moduleModel,
         'module' => $module
     ]) ?>

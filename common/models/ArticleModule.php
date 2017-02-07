@@ -8,7 +8,6 @@ namespace common\models;
  * @property integer $id
  * @property string $name
  * @property string $title
- * @property string $model
  */
 class ArticleModule extends \yii\db\ActiveRecord
 {
@@ -27,7 +26,6 @@ class ArticleModule extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'title'], 'string', 'max' => 50],
-            [['model'], 'string', 'max' => 128],
         ];
     }
 
@@ -40,12 +38,11 @@ class ArticleModule extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'title' => 'Title',
-            'model' => 'Model',
         ];
     }
 
     public static function getTypeEnum()
     {
-        return ['base' => '普通'] + self::find()->select('title')->indexBy('name')->column();
+        return self::find()->select('title')->indexBy('name')->column();
     }
 }

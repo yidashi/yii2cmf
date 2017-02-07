@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-9">
         <?= $this->render('_form', [
             'model' => $model,
-            'dataModel' => $dataModel,
             'moduleModel' => $moduleModel,
             'module' => $module
         ]) ?>

@@ -72,8 +72,12 @@ class DynamicFormBehavior extends Behavior
     public function getAttributeOptions($attribute)
     {
         if(isset($this->formAttributes[$attribute])) {
-            return ArrayHelper::getValue($this->formAttributes[$attribute], 'options', []);
+            $options = ArrayHelper::getValue($this->formAttributes[$attribute], 'options', []);
+            if (is_callable($options)) {
+                return call_user_func($options, $this->owner);
+            }
         }
+        return [];
     }
 
     public function formAttributes()

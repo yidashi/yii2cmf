@@ -153,33 +153,22 @@ class ArticleController extends Controller
         $model = new Article();
         $model->status = Article::STATUS_ACTIVE;
         $model->module = $module;
-        $dataModel = new ArticleData();
-        if ($module != 'base') {
-            $moduleModelClass = $this->findModule($module);
-            $moduleModel = new $moduleModelClass;
-        } else {
-            $moduleModel = null;
-        }
+        $moduleModelClass = $model->findModuleClass($module);
+        $moduleModel = new $moduleModelClass;
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try{
                 $model->load(Yii::$app->request->post());
                 $model->save();
-                $dataModel->load(Yii::$app->request->post());
-                $dataModel->id = $model->id;
-                $dataModel->save();
-                if($model->hasErrors() || $dataModel->hasErrors()) {
+                if($model->hasErrors()) {
                     throw new Exception('操作失败');
                 }
-                if ($module != 'base') {
-                    $moduleModel->load(Yii::$app->request->post());
-                    $moduleModel->id = $model->id;
-                    $moduleModel->save();
-                    if($moduleModel->hasErrors()) {
-                        throw new Exception('操作失败');
-                    }
+                $moduleModel->load(Yii::$app->request->post());
+                $moduleModel->id = $model->id;
+                $moduleModel->save();
+                if($moduleModel->hasErrors()) {
+                    throw new Exception('操作失败');
                 }
-
                 $transaction->commit();
                 Yii::$app->session->setFlash('success', '发布成功');
             } catch (\Exception $e) {
@@ -188,13 +177,9 @@ class ArticleController extends Controller
             }
             return $this->redirect(['index']);
         }
-        $articleModuleItems = [];
-        $articleModuleItems[] = [
-            'label' => '文章',
-            'url' => ['/article/create'],
-            'active' => $module == 'base'
-        ];
+
         $articleModules = ArticleModule::find()->all();
+        $articleModuleItems = [];
         foreach($articleModules as $articleModule) {
             $articleModuleItem = [];
             $articleModuleItem['label'] = $articleModule->title;
@@ -204,20 +189,12 @@ class ArticleController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
-            'dataModel' => $dataModel,
             'moduleModel' => $moduleModel,
             'module' => $module,
             'articleModuleItems' => $articleModuleItems
         ]);
     }
-    public function findModule($name)
-    {
-        if (($module = ArticleModule::findOne(['name' => $name])) != null) {
-            return $module->model;
-        } else {
-            throw new NotFoundHttpException('文章类型不存在');
-        }
-    }
+
     /**
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -229,16 +206,13 @@ class ArticleController extends Controller
     public function actionUpdate($id)
     {
         $model = Article::find()->where(['id' => $id])->with('data')->one();
-        $dataModel = $model->data;
-        $moduleModel = $model->extend;
+        $moduleModel = $model->data;
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try {
                 $model->load(Yii::$app->request->post());
                 $model->save();
-                $dataModel->load(Yii::$app->request->post());
-                $dataModel->save();
-                if($model->hasErrors() || $dataModel->hasErrors()) {
+                if($model->hasErrors()) {
                     throw new Exception('操作失败');
                 }
                 if ($moduleModel) {
@@ -257,7 +231,6 @@ class ArticleController extends Controller
         }
         return $this->render('update', [
             'model' => $model,
-            'dataModel' => $dataModel,
             'moduleModel' => $moduleModel,
             'module' => $model->module
         ]);

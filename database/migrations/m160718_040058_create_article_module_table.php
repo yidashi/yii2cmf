@@ -20,7 +20,6 @@ class m160718_040058_create_article_module_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string(50),
             'title' => $this->string(50),
-            'model' => $this->string(128)
         ], $tableOptions);
         $this->createTable('{{%article_exhibition}}', [
             'id' => $this->integer(11)->unique(),
@@ -35,9 +34,12 @@ class m160718_040058_create_article_module_table extends Migration
         $this->addColumn('{{%article}}', 'module', $moduleColumn);
         $this->addColumn('{{%category}}', 'module', $moduleColumn);
         $this->insert('{{%article_module}}', [
+            'name' => 'base',
+            'title' => '普通',
+        ]);
+        $this->insert('{{%article_module}}', [
             'name' => 'exhibition',
             'title' => '展会',
-            'model' => 'common\models\ArticleExhibition'
         ]);
     }
 

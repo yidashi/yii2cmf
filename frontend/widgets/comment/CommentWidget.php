@@ -18,43 +18,56 @@ class CommentWidget extends Widget
 {
     public $type = 'article';
     public $type_id;
+    /**
+     * @var \yii\db\ActiveRecord
+     */
+    public $model;
     public $listTitle = '评论';
     public $createTitle = '发表评论';
 
+    public function init()
+    {
+        parent::init();
+        if (isset($this->model)) {
+            $this->type = $this->model->getType();
+            $this->type_id = $this->model->getPrimaryKey();
+        }
+    }
     public function run()
     {
-        // 评论列表
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id, 'parent_id' => 0]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'is_top' => SORT_DESC,
-                    'id' => SORT_DESC
+        if (!isset($this->model) || $this->model->getCommentEnabled()) {
+            // 评论列表
+            $dataProvider = new ActiveDataProvider([
+                'query' => Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id, 'status' => 1, 'parent_id' => 0]),
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                        'is_top' => SORT_DESC,
+                        'id' => SORT_DESC
+                    ]
                 ]
-            ]
-        ]);
-        $model = Article::find()->normal()->andWhere(['id' => $this->type_id])->one();
-        if (is_null($model) || !$model->hasAttribute('comment') || !$model->hasProperty('comment')) {
-            $comment = Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id])->count();
-        } else {
-            $comment = $model->comment;
-        }
-        // 评论框
-        $commentModel = new Comment();
-        $commentModel->type = $this->type;
-        $commentModel->type_id = $this->type_id;
+            ]);
+            if (isset($this->model)) {
+                $commentTotal = $this->model->getCommentTotal();
+            } else {
+                $commentTotal = Comment::activeCount($this->type, $this->type_id);
+            }
+            // 评论框
+            $commentModel = new Comment();
+            $commentModel->type = $this->type;
+            $commentModel->type_id = $this->type_id;
 
-        return $this->render('index', [
-            'type' => $this->type,
-            'typeId' => $this->type_id,
-            'comment' => $comment,
-            'commentModel' => $commentModel,
-            'dataProvider' => $dataProvider,
-            'listTitle' => $this->listTitle,
-            'createTitle' => $this->createTitle,
-        ]);
+            return $this->render('index', [
+                'type' => $this->type,
+                'typeId' => $this->type_id,
+                'commentTotal' => $commentTotal,
+                'commentModel' => $commentModel,
+                'dataProvider' => $dataProvider,
+                'listTitle' => $this->listTitle,
+                'createTitle' => $this->createTitle,
+            ]);
+        }
     }
 }

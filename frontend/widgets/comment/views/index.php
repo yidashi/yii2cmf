@@ -7,7 +7,7 @@
     .media-content img{width:80px;height:80px;margin-right:10px;}
 </style>
 <div id="comments">
-    <h4>共 <span class="text-danger"><?= $comment ?></span> 条<?= $listTitle ?></h4>
+    <h4>共 <span class="text-danger"><?= $commentTotal ?></span> 条<?= $listTitle ?></h4>
     <?php \yii\widgets\Pjax::begin(['id' => 'comment-container']) ?>
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,

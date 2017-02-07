@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
@@ -11,6 +12,7 @@ use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use common\modules\user\behaviors\UserBehavior;
 use Yii;
+use yii\base\InvalidParamException;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 
@@ -18,6 +20,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%article}}".
  *
  * @property int $id
+ * @property int $user_id
  * @property string $title
  * @property string $content
  * @property int $created_at
@@ -31,6 +34,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int $view
  * @property string $published_at
  * @property int $is_top
+ * @property int $is_best
+ * @property int $is_hot
  * @property string $module
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
@@ -73,6 +78,7 @@ class Article extends \yii\db\ActiveRecord
             [['cover', 'source'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
+            ['module', 'string']
         ];
     }
     public function setCategory($attribute, $params)
@@ -119,7 +125,6 @@ class Article extends \yii\db\ActiveRecord
     public function attributeHints()
     {
         return [
-            'description' => '（默认截取内容前150个字符）',
             'tagNames' => '（空格分隔多个标签）'
         ];
     }
@@ -152,6 +157,10 @@ class Article extends \yii\db\ActiveRecord
                 'type' => 'article'
             ],
             ['class' => TagBehavior::className()],
+            [
+                'class' => CommentBehavior::className(),
+                'type' => 'article'
+            ],
             UserBehavior::className()
         ];
         if (!Yii::$app->request->isConsoleRequest) {
@@ -196,17 +205,9 @@ class Article extends \yii\db\ActiveRecord
 
     public function getData()
     {
-        return $this->hasOne(ArticleData::className(), ['id' => 'id']);
+        $moduleClass = $this->findModuleClass($this->module);
+        return $this->hasOne($moduleClass, ['id' => 'id']);
     }
-
-    public function getExtend()
-    {
-        if ($this->module != 'base') {
-            $module = ArticleModule::find()->where(['name' => $this->module])->one();
-            return $this->hasOne($module->model, ['id' => 'id']);
-        }
-    }
-
 
     /**
      * 真实浏览量
@@ -255,5 +256,21 @@ class Article extends \yii\db\ActiveRecord
     public function getIsReprint()
     {
         return !empty($this->source);
+    }
+
+    public function findModuleClass($module)
+    {
+        $class = new \ReflectionClass(get_called_class());
+        $moduleClass = $class->getNamespaceName() . '\\article\\' . ucfirst($this->module);
+
+        // 找父类
+        if (!class_exists($moduleClass)) {
+            $parentClass = $class->getParentClass();
+            $moduleClass = $parentClass->getNamespaceName() . '\\article\\' . ucfirst($this->module);
+        }
+        if (!class_exists($moduleClass)) {
+            throw new InvalidParamException('文章类型不存在');
+        }
+        return $moduleClass;
     }
 }

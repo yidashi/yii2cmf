@@ -112,7 +112,9 @@ class DynamicInputWidget extends InputWidget
                 return FileWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
             case 'editor': // 编辑器
-                return EditorWidget::widget(['name' => $this->name, 'value' => $this->value]);
+                return EditorWidget::widget(ArrayHelper::merge([
+                    'name' => $this->name, 'value' => $this->value
+                ], $this->options));
                 break;
             case 'date': // 日期
                 return DatePicker::widget(ArrayHelper::merge([
@@ -184,7 +186,9 @@ class DynamicInputWidget extends InputWidget
                 return FileWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
             case 'editor': // 编辑器
-                return EditorWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                return EditorWidget::widget(ArrayHelper::merge([
+                    'model' => $this->model, 'attribute' => $this->attribute
+                ], $this->options));
                 break;
             case 'date': // 日期
                 return DatePicker::widget(ArrayHelper::merge([

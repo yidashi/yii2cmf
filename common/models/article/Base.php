@@ -1,8 +1,12 @@
 <?php
 
-namespace common\models;
+namespace common\models\article;
+
+use backend\behaviors\DynamicFormBehavior;
 use common\behaviors\XsBehavior;
+use common\models\Article;
 use common\models\behaviors\ArticleDataBehavior;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%article_data}}".
@@ -11,7 +15,7 @@ use common\models\behaviors\ArticleDataBehavior;
  * @property string $content
  * @property integer $markdown
  */
-class ArticleData extends \yii\db\ActiveRecord
+class Base extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -59,14 +63,48 @@ class ArticleData extends \yii\db\ActiveRecord
         ];
     }
 
+    public function attributeHints()
+    {
+        return [
+            'content' => '摘要不填时默认截取内容前150个字符'
+        ];
+    }
     public function behaviors()
     {
-        $behaviors = [
-            ArticleDataBehavior::className()
-        ];
+        $behaviors = [];
         if (\Yii::$app->config->get('SEARCH_ENGINE') == 'xunsearch') {
             $behaviors[] = XsBehavior::className();
         }
+        $behaviors[] = [
+            'class' => DynamicFormBehavior::className(),
+            'formAttributes' => [
+                'content' => [
+                    'type' => 'editor',
+                    'options' => function ($model) {
+                        return $model->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $model->markdown];
+                    }
+                ],
+            ]
+        ];
         return $behaviors;
+    }
+
+    // 发布新文章后（摘要为空的话根据内容生成摘要)
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        $article = Article::findOne(['id' => $this->id]);
+        if (!empty($article)) {
+            if (empty($article->description)) {
+                $article->description = $this->generateDesc($this->getProcessedContent());
+                $article->save();
+            }
+        }
+    }
+
+    // 摘要生成方式
+    private function generateDesc($content)
+    {
+        return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags($content)), 150);
     }
 }

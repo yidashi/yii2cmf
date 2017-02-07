@@ -27,9 +27,11 @@ use common\helpers\Tree;
 
                     <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists($model->module)))) ?>
 
-                    <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $dataModel->markdown]); ?>
-
                     <?= $form->boxField($model, 'description')->textarea()?>
+
+                    <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
+                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
+                    <?php endforeach; ?>
 
                     <?= $form->boxField($model, 'meta', ["collapsed" => true])->widget(MetaForm::className())->header("SEO"); ?>
 
@@ -61,11 +63,7 @@ use common\helpers\Tree;
                     <?= $form->boxField($model, TagBehavior::$formName)->widget(TagsInput::className())->header(TagBehavior::$formLable); ?>
 
                     <?= $form->field($model, 'source')->textInput() ?>
-                    <?php if ($moduleModel): ?>
-                    <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
-                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
-                    <?php endforeach; ?>
-                    <?php endif; ?>
+
                 </div>
             </div>
         </div>
