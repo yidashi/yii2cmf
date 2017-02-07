@@ -135,6 +135,10 @@ class MenuController extends Controller
      */
     public function actionDelete($id)
     {
+        if (Menu::find()->where(['parent' => $id])->all() > 0) {
+            Yii::$app->session->setFlash('error', '请先删除该菜单下的所有子菜单');
+            return $this->redirect(['index']);
+        }
         $this->findModel($id)->delete();
         MenuHelper::invalidate();
 
