@@ -44,11 +44,11 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <?php endforeach; ?>
     </ul>
     <div class="exhibition-info well">
-        <p class="exhibition-address"><?= Html::icon('map-pin') ?> <?= $model->extend->city ?> <?= $model->extend->address ?></p>
-        <p class="exhibition-time"><?= Html::icon('clock-o') ?> <?= $model->extend->start_at ?> 至 <?= $model->extend->end_at ?></p>
+        <p class="exhibition-address"><?= Html::icon('map-pin') ?> <?= $model->data->city ?> <?= $model->data->address ?></p>
+        <p class="exhibition-time"><?= Html::icon('clock-o') ?> <?= $model->data->start_at ?> 至 <?= $model->data->end_at ?></p>
     </div>
     <!--内容-->
-    <div class="view-content"><?= \yii\helpers\HtmlPurifier::process($model->data->processedContent) ?></div>
+    <div class="view-content"><?= \yii\helpers\HtmlPurifier::process($model->description) ?></div>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
     <nav>
         <ul class="pager">
