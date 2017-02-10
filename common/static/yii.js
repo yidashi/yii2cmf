@@ -102,11 +102,7 @@ yii = (function ($) {
          * @param cancel a callback to be called when the user cancels the confirmation
          */
         confirm: function (message, ok, cancel) {
-            if (confirm(message)) {
-                !ok || ok();
-            } else {
-                !cancel || cancel();
-            }
+            $.modal.confirm(message, ok, cancel);
         },
 
         /**
