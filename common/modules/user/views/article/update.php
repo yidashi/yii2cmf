@@ -7,7 +7,6 @@
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Article */
-/* @var $dataModel common\models\ArticleData */
 
 $this->title = '我的发布';
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['/user/article-list']];
@@ -18,7 +17,7 @@ $this->params['breadcrumbs'][] = $model->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'dataModel' => $dataModel
+        'moduleModel' => $moduleModel
     ]) ?>
 
 </div>

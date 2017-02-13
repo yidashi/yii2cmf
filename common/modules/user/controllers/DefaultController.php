@@ -91,14 +91,14 @@ class DefaultController extends Controller
         if ($model == null) {
             throw new NotFoundHttpException('文章不存在或者不属于你');
         }
-        $dataModel = $model->data;
+        $moduleModel = $model->data;
         if (
             $model->load(\Yii::$app->request->post())
             && $model->validate()
-            && $dataModel->load(\Yii::$app->request->post())
-            && $dataModel->validate()
+            && $moduleModel->load(\Yii::$app->request->post())
+            && $moduleModel->validate()
             && $model->save(false)
-            && $dataModel->save(false)
+            && $moduleModel->save(false)
         ) {
             \Yii::$app->session->setFlash('success', '修改成功！');
             return $this->redirect(['update-article', 'id' => $id]);
@@ -106,7 +106,7 @@ class DefaultController extends Controller
 
         return $this->render('/article/update', [
             'model' => $model,
-            'dataModel' => $dataModel
+            'moduleModel' => $moduleModel
         ]);
     }
 
