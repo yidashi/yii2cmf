@@ -90,8 +90,6 @@ class MenuController extends Controller
         $model = new Menu();
         $model->parent_name = $id ? Menu::findOne($id)->name : null;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            MenuHelper::invalidate();
-
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -115,8 +113,6 @@ class MenuController extends Controller
             $model->parent_name = $model->menuParent->name;
         }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            MenuHelper::invalidate();
-
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -140,8 +136,6 @@ class MenuController extends Controller
             return $this->redirect(['index']);
         }
         $this->findModel($id)->delete();
-        MenuHelper::invalidate();
-
         return $this->redirect(['index']);
     }
 

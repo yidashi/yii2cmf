@@ -2,8 +2,10 @@
 
 namespace rbac\models;
 
+use common\behaviors\CacheInvalidateBehavior;
 use common\behaviors\PositionBehavior;
 use rbac\components\Configs;
+use rbac\components\MenuHelper;
 use Yii;
 use yii\helpers\Html;
 
@@ -49,13 +51,19 @@ class Menu extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            'positionBehavior' => [
+            [
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'order',
                 'groupAttributes' => [
                     'parent' // multiple lists varying by 'parent'
                 ],
             ],
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'tags' => [
+                    MenuHelper::CACHE_TAG
+                ]
+            ]
         ];
     }
 

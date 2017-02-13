@@ -60,6 +60,7 @@ class m160702_101410_create_plugins extends Migration
         $this->insert('{{%module}}', [
             'id' => 'config',
             'name' => '动态配置',
+            'bootstrap' => 'app-frontend|app-backend|app-console',
             'class' => 'common\\modules\\config\\Module',
             'status' => 1,
             'type' => 1,

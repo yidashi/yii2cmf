@@ -63,6 +63,7 @@ class ImportController extends Controller
     /**
      * 还原数据库初始化
      * @param int $time
+     * @return mixed
      */
     public function actionInit($time = 0)
     {
@@ -98,8 +99,10 @@ class ImportController extends Controller
         }
     }
 
-    public function actionStart($part = null, $start = null)
+    public function actionStart()
     {
+        $part = \Yii::$app->request->post('part');
+        $start = \Yii::$app->request->post('start');
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $list  = \Yii::$app->session->get('backup_list');
         $db = new Database($list[$part], array(

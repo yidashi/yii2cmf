@@ -106,7 +106,6 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
         $model->route = $route;
         $model->parent = $id;
         $model->save();
-        MenuHelper::invalidate();
     }
 
     /**
@@ -117,7 +116,6 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
     public function deleteMenu($name)
     {
         \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
-        MenuHelper::invalidate();
     }
 
     /**
@@ -128,7 +126,7 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
     {
         if ($this->checkInfo()) {
             $model = Module::find()->where(['id' => $this->getPackage()])->one();
-            if (empty($model)) {
+            if ($model === null) {
                 $model = new Module();
                 $model->attributes = $this->info;
                 $model->type = Module::TYPE_PLUGIN;
@@ -146,7 +144,7 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
     {
         $model = Module::find()->where(['id' => $this->getPackage()])->one();
         $model->status = Module::STATUS_UNINSTALL;
-        $model->save();
+        return $model->save();
     }
 
     public function upgrade()

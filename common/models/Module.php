@@ -15,7 +15,9 @@ use yii\caching\TagDependency;
  * @property string $title
  * @property integer $status
  * @property string $author
+ * @property integer $type
  * @property string $desc
+ * @property string $config
  * @property integer $created_at
  * @property integer $updated_at
  */

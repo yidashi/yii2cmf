@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <script type="text/javascript">
         $(".db-import").click(function(){
             var self = this, status = ".";
-            $.get(self.href, success, "json");
+            $.post(self.href, success, "json");
             window.onbeforeunload = function(){ return "正在还原数据库，请不要关闭！" }
             return false;
 
@@ -82,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     $(self).parent().prev().text(data.info);
                     if(data.part){
-                        $.get('<?= \yii\helpers\Url::to(['start'])?>',
+                        $.post('<?= \yii\helpers\Url::to(['start'])?>',
                             {"part" : data.part, "start" : data.start},
                             success,
                             "json"
