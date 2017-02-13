@@ -9,12 +9,15 @@ use common\modules\user\models\User;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Html;
+use common\behaviors\UserBehaviorBehavior;
+use Yii;
 
 /**
  * This is the model class for table "{{%comment}}".
  *
  * @property int $id
  * @property int $user_id
+ * @property string $user_ip
  * @property string $content
  * @property string $type
  * @property int $type_id
@@ -70,6 +73,7 @@ class Comment extends \yii\db\ActiveRecord
             'up' => '顶',
             'down' => '踩',
             'is_top' => '是否置顶',
+            'status' => '状态',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
             'parent_id' => '父评论'
@@ -92,7 +96,23 @@ class Comment extends \yii\db\ActiveRecord
                 'type' => 'comment'
             ],
             UserBehavior::className(),
-            CommentBehavior::className()
+            CommentBehavior::className(),
+            [
+                'class' => UserBehaviorBehavior::className(),
+                'eventName' => [self::EVENT_AFTER_INSERT],
+                'name' => 'comment',
+                'rule' => [
+                    'cycle' => 24,
+                    'max' => 10,
+                    'counter' => 5,
+                ],
+                'content' => '{user.username}在{extra.time}评论',
+                'data' => [
+                    'extra' => [
+                        'time' => date('Y-m-d H:i:s')
+                    ]
+                ]
+            ]
         ];
     }
 
@@ -103,7 +123,7 @@ class Comment extends \yii\db\ActiveRecord
      */
     public function getSons()
     {
-        return $this->hasMany(self::className(), ['parent_id' => 'id']);
+        return $this->hasMany(self::className(), ['parent_id' => 'id'])->where(['status' => 1]);
     }
 
     public function getParent()
@@ -127,5 +147,60 @@ class Comment extends \yii\db\ActiveRecord
             $data = preg_replace('/(@\S+?\s)/', Html::a('$1', ['/user/default/index', 'id' => $replyUserId]), $data);
         }
         return $data;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($insert == true) {
+                $this->user_ip = Yii::$app->getRequest()->getUserIP();
+                return true;
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert) {
+            $this->updateCommentTotal();
+            return true;
+        }
+
+        return true;
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $this->updateCommentTotal();
+    }
+
+    public function updateCommentTotal()
+    {
+        $model = CommentInfo::find()->where(['type' => $this->type, 'type_id' => $this->type_id])->one();
+        $total = Comment::activeCount($this->type, $this->type_id);
+        if($model == null && $total != 0) {
+            $model = new CommentInfo();
+            $model->type =$this->type;
+            $model->type_id = $this->type_id;
+            $model->total =$total;
+            $model->save();
+        } else {
+            $model->total = $total;
+            $model->save();
+        }
+    }
+
+    public static function activeCount($type, $type_id = NULL)
+    {
+        return self::find()->where([
+            'type' => $type,
+            'type_id' => $type_id,
+            'status' => 1
+        ])->count();
     }
 }
