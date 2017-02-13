@@ -10,7 +10,6 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -24,7 +23,9 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
-        <?= $form->field($dataModel, 'content')->widget(\common\widgets\EditorWidget::className(), $dataModel->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $dataModel->markdown]); ?>
+        <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
+            <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
+        <?php endforeach; ?>
 
     </div>
     <div class="col-lg-3">

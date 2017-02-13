@@ -258,7 +258,7 @@ class Article extends \yii\db\ActiveRecord
         return !empty($this->source);
     }
 
-    public function findModuleClass($module)
+    public function findModuleClass()
     {
         $class = new \ReflectionClass(get_called_class());
         $moduleClass = $class->getNamespaceName() . '\\article\\' . ucfirst($this->module);

@@ -67,13 +67,14 @@ class DefaultController extends Controller
             'pages' => $pages,
         ]);
     }
-    public function actionCreateArticle()
+    public function actionCreateArticle($module = 'base')
     {
-        $model = new Article();
-        $dataModel = new ArticleData();
-        if ($model->load(\Yii::$app->request->post()) && $dataModel->load(\Yii::$app->request->post()) && $model->validate() && $dataModel->validate() && $model->save(false)) {
-            $dataModel->id = $model->id;
-            if ($dataModel->save(false)) {
+        $model = new Article(['module' => $module]);
+        $moduleClass = $model->findModuleClass();
+        $moduleModel = new $moduleClass();
+        if ($model->load(\Yii::$app->request->post()) && $moduleModel->load(\Yii::$app->request->post()) && $model->validate() && $moduleModel->validate() && $model->save(false)) {
+            $moduleModel->id = $model->id;
+            if ($moduleModel->save(false)) {
                 \Yii::$app->session->setFlash('success', '发布成功！');
                 return $this->redirect(['create-article']);
             }
@@ -81,7 +82,7 @@ class DefaultController extends Controller
 
         return $this->render('/article/create', [
             'model' => $model,
-            'dataModel' => $dataModel
+            'moduleModel' => $moduleModel
         ]);
     }
     public function actionUpdateArticle($id)
