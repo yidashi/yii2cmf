@@ -57,6 +57,15 @@ class m160702_101410_create_plugins extends Migration
             'created_at' => time(),
             'updated_at' => time()
         ]);
+        $this->insert('{{%module}}', [
+            'id' => 'config',
+            'name' => '动态配置',
+            'class' => 'common\\modules\\config\\Module',
+            'status' => 1,
+            'type' => 1,
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
     }
 
     /**
