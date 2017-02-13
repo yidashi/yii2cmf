@@ -6,7 +6,7 @@
  * Time: 下午11:09
  */
 
-namespace config\models;
+namespace common\modules\config\models;
 
 
 trait ConfigTrait

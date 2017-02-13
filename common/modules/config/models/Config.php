@@ -1,6 +1,7 @@
 <?php
 
-namespace config\models;
+namespace common\modules\config\models;
+
 use common\behaviors\CacheInvalidateBehavior;
 use yii\behaviors\TimestampBehavior;
 

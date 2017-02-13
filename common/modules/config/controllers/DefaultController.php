@@ -1,10 +1,10 @@
 <?php
 
-namespace config\controllers;
+namespace common\modules\config\controllers;
 
-use config\models\Config;
-use config\models\DatabaseConfigForm;
-use config\models\MailConfigForm;
+use common\modules\config\models\Config;
+use common\modules\config\models\DatabaseConfigForm;
+use common\modules\config\models\MailConfigForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

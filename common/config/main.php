@@ -51,10 +51,6 @@ return [
                 ],*/
             ],
         ],
-        'config' => [ //动态配置
-            'class' => 'config\\components\\Config',
-            'localConfigFile' => '@common/config/main-local.php'
-        ],
         'fs' => [
             'class' => 'creocoder\flysystem\LocalFilesystem',
             'path' => '@storagePath/upload',
@@ -84,7 +80,4 @@ return [
             'class' => 'common\\components\\ModuleManager'
         ]
     ],
-    'aliases' => [
-        '@config' => '@common/modules/config',
-    ]
 ];

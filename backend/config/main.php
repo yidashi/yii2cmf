@@ -98,9 +98,6 @@ return [
         'migration' => [
             'class' => 'migration\Module',
         ],
-        'config' => [
-            'class' => 'config\Module'
-        ]
     ],
     'aliases' => [
         '@rbac' => '@backend/modules/rbac',

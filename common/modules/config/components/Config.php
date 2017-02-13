@@ -6,10 +6,10 @@
  * Time: 下午4:07
  */
 
-namespace config\components;
+namespace common\modules\config\components;
 
 use Yii;
-use config\models\Config as ConfigModel;
+use common\modules\config\models\Config as ConfigModel;
 use yii\base\Component;
 use yii\caching\TagDependency;
 use yii\helpers\VarDumper;

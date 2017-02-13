@@ -19,7 +19,7 @@ class m160702_101410_create_plugins extends Migration
         $this->createTable('{{%module}}', [
             'id' => $this->string(50)->notNull()->unique()->comment('标识'),
             'name' => $this->string(50)->notNull(),
-            'bootstrap' => $this->string(128)->comment('模块所属应用ID'),
+            'bootstrap' => $this->string(128)->comment('模块初始化应用ID'),
             'class' => $this->string(128)->comment('模块类'),
             'status' => $this->smallInteger(1)->notNull(),
             'type' => $this->smallInteger(1)->notNull()->comment('模块类型1core2plugin'),

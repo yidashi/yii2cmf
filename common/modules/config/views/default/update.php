@@ -2,7 +2,7 @@
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Config */
+/* @var $model common\modules\config\models\Config */
 
 $this->title = '更新配置: '.' '.$model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Configs', 'url' => ['index']];

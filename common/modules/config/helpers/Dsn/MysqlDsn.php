@@ -1,8 +1,8 @@
 <?php
 
-namespace config\helpers\Dsn;
+namespace common\modules\config\helpers\Dsn;
 
-use config\helpers\Dsn;
+use common\modules\config\helpers\Dsn;
 
 /**
  * MysqlDsn

@@ -6,10 +6,18 @@
  * Time: 下午7:35
  */
 
-namespace config;
+namespace common\modules\config;
 
 
-class Module extends \yii\base\Module
+use yii\base\BootstrapInterface;
+
+class Module extends \yii\base\Module implements BootstrapInterface
 {
-
+    public function bootstrap($app)
+    {
+        $app->set('config', [
+            'class' => 'common\\modules\\config\\components\\Config',
+            'localConfigFile' => '@common/config/main-local.php'
+        ]);
+    }
 }

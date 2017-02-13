@@ -2,7 +2,7 @@
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Config */
+/* @var $model common\modules\config\models\Config */
 
 $this->title = \Yii::t('app', 'Create Config');
 $this->params['breadcrumbs'][] = ['label' => 'Configs', 'url' => ['index']];

@@ -4,9 +4,9 @@
  * Date: 2016/1/11
  * Time: 17:59.
  */
-namespace config\controllers;
+namespace common\modules\config\controllers;
 
-use config\models\Config;
+use common\modules\config\models\Config;
 use Yii;
 use yii\base\Model;
 use yii\caching\TagDependency;

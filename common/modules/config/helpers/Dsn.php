@@ -6,7 +6,7 @@
  * Time: 下午9:21
  */
 
-namespace config\helpers;
+namespace common\modules\config\helpers;
 
 
 use yii\base\Object;
