@@ -67,6 +67,15 @@ class m160702_101410_create_plugins extends Migration
             'created_at' => time(),
             'updated_at' => time()
         ]);
+        $this->insert('{{%module}}', [
+            'id' => 'area',
+            'name' => '前台动态区域',
+            'class' => 'common\\modules\\area\\Module',
+            'status' => 1,
+            'type' => 1,
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
     }
 
     /**

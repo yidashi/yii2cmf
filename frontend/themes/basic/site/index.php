@@ -32,7 +32,7 @@ use yii\helpers\Url;
             <?php endif; ?>
             <a class="btn btn-primary" href="<?= Url::to(['/sign'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") = "'. date('Ymd') . '"')->queryScalar() ?>人签到</a>
         </div>
-        <?= \frontend\widgets\area\AreaWidget::widget([
+        <?= \common\modules\area\widgets\AreaWidget::widget([
             'slug' => 'site-index-sidebar',
             "blockClass"=>"panel panel-default",
             "headerClass"=>"panel-heading",

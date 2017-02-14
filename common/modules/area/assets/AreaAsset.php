@@ -1,14 +1,14 @@
 <?php
-namespace backend\assets;
+namespace common\modules\area\assets;
 
 class AreaAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = '@common/modules/area/static';
     public $css = [
-        'css/area.css',
+        'area.css',
     ];
     public $js = [
-        'js/area.js'
+        'area.js'
     ];
     public $depends = [
         'backend\assets\AppAsset',

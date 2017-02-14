@@ -1,9 +1,9 @@
 <?php
-namespace backend\controllers;
+namespace common\modules\area\controllers;
 
 use common\enums\BooleanEnum;
-use common\models\Area;
-use common\models\Block;
+use common\modules\area\models\Area;
+use common\modules\area\models\Block;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

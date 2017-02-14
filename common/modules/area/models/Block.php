@@ -1,5 +1,5 @@
 <?php
-namespace common\models;
+namespace common\modules\area\models;
 
 use common\enums\BooleanEnum;
 use Yii;
@@ -102,7 +102,7 @@ class Block extends \yii\db\ActiveRecord
 
     public function getWidget()
     {
-        $namespace = 'frontend\widgets\area\\';
+        $namespace = 'common\modules\area\widgets\\';
         $widget = $namespace . ucfirst($this->type) . 'Widget';
         return $widget;
     }

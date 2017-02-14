@@ -42,7 +42,7 @@ if(isset($category)) {
     <?php endif;?>
 </div>
 <div class="col-lg-3">
-    <?= \frontend\widgets\area\AreaWidget::widget([
+    <?= \common\modules\area\widgets\AreaWidget::widget([
         'slug' => 'article-index-sidebar',
         "blockClass"=>"panel panel-default",
         "headerClass"=>"panel-heading",

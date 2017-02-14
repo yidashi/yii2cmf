@@ -1,8 +1,7 @@
 <?php
-namespace backend\controllers;
+namespace common\modules\area\controllers;
 
-use common\models\Block;
-use frontend\widgets\area\TextWidget;
+use common\modules\area\models\Block;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;

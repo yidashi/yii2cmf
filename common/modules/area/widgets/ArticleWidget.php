@@ -6,7 +6,7 @@
  * Time: 上午10:51
  */
 
-namespace frontend\widgets\area;
+namespace common\modules\area\widgets;
 
 
 use frontend\models\Article;

@@ -1,7 +1,7 @@
 <?php
-namespace frontend\widgets\area;
+namespace common\modules\area\widgets;
 
-use common\models\Area;
+use common\modules\area\models\Area;
 use yii\base\InvalidConfigException;
 use yii\base\Widget;
 use yii\helpers\Html;

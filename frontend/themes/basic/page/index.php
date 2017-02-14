@@ -27,7 +27,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     ]) ?>
 </div>
 <div class="col-md-3">
-    <?= \frontend\widgets\area\AreaWidget::widget([
+    <?= \common\modules\area\widgets\AreaWidget::widget([
         'slug' => 'page-index-sidebar',
         "blockClass"=>"panel panel-default",
         "headerClass"=>"panel-heading",

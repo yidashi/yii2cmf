@@ -1,6 +1,6 @@
 <?php
 
-use backend\assets\AreaAsset;
+use common\modules\area\assets\AreaAsset;
 use yii\helpers\Url;
 use yii\web\View;
 

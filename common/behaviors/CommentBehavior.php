@@ -114,6 +114,7 @@ class CommentBehavior  extends Behavior
     {
         return $this->owner->getPrimaryKey();
     }
+
     public function getCommentTotal()
     {
         $model = $this->owner->commentInfo;

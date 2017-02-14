@@ -23,6 +23,7 @@ use Yii;
  * @property int $type_id
  * @property int $parent_id
  * @property int $reply_uid
+ * @property Comment $parent
  */
 class Comment extends \yii\db\ActiveRecord
 {

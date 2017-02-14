@@ -40,8 +40,7 @@ class ArticleBehavior extends Behavior
         if ($content != null) {
             $content->delete();
         }
-        // 清除收藏和顶
-        Vote::deleteAll(['type' => 'article', 'type_id' => $event->sender->id]);
+        // 清除收藏
         Favourite::deleteAll(['article_id' => $event->sender->id]);
     }
     /**

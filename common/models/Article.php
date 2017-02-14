@@ -8,6 +8,8 @@ use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use common\behaviors\TagBehavior;
 use common\behaviors\VoteBehavior;
+use common\models\article\Base;
+use common\models\article\Exhibition;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use common\modules\user\behaviors\UserBehavior;
@@ -40,7 +42,7 @@ use yii\behaviors\TimestampBehavior;
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
  * @property boolean $isFavourite read-only
- * @property ArticleData $data
+ * @property Base|Exhibition $data
  */
 class Article extends \yii\db\ActiveRecord
 {

@@ -12,15 +12,21 @@ namespace common\behaviors;
 use common\models\Vote;
 use Yii;
 use yii\base\Behavior;
+use yii\db\ActiveRecord;
 
 class VoteBehavior extends Behavior
 {
+    /**
+     * @var \yii\db\ActiveRecord
+     */
+    public $owner;
+
     public $type;
 
     public function events()
     {
         return [
-
+            ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
     }
 
@@ -68,5 +74,17 @@ class VoteBehavior extends Behavior
         }
 
         return ltrim($this->type,"\\");
+    }
+
+    public function getTypeId()
+    {
+        return $this->owner->getPrimaryKey();
+    }
+
+    public function afterDelete()
+    {
+        $type = $this->getType();
+        $type_id = $this->getTypeId();
+        Vote::deleteAll(['type' => $type, 'type_id' => $type_id]);
     }
 }

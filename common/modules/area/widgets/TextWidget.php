@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\widgets\area;
+namespace common\modules\area\widgets;
 
 use yii\base\Widget;
 
