@@ -10,7 +10,7 @@ use yii\widgets\InputWidget;
 
 class MultipleWidget extends InputWidget
 {
-
+    public $onlyImage = true;
 
     public $wrapperOptions;
     /**
@@ -28,9 +28,7 @@ class MultipleWidget extends InputWidget
      *
      * @var array 上传url地址
      */
-    public $url = [
-        '/upload/images-upload'
-    ];
+    public $url = [];
 
     /**
      *  这里为了配合后台方便处理所有都是设为true,文件上传数目请控制好 $maxNumberOfFiles
@@ -48,7 +46,7 @@ class MultipleWidget extends InputWidget
      *
      * @var int 允许上传的最大文件数目
      */
-    public $maxNumberOfFiles = 1;
+    public $maxNumberOfFiles = 10;
 
     /**
      *
@@ -77,7 +75,11 @@ class MultipleWidget extends InputWidget
     public function init()
     {
         parent::init();
-
+        if ($this->onlyImage === false) {
+            $this->url = $this->multiple ? ['/upload/files-upload'] : ['/upload/file-upload'];
+        } else {
+            $this->url = $this->multiple ? ['/upload/images-upload'] : ['/upload/image-upload'];
+        }
         if ($this->hasModel()) {
             $this->name = $this->name ? : Html::getInputName($this->model, $this->attribute);
             $value = Html::getAttributeValue($this->model, $this->attribute);

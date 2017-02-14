@@ -6,7 +6,7 @@
 }
 .upload-kit .upload-kit-input {
   width: 150px;
-  height:150px
+	height:150px
 }
 .upload-kit .upload-kit-input,
 .upload-kit .upload-kit-item {
@@ -115,7 +115,6 @@
   position: relative;
   display: block;
   width: 150px;
-  height:150px;
 }
 .upload-kit .upload-kit-item.not-image .name {
   text-align: center;
@@ -144,18 +143,4 @@
 }
 .upload-kit:after {
   clear: both;
-}
-
-
-.single-media .upload-kit-input {
-  height: 150px;
-  width: 100%;
-}
-.single-media .upload-kit-item  {
-  margin:0;
-}
-.single-media .upload-kit-item.image > img {
-  height: 100%;
-  width: 100%;
-  border-radius: 7px;
 }

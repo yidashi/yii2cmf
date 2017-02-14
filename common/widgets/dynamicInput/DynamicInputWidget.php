@@ -11,7 +11,6 @@ namespace common\widgets\dynamicInput;
 
 use common\modules\city\widgets\CityWidget;
 use common\widgets\EditorWidget;
-use common\widgets\upload\FileWidget;
 use common\widgets\upload\SingleWidget;
 use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
@@ -109,7 +108,7 @@ class DynamicInputWidget extends InputWidget
                 return SingleWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
             case 'file': // 文件
-                return FileWidget::widget(['name' => $this->name, 'value' => $this->value]);
+                return SingleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false]);
                 break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(ArrayHelper::merge([
@@ -183,7 +182,7 @@ class DynamicInputWidget extends InputWidget
                 return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
             case 'file': // 文件
-                return FileWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false]);
                 break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(ArrayHelper::merge([
