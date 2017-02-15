@@ -6,7 +6,7 @@
 
 2. `composer install` 
 
-3. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可)
+3. `php yii app`(windows 命令行乱码问题是因为windows命令行默认编码为gbk，项目编码为utf8，执行`chcp 65001`修改命令行编码为utf8即可。如在窗口中仍旧不能正确显示UTF-8字符。在命令行标题栏上点击右键，选择"属性"->"字体"，将点阵字体修改为True Type字体"Lucida Console"，然后点击确定将属性应用到当前窗口。)
 
 4. `php yii serve` (自有服务器就不需要这一步了,下边的访问地址根据自己的服务器来)
 
