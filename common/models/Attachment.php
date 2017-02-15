@@ -15,6 +15,8 @@ use yii\imagine\Image;
  * @property integer $user_id
  * @property string $name
  * @property string $title
+ * @property string $url
+ * @property string $extension
  * @property string $description
  * @property string $hash
  * @property integer $size

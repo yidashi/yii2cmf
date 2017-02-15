@@ -12,7 +12,7 @@ use common\models\Module;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yii\console\Application;
+use yii\web\Application;
 use yii\helpers\ArrayHelper;
 
 class LoadModule extends Component implements BootstrapInterface

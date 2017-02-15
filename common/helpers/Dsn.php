@@ -1,18 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: yidashi
- * Date: 2016/11/7
- * Time: 下午9:21
- */
 
-namespace common\modules\config\helpers;
-
+namespace common\helpers;
 
 use yii\base\Object;
 
-class Dsn extends Object
-{
+class Dsn extends Object {
+
     public $dsn;
 
     public $sheme;
@@ -101,4 +94,5 @@ class Dsn extends Object
     public function getPort() {
         return $this->parseDsn['port'];
     }
+
 }

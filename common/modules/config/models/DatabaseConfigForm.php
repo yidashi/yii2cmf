@@ -1,7 +1,7 @@
 <?php
 namespace common\modules\config\models;
 
-use common\modules\config\helpers\Dsn;
+use common\helpers\Dsn;
 use yii\base\Model;
 use yii\db\Connection;
 use yii\db\Exception;

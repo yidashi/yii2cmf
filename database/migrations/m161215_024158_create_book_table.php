@@ -48,5 +48,6 @@ class m161215_024158_create_book_table extends Migration
     {
         $this->dropTable('{{%book}}');
         $this->dropTable('{{%book_chapter}}');
+        $this->dropTable('{{%book_category}}');
     }
 }

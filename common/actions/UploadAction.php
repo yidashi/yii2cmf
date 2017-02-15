@@ -139,6 +139,11 @@ class UploadAction extends Action
         }
         return $res;
     }
+
+    /**
+     * @param UploadedFile $file
+     * @return array|mixed
+     */
     private function uploadOne($file)
     {
         try {
@@ -151,16 +156,19 @@ class UploadAction extends Action
                 $hash = md5_file($file->tempName);
                 $attachment = $this->modelClass->find()->where(['hash' => $hash])->one();
                 if (empty($attachment)) {
-                    if ($this->unique === true && $model->file->extension) {
-                        $model->file->name = uniqid() . '.' . $model->file->extension;
+                    if ($this->unique === true && $file->extension) {
+                        $file->name = uniqid() . '.' . $file->extension;
                     }
-                    if ($model->file->saveAs($this->path . $model->file->name)) {
+                    if ($model->file->saveAs($this->path . $file->name)) {
+                        /**
+                         * @var \common\models\Attachment $attachment
+                         */
                         $attachment = new $this->modelClass;
-                        $attachment->url = $this->url . $model->file->name;
-                        $attachment->name = $model->file->name;
-                        $attachment->extension = $model->file->extension;
-                        $attachment->type = $model->file->type;
-                        $attachment->size = $model->file->size;
+                        $attachment->url = $this->url . $file->name;
+                        $attachment->name = $file->name;
+                        $attachment->extension = $file->extension;
+                        $attachment->type = $file->type;
+                        $attachment->size = $file->size;
                         $attachment->hash = $hash;
                         $attachment->save();
                     } else {

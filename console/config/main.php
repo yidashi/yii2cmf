@@ -8,10 +8,6 @@ $params = array_merge(
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => [
-        'log',
-        'common\\components\\LoadModule'
-    ],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
         'migrate' => [

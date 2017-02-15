@@ -1,0 +1,151 @@
+/* Loading-overlay styles */
+
+@font-face {
+  font-family: "demo";
+  src: url('../fonts/icons.woff') format("woff"), url('../fonts/icons.ttf') format("truetype");
+}
+
+@-moz-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  position: relative;
+}
+
+.loading .loading-overlay {
+  position: absolute;
+	  bottom: -60px;
+  left: 0;
+	  padding-top:610px;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: center;
+	z-index:1000;
+	height:100%;
+	width:100%;
+
+
+}
+.loading .loading-text {
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  text-shadow: white 0 0 1em, white 0 0 0.5em, white 0 0 0.25em;
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.loading .loading-text:after {
+  content: "...";
+}
+.loading .loading-spinner {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: -3.9375rem auto 0;
+  color: #1a1d1d;
+  text-align: center;
+}
+.loading .loading-icon {
+  font-size: 4.8125rem;
+  line-height: 5.25rem;
+  text-shadow: rgba(255, 255, 255, 0.75) 0 0 0.5em;
+  -webkit-animation: loading 1s steps(4) infinite;
+  -moz-animation: loading 1s steps(4) infinite;
+  -o-animation: loading 1s steps(4) infinite;
+  animation: loading 1s steps(4) infinite;
+  display: block;
+  vertical-align: middle;
+}
+.loading .loading-icon:before {
+  vertical-align: middle;
+  content: "\e000";
+  font-family: "demo";
+}
+
+
+

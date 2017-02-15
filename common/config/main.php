@@ -5,6 +5,11 @@ return [
     'runtimePath' => '@app/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',
+    'bootstrap' => [
+        'log',
+        'common\\components\\LoadModule',
+        'common\\components\\LoadPlugins',
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',

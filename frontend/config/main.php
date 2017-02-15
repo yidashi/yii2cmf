@@ -8,11 +8,6 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => [
-        'log',
-        'common\\components\\LoadPlugins',
-        'common\\components\\LoadModule'
-    ],
     'controllerNamespace' => 'frontend\controllers',
     'controllerMap' => [
         'upload' => \common\actions\UploadController::className()

@@ -155,7 +155,7 @@ class AppController extends Controller
     // 重置安装
     public function resetInstall()
     {
-        $this->run('/migrate/down', ['interactive' => false]);
+        $this->run('/migrate/down', ['all', 'interactive' => false]);
         @unlink(Yii::getAlias($this->installFile));
         @unlink(Yii::getAlias($this->envPath));
     }

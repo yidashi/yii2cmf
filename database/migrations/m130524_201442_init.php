@@ -253,6 +253,7 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%auth}}');
         $this->dropTable('{{%category}}');
         $this->dropTable('{{%comment}}');
+        $this->dropTable('{{%comment_info}}');
         $this->dropTable('{{%favourite}}');
         $this->dropTable('{{%gather}}');
         $this->dropTable('{{%page}}');

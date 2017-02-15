@@ -18,22 +18,6 @@
     
 > 如果使用自己的服务器，修改下.env文件里 `SITE_URL` `FRONTEND_URL` `BACKEND_URL` `STORAGE_URL` 这几个配置
 
-## 目录结构
-
-```
-api             接口
-backend         后台
-common          核心
-console         控制台
-database        数据库（迁移 填充）
-frontend        前台
-plugins         插件
-vendor          扩展
-web             web统一入口（web服务器可只开放该目录,保证安全）
-wechat          微信
-.env            基本配置文件
-helpers         基本工具函数（自动加载）
-```
 
 ## demo
 
@@ -41,14 +25,8 @@ helpers         基本工具函数（自动加载）
 
 后台地址: `www.51siyuan.cn/admin`  帐号 `demo` 密码 `111111`
 
-## 定时任务
+## doc
 
-`crontab -e` 添加
-
-`* * * * * php /path/to/yii schedule/run  1>> /dev/null 2>&1`
-
-`console/schedule.php` 里添加
-
-`$schedule->exec('craw jianshu')->daily();`
+[更多文档](http://www.51siyuan.cn/book/2)
 
 

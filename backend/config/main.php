@@ -9,11 +9,6 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => [
-        'log',
-        'common\\components\\LoadPlugins',
-        'common\\components\\LoadModule'
-    ],
     'controllerMap'=>[
         'file-manager-elfinder' => [
             'class' => 'mihaildev\elfinder\Controller',
