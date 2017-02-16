@@ -101,6 +101,7 @@ class m130524_201442_init extends Migration
             'down' => Schema::TYPE_INTEGER . "(1) NOT NULL DEFAULT '0'",
             'is_top' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",
             'type' => Schema::TYPE_STRING . "(20) NOT NULL",
+            'status' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
