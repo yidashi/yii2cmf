@@ -16,9 +16,11 @@ use yii\web\NotFoundHttpException;
 
 class ArticleController extends Controller
 {
-    public function actionIndex($cid = '')
+    public function actionIndex($cid = null, $module = null)
     {
-        $query = Article::find()->published()->andFilterWhere(['category_id' => $cid]);
+        $query = Article::find()->published()
+            ->andFilterWhere(['category_id' => $cid])
+            ->andFilterWhere(['module' => $module]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [

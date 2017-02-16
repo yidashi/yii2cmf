@@ -59,9 +59,6 @@ return [
         'themeManager' => [
             'class' => 'common\components\ThemeManager',
         ],
-        'pluginManager' => [
-            'class' => 'common\components\PluginManager',
-        ],
     ],
     'modules' => [
         'rbac' => [

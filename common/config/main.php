@@ -83,6 +83,9 @@ return [
         'notify' => 'common\components\notify\Handler',
         'moduleManager' => [
             'class' => 'common\\components\\ModuleManager'
-        ]
+        ],
+        'pluginManager' => [
+            'class' => 'common\components\PluginManager',
+        ],
     ],
 ];

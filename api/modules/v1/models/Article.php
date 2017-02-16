@@ -11,7 +11,6 @@ namespace api\modules\v1\models;
 
 class Article extends \common\models\Article
 {
-
     public function extraFields()
     {
         return [

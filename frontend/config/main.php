@@ -44,9 +44,6 @@ return [
                 }
             }
         ],
-        'pluginManager' => [
-            'class' => 'common\components\PluginManager',
-        ],
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')

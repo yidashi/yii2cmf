@@ -20,7 +20,7 @@ class Controller extends \yii\rest\Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        unset($behaviors['contentNegotiator']['formats']['application/xml']);
+        unset($behaviors['contentNegotiator']);
         $behaviors['cors'] = [
             'class' => Cors::className(),
         ];

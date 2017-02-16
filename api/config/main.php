@@ -6,20 +6,10 @@ $params = array_merge(
 return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'api\common\controllers',
     'components' => [
         'user' => [
             'identityClass' => 'common\modules\user\models\User',
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -35,6 +25,7 @@ return [
             ],
         ],
         'response' => [
+            'format' => 'json',
             'on beforeSend' => function($event) {
                 $response = $event->sender;
                 if ($response->data !== null) {
