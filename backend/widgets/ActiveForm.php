@@ -9,9 +9,11 @@
 namespace backend\widgets;
 
 use yii\helpers\ArrayHelper;
+use yii\base\Model;
 
 class ActiveForm extends \yii\widgets\ActiveForm
 {
+    public $fieldClass = 'backend\widgets\ActiveField';
     public $boxFieldClass = '\backend\widgets\BoxField';
 
     /**
@@ -38,56 +40,19 @@ class ActiveForm extends \yii\widgets\ActiveForm
     }
 
     /**
-     * 有后缀的
-     * @param $model
-     * @param $attribute
-     * @param string $suffix
-     * @param string $suffixType
-     * @param array $options
-     * @return object
+     * Generates a form field.
+     * A form field is associated with a model and an attribute. It contains a label, an input and an error message
+     * and use them to interact with end users to collect their inputs for the attribute.
+     * @param Model $model the data model.
+     * @param string $attribute the attribute name or expression. See [[Html::getAttributeName()]] for the format
+     * about attribute expression.
+     * @param array $options the additional configurations for the field object. These are properties of [[ActiveField]]
+     * or a subclass, depending on the value of [[fieldClass]].
+     * @return ActiveField the created ActiveField object.
+     * @see fieldConfig
      */
-    public function suffixField($model, $attribute, $suffix = '', $suffixType = 'addon', $options = [])
+    public function field($model, $attribute, $options = [])
     {
-        $config = $this->fieldConfig;
-        if ($config instanceof \Closure) {
-            $config = call_user_func($config, $model, $attribute);
-        }
-        if (!isset($config['class'])) {
-            $config['class'] = $this->fieldClass;
-        }
-        $defaultOptions = ['template' => "{label}\n<div class=\"input-group\">{input}\n<div class=\"input-group-" . $suffixType . "\">" . $suffix . "</div></div>\n{hint}\n{error}"];
-        $options = array_merge($defaultOptions, $options);
-        return \Yii::createObject(ArrayHelper::merge($config, $options, [
-            'model' => $model,
-            'attribute' => $attribute,
-            'form' => $this,
-        ]));
-    }
-
-    /**
-     * 有前缀的
-     * @param $model
-     * @param $attribute
-     * @param string $prefix
-     * @param string $prefixType
-     * @param array $options
-     * @return object
-     */
-    public function prefixField($model, $attribute, $prefix = '', $prefixType = 'addon', $options = [])
-    {
-        $config = $this->fieldConfig;
-        if ($config instanceof \Closure) {
-            $config = call_user_func($config, $model, $attribute);
-        }
-        if (!isset($config['class'])) {
-            $config['class'] = $this->fieldClass;
-        }
-        $defaultOptions = ['template' => "{label}\n<div class=\"input-group\"><div class=\"input-group-" . $prefixType . "\">" . $prefix . "</div>\n{input}</div>\n{hint}\n{error}"];
-        $options = array_merge($defaultOptions, $options);
-        return \Yii::createObject(ArrayHelper::merge($config, $options, [
-            'model' => $model,
-            'attribute' => $attribute,
-            'form' => $this,
-        ]));
+        return parent::field($model, $attribute, $options);
     }
 }

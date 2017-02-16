@@ -6,19 +6,17 @@
  * Time: 下午2:05
  */
 
-namespace backend\controllers;
+namespace common\modules\book\controllers;
 
 
 use backend\actions\Position;
-use common\models\Book;
-use common\models\BookChapter;
-use yii\base\InvalidParamException;
-use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
-use yii\web\Controller;
+use common\modules\book\models\Book;
+use common\modules\book\models\BookChapter;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
 
-class BookController extends Controller
+class AdminController extends Controller
 {
 
     public function actions()

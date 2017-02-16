@@ -1,11 +1,11 @@
 <?php
 
-namespace common\models;
+namespace common\modules\book\models;
 
 use common\helpers\Tree;
+use common\models\Comment;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%book}}".

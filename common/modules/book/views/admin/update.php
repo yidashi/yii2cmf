@@ -7,7 +7,7 @@
  */
 /**
  * @var \yii\web\View $this
- * @var \common\models\Book $model
+ * @var \common\modules\book\models\Book $model
  */
 
 use yii\helpers\Html;
@@ -16,7 +16,7 @@ use yii\helpers\Markdown;
 use backend\widgets\ActiveForm;
 
 $this->title = '编辑书:' . $model->book_name;
-$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['/book/index']];
+$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $this->render('_form', ['model' => $model]) ?>

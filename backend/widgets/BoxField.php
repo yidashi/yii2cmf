@@ -2,9 +2,8 @@
 namespace backend\widgets;
 
 use yii\helpers\Html;
-use yii\widgets\ActiveField;
 
-class BoxField extends ActiveField
+class BoxField extends \yii\widgets\ActiveField
 {
 
     public $collapsed = false;

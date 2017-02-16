@@ -66,7 +66,9 @@ class MultipleWidget extends InputWidget
      * ----------------------------------------------
      */
 
-      public $deleteUrl = ["/upload/delete"];
+    public $deleteUrl = ["/upload/delete"];
+
+    public $fileInputName;
 
     /**
      *
@@ -96,8 +98,9 @@ class MultipleWidget extends InputWidget
 
         }
 
+        $this->fileInputName = md5($this->name);
         if (! array_key_exists('fileparam', $this->url)) {
-            $this->url['fileparam'] = $this->name;//服务器需要通过这个判断是哪一个input name上传的
+            $this->url['fileparam'] = $this->fileInputName;//服务器需要通过这个判断是哪一个input name上传的
         }
 
         $this->clientOptions = ArrayHelper::merge($this->clientOptions, [
@@ -138,8 +141,8 @@ class MultipleWidget extends InputWidget
     {
         $this->registerClientScript();
         $content = Html::beginTag('div',$this->wrapperOptions);
-        $content .= Html::fileInput($this->name, null, [
-            'id' => $this->options['id'],
+        $content .= Html::fileInput($this->fileInputName, null, [
+            'id' => $this->fileInputName,
             'multiple' => $this->multiple
         ]);
         $content .= Html::endTag('div');
@@ -160,6 +163,6 @@ class MultipleWidget extends InputWidget
         }
 
         $options = Json::encode($this->clientOptions);
-        $this->getView()->registerJs("jQuery('#{$this->options['id']}').attachmentUpload({$options});");
+        $this->getView()->registerJs("jQuery('#{$this->fileInputName}').attachmentUpload({$options});");
     }
 }

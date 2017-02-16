@@ -6,17 +6,17 @@
  * Time: 下午2:05
  */
 
-namespace frontend\controllers;
+namespace common\modules\book\controllers;
 
 
-use common\models\Book;
-use common\models\BookChapter;
+use common\modules\book\models\Book;
+use common\modules\book\models\BookChapter;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use Yii;
 use yii\web\NotFoundHttpException;
 
-class BookController extends Controller
+class DefaultController extends Controller
 {
 
     public function actionIndex()

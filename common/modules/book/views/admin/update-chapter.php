@@ -7,7 +7,7 @@
  */
 /**
  * @var \yii\web\View $this
- * @var \common\models\BookChapter $model
+ * @var \common\modules\book\models\BookChapter $model
  */
 
 use yii\helpers\Html;
@@ -15,11 +15,11 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Markdown;
 use backend\widgets\ActiveForm;
 
-$this->title = $model->book->book_name . ':新增章节';
-$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['/book/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->book->book_name, 'url' => ['/book/view', 'id' => $model->book->id]];
+$this->title = $model->chapter_name;
+$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->book->book_name, 'url' => ['view', 'id' => $model->book->id]];
 $this->params['breadcrumbs'][] = Html::encode($model->chapter_name);
 ?>
-<?php $this->beginContent('@backend/views/book/_layout.php', ['model' => $model]) ?>
+<?php $this->beginContent('@common/modules/book/views/admin/_layout.php', ['model' => $model]) ?>
 <?= $this->render('_form_chapter', ['model' => $model]) ?>
 <?php $this->endContent() ?>

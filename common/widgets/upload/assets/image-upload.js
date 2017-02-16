@@ -153,7 +153,7 @@
                 } else {
                     item.removeClass('image').addClass('not-image');
                     item.css('backgroundImage', '');
-                    item.find('span.name').text(file.name);
+                    item.append($('<span/>', {"class": "name"}).text(file.filename));
                 }
                 return item;
             },

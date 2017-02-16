@@ -7,7 +7,7 @@
  */
 /**
  * @var \yii\web\View $this
- * @var \common\models\Book $model
+ * @var \common\modules\book\models\Book $model
  */
 
 use yii\helpers\Html;
@@ -15,7 +15,7 @@ use yii\helpers\HtmlPurifier;
 use yii\helpers\Markdown;
 
 $this->title = $model->book_name;
-$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['/book/index']];
+$this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['index']];
 $this->params['breadcrumbs'][] = Html::encode($model->book_name);
 ?>
     <div class="view-title">

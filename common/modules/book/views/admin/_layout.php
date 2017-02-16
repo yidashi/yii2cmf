@@ -8,10 +8,9 @@
 
 /**
  * @var \yii\web\View $this
- * @var common\models\BookChapter $model
+ * @var common\modules\book\models\BookChapter $model
  */
 
-use yii\helpers\Url;
 ?>
 <style>
     .btn-operate-chapter {

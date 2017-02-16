@@ -39,6 +39,16 @@ class m161215_024158_create_book_table extends Migration
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);
+        $this->insert('{{%module}}', [
+            'id' => 'book',
+            'name' => '文档wiki',
+            'bootstrap' => 'app-frontend|app-backend',
+            'class' => 'common\\modules\\book\\Module',
+            'status' => 1,
+            'type' => 1,
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
     }
 
     /**
@@ -49,5 +59,8 @@ class m161215_024158_create_book_table extends Migration
         $this->dropTable('{{%book}}');
         $this->dropTable('{{%book_chapter}}');
         $this->dropTable('{{%book_category}}');
+        $this->delete('{{%module}}', [
+            'id' => 'book'
+        ]);
     }
 }

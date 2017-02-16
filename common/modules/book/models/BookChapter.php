@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\modules\book\models;
 
 use common\behaviors\PositionBehavior;
 use Yii;
