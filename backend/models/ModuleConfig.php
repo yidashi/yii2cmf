@@ -11,7 +11,7 @@ namespace backend\models;
 
 use yii\base\Model;
 
-class PluginsConfig extends Model
+class ModuleConfig extends Model
 {
     public $name;
     public $value;

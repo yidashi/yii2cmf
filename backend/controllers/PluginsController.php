@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\ModuleConfig;
 use backend\models\PluginsConfig;
 use common\models\Module;
 use Yii;
@@ -37,7 +38,7 @@ class PluginsController extends Controller
      */
     public function actionIndex()
     {
-        $plugins = Yii::$app->get("pluginManager")->findAll();
+        $plugins = Yii::$app->pluginManager->findAll();
         $dataProvider = new ArrayDataProvider([
             'allModels' => $plugins
         ]);
@@ -50,8 +51,7 @@ class PluginsController extends Controller
     public function actionInstall()
     {
         $id = Yii::$app->request->post('id');
-        /* @var $pluginManager \common\components\PluginManager */
-        $pluginManager = Yii::$app->get('pluginManager');
+        $pluginManager = Yii::$app->pluginManager;
         $plugin = $pluginManager->findOne($id);
         if(!$pluginManager->install($plugin)){
             Yii::$app->session->setFlash('error', '插件安装失败');
@@ -64,8 +64,7 @@ class PluginsController extends Controller
     public function actionUninstall()
     {
         $id = Yii::$app->request->post('id');
-        /* @var $pluginManager \common\components\PluginManager */
-        $pluginManager = Yii::$app->get('pluginManager');
+        $pluginManager = Yii::$app->pluginManager;
         $plugin = $pluginManager->findOne($id);
         if(!$pluginManager->uninstall($plugin)){
             Yii::$app->session->setFlash('error', '插件卸载失败');
@@ -78,8 +77,7 @@ class PluginsController extends Controller
     public function actionOpen()
     {
         $id = Yii::$app->request->post('id');
-        /* @var $pluginManager \common\components\PluginManager */
-        $pluginManager = Yii::$app->get('pluginManager');
+        $pluginManager = Yii::$app->pluginManager;
         $plugin = $pluginManager->findOne($id);
         if(!$plugin->install){
             Yii::$app->session->setFlash('error', '插件没安装');
@@ -95,8 +93,7 @@ class PluginsController extends Controller
     public function actionClose()
     {
         $id = Yii::$app->request->post('id');
-        /* @var $pluginManager \common\components\PluginManager */
-        $pluginManager = Yii::$app->get('pluginManager');
+        $pluginManager = Yii::$app->pluginManager;
         $plugin = $pluginManager->findOne($id);
         if(!$plugin->install){
             Yii::$app->session->setFlash('error', '插件没安装');
@@ -111,22 +108,23 @@ class PluginsController extends Controller
 
     /**
      * 插件配置
-     * @param $name
+     * @param $id
      * @return string|\yii\web\Response
      * @throws \yii\base\InvalidConfigException
      */
     public function actionConfig($id)
     {
-        $model = Module::find()->where(['id' => $id])->one();
-        if (empty($model) || $model->status == Module::STATUS_UNINSTALL) {
+        $pluginManager = Yii::$app->pluginManager;
+        $plugin = $pluginManager->findOne($id);
+        if(!$plugin->install){
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $configs = Json::decode($model->config);
+        $configs = $plugin->getConfig();
         $configModels = [];
         if (!empty($configs)) {
             foreach ($configs as $k => $config) {
-                $configModel = new PluginsConfig();
+                $configModel = new ModuleConfig();
                 $configModel->scenario = 'init';
                 $configModel->attributes = $config;
                 $configModels[$k] = $configModel;
@@ -136,11 +134,11 @@ class PluginsController extends Controller
             'models' => $configModels,
             'pagination' => false
         ]);
+        $model = $plugin->getModel();
         if (\Yii::$app->request->isPost && Model::loadMultiple($configModels, \Yii::$app->request->post()) && Model::validateMultiple($configModels)) {
             $configs = Json::encode($configModels);
             $model->config = $configs;
             $model->save();
-            Yii::$app->cache->delete('pluginConfig-' . $model->name);
             return $this->redirect(['index']);
         }
 

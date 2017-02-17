@@ -1,6 +1,9 @@
 <?php
 namespace common\components;
 
+use common\models\Module;
+use common\modules\ModuleInfo;
+use plugins\Plugins;
 use yii\base\Component;
 use yii\helpers\FileHelper;
 
@@ -74,7 +77,7 @@ class PackageManager extends Component
 
     /**
      * @param $id
-     * @return null
+     * @return ModuleInfo|Plugins
      */
     public function findOne($id)
     {

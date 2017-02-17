@@ -37,4 +37,20 @@ abstract class Theme extends PackageInfo
     public function bootstrap()
     {
     }
+
+    public function install()
+    {
+
+    }
+
+    //卸载
+    public function uninstall()
+    {
+
+    }
+
+    public function upgrade()
+    {
+
+    }
 }

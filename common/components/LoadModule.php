@@ -29,7 +29,11 @@ class LoadModule extends Component implements BootstrapInterface
         $models = Module::findOpenModules(Module::TYPE_CORE);
         $bootstrapType = $app->id;
         foreach ($models as $model) {
-            $this->setModule($model->id, ['class' => $model->class]);
+            $modulePackage = Yii::$app->moduleManager->findOne($model->id);
+            $class = [
+                'class' => $modulePackage->getModuleClass()
+            ];
+            $this->setModule($model->id, $class);
             $bootstraps = explode("|", $model->bootstrap);
             if (in_array($bootstrapType, $bootstraps)) {
                 $module = \Yii::$app->getModule($model->id);

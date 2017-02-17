@@ -40,7 +40,7 @@ function checkInstalled()
 /**
  * Class BaseApplication
  * Used for properties that are identical for both WebApplication and ConsoleApplication
- * @property \config\components\Config $config
+ * @property \common\modules\config\components\Config $config
  * @property \common\components\Storage $storage
  * @property \common\components\notify\Handler $notify
  */
@@ -53,6 +53,7 @@ abstract class BaseApplication extends yii\base\Application
  * Include only Web application related components here
  * @property \frontend\components\Search $search
  * @property \common\components\PluginManager $pluginManager
+ * @property \common\components\ModuleManager $moduleManager
  * @property \common\components\ThemeManager $themeManager
  */
 class WebApplication extends yii\web\Application

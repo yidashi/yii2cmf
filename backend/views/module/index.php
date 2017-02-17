@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ArrayDataProvider */
 
-$this->title = '插件';
+$this->title = '模块';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="module-index">

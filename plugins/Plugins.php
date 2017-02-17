@@ -21,77 +21,13 @@ use rbac\components\MenuHelper;
 
 abstract class Plugins extends PackageInfo implements BootstrapInterface
 {
-    private $_config = [];
-
-    public $info = [
-        'author' => '',
-        'version' => '',
-        'name' => '',
-        'title' => '',
-        'desc' => ''
-    ];
 
     public $aliases = [];
     /**
      * @var string 模块所属应用ID(frontend,backend,wechat,api)
      */
     public $app = 'app-backend';
-    /**
-     * @var string 配置文件名
-     */
-    public $configFile = '';
 
-    public function init()
-    {
-        if (empty($this->configFile)) {
-            $class = new ReflectionClass($this);
-            $this->configFile = dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'config.php';
-
-        }
-    }
-    final public function checkInfo(){
-        $info_check_keys = ['id','name','description','author','version'];
-        foreach ($info_check_keys as $value) {
-            if(!array_key_exists($value, $this->info))
-                return false;
-        }
-        return true;
-    }
-
-    /**
-     * 获取插件初始配置
-     * @return array|mixed
-     */
-    final public function getInitConfig()
-    {
-        if (is_file($this->configFile)) {
-            $this->_config = include $this->configFile;
-        }
-        return $this->_config;
-    }
-
-    /**
-     * 获取插件当前配置
-     * @return array|mixed
-     */
-    final public function getConfig()
-    {
-        $cacheKey = 'pluginConfig-' . $this->info['name'];
-        $c = Yii::$app->cache->get($cacheKey);
-        if ($c === false) {
-            $name = $this->info['name'];
-            $model = Module::find()->where(['name' => $name])->one();
-            $configs = Json::decode($model->config);
-            $c = [];
-            if (!empty($configs)) {
-                foreach ($configs as $k => $config) {
-                    $c[$config['name']] = $config['value'];
-                }
-            }
-            Yii::$app->cache->set($cacheKey, $c);
-        }
-        return $c;
-    }
     /**
      * 在菜单插件管理下添加一个新菜单
      * @param $name
@@ -118,39 +54,6 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
         \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
     }
 
-    /**
-     * 安装插件时候执行
-     * 比如后台添加菜单,建表等
-     */
-    public function install()
-    {
-        if ($this->checkInfo()) {
-            $model = Module::find()->where(['id' => $this->getPackage()])->one();
-            if ($model === null) {
-                $model = new Module();
-                $model->attributes = $this->info;
-                $model->type = Module::TYPE_PLUGIN;
-                $model->config = Json::encode($this->getInitConfig());
-            } else {
-                $model->status = Module::STATUS_OPEN;
-            }
-            return $model->save();
-        }
-        return false;
-    }
-
-    //卸载
-    public function uninstall()
-    {
-        $model = Module::find()->where(['id' => $this->getPackage()])->one();
-        $model->status = Module::STATUS_UNINSTALL;
-        return $model->save();
-    }
-
-    public function upgrade()
-    {
-
-    }
     /**
      * 各插件在系统bootstrap阶段执行,前台执行frontend方法,后台执行backend方法.
      * 比如插件要在后台添加一个控制器,则可以这样写
@@ -250,37 +153,4 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
 
         return dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'views';
     }
-
-    private $_model;
-    public function getModel()
-    {
-        if ($this->_model == null) {
-            $model = Module::findOne($this->getPackage());
-            if ($model == null) {
-                $model = new Module();
-                $model->loadDefaultValues();
-                $model->id = $this->getPackage();
-            }
-            $this->_model = $model;
-        }
-        return $this->_model;
-    }
-    public function getInstall()
-    {
-        return $this->getModel()->getInstall();
-    }
-    public function getOpen()
-    {
-        return $this->getModel()->getOpen();
-    }
-    public function canUninstall()
-    {
-        return $this->getModel()->install === true;
-    }
-
-    public function canInstall()
-    {
-        return $this->getModel()->install ===  false;
-    }
-
 }

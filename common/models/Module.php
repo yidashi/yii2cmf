@@ -25,7 +25,6 @@ class Module extends \yii\db\ActiveRecord
 {
     const STATUS_OPEN = 1;
     const STATUS_CLOSE = 0;
-    const STATUS_UNINSTALL = -1;
 
     const TYPE_CORE = 1;
     const TYPE_PLUGIN = 2;
@@ -78,7 +77,7 @@ class Module extends \yii\db\ActiveRecord
                 'class' => CacheInvalidateBehavior::className(),
                 'keys' => [
                     ['modules', self::TYPE_CORE],
-                    ['modules', self::TYPE_PLUGIN]
+                    ['modules', self::TYPE_PLUGIN],
                 ]
             ]
         ];
@@ -95,14 +94,10 @@ class Module extends \yii\db\ActiveRecord
         return $modules;
     }
 
-    public function loadDefaultValues($skipIfSet = true)
-    {
-        $this->status = self::STATUS_UNINSTALL;
-        return $this;
-    }
+
     public function getInstall()
     {
-        return $this->status != self::STATUS_UNINSTALL;
+        return $this->isNewRecord ? false : true;
     }
     public function getOpen()
     {
