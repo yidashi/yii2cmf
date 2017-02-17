@@ -120,7 +120,7 @@ class PluginsController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $configs = $plugin->getConfig();
+        $configs = Json::decode($plugin->getModel()->config);
         $configModels = [];
         if (!empty($configs)) {
             foreach ($configs as $k => $config) {

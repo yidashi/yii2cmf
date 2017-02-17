@@ -47,7 +47,7 @@ class Module extends \yii\db\ActiveRecord
             [['status', 'type'], 'integer'],
             [['type'], 'in', 'range' => [1,2]],
             [['name'], 'string', 'max' => 50],
-            [['class', 'bootstrap'], 'string', 'max' => 128],
+            [['bootstrap'], 'string', 'max' => 128],
             [['config'], 'string'],
             ['status', 'default', 'value' => 1],
             [['id'], 'unique'],

@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation for table `{{%module}}`.
  */
-class m160702_101410_create_plugins extends Migration
+class m160702_101410_create_module extends Migration
 {
     /**
      * @inheritdoc
@@ -20,7 +20,6 @@ class m160702_101410_create_plugins extends Migration
             'id' => $this->string(50)->notNull()->unique()->comment('标识'),
             'name' => $this->string(50)->notNull(),
             'bootstrap' => $this->string(128)->comment('模块初始化应用ID'),
-            'class' => $this->string(128)->comment('模块类'),
             'status' => $this->smallInteger(1)->notNull(),
             'type' => $this->smallInteger(1)->notNull()->comment('模块类型1core2plugin'),
             'config' => $this->text()->comment('配置'),
@@ -32,7 +31,6 @@ class m160702_101410_create_plugins extends Migration
             'id' => 'user',
             'name' => '用户模块',
             'bootstrap' => 'app-frontend|app-backend',
-            'class' => 'common\\modules\\user\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),
@@ -42,7 +40,6 @@ class m160702_101410_create_plugins extends Migration
             'id' => 'message',
             'name' => '站内信模块',
             'bootstrap' => 'app-frontend|app-backend',
-            'class' => 'common\\modules\\message\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),
@@ -51,7 +48,6 @@ class m160702_101410_create_plugins extends Migration
         $this->insert('{{%module}}', [
             'id' => 'city',
             'name' => '城市模块',
-            'class' => 'common\\modules\\city\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),
@@ -61,7 +57,6 @@ class m160702_101410_create_plugins extends Migration
             'id' => 'config',
             'name' => '动态配置',
             'bootstrap' => 'app-frontend|app-backend|app-console',
-            'class' => 'common\\modules\\config\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),
@@ -70,7 +65,6 @@ class m160702_101410_create_plugins extends Migration
         $this->insert('{{%module}}', [
             'id' => 'area',
             'name' => '前台动态区域',
-            'class' => 'common\\modules\\area\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),
