@@ -117,7 +117,7 @@ class ModuleController extends Controller
             Yii::$app->session->setFlash('error', '插件没安装');
             return $this->redirect(['index']);
         }
-        $configs = $module->getConfig();
+        $configs = Json::decode($module->getModel()->config);
         $configModels = [];
         if (!empty($configs)) {
             foreach ($configs as $k => $config) {
