@@ -1,67 +1,66 @@
 <?php
+use rbac\components\MenuHelper;
+use rbac\models\Menu;
+use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-use yii\helpers\Url;
+/* @var $this \yii\web\View */
+/* @var $content string */
+/* @var $context \yii\web\Controller */
 
-$this->title = '控制面板';
+backend\assets\AppAsset::register($this);
+\backend\assets\HuiAsset::register($this);
+$leftMenuItems = [];
+if (!isset($this->params['menuGroup'])) {
+    $context = $this->context;
+    $route = '/' . $context->uniqueId . '/' . ($context->action->id ?: $context->defaultAction);
+    $leftMenu = Menu::findOne(['route' => $route]);
+    if ($leftMenu == null) {
+        $route = '/' . $context->uniqueId . '/' . $context->defaultAction;
+        $leftMenu = Menu::findOne(['route' => $route]);
+    }
+    if ($leftMenu != null) {
+        $groupMenu = MenuHelper::getRootMenu($leftMenu);
+        $this->params['menuGroup'] = $groupMenu->name;
+        $leftMenuItems = MenuHelper::getAssignedMenu(\Yii::$app->user->id, $groupMenu['id']);
+    }
+}
 ?>
-<div class="site-index">
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+</head>
+<body class="hold-transition <?= Yii::$app->config->get('BACKEND_SKIN', 'skin-green') ?> sidebar-mini fixed">
+<?php $this->beginBody() ?>
+<div class="wrapper">
 
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3><?= \common\models\Article::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
-                        <p>当前内容(文章)</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-book"></i>
-                    </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3><?= \common\models\Article::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
-                        <p>待审内容(文章)</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-book"></i>
-                    </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3><?= \common\modules\user\models\User::find()->count() ?><sup style="font-size: 20px">人</sup></h3>
-                        <p>注册用户</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <a href="<?= Url::to(['/user/admin/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-purple">
-                    <div class="inner">
-                        <h3><?= \common\models\Comment::find()->where(['type' => 'suggest'])->count() ?></h3>
-                        <p>留言</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-files-o"></i>
-                    </div>
-                    <a href="<?= Url::to(['/suggest/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-        </div><!-- /.row -->
-    </div>
+    <?= $this->render(
+        'header.php'
+    ) ?>
+
+    <?= $this->render(
+        'left.php',
+        [
+            'leftMenuItems' => $leftMenuItems
+        ]
+    )
+    ?>
+
+    <?= $this->render(
+        'content.php',
+        ['content' => $content]
+    ) ?>
 
 </div>
+<?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
+</body>
+</html>
+<?php $this->endPage() ?>

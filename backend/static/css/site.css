@@ -2,9 +2,9 @@ body {
     font-size:13px;
 }
 div.required label.control-label:after {
-     content: " *";
-     color: red;
- }
+    content: " *";
+    color: red;
+}
 td{word-break: break-all}
 .table thead tr th {
     padding: 8px 8px;
@@ -283,3 +283,71 @@ td{word-break: break-all}
     background: #f9f9f9;
     outline: 0;
 }
+
+/*选项卡导航*/
+.Hui-tabNav, .Hui-tabNav .acrossTab li, .Hui-tabNav .acrossTab li em {
+    background-image: url(../images/acrossTab-2.png);
+}
+.acrossTab li {
+    position: relative;
+    float: left;
+    display: inline-block;
+    height: 29px;
+    line-height: 29px;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0 30px;
+    white-space: nowrap;
+    color: #282828;
+    background-position: 0 0;
+}
+.acrossTab li, .acrossTab li em {
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.acrossTab li em {
+    position: absolute;
+    width: 23px;
+    height: 29px;
+    right: -20px;
+    top: 0;
+    z-index: 50;
+    background-position: right -30px;
+}
+
+.acrossTab li.active {
+    background-position: 0 -120px;
+    z-index: 99;
+}
+.acrossTab li.active em {
+    background-position: right -150px;
+}
+.acrossTab li i {
+    position: absolute;
+    display: block;
+    width: 13px;
+    height: 13px;
+    top: 50%;
+    margin-top: -6px;
+    right: 5px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+    background-image: url(../images/acrossTab-close.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.Hui-tabNav-wp{position:relative; height:35px;overflow:hidden}
+.Hui-tabNav,
+.Hui-tabNav .acrossTab li
+,.Hui-tabNav .acrossTab li em{background-image:url(../images/acrossTab-2.png)}
+.Hui-tabNav{height:35px; padding-right:75px;overflow:hidden; position:relative;background-color:#efeef0; background-repeat: repeat-x; background-position: 0 -175px;}
+.Hui-tabNav .acrossTab{ list-style: none; position:absolute; height:26px; line-height:26px; background:none; top:8px; left:0;padding-top:0}
+.Hui-tabNav .acrossTab li{height:26px;line-height:26px;}
+.Hui-tabNav .acrossTab li em{ right:-16px; height: 26px; width: 16px}
+.loading {background:url(../images/loading.gif) no-repeat center; height:100px}
+.Hui-tabNav-more {position: absolute;right:0px;width:70px;top:4px;display: none}
+.show_iframe{ position:absolute; top:0; right:0; left:0; bottom:0;}
+.show_iframe iframe {position: absolute;bottom: 0;height: 100%;width: 100%}
+
+.content-iframe {position:relative;}

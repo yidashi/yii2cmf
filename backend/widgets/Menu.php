@@ -14,7 +14,7 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $linkTemplate = '<a href="{url}">{icon} {label}</a>';
+    public $linkTemplate = '<a href="{url}" title="{label}">{icon} <span>{label}</span></a>';
     public $submenuTemplate = "\n<ul class='treeview-menu' {show}>\n{items}\n</ul>\n";
     public $activateParents = true;
     /**
@@ -22,29 +22,30 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if(isset($item['items']))
-            $linkTemplate = '<a href="{url}">{icon} {label} <i class="fa fa-angle-left pull-right"></i></a>';
-        else
+        if(isset($item['items'])) {
+            $linkTemplate = '<a href="{url}" title="{label}">{icon} <span>{label}</span> <i class="fa fa-angle-left pull-right"></i></a>';
+        } else {
             $linkTemplate = $this->linkTemplate;
+        }
         if (isset($item['url'])) {
             $template = ArrayHelper::getValue($item, 'template', $linkTemplate);
             $replace = !empty($item['icon']) ? [
                 '{url}' => Url::to($item['url']),
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => $item['label'],
                 '{icon}' => Html::icon($item['icon'])
             ] : [
                 '{url}' => Url::to($item['url']),
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => $item['label'],
                 '{icon}' => Html::icon('circle-o'),
             ];
             return strtr($template, $replace);
         } else {
             $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
             $replace = !empty($item['icon']) ? [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => $item['label'],
                 '{icon}' => Html::icon($item['icon'])
             ] : [
-                '{label}' => '<span>'.$item['label'].'</span>',
+                '{label}' => $item['label'],
                 '{icon}' => Html::icon('circle-o'),
             ];
             return strtr($template, $replace);
