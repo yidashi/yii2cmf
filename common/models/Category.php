@@ -136,31 +136,6 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
-    public static function tree($list = null)
-    {
-        if (is_null($list)) {
-            $list = self::find()->asArray()->all();
-        }
-
-        $tree = Tree::build($list);
-        return $tree;
-    }
-
-    public static function treeList($tree = null, &$result = [], $deep = 0, $separator = '--')
-    {
-        if (is_null($tree)) {
-            $tree = self::tree();
-        }
-        $deep++;
-        foreach($tree as $list) {
-            $list['title'] = str_repeat($separator, $deep-1) . $list['title'];
-            $result[] = $list;
-            if (isset($list['children'])) {
-                self::treeList($list['children'], $result, $deep, $separator);
-            }
-        }
-        return $result;
-    }
     public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '--')
     {
         $deep++;

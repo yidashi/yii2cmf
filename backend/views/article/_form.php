@@ -27,7 +27,7 @@ use common\helpers\Tree;
 
                     <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists($model->module)))) ?>
 
-                    <?= $form->boxField($model, 'description')->textarea()?>
+                    <?= $form->field($model, 'description')->textarea()?>
 
                     <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
                         <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
@@ -48,7 +48,7 @@ use common\helpers\Tree;
                             'pluginOptions' => ['autoclose' => true]
                         ]
                     ) ?>
-                    <?= $form->boxField($model, 'cover', ['collapsed' => true])->widget(\common\widgets\upload\SingleWidget::className()) ?>
+                    <?= $form->field($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
 
                     <?= $form->field($model, 'is_top')->checkbox() ?>
 
@@ -60,7 +60,7 @@ use common\helpers\Tree;
 
                     <?= $form->field($model, 'view')->textInput() ?>
 
-                    <?= $form->boxField($model, TagBehavior::$formName)->widget(TagsInput::className())->header(TagBehavior::$formLable); ?>
+                    <?= $form->field($model, TagBehavior::$formName)->label(TagBehavior::$formLable)->widget(TagsInput::className()) ?>
 
                     <?= $form->field($model, 'source')->textInput() ?>
 
