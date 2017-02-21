@@ -77,10 +77,12 @@ class MultipleWidget extends InputWidget
     public function init()
     {
         parent::init();
-        if ($this->onlyImage === false) {
-            $this->url = $this->multiple ? ['/upload/files-upload'] : ['/upload/file-upload'];
-        } else {
-            $this->url = $this->multiple ? ['/upload/images-upload'] : ['/upload/image-upload'];
+        if (empty($this->url)) {
+            if ($this->onlyImage === false) {
+                $this->url = $this->multiple ? ['/upload/files-upload'] : ['/upload/file-upload'];
+            } else {
+                $this->url = $this->multiple ? ['/upload/images-upload'] : ['/upload/image-upload'];
+            }
         }
         if ($this->hasModel()) {
             $this->name = $this->name ? : Html::getInputName($this->model, $this->attribute);
