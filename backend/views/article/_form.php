@@ -10,7 +10,6 @@ use common\helpers\Tree;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-/* @var $dataModel common\models\ArticleData */
 /* @var $moduleModel common\models\ArticleExhibition */
 /* @var $form backend\widgets\ActiveForm */
 ?>
