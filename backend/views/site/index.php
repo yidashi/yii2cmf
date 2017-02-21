@@ -24,14 +24,9 @@ backend\assets\AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="wrapper">
 
-    <?= $this->render(
-        'header.php'
-    ) ?>
+    <?= $this->render('header.php') ?>
 
-    <?= $this->render(
-        'content.php',
-        ['content' => $content]
-    ) ?>
+    <?= $this->render('content.php') ?>
 
 </div>
 <?php $this->endBody() ?>

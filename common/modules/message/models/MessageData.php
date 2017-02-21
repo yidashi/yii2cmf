@@ -40,7 +40,7 @@ class MessageData extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'content' => Yii::t('app', 'Content'),
+            'content' => '内容',
             'created_at' => Yii::t('app', 'Created At'),
         ];
     }
