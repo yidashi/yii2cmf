@@ -4,11 +4,11 @@ namespace backend\assets;
 use yii\base\Exception;
 use yii\web\AssetBundle;
 
-class HuiAsset extends AssetBundle
+class IframeAsset extends AssetBundle
 {
     public $sourcePath = '@backend/static';
 
     public $js = [
-        'js/H-ui.admin.js',
+        'js/iframe.js',
     ];
 }

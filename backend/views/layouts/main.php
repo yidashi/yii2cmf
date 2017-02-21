@@ -42,12 +42,9 @@ backend\assets\AppAsset::register($this);
             </h1>
         <?php } ?>
 
-        <?=
-        \yii\widgets\Breadcrumbs::widget(
-            [
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]
-        ) ?>
+        <?= \yii\widgets\Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
     </section>
 
     <section class="content">

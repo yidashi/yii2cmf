@@ -6,12 +6,11 @@ $(document).ajaxError(function(event,xhr,options,exc){
     $.modal.error(message);
 });
 $(function () {
-    $(document).off('click', "[data-remote-modal]").on('click', "[data-remote-modal]", function() {
-        var url = $(this).data('remote-modal-url') || $(this).attr('href');
-        var title = $(this).data('remote-modal-title') || $(this).text();
-        var data = $(this).data('remote-modal-params') || {};
-        $.modal.load(url, title, data);
-        return false;
+    $("[data-toggle='iframe']").on('click', function () {
+        if (parent != window) {
+            parent.admin_tab(this);
+            return false;
+        }
     });
 })
 String.prototype.addQueryParams = function(params) {

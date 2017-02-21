@@ -7,6 +7,12 @@ use yii\helpers\Url;
 /* @var $content string */
 
 $logCount = \backend\models\SystemLog::find()->count();
+$menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($menu){
+    return [
+        'id' => $menu['id'],
+        'name' => $menu['name'],
+    ];
+});
 ?>
 
 <header class="main-header">
@@ -92,21 +98,28 @@ $logCount = \backend\models\SystemLog::find()->count();
         </div>
 
         <div class="navbar-collapse collapse" role="navigation">
-            <?php
-//            p(MenuHelper::getAssignedMenu(Yii::$app->user->id));
-            echo \yii\bootstrap\Nav::widget([
-                'items' => array_map(function($val){
-                    $firstMenu = MenuHelper::getFirstMenu($val['items']);
-                    $val['url'] = $firstMenu['url'];
-                    unset($val['items']);
-//                    p($val);
-                    return $val;
-                }, MenuHelper::getAssignedMenu(Yii::$app->user->id)),
-                'options' => [
-                    'class' => ' navbar-nav'
-                ],
-                'encodeLabels' => false
-            ])?>
+            <ul class="navbar-nav nav">
+                <?php foreach ($menuGroups as $key => $menuGroup) : ?>
+                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><?= $menuGroup['name'] ?></a></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </nav>
 </header>
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="tab-content">
+
+        <?php foreach ($menuGroups as $key => $menuGroup): ?>
+        <div class="tab-pane <?php if ($key == 0) {echo 'active';} ?>" id="menu-group-<?= $menuGroup['id'] ?>">
+            <?= \backend\widgets\Menu::widget([
+                'options' => ['class' => 'sidebar-menu'],
+                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id, $menuGroup['id'])
+            ]) ?>
+        </div>
+        <?php endforeach; ?>
+
+        </div>
+    </section>
+</aside>
+
