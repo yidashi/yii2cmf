@@ -2,8 +2,8 @@ body {
     font-size:13px;
 }
 div.required label.control-label:after {
-    content: " *";
-    color: red;
+     content: " *";
+     color: red;
 }
 td{word-break: break-all}
 .table thead tr th {

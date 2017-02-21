@@ -16,7 +16,7 @@ Yii::setAlias('plugins', dirname(dirname(__DIR__)) . '/plugins');
 
 
 Yii::setAlias('storagePath', '@root/web/storage');
-Yii::setAlias('storageUrl', env('STORAGE_URL', env('FRONTEND_URL/storage')));
+Yii::setAlias('storageUrl', env('SITE_URL') . '/storage');
 
 
 Yii::$container->set('yii\widgets\LinkPager', ['maxButtonCount' => 5, 'firstPageLabel' => '首页', 'lastPageLabel' => '末页']);

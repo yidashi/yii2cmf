@@ -9,21 +9,21 @@ class SiteForm extends Model
 {
     
 
-    public $appName;
+    public $SITE_URL = 'http://';
 
     const CACHE_KEY = "install-site-form";
     
     public function rules()
     {
         return [
-            [['appName',], 'string']
+            [['SITE_URL',], 'string']
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'appName' => '站点名称',
+            'SITE_URL' => '站点地址',
         ];
     }
     

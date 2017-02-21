@@ -14,7 +14,7 @@ use common\models\Category;
     <div class="box-body">
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'pid')->dropDownList(Category::getDropDownList(Category::tree()), ['prompt' => '请选择']) ?>
+        <?= $form->field($model, 'pid')->dropDownList(Category::getDropDownList(Category::lists()), ['prompt' => '请选择']) ?>
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 

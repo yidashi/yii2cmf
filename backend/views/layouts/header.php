@@ -21,7 +21,7 @@ $logCount = \backend\models\SystemLog::find()->count();
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li><?= Html::a('<i class="fa  fa-home"></i>', Yii::$app->config->get('FRONTEND_URL'), ['target' => '_blank']) ?></li>
+                <li><?= Html::a('<i class="fa  fa-home"></i>', Yii::$app->config->get('SITE_URL'), ['target' => '_blank']) ?></li>
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>

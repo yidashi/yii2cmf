@@ -62,10 +62,10 @@ class AdminForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => 'username',
-            'password' => 'Password',
-            'passwordConfirm' => 'Password Confirm',
-            'email' => 'Email'
+            'username' => '用户名',
+            'password' => '密码',
+            'passwordConfirm' => '确认密码',
+            'email' => '邮箱'
         ];
     }
 

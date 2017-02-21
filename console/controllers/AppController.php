@@ -9,6 +9,7 @@
 namespace console\controllers;
 
 
+use common\modules\user\models\User;
 use yii\console\Controller;
 use Yii;
 use yii\helpers\Console;
@@ -187,6 +188,9 @@ STR;
         $this->setEnv('YII_ENV', $appStatus);
         // 迁移
         Yii::$app->runAction('migrate/up', ['interactive' => false]);
+        //创建默认用户
+        $this->runAction('create-admin', ['interactive' => $this->interactive]);
+        $this->setEnv('SITE_URL', $this->prompt('siteUrl'));
         // 清缓存
         Yii::$app->runAction('cache/flush-all', ['interactive' => false]);
         $this->setInstalled();
@@ -194,9 +198,8 @@ STR;
 +=================================================+
 | Installation completed successfully, Thanks you |
 | 安装成功，感谢选择和使用 yii2cmf              |
-+-------------------------------------------------+
-| 说明和注意事项：                                |
-| 图片不能正常显示需要到.env文件里修改对应URL
++------------------------------------------+
+| 默认后台账号：hehe  密码： 111111
 +=================================================+
 
 STR;
@@ -204,6 +207,15 @@ STR;
         $this->stdout($end, Console::FG_GREEN);
     }
 
+    public function actionCreateAdmin()
+    {
+        $user = new User();
+        $user->setScenario("create");
+        $user->email = 'hehe@hehe.com';
+        $user->username = 'hehe';
+        $user->password = '111111';
+        $user->create();
+    }
     public function actionReset()
     {
         if (!$this->checkInstalled()) {

@@ -11,7 +11,7 @@ class SwitcherColumn extends  DataColumn
 
     public $reload = 0;
 
-    public $route = 'switcher';
+    public $route = ['switcher'];
 
     public function registerClientScript()
     {

@@ -119,17 +119,17 @@ $this->beginPage();
                                                 ])
                                             ]
                                         ],
-//                                        [
-//                                            'label' => '输入管理员信息',
-//                                            "url" => [
-//                                                "site/set-admin"
-//                                            ],
-//                                            "options" => [
-//                                                "data-url" => Url::to([
-//                                                    "site/set-admin"
-//                                                ])
-//                                            ]
-//                                        ]
+                                        [
+                                            'label' => '输入管理员信息',
+                                            "url" => [
+                                                "site/set-admin"
+                                            ],
+                                            "options" => [
+                                                "data-url" => Url::to([
+                                                    "site/set-admin"
+                                                ])
+                                            ]
+                                        ]
                                     ]
                                 ]);
                                 ?>
