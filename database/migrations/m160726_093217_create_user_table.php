@@ -50,7 +50,7 @@ class m160726_093217_create_user_table extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL"
         ], $tableOptions);
 
-        $this->insert('{{%user}}', [
+        /*$this->insert('{{%user}}', [
             'username' => 'hehe',
             'auth_key' => '1lQl4TG6sYlyWRqXZEWL0ZhQkPATVnMs',
             'password_hash' => '$2y$13$lYlhIcBcs6jBr7yTd6YrWueckcs.Cvx70juIHs6wEfjtUwnA318VW',
@@ -65,7 +65,7 @@ class m160726_093217_create_user_table extends Migration
             'locale' => 'zh-CN',
             'created_at' => 1441766741,
             'updated_at' => 1441766741,
-        ]);
+        ]);*/
     }
 
     /**

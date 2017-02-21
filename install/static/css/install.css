@@ -11,7 +11,10 @@ body {
     background: -ms-linear-gradient(top,#ccc,#fff);
     background: linear-gradient(top,#ccc,#fff)
 }
-
+div.required label.control-label:after {
+    content: " *";
+    color: red;
+}
 #wrapper {
     width: 800px;
 }

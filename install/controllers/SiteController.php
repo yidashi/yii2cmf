@@ -103,9 +103,6 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             
             if ($model->validate() && $model->save()) {
-                $this->installDb();
-                $this->installConfig();
-                Yii::$app->setInstalled();
                 return $this->renderJson(true);
             } else {
                 return $this->renderJson(false, current($model->getFirstErrors()));
@@ -141,6 +138,7 @@ class SiteController extends Controller
 
                 \Yii::$app->getCache()->flush();
                 //安装完成
+                Yii::$app->setInstalled();
                 return $this->renderJson(true);
            
         } 
@@ -197,13 +195,7 @@ class SiteController extends Controller
         \Yii::$app->setKeys($this->envPath);
         $data = \Yii::$app->getCache()->get(SiteForm::CACHE_KEY);
         foreach ($data as $name => $value) {
-            $configName = preg_replace_callback('/([a-z]*)([A-Z].*)/', function ($matches) {
-                return $matches[1] . "." . strtolower($matches[2]);
-            }, $name);
-            Yii::$app->db->createCommand()->insert('{{%config}}',[
-                'name' => $configName,
-                'value' => $value
-            ]);
+            Yii::$app->setEnv($name, $value);
         }
         return true;
     }
@@ -220,15 +212,6 @@ class SiteController extends Controller
         if($user->create() == false) {
             return current($user->getFirstErrors());
         }
-        //添加管理员权限
-        $connection = \Yii::$app->getDb();
-        $connection->createCommand()
-            ->insert('{{%auth_assignment}}', [
-            'item_name' => 'superAdmin',
-            'user_id' => $user->id,
-            "created_at" => time()
-        ])->execute();
-
         return null;
     }
 
@@ -260,5 +243,4 @@ class SiteController extends Controller
             'apply_time' => time(),
         ])->execute();
     }
-
 }

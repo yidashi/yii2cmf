@@ -6,6 +6,6 @@ $form = \yii\widgets\ActiveForm::begin([
     ]
 ]);
 ?>
-<?=$form->field($model, 'appName')->textInput(['autocomplete' => 'off','class' => 'form-control'])?>
+<?=$form->field($model, 'SITE_URL')->textInput(['autocomplete' => 'off','class' => 'form-control'])?>
 
 <?php \yii\widgets\ActiveForm::end(); ?>

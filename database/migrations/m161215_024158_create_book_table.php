@@ -43,7 +43,6 @@ class m161215_024158_create_book_table extends Migration
             'id' => 'book',
             'name' => '文档wiki',
             'bootstrap' => 'app-frontend|app-backend',
-            'class' => 'common\\modules\\book\\Module',
             'status' => 1,
             'type' => 1,
             'created_at' => time(),

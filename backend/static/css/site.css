@@ -4,7 +4,7 @@ body {
 div.required label.control-label:after {
      content: " *";
      color: red;
- }
+}
 td{word-break: break-all}
 .table thead tr th {
     padding: 8px 8px;
