@@ -16,5 +16,4 @@ $this->title = $name;
     </div>
 
     <a href="javascript:;" class="btn btn-primary btn-flat" onclick="history.back()">返回</a>
-    <a href="<?= \yii\helpers\Url::home() ?>" class="btn btn-success btn-flat">首页</a>
 </div>

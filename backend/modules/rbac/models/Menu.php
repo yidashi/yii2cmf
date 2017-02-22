@@ -75,11 +75,8 @@ class Menu extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             ['name', 'unique'],
-            [['parent_name'], 'filterParent'],
-            [['parent_name'], 'in',
-                'range' => static::find()->select(['name'])->column(),
-                'message' => 'Menu "{value}" not found.', ],
-            [['parent', 'route', 'data', 'order'], 'default'],
+            [['parent'], 'in', 'range' => static::find()->select(['id'])->column(), 'message' => 'Menu "{value}" not found.', ],
+            [['data', 'parent'], 'default'],
             ['route', function($attribute){
                 if (!empty($this->$attribute)) {
                     $this->addError('route', '一级菜单不能有地址');
@@ -98,28 +95,6 @@ class Menu extends \yii\db\ActiveRecord
     }
 
     /**
-     * Use to loop detected.
-     */
-    public function filterParent()
-    {
-        $value = $this->parent_name;
-        $parent = self::findOne(['name' => $value]);
-        if ($parent) {
-            $id = $this->id;
-            $parent_id = $parent->id;
-            while ($parent) {
-                if ($parent->id == $id) {
-                    $this->addError('parent_name', 'Loop detected.');
-
-                    return;
-                }
-                $parent = $parent->menuParent;
-            }
-            $this->parent = $parent_id;
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function attributeLabels()
@@ -128,7 +103,6 @@ class Menu extends \yii\db\ActiveRecord
             'id' => Yii::t('rbac', 'ID'),
             'name' => Yii::t('rbac', 'Name'),
             'parent' => Yii::t('rbac', 'Parent'),
-            'parent_name' => Yii::t('rbac', 'Parent Name'),
             'route' => Yii::t('rbac', 'Route'),
             'icon' => Yii::t('rbac', 'Icon'),
             'order' => Yii::t('rbac', 'Order'),
@@ -170,6 +144,18 @@ class Menu extends \yii\db\ActiveRecord
             }
         }
 
+        return $result;
+    }
+
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '&nbsp;&nbsp;&nbsp;&nbsp;')
+    {
+        $deep++;
+        foreach($tree as $list) {
+            $result[$list['id']] = str_repeat($separator, $deep-1) . $list['name'];
+            if (isset($list['children'])) {
+                self::getDropDownList($list['children'], $result, $deep);
+            }
+        }
         return $result;
     }
 }

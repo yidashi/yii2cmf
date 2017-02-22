@@ -19,7 +19,7 @@ $this->title = '控制面板';
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" data-toggle="iframe" title="文章列表">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" target="_blank" title="文章列表">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
@@ -32,7 +32,7 @@ $this->title = '控制面板';
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" data-toggle="iframe" title="文章列表">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" target="_blank" title="文章列表">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
@@ -45,7 +45,7 @@ $this->title = '控制面板';
                     <div class="icon">
                         <i class="fa fa-user"></i>
                     </div>
-                    <a href="<?= Url::to(['/user/admin/index']) ?>" class="small-box-footer" data-toggle="iframe" title="用户管理">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/user/admin/index']) ?>" class="small-box-footer" target="_blank" title="用户管理">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
@@ -58,7 +58,7 @@ $this->title = '控制面板';
                     <div class="icon">
                         <i class="fa fa-files-o"></i>
                     </div>
-                    <a href="<?= Url::to(['/suggest/index']) ?>" class="small-box-footer" data-toggle="iframe" title="留言板">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/suggest/index']) ?>" class="small-box-footer" target="_blank" title="留言板">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
         </div><!-- /.row -->

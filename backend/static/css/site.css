@@ -285,7 +285,7 @@ td{word-break: break-all}
 }
 
 /*选项卡导航*/
-.Hui-tabNav, .Hui-tabNav .acrossTab li, .Hui-tabNav .acrossTab li em {
+.tab-nav, .tab-nav .acrossTab li, .tab-nav .acrossTab li em {
     background-image: url(../images/acrossTab-2.png);
 }
 .acrossTab li {

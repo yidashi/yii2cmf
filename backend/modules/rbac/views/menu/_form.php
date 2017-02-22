@@ -12,38 +12,33 @@ use yii\widgets\ActiveForm;
 
 ?>
 
-<div class="box box-primary">
-    <div class="box-body">
-    <?php $form = ActiveForm::begin(); ?>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
+            <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
 
-    <?= $form->field($model, 'parent_name')->textInput(['id' => 'parent_name']) ?>
+            <?= $form->field($model, 'parent')->dropDownList($model::getDropDownList(\common\helpers\Tree::build($model::find()->asArray()->all(), 'id', 'parent', 'children', null)), ['encode' => false]) ?>
 
-    <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
+            <?= $form->field($model, 'route')->textInput(['id' => 'route']) ?>
 
-    <?= $form->field($model, 'icon')->widget(\backend\widgets\iconpicker\IconPickerWidget::className()) ?>
+            <?= $form->field($model, 'icon')->widget(\backend\widgets\iconpicker\IconPickerWidget::className()) ?>
 
-    <?= $form->field($model, 'order')->input('number') ?>
+            <?= $form->field($model, 'order')->input('number') ?>
 
-    <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>
+            <?= $form->field($model, 'data')->textarea(['rows' => 4]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), ['class' => 'btn btn-flat btn-block bg-maroon']) ?>
+            <div class="form-group">
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('rbac', 'Create') : Yii::t('rbac', 'Update'), ['class' => 'btn btn-flat btn-block bg-maroon']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-    </div>
-</div>
 <?php
 AutocompleteAsset::register($this);
 
-$options1 = Json::htmlEncode([
-    'source' => Menu::find()->select(['name'])->column(),
-]);
-$this->registerJs("$('#parent_name').autocomplete($options1);");
-
-$options2 = Json::htmlEncode([
+$options = Json::htmlEncode([
     'source' => Menu::getSavedRoutes(),
 ]);
-$this->registerJs("$('#route').autocomplete($options2);");
+$this->registerJs("$('#route').autocomplete($options);");

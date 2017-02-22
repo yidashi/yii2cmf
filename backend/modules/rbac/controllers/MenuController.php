@@ -75,7 +75,7 @@ class MenuController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-                'model' => $this->findModel($id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -88,12 +88,13 @@ class MenuController extends Controller
     public function actionCreate($id = null)
     {
         $model = new Menu();
-        $model->parent_name = $id ? Menu::findOne($id)->name : null;
+        $model->parent = $id ? : null;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '操作成功');
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
-                    'model' => $model,
+                'model' => $model,
             ]);
         }
     }
@@ -109,14 +110,12 @@ class MenuController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->menuParent) {
-            $model->parent_name = $model->menuParent->name;
-        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', '操作成功');
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
-                    'model' => $model,
+                'model' => $model,
             ]);
         }
     }
@@ -131,11 +130,12 @@ class MenuController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Menu::find()->where(['parent' => $id])->all() > 0) {
+        if (Menu::find()->where(['parent' => $id])->count() > 0) {
             Yii::$app->session->setFlash('error', '请先删除该菜单下的所有子菜单');
             return $this->redirect(['index']);
         }
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', '操作成功');
         return $this->redirect(['index']);
     }
 

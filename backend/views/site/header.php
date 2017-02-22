@@ -27,7 +27,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li><?= Html::a('<i class="fa  fa-home"></i>', Yii::$app->config->get('FRONTEND_URL'), ['target' => '_blank']) ?></li>
+                <li><?= Html::a('<i class="fa fa-home"></i>', Yii::$app->config->get('SITE_URL'), ['target' => '_blank', 'data-not-iframe' => '1']) ?></li>
                 <li id="log-dropdown" class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-warning"></i>
@@ -46,7 +46,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                             <ul class="menu">
                                 <?php foreach(\backend\models\SystemLog::find()->orderBy(['log_time'=>SORT_DESC])->limit(5)->all() as $logEntry): ?>
                                     <li>
-                                        <a href="<?= Url::to(['/log/view', 'id'=>$logEntry->id]) ?>">
+                                        <a href="<?= Url::to(['/log/view', 'id'=>$logEntry->id]) ?>" target="_blank" title="错误日志">
                                             <i class="fa fa-warning <?= $logEntry->level == \yii\log\Logger::LEVEL_ERROR ? 'text-red' : 'text-yellow' ?>"></i>
                                             <?= $logEntry->category ?>
                                         </a>
@@ -55,7 +55,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                             </ul>
                         </li>
                         <li class="footer">
-                            <?php echo Html::a('查看全部', ['/log/index']) ?>
+                            <?= Html::a('查看全部', ['/log/index'], ['target' => '_blank', 'title' => '错误日志']) ?>
                         </li>
                     </ul>
                 </li>
@@ -79,7 +79,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat'])?>
+                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat', 'target' => '_blank', 'title' => '修改密码'])?>
                             </div>
                             <div class="pull-right">
                                 <?= Html::a('登出', ['/user/admin/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>

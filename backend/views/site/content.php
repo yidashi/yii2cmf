@@ -2,7 +2,7 @@
     <div id="tab-nav" class="tab-nav hidden-xs">
         <div class="tab-nav-wp">
             <ul id="min_title_list" class="acrossTab cl">
-                <li class="active"><span data-href="<?= \yii\helpers\Url::to(['/site/dashboard']) ?>">控制面板</span><em></em></li>
+                <li class="active"><span data-href="<?= \yii\helpers\Url::to(['/site/dashboard']) ?>">控制面板</span><i></i><em></em></li>
             </ul>
         </div>
         <div class="tab-nav-more btn-group">

@@ -6,13 +6,13 @@ $(document).ajaxError(function(event,xhr,options,exc){
     $.modal.error(message);
 });
 $(function () {
-    $("[data-toggle='iframe']").on('click', function () {
+    $("a[target='_blank']").on('click', function () {
         if (parent != window) {
             parent.admin_tab(this);
             return false;
         }
     });
-})
+});
 String.prototype.addQueryParams = function(params) {
     var split = '?';
     if (this.indexOf('?') > -1) {
