@@ -9,38 +9,38 @@
 namespace common\components;
 
 
+use creocoder\flysystem\Filesystem;
 use yii\base\Component;
-use creocoder\flysystem\LocalFilesystem;
 
 class Storage extends Component
 {
     public $baseUrl;
 
-    public $basePath;
+    /**
+     * @var array|string|Filesystem
+     */
+    public $fs;
 
     public function init()
     {
         parent::init();
         $this->baseUrl = \Yii::getAlias($this->baseUrl);
-        $this->basePath = \Yii::getAlias($this->basePath);
-    }
-
-    public function path2url($path)
-    {
-        return str_replace($this->basePath, $this->baseUrl, $path);
-    }
-    public function url2path($url)
-    {
-        return str_replace($this->baseUrl, $this->basePath, $url);
+        $this->fs = \Yii::createObject($this->fs);
     }
 
     public function getPath($filename)
     {
-        return $this->basePath . '/' . $filename;
+        return $this->fs->getAdapter()->applyPathPrefix($filename);
     }
 
     public function getUrl($filename)
     {
         return $this->baseUrl . '/' . $filename;
     }
+
+    public function upload($target, $source)
+    {
+        return $this->fs->write($target, file_get_contents($source));
+    }
+
 }

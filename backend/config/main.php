@@ -10,17 +10,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'controllerMap'=>[
-        'file-manager-elfinder' => [
-            'class' => 'mihaildev\elfinder\Controller',
-            'disabledCommands' => ['netmount'],
-            'roots' => [
-                [
-                    'baseUrl' => '@storageUrl',
-                    'basePath' => '@storagePath',
-                    'path'   => '/',
-                ]
-            ]
-        ],
         'upload' => \common\actions\UploadController::className()
     ],
     'components' => [

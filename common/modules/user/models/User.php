@@ -312,7 +312,7 @@ class User extends ActiveRecord implements IdentityInterface
             $height = $width;
         }
         if($this->profile->avatar) {
-            $avatarFile = Yii::$app->storage->url2path($this->profile->avatar);
+            /*$avatarFile = Yii::$app->storage->url2path($this->profile->avatar);
             $info = pathinfo($avatarFile);
             $thumbFile = $info['dirname'] . DIRECTORY_SEPARATOR . $info['filename'] . '_' . $width . '_' . $height . '.' . $info['extension'];
             if (is_file($avatarFile)) {
@@ -322,7 +322,8 @@ class User extends ActiveRecord implements IdentityInterface
                 return Yii::$app->storage->path2url($thumbFile);
             } else {
                 return $this->profile->avatar;
-            }
+            }*/
+            return $this->profile->avatar;
         }
         return $this->getDefaultAvatar($width, $height);
     }
@@ -333,8 +334,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
     public static function getDefaultAvatar($width, $height)
     {
-//        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/widgets/upload/assets/avatars");
-        list ($basePath, $baseUrl) = [Yii::getAlias('@storagePath/avatars'), Yii::getAlias('@storageUrl/avatars')];
+        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/static/avatars");
 
         $name = "avatar_" . $width."x".$height. ".png";
         if(file_exists($basePath . DIRECTORY_SEPARATOR . $name)) {

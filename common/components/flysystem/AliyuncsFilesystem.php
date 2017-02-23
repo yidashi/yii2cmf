@@ -12,7 +12,7 @@ namespace common\components\flysystem;
 use creocoder\flysystem\Filesystem;
 use yii\base\InvalidConfigException;
 
-class QiniuFilesystem extends Filesystem
+class AliyuncsFilesystem extends Filesystem
 {
     /**
      * @var string
@@ -22,6 +22,14 @@ class QiniuFilesystem extends Filesystem
      * @var string
      */
     public $secret;
+    /**
+     * @var string
+     */
+    public $endpoint;
+    /**
+     * @var bool
+     */
+    public $isCName = false;
     /**
      * @var string
      */
@@ -44,6 +52,10 @@ class QiniuFilesystem extends Filesystem
             throw new InvalidConfigException('The "secret" property must be set.');
         }
 
+        if ($this->endpoint === null) {
+            throw new InvalidConfigException('The "endpoint" property must be set.');
+        }
+
         if ($this->bucket === null) {
             throw new InvalidConfigException('The "bucket" property must be set.');
         }
@@ -52,13 +64,15 @@ class QiniuFilesystem extends Filesystem
     }
 
     /**
-     * @return QiniuAdapter
+     * @return AliyuncsAdapter
      */
     protected function prepareAdapter()
     {
-        return new QiniuAdapter(
+        return new AliyuncsAdapter(
             $this->access,
             $this->secret,
+            $this->endpoint,
+            $this->isCName,
             $this->bucket
         );
     }

@@ -23,14 +23,10 @@ class UploadController extends Controller
         return [
             'redactor-files-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'type' => GetAction::TYPE_FILES,
             ],
             'redactor-image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
@@ -42,14 +38,10 @@ class UploadController extends Controller
             ],
             'redactor-images-get' => [
                 'class' => 'vova07\imperavi\actions\GetAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'type' => GetAction::TYPE_IMAGES,
             ],
             'redactor-file-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'uploadOnlyImage' => false,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
@@ -63,36 +55,27 @@ class UploadController extends Controller
             ],
             'image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
             'avatar-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
+                'path' => 'avatar',
                 'validatorOptions' => ['minWidth' => 100, 'minHeight' => 100, 'underWidth' => '图片宽高不要小于100x100', 'underHeight' => '图片宽高不要小于100x100']
             ],
             'file-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false
             ],
             'images-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'multiple' => true,
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment'
             ],
             'backend-files-upload' => [
                 'class' => 'common\actions\UploadAction',
                 'multiple' => true,
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false,
                 'itemCallback' => function ($result) {
@@ -102,8 +85,6 @@ class UploadController extends Controller
             ],
             'md-image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
@@ -117,8 +98,6 @@ class UploadController extends Controller
             ],
             'im-image-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
@@ -136,8 +115,6 @@ class UploadController extends Controller
             ],
             'im-file-upload' => [
                 'class' => 'common\actions\UploadAction',
-                'url' => Yii::$app->storage->baseUrl,
-                'path' => Yii::$app->storage->basePath,
                 'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false,
                 'callback' => function($result) {
