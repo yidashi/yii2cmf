@@ -33,11 +33,6 @@ class UploadAction extends Action
     public $path;
 
     /**
-     * @var string URL path to directory where files will be uploaded
-     */
-    public $url;
-
-    /**
      * @var string Validator name
      */
     public $uploadOnlyImage = true;
@@ -79,20 +74,6 @@ class UploadAction extends Action
      */
     public function init()
     {
-        if ($this->url === null) {
-            throw new InvalidConfigException('The "url" attribute must be set.');
-        } else {
-            $this->url = rtrim($this->url, '/') . '/';
-        }
-        if ($this->path === null) {
-            throw new InvalidConfigException('The "path" attribute must be set.');
-        } else {
-            $this->path = rtrim(Yii::getAlias($this->path), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-
-            if (!FileHelper::createDirectory($this->path)) {
-                throw new InvalidCallException("Directory specified in 'path' attribute doesn't exist or cannot be created.");
-            }
-        }
         if (Yii::$app->request->get($this->uploadQueryParam)) {
             $this->uploadParam = Yii::$app->request->get($this->uploadQueryParam);
         }
@@ -130,7 +111,7 @@ class UploadAction extends Action
         }
 
     }
-    private function uploadMore($files) {
+    private function uploadMore(array $files) {
         $res = [];
         foreach ($files as $file) {
 
@@ -139,12 +120,7 @@ class UploadAction extends Action
         }
         return $res;
     }
-
-    /**
-     * @param UploadedFile $file
-     * @return array|mixed
-     */
-    private function uploadOne($file)
+    private function uploadOne(UploadedFile $file)
     {
         try {
             $model = new DynamicModel(compact('file'));
@@ -159,12 +135,13 @@ class UploadAction extends Action
                     if ($this->unique === true && $file->extension) {
                         $file->name = uniqid() . '.' . $file->extension;
                     }
-                    if ($model->file->saveAs($this->path . $file->name)) {
+                    $filePath = $this->path . $file->name;
+                    if (Yii::$app->storage->upload($filePath, $file->tempName)) {
                         /**
                          * @var \common\models\Attachment $attachment
                          */
                         $attachment = new $this->modelClass;
-                        $attachment->url = $this->url . $file->name;
+                        $attachment->path = $filePath;
                         $attachment->name = $file->name;
                         $attachment->extension = $file->extension;
                         $attachment->type = $file->type;
@@ -177,7 +154,7 @@ class UploadAction extends Action
                 }
                 $result = [
                     'id' => $attachment->id,
-                    'url' => $attachment->url,
+                    'url' => $attachment->getUrl(),
                     'extension' => $attachment->extension,
                     'type' => $attachment->type,
                     'size' => $attachment->size,
@@ -186,14 +163,14 @@ class UploadAction extends Action
                 if ($this->uploadOnlyImage !== true) {
                     $result['filename'] = $attachment->name;
                 }
-                if ($this->itemCallback != null) {
-                    $result = call_user_func($this->itemCallback, $result);
-                }
             }
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             $result = [
                 'error' => $e->getMessage()
             ];
+        }
+        if ($this->itemCallback instanceof \Closure) {
+            $result = call_user_func($this->itemCallback, $result);
         }
         return $result;
     }

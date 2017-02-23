@@ -38,7 +38,8 @@
         "bower-asset/blueimp-file-upload" : "*",
         "bower-asset/font-awesome": "^4.0",
         "bower-asset/editor.md": "*",
-        "creocoder/yii2-flysystem": "*"
+        "creocoder/yii2-flysystem": "*",
+        "qiniu/php-sdk": "^7.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",

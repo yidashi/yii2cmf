@@ -15,7 +15,7 @@ use yii\imagine\Image;
  * @property integer $user_id
  * @property string $name
  * @property string $title
- * @property string $url
+ * @property string $path
  * @property string $extension
  * @property string $description
  * @property string $hash
@@ -23,6 +23,7 @@ use yii\imagine\Image;
  * @property string $type
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $url
  */
 class Attachment extends \yii\db\ActiveRecord
 {
@@ -40,7 +41,7 @@ class Attachment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['url', 'hash'], 'required'],
+            [['path', 'hash'], 'required'],
             [['user_id', 'size'], 'integer'],
             [['name', 'title', 'description', 'type', 'extension'], 'string', 'max' => 255],
             [['hash'], 'string', 'max' => 64]
@@ -77,19 +78,19 @@ class Attachment extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getFilePath()
+    public function getUrl()
     {
-        return Yii::$app->storage->basePath . DIRECTORY_SEPARATOR . $this->name;
+        return Yii::$app->storage->getUrl($this->path);
     }
 
     public function getAbsolutePath()
     {
-        return Yii::$app->storage->basePath . DIRECTORY_SEPARATOR . $this->name;
+        return Yii::$app->storage->fs->getAdapter()->applyPathPrefix($this->path);
     }
 
     public function getFile()
     {
-        return Yii::$app->fs->get($this->name);
+        return Yii::$app->storage->fs->get($this->path);
     }
 
     public function getThumb($width, $height, $options = [])
@@ -100,20 +101,21 @@ class Attachment extends \yii\db\ActiveRecord
         $options = $this->getDefaultThumbOptions($options);
 
         $thumbFile = $this->getThumbFilename($width, $height, $options);
-        $thumbPath = \Yii::$app->storage->getPath($thumbFile);
+        $thumbPath = pathinfo($this->path, PATHINFO_DIRNAME) . $thumbFile;
 
-        if (!\Yii::$app->get('fs')->has($thumbPath)) {
+        if (!\Yii::$app->storage->fs->has($thumbPath)) {
             $this->makeThumbStorage($thumbPath, $width, $height, $options);
         }
-        return \Yii::$app->storage->path2url($thumbPath);
+        return \Yii::$app->storage->getUrl($thumbPath);
     }
+
     // TODO 这里只能用localFilesystem
     protected function makeThumbStorage($thumbPath, $width, $height, $options)
     {
-        Image::thumbnail($this->getFilePath(), $width, $height)->save($thumbPath);
+        Image::thumbnail($this->getAbsolutePath(), $width, $height)->save($thumbPath);
 
     }
-    
+
     protected function getThumbFilename($width, $height, $options)
     {
         return 'thumb_' . $this->primaryKey . '_' . $width . 'x' . $height . '_' . $options['offset'][0] . '_' . $options['offset'][1] . '_' . $options['mode'] . '.' . $options['extension'];
@@ -153,7 +155,7 @@ class Attachment extends \yii\db\ActiveRecord
         $collection = $this->getThumbs();
         if (!empty($collection)) {
             foreach ($collection as $item) {
-                Yii::$app->fs->delete($item);
+                Yii::$app->storage->fs->delete($item);
             }
         }
     }
@@ -162,7 +164,7 @@ class Attachment extends \yii\db\ActiveRecord
     {
         $pattern = 'thumb_' . $this->primaryKey . '_';
 
-        $allFiles = \Yii::$app->fs->listContents();
+        $allFiles = \Yii::$app->storage->fs->listContents();
 
         $collection = [];
         foreach ($allFiles as $file) {
@@ -176,7 +178,7 @@ class Attachment extends \yii\db\ActiveRecord
     {
         parent::afterDelete();
         // 文件删了
-        $filePath = $this->getFilePath();
+        $filePath = $this->getAbsolutePath();
         @unlink($filePath);
     }
 

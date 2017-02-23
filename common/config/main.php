@@ -56,13 +56,12 @@ return [
                 ],*/
             ],
         ],
-        'fs' => [
-            'class' => 'creocoder\flysystem\LocalFilesystem',
-            'path' => '@storagePath/upload',
-        ],
         'storage' => [
             'class' => 'common\\components\\Storage',
-            'basePath' => '@storagePath/upload',
+            'fs' => [
+                'class' => 'creocoder\flysystem\LocalFilesystem',
+                'path' => '@storagePath/upload',
+            ],
             'baseUrl' => '@storageUrl/upload'
         ],
         'log' => [

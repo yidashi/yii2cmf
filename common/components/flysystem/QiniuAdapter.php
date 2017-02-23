@@ -8,6 +8,7 @@
 
 namespace common\components\flysystem;
 
+use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
@@ -15,7 +16,7 @@ use Qiniu\Auth;
 use Qiniu\Storage\UploadManager;
 use Qiniu\Storage\BucketManager;
 
-class QiniuAdapter implements AdapterInterface
+class QiniuAdapter extends AbstractAdapter
 {
     use NotSupportingVisibilityTrait;
     /**
