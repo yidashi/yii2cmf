@@ -101,7 +101,7 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
-        $this->createIndex('type', '{{%comment}}', ['type', 'type_id']);
+        $this->createIndex('entity', '{{%comment}}', ['entity', 'entity_id']);
 // comment_info
         $this->createTable('{{%comment_info}}', [
             'id' => Schema::TYPE_PK,
@@ -110,7 +110,7 @@ class m130524_201442_init extends Migration
             'status' => $this->boolean()->notNull()->defaultValue(1),
             'total' => $this->integer(11)->notNull()
         ], $this->tableOptions);
-        $this->createIndex('type', '{{%comment_info}}', ['type', 'type_id']);
+        $this->createIndex('entity', '{{%comment_info}}', ['entity', 'entity_id']);
 // favourite
         $this->createTable('{{%favourite}}', [
             'id' => Schema::TYPE_PK,
@@ -219,7 +219,15 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'action' => Schema::TYPE_STRING . "(20) NOT NULL DEFAULT 'up'",
         ], $this->tableOptions);
-
+//vote_info
+        $this->createTable('{{%vote_info}}', [
+            'id' => Schema::TYPE_PK,
+            'entity' => $this->string(80)->notNull(),
+            'entity_id' => $this->integer(11)->notNull(),
+            'up' => $this->integer(11)->notNull()->defaultValue('0'),
+            'down' => $this->integer(11)->notNull()->defaultValue('0'),
+        ], $this->tableOptions);
+        $this->createIndex('entity', '{{%vote_info}}', ['entity', 'entity_id']);
         $this->insert('{{%page}}', [
             'use_layout' => 1,
             'content' => '关于我们',
@@ -262,6 +270,7 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%system_log}}');
         $this->dropTable('{{%tag}}');
         $this->dropTable('{{%vote}}');
+        $this->dropTable('{{%vote_info}}');
         $this->execute('SET foreign_key_checks = 1');
     }
 }

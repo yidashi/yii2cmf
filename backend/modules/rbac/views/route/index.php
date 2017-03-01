@@ -17,19 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="box box-primary">
     <div class="box-body">
-        <div class="col-md-5">
+        <div class="col-xs-5">
             <?= Yii::t('rbac', 'Avaliable') ?>:
             <input id="search-avaliable">
             <a href="#" id="btn-refresh"><span class="glyphicon glyphicon-refresh"></span></a><br><br>
             <select id="list-avaliable" multiple size="20" style="width: 100%">
             </select>
         </div>
-        <div class="col-md-1">
+        <div class="col-xs-1">
             <br><br>
             <a href="#" id="btn-add" class="btn btn-success btn-flat">&gt;&gt;</a><br>
             <a href="#" id="btn-remove" class="btn btn-danger">&lt;&lt;</a>
         </div>
-        <div class="col-md-5">
+        <div class="col-xs-5">
             <?= Yii::t('rbac', 'Assigned') ?>:
             <input id="search-assigned"><br><br>
             <select id="list-assigned" multiple size="20" style="width: 100%">

@@ -38,38 +38,36 @@ $(document).ready(function() {
                 height: 130
             });
             this.ui.preview = thumbnail;
+            jcrop_api.newSelection();
+
+            var bound = getRandom();
+            jcrop_api.setSelect(bound);
+
+            $('#crop-x').val(bound[0]);
+            $('#crop-y').val(bound[1]);
+            $('#crop-w').val(bound[2]);
+            $('#crop-h').val(bound[3]);
+
+            if (is_init == false) {
+
+                is_init = true;
+                jcrop_api.container.on('cropmove cropend', function(e, s, c) {
+                    $('#crop-x').val(c.x);
+                    $('#crop-y').val(c.y);
+                    $('#crop-w').val(c.w);
+                    $('#crop-h').val(c.h);
+                });
+
+                $('#text-inputs').on('change', 'input', function(e) {
+                    jcrop_api.animateTo([
+                        parseInt($('#crop-x').val()),
+                        parseInt($('#crop-y').val()),
+                        parseInt($('#crop-w').val()),
+                        parseInt($('#crop-h').val())
+                    ]);
+                });
+            }
         });
-
-        jcrop_api.newSelection();
-
-        var bound = getRandom();
-        jcrop_api.setSelect(bound);
-        
-        $('#crop-x').val(bound[0]);
-        $('#crop-y').val(bound[1]);
-        $('#crop-w').val(bound[2]);
-        $('#crop-h').val(bound[3]);
-
-        if (is_init == false) {
-
-            is_init = true;
-            jcrop_api.container.on('cropmove cropend', function(e, s, c) {
-                $('#crop-x').val(c.x);
-                $('#crop-y').val(c.y);
-                $('#crop-w').val(c.w);
-                $('#crop-h').val(c.h);
-            });
-
-            $('#text-inputs').on('change', 'input', function(e) {
-                jcrop_api.animateTo([
-                    parseInt($('#crop-x').val()),
-                    parseInt($('#crop-y').val()),
-                    parseInt($('#crop-w').val()),
-                    parseInt($('#crop-h').val())
-                ]);
-            });
-        }
-
         return false;
 
     });

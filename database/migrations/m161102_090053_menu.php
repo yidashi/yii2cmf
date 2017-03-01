@@ -70,7 +70,7 @@ class m161102_090053_menu extends Migration
             ['72','数据库配置','71','/config/default/database','3','',''],
             ['73','邮箱配置','71','/config/default/mail','4','',''],
             ['75','缓存','24','/cache/index','8','','fa-flash'],
-            ['76','附件','39','/attachment/index','9','','fa-file-picture-o'],
+            ['76','附件','39','/attachment/admin/index','9','','fa-file-picture-o'],
             ['77','标签','39','/tag/index','10','','fa-tags'],
         ]);
         $this->execute('SET foreign_key_checks = 1;');

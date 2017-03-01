@@ -80,7 +80,6 @@ class Page extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
             [
                 'class' => MetaBehavior::className(),
-                'type' => 'page'
             ],
             [
                 'class' => CommentBehavior::className()

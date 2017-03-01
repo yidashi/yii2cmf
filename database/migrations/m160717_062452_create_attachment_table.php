@@ -30,6 +30,12 @@ class m160717_062452_create_attachment_table extends Migration
             'created_at' => $this->integer(10),
             'updated_at' => $this->integer(10)
         ], $tableOptions);
+        $this->createTable('{{%attachment_index}}', [
+            'attachment_id' => $this->integer(11)->notNull(),
+            'entity' => $this->string(80)->notNull(),
+            'entity_id' => $this->integer(11)->notNull(),
+            'attribute' => $this->string(20)->notNull()
+        ], $tableOptions);
     }
 
     /**
@@ -38,5 +44,6 @@ class m160717_062452_create_attachment_table extends Migration
     public function down()
     {
         $this->dropTable('{{%attachment}}');
+        $this->dropTable('{{%attachment_index}}');
     }
 }

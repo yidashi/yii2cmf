@@ -26,8 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->user->username;
                         }
                     ],
-                    'type',
-                    'type_id',
+                    'entity',
+                    'entity_id',
                     [
                         'attribute' => 'content',
                         'options' => ['width' => '40%'],
