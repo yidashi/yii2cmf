@@ -34,6 +34,10 @@ class QiniuAdapter extends AbstractAdapter
     /**
      * @var string
      */
+    protected $domain;
+    /**
+     * @var string
+     */
     protected $token;
     /**
      * Constructor.
@@ -128,8 +132,7 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function read($path)
     {
-        $contents = file_get_contents('http://'.$this->bucket.'.qiniudn.com/'.$path);
-        return compact('contents', 'path');
+        return false;
     }
     /**
      * {@inheritdoc}
@@ -191,4 +194,5 @@ class QiniuAdapter extends AbstractAdapter
             'size' => $filestat['fsize'],
         );
     }
+
 }

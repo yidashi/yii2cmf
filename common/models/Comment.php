@@ -19,8 +19,8 @@ use Yii;
  * @property int $user_id
  * @property string $user_ip
  * @property string $content
- * @property string $type
- * @property int $type_id
+ * @property string $entity
+ * @property int $entity_id
  * @property int $parent_id
  * @property int $reply_uid
  * @property Comment $parent
@@ -41,8 +41,8 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'type_id', 'content'], 'required'],
-            [['type_id', 'user_id', 'parent_id', 'up', 'down', 'is_top', 'parent_id', 'reply_uid'], 'integer'],
+            [['entity', 'entity_id', 'content'], 'required'],
+            [['entity_id', 'user_id', 'parent_id', 'is_top', 'parent_id', 'reply_uid'], 'integer'],
             [['content'], 'string'],
             ['parent_id', function($attribute){
                 $this->reply_uid = $this->parent->user_id;
@@ -67,8 +67,8 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => '类型',
-            'type_id' => '目标',
+            'entity' => '类型',
+            'entity_id' => '目标',
             'user_id' => '评论人',
             'content' => '内容',
             'up' => '顶',
@@ -92,10 +92,7 @@ class Comment extends \yii\db\ActiveRecord
                 'createdByAttribute' => 'user_id',
                 'updatedByAttribute' => false
             ],
-            [
-                'class' => VoteBehavior::className(),
-                'type' => 'comment'
-            ],
+            VoteBehavior::className(),
             UserBehavior::className(),
             CommentBehavior::className(),
             [
@@ -182,12 +179,12 @@ class Comment extends \yii\db\ActiveRecord
 
     public function updateCommentTotal()
     {
-        $model = CommentInfo::find()->where(['type' => $this->type, 'type_id' => $this->type_id])->one();
-        $total = Comment::activeCount($this->type, $this->type_id);
+        $model = CommentInfo::find()->where(['entity' => $this->entity, 'entity_id' => $this->entity_id])->one();
+        $total = Comment::activeCount($this->entity, $this->entity_id);
         if($model == null && $total != 0) {
             $model = new CommentInfo();
-            $model->type =$this->type;
-            $model->type_id = $this->type_id;
+            $model->entity =$this->entity;
+            $model->entity_id = $this->entity_id;
             $model->total =$total;
             $model->save();
         } else {
@@ -196,11 +193,11 @@ class Comment extends \yii\db\ActiveRecord
         }
     }
 
-    public static function activeCount($type, $type_id = NULL)
+    public static function activeCount($entity, $entity_id = NULL)
     {
         return self::find()->where([
-            'type' => $type,
-            'type_id' => $type_id,
+            'entity' => $entity,
+            'entity_id' => $entity_id,
             'status' => 1
         ])->count();
     }

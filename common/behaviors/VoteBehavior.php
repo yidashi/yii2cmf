@@ -10,22 +10,25 @@ namespace common\behaviors;
 
 
 use common\models\Vote;
+use common\models\VoteInfo;
+use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 class VoteBehavior extends Behavior
 {
+    use EntityTrait;
     /**
      * @var \yii\db\ActiveRecord
      */
     public $owner;
 
-    public $type;
-
     public function events()
     {
         return [
+            ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
+            ActiveRecord::EVENT_AFTER_UPDATE => 'afterUpdate',
             ActiveRecord::EVENT_AFTER_DELETE => 'afterDelete',
         ];
     }
@@ -43,7 +46,7 @@ class VoteBehavior extends Behavior
     {
         if (!Yii::$app->user->isGuest) {
             $userId = Yii::$app->user->id;
-            $up = Vote::find()->where(['type' => $this->type, 'type_id' => $this->owner->id, 'user_id' => $userId, 'action' => Vote::ACTION_UP])->one();
+            $up = Vote::find()->where(['entity' => $this->entity, 'entity_id' => $this->owner->id, 'user_id' => $userId, 'action' => Vote::ACTION_UP])->one();
             if ($up) {
                 return true;
             }
@@ -59,7 +62,7 @@ class VoteBehavior extends Behavior
     {
         if (!Yii::$app->user->isGuest) {
             $userId = Yii::$app->user->id;
-            $down = Vote::find()->where(['type' => $this->type, 'type_id' => $this->owner->id, 'user_id' => $userId, 'action' => Vote::ACTION_DOWN])->one();
+            $down = Vote::find()->where(['entity' => $this->entity, 'entity_id' => $this->owner->id, 'user_id' => $userId, 'action' => Vote::ACTION_DOWN])->one();
             if ($down) {
                 return true;
             }
@@ -67,24 +70,56 @@ class VoteBehavior extends Behavior
         return false;
     }
 
-    public function getType()
+    public function getVoteInfo()
     {
-        if ($this->type == null) {
-            $this->type = $this->owner->className();
-        }
-
-        return ltrim($this->type,"\\");
+        return $this->owner->hasOne(VoteInfo::className(), [
+            'entity_id' => $this->owner->primaryKey()[0]
+        ])->where(['entity' => $this->getEntity()]);
     }
 
-    public function getTypeId()
+    public function getUpTotal()
     {
-        return $this->owner->getPrimaryKey();
+        $model = $this->owner->voteInfo;
+        if ($model == null) {
+            return 0;
+        }
+        return $model->up;
+    }
+
+    public function getDownTotal()
+    {
+        $model = $this->owner->voteInfo;
+        if ($model == null) {
+            return 0;
+        }
+        return $model->down;
+    }
+
+    public function afterInsert()
+    {
+        $model = new VoteInfo();
+        $model->entity = $this->getEntity();
+        $model->entity_id = $this->getEntityId();
+        $model->save();
+    }
+
+    public function afterUpdate()
+    {
+        /* @var $model \common\models\VoteInfo */
+        $model = $this->owner->VoteInfo;
+        if ($model == null) {
+            $model = new VoteInfo();
+            $model->entity = $this->getEntity();
+            $model->entity_id = $this->getEntityId();
+            $model->save();
+        }
     }
 
     public function afterDelete()
     {
-        $type = $this->getType();
-        $type_id = $this->getTypeId();
-        Vote::deleteAll(['type' => $type, 'type_id' => $type_id]);
+        $entity = $this->getEntity();
+        $entityId = $this->getEntityId();
+        VoteInfo::deleteAll(['entity' => $entity, 'entity_id' => $entityId]);
+        Vote::deleteAll(['entity' => $entity, 'entity_id' => $entityId]);
     }
 }

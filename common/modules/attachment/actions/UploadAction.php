@@ -6,15 +6,13 @@
  * Time: 上午11:14
  */
 
-namespace common\actions;
+namespace common\modules\attachment\actions;
 
 use Yii;
 use yii\base\Action;
 use yii\base\DynamicModel;
 use yii\base\Exception;
-use yii\base\InvalidCallException;
-use yii\base\InvalidConfigException;
-use yii\helpers\FileHelper;
+use common\modules\attachment\models\Attachment;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
@@ -24,13 +22,9 @@ use yii\web\UploadedFile;
 class UploadAction extends Action
 {
     /**
-     * @var \yii\db\ActiveRecord
-     */
-    public $modelClass = 'common\models\attachment';
-    /**
      * @var string Path to directory where files will be uploaded
      */
-    public $path;
+    public $path = '';
 
     /**
      * @var string Validator name
@@ -46,11 +40,6 @@ class UploadAction extends Action
      */
     public $uploadQueryParam = 'fileparam';
 
-    /**
-     * @var boolean If `true` unique filename will be generated automatically
-     */
-    public $unique = true;
-
     public $multiple = false;
 
     /**
@@ -63,7 +52,7 @@ class UploadAction extends Action
      */
     private $_validator = 'image';
 
-    public $deleteUrl = ['/upload/delete'];
+    public $deleteUrl = ['/attachment/upload/delete'];
 
     public $callback;
 
@@ -76,9 +65,6 @@ class UploadAction extends Action
     {
         if (Yii::$app->request->get($this->uploadQueryParam)) {
             $this->uploadParam = Yii::$app->request->get($this->uploadQueryParam);
-        }
-        if ($this->modelClass) {
-            $this->modelClass = Yii::createObject($this->modelClass);
         }
         if ($this->uploadOnlyImage !== true) {
             $this->_validator = 'file';
@@ -129,32 +115,13 @@ class UploadAction extends Action
             if ($model->hasErrors()) {
                 throw new Exception($model->getFirstError('file'));
             } else {
-                $hash = md5_file($file->tempName);
-                $attachment = $this->modelClass->find()->where(['hash' => $hash])->one();
-                if (empty($attachment)) {
-                    if ($this->unique === true && $file->extension) {
-                        $file->name = uniqid() . '.' . $file->extension;
-                    }
-                    $filePath = $this->path . $file->name;
-                    if (Yii::$app->storage->upload($filePath, $file->tempName)) {
-                        /**
-                         * @var \common\models\Attachment $attachment
-                         */
-                        $attachment = new $this->modelClass;
-                        $attachment->path = $filePath;
-                        $attachment->name = $file->name;
-                        $attachment->extension = $file->extension;
-                        $attachment->type = $file->type;
-                        $attachment->size = $file->size;
-                        $attachment->hash = $hash;
-                        $attachment->save();
-                    } else {
-                        throw new Exception('上传失败');
-                    }
-                }
+                $attachment = Attachment::uploadFromPost($this->path, $file);
                 $result = [
                     'id' => $attachment->id,
-                    'url' => $attachment->getUrl(),
+                    'name' => $attachment->name,
+                    'hash' => $attachment->hash,
+                    'url' => $attachment->url,
+                    'path' => $attachment->path,
                     'extension' => $attachment->extension,
                     'type' => $attachment->type,
                     'size' => $attachment->size,
@@ -164,13 +131,13 @@ class UploadAction extends Action
                     $result['filename'] = $attachment->name;
                 }
             }
+            if ($this->itemCallback instanceof \Closure) {
+                $result = call_user_func($this->itemCallback, $result);
+            }
         } catch (Exception $e) {
             $result = [
                 'error' => $e->getMessage()
             ];
-        }
-        if ($this->itemCallback instanceof \Closure) {
-            $result = call_user_func($this->itemCallback, $result);
         }
         return $result;
     }

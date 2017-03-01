@@ -5,6 +5,8 @@ namespace common\modules\user\models;
 use backend\models\search\SearchModelTrait;
 use common\models\Sign;
 use common\models\UserLevel;
+use common\modules\attachment\models\Attachment;
+use common\modules\attachment\models\AttachmentIndex;
 use common\modules\user\traits\ModuleTrait;
 use Yii;
 use yii\base\NotSupportedException;
@@ -312,18 +314,7 @@ class User extends ActiveRecord implements IdentityInterface
             $height = $width;
         }
         if($this->profile->avatar) {
-            /*$avatarFile = Yii::$app->storage->url2path($this->profile->avatar);
-            $info = pathinfo($avatarFile);
-            $thumbFile = $info['dirname'] . DIRECTORY_SEPARATOR . $info['filename'] . '_' . $width . '_' . $height . '.' . $info['extension'];
-            if (is_file($avatarFile)) {
-                if (!is_file($thumbFile)) {
-                    Image::thumbnail($avatarFile, $width, $height, 'inset')->save($thumbFile);
-                }
-                return Yii::$app->storage->path2url($thumbFile);
-            } else {
-                return $this->profile->avatar;
-            }*/
-            return $this->profile->avatar;
+            return $this->profile->avatar->getThumb($width, $height);
         }
         return $this->getDefaultAvatar($width, $height);
     }
@@ -345,8 +336,15 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function saveAvatar($avatar)
     {
-        $this->profile->avatar = $avatar;
-        return $this->profile->save();
+        if ($this->profile->avatar) {
+            $this->profile->avatar->delete();
+        }
+        $attachmentIndex =   new AttachmentIndex();
+        $attachmentIndex->attachment_id = $avatar->primaryKey;
+        $attachmentIndex->entity = get_class($this->profile);
+        $attachmentIndex->entity_id = $this->primaryKey;
+        $attachmentIndex->attribute = "avatar";
+        $attachmentIndex->save();
     }
 
     public function init()

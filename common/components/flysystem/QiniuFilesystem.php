@@ -27,10 +27,6 @@ class QiniuFilesystem extends Filesystem
      */
     public $bucket;
     /**
-     * @var string|null
-     */
-    public $prefix;
-    /**
      * @var array
      */
     public $options = [];

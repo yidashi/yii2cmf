@@ -7,7 +7,7 @@
  $('#dm').remove();
  // $('#dm-switch').remove();
 
-function start_sio(type, type_id, dm_mgr, cb){
+function start_sio(entity, entity_id, dm_mgr, cb){
   console.log('-->');
   delete localStorage.debug;
   //localStorage.debug='*,-engine.io*';
@@ -17,7 +17,7 @@ function start_sio(type, type_id, dm_mgr, cb){
     reconnectionDelay: 5000,
     reconnectionDelayMax: 10000,
     //transports: ['websocket', 'polling'],
-    query: 'type_id=' + article_id + '&type=' + type
+    query: 'entity_id=' + article_id + '&entity=' + entity
   };
   var socket = io.connect('ws://dm3.jiecao.fm/art', opts);
   window.__socket = socket;
@@ -34,12 +34,12 @@ function start_sio(type, type_id, dm_mgr, cb){
   socket.on('error', function(err){
     jlog('[EE] socket.io error: ' + err);
   });
-  if(typeof(cb) !== 'undefined'){
+  if(entityof(cb) !== 'undefined'){
     cb(socket);
   }
 }
 
-function start(type, type_id, list_url){
+function start(entity, entity_id, list_url){
   // Get querystring from url
   function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -50,7 +50,7 @@ function start(type, type_id, list_url){
 
   // Get article_id
 /*  var article_id = getParameterByName('id');
-  if(typeof(art_id) != 'undefined'){
+  if(entityof(art_id) != 'undefined'){
     article_id = art_id
   }
 
@@ -61,16 +61,16 @@ function start(type, type_id, list_url){
   jlog('art_id=' + article_id);*/
 
   var opt = {
-     type: type,
-     type_id : type_id,
+     entity: entity,
+     entity_id : entity_id,
      danmu_list_url : list_url
   };
 
-  if(typeof(danmuListUrl) !== 'undefined'){
+  if(entityof(danmuListUrl) !== 'undefined'){
     opt.danmu_list_url = danmuListUrl
   }
 
-  jQuery.extend(DanmuManager.prototype, jQuery.eventEmitter);
+  jQuery.extend(DanmuManager.protoentity, jQuery.eventEmitter);
   window.dm_mgr = new DanmuManager(opt);
 
   dm_mgr.on('no_more_data', function(){
@@ -79,7 +79,7 @@ function start(type, type_id, list_url){
   });
 
   dm_mgr.on('dm_on', function(){
-    if(typeof __socket == 'undefined'){
+    if(entityof __socket == 'undefined'){
       // start_sio(article_id, dm_mgr);
       return;
     }
@@ -89,7 +89,7 @@ function start(type, type_id, list_url){
   });
 
   dm_mgr.on('dm_off', function(){
-    if(typeof __socket != 'undefined' && __socket.connected){
+    if(entityof __socket != 'undefined' && __socket.connected){
       __socket.disconnect();
     }
   });
@@ -132,19 +132,19 @@ var DM = function(){
   this.nickname = '';
   this.content = '';
   this.avatar = '';
-  this.type = 'polling';
+  this.entity = 'polling';
 };
 
-var DM_ToString = DM.prototype.toString = function(){
-  return 'nickname=' + this.nickname + ', content=' + this.content + ', avatar=' + this.avatar + ', type=' + this.type;
+var DM_ToString = DM.protoentity.toString = function(){
+  return 'nickname=' + this.nickname + ', content=' + this.content + ', avatar=' + this.avatar + ', entity=' + this.entity;
 };
 
 
-function initDm(type, type_id, list_url){
+function initDm(entity, entity_id, list_url){
   setTimeout(function(){
     // $('body').prepend('<div id="dm-switch"><div class="dm-switch-icon"></div></div>');
     $('body').prepend('<div id="dm"></div>');
-    start(type, type_id, list_url);
+    start(entity, entity_id, list_url);
     //点击每个弹幕块
     // var inputField = api.require('inputField');
     $('#dm').on('click','.dm-item',function(){

@@ -6,28 +6,28 @@
  * Time: 上午1:46
  */
 
-namespace common\actions;
+namespace common\modules\attachment\controllers;
 
 
-use common\models\Attachment;
-use vova07\imperavi\actions\GetAction;
 use Yii;
 use yii\helpers\Url;
 use yii\web\Controller;
+use common\modules\attachment\actions\UploadAction;
+use common\modules\attachment\actions\GetAction;
 
 class UploadController extends Controller
 {
     public $enableCsrfValidation = false;
+
     public function actions()
     {
         return [
             'redactor-files-get' => [
-                'class' => 'vova07\imperavi\actions\GetAction',
-                'type' => GetAction::TYPE_FILES,
+                'class' => GetAction::className(),
+                'type' => 'files',
             ],
             'redactor-image-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
                         'filelink' => $result['files'][0]['url']
@@ -37,13 +37,12 @@ class UploadController extends Controller
                 }
             ],
             'redactor-images-get' => [
-                'class' => 'vova07\imperavi\actions\GetAction',
-                'type' => GetAction::TYPE_IMAGES,
+                'class' => GetAction::className(),
+                'type' => 'images',
             ],
             'redactor-file-upload' => [
-                'class' => 'common\actions\UploadAction',
+                'class' => UploadAction::className(),
                 'uploadOnlyImage' => false,
-                'modelClass' => 'common\models\Attachment',
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
                         'filelink' => $result['files'][0]['url'],
@@ -54,29 +53,24 @@ class UploadController extends Controller
                 }
             ],
             'image-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment'
+                'class' => UploadAction::className(),
             ],
             'avatar-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'path' => 'avatar',
                 'validatorOptions' => ['minWidth' => 100, 'minHeight' => 100, 'underWidth' => '图片宽高不要小于100x100', 'underHeight' => '图片宽高不要小于100x100']
             ],
             'file-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'uploadOnlyImage' => false
             ],
             'images-upload' => [
-                'class' => 'common\actions\UploadAction',
+                'class' => UploadAction::className(),
                 'multiple' => true,
-                'modelClass' => 'common\models\Attachment'
             ],
             'backend-files-upload' => [
-                'class' => 'common\actions\UploadAction',
+                'class' => UploadAction::className(),
                 'multiple' => true,
-                'modelClass' => 'common\models\Attachment',
                 'uploadOnlyImage' => false,
                 'itemCallback' => function ($result) {
                     $result['updateUrl'] = Url::to(['/attachment/update', 'id' => $result['id']]);
@@ -84,8 +78,7 @@ class UploadController extends Controller
                 }
             ],
             'md-image-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
                         'success' => 1,
@@ -97,8 +90,7 @@ class UploadController extends Controller
                 }
             ],
             'im-image-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
                         'code' => 0,
@@ -114,8 +106,7 @@ class UploadController extends Controller
                 }
             ],
             'im-file-upload' => [
-                'class' => 'common\actions\UploadAction',
-                'modelClass' => 'common\models\Attachment',
+                'class' => UploadAction::className(),
                 'uploadOnlyImage' => false,
                 'callback' => function($result) {
                     return !isset($result['files'][0]['error']) ? [
@@ -137,6 +128,6 @@ class UploadController extends Controller
 
     public function actionDelete($id)
     {
-
+        //TODO AttachmentIndex里没有该attachment_id就可以把attachment删了
     }
 }

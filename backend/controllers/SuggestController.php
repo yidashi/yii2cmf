@@ -33,7 +33,7 @@ class SuggestController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->where(['type' => 'suggest']),
+            'query' => Comment::find()->where(['entity' => 'suggest']),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC

@@ -2,8 +2,10 @@
 
 namespace common\modules\book\models;
 
+use common\behaviors\CommentBehavior;
 use common\helpers\Tree;
 use common\models\Comment;
+use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -65,7 +67,12 @@ class Book extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'book_cover'
+            ],
+            CommentBehavior::className()
         ];
     }
 
@@ -122,18 +129,15 @@ class Book extends \yii\db\ActiveRecord
     /**
      * 获取所有评论数
      */
-    public function getAllComment()
+    public function getAllCommentTotal()
     {
         $chapters = $this->chapters;
         $chapterIds = [];
+        $total = 0;
         foreach ($chapters as $chapter) {
-            $chapterIds[] = $chapter->id;
+            $total += $chapter->getCommentTotal();
         }
-        return Comment::find()->where(['type' => 'book', 'type_id' => $this->id])->andWhere(['type' => 'book-chapter', 'type_id' => $chapterIds])->count();
+        return $total;
     }
 
-    public function getBookCover()
-    {
-        return $this->book_cover;
-    }
 }

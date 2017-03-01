@@ -1,6 +1,7 @@
 <?php
 namespace common\widgets\upload;
 
+use yii\base\Arrayable;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -80,8 +81,10 @@ class MultipleWidget extends InputWidget
         if (empty($this->url)) {
             if ($this->onlyImage === false) {
                 $this->url = $this->multiple ? ['/upload/files-upload'] : ['/upload/file-upload'];
+                $this->acceptFileTypes = 'image/png, image/jpg, image/jpeg, image/gif, image/bmp, application/x-zip-compressed';
             } else {
                 $this->url = $this->multiple ? ['/upload/images-upload'] : ['/upload/image-upload'];
+                $this->acceptFileTypes = 'image/png, image/jpg, image/jpeg, image/gif, image/bmp';
             }
         }
         if ($this->hasModel()) {
@@ -121,18 +124,24 @@ class MultipleWidget extends InputWidget
 
     protected function formatAttachment($attachment)
     {
-        if (is_string($attachment) && !empty($attachment)) {
-            return [
-                "url"=>$attachment,
-                "path"=>$attachment
+        if (!empty($attachment) && is_string($attachment)) {
+            $result = [
+                "url" => $attachment,
+                "path" => $attachment
             ];
+            $extension = pathinfo($attachment, PATHINFO_EXTENSION);
+            if (!in_array($extension, $this->imageExtensions)) {
+                $result['type'] = $extension;
+            }
+            return $result;
         } else if (is_array($attachment)) {
             return $attachment;
-        }
-
-        return null;
+        } else if ($attachment instanceof Arrayable)
+            return $attachment->toArray();
+        return [];
     }
 
+    protected $imageExtensions = ['gif', 'png', 'jpg', 'jpeg', 'bmp'];
 
 
     /**
@@ -145,7 +154,8 @@ class MultipleWidget extends InputWidget
         $content = Html::beginTag('div',$this->wrapperOptions);
         $content .= Html::fileInput($this->fileInputName, null, [
             'id' => $this->fileInputName,
-            'multiple' => $this->multiple
+            'multiple' => $this->multiple,
+            'accept' => $this->acceptFileTypes
         ]);
         $content .= Html::endTag('div');
         return $content;

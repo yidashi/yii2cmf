@@ -55,16 +55,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $slider = Article::find()
-            ->published()
-            ->orderBy(['view' => SORT_DESC])
-            ->limit(5)
-            ->all();
-        $recommend = Article::find()
-            ->published()
-            ->orderBy(['comment' => SORT_DESC])
-            ->limit(10)
-            ->all();
         $dataProvider = new ActiveDataProvider([
             'query' => Article::find()->published(),
             'sort' => [
@@ -77,8 +67,6 @@ class SiteController extends Controller
         $categories = Category::find()->all();
         $hotTags = Tag::hot();
         return $this->render('index', [
-            'slider' => $slider,
-            'recommend' => $recommend,
             'dataProvider' => $dataProvider,
             'categories' => $categories,
             'hotTags' => $hotTags
