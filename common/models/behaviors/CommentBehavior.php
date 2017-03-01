@@ -24,14 +24,13 @@ class CommentBehavior extends Behavior
     {
         return [
             ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
-            ActiveRecord::EVENT_AFTER_DELETE => 'decreaseComment'
         ];
     }
     public function afterInsert($event)
     {
         $this->sendNotify($event);
-        $this->increaseComment($event);
     }
+    // TODO 这块不好
     public function sendNotify($event)
     {
         $fromUid = $event->sender->user_id;
@@ -39,8 +38,8 @@ class CommentBehavior extends Behavior
         if ($event->sender->parent_id > 0) {
             $toUid = $event->sender->reply_uid ?: $event->sender->parent->user_id;
             $extra = ['comment' => $this->generateMsgContent($event->sender->content)];
-            switch ($event->sender->type) {
-                case 'article':
+            switch ($event->sender->entity) {
+                case 'common\models\Article':
                     $category = 'reply';
                     $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
                     break;
@@ -53,16 +52,16 @@ class CommentBehavior extends Behavior
                     break;
             }
         } else {
-            switch ($event->sender->type) {
-                case 'article':
+            switch ($event->sender->entity) {
+                case 'common\models\Article':
                     $category = 'comment';
-                    $article = Article::find()->where(['id' => $event->sender->type_id])->one();
+                    $article = Article::find()->where(['id' => $event->sender->entity_id])->one();
                     $toUid = $article->user_id;
                     $extra = [
                         'comment' => $this->generateMsgContent($event->sender->content),
                         'article_title' => Html::a($article->title, ['/article/view', 'id' => $article->id])
                     ];
-                    $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
+                    $link = Url::to(['/article/view', 'id' => $event->sender->entity_id, '#' => 'comment-' . $event->sender->id]);
                     break;
                 case 'suggest':
                     $category = 'suggest';
@@ -70,7 +69,7 @@ class CommentBehavior extends Behavior
                     $extra = [
                         'comment' => $this->generateMsgContent($event->sender->content),
                     ];
-                    $link = Url::to(['/suggest', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
+                    $link = Url::to(['/suggest', 'id' => $event->sender->entity_id, '#' => 'comment-' . $event->sender->id]);
                     break;
                 default:
                     return;
@@ -87,22 +86,5 @@ class CommentBehavior extends Behavior
     private function generateMsgContent($content)
     {
         return StringHelper::truncate(preg_replace('/\s+/', ' ', strip_tags(Markdown::process($content))), 50);
-    }
-
-    /**
-     * 更新文章评论计数器等.
-     */
-    public function increaseComment($event)
-    {
-        if ($event->sender->type == 'article') {
-            Article::updateAllCounters(['comment' => 1], ['id' => $event->sender->type_id]);
-        }
-    }
-
-    public function decreaseComment($event)
-    {
-        if ($event->sender->type == 'article') {
-            Article::updateAllCounters(['comment' => -1], ['id' => $event->sender->type_id]);
-        }
     }
 }

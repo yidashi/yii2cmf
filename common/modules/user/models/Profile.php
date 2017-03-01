@@ -3,6 +3,7 @@
 namespace common\modules\user\models;
 
 use common\models\City;
+use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -14,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $signature
- * @property string $avatar
+ * @property \common\modules\attachment\models\Attachment $avatar
  * @property integer $gender
  */
 class Profile extends \yii\db\ActiveRecord
@@ -48,7 +49,6 @@ class Profile extends \yii\db\ActiveRecord
             [['signature'], 'string', 'max' => 100],
             [['qq'], 'string', 'max' => 20],
             [['phone'], 'match', 'pattern' => '/^1[0-9]{10}$/'],
-            [['avatar'], 'string', 'max' => 255],
             ['locale', 'default', 'value' => Yii::$app->language],
             ['locale', 'in', 'range' => array_keys(self::getLocaleList())],
         ];
@@ -80,7 +80,11 @@ class Profile extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'avatar'
+            ]
         ];
     }
 

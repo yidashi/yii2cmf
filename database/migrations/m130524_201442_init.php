@@ -29,10 +29,6 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'status' => Schema::TYPE_BOOLEAN . " NOT NULL COMMENT '状态'",
-            'cover' => Schema::TYPE_STRING . "(255) NULL COMMENT '封面'",
-            'comment' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
-            'up' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
-            'down' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'is_top' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否置顶'),
             'is_hot' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否热门'),
@@ -64,8 +60,8 @@ class m130524_201442_init extends Migration
             'title' => $this->string(128),
             'keywords' => $this->string(128),
             'description' => $this->string(128),
-            'type' => $this->string(128),
-            'type_id' => $this->integer()
+            'entity' => $this->string(80),
+            'entity_id' => $this->integer()
         ], $this->tableOptions);
 // auth
         $this->createTable('{{%auth}}', [
@@ -93,28 +89,27 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%comment}}', [
             'id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'type_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'user_ip' => $this->string(20)->comment('用户ip')->defaultValue(''),
+            'entity' => Schema::TYPE_STRING . "(80) NOT NULL",
+            'entity_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL COMMENT '内容'",
             'parent_id' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'reply_uid' => $this->integer(11)->defaultValue('0'),
-            'up' => Schema::TYPE_INTEGER . "(1) NOT NULL DEFAULT '0'",
-            'down' => Schema::TYPE_INTEGER . "(1) NOT NULL DEFAULT '0'",
             'is_top' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",
-            'type' => Schema::TYPE_STRING . "(20) NOT NULL",
-            'status' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '0'",
+            'status' => Schema::TYPE_SMALLINT . "(1) NOT NULL DEFAULT '1'",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
-        $this->createIndex('type', '{{%comment}}', ['type', 'type_id']);
+        $this->createIndex('entity', '{{%comment}}', ['entity', 'entity_id']);
 // comment_info
         $this->createTable('{{%comment_info}}', [
             'id' => Schema::TYPE_PK,
-            'type' => $this->string(80)->notNull(),
-            'type_id' => $this->integer(11)->notNull(),
+            'entity' => $this->string(80)->notNull(),
+            'entity_id' => $this->integer(11)->notNull(),
             'status' => $this->boolean()->notNull()->defaultValue(1),
             'total' => $this->integer(11)->notNull()
         ], $this->tableOptions);
-        $this->createIndex('type', '{{%comment_info}}', ['type', 'type_id']);
+        $this->createIndex('entity', '{{%comment_info}}', ['entity', 'entity_id']);
 // favourite
         $this->createTable('{{%favourite}}', [
             'id' => Schema::TYPE_PK,
@@ -216,14 +211,22 @@ class m130524_201442_init extends Migration
 // vote
         $this->createTable('{{%vote}}', [
             'id' => Schema::TYPE_PK,
-            'type' => Schema::TYPE_STRING . "(20) NOT NULL",
+            'entity' => Schema::TYPE_STRING . "(80) NOT NULL",
+            'entity_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'action' => Schema::TYPE_STRING . "(20) NOT NULL DEFAULT 'up'",
-            'type_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
         ], $this->tableOptions);
-
+//vote_info
+        $this->createTable('{{%vote_info}}', [
+            'id' => Schema::TYPE_PK,
+            'entity' => $this->string(80)->notNull(),
+            'entity_id' => $this->integer(11)->notNull(),
+            'up' => $this->integer(11)->notNull()->defaultValue('0'),
+            'down' => $this->integer(11)->notNull()->defaultValue('0'),
+        ], $this->tableOptions);
+        $this->createIndex('entity', '{{%vote_info}}', ['entity', 'entity_id']);
         $this->insert('{{%page}}', [
             'use_layout' => 1,
             'content' => '关于我们',
@@ -266,6 +269,7 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%system_log}}');
         $this->dropTable('{{%tag}}');
         $this->dropTable('{{%vote}}');
+        $this->dropTable('{{%vote_info}}');
         $this->execute('SET foreign_key_checks = 1');
     }
 }

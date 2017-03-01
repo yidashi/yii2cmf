@@ -12,18 +12,15 @@ use common\models\Module;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
-use yii\web\Application;
 use yii\helpers\ArrayHelper;
 
 class LoadModule extends Component implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        if ($app instanceof Application) {
-            // 先判断是否安装，没安装不操作~
-            if (!file_exists(Yii::getAlias('@root/web/storage/install.txt'))) {
-                return;
-            }
+        // 先判断是否安装，没安装不操作~
+        if (!file_exists(Yii::getAlias('@root/web/storage/install.txt'))) {
+            return;
         }
 
         $models = Module::findOpenModules(Module::TYPE_CORE);
@@ -31,7 +28,8 @@ class LoadModule extends Component implements BootstrapInterface
         foreach ($models as $model) {
             $modulePackage = Yii::$app->moduleManager->findOne($model->id);
             $class = [
-                'class' => $modulePackage->getModuleClass()
+                'class' => $modulePackage->getModuleClass(),
+                'params' => $modulePackage->getConfig()
             ];
             $this->setModule($model->id, $class);
             $bootstraps = explode("|", $model->bootstrap);

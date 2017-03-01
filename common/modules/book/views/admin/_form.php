@@ -17,7 +17,7 @@ use backend\widgets\ActiveForm;
         <?php $form = Activeform::begin() ?>
         <?= $form->field($model, 'book_name') ?>
 
-        <?= $form->field($model, 'book_cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
+        <?= $form->field($model, 'book_cover')->widget(\common\modules\attachment\widgets\SingleWidget::className()) ?>
 
         <?= $form->field($model, 'book_description')->widget(\common\widgets\editormd\Editormd::className(), ['clientOptions' => ['watch' => true, 'height' => 1000]]) ?>
 

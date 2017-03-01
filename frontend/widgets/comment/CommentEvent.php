@@ -13,7 +13,7 @@ use yii\base\Event;
 
 class CommentEvent extends Event
 {
-    public $type;
+    public $entity;
 
-    public $typeId;
+    public $entityId;
 }

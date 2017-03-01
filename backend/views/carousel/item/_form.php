@@ -15,7 +15,7 @@ use yii\helpers\Html;
         <div class="col-md-6">
             <?php echo $form->errorSummary($model) ?>
 
-            <?php echo $form->field($model, 'image')->widget(\common\widgets\upload\SingleWidget::className()) ?>
+            <?php echo $form->field($model, 'image')->widget(\common\modules\attachment\widgets\SingleWidget::className()) ?>
 
         </div>
         <div class="col-md-6">

@@ -9,8 +9,8 @@ namespace common\models;
  * @property string $title
  * @property string $keywords
  * @property string $description
- * @property string $type
- * @property integer $type_id
+ * @property string $entity
+ * @property integer $entity_id
  */
 class Meta extends \yii\db\ActiveRecord
 {
@@ -28,8 +28,8 @@ class Meta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type_id'], 'integer'],
-            [['title', 'keywords', 'description', 'type'], 'string', 'max' => 128],
+            [['entity_id'], 'integer'],
+            [['title', 'keywords', 'description', 'entity'], 'string', 'max' => 128],
         ];
     }
 
@@ -43,8 +43,8 @@ class Meta extends \yii\db\ActiveRecord
             'title' => 'Title',
             'keywords' => 'Keywords',
             'description' => 'Description',
-            'type' => 'Type',
-            'type_id' => 'Type ID',
+            'entity' => 'entity',
+            'entity_id' => 'entity ID',
         ];
     }
 }

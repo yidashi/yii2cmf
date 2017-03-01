@@ -10,6 +10,7 @@ namespace common\behaviors;
 
 use common\models\Comment;
 use common\models\CommentInfo;
+use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
@@ -17,12 +18,11 @@ use yii\validators\Validator;
 
 class CommentBehavior  extends Behavior
 {
+    use EntityTrait;
     /**
      * @var \yii\db\ActiveRecord
      */
     public $owner;
-
-    public $type;
 
     public $defaultStatus = 1;
 
@@ -55,8 +55,8 @@ class CommentBehavior  extends Behavior
                 return;
             }
             $model = new CommentInfo();
-            $model->type = $this->getType();
-            $model->type_id = $this->getTypeId();
+            $model->entity = $this->getEntity();
+            $model->entity_id = $this->getEntityId();
             $model->status = $status;
             $model->save();
         }
@@ -74,8 +74,8 @@ class CommentBehavior  extends Behavior
                     return;
                 }
                 $model = new CommentInfo();
-                $model->type = $this->getType();
-                $model->type_id = $this->getTypeId();
+                $model->entity = $this->getEntity();
+                $model->entity_id = $this->getEntityId();
                 $model->status = $status;
                 $model->save();
             } else {
@@ -87,32 +87,17 @@ class CommentBehavior  extends Behavior
 
     public function afterDelete()
     {
-        $type = $this->getType();
-        $type_id = $this->getTypeId();
-        CommentInfo::deleteAll(['type' => $type, 'type_id' => $type_id]);
-        Comment::deleteAll(['type' => $type, 'type_id' => $type_id]);
+        $entity = $this->getEntity();
+        $entityId = $this->getEntityId();
+        CommentInfo::deleteAll(['entity' => $entity, 'entity_id' => $entityId]);
+        Comment::deleteAll(['entity' => $entity, 'entity_id' => $entityId]);
     }
 
     public function getCommentInfo()
     {
         return $this->owner->hasOne(CommentInfo::className(), [
-            'type_id' => $this->owner->primaryKey()[0]
-        ])->where(["type" => $this->getType()]);
-    }
-
-
-    public function getType()
-    {
-        if ($this->type == null) {
-            $this->type = $this->owner->className();
-        }
-
-        return ltrim($this->type,"\\");
-    }
-
-    public function getTypeId()
-    {
-        return $this->owner->getPrimaryKey();
+            'entity_id' => $this->owner->primaryKey()[0]
+        ])->where(['entity' => $this->getEntity()]);
     }
 
     public function getCommentTotal()

@@ -24,7 +24,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
         <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d', $model->created_at) ?></span>
         <span class="views"><?= Html::icon('eye')?> <?= $model->trueView?>次浏览</span>
-        <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?=$model->comment?>条评论</a></span>
+        <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?= $model->commentTotal ?>条评论</a></span>
         <span class="favourites"><?= Html::a(Html::icon($model->isFavourite ? 'star' : 'star-o') . ' <em>' . $model->favourite . '</em>', ['/favourite'], [
                 'data-params' => [
                     'id' => $model->id
@@ -36,8 +36,8 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
         <!--   打赏作者     -->
         <?= \frontend\widgets\reward\RewardWidget::widget(['articleId' => $model->id])?>
         <span class="vote">
-            <a class="up" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->up?></em></a>
-            <a class="down" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->down ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->down?></em></a></span>
+            <a class="up" href="<?= Url::to(['/vote/index', 'id' => $model->id, 'entity' => $model->getEntity(), 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?= $model->upTotal ?></em></a>
+            <a class="down" href="<?= Url::to(['/vote/index', 'id' => $model->id, 'entity' => $model->getEntity(), 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->isDown ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->downTotal?></em></a></span>
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>
@@ -64,7 +64,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     <!--分享-->
     <?= \common\widgets\share\Share::widget()?>
     <!-- 评论   -->
-    <?= \frontend\widgets\comment\CommentWidget::widget(['type_id' => $model->id]) ?>
+    <?= \frontend\widgets\comment\CommentWidget::widget(['entityId' => $model->id]) ?>
 </div>
 <div class="col-lg-3">
     <div class="panel panel-default">

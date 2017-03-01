@@ -11,7 +11,7 @@ namespace common\widgets\dynamicInput;
 
 use common\modules\city\widgets\CityWidget;
 use common\widgets\EditorWidget;
-use common\widgets\upload\SingleWidget;
+use common\modules\attachment\widgets\SingleWidget;
 use kartik\date\DatePicker;
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;

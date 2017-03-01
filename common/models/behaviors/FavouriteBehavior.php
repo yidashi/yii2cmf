@@ -22,7 +22,7 @@ class FavouriteBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_INSERT => 'sendNotify'
         ];
     }
-
+//TODO
     public function sendNotify($event)
     {
         $category = 'favourite';

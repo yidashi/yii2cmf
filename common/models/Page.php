@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use common\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\StringHelper;
@@ -79,8 +80,10 @@ class Page extends \yii\db\ActiveRecord
             TimestampBehavior::className(),
             [
                 'class' => MetaBehavior::className(),
-                'type' => 'page'
             ],
+            [
+                'class' => CommentBehavior::className()
+            ]
         ];
     }
 

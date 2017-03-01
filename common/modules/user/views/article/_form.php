@@ -29,7 +29,7 @@ use yii\widgets\ActiveForm;
 
     </div>
     <div class="col-lg-3">
-        <?= $form->field($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
+        <?= $form->field($model, 'cover')->widget(\common\modules\attachment\widgets\SingleWidget::className()) ?>
 
         <?= $form->field($model, TagBehavior::$formName)->label(TagBehavior::$formLable)->widget(\common\widgets\tag\TagsInput::className())?>
         <div class="form-group">

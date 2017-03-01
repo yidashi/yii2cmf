@@ -1,0 +1,43 @@
+
+/*------------------------------------*\
+    #附件信息
+\*------------------------------------*/
+
+.misc-pub-section {
+	padding: 6px 0 
+}
+.misc-pub-section>a{float:right;font-size:16px}
+
+
+
+#attachment-info img {
+	float: left;
+	max-width: 82px;
+}
+
+#attachment-info .detail {
+	float: left;
+	margin: 0 0 0 10px;
+	padding: 0;
+	list-style: none;
+	font-size: .85em;
+}
+
+#attachment-info .filename {
+	clear: both;
+	margin-bottom: 5px;
+}
+
+#attachment-info #control-form .form-group {
+	margin-bottom: 0;
+}
+
+#attachment-info #control-form .control-label {
+	margin-bottom: 0;
+	font-size: .9em;
+	font-weight: bold;
+}
+
+#attachment-info #control-form textarea {
+	max-width: 100%;
+}

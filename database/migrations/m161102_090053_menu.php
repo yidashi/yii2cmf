@@ -63,14 +63,14 @@ class m161102_090053_menu extends Migration
             ['58','权限管理','33','/rbac/permission/index','4','','fa-check-square'],
             ['66','群发站内信','24','/message/admin/create','4','','fa-comment-o'],
             ['67','错误日志','24','/log/index','5','','fa-warning'],
-            ['68','控制面板','24','/site/index','1','','fa-dashboard'],
+            ['68','控制面板','24','/site/dashboard','1','','fa-dashboard'],
             ['69','GII','24','/gii/default/index','6','',''],
             ['70','迁移','24','/migration/default/index','7','','fa-external-link'],
             ['71','配置','','','8','',''],
             ['72','数据库配置','71','/config/default/database','3','',''],
             ['73','邮箱配置','71','/config/default/mail','4','',''],
             ['75','缓存','24','/cache/index','8','','fa-flash'],
-            ['76','附件','39','/attachment/index','9','','fa-file-picture-o'],
+            ['76','附件','39','/attachment/admin/index','9','','fa-file-picture-o'],
             ['77','标签','39','/tag/index','10','','fa-tags'],
         ]);
         $this->execute('SET foreign_key_checks = 1;');

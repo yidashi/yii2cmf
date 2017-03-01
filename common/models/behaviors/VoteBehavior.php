@@ -22,7 +22,7 @@ class VoteBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_INSERT => 'sendNotify'
         ];
     }
-
+// TODO 通知处理的不好
     public function sendNotify($event)
     {
         // 赞才发通知

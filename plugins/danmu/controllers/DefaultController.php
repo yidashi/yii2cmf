@@ -8,7 +8,7 @@
 
 namespace plugins\danmu\controllers;
 
-use common\components\WebController as Controller;
+use common\components\Controller;
 use common\models\Comment;
 use common\modules\user\models\User;
 use yii\data\Pagination;
@@ -22,11 +22,11 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         Yii::$app->response->format = 'json';
-        $typeId = \Yii::$app->request->post('type_id');
-        $type = \Yii::$app->request->post('type');
+        $entityId = \Yii::$app->request->post('entity_id');
+        $entity = \Yii::$app->request->post('entity');
         $time = \Yii::$app->request->post('time');
         $page = \Yii::$app->request->post('page');
-        $query = Comment::find()->where(['type' => $type, 'type_id' => $typeId]);
+        $query = Comment::find()->where(['entity' => $entity, 'entity_id' => $entityId]);
         $countQuery = clone $query;
         $pages = new Pagination(['totalCount' => $countQuery->count()]);
         $models = $query->alias('comment')->offset($pages->offset)

@@ -126,7 +126,7 @@ class DefaultController extends Controller
     {
         $userId = \Yii::$app->user->id;
         $dataProvider = new ActiveDataProvider([
-            'query' => Vote::find()->where(['type' => 'article', 'user_id' => $userId, 'action' => 'up']),
+            'query' => Vote::find()->where(['entity' => 'common\models\Article', 'user_id' => $userId, 'action' => 'up']),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC

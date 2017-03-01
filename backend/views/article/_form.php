@@ -7,6 +7,7 @@ use common\widgets\tag\TagsInput;
 use yii\helpers\Html;
 use common\models\Category;
 use common\helpers\Tree;
+use common\modules\attachment\widgets\SingleWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -47,7 +48,7 @@ use common\helpers\Tree;
                             'pluginOptions' => ['autoclose' => true]
                         ]
                     ) ?>
-                    <?= $form->field($model, 'cover')->widget(\common\widgets\upload\SingleWidget::className()) ?>
+                    <?= $form->field($model, 'cover')->widget(SingleWidget::className()) ?>
 
                     <?= $form->field($model, 'is_top')->checkbox() ?>
 

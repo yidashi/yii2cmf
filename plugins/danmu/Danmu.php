@@ -13,8 +13,8 @@ class Danmu
     public static function handle($event)
     {
         echo DanmuWidget::widget([
-            'type' => $event->type,
-            'typeId' => $event->typeId
+            'entity' => $event->entity,
+            'entityId' => $event->entityId
         ]);
     }
 }
