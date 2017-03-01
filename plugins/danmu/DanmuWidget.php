@@ -22,6 +22,7 @@ class DanmuWidget extends \yii\base\Widget
     public function run()
     {
         DanmuAsset::register($this->view);
+        $this->entity = str_replace('\\', '\\\\', $this->entity);
         $script = "initDm('{$this->entity}', {$this->entityId}, '{$this->listUrl}');";
         $this->view->registerJs($script);
     }

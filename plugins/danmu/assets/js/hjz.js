@@ -45,7 +45,7 @@ var DMRE = function(mgr, is_full_control){
     this.PIVOT_FOR_START_GETTING_NEW_DMS = 4;
 }
 
-DMRE.protoentity._getUrlParam = function(name){
+DMRE.prototype._getUrlParam = function(name){
     var _reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
     var _target = window.location.search.substr(1).match(_reg);
     // if(_target != null) return unescape(_target[2]);
@@ -53,7 +53,7 @@ DMRE.protoentity._getUrlParam = function(name){
     return false;
 }
 
-DMRE.protoentity._init = function(){
+DMRE.prototype._init = function(){
     var that = this;
     this.dmWrap = Zepto('#dm');
     this.dmWrapHeight = Zepto('#dm').height();
@@ -68,7 +68,7 @@ DMRE.protoentity._init = function(){
     }
     this._isDown = this._getUrlParam('down');
     Zepto(this.dmWrap).empty();
-    entityof this.is_full_control == 'boolean' && this.is_full_control ? Zepto(this.dmSwitch).css('display', 'none') : Zepto(this.dmSwitch).css('display', 'block');
+    typeof this.is_full_control == 'boolean' && this.is_full_control ? Zepto(this.dmSwitch).css('display', 'none') : Zepto(this.dmSwitch).css('display', 'block');
     if(window.localStorage && !localStorage.dmState){
         localStorage.dmState = 'on'; // 初始化弹幕状态，默认打开，关闭为off
         this.manager.emit('dm_on');
@@ -114,11 +114,11 @@ DMRE.protoentity._init = function(){
     }
 }
 
-DMRE.protoentity.log = function(text){
+DMRE.prototype.log = function(text){
     jlog('[DMRE] ' + text);
 }
 
-DMRE.protoentity._cutStr = function(str, len){
+DMRE.prototype._cutStr = function(str, len){
     var str_length = 0;
     var str_len = 0;
     str_cut = new String();
@@ -140,7 +140,7 @@ DMRE.protoentity._cutStr = function(str, len){
     }
 }
 
-DMRE.protoentity._getDM = function(){
+DMRE.prototype._getDM = function(){
     var obj = this.manager.readSync();
     if(!obj){
         this.log('get_dm, get null value');
@@ -159,7 +159,7 @@ DMRE.protoentity._getDM = function(){
     return dm;
 }
 
-DMRE.protoentity._cutStr = function(str, len){
+DMRE.prototype._cutStr = function(str, len){
     var str_length = 0;
     var str_len = 0;
     str_cut = new String();
@@ -181,12 +181,12 @@ DMRE.protoentity._cutStr = function(str, len){
     }
 }
 
-DMRE.protoentity._renderDM = function(dm){
+DMRE.prototype._renderDM = function(dm){
     if(!dm){
         return null;
     }
     var html = [];
-    if(dm.entity && dm.entity == 'realtime'){ //是否为实时
+    if(dm.type && dm.type == 'realtime'){ //是否为实时
         html.push('<div onclick=\'ga("send", "event", "dm", "click", "dm-item")\' class="dm-item new" style="top: ' + this.dmWrapHeight + 'px; opacity: ' + this.itemOpacity + '">');
     }else{
         html.push('<a data-id="'+dm.id+'" data-nickname="'+dm.nickname+'" class="dm-item" style="top: ' + this.dmWrapHeight + 'px; opacity: ' + this.itemOpacity + '" tapmode="">');
@@ -207,7 +207,7 @@ DMRE.protoentity._renderDM = function(dm){
     return html.join('');
 }
 
-DMRE.protoentity._load = function(){
+DMRE.prototype._load = function(){
     var _html = this._renderDM(this._getDM());
     if(_html != null){
         return _html;
@@ -216,7 +216,7 @@ DMRE.protoentity._load = function(){
     }
 }
 
-DMRE.protoentity._start = function(){
+DMRE.prototype._start = function(){
     if(localStorage.dmState === 'off'){
         return;
     }
@@ -238,7 +238,7 @@ DMRE.protoentity._start = function(){
     // }
 }
 
-DMRE.protoentity._pause = function(){
+DMRE.prototype._pause = function(){
     clearTimeout(this.timer);
     // if(/android/i.test(this._ua)){
         // Zepto(this.dmSwitchIcon).css('background-position', '0 0');
@@ -247,7 +247,7 @@ DMRE.protoentity._pause = function(){
     // }
 }
 
-DMRE.protoentity._close = function(){
+DMRE.prototype._close = function(){
     clearTimeout(this.timer);
     var dmWrap = Zepto(this.dmWrap);
     dmWrap.animate({ 'opacity': 0 }, this.ANIM_TIME, 'ease-out', function(){
@@ -263,7 +263,7 @@ DMRE.protoentity._close = function(){
     this.manager.emit('dm_off');
 }
 
-DMRE.protoentity._open = function(){
+DMRE.prototype._open = function(){
     clearTimeout(this.timer);
     var that = this,
         dmWrap = Zepto(this.dmWrap);
@@ -281,11 +281,11 @@ DMRE.protoentity._open = function(){
     this.manager.emit('dm_on');
 }
 
-DMRE.protoentity._getTranslateY = function(item){
+DMRE.prototype._getTranslateY = function(item){
     return parseInt(Zepto(item).css('-webkit-transform').match(/\-?[0-9]+/g)[0]);
 }
 
-DMRE.protoentity._anmite = function(isEnd){
+DMRE.prototype._anmite = function(isEnd){
     var that = this;
     var dmItems = Zepto(this.dmWrap).find(this.dmItemClass);
     var newItemHeight = Zepto(dmItems).last().height();

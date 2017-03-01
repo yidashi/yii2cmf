@@ -22,12 +22,12 @@ var DanmuManager = function(opt) {
   this.last_dm_ids = {};
 };
 
-DanmuManager.protoentity.push = function(dm) {
+DanmuManager.prototype.push = function(dm) {
   if(!dm){
     return this.log('push, NULL data pushed');
   }
   dm.avatar = dm.avatar || '../image/default/avatar.png';
-  dm.entity = 'realtime';
+  dm.type = 'realtime';
   this.q.unshift(dm);
   this.log('EVENT push_fired EMITTED:' + DM_ToString.call(dm));
 };
@@ -35,7 +35,7 @@ DanmuManager.protoentity.push = function(dm) {
 /**
  * 取出一条需要显示的数据
  */
-DanmuManager.protoentity.read = function(cb) {
+DanmuManager.prototype.read = function(cb) {
   //始终返回队列顶部数据
   var dm = this.q.shift();
   //检查队列长度以判断是否需要拉取新的弹幕列表
@@ -58,7 +58,7 @@ DanmuManager.protoentity.read = function(cb) {
   }
 }
 
-DanmuManager.protoentity.optimizeImg = function(url){
+DanmuManager.prototype.optimizeImg = function(url){
   if(url && url.search('qzapp.qlogo.cn/') > 0){ // QQ avatar
     url = url.replace(/\/100$/,'\/30');
   }
@@ -71,7 +71,7 @@ DanmuManager.protoentity.optimizeImg = function(url){
 /**
  * 取出一条需要显示的数据
  */
-DanmuManager.protoentity.readSync = function() {
+DanmuManager.prototype.readSync = function() {
   //始终返回队列顶部数据
   var dm = this.q.shift();
   //检查队列长度以判断是否需要拉取新的弹幕列表
@@ -92,7 +92,7 @@ DanmuManager.protoentity.readSync = function() {
 }
 
 var kw = [/兼职/,/淘宝/,/扣扣/,/结算/,/结算/,/加Q/,/天猫/,/傔职/,/掏宝/,/在线客服/,/诚聘/,/贝兼/,/间职/,/空余时间/,/日結/,/加q/,/蒹职/,/上班族/];
-DanmuManager.protoentity.filterContent = function(str){
+DanmuManager.prototype.filterContent = function(str){
   for(var len = kw.length, i=0; i< len; i++){
     if(str.match(kw[i])){
       return "笑Cry！";
@@ -102,7 +102,7 @@ DanmuManager.protoentity.filterContent = function(str){
   return str;
 };
 
-DanmuManager.protoentity.get_current_pos = function(){
+DanmuManager.prototype.get_current_pos = function(){
   var _tmp = parseInt($(document).scrollTop() / $(document).height() * 100, 10);
   if(_tmp < 0){
     _tmp = 0;
@@ -110,7 +110,7 @@ DanmuManager.protoentity.get_current_pos = function(){
   return _tmp;
 };
 
-DanmuManager.protoentity.get_pos_section = function(_tmp_pos){
+DanmuManager.prototype.get_pos_section = function(_tmp_pos){
   _tmp_pos = _tmp_pos || this.get_current_pos();
   var _pos = 0;
   for(var i=0, len=this.pos_sections.length; i < len; i++){
@@ -124,7 +124,7 @@ DanmuManager.protoentity.get_pos_section = function(_tmp_pos){
   return _pos < 1 ? 1 : _pos;
 };
 
-DanmuManager.protoentity.prepare_pos_section = function(pos_arr){
+DanmuManager.prototype.prepare_pos_section = function(pos_arr){
   // 不重复设置值
   if(this.pos_sections && this.pos_sections.length > 0){
     return;
@@ -139,7 +139,7 @@ DanmuManager.protoentity.prepare_pos_section = function(pos_arr){
 /**
  * 向服务器端获取列表数据
  */
-DanmuManager.protoentity.get_list = function() {
+DanmuManager.prototype.get_list = function() {
   // 如果ajax正在执行，直接跳过
   if(this.is_fetching){
     return this.log('get_list, is_fetching=true');
@@ -183,9 +183,9 @@ DanmuManager.protoentity.get_list = function() {
   jlog(post_data);
   $.ajax({
     url : that.danmu_list_url,
-    dataentity : 'json',
+    dataType : 'json',
     data: post_data,
-    entity: 'post',
+    type: 'post',
     success:function(data) {
       that.is_fetching = false;
       if(!data){
@@ -215,7 +215,7 @@ DanmuManager.protoentity.get_list = function() {
   that.pos_last_time = that.pos_current;
 };
 
-DanmuManager.protoentity.transform = function(data, curr_section){
+DanmuManager.prototype.transform = function(data, curr_section){
   var arr = data.list || [];
   if(arr){
     var dm = arr[arr.length - 1];
@@ -226,7 +226,7 @@ DanmuManager.protoentity.transform = function(data, curr_section){
   return arr;
 };
 
-DanmuManager.protoentity.append_data = function(data) {
+DanmuManager.prototype.append_data = function(data) {
   this.log('append_data, data.length=' + (!data ? 'null' : data.length));
   this.is_fetching = false;
   if(data && data.length > 0){
@@ -238,6 +238,6 @@ DanmuManager.protoentity.append_data = function(data) {
   }
 };
 
-DanmuManager.protoentity.log = function(text) {
+DanmuManager.prototype.log = function(text) {
   jlog('[DanmuManager] ' + text);
 };

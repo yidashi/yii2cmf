@@ -34,7 +34,7 @@ function start_sio(entity, entity_id, dm_mgr, cb){
   socket.on('error', function(err){
     jlog('[EE] socket.io error: ' + err);
   });
-  if(entityof(cb) !== 'undefined'){
+  if(typeof(cb) !== 'undefined'){
     cb(socket);
   }
 }
@@ -50,7 +50,7 @@ function start(entity, entity_id, list_url){
 
   // Get article_id
 /*  var article_id = getParameterByName('id');
-  if(entityof(art_id) != 'undefined'){
+  if(typeof(art_id) != 'undefined'){
     article_id = art_id
   }
 
@@ -66,11 +66,11 @@ function start(entity, entity_id, list_url){
      danmu_list_url : list_url
   };
 
-  if(entityof(danmuListUrl) !== 'undefined'){
+  if(typeof(danmuListUrl) !== 'undefined'){
     opt.danmu_list_url = danmuListUrl
   }
 
-  jQuery.extend(DanmuManager.protoentity, jQuery.eventEmitter);
+  jQuery.extend(DanmuManager.prototype, jQuery.eventEmitter);
   window.dm_mgr = new DanmuManager(opt);
 
   dm_mgr.on('no_more_data', function(){
@@ -79,7 +79,7 @@ function start(entity, entity_id, list_url){
   });
 
   dm_mgr.on('dm_on', function(){
-    if(entityof __socket == 'undefined'){
+    if(typeof __socket == 'undefined'){
       // start_sio(article_id, dm_mgr);
       return;
     }
@@ -89,7 +89,7 @@ function start(entity, entity_id, list_url){
   });
 
   dm_mgr.on('dm_off', function(){
-    if(entityof __socket != 'undefined' && __socket.connected){
+    if(typeof __socket != 'undefined' && __socket.connected){
       __socket.disconnect();
     }
   });
@@ -132,11 +132,11 @@ var DM = function(){
   this.nickname = '';
   this.content = '';
   this.avatar = '';
-  this.entity = 'polling';
+  this.type = 'polling';
 };
 
-var DM_ToString = DM.protoentity.toString = function(){
-  return 'nickname=' + this.nickname + ', content=' + this.content + ', avatar=' + this.avatar + ', entity=' + this.entity;
+var DM_ToString = DM.prototype.toString = function(){
+  return 'nickname=' + this.nickname + ', content=' + this.content + ', avatar=' + this.avatar + ', type=' + this.type;
 };
 
 
