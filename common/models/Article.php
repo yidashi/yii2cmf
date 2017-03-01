@@ -12,6 +12,7 @@ use common\models\article\Base;
 use common\models\article\Exhibition;
 use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
+use common\modules\attachment\behaviors\UploadBehavior;
 use common\modules\user\behaviors\UserBehavior;
 use Yii;
 use yii\base\InvalidParamException;
@@ -65,7 +66,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['title', 'category_id'], 'required'],
             [['title'], 'trim'],
-            [['status', 'category_id', 'view', 'up', 'down', 'is_top', 'is_hot', 'is_best'], 'integer'],
+            [['status', 'category_id', 'view', 'is_top', 'is_hot', 'is_best'], 'integer'],
             ['published_at', 'default', 'value' => function(){
                 return date('Y-m-d H:i:s', time());
             }],
@@ -77,7 +78,7 @@ class Article extends \yii\db\ActiveRecord
             [['category_id'], 'setCategory'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
             [['title', 'category'], 'string', 'max' => 50],
-            [['cover', 'source'], 'string', 'max' => 255],
+            [['source'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
             ['module', 'string']
@@ -152,16 +153,20 @@ class Article extends \yii\db\ActiveRecord
             ArticleBehavior::className(),
             [
                 'class' => MetaBehavior::className(),
-                'type' => 'article'
+                'entity' => __CLASS__
             ],
             [
                 'class' => VoteBehavior::className(),
-                'type' => 'article'
+                'entity' => __CLASS__
             ],
-            ['class' => TagBehavior::className()],
+            TagBehavior::className(),
             [
                 'class' => CommentBehavior::className(),
-                'type' => 'article'
+                'entity' => __CLASS__
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'cover'
             ],
             UserBehavior::className()
         ];

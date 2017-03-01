@@ -16,10 +16,10 @@ use yii\helpers\Url;
 
 <div class="thumbnail">
     <a href="<?php if($model->book_link) {echo $model->book_link;}else {echo url(['view', 'id' => $model->id]);} ?>" <?php if($model->book_link){echo 'target="_blank"';} ?>>
-        <img alt="<?= Html::encode($model->book_name) ?>" src="<?= $model->getBookCover() ?>"/>
+        <img alt="<?= Html::encode($model->book_name) ?>" src="<?= $model->book_cover ?>"/>
         <div class="caption">
             <h3><?= Html::encode($model->book_name) ?></h3>
-            <p>阅读/<?= $model->view ?> 评论/<?= $model->getAllComment() ?></p>
+            <p>阅读/<?= $model->view ?> 评论/<?= $model->getAllCommentTotal() ?></p>
         </div>
     </a>
 </div>

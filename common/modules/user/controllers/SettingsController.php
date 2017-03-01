@@ -9,7 +9,7 @@
 namespace common\modules\user\controllers;
 
 
-use common\models\Attachment;
+use common\modules\attachment\models\Attachment;
 use common\modules\user\models\Profile;
 use Yii;
 use yii\filters\AccessControl;
@@ -55,16 +55,13 @@ class SettingsController extends Controller
             $y = Yii::$app->getRequest()->post("y");
             $w = Yii::$app->getRequest()->post("w");
             $h = Yii::$app->getRequest()->post("h");
+            /**
+             * @var Attachment $attachment
+             */
             $attachment = Attachment::findOne($avatar);
-            $original= $attachment->filePath;
-            $fileInfo = pathinfo($original);
-            $target = $fileInfo['dirname'] . '/' . $fileInfo['filename'] . '_avatar.' . $fileInfo['extension'];
-            Image::crop($original, $w, $h, [
-                $x,
-                $y
-            ])->save($target);
-            $targetUrl = Yii::$app->storage->path2url($target);
-            $user->saveAvatar($targetUrl);
+
+            $avatarAttachment = $attachment->makeCropStorage($w, $h, $x, $y);
+            $user->saveAvatar($avatarAttachment);
 
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             $result = [

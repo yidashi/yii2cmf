@@ -10,14 +10,15 @@ namespace common\behaviors;
 
 
 use common\models\Meta;
+use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 class MetaBehavior extends Behavior
 {
-    public $type;
-
+    use EntityTrait;
+    
     public function events()
     {
         return [
@@ -48,8 +49,8 @@ class MetaBehavior extends Behavior
         $model = $this->owner->meta;
         if ($model == null) {
             $model = new Meta([
-                'type' => $this->getType(),
-                'type_id' => $this->owner->getPrimaryKey()
+                'entity' => $this->getEntity(),
+                'entity_id' => $this->getEntityId()
             ]);
         }
         return $model;
@@ -57,19 +58,10 @@ class MetaBehavior extends Behavior
     public function getMeta()
     {
         return $this->owner->hasOne(Meta::className(), [
-            'type_id' => $this->owner->primaryKey()[0]
+            'entity_id' => $this->owner->primaryKey()[0]
         ])->where([
-            "type" => $this->getType()
+            "entity" => $this->getEntity()
         ]);
-    }
-
-    public function getType()
-    {
-        if ($this->type == null) {
-            $this->type = $this->owner->className();
-        }
-
-        return ltrim($this->type,"\\");
     }
 
 }

@@ -11,8 +11,8 @@ use yii\helpers\Url;
 
 class DanmuWidget extends \yii\base\Widget
 {
-    public $type;
-    public $typeId;
+    public $entity;
+    public $entityId;
     public $listUrl = null;
     public function init()
     {
@@ -22,7 +22,7 @@ class DanmuWidget extends \yii\base\Widget
     public function run()
     {
         DanmuAsset::register($this->view);
-        $script = "initDm('{$this->type}', {$this->typeId}, '{$this->listUrl}');";
+        $script = "initDm('{$this->entity}', {$this->entityId}, '{$this->listUrl}');";
         $this->view->registerJs($script);
     }
 

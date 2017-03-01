@@ -1,0 +1,14 @@
+/*------------------------------------*\
+    #更新页面
+\*------------------------------------*/
+
+.attachment_image {
+    overflow: hidden;
+}
+
+.attachment_image img{
+	max-width:100%;
+	max-height:700px;
+}
+
+

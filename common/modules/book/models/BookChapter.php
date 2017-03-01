@@ -2,6 +2,7 @@
 
 namespace common\modules\book\models;
 
+use common\behaviors\CommentBehavior;
 use common\behaviors\PositionBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -65,6 +66,9 @@ class BookChapter extends \yii\db\ActiveRecord
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'sort',
                 'groupAttributes' => ['book_id', 'pid']
+            ],
+            [
+                'class' => CommentBehavior::className()
             ]
         ];
     }

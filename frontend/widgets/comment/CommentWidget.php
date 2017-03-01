@@ -16,8 +16,8 @@ use yii\data\ActiveDataProvider;
 
 class CommentWidget extends Widget
 {
-    public $type = 'article';
-    public $type_id;
+    public $entity = 'common\models\article';
+    public $entityId;
     /**
      * @var \yii\db\ActiveRecord
      */
@@ -29,8 +29,8 @@ class CommentWidget extends Widget
     {
         parent::init();
         if (isset($this->model)) {
-            $this->type = $this->model->getType();
-            $this->type_id = $this->model->getPrimaryKey();
+            $this->entity = $this->model->getEntity();
+            $this->entityId = $this->model->getEntityId();
         }
     }
     public function run()
@@ -38,7 +38,7 @@ class CommentWidget extends Widget
         if (!isset($this->model) || $this->model->getCommentEnabled()) {
             // 评论列表
             $dataProvider = new ActiveDataProvider([
-                'query' => Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id, 'status' => 1, 'parent_id' => 0]),
+                'query' => Comment::find()->andWhere(['entity' => $this->entity, 'entity_id' => $this->entityId, 'status' => 1, 'parent_id' => 0]),
                 'pagination' => [
                     'pageSize' => 10,
                 ],
@@ -52,16 +52,16 @@ class CommentWidget extends Widget
             if (isset($this->model)) {
                 $commentTotal = $this->model->getCommentTotal();
             } else {
-                $commentTotal = Comment::activeCount($this->type, $this->type_id);
+                $commentTotal = Comment::activeCount($this->entity, $this->entityId);
             }
             // 评论框
             $commentModel = new Comment();
-            $commentModel->type = $this->type;
-            $commentModel->type_id = $this->type_id;
+            $commentModel->entity = $this->entity;
+            $commentModel->entity_id = $this->entityId;
 
             return $this->render('index', [
-                'type' => $this->type,
-                'typeId' => $this->type_id,
+                'entity' => $this->entity,
+                'entityId' => $this->entityId,
                 'commentTotal' => $commentTotal,
                 'commentModel' => $commentModel,
                 'dataProvider' => $dataProvider,

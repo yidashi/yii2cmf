@@ -98,34 +98,12 @@ class ArticleController extends Controller
 
         // sidebar
         $hots = Article::hots($model->category_id);
-        // 评论列表
-        $commentDataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->andWhere(['type' => 'article', 'type_id' => $id, 'parent_id' => 0]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'is_top' => SORT_DESC,
-                    'id' => SORT_DESC
-                ]
-            ]
-        ]);
-        $commentModels = $commentDataProvider->getModels();
-        $pages = $commentDataProvider->getPagination();
-        // 评论框
-        $commentModel = new Comment();
-        $commentModel->type = 'article';
         // 上下一篇
         $next = Article::find()->where(['>', 'id', $id])->published()->one();
         $prev = Article::find()->where(['<', 'id', $id])->published()->orderBy('id desc')->one();
         return $this->render($model->module . '/view', [
             'model' => $model,
-            'commentModel' => $commentModel,
-            'commentModels' => $commentModels,
-            'pages' => $pages,
             'hots' => $hots,
-            'commentDataProvider' => $commentDataProvider,
             'next' => $next,
             'prev' => $prev
         ]);
