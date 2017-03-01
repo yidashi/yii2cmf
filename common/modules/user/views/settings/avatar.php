@@ -1,6 +1,6 @@
 <?php
 
-use common\widgets\upload\AvatarUploadAsset;
+use common\modules\attachment\widgets\AvatarUploadAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 AvatarUploadAsset::register($this);
 
 $this->registerJs("var uploadUrl='" . Url::to([
-    "/upload/avatar-upload",
+    "/attachment/upload/avatar-upload",
     'fileparam' => "avatar"
 ]) . "'", View::POS_HEAD);
 
