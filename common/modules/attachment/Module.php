@@ -15,20 +15,31 @@ class Module extends \yii\base\Module implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        $app->set('storage', [
-            'class' => 'common\\modules\\attachment\\components\\Storage',
+        $storage = [
+            'class' => 'common\modules\attachment\components\Storage',
             'fs' => [
-//                'class' => 'creocoder\flysystem\LocalFilesystem',
-//                'path' => '@storagePath/upload',
-                'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',
-                'access' => 'EMBSLKU4SR4O8bHVteOY4F4Od2fYaty4aYY3PsR9',
-                'secret' => 'L2DdJkn3A8scKa3wbaktz6vU-tj8H9oLnZhU7yCn',
-                'bucket' => 'siyuan',
+                'class' => 'creocoder\flysystem\LocalFilesystem',
+                'path' => '@storagePath/upload',
             ],
-            'baseUrl' => 'http://image.51siyuan.cn',
-            'imageProcessor' => [
-                'class' => 'common\\modules\\attachment\\components\\image\\Qiniu',
-            ]
-        ]);
+            'baseUrl' => '@storagePath/upload',
+            'imageProcessor' => 'common\modules\attachment\components\image\Local'
+        ];
+        if (isset($this->params['filesystem_type'])) {
+            switch ($this->params['filesystem_type']) {
+                case 'qiniu':
+                    $storage['fs'] = [
+                        'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',
+                        'access' => $this->params['qiniu_access_key'],
+                        'secret' => $this->params['qiniu_access_secret'],
+                        'bucket' => $this->params['qiniu_bucket'],
+                    ];
+                    $storage['baseUrl'] = 'http://image.51siyuan.cn';
+                    $storage['imageProcessor'] = [
+                        'class' => 'common\\modules\\attachment\\components\\image\\Qiniu'
+                    ];
+                    break;
+            }
+        }
+        $app->set('storage', $storage);
     }
 }

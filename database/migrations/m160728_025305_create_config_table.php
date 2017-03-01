@@ -36,7 +36,7 @@ class m160728_025305_create_config_table extends Migration
 LOCK TABLES {{%config}} WRITE;
 /*!40000 ALTER TABLE {{%config}} DISABLE KEYS */;
 INSERT INTO {{%config}} VALUES (1,'CONFIG_TYPE_LIST','text=>字符\r\narray=>数组\r\npassword=>密码\r\nimage=>图片\r\ntextarea=>多行字符\r\nselect=>下拉框\r\nradio=>单选框\r\ncheckbox=>多选框\r\neditor=>富文本编辑器','','配置类型列表','array',0,1461937892,'system'),
-(2,'CONFIG_GROUP','site=>网站\r\nsystem=>系统\r\nemail=>邮箱\r\nwechat=>微信','','配置分组','array',1468405444,1468421137,'system'),
+(2,'CONFIG_GROUP','site=>网站\r\nsystem=>系统\r\nwechat=>微信','','配置分组','array',1468405444,1468421137,'system'),
 (3,'SITE_NAME','yii2cmf','','网站名称','text',0,1461937892,'site'),
 (4,'SITE_ICP','','','域名备案号','text',0,1461937892,'site'),
 (5,'SITE_LOGO','','','网站LOGO','image',0,1461937892,'site'),
