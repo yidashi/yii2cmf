@@ -38,7 +38,6 @@ class m160726_093217_create_user_table extends Migration
             'user_id' => Schema::TYPE_PK,
             'money' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT 0",
             'signature' => Schema::TYPE_STRING . "(100) NOT NULL DEFAULT ''",
-            'avatar' => Schema::TYPE_STRING . "(255) NOT NULL DEFAULT ''",
             'gender' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'qq' => $this->string(20),
             'phone' => $this->string(20),

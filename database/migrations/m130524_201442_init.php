@@ -29,7 +29,6 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'status' => Schema::TYPE_BOOLEAN . " NOT NULL COMMENT '状态'",
-            'cover' => Schema::TYPE_STRING . "(255) NULL COMMENT '封面'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'is_top' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否置顶'),
             'is_hot' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否热门'),

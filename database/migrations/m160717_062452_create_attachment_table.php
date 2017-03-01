@@ -22,7 +22,7 @@ class m160717_062452_create_attachment_table extends Migration
             'name' => $this->string(255),
             'title' => $this->string(255),
             'description' => $this->string(255)->null(),
-            'url' => $this->string(255)->notNull(),
+            'path' => $this->string(255)->notNull(),
             'hash' => $this->string(64)->notNull(),
             'size' => $this->integer(11),
             'type' => $this->string(255),
