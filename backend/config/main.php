@@ -9,9 +9,6 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'controllerMap'=>[
-        'upload' => \common\actions\UploadController::className()
-    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrfBackend'

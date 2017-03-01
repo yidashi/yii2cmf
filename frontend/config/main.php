@@ -9,9 +9,6 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'frontend\controllers',
-    'controllerMap' => [
-        'upload' => \common\actions\UploadController::className()
-    ],
     'components' => [
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
