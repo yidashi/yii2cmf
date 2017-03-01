@@ -10,23 +10,14 @@ namespace common\components\flysystem;
 
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
-use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
-use Qiniu\Auth;
-use Qiniu\Storage\UploadManager;
-use Qiniu\Storage\BucketManager;
+use OSS\OssClient;
 
-class QiniuAdapter extends AbstractAdapter
+class AliyuncsAdapter extends AbstractAdapter
 {
     use NotSupportingVisibilityTrait;
-    /**
-     * @var \Qiniu\Storage\UploadManager
-     */
-    protected $uploadManager;
-    /**
-     * @var \Qiniu\Storage\BucketManager
-     */
-    protected $bucketManager;
+
+    protected $ossClient;
     /**
      * @var string
      */
@@ -34,32 +25,21 @@ class QiniuAdapter extends AbstractAdapter
     /**
      * @var string
      */
-    protected $domain;
-    /**
-     * @var string
-     */
     protected $token;
     /**
      * Constructor.
      */
-    public function __construct($ak, $sk, $bucket)
+    public function __construct($ak, $sk, $endpoint, $isCName, $bucket)
     {
-        $auth = new Auth($ak, $sk);
+        $this->ossClient = new OssClient($ak, $sk, $endpoint, $isCName);
         $this->bucket = $bucket;
-        $this->token = $auth->uploadToken($bucket);
-        $this->uploadManager = new UploadManager();
-        $this->bucketManager = new BucketManager($auth);
     }
     /**
      * {@inheritdoc}
      */
     public function write($path, $contents, Config $config)
     {
-        list($ret, $error) = $this->uploadManager->put($this->token, $path, $contents);
-        if ($error) {
-            return false;
-        }
-        return $ret;
+        return $this->ossClient->putObject($this->bucket, $path, $contents);
     }
     /**
      * {@inheritdoc}
@@ -90,12 +70,11 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function rename($path, $newpath)
     {
-        $r = $this->bucketManager->rename($this->bucket, $path, $newpath);
-        return is_null($r);
+        return false;
     }
     public function copy($path, $newpath)
     {
-        $r = $this->bucketManager->copy($this->bucket, $path, $this->bucket, $newpath);
+        $r = $this->ossClient->copyObject($this->bucket, $path, $this->bucket, $newpath);
         return is_null($r);
     }
     /**
@@ -103,7 +82,8 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function delete($path)
     {
-        return $this->bucketManager->delete($this->bucket, $path);
+        $r = $this->ossClient->deleteObject($this->bucket, $path);
+        return is_null($r);
     }
     /**
      * {@inheritdoc}
@@ -124,8 +104,7 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function has($path)
     {
-        $r = $this->bucketManager->stat($this->bucket, $path);
-        return is_array($r[0]);
+        return $this->ossClient->doesObjectExist($this->bucket, $path);
     }
     /**
      * {@inheritdoc}
@@ -148,7 +127,7 @@ class QiniuAdapter extends AbstractAdapter
     public function listContents($directory = '', $recursive = false)
     {
         $list = [];
-        $r = $this->bucketManager->listFiles($this->bucket, $directory);
+        $r = $this->ossClient->listObjects($this->bucket, $directory);
         foreach ($r[0] as $v) {
             $list[] = $this->normalizeFileInfo($v);
         }
@@ -159,9 +138,9 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function getMetadata($path)
     {
-        $r = $this->bucketManager->stat($this->bucket, $path);
-        $r[0]['key'] = $path;
-        return $this->normalizeFileInfo($r[0]);
+        $r = $this->ossClient->getObjectMeta($this->bucket, $path);
+        $r['key'] = $path;
+        return $this->normalizeFileInfo($r);
     }
     /**
      * {@inheritdoc}
@@ -175,8 +154,8 @@ class QiniuAdapter extends AbstractAdapter
      */
     public function getMimetype($path)
     {
-        $r = $this->bucketManager->stat($this->bucket, $path);
-        return ['mimetype' => $r[0]['mimeType']];
+        $r = $this->ossClient->getObjectMeta($this->bucket, $path);
+        return ['mimetype' => $r['content-type']];
     }
     /**
      * {@inheritdoc}
@@ -190,9 +169,8 @@ class QiniuAdapter extends AbstractAdapter
         return array(
             'type' => 'file',
             'path' => $filestat['key'],
-            'timestamp' => floor($filestat['putTime']/10000000),
-            'size' => $filestat['fsize'],
+            'timestamp' => $filestat['last-modified'],
+            'size' => $filestat['content-length'],
         );
     }
-
 }

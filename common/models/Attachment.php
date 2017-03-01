@@ -78,6 +78,16 @@ class Attachment extends \yii\db\ActiveRecord
         ];
     }
 
+<<<<<<< HEAD
+=======
+    public function fields()
+    {
+        return array_merge(parent::fields(), [
+            'url'
+        ]);
+    }
+
+>>>>>>> b021cab5636315501f7b20f02149d473ee99ee70
     public function getUrl()
     {
         return Yii::$app->storage->getUrl($this->path);
@@ -85,9 +95,16 @@ class Attachment extends \yii\db\ActiveRecord
 
     public function getAbsolutePath()
     {
+<<<<<<< HEAD
         return Yii::$app->storage->fs->getAdapter()->applyPathPrefix($this->path);
+=======
+        return Yii::$app->storage->getPath($this->path);
+>>>>>>> b021cab5636315501f7b20f02149d473ee99ee70
     }
 
+    /**
+     * @return \League\Flysystem\Handler
+     */
     public function getFile()
     {
         return Yii::$app->storage->fs->get($this->path);
@@ -97,8 +114,6 @@ class Attachment extends \yii\db\ActiveRecord
     {
         $width = (int) $width;
         $height = (int) $height;
-
-        $options = $this->getDefaultThumbOptions($options);
 
         $thumbFile = $this->getThumbFilename($width, $height, $options);
         $thumbPath = pathinfo($this->path, PATHINFO_DIRNAME) . $thumbFile;
@@ -178,8 +193,14 @@ class Attachment extends \yii\db\ActiveRecord
     {
         parent::afterDelete();
         // 文件删了
+<<<<<<< HEAD
         $filePath = $this->getAbsolutePath();
         @unlink($filePath);
+=======
+        if (Yii::$app->storage->fs->has($this->path)) {
+            Yii::$app->storage->fs->delete($this->path);
+        }
+>>>>>>> b021cab5636315501f7b20f02149d473ee99ee70
     }
 
 }

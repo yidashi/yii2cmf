@@ -1,9 +1,23 @@
 <?php
 
-namespace backend\models;
 
+/**
+ * HassCMS (http://www.hassium.org/)
+ *
+ * @link http://github.com/hasscms for the canonical source repository
+ * @copyright Copyright (c) 2016-2099 Hassium Software LLC.
+ * @license http://opensource.org/licenses/gpl-license.php GNU Public License
+ */
+namespace backend\models;
 use common\models\Attachment;
 
+/**
+ *
+ * @package hass\package_name
+ * @author zhepama <zhepama@gmail.com>
+ * @since 0.1.0
+ *
+ */
 class MediaItem
 {
     const TYPE_FILE = 'file';
@@ -72,8 +86,7 @@ class MediaItem
      */
     public static function createFromAttachment($attachment)
     {
-        $file = $attachment->getFile();
-        $item = new static($attachment->getAbsolutePath(),$file->getSize(),$file->getTimestamp(),$file->getType(),$attachment->url);
+        $item = new static($attachment->path,$attachment->size, $attachment->updated_at, 'file', $attachment->url);
         return $item;
     }
 
