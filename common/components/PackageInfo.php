@@ -170,11 +170,6 @@ abstract class PackageInfo extends Object
         return $this->getModel()->install === true;
     }
 
-    public function canInstall()
-    {
-        return $this->getModel()->install ===  false;
-    }
-
     public function canClose()
     {
         return $this->getModel()->is_core == false;
