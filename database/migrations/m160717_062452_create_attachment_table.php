@@ -36,6 +36,15 @@ class m160717_062452_create_attachment_table extends Migration
             'entity_id' => $this->integer(11)->notNull(),
             'attribute' => $this->string(20)->notNull()
         ], $tableOptions);
+        $this->insert('{{%module}}', [
+            'id' => 'attachment',
+            'name' => '附件',
+            'bootstrap' => 'app-frontend|app-backend',
+            'status' => 1,
+            'type' => 1,
+            'created_at' => time(),
+            'updated_at' => time()
+        ]);
     }
 
     /**
