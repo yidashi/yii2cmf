@@ -234,7 +234,7 @@ class Attachment extends \yii\db\ActiveRecord
         $attachment = static::findByHash($hash);
         if (empty($attachment)) {
             $fileName = $hash . '.' . $this->extension;
-            $path = trim(pathinfo($this->path, PATHINFO_DIRNAME), '');
+            $path = trim(pathinfo($this->path, PATHINFO_DIRNAME), '.');
             $filePath = ($path ? ($path . '/') : '') . $fileName;
             if (Yii::$app->storage->upload($filePath, $url)) {
                 $attachment = new static();
