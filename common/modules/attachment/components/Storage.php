@@ -32,7 +32,7 @@ class Storage extends Component
         parent::init();
         $this->baseUrl = \Yii::getAlias($this->baseUrl);
         $this->fs = \Yii::createObject($this->fs);
-        $this->imageProcessor = \Yii::createObject(ArrayHelper::merge(['baseUrl' => $this->baseUrl], $this->imageProcessor));
+        $this->imageProcessor = \Yii::createObject($this->imageProcessor, ['baseUrl' => $this->baseUrl]);
     }
 
     public function getPath($url)

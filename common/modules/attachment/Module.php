@@ -21,7 +21,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'class' => 'creocoder\flysystem\LocalFilesystem',
                 'path' => '@storagePath/upload',
             ],
-            'baseUrl' => '@storagePath/upload',
+            'baseUrl' => '@storageUrl/upload',
             'imageProcessor' => 'common\modules\attachment\components\image\Local'
         ];
         if (isset($this->params['filesystem_type'])) {
@@ -33,7 +33,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                         'secret' => $this->params['qiniu_access_secret'],
                         'bucket' => $this->params['qiniu_bucket'],
                     ];
-                    $storage['baseUrl'] = 'http://image.51siyuan.cn';
+                    $storage['baseUrl'] = $this->params['qiniu_domain'];
                     $storage['imageProcessor'] = [
                         'class' => 'common\\modules\\attachment\\components\\image\\Qiniu'
                     ];
