@@ -80,7 +80,8 @@ function creatIframe(href,titleName){
     showBox.find('iframe').load(function(){
         if (!titleName) {
             var title = $('title', $(this.contentWindow.document)).text();
-            $li.find('span').text(title);
+            var index = showBox.index();
+            show_nav.find('li').eq(index).find('span').text(title);
         }
         tabNavallwidth();
         showBox.find('.loading').hide();
@@ -117,15 +118,15 @@ function removeIframeAll(){
 }
 
 $(function(){
-	/*选项卡导航*/
+    /*选项卡导航*/
     $(".main-sidebar").on("click",".sidebar a[href!='#']", function(){
         admin_tab(this);
         return false;
     });
     $("a[target='_blank']").on("click", function(){
-    	if ($(this).data('not-iframe')) {
-    		return;
-		}
+        if ($(this).data('not-iframe')) {
+            return;
+        }
         admin_tab(this);
         return false;
     });
