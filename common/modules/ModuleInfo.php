@@ -13,6 +13,7 @@ use common\components\PackageInfo;
 
 class ModuleInfo extends PackageInfo
 {
+    public $isCore = 0;
     public function getModuleClass()
     {
         return $this->getNamespace() . '\\' . 'Module';

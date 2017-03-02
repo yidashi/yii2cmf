@@ -11,6 +11,8 @@ namespace common\modules\attachment;
 
 class ModuleInfo extends \common\modules\ModuleInfo
 {
+    public $isCore = 1;
+
     public $info = [
         'author' => '易大师',
         'bootstrap' => 'app-frontend|app-backend',

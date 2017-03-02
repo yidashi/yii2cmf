@@ -35,6 +35,9 @@ class ModuleManager extends PackageManager
 
     public function uninstall(ModuleInfo $module)
     {
+        if ($module->isCore) {
+            return false;
+        }
         $model = $module->getModel();
         return $model->delete();
     }
@@ -46,6 +49,9 @@ class ModuleManager extends PackageManager
     }
     public function close(ModuleInfo $module)
     {
+        if ($module->isCore) {
+            return false;
+        }
         $model = $module->getModel();
         $model->status = 0;
         return $model->save();

@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'version:text:版本',
                     'author:text:作者',
                     'open:boolean:是否启用',
-
+                    'isCore:boolean:是否核心',
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'template' => '{open} {close} {install} {uninstall} {config}',
@@ -40,6 +40,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'close' => function($url, $model, $key) {
+                                if ($model->isCore) {
+                                    return false;
+                                }
                                 if (!$model->install) {
                                     return false;
                                 }
@@ -63,6 +66,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]);
                             },
                             'uninstall' => function($url, $model, $key) {
+                                if ($model->isCore) {
+                                    return false;
+                                }
                                 if (!$model->install) {
                                     return false;
                                 }
