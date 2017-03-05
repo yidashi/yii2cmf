@@ -71,10 +71,10 @@ class EditorWidget extends InputWidget
         $defaultOptions = [
             'lang' => 'zh_cn',
             'minHeight' => 200,
-            'imageUpload' => Url::to(['/upload/redactor-image-upload']),
-            'imageManagerJson' => Url::to(['/upload/redactor-images-get']),
-            'fileManagerJson' => Url::to(['/upload/redactor-files-get']),
-            'fileUpload' => Url::to(['/upload/redactor-file-upload']),
+            'imageUpload' => Url::to(['/attachment/upload/redactor-image-upload']),
+            'imageManagerJson' => Url::to(['/attachment/upload/redactor-images-get']),
+            'fileManagerJson' => Url::to(['/attachment/upload/redactor-files-get']),
+            'fileUpload' => Url::to(['/attachment/upload/redactor-file-upload']),
             'plugins' => [
                 'clips',
                 'fullscreen',
