@@ -27,8 +27,8 @@ class m160717_062452_create_attachment_table extends Migration
             'size' => $this->integer(11),
             'type' => $this->string(255),
             'extension' => $this->string(255),
-            'created_at' => $this->integer(10),
-            'updated_at' => $this->integer(10)
+            'created_at' => $this->integer(10)->notNull(),
+            'updated_at' => $this->integer(10)->notNull()
         ], $tableOptions);
         $this->createTable('{{%attachment_index}}', [
             'attachment_id' => $this->integer(11)->notNull(),

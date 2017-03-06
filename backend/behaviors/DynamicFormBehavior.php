@@ -32,6 +32,7 @@ class DynamicFormBehavior extends Behavior
             'checkbox',
             'radio',
             'image',
+            'images',
             'editor',
             'date',
             'datetime',

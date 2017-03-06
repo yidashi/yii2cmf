@@ -25,7 +25,8 @@ class AppAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'common\assets\ModalAsset',
-        'common\assets\FontAwesomeAsset'
+        'common\assets\FontAwesomeAsset',
+        'common\assets\FancyboxAsset',
     ];
 
     /**

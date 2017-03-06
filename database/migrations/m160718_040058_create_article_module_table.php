@@ -33,6 +33,13 @@ class m160718_040058_create_article_module_table extends Migration
         $moduleColumn->defaultValue('base');// 默认普通文章
         $this->addColumn('{{%article}}', 'module', $moduleColumn);
         $this->addColumn('{{%category}}', 'module', $moduleColumn);
+        $this->createTable('{{%article_download}}', [
+            'id' => $this->integer(11)->unique(),
+            'content' => $this->text(),
+        ], $tableOptions);
+        $this->createTable('{{%article_photo}}', [
+            'id' => $this->integer(11)->unique(),
+        ], $tableOptions);
         $this->insert('{{%article_module}}', [
             'name' => 'base',
             'title' => '普通',
@@ -40,6 +47,14 @@ class m160718_040058_create_article_module_table extends Migration
         $this->insert('{{%article_module}}', [
             'name' => 'exhibition',
             'title' => '展会',
+        ]);
+        $this->insert('{{%article_module}}', [
+            'name' => 'download',
+            'title' => '下载',
+        ]);
+        $this->insert('{{%article_module}}', [
+            'name' => 'photo',
+            'title' => '相册',
         ]);
     }
 
@@ -50,6 +65,8 @@ class m160718_040058_create_article_module_table extends Migration
     {
         $this->dropTable('{{%article_module}}');
         $this->dropTable('{{%article_exhibition}}');
+        $this->dropTable('{{%article_download}}');
+        $this->dropTable('{{%article_photo}}');
         $this->dropColumn('{{%article}}', 'module');
         $this->dropColumn('{{%category}}', 'module');
     }

@@ -3,23 +3,24 @@
 namespace common\models\article;
 
 use common\modules\attachment\behaviors\UploadBehavior;
+use common\modules\attachment\models\Attachment;
 use Yii;
 use backend\behaviors\DynamicFormBehavior;
 
 /**
- * This is the model class for table "{{%article_download}}".
+ * This is the model class for table "{{%article_photo}}".
  *
  * @property integer $id
- * @property \common\modules\attachment\models\Attachment $attachment
+ * @property Attachment[] $photos
  */
-class Download extends \yii\db\ActiveRecord
+class Photo extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%article_download}}';
+        return '{{%article_photo}}';
     }
 
     /**
@@ -28,9 +29,8 @@ class Download extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'attachment'], 'required'],
+            [['id', 'photos'], 'required'],
             [['id'], 'integer'],
-            ['content', 'string']
         ];
     }
 
@@ -41,8 +41,7 @@ class Download extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'attachment' => '文件',
-            'content' => '内容',
+            'photos' => '图片',
         ];
     }
 
@@ -51,13 +50,13 @@ class Download extends \yii\db\ActiveRecord
         return [
             [
                 'class' => UploadBehavior::className(),
-                'attribute' => 'attachment'
+                'multiple' => true,
+                'attribute' => 'photos'
             ],
             [
                 'class' => DynamicFormBehavior::className(),
                 'formAttributes' => [
-                    'attachment' => 'file',
-                    'content' => 'textarea'
+                    'photos' => 'images',
                 ]
             ]
         ];

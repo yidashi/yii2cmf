@@ -9,6 +9,7 @@
 namespace common\widgets\dynamicInput;
 
 
+use common\modules\attachment\widgets\MultipleWidget;
 use common\modules\city\widgets\CityWidget;
 use common\widgets\EditorWidget;
 use common\modules\attachment\widgets\SingleWidget;
@@ -35,6 +36,7 @@ class DynamicInputWidget extends InputWidget
         'checkbox',
         'radio',
         'image',
+        'images',
         'editor',
         'date',
         'datetime',
@@ -106,6 +108,9 @@ class DynamicInputWidget extends InputWidget
                 break;
             case 'image': // 图片
                 return SingleWidget::widget(['name' => $this->name, 'value' => $this->value]);
+                break;
+            case 'images': // 图片
+                return MultipleWidget::widget(['name' => $this->name, 'value' => $this->value]);
                 break;
             case 'file': // 文件
                 return SingleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false]);
@@ -180,6 +185,9 @@ class DynamicInputWidget extends InputWidget
                 break;
             case 'image': // 图片
                 return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
+                break;
+            case 'images': // 图片
+                return MultipleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute]);
                 break;
             case 'file': // 文件
                 return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false]);

@@ -6,6 +6,22 @@ $(document).ajaxError(function(event,xhr,options,exc){
     $.modal.error(message);
 });
 $(function () {
+    $(".fancybox").fancybox({
+        prevEffect	: 'none',
+        nextEffect	: 'none',
+        helpers	: {
+            title	: {
+                type: 'float'
+            },
+            buttons	: {},
+            thumbs	: {
+                width	: 50,
+                height	: 50
+            }
+        }
+    });
+    $('[data-toggle=popover]').popover();
+    $('[data-toggle=tooltip]').tooltip();
     $("a[target='_blank']").on('click', function () {
         if (parent != window) {
             parent.admin_tab(this);

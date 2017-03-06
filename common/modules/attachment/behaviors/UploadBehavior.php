@@ -46,6 +46,16 @@ class UploadBehavior extends BaseAttachAttribute
         return $value;
     }
 
+    protected function setValue($value)
+    {
+        $value = array_filter($value, function ($val) {
+            if (empty($val)) {
+                return false;
+            }
+            return true;
+        });
+        $this->value = $value;
+    }
 
     public function getAttachments()
     {
