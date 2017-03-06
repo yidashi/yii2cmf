@@ -17,6 +17,6 @@ use yii\helpers\Url;
     </h4>
     <div class="media-action">
         <span class="views"><?= Html::icon('eye')?> 浏览 <?= $model->trueView?></span>
-        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $model->comment, ['article/view', 'id' => $model->id, '#' => 'comments'])?></span>
+        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $model->commentTotal, ['article/view', 'id' => $model->id, '#' => 'comments'])?></span>
     </div>
 </div>
