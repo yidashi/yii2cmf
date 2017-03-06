@@ -3,6 +3,7 @@
 namespace common\modules\config\models;
 
 use common\behaviors\CacheInvalidateBehavior;
+use common\modules\attachment\models\Attachment;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -33,8 +34,22 @@ class Config extends \yii\db\ActiveRecord
             [['name', 'description', 'type'], 'required'],
             [['name', 'group'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
+            ['value', 'filter', 'filter' => function ($val) {
+                if ($this->type == 'image') {
+                    return $val['id'];
+                }
+                return $val;
+            }, 'skipOnEmpty' => true],
             [['value', 'description', 'extra'], 'string'],
         ];
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        if ($this->type == 'image' && empty($this->value)) {
+            $this->value = Attachment::findOne($this->value);
+        }
     }
 
     /**
