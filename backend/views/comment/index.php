@@ -26,8 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $model->user->username;
                         }
                     ],
-                    'entity',
-                    'entity_id',
+                    'user_ip',
+                    [
+                        'label' => '源',
+                        'value' => function ($model) {
+                            return $model->entity . ':' . $model->entity_id;
+                        }
+                    ],
                     [
                         'attribute' => 'content',
                         'options' => ['width' => '40%'],
@@ -36,8 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'format' => 'html'
                     ],
-                     'up',
-                     'down',
                     'created_at:datetime',
                     [
                         'class' => 'yii\grid\ActionColumn',
