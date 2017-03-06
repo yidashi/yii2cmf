@@ -16,6 +16,7 @@ class m161215_024158_create_book_table extends Migration
             'id' => $this->primaryKey(),
             'book_name' => $this->string(50)->notNull()->comment('书名'),
             'book_author' => $this->integer(11)->notNull()->comment('作者'),
+            'book_link' => $this->string(128)->comment('书外链'),
             'book_description' => $this->string(1000)->notNull()->comment('书简介'),
             'category_id' => $this->integer(11)->notNull()->comment('书分类'),
             'created_at' => $this->integer()->notNull(),
