@@ -70,6 +70,7 @@ class Comment extends \yii\db\ActiveRecord
             'entity' => '类型',
             'entity_id' => '目标',
             'user_id' => '评论人',
+            'user_ip' => 'IP',
             'content' => '内容',
             'up' => '顶',
             'down' => '踩',
