@@ -198,7 +198,7 @@ class m130524_201442_init extends Migration
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
-            'action' => Schema::TYPE_STRING . "(20) NOT NULL DEFAULT 'up' COMMENT up or down'",
+            'action' => Schema::TYPE_STRING . "(20) NOT NULL DEFAULT 'up' COMMENT 'up or down'",
         ], $this->tableOptions);
 //vote_info
         $this->createTable('{{%vote_info}}', [
