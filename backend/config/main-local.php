@@ -9,8 +9,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => env('BACKEND_PRETTY_URL', false),
             'showScriptName' => false,
-            'rules' => [
-            ],
         ],
     ],
 ];

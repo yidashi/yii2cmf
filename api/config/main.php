@@ -24,6 +24,9 @@ return [
                 ],
             ],
         ],
+        'request' => [
+            'enableCookieValidation' => false
+        ],
         'response' => [
             'format' => 'json',
             'on beforeSend' => function($event) {

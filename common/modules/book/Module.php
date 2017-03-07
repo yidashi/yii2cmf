@@ -9,23 +9,7 @@
 
 namespace common\modules\book;
 
-use yii\base\BootstrapInterface;
-
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \yii\base\Module
 {
-    public function bootstrap($app)
-    {
-        if ($app->id == 'app-backend') {
-            $app->urlManager->addRules([
-                'book/<action:\S+>' => 'book/admin/<action>',
-            ], false);
-        } else if ($app->id == 'app-frontend') {
-            $app->urlManager->addRules([
-                'books' => '/book/default/index',
-                'book/<id:\d+>' => '/book/default/view',
-                'book/chapter/<id:\d>' => '/book/default/chapter',
-                'book/<action:\S+>' => 'book/default/<action>',
-            ], false);
-        }
-    }
+
 }

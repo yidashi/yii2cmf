@@ -9,6 +9,8 @@
 namespace common\modules\urlrule\models;
 
 
+use common\behaviors\CacheInvalidateBehavior;
+use common\behaviors\PositionBehavior;
 use yii\db\ActiveRecord;
 use Yii;
 
@@ -70,6 +72,20 @@ class UrlRule extends ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'keys' => 'openRules'
+            ],
+            [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'sort'
+            ]
+        ];
+    }
+
     public function beforeSave($insert)
     {
         if(parent::beforeSave($insert)== false) {
@@ -84,13 +100,13 @@ class UrlRule extends ActiveRecord
         return true;
     }
 
-    public static function getRuleByRoute($route,$params)
+    public static function findOpenRules()
     {
-        return static::findOne(['route' => $route, 'defaults' => http_build_query($params), 'status' => 1]);
-    }
-
-    public static function getRuleByPattern($pattern)
-    {
-        return static::findOne(['pattern' => $pattern, 'status' => 1]);
+        $rules = Yii::$app->cache->get('openRules');
+        if ($rules === false) {
+            $rules = static::find()->where(['status' => 1])->orderBy('sort asc')->all();
+            Yii::$app->cache->set('openRules', $rules);
+        }
+        return $rules;
     }
 }

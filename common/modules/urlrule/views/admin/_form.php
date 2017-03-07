@@ -16,6 +16,8 @@ use backend\widgets\ActiveForm;
 <?= $form->field($model, 'pattern') ?>
 <?= $form->field($model, 'route') ?>
 <?= $form->field($model, 'defaults') ?>
+<?= $form->field($model, 'suffix') ?>
+<?= $form->field($model, 'verb') ?>
 </div>
 </div>
 <div class="form-group">

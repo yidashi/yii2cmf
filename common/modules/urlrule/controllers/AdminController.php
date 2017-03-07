@@ -2,29 +2,12 @@
 namespace common\modules\urlrule\controllers;
 
 use common\components\Controller;
-use common\modules\urlrule\components\UrlRule;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class AdminController extends Controller
 {
-
-    public function init()
-    {
-        parent::init();
-        Yii::$app->setModule('urlManager', [
-            'enablePrettyUrl' => true,
-            'showScriptName' => true,
-            'rules' => [
-                [
-                    'class' => UrlRule::className()
-                ]
-            ]
-        ]);
-    }
-
-
     public function actions()
     {
         return [

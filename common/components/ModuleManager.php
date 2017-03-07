@@ -30,7 +30,13 @@ class ModuleManager extends PackageManager
         $model->type = Module::TYPE_CORE;
         $model->config = Json::encode($module->getInitConfig());
         $model->status = Module::STATUS_OPEN;
-        return $model->save();
+        if ($model->save()) {
+            if (method_exists($module, 'install')) {
+                return call_user_func([$module, 'install']);
+            }
+            return true;
+        }
+        return false;
     }
 
     public function uninstall(ModuleInfo $module)
@@ -39,13 +45,25 @@ class ModuleManager extends PackageManager
             return false;
         }
         $model = $module->getModel();
-        return $model->delete();
+        if ($model->delete()) {
+            if (method_exists($module, 'uninstall')) {
+                call_user_func([$module, 'uninstall']);
+            }
+            return true;
+        }
+        return false;
     }
     public function open(ModuleInfo $module)
     {
         $model = $module->getModel();
         $model->status = 1;
-        return $model->save();
+        if ($model->save()) {
+            if (method_exists($module, 'open')) {
+                call_user_func([$module, 'open']);
+            }
+            return true;
+        }
+        return false;
     }
     public function close(ModuleInfo $module)
     {
@@ -54,7 +72,13 @@ class ModuleManager extends PackageManager
         }
         $model = $module->getModel();
         $model->status = 0;
-        return $model->save();
+        if ($model->save()) {
+            if (method_exists($module, 'close')) {
+                call_user_func([$module, 'close']);
+            }
+            return true;
+        }
+        return false;
     }
 
     public function upgrade()

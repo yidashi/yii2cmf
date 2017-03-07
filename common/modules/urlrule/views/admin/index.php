@@ -32,32 +32,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'dataProvider' => $dataProvider,
                     "columns" => [
                         'id',
-                        [
-                            'attribute' => 'pattern',
-                            "format" => "html",
-                            'value' => function ($model, $key, $index, $column) {
-                                $params = is_array($key) ? $key : [
-                                    'id' => (string) $key
-                                ];
-                                $params[0] = "update";
-                                $value = ArrayHelper::getValue($model, $column->attribute);
-                                return Html::a($value, $params);
-                            }
-                        ],
+                        'pattern',
                         'route',
                         'defaults',
+                        'suffix',
+                        'verb',
                         [
                             'class' => 'yii\grid\ActionColumn',
-                            "urlCreator" => function ($action, $model, $key, $index) {
-                                if ($action != "view") {
-                                    return null;
-                                }
-
-                                $route = $model->route;
-                                parse_str($model->defaults, $params);
-                                array_unshift($params, $route);
-                                return \Yii::$app->urlManager->createUrl($params);
-                            }
                         ]
                     ]
                 ]
