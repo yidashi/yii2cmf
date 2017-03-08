@@ -18,9 +18,6 @@ class Article extends \common\models\Article
                 $css = \Yii::$app->request->getHostInfo() . \Yii::$app->request->getBaseUrl() . '/article.css';
                 return <<<CONTENT
     <link href="{$css}" rel="stylesheet"/>
-    <div class="view-title">
-        <h1>{$model->title}</h1>
-    </div>
     <div class="action">
         <span class="views">{$model->view}次浏览</span>
     </div>

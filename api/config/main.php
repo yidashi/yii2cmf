@@ -9,7 +9,7 @@ return [
     'controllerNamespace' => 'api\common\controllers',
     'components' => [
         'user' => [
-            'identityClass' => 'common\modules\user\models\User',
+            'identityClass' => 'api\common\models\User',
         ],
         'urlManager' => [
             'enablePrettyUrl' => true,
@@ -19,7 +19,8 @@ return [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
                         'v1/article',
-                        'v1/nav'
+                        'v1/nav',
+                        'v1/user',
                     ]
                 ],
             ],
@@ -29,23 +30,32 @@ return [
         ],
         'response' => [
             'format' => 'json',
+            'on afterSend' => function ($event) {
+            },
             'on beforeSend' => function($event) {
                 $response = $event->sender;
                 if ($response->data !== null) {
                     if (!$response->isSuccessful) {
                         $result = $response->data;
-                        $response->data = [
-                            'errcode' => isset($result['status']) ? $result['status'] : $result['code'],
-                            'errmsg' => $result['message'],
-                            'data' => (object) []
-                        ];
+                        if ($response->statusCode == 422) {
+                            $response->data = [
+                                'errcode' => $response->statusCode,
+                                'errmsg' => $result[0]['message'],
+                            ];
+                        } else {
+                            $response->data = [
+                                'errcode' => isset($result['status']) ? $result['status'] : $response->statusCode,
+                                'errmsg' => $result['message'],
+                            ];
+                        }
                         $response->statusCode = 200;
                     } else {
                         $result = $response->data;
-                        $response->data = array_merge($result, [
+                        $response->data = array_merge([
                             'errcode' => 0,
                             'errmsg' => 'ok',
-                        ]);
+                        ], $result);
+
                     }
                 }
             }
