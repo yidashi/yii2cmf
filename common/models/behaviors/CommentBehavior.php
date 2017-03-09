@@ -41,7 +41,7 @@ class CommentBehavior extends Behavior
             switch ($event->sender->entity) {
                 case 'common\models\Article':
                     $category = 'reply';
-                    $link = Url::to(['/article/view', 'id' => $event->sender->type_id, '#' => 'comment-' . $event->sender->id]);
+                    $link = Url::to(['/article/view', 'id' => $event->sender->entity_id, '#' => 'comment-' . $event->sender->id]);
                     break;
                 case 'suggest':
                     $category = 'suggest';
