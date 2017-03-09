@@ -18,8 +18,14 @@ class Notify extends \common\models\Notify
         return [
             'from',
             'to',
-            'content',
             'title'
+        ];
+    }
+
+    public function extraFields()
+    {
+        return [
+            'content',
         ];
     }
 

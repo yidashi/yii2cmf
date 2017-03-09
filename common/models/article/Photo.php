@@ -51,7 +51,8 @@ class Photo extends \yii\db\ActiveRecord
             [
                 'class' => UploadBehavior::className(),
                 'multiple' => true,
-                'attribute' => 'photos'
+                'attribute' => 'photos',
+                'entity' => __CLASS__
             ],
             [
                 'class' => DynamicFormBehavior::className(),

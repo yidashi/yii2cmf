@@ -2,30 +2,34 @@
 /**
  * Created by PhpStorm.
  * User: yidashi
- * Date: 16/2/25
- * Time: 下午2:36
+ * Date: 2017/3/8
+ * Time: 下午11:21
  */
 
 namespace api\modules\v1\models;
 
 
+use api\common\models\User;
 use yii\helpers\ArrayHelper;
 
-class Article extends \common\models\Article
+class Comment extends \common\models\Comment
 {
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
     public function fields()
     {
         return ArrayHelper::merge(parent::fields(), [
-            'cover' => function ($model) {
-                return ArrayHelper::getValue($model, 'cover.url', '');
-            }
+            'author',
         ]);
     }
 
     public function extraFields()
     {
         return [
-            'data'
+            'sons'
         ];
     }
 }

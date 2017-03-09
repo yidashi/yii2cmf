@@ -48,12 +48,14 @@ class UploadBehavior extends BaseAttachAttribute
 
     protected function setValue($value)
     {
-        $value = array_filter($value, function ($val) {
-            if (empty($val)) {
-                return false;
-            }
-            return true;
-        });
+        if (!empty($value)) {
+            $value = array_filter($value, function ($val) {
+                if (empty($val)) {
+                    return false;
+                }
+                return true;
+            });
+        }
         $this->value = $value;
     }
 
