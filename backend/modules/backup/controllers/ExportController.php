@@ -12,11 +12,12 @@ class ExportController extends Controller
 {
     public function actionIndex()
     {
-        $Db    = \Yii::$app->db;
-        $list  = $Db->createCommand('SHOW TABLE STATUS')->queryAll();
+        $db    = \Yii::$app->db;
+        $list  = $db->createCommand('SHOW TABLE STATUS')->queryAll();
         $list  = array_map('array_change_key_case', $list);
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $list
+            'allModels' => $list,
+            'pagination' => false
         ]);
         return $this->render('index', [
             'dataProvider' => $dataProvider
@@ -33,10 +34,10 @@ class ExportController extends Controller
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         if($tables) {
-            $Db   = \Yii::$app->db;
+            $db   = \Yii::$app->db;
             if(is_array($tables)){
                 $tables = implode('`,`', $tables);
-                $list = $Db->createCommand("OPTIMIZE TABLE `{$tables}`")->queryAll();
+                $list = $db->createCommand("OPTIMIZE TABLE `{$tables}`")->queryAll();
 
                 if($list){
                     return [
@@ -46,7 +47,7 @@ class ExportController extends Controller
                     throw new Exception('数据表优化出错请重试!');
                 }
             } else {
-                $list = $Db->createCommand("OPTIMIZE TABLE `{$tables}`")->queryAll();
+                $list = $db->createCommand("OPTIMIZE TABLE `{$tables}`")->queryAll();
                 if($list){
                     return [
                         'message' => "数据表'{$tables}'优化完成！"
@@ -68,10 +69,10 @@ class ExportController extends Controller
     {
         \Yii::$app->response->format = Response::FORMAT_JSON;
         if($tables) {
-            $Db   = \Yii::$app->db;
+            $db   = \Yii::$app->db;
             if(is_array($tables)){
                 $tables = implode('`,`', $tables);
-                $list = $Db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
+                $list = $db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
 
                 if($list){
                     return [
@@ -81,7 +82,7 @@ class ExportController extends Controller
                     throw new Exception('数据表修复出错请重试');
                 }
             } else {
-                $list = $Db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
+                $list = $db->createCommand("REPAIR TABLE `{$tables}`")->queryAll();
                 if($list){
                     return [
                         'message' => "数据表'{$tables}'修复完成！"
