@@ -22,7 +22,10 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'path' => '@storagePath/upload',
             ],
             'baseUrl' => '@storageUrl/upload',
-            'imageProcessor' => ['class' => 'common\modules\attachment\components\image\Local']
+            'imageProcessor' => [
+                'class' => 'common\modules\attachment\components\image\Local',
+                'path' => '@storagePath/upload',
+            ]
         ];
         if (isset($this->params['filesystem_type'])) {
             switch ($this->params['filesystem_type']) {
