@@ -81,7 +81,8 @@ class Article extends \yii\db\ActiveRecord
             [['source'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
-            ['module', 'string']
+            ['module', 'string'],
+            ['cover', 'safe']
         ];
     }
     public function setCategory($attribute, $params)
@@ -166,7 +167,8 @@ class Article extends \yii\db\ActiveRecord
             ],
             [
                 'class' => UploadBehavior::className(),
-                'attribute' => 'cover'
+                'attribute' => 'cover',
+                'entity' => __CLASS__
             ],
             UserBehavior::className()
         ];

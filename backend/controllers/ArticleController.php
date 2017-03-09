@@ -216,7 +216,7 @@ class ArticleController extends Controller
                     throw new Exception('操作失败');
                 }
                 if ($moduleModel) {
-                    $moduleModel->load(Yii::$app->request->post()) &&
+                    $moduleModel->load(Yii::$app->request->post());
                     $moduleModel->save();
                     if($moduleModel->hasErrors()) {
                         throw new Exception('操作失败');
