@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property string $name
  * @property string $value
+ * @property string $type
  * @property string $desc
  */
 class Config extends \yii\db\ActiveRecord
@@ -47,7 +48,7 @@ class Config extends \yii\db\ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        if ($this->type == 'image' && empty($this->value)) {
+        if ($this->type == 'image' && !empty($this->value)) {
             $this->value = Attachment::findOne($this->value);
         }
     }
