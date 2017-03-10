@@ -12,6 +12,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
     public function bootstrap($app)
     {
+        list(, $appName) = explode('-', $app->id);
         $app->set('i18n', [
             'class' => 'yii\i18n\I18N',
             'translations' => [
@@ -23,6 +24,12 @@ class Module extends \yii\base\Module implements BootstrapInterface
                         'backend'=>'backend.php',
                         'frontend'=>'frontend.php',
                     ],
+                    'on missingTranslation' => [$this, 'missingTranslation']
+                ],
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/modules/i18n/messages',
+                    'fileMap' => ['app' => $appName . '.php'],
                     'on missingTranslation' => [$this, 'missingTranslation']
                 ],
                 /*'*'=> [
