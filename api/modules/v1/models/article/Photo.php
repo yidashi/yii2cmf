@@ -15,9 +15,6 @@ class Photo extends \common\models\article\Photo
     {
         return [
             'photos',
-            'part_photos' => function ($model) {
-                return array_slice($model->photos, 3);
-            },
             'photos_total' => function ($model) {
                 return count($model->photos);
             }
