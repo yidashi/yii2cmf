@@ -51,6 +51,11 @@
             "helpers.php"
         ]
     },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0755)\""
+        ]
+    },
     "config": {
         "process-timeout": 1800
     },

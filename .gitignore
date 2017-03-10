@@ -32,3 +32,5 @@ dump.rdb
 
 # env
 /.env
+
+composer.lock
