@@ -2,11 +2,9 @@
 
 进入项目根目录
 
-1. `composer global require "fxp/composer-asset-plugin:^1.2.0"`
+1. `composer install`
 
-2. `composer install` 
-
-3. 直接访问项目地址即可！
+2. 直接访问项目地址即可！
 
 
 ## demo

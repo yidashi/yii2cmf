@@ -15,6 +15,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
+        "fxp/composer-asset-plugin":"^1.2.0",
         "yiisoft/yii2": "2.0.9",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
@@ -53,7 +54,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\""
+        ],
+        "post-root-package-install" :[
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\""
         ]
     },
     "config": {
