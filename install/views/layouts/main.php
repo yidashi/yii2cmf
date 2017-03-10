@@ -129,6 +129,17 @@ $this->beginPage();
                                                     "site/set-admin"
                                                 ])
                                             ]
+                                        ],
+                                        [
+                                            'label' => '选择安装模块',
+                                            "url" => [
+                                                "site/select-module"
+                                            ],
+                                            "options" => [
+                                                "data-url" => Url::to([
+                                                    "site/select-module"
+                                                ])
+                                            ]
                                         ]
                                     ]
                                 ]);

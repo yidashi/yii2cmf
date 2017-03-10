@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\i18n\models\I18nMessage */
+/* @var $model common\modules\i18n\models\I18nMessage */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 

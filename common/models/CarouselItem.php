@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\behaviors\PositionBehavior;
 use common\behaviors\CacheInvalidateBehavior;
+use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -60,6 +61,12 @@ class CarouselItem extends ActiveRecord
                         ];
                     }
                 ]
+            ],
+            [
+                'class' => UploadBehavior::className(),
+                'attribute' => 'image',
+                'multiple' => false,
+                'entity' => __CLASS__
             ]
         ];
     }
@@ -72,7 +79,8 @@ class CarouselItem extends ActiveRecord
         return [
             [['carousel_id'], 'required'],
             [['carousel_id', 'status', 'order'], 'integer'],
-            [['url', 'caption', 'image'], 'string', 'max' => 1024],
+            [['url', 'caption'], 'string', 'max' => 1024],
+            ['image', 'safe']
         ];
     }
 

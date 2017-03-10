@@ -21,7 +21,6 @@ class m160721_134955_create_carousel_table extends Migration
         $this->createTable('{{%carousel_item}}', [
             'id' => $this->primaryKey(),
             'carousel_id' => $this->integer()->notNull(),
-            'image'=>$this->string(1024),
             'url' => $this->string(1024),
             'caption' => $this->string(1024),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),

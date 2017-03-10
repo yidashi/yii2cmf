@@ -4,11 +4,11 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\i18n\models\search\I18nSourceMessageSearch */
+/* @var $model common\modules\i18n\models\search\I18nMessageSearch */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="i18n-source-message-search">
+<div class="i18n-message-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,9 +17,9 @@ use yii\helpers\Html;
 
     <?php echo $form->field($model, 'id') ?>
 
-    <?php echo $form->field($model, 'category') ?>
+    <?php echo $form->field($model, 'language') ?>
 
-    <?php echo $form->field($model, 'message') ?>
+    <?php echo $form->field($model, 'translation') ?>
 
     <div class="form-group">
         <?php echo Html::submitButton(Yii::t('backend', 'Search'), ['class' => 'btn btn-primary']) ?>

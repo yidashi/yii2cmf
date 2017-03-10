@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\i18n\models\I18nSourceMessage */
+/* @var $model common\modules\i18n\models\I18nSourceMessage */
 
 $this->title = Yii::t('backend', 'Update {modelClass}: ', [
     'modelClass' => 'I18n Source Message',

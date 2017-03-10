@@ -1,13 +1,13 @@
 <?php
 
-namespace backend\modules\i18n\models\search;
+namespace common\modules\i18n\models\search;
 
-use backend\modules\i18n\models\I18nSourceMessage;
+use common\modules\i18n\models\I18nSourceMessage;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * I18nSourceMessageSearch represents the model behind the search form about `backend\modules\i18n\models\I18nSourceMessage`.
+ * I18nSourceMessageSearch represents the model behind the search form about `common\modules\i18n\models\I18nSourceMessage`.
  */
 class I18nSourceMessageSearch extends I18nSourceMessage
 {

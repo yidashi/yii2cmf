@@ -50,7 +50,9 @@ class CarouselItemController extends Controller
     /**
      * Creates a new CarouselItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param integer $carousel_id
      * @return mixed
+     * @throws HttpException
      */
     public function actionCreate($carousel_id)
     {
@@ -63,7 +65,7 @@ class CarouselItemController extends Controller
         $model->carousel_id =  $carousel->id;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('common', 'Created success'));
+                Yii::$app->getSession()->setFlash('success', Yii::t('common', 'created success'));
                 return $this->redirect(['/carousel/update', 'id' => $model->carousel_id]);
             }
         }

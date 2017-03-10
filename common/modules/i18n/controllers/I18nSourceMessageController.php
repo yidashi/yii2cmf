@@ -1,21 +1,18 @@
 <?php
 
-namespace backend\modules\i18n\controllers;
+namespace common\modules\i18n\controllers;
 
-use backend\modules\i18n\models\I18nMessage;
-use backend\modules\i18n\models\I18nSourceMessage;
-use backend\modules\i18n\models\search\I18nMessageSearch;
+use common\modules\i18n\models\I18nSourceMessage;
+use common\modules\i18n\models\search\I18nSourceMessageSearch;
 use Yii;
 use yii\filters\VerbFilter;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * I18nMessageController implements the CRUD actions for I18nMessage model.
+ * I18nSourceMessageController implements the CRUD actions for I18nSourceMessage model.
  */
-class I18nMessageController extends Controller
+class I18nSourceMessageController extends Controller
 {
     public function behaviors()
     {
@@ -30,45 +27,43 @@ class I18nMessageController extends Controller
     }
 
     /**
-     * Lists all I18nMessage models.
+     * Lists all I18nSourceMessage models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new I18nMessageSearch();
+        $searchModel = new I18nSourceMessageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        Url::remember(Yii::$app->request->getUrl(), 'i18n-messages-filter');
-
-        $languages = ArrayHelper::map(
-            I18nMessage::find()->select('language')->distinct()->all(),
-            'language',
-            'language'
-        );
-        $categories = ArrayHelper::map(
-            I18nSourceMessage::find()->select('category')->distinct()->all(),
-            'category',
-            'category'
-        );
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'languages' => $languages,
-            'categories' => $categories
         ]);
     }
 
     /**
-     * Creates a new I18nMessage model.
+     * Displays a single I18nSourceMessage model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    /**
+     * Creates a new I18nSourceMessage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new I18nMessage();
+        $model = new I18nSourceMessage();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -77,18 +72,17 @@ class I18nMessageController extends Controller
     }
 
     /**
-     * Updates an existing I18nMessage model.
+     * Updates an existing I18nSourceMessage model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
-     * @param string $language
      * @return mixed
      */
-    public function actionUpdate($id, $language)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $language);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(Url::previous('i18n-messages-filter') ?: ['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -97,30 +91,28 @@ class I18nMessageController extends Controller
     }
 
     /**
-     * Deletes an existing I18nMessage model.
+     * Deletes an existing I18nSourceMessage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @param string $language
      * @return mixed
      */
-    public function actionDelete($id, $language)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $language)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the I18nMessage model based on its primary key value.
+     * Finds the I18nSourceMessage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @param string $language
-     * @return I18nMessage the loaded model
+     * @return I18nSourceMessage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $language)
+    protected function findModel($id)
     {
-        if (($model = I18nMessage::findOne(['id' => $id, 'language' => $language])) !== null) {
+        if (($model = I18nSourceMessage::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

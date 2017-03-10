@@ -23,6 +23,17 @@ class ModuleManager extends PackageManager
 
     public $infoClass = 'ModuleInfo';
 
+    public function findCore()
+    {
+        $all = $this->findAll();
+        return array_filter($all, function ($val) {
+            if (!$val->isCore) {
+                return false;
+            }
+            return true;
+        });
+    }
+
     public function install(ModuleInfo $module)
     {
         $model = $module->getModel();

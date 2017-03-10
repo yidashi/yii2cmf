@@ -2,6 +2,7 @@
 namespace install\controllers;
 
 
+use common\components\ModuleManager;
 use common\modules\user\models\User;
 use yii\web\Controller;
 use Yii;
@@ -145,6 +146,32 @@ class SiteController extends Controller
         
         return $this->render('setadmin', [
             "model" => $model
+        ]);
+    }
+
+    public function actionSelectModule()
+    {
+        $moduleManager = new ModuleManager();
+        $modules = $moduleManager->findAll();
+        if (Yii::$app->request->isPost) {
+            $installModules = Yii::$app->request->post('modules');
+            foreach ($installModules as $installModule) {
+                $installModuleInfo = $moduleManager->findOne($installModule);
+                $moduleManager->install($installModuleInfo);
+            }
+            // 安装核心模块
+            $cores = $moduleManager->findCore();
+            foreach ($cores as $core) {
+                $moduleManager->install($core);
+            }
+            //清缓存
+            \Yii::$app->getCache()->flush();
+            //安装完成
+            Yii::$app->setInstalled();
+            return $this->renderJson(true);
+        }
+        return $this->render('selectmodule', [
+            "modules" => $modules
         ]);
     }
     /**

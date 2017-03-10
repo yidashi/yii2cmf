@@ -32,16 +32,6 @@ return [
             'class' => 'backend\components\Formatter',
             'booleanFormat' => ['<i class="fa fa-times text-danger"></i>', '<i class="fa fa-check text-success"></i>']
         ],
-        'i18n' => [
-            'translations' => [
-                'app*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath'=>'@common/messages',
-                    'fileMap' => ['app' => 'backend.php'],
-                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
-                ],
-            ],
-        ],
         'themeManager' => [
             'class' => 'common\components\ThemeManager',
         ],
@@ -52,10 +42,6 @@ return [
         ],
         'backup' => [
             'class' => 'backup\Module',
-        ],
-        'i18n' => [
-            'class' => 'backend\modules\i18n\Module',
-            'defaultRoute'=>'i18n-message/index'
         ],
         'gii' => [
             'class' => 'gii\Module',

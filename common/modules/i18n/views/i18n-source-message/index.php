@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\i18n\models\search\I18nSourceMessageSearch */
+/* @var $searchModel common\modules\i18n\models\search\I18nSourceMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('backend', 'I18n Source Messages');

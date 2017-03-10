@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\i18n\models\I18nSourceMessage */
+/* @var $model common\modules\i18n\models\I18nSourceMessage */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'I18n Source Messages'), 'url' => ['index']];
