@@ -77,7 +77,7 @@ class UrlRule extends ActiveRecord
         return [
             [
                 'class' => CacheInvalidateBehavior::className(),
-                'keys' => 'openRules'
+                'keys' => ['openRules']
             ],
             [
                 'class' => PositionBehavior::className(),
