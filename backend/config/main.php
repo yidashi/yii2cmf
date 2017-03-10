@@ -63,12 +63,6 @@ return [
             'class' => 'migration\Module',
         ],
     ],
-    'aliases' => [
-        '@rbac' => '@backend/modules/rbac',
-        '@backup' => '@backend/modules/backup',
-        '@gii' => '@backend/modules/gii',
-        '@migration' => '@backend/modules/migration',
-    ],
     'as access' => [
         'class' => 'rbac\components\AccessControl',
         'allowActions' => [
