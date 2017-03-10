@@ -19,6 +19,7 @@ class Scroll extends Widget
         echo Html::beginTag('div', ['class' => 'fixed-btn']);
         echo '<a class="back-to-top"><span class="fa fa-arrow-up"></span></a>';
         echo '<a class="qrcode"><i class="fa fa-qrcode"></i></a>';
+        echo '<a class="app"><i class="fa fa-mobile-phone"></i></a>';
         echo Html::endTag('div');
         $this->registerClientScript();
     }
@@ -55,6 +56,7 @@ class Scroll extends Widget
 CSS
         );
         $qrcode = \Yii::$app->config->get('wx.qrcode');
+        $app = \Yii::$app->config->get('app.download_qrcode');
         $this->view->registerJs(<<<JS
 // back-to-top
     $(window).scroll(function(){
@@ -73,6 +75,12 @@ CSS
         html:true,
         title:'关注公众号',
         content:'<img src="{$qrcode}" width="128" height="128">'
+    });
+    $('.app').popover({
+        placement:'left',
+        html:true,
+        title:'下载app',
+        content:'<img src="{$app}" width="128" height="128">'
     });
 JS
         );
