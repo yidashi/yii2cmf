@@ -152,7 +152,7 @@ class SiteController extends Controller
         $moduleManager = new ModuleManager();
         $modules = $moduleManager->findAll();
         if (Yii::$app->request->isPost) {
-            $installModules = Yii::$app->request->post('modules');
+            $installModules = Yii::$app->request->post('modules', []);
             foreach ($installModules as $installModule) {
                 $installModuleInfo = $moduleManager->findOne($installModule);
                 $moduleManager->install($installModuleInfo);
