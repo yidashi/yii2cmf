@@ -16,7 +16,4 @@ $form = \yii\widgets\ActiveForm::begin([
 <?=$form->field($model, 'database')->textInput(['autocomplete' => 'off','class' => 'form-control'])?>
 <?=$form->field($model, 'prefix')->textInput(['autofocus' => 'on','autocomplete' => 'off','class' => 'form-control'])?>
 
-	<div class="desc">
-
-	</div>
 <?php \yii\widgets\ActiveForm::end(); ?>

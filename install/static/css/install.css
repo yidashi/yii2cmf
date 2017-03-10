@@ -106,8 +106,6 @@ div.required label.control-label:after {
     position: relative;
     width: 550px;
     min-height: 500px;
-    background: #666;
-    color: #fff;
     padding:40px;
 }
 
@@ -121,8 +119,6 @@ div.required label.control-label:after {
     margin: 1px 0 0 0;
     padding: 15px 20px;
     text-align: center;
-    color: #fff;
-    background: #555;
     border-radius: 0 0 5px 5px
 }
 .ibtnArea:after {

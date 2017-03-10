@@ -14,7 +14,7 @@ class m161102_090053_menu extends Migration
             'route' => 'VARCHAR(256) NULL',
             'order' => 'INT(11) NULL',
             'data' => 'TEXT NULL',
-            'icon' => 'VARCHAR(50) NOT NULL',
+            'icon' => 'VARCHAR(50) NULL',
             'PRIMARY KEY (`id`)'
         ], "CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB");
 

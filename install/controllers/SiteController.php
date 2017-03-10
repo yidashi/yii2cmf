@@ -57,7 +57,7 @@ class SiteController extends Controller
                 return $this->renderJson(false, "同意安装协议才能继续安装!");
             }
         }
-        
+
         return $this->render('license');
     }
 
@@ -70,6 +70,56 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionCheckDirFile()
+    {
+        $items = [
+            ['dir',  '可写', 'success', '@root/cache'],
+            ['dir',  '可写', 'success', '@backend/runtime'],
+            ['dir',  '可写', 'success', '@frontend/runtime'],
+            ['dir',  '可写', 'success', '@api/runtime'],
+            ['dir',  '可写', 'success', '@root/web/storage'],
+        ];
+        $result = true;
+        foreach ($items as &$val) {
+            $val[3] =	Yii::getAlias($val[3]);
+            if('dir' == $val[0]){
+                if(!is_writable($val[3])) {
+                    if(is_dir($val[3])) {
+                        $val[1] = '可读';
+                        $val[2] = 'error';
+                    } else {
+                        $val[1] = '不存在';
+                        $val[2] = 'error';
+                    }
+                    $result = false;
+                }
+            } else {
+                if(file_exists($val[3])) {
+                    if(!is_writable($val[3])) {
+                        $val[1] = '不可写';
+                        $val[2] = 'error';
+                        $result = false;
+                    }
+                } else {
+                    if(!is_writable(dirname($val[3]))) {
+                        $val[1] = '不存在';
+                        $val[2] = 'error';
+                        $result = false;
+                    }
+                }
+            }
+        }
+        if (Yii::$app->request->isPost) {
+            if ($result == true) {
+                return $this->renderJson(true);
+            }else {
+                return $this->renderJson(false, '请确保目录和文件拥有指定权限');
+            }
+        }
+        return $this->render('checkdirfile', [
+            "items" => $items
+        ]);
+    }
     public function actionSelectDb()
     {
         return $this->render('index');
@@ -78,18 +128,18 @@ class SiteController extends Controller
     public function actionSetDb()
     {
         $model = new DatabaseForm();
-        
+
         $model->loadDefaultValues();
-        
+
         if ($model->load(Yii::$app->request->post())) {
-            
+
             if ($model->validate() && $model->save()) {
                 return $this->renderJson(true);
             } else {
                 return $this->renderJson(false, current($model->getFirstErrors()));
             }
         }
-        
+
         return $this->render('setdb', [
             "model" => $model
         ]);
@@ -98,18 +148,18 @@ class SiteController extends Controller
     public function actionSetSite()
     {
         $model = new SiteForm();
-        
+
         $model->loadDefaultValues();
-        
+
         if ($model->load(Yii::$app->request->post())) {
-            
+
             if ($model->validate() && $model->save()) {
                 return $this->renderJson(true);
             } else {
                 return $this->renderJson(false, current($model->getFirstErrors()));
             }
         }
-        
+
         return $this->render('setsite', [
             "model" => $model
         ]);
@@ -118,7 +168,7 @@ class SiteController extends Controller
     public function actionSetAdmin()
     {
         $model = new AdminForm();
-        
+
         $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post())) {
 
@@ -126,22 +176,22 @@ class SiteController extends Controller
                 return $this->renderJson(false, current($model->getFirstErrors()));
             }
 
-                $error = $this->installDb();
-                if ($error != null) {
-                    return $this->renderJson(false, $error);
-                }
+            $error = $this->installDb();
+            if ($error != null) {
+                return $this->renderJson(false, $error);
+            }
 
-                //安装核心模块
-                $this->installConfig();
-                // 创建用户
-                $error = $this->createAdminUser();
-                if ($error != null) {
-                    return $this->renderJson(false, $error);
-                }
-                return $this->renderJson(true);
-           
-        } 
-        
+            //安装核心模块
+            $this->installConfig();
+            // 创建用户
+            $error = $this->createAdminUser();
+            if ($error != null) {
+                return $this->renderJson(false, $error);
+            }
+            return $this->renderJson(true);
+
+        }
+
         return $this->render('setadmin', [
             "model" => $model
         ]);
@@ -208,7 +258,7 @@ class SiteController extends Controller
             }
         }
         ob_end_clean();
-        
+
         if (! empty($error)) {
             return $error;
         }
