@@ -19,7 +19,7 @@
         "yiisoft/yii2": "2.0.9",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
-        "yiisoft/yii2-authclient": "^2.0",
+        "yiisoft/yii2-authclient": "~2.1.0",
         "yiisoft/yii2-redis": "*",
         "yiisoft/yii2-imagine": "^2.0",
         "aferrandini/PHPQRCode": "1.0.1",

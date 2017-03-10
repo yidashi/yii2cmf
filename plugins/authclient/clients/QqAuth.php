@@ -23,7 +23,9 @@ class QqAuth extends OAuth2
 
     protected function initUserAttributes()
     {
-        $openid =  $this->api('oauth2.0/me', 'GET');
+        // 因为authclient升级导致processResponse方法没有了，QQ获取openid这个接口的返回又很奇葩，是个jsonp格式，httpclient又不支持
+
+        $openid = $this->getOpenId();
         $qquser = $this->api("user/get_user_info", 'GET', ['oauth_consumer_key'=>$openid['client_id'], 'openid'=>$openid['openid']]);
         $qquser['openid'] = $openid['openid'];
         $qquser['id'] = $qquser['openid'];
@@ -33,6 +35,23 @@ class QqAuth extends OAuth2
         return $qquser;
     }
 
+    public function getOpenId()
+    {
+        $request = $this->createApiRequest()
+            ->setMethod('get')
+            ->setUrl('oauth2.0/me');
+
+        $response = $request->send();
+        $rawResponse = $response->getContent();
+        if(strpos($rawResponse, "callback") !== false){
+            $lpos = strpos($rawResponse, "(");
+            $rpos = strrpos($rawResponse, ")");
+            $rawResponse = substr($rawResponse, $lpos + 1, $rpos - $lpos -1);
+            $openid = Json::decode($rawResponse);
+            return $openid;
+        }
+        return false;
+    }
     protected function defaultName()
     {
         return 'QQ';
@@ -46,6 +65,7 @@ class QqAuth extends OAuth2
 
     /**
      * 该扩展初始的处理方法似乎QQ互联不能用，应此改写了方法
+     * @deprecated authclient since 2.1.0
      * @see \yii\authclient\BaseOAuth::processResponse()
      */
     protected function processResponse($rawResponse, $contentType = self::CONTENT_TYPE_AUTO)
