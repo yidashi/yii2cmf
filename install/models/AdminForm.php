@@ -24,7 +24,8 @@ class AdminForm extends Model
             [
                 [
                     'username',
-                    'password'
+                    'password',
+                    'email'
                 ],
                 'required'
             ],
