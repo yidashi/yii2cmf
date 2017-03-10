@@ -130,16 +130,14 @@ class SiteController extends Controller
                 if ($error != null) {
                     return $this->renderJson(false, $error);
                 }
+
+                //安装核心模块
                 $this->installConfig();
                 // 创建用户
                 $error = $this->createAdminUser();
                 if ($error != null) {
                     return $this->renderJson(false, $error);
                 }
-
-                \Yii::$app->getCache()->flush();
-                //安装完成
-                Yii::$app->setInstalled();
                 return $this->renderJson(true);
            
         } 
