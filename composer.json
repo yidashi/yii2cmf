@@ -53,7 +53,7 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0755)\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
     },
     "config": {
