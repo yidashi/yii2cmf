@@ -57,10 +57,4 @@ return [
             'class' => 'common\components\PluginManager',
         ],
     ],
-    'aliases' => [
-        '@rbac' => '@backend/modules/rbac',
-        '@backup' => '@backend/modules/backup',
-        '@gii' => '@backend/modules/gii',
-        '@migration' => '@backend/modules/migration',
-    ],
 ];

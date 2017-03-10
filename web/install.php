@@ -3,8 +3,10 @@ require __DIR__.'/../vendor/autoload.php';
 
 require __DIR__.'/../Yii.php';
 
-Yii::setAlias('@install', dirname(__DIR__) . '/install');
 require __DIR__.'/../common/config/bootstrap.php';
+Yii::setAlias('@install', dirname(__DIR__) . '/install');
+Yii::setAlias('@rbac', '@backend/modules/rbac');
+
 $config = [
     'id' => 'app-install',
     'basePath' => '@install',
