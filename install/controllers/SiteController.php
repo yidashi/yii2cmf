@@ -78,6 +78,9 @@ class SiteController extends Controller
             ['dir',  '可写', 'success', '@frontend/runtime'],
             ['dir',  '可写', 'success', '@api/runtime'],
             ['dir',  '可写', 'success', '@root/web/storage'],
+            ['dir',  '可写', 'success', '@root/web/assets'],
+            ['dir',  '可写', 'success', '@root/web/admin/assets'],
+            ['dir',  '可写', 'success', '@root/web/api/assets'],
         ];
         $result = true;
         foreach ($items as &$val) {
