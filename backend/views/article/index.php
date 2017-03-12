@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'title',
                         'value' => function($model) {
-                            return Html::a($model->title, Yii::$app->config->get('SITE_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
+                            return Html::a($model->title, Yii::$app->config->get('SITE_URL') . '/' . $model->id . '.html', ['target' => '_blank', 'no-iframe' => '1']);
                         },
                         'format' => 'raw',
                         'enableSorting' => false

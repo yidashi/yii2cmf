@@ -16,6 +16,7 @@ class ArticleQuery extends ActiveQuery
 {
     /**
      * 被删除的
+     * @return $this
      */
     public function onlyTrashed()
     {
@@ -23,6 +24,7 @@ class ArticleQuery extends ActiveQuery
     }
     /**
      * 未被删除的
+     * @return $this
      */
     public function notTrashed()
     {
@@ -31,6 +33,7 @@ class ArticleQuery extends ActiveQuery
 
     /**
      * 待审核的
+     * @return $this
      */
     public function pending()
     {
@@ -45,6 +48,7 @@ class ArticleQuery extends ActiveQuery
     }
     /**
      * 未删除且审核通过的
+     * @return $this
      */
     public function normal()
     {
@@ -53,12 +57,16 @@ class ArticleQuery extends ActiveQuery
 
     /**
      * 已经发布的
+     * @return $this
      */
     public function published()
     {
         return $this->normal()->andWhere(['<', 'published_at', time()]);
     }
 
+    /**
+     * @return $this
+     */
     public function my()
     {
         return $this->andWhere(['user_id' => \Yii::$app->user->id]);

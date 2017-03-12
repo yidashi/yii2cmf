@@ -46,6 +46,7 @@ class CategoryController extends Controller
         $dataProvider = new ActiveDataProvider(['query' => Category::find()]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'pagination' => false
         ]);
     }
     /**

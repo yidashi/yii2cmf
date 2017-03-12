@@ -2,23 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: yidashi
- * Date: 16/6/22
- * Time: 下午9:07
+ * Date: 2017/3/12
+ * Time: 下午4:36
  */
 
-namespace common\models\behaviors;
+namespace common\behaviors;
 
 
-use common\behaviors\SoftDeleteBehavior;
-use common\models\Category;
-use common\models\Favourite;
-use common\models\Vote;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
+use common\models\Category;
 
-class ArticleBehavior extends Behavior
+class CategoryBehavior extends Behavior
 {
-
     public function events()
     {
         return [
@@ -30,19 +26,6 @@ class ArticleBehavior extends Behavior
         ];
     }
 
-    /**
-     * 删除文章后
-     */
-    public function afterDeleteInternal($event)
-    {
-        // 删除文章内容
-        $content = $event->sender->data;
-        if ($content != null) {
-            $content->delete();
-        }
-        // 清除收藏
-        Favourite::deleteAll(['article_id' => $event->sender->id]);
-    }
     /**
      * 软删除文章后（更新分类文章数)
      */

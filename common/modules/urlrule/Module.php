@@ -32,10 +32,12 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'verb' => $model->verb
             ];
         }
-        Yii::$app->getUrlManager()->enablePrettyUrl = true;
-        Yii::$app->getUrlManager()->showScriptName = false;
-        Yii::$app->getUrlManager()->init();//目的是buildRule
+        if (isset($this->params['pretty']) && $this->params['pretty']) {
+            Yii::$app->getUrlManager()->enablePrettyUrl = true;
+            Yii::$app->getUrlManager()->showScriptName = false;
+            Yii::$app->getUrlManager()->init();//目的是buildRule
+            Yii::$app->getUrlManager()->addRules($rules, false);
+        }
 
-        Yii::$app->getUrlManager()->addRules($rules, false);
     }
 }

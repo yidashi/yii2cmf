@@ -90,7 +90,7 @@ class ArticleController extends Controller
     public function actionView($id)
     {
         /* @var $model Article|null */
-        $model = Article::find()->where(['id' => $id])->published()->one();
+        $model = Article::find()->andWhere(['id' => $id])->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
@@ -99,28 +99,13 @@ class ArticleController extends Controller
         // sidebar
         $hots = Article::hots($model->category_id);
         // 上下一篇
-        $next = Article::find()->where(['>', 'id', $id])->published()->one();
-        $prev = Article::find()->where(['<', 'id', $id])->published()->orderBy('id desc')->one();
+        $next = Article::find()->andWhere(['>', 'id', $id])->one();
+        $prev = Article::find()->andWhere(['<', 'id', $id])->orderBy('id desc')->one();
         return $this->render($model->module . '/view', [
             'model' => $model,
             'hots' => $hots,
             'next' => $next,
             'prev' => $prev
         ]);
-    }
-
-    /**
-     * @param $id
-     * @return Article|null
-     * @throws NotFoundHttpException
-     */
-    private function findModel($id)
-    {
-        /* @var $model Article|null */
-        $model = Article::find()->where(['id' => $id])->published()->one();
-        if ($model === null) {
-            throw new NotFoundHttpException('not found');
-        }
-        return $model;
     }
 }

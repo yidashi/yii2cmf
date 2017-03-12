@@ -23,6 +23,9 @@ $(function () {
     $('[data-toggle=popover]').popover();
     $('[data-toggle=tooltip]').tooltip();
     $("a[target='_blank']").on('click', function () {
+        if ($(this).attr('no-iframe')) {
+            return true;
+        }
         if (parent != window) {
             parent.admin_tab(this);
             return false;

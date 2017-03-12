@@ -15,27 +15,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box-body">
         <?php
         $form = ActiveForm::begin();
-        echo \yii\grid\GridView::widget([
-            'dataProvider' => $dataProvider,
-            'layout' => '{items}',
-            'columns' => [
-                'desc:text:配置描述',
-                [
-                    'attribute' => 'value',
-                    'label' => '配置值',
-                    'value' => function($model, $key, $index) use ($form) {
-                        return $form->field($model, "[$index]value")->label(false)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(),[
-                            'data' => $model->extra,
-                            'type' => $model->type
-                        ]);
-                    },
-                    'format' => 'raw',
-                    'options' => ['style' => 'width:60%']
-                ],
-                'name:text:配置名'
-            ]
-        ]);
-
+        foreach ($configModels as $index => $configModel) {
+            echo $form->field($configModel, "[$index]value")->label($configModel->desc)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(),[
+                'data' => $configModel->extra,
+                'type' => $configModel->type
+            ]);
+        }
         echo Html::submitButton('提交', ['class' => 'btn btn-primary btn-flat']);
         ActiveForm::end();
         ?>
