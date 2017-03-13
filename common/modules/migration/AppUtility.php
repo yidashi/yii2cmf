@@ -104,6 +104,8 @@ class AppUtility
             } else {
                 $this->string .= (empty($this->array['defaultValue'])) ? '' : " DEFAULT " . $this->array['defaultValue']['expression'] . " ";
             }
+        if (isset($this->array['comment']))
+            $this->string .= (empty($this->array['comment'])) ? '' : " COMMENT \'{$this->array['comment']}\'";
     }
 
     private function runSqlite()

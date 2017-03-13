@@ -1,33 +1,45 @@
 <?php
-namespace migration\controllers;
+/**
+ * Created by PhpStorm.
+ * Author: ljt
+ * DateTime: 2016/11/25 11:30
+ * Description:
+ */
 
-use migration\AppUtility;
+namespace migration\console;
+
 use migration\models\MigrationUtility;
 use Yii;
 use yii\base\Object;
+use yii\helpers\Console;
 use yii\helpers\FileHelper;
-use yii\web\Controller;
+use migration\AppUtility;
 
 
-class DefaultController extends Controller
+class MigrateController extends \yii\console\controllers\MigrateController
 {
+    public $useTablePrefix = true;
 
+    public $migrationPath = '@database/migrations';
     /**
-     * @todo 没有添加事务
+     * dump migrate file
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionDump()
     {
         set_time_limit(0);
         $model = new MigrationUtility();
         $upStr = new OutputString();
         $downStr = new OutputString();
+        $data = [
+            'tableSchemas' => array_keys(MigrationUtility::getTableNames()),
+            'tableDatas' => array_keys(MigrationUtility::getTableNames()),
+            'migrationPath' => $this->migrationPath
+        ];
+        if ($model->load($data, '')) {
 
-        if ($model->load(\Yii::$app->getRequest()
-            ->post())) {
-
-            if (! empty($model->tableSchemas)) {
+            if (!empty($model->tableSchemas)) {
                 list ($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
@@ -40,7 +52,7 @@ class DefaultController extends Controller
             }
 
             $path = Yii::getAlias($model->migrationPath);
-            if (! is_dir($path)) {
+            if (!is_dir($path)) {
                 FileHelper::createDirectory($path);
             }
 
@@ -53,16 +65,8 @@ class DefaultController extends Controller
                 'down' => $downStr->output()
             ]);
             file_put_contents($file, $content);
-            Yii::$app->session->setFlash("success", "迁移成功，保存在" . $file);
+            $this->stdout('成功生成迁移文件 ' . $file, Console::FG_GREEN);
         }
-
-        if ($model->migrationPath == null) {
-            $model->migrationPath = $this->module->migrationPath;
-        }
-
-        return $this->render('index', [
-            'model' => $model
-        ]);
     }
 
     public function getTableName($name)
@@ -198,7 +202,7 @@ class DefaultController extends Controller
             foreach ($data as $row) {
                 $out .= '[';
                 foreach ($row as $field) {
-                    if ($field == null) {
+                    if ($field === null) {
                         $out .= "null,";
                     } else {
                         $out .= "'" . addcslashes($field, "'") . "',";

@@ -10,11 +10,6 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
-        'migrate' => [
-            'class' => 'backend\modules\migration\console\MigrateController',
-            'useTablePrefix' => true,
-            'migrationPath' => '@database/migrations',
-        ],
         'schedule' => [
             'class' => \omnilight\scheduling\ScheduleController::className(),
             'scheduleFile' => '@app/schedule.php'
@@ -39,9 +34,6 @@ return [
                 ],
             ],
         ]
-    ],
-    'aliases' => [
-        '@migration' => '@backend/modules/migration',
     ],
     'params' => $params,
 ];

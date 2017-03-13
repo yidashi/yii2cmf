@@ -10,6 +10,7 @@ use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -51,6 +52,7 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember('', $this->id);
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -248,7 +250,7 @@ class ArticleController extends Controller
     {
         $this->findModel($id)->softDelete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Url::previous($this->id));
     }
 
 

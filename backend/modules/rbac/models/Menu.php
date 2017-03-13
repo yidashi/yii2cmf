@@ -74,7 +74,7 @@ class Menu extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            ['name', 'unique'],
+            ['name', 'unique', 'targetAttribute' => ['name', 'parent']],
             [['parent'], 'in', 'range' => static::find()->select(['id'])->column(), 'message' => 'Menu "{value}" not found.', ],
             [['data', 'parent'], 'default'],
             ['route', function($attribute){

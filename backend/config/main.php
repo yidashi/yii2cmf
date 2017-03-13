@@ -43,31 +43,10 @@ return [
         'backup' => [
             'class' => 'backup\Module',
         ],
-        'gii' => [
-            'class' => 'gii\Module',
-            'generators' => [
-                'crud' => [
-                    'class' => 'yii\gii\generators\crud\Generator',
-                    'templates' => [
-                        'default' => '@gii/generators/crud/default'
-                    ]
-                ],
-                'model' => [
-                    'class' => 'gii\\generators\model\\Generator',
-                    'useTablePrefix' => true,
-                    'ns' => 'common\\models'
-                ]
-            ]
-        ],
-        'migration' => [
-            'class' => 'migration\Module',
-        ],
     ],
     'aliases' => [
         '@rbac' => '@backend/modules/rbac',
         '@backup' => '@backend/modules/backup',
-        '@gii' => '@backend/modules/gii',
-        '@migration' => '@backend/modules/migration',
     ],
     'as access' => [
         'class' => 'rbac\components\AccessControl',

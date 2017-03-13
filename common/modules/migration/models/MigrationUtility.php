@@ -6,13 +6,13 @@ use yii\helpers\ArrayHelper;
 
 class MigrationUtility extends Model
 {
-
+    
     public $migrationName = "migration";
-
+    
     public $migrationPath;
-
+       
     public $tableSchemas;
-
+    
     public $tableDatas;
 
     /**
@@ -26,7 +26,7 @@ class MigrationUtility extends Model
     function rules()
     {
         return [
-            [["migrationName","migrationPath","tableSchemas","tableDatas","tableOption"],'safe']
+          [["migrationName","migrationPath","tableSchemas","tableDatas","tableOption"],'safe']
         ];
     }
 

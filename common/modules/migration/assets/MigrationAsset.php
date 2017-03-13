@@ -3,7 +3,6 @@ namespace migration\assets;
 
 class MigrationAsset extends  \yii\web\AssetBundle
 {
-    public $sourcePath = '@backend/modules/migration/static';
     public $css = [
         'migration.css',
     ];
@@ -13,4 +12,10 @@ class MigrationAsset extends  \yii\web\AssetBundle
     public $depends = [
         '\backend\assets\AppAsset',
     ];
+
+    public function init()
+    {
+        parent::init();
+        $this->sourcePath = dirname(__DIR__) . '/static';
+    }
 }

@@ -17,7 +17,10 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="box box-primary">
-    <div class="box-header"><h2 class="box-title"><?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>搜索</h2></div>
+    <div class="box-header">
+        <h2 class="box-title"><?= Inflector::camel2id(StringHelper::basename($generator->modelClass)) ?>搜索</h2>
+        <div class="box-tools"><button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" data-original-title="" title=""><i class="fa fa-minus"></i></button></div>
+    </div>
     <div class="box-body">
 
         <?= "<?php " ?>$form = ActiveForm::begin([

@@ -58,8 +58,15 @@ class PackageManager extends Component
 
     public function findByPath($path)
     {
-        $path = new \SplFileInfo($path);
-        $class = $this->namespace . $path->getBasename() . '\\' . $this->infoClass;
+        $aliasFile = $path . '/alias.php';
+        if (file_exists($aliasFile)) {
+            $alias = include $aliasFile;
+            \Yii::setAlias('@' . $alias, $path);
+            $class = $alias . '\\' . $this->infoClass;
+        } else {
+            $path = new \SplFileInfo($path);
+            $class = $this->namespace . $path->getBasename() . '\\' . $this->infoClass;
+        }
         if (class_exists($class)) {
             $config = [
                 'class' => $class
