@@ -69,14 +69,14 @@
         "yii\\composer\\Installer::postCreateProject": {
             "setPermission": [
                 {
-                    "cache": "0777",
-                    "web/assets": "0777",
-                    "web/storage": "0777",
-                    "web/admin/assets": "0777",
-                    "api/runtime": "0777",
-                    "backend/runtime": "0777",
-                    "frontend/runtime": "0777",
-                    "web/api/assets": "0777"
+                    "cache": "0776",
+                    "web/assets": "0776",
+                    "web/storage": "0776",
+                    "web/admin/assets": "0776",
+                    "api/runtime": "0776",
+                    "backend/runtime": "0776",
+                    "frontend/runtime": "0776",
+                    "web/api/assets": "0776"
                 }
             ]
         },
