@@ -57,17 +57,12 @@ use yii\helpers\Url;
         ])?>
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h5>活跃用户</h5>
+                <h5>热门教程</h5>
             </div>
             <div class="panel-body">
-                <ul class="login-user-list">
-                    <?php $users = \common\modules\user\models\User::find()->orderBy('login_at desc')->limit(6)->all();foreach($users as $user): ?>
-                        <li class="col-md-4 col-xs-4 mb15">
-                            <a href="<?= Url::to(['/user/default/index', 'id' => $user->id]) ?>">
-                                <img src="<?= $user->getAvatar(64) ?>" alt="<?= $user->username ?>">
-                                <p><?= $user->username ?></p>
-                            </a>
-                        </li>
+                <ul class="post-list">
+                    <?php $books = \common\modules\book\models\Book::find()->orderBy('view desc')->limit(5)->all();foreach($books as $book): ?>
+                        <li><a href="<?= Url::to(['/book/default/view', 'id' => $book->id]) ?>" title="<?= $book->book_name ?>" target="_blank"><?= $book->book_name ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -99,6 +94,22 @@ use yii\helpers\Url;
                 </ul>
             </div>
         </div>
-        <?php $this->trigger('indexSideBar') ?>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h5>活跃用户</h5>
+            </div>
+            <div class="panel-body">
+                <ul class="login-user-list">
+                    <?php $users = \common\modules\user\models\User::find()->orderBy('login_at desc')->limit(6)->all();foreach($users as $user): ?>
+                        <li class="col-md-4 col-xs-4 mb15">
+                            <a href="<?= Url::to(['/user/default/index', 'id' => $user->id]) ?>">
+                                <img src="<?= $user->getAvatar(64) ?>" alt="<?= $user->username ?>">
+                                <p><?= $user->username ?></p>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
