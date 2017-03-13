@@ -54,16 +54,32 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\"",
+            "yii\\composer\\Installer::postCreateProject"
         ],
         "post-root-package-install" :[
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\"",
+            "yii\\composer\\Installer::postCreateProject"
         ]
     },
     "config": {
         "process-timeout": 1800
     },
     "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "cache": "0776",
+                    "web/assets": "0776",
+                    "web/storage": "0776",
+                    "web/admin/assets": "0776",
+                    "api/runtime": "0776",
+                    "backend/runtime": "0776",
+                    "frontend/runtime": "0776",
+                    "web/api/assets": "0776"
+                }
+            ]
+        },
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
