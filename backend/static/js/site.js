@@ -33,8 +33,10 @@ $(function () {
     });
     var elems = Array.prototype.slice.call(document.querySelectorAll('[data-toggle=switcher]'));
     elems.forEach(function(html) {
-        var switchery = new Switchery(html,{ size: 'small' });
-        jQuery(html).data('switchery', switchery);
+        var disabled = !!$(html).data('switcher-disabled');
+        var size = $(html).data('switcher-size') || 'small';
+        var switchery = new Switchery(html,{ size: size, disabled:disabled, disabledOpacity:1 });
+        $(html).data('switchery', switchery);
     });
 });
 String.prototype.addQueryParams = function(params) {

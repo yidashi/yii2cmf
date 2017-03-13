@@ -44,6 +44,18 @@ class Html extends BaseHtml
         return static::staticControl($value, $options);
     }
 
+    public static function booleanInput($type, $name, $checked = false, $options = [])
+    {
+        $options['data-toggle'] = 'switcher';
+        return parent::booleanInput($type, $name, $checked, $options);
+    }
+
+    public static function activeBooleanInput($type, $model, $attribute, $options = [])
+    {
+        $options['data-toggle'] = 'switcher';
+        return parent::activeBooleanInput($type, $model, $attribute, $options);
+    }
+
     /**
      * 标红字符串中含有的关键词
      * @param $q string 关键词

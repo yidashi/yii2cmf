@@ -30,7 +30,7 @@ return [
         ],
         'formatter' => [
             'class' => 'backend\components\Formatter',
-            'booleanFormat' => ['<i class="fa fa-times text-danger"></i>', '<i class="fa fa-check text-success"></i>']
+            'booleanFormat' => ['<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1"/>', '<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1" checked/>'],
         ],
         'themeManager' => [
             'class' => 'common\components\ThemeManager',
