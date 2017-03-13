@@ -32,8 +32,11 @@ $this->registerMetaTag([
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<?= $this->render('_nav') ?>
+<?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
+<?= $this->render('_header') ?>
+<?php else: ?>
+    <?= $this->render('_nav') ?>
+<?php endif; ?>
 <div class="container content-wrapper">
     <?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
     <?= Breadcrumbs::widget([

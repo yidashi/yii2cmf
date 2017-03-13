@@ -110,7 +110,7 @@ class Book extends \yii\db\ActiveRecord
         foreach ($chapters as $chapter) {
             $item = [];
             $item['label'] = $chapter->chapter_name;
-            $item['url'] = ['/book/update-chapter', 'id' => $chapter->id];
+            $item['url'] = ['update-chapter', 'id' => $chapter->id];
             $item['active'] = (request('id') == $chapter->id && Yii::$app->controller->action->id == 'update-chapter') || (request('chapter_id') == $chapter->id && Yii::$app->controller->action->id == 'create-chapter');
             $item['id'] = $chapter->id;
             $item['pid'] = $chapter->pid;

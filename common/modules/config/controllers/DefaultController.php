@@ -6,116 +6,42 @@ use common\modules\config\models\Config;
 use common\modules\config\models\DatabaseConfigForm;
 use common\modules\config\models\MailConfigForm;
 use Yii;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use yii\base\Model;
+use yii\caching\TagDependency;
 
 /**
  * ConfigController implements the CRUD actions for Config model.
  */
 class DefaultController extends Controller
 {
-    /**
-     * Lists all Config models.
-     *
-     * @return mixed
-     */
     public function actionIndex()
     {
-        $query = Config::find();
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
+        $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $group = Yii::$app->request->get('group', current(array_keys($groups)));
+        $configModels = Config::find()->where(['group' => $group])->all();
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
+            'groups' => $groups,
+            'group' => $group,
+            'configModels' => $configModels
         ]);
     }
-
-    /**
-     * Displays a single Config model.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
-    public function actionView($id)
+    public function actionStore()
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Config model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Config();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+        $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $group = Yii::$app->request->get('group', current(array_keys($groups)));
+        $configModels = Config::find()->where(['group' => $group])->all();
+        if (Model::loadMultiple($configModels, \Yii::$app->request->post()) && Model::validateMultiple($configModels)) {
+            foreach ($configModels as $configModel) {
+                /* @var $config Config */
+                $configModel->save(false);
+            }
+            TagDependency::invalidate(\Yii::$app->cache,  Yii::$app->config->cacheTag);
+            Yii::$app->session->setFlash('success', '保存成功');
+            return $this->redirect(['index', 'group' => $group]);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing Config model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Deletes an existing Config model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
-    }
-
-    /**
-     * Finds the Config model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param int $id
-     *
-     * @return Config the loaded model
-     *
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    protected function findModel($id)
-    {
-        if (($model = Config::findOne($id)) !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            Yii::$app->session->setFlash('error', '保存失败');
+            return $this->redirect(['index', 'group' => $group]);
         }
     }
 

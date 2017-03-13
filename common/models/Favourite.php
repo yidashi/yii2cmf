@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\models\behaviors\FavouriteBehavior;
+use common\behaviors\NotifyBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -54,7 +54,10 @@ class Favourite extends \yii\db\ActiveRecord
                 'class' => TimestampBehavior::className(),
                 'updatedAtAttribute' => false
             ],
-            FavouriteBehavior::className()
+            [
+                'class' => NotifyBehavior::className(),
+                'entity' => __CLASS__
+            ]
         ];
     }
 

@@ -2,8 +2,8 @@
 
 namespace common\models;
 
+use common\behaviors\NotifyBehavior;
 use common\behaviors\VoteBehavior;
-use common\models\behaviors\CommentBehavior;
 use common\modules\user\behaviors\UserBehavior;
 use common\modules\user\models\User;
 use yii\behaviors\BlameableBehavior;
@@ -95,7 +95,10 @@ class Comment extends \yii\db\ActiveRecord
             ],
             VoteBehavior::className(),
             UserBehavior::className(),
-            CommentBehavior::className(),
+            [
+                'class' => NotifyBehavior::className(),
+                'entity' => __CLASS__
+            ],
             [
                 'class' => UserBehaviorBehavior::className(),
                 'eventName' => [self::EVENT_AFTER_INSERT],

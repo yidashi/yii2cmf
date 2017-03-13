@@ -1,33 +1,32 @@
 <?php
-
-use yii\grid\GridView;
+/**
+ * author: yidashi
+ * Date: 2016/1/11
+ * Time: 18:01.
+ */
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = '配置';
+$this->title = '网站设置';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php $this->beginBlock('content-header') ?>
-<?= $this->title . ' ' . Html::a(Yii::t('app', 'Create Config'), ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
-<?php $this->endBlock() ?>
-<div class="box box-primary">
-    <div class="box-body">
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            'columns' => [
-                'id',
-                'name',
-                [
-                    'attribute' => 'type',
-                    'value' => function ($model) {
-                        return $model->getTypeList()[$model->type];
-                    },
-                ],
-                'group',
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]); ?>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <?php foreach($groups as $k => $g): ?>
+            <li<?php if ($k == $group): ?> class="active"<?php endif; ?>><?= Html::a($g, ['index', 'group' => $k]) ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="tab-content">
+        <?php
+        $form = ActiveForm::begin(['action' => ['store', 'group' => $group]]);
+        foreach ($configModels as $index => $configModel) {
+            echo $form->field($configModel, "[$index]value")->label($configModel->description)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(),[
+                'data' => $configModel->extra,
+                'type' => $configModel->type
+            ]);
+        }
+        echo Html::submitButton('提交', ['class' => 'btn btn-primary btn-flat btn-block']);
+        ActiveForm::end();
+        ?>
     </div>
 </div>

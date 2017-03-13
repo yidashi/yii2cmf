@@ -7,7 +7,6 @@
  */
 
 $this->title = '搜索_' . Yii::$app->request->get('q');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-header">
     <h2>搜索 - <?= Yii::$app->request->get('q') ?></h2>

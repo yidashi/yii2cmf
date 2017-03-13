@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\behaviors\CategoryBehavior;
 use common\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
@@ -10,7 +11,6 @@ use common\behaviors\TagBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\article\Base;
 use common\models\article\Exhibition;
-use common\models\behaviors\ArticleBehavior;
 use common\models\query\ArticleQuery;
 use common\modules\attachment\behaviors\UploadBehavior;
 use common\modules\user\behaviors\UserBehavior;
@@ -151,7 +151,7 @@ class Article extends \yii\db\ActiveRecord
                 ],
                 'invokeDeleteEvents' => false // 不触发删除相关事件
             ],
-            ArticleBehavior::className(),
+            CategoryBehavior::className(),
             [
                 'class' => MetaBehavior::className(),
                 'entity' => __CLASS__
@@ -199,6 +199,16 @@ class Article extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        // 删除文章内容
+        $content = $this->data;
+        if ($content != null) {
+            $content->delete();
+        }
     }
 
     public function getMetaData()

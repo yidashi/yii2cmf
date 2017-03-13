@@ -19,10 +19,10 @@ use yii\helpers\Html;
 ]) ?>
 <?php
 NavBar::begin([
-    'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 48, 'height' => 48]) : Yii::$app->config->get('SITE_NAME'),
+    'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 62, 'height' => 30]) : Yii::$app->config->get('SITE_NAME'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-fixed-top'
+        'class' => 'navbar-inverse'
     ],
 ]);
 $menuItems = NavModel::getItems('header');

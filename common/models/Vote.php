@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\models\behaviors\VoteBehavior;
+use common\behaviors\NotifyBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -35,7 +35,7 @@ class Vote extends \yii\db\ActiveRecord
         return [
             [['entity', 'user_id', 'entity_id'], 'required'],
             [['user_id', 'entity_id'], 'integer'],
-            [['entity', 'action'], 'string', 'max' => 20],
+            [['entity', 'action'], 'string', 'max' => 80],
             ['action', 'in', 'range' => ['up', 'down']],
         ];
     }
@@ -60,7 +60,10 @@ class Vote extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            VoteBehavior::className()
+            [
+                'class' => NotifyBehavior::className(),
+                'entity' => __CLASS__
+            ]
         ];
     }
 

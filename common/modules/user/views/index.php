@@ -11,7 +11,7 @@ use yii\helpers\Url;
  */
 $this->title = '个人中心';
 ?>
-<div class="col-lg-3">
+<div class="col-md-3">
     <div class="panel panel-default">
         <div class="panel-body" style="background: url(http://www.yiichina.com/images/user-bg.jpg); background-size:100% 120px; background-repeat:no-repeat;">
             <div class="profile-user">
@@ -23,7 +23,7 @@ $this->title = '个人中心';
                 <p><?= $user->profile->signature?></p>
                 <div class="button">
                     <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($user->id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($user->id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $user->id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($user->id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>
-                    <a class="btn btn-xs btn-primary" href="<?= Url::to(['/message/default/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                    <a class="btn btn-xs btn-primary<?php if ($user->id == Yii::$app->user->id):?> disabled<?php endif; ?>" href="<?= Url::to(['/message/default/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
                 </div>
                 <ul class="stat">
                     <li>金钱<h3><?= $user->profile->money ?></h3></li>
@@ -51,6 +51,6 @@ $this->title = '个人中心';
         </div>
     </div>
 </div>
-<div class="col-lg-9">
+<div class="col-md-9">
 
 </div>

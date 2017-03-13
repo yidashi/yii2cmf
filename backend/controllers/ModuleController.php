@@ -127,10 +127,6 @@ class ModuleController extends Controller
                 $configModels[$k] = $configModel;
             }
         }
-        $dataProvider = new ArrayDataProvider([
-            'models' => $configModels,
-            'pagination' => false
-        ]);
         $model = $module->getModel();
         if (\Yii::$app->request->isPost && Model::loadMultiple($configModels, \Yii::$app->request->post()) && Model::validateMultiple($configModels)) {
             $configs = Json::encode($configModels);
@@ -141,7 +137,7 @@ class ModuleController extends Controller
 
         return $this->render('config', [
             'model' => $model,
-            'dataProvider' => $dataProvider
+            'configModels' => $configModels
         ]);
     }
 }

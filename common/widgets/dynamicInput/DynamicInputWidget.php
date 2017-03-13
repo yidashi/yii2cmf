@@ -29,6 +29,7 @@ class DynamicInputWidget extends InputWidget
     public $types = [
         'text',
         'array',
+        'boolean',
         'password',
         'textarea',
         'select',
@@ -84,6 +85,9 @@ class DynamicInputWidget extends InputWidget
                 $options = array_merge($this->inputOptions, ['rows' => 5], $this->options);
                 return Html::textarea($this->name, $this->value, $options);
                 break;
+            case 'boolean': // 布尔
+                return Html::checkbox($this->name, $this->value, $this->options);
+                break;
             case 'textarea': // 多行文本框
                 $options = array_merge($this->inputOptions, ['rows' => 5], $this->options);
                 return Html::textarea($this->name, $this->value, $options);
@@ -101,7 +105,7 @@ class DynamicInputWidget extends InputWidget
                 ], $this->options));
                 break;
             case 'checkbox': // 多选
-                return Html::checkboxList($this->name, $this->value, $this->data, $this->options);
+                return Html::checkboxList($this->name, $this->value, $this->data, ArrayHelper::merge($this->options, ['label' => false]));
                 break;
             case 'radio': // 单选
                 return Html::radioList($this->name, $this->value, $this->data, $this->options);
@@ -160,6 +164,9 @@ class DynamicInputWidget extends InputWidget
             case 'array': // 数组
                 $options = array_merge($this->inputOptions, ['rows' => 5], $this->options);
                 return Html::activeTextarea($this->model, $this->attribute, $options);
+                break;
+            case 'boolean': // 布尔
+                return Html::activeCheckbox($this->model, $this->attribute, ArrayHelper::merge($this->options, ['label' => false]));
                 break;
             case 'textarea': // 多行文本框
                 $options = array_merge($this->inputOptions, ['rows' => 5], $this->options);

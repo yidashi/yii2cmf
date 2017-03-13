@@ -44,7 +44,7 @@ class DatabaseForm extends Model
             'password' => $this->password,
             'charset' => 'utf8'
         ]);
-    
+
         try {
          
             Yii::$app->get("newDb")->open();

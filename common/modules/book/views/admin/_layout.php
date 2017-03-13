@@ -35,7 +35,7 @@
             'items' => $model->book->getUpdateMenuItems()
         ]) ?>
 
-        <?= \yii\helpers\Html::a('<i class="fa fa-plus"></i> 新增章节', ['/book/create-chapter', 'id' => $model->book->id], ['class' => 'btn bg-maroon btn-sm']) ?>
+        <?= \yii\helpers\Html::a('<i class="fa fa-plus"></i> 新增章节', ['/book/admin/create-chapter', 'id' => $model->book->id], ['class' => 'btn bg-maroon btn-sm']) ?>
 
     </div>
     <div class="col-md-9">

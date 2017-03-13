@@ -16,6 +16,9 @@ use yii\helpers\StringHelper;
 use Yii;
 use common\models\UserBehaviorLog as Log;
 
+/**
+ * 记录用户行为
+ */
 class UserBehaviorBehavior extends Behavior
 {
     const RULE = '/\{(.+?)(?:\{(.+)\})?\}/';
