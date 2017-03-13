@@ -31,6 +31,11 @@ $(function () {
             return false;
         }
     });
+    var elems = Array.prototype.slice.call(document.querySelectorAll('[data-toggle=switcher]'));
+    elems.forEach(function(html) {
+        var switchery = new Switchery(html,{ size: 'small' });
+        jQuery(html).data('switchery', switchery);
+    });
 });
 String.prototype.addQueryParams = function(params) {
     var split = '?';

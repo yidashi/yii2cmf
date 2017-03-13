@@ -6,7 +6,7 @@
  * Description:
  */
 
-namespace backend\behaviors;
+namespace common\behaviors;
 
 
 use yii\base\Behavior;

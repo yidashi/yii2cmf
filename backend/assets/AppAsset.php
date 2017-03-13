@@ -27,6 +27,7 @@ class AppAsset extends AssetBundle
         'common\assets\ModalAsset',
         'common\assets\FontAwesomeAsset',
         'common\assets\FancyboxAsset',
+        'backend\assets\SwitcherAsset'
     ];
 
     /**

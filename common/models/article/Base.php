@@ -2,10 +2,9 @@
 
 namespace common\models\article;
 
-use backend\behaviors\DynamicFormBehavior;
+use common\behaviors\DynamicFormBehavior;
 use common\behaviors\XsBehavior;
 use common\models\Article;
-use common\models\behaviors\ArticleDataBehavior;
 use yii\helpers\StringHelper;
 
 /**

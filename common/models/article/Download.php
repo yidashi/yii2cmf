@@ -4,7 +4,7 @@ namespace common\models\article;
 
 use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
-use backend\behaviors\DynamicFormBehavior;
+use common\behaviors\DynamicFormBehavior;
 
 /**
  * This is the model class for table "{{%article_download}}".

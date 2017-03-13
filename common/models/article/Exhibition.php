@@ -2,7 +2,7 @@
 
 namespace common\models\article;
 
-use backend\behaviors\DynamicFormBehavior;
+use common\behaviors\DynamicFormBehavior;
 use yii\db\ActiveRecord;
 
 /**

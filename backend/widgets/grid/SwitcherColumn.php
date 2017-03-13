@@ -1,6 +1,7 @@
 <?php
 namespace backend\widgets\grid;
 
+use backend\assets\SwitcherAsset;
 use yii\grid\DataColumn;
 use yii\helpers\Html;
 use common\enums\StatusEnum;
@@ -17,12 +18,6 @@ class SwitcherColumn extends  DataColumn
     {
         SwitcherAsset::register($this->grid->view);
         $js = <<<'EOT'
-			var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-			elems.forEach(function(html) {
-			  var switchery = new Switchery(html,{ size: 'small' });
-			  jQuery(html).data('switchery', switchery);
-			});
-
 		    $('.js-switch').on('change', function(){
 		        var switchery =  $(this).data("switchery");
 		        switchery.disable();
