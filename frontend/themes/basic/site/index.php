@@ -22,7 +22,7 @@ use yii\helpers\Url;
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><?= $category->title ?></h3>
-                        <div class="pull-right"><a href="<?= Url::to(['/article/index', 'cate' => $category->id]) ?>" target="_blank">更多 >></a></div>
+                        <div class="pull-right"><a href="<?= Url::to(['/article/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
                     </div>
                     <div class="panel-body">
                         <ul class="category-article-list">

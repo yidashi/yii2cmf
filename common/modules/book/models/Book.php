@@ -76,6 +76,14 @@ class Book extends \yii\db\ActiveRecord
         ];
     }
 
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        foreach ($this->chapters as $chapter) {
+            $chapter->delete();
+        }
+    }
+
     public function getFirstChapter()
     {
         return $this->hasOne(BookChapter::className(), ['book_id' => 'id'])->orderBy(['sort' => SORT_ASC]);

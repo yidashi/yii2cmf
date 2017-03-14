@@ -4,6 +4,7 @@ namespace common\models;
 use common\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\StringHelper;
 
 /**
@@ -36,7 +37,17 @@ class Page extends \yii\db\ActiveRecord
             ['markdown', 'default', 'value' => $this->getIsMarkdown()],
             [['use_layout'], 'in', 'range' => [0, 1]],
             [['title'], 'string', 'max' => 50],
+            ['content', 'filterHtml']
         ];
+    }
+
+    public function filterHtml($attribute)
+    {
+        $this->$attribute = HtmlPurifier::process($this->$attribute, function ($config) {
+            $config->set('HTML.Allowed', 'p[style],a[href|title],img[src|title|alt|class],h3,ul,ol,li,span,b,strong,hr,code,table,tbody,tr,td');
+            // 清除空标签
+            $config->set('AutoFormat.RemoveEmpty', true);
+        });
     }
 
     /**

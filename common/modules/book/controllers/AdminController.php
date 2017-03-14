@@ -22,6 +22,12 @@ class AdminController extends Controller
     public function actions()
     {
         return [
+            'delete' => [
+                'class' => 'backend\\actions\\Delete',
+                'findModel' => function($id) {
+                    return Book::findOne($id);
+                }
+            ],
             'move-chapter' => [
                 'class' => Position::className(),
                 'returnUrl' => request()->referrer,

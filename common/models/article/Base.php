@@ -5,6 +5,7 @@ namespace common\models\article;
 use common\behaviors\DynamicFormBehavior;
 use common\behaviors\XsBehavior;
 use common\models\Article;
+use yii\helpers\HtmlPurifier;
 use yii\helpers\StringHelper;
 
 /**
@@ -34,7 +35,17 @@ class Base extends \yii\db\ActiveRecord
             [['id', 'markdown'], 'integer'],
             ['markdown', 'default', 'value' => $this->getIsMarkdown()],
             [['content'], 'string'],
+            ['content', 'filterHtml']
         ];
+    }
+
+    public function filterHtml($attribute)
+    {
+        $this->$attribute = HtmlPurifier::process($this->$attribute, function ($config) {
+            $config->set('HTML.Allowed', 'p[style],a[href|title],img[src|title|alt|class],h3,ul,ol,li,span,b,strong,hr,code,table,tbody,tr,td');
+            // 清除空标签
+            $config->set('AutoFormat.RemoveEmpty', true);
+        });
     }
 
     /**
