@@ -34,4 +34,25 @@ class ActiveField extends \yii\widgets\ActiveField
         $this->template = "{label}\n<div class=\"input-group $size\"><div class=\"input-group-" . $prefixType . "\">" . $prefix . "</div>\n{input}</div>\n{hint}\n{error}";
         return $this;
     }
+
+    public function boolean($options = [], $enclosedByLabel = true)
+    {
+        if ($enclosedByLabel) {
+            $this->parts['{input}'] = Html::activeBoolean($this->model, $this->attribute, $options);
+            $this->parts['{label}'] = '';
+        } else {
+            if (isset($options['label']) && !isset($this->parts['{label}'])) {
+                $this->parts['{label}'] = $options['label'];
+                if (!empty($options['labelOptions'])) {
+                    $this->labelOptions = $options['labelOptions'];
+                }
+            }
+            unset($options['labelOptions']);
+            $options['label'] = null;
+            $this->parts['{input}'] = Html::activeBoolean($this->model, $this->attribute, $options);
+        }
+        $this->adjustLabelFor($options);
+
+        return $this;
+    }
 }

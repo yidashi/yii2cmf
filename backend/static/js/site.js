@@ -35,7 +35,7 @@ $(function () {
     elems.forEach(function(html) {
         var disabled = !!$(html).data('switcher-disabled');
         var size = $(html).data('switcher-size') || 'small';
-        var switchery = new Switchery(html,{ size: size, disabled:disabled, disabledOpacity:1 });
+        var switchery = new Switchery(html,{ size: size, disabled:disabled, disabledOpacity:0.5 });
         $(html).data('switchery', switchery);
     });
 });

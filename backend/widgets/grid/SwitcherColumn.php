@@ -62,7 +62,8 @@ EOT;
                 'class' => 'js-switch',
                 'data-url' => Url::to($this->route),
                 'data-params' => $params,
-                'data-reload' => $this->reload
+                'data-reload' => $this->reload,
+                'data-toggle' => 'switcher'
             ]);
         }
 
