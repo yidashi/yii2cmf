@@ -9,50 +9,65 @@
 namespace frontend\widgets\comment;
 
 
+use common\models\Comment;
 use frontend\models\Article;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
-use common\models\Comment;
 
 class CommentWidget extends Widget
 {
-    public $type = 'article';
-    public $type_id;
+    public $entity = 'common\models\Article';
+    public $entityId;
+    /**
+     * @var \yii\db\ActiveRecord
+     */
+    public $model;
     public $listTitle = '评论';
     public $createTitle = '发表评论';
 
+    public function init()
+    {
+        parent::init();
+        if (isset($this->model)) {
+            $this->entity = $this->model->getEntity();
+            $this->entityId = $this->model->getEntityId();
+        }
+    }
     public function run()
     {
-        // 评论列表
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->andWhere(['type' => $this->type, 'type_id' => $this->type_id, 'parent_id' => 0]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'is_top' => SORT_DESC,
-                    'id' => SORT_DESC
+        if (!isset($this->model) || $this->model->getCommentEnabled()) {
+            // 评论列表
+            $dataProvider = new ActiveDataProvider([
+                'query' => Comment::find()->andWhere(['entity' => $this->entity, 'entity_id' => $this->entityId, 'status' => 1, 'parent_id' => 0]),
+                'pagination' => [
+                    'pageSize' => 10,
+                ],
+                'sort' => [
+                    'defaultOrder' => [
+                        'is_top' => SORT_DESC,
+                        'id' => SORT_DESC
+                    ]
                 ]
-            ]
-        ]);
-        $model = Article::find()->normal()->andWhere(['id' => $this->type_id])->one();
-        if (is_null($model) || !$model->hasProperty('comment')) {
-            $comment = $dataProvider->getTotalCount();
-        } else {
-            $comment = $model->comment;
-        }
-        // 评论框
-        $commentModel = new Comment();
-        $commentModel->type = $this->type;
-        $commentModel->type_id = $this->type_id;
+            ]);
+            if (isset($this->model)) {
+                $commentTotal = $this->model->getCommentTotal();
+            } else {
+                $commentTotal = Comment::activeCount($this->entity, $this->entityId);
+            }
+            // 评论框
+            $commentModel = new Comment();
+            $commentModel->entity = $this->entity;
+            $commentModel->entity_id = $this->entityId;
 
-        return $this->render('index', [
-            'comment' => $comment,
-            'commentModel' => $commentModel,
-            'dataProvider' => $dataProvider,
-            'listTitle' => $this->listTitle,
-            'createTitle' => $this->createTitle,
-        ]);
+            return $this->render('index', [
+                'entity' => $this->entity,
+                'entityId' => $this->entityId,
+                'commentTotal' => $commentTotal,
+                'commentModel' => $commentModel,
+                'dataProvider' => $dataProvider,
+                'listTitle' => $this->listTitle,
+                'createTitle' => $this->createTitle,
+            ]);
+        }
     }
 }

@@ -9,11 +9,23 @@
 namespace api\modules\v1\models;
 
 
+use yii\helpers\ArrayHelper;
+
 class Article extends \common\models\Article
 {
+    public function fields()
+    {
+        return ArrayHelper::merge(parent::fields(), [
+            'cover' => function ($model) {
+                return ArrayHelper::getValue($model, 'cover.url', '');
+            }
+        ]);
+    }
 
     public function extraFields()
     {
-        return ['data'];
+        return [
+            'data'
+        ];
     }
 }

@@ -2,25 +2,28 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Spider;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * SpiderController implements the CRUD actions for Spider model.
  */
 class SpiderController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
@@ -117,5 +120,14 @@ class SpiderController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionCrawl($id)
+    {
+        set_time_limit(0);
+        Yii::$app->response->format = 'json';
+        $spider = $this->findModel($id);
+        $spider->crawl();
+        return ['message' => '采集成功'];
     }
 }

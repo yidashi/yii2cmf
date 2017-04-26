@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="config-index">
     <?php \yii\widgets\ActiveForm::begin(['id' => 'export-form', 'action' => ['init']])?>
     <p>
-        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success', 'id' => 'export']) ?>
+        <?= Html::a('立即备份', ['init'], ['class' => 'btn btn-success btn-flat', 'id' => 'export']) ?>
     </p>
     <div class="box box-primary">
         <div class="box-body">
@@ -47,7 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data' => [
                                             'ajax' => 1,
                                             'method' => 'get'
-                                        ]
+                                        ],
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             },
@@ -58,7 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data' => [
                                             'ajax' => 1,
                                             'method' => 'get'
-                                        ]
+                                        ],
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             }
@@ -80,9 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
         $optimize.add($repair).click(function(){
             $.post(this.href, $form.serialize(), function(data){
                 if(data.status){
-                    updateAlert(data.info,'alert-success');
+                    $.modal.success(data.info);
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                 }
                 setTimeout(function(){
                     $('#top-alert').find('button').click();
@@ -95,6 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $export.click(function(){
             $export.parent().children().addClass("disabled");
             $export.html("正在发送备份请求...");
+            var that = this;
             $.post(
                 $form.attr("action"),
                 $form.serialize(),
@@ -102,14 +105,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     if(data.status){
                         tables = data.tables;
                         $export.html(data.info + "开始备份，请不要关闭本页面！");
-                        backup(data.tab);
+                        backup.call(that, data.tab);
                         window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
                     } else {
-                        updateAlert(data.info,'alert-error');
+                        $.modal.error(data.info);
                         $export.parent().children().removeClass("disabled");
                         $export.html("立即备份");
                         setTimeout(function(){
-                            $('#top-alert').find('button').click();
                             $(that).removeClass('disabled').prop('disabled',false);
                         },1500);
                     }
@@ -133,12 +135,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     backup(data.tab, tab.id != data.tab.id);
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                     $export.parent().children().removeClass("disabled");
                     $export.html("立即备份");
                     setTimeout(function(){
-                        $('#top-alert').find('button').click();
-                        $(that).removeClass('disabled').prop('disabled',false);
+                        $(this).removeClass('disabled').prop('disabled',false);
                     },1500);
                 }
             }, "json");

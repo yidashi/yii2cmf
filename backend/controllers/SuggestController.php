@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Comment;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * SuggestController implements the CRUD actions for Suggest model.
@@ -33,7 +33,7 @@ class SuggestController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->where(['type' => 'suggest']),
+            'query' => Comment::find()->where(['entity' => 'suggest']),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC
@@ -70,7 +70,7 @@ class SuggestController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Yii::$app->request->getReferrer());
     }
 
     /**

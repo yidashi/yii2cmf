@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\SystemLogSearch */
@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="system-log-index">
 
     <p>
-        <?php echo Html::a('清除', false, ['class' => 'btn btn-danger', 'data-method'=>'delete']) ?>
+        <?php echo Html::a('清除', false, ['class' => 'btn btn-danger btn-flat', 'data-method'=>'delete']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template'=>'{view}{delete}'
+                        'template'=>'{view} {delete}'
                     ]
                 ]
             ]); ?>

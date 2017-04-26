@@ -2,8 +2,6 @@
 
 namespace common\models;
 
-use Yii;
-
 /**
  * This is the model class for table "pop_notify_category".
  *
@@ -18,7 +16,7 @@ class NotifyCategory extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pop_notify_category';
+        return '{{%notify_category}}';
     }
 
     /**

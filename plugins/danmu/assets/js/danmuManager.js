@@ -10,7 +10,8 @@ var page = 1;
 var DanmuManager = function(opt) {
   this.q = []; // store danmu collection
   this.danmu_list_url = opt.danmu_list_url;
-  this.article_id = opt.art_id;  //文章ID
+  this.entity_id = opt.entity_id;  //文章ID
+  this.entity = opt.entity;  //文章ID
   this.pos_current = 0; //进度
   this.pos_last_time = 0;  //上次请求的文章进度
   this.fetch_size = opt.fetch_size || 20; //ajax获取弹幕时的数量
@@ -50,7 +51,7 @@ DanmuManager.prototype.read = function(cb) {
 
   if(dm && dm.id){
     this.log('read, dm=' + dm.id + ', dm.avatar=' + dm.avatar);
-    dm.avatar = this.optimizeImg(dm.user_id);
+    dm.avatar = this.optimizeImg(dm.avatar);
     return cb(dm, len);
   } else {
     return cb(null, len);
@@ -58,13 +59,12 @@ DanmuManager.prototype.read = function(cb) {
 }
 
 DanmuManager.prototype.optimizeImg = function(url){
-  if(url.search('qzapp.qlogo.cn/') > 0){ // QQ avatar
-    return url.replace(/\/100$/,'\/30');
+  if(url && url.search('qzapp.qlogo.cn/') > 0){ // QQ avatar
+    url = url.replace(/\/100$/,'\/30');
   }
-  if(url.search('sinaimg.cn') > 0){ // Weibo avatar
-    return url.replace(/\/50\//, '\/30\/');
+  if(url && url.search('sinaimg.cn') > 0){ // Weibo avatar
+    url = url.replace(/\/50\//, '\/30\/');
   }
-    return 'http://static.51siyuan.cn/default/avatar.png';
   return url;
 }
 
@@ -79,7 +79,7 @@ DanmuManager.prototype.readSync = function() {
 
   //如果队列有数据
   if(dm){
-    dm.avatar = this.optimizeImg(dm.user_id);
+    dm.avatar = this.optimizeImg(dm.avatar);
     dm.content = this.filterContent(dm.content);
     this.log('read, dm=' + dm.id + ', dm.avatar=' + dm.avatar);
     return {'dm': dm, 'len': len};
@@ -170,13 +170,13 @@ DanmuManager.prototype.get_list = function() {
   // 获取当前进度的最后一次获取的弹幕ID
   var _last_dm_id = this.last_dm_ids[_current_section + ''] || 0;
   var post_data = {
-    article_id : that.article_id,
-    bpos: that.pos_last_time,
-    epos: that.pos_current,
-    pagesize: that.fetch_size,
-    last_id: _last_dm_id,
-    type: 0,
-    time: ts,
+      entity_id : that.entity_id,
+      entity : that.entity,
+      bpos: that.pos_last_time,
+      epos: that.pos_current,
+      pagesize: that.fetch_size,
+      last_id: _last_dm_id,
+      time: ts,
       page:page
   };
   this.log('---start ajax---');
@@ -194,7 +194,7 @@ DanmuManager.prototype.get_list = function() {
       if(_current_section != that.get_pos_section()){
         return that.log('give up, cause pos_section has been changed');
       }
-        page++;
+      page++;
       var dm_list = that.transform(data, _current_section);
       that.append_data(dm_list);
       that.log('get_list, has_next=' + data.hasNext);

@@ -1,8 +1,5 @@
 <?php
 
-use common\helpers\Html;
-use yii\helpers\Url;
-
 /* @var $this yii\web\View */
 /* @var $models array */
 /* @var $pages array */
@@ -10,16 +7,17 @@ use yii\helpers\Url;
 if(isset($category)) {
     $this->title = $category->title;
     $this->params['breadcrumbs'][] = $category->title;
-    $this->registerMetaTag(['name' => 'keywords', 'content' => $category->title . ' ' . Yii::$app->config->get('SEO_SITE_KEYWORDS')]);
-    $this->registerMetaTag(['name' => 'description', 'content' => $category->description . ' ' . Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);
+    list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $category->getMetaData();
 } elseif (isset($tag)) {
     $this->title = $tag->name;
     $this->params['breadcrumbs'][] = $tag->name;
+} else {
+    $this->title = '文章';
+    $this->params['breadcrumbs'][] = $this->title;
 }
 
-
 ?>
-<div class="col-lg-8">
+<div class="col-lg-9">
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',
@@ -43,7 +41,13 @@ if(isset($category)) {
     ]); ?>
     <?php endif;?>
 </div>
-<div class="col-lg-4">
+<div class="col-lg-3">
+    <?= \common\modules\area\widgets\AreaWidget::widget([
+        'slug' => 'article-index-sidebar',
+        "blockClass"=>"panel panel-default",
+        "headerClass"=>"panel-heading",
+        "bodyClass"=>"panel-body",
+    ])?>
     <div class="panel panel-success">
         <div class="panel-heading">
             <h5>热门标签</h5>

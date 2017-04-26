@@ -2,18 +2,29 @@
 
 namespace common\models;
 
+use common\behaviors\PositionBehavior;
+use common\behaviors\CacheInvalidateBehavior;
+use common\behaviors\MetaBehavior;
+use common\helpers\Tree;
 use common\models\behaviors\CategoryBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\helpers\ArrayHelper;
+use yii\caching\TagDependency;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%article}}".
  *
  * @property int $id
+ * @property int $pid
  * @property string $title
+ * @property string $slug
+ * @property string $description
  * @property int $created_at
  * @property int $updated_at
+ * @property string $module
+ * @property string $cover
+ * @property int $allow_publish
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -31,9 +42,15 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'name'], 'required'],
-            [['pid', 'is_nav', 'sort'], 'integer'],
-            [['is_nav','sort'], 'default', 'value' => 0]
+            [['title'], 'required'],
+            //中文没法自动生成slug，又没必要必填
+            ['slug', 'default', 'value' => function ($model) {
+                return $model->title;
+            }],
+            ['module', 'safe'],
+            [['pid', 'sort', 'allow_publish'], 'integer'],
+            ['pid', 'default', 'value' => 0],
+            [['sort'], 'default', 'value' => 0]
         ];
     }
 
@@ -45,22 +62,16 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => '分类名',
-            'name' => '标识',
+            'slug' => '标识',
             'pid' => '上级分类',
             'ptitle' => '上级分类', // 非表字段,方便后台显示
             'description' => '分类介绍',
             'article' => '文章数', //冗余字段,方便查询
-            'is_nav' => '是否显示在导航栏',
             'sort' => '排序',
+            'module' => '支持的文档类型',
+            'allow_publish' => '是否允许发布内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
-        ];
-    }
-
-    public function attributeHints()
-    {
-        return [
-            'name' => '(url里显示)'
         ];
     }
 
@@ -71,10 +82,37 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            CategoryBehavior::className()
+            [
+                'class' => MetaBehavior::className(),
+            ],
+            CategoryBehavior::className(),
+            'positionBehavior' => [
+                'class' => PositionBehavior::className(),
+                'positionAttribute' => 'sort',
+                'groupAttributes' => [
+                    'pid'
+                ],
+            ],
+            [
+                'class' => CacheInvalidateBehavior::className(),
+                'tags' => [
+                    'categoryList'
+                ]
+
+            ]
         ];
     }
 
+    public function getMetaData()
+    {
+        $model =  $this->getMetaModel();
+
+        $title = $model->title ? : $this->title;
+        $keywords = $model->keywords;
+        $description =$model->description ? : $this->description;
+
+        return [$title, $keywords, $description];
+    }
     /**
      * 获取分类名
      */
@@ -83,58 +121,30 @@ class Category extends \yii\db\ActiveRecord
         return static::find()->select('title')->where(['id' => $this->pid])->scalar();
     }
 
-    public static function lists()
+    public static function lists($module = null)
     {
-        $list = Yii::$app->cache->get('categoryList');
+        $list = Yii::$app->cache->get(['categoryList', $module]);
         if ($list === false) {
-            $list = static::find()->select('title')->indexBy('id')->column();
-            Yii::$app->cache->set('categoryList', $list);
+            $query = static::find();
+            if ($module) {
+                $query->where(new Expression("FIND_IN_SET('{$module}', module) "));
+            }
+            $list = $query->asArray()->all();
+            Yii::$app->cache->set(['categoryList', $module], $list, 0, new TagDependency(['tags' => ['categoryList']]));
         }
-
         return $list;
     }
 
-    public static function tree($list = null)
+    public static function getDropDownList($tree = [], &$result = [], $deep = 0, $separator = '--')
     {
-        if (is_null($list)) {
-            $list = self::find()->asArray()->all();
-        }
-
-        $tree = self::list2tree($list);
-        return $tree;
-    }
-
-    public static function treeList($tree = null, &$result = [], $deep = 0, $separator = '--')
-    {
-        if (is_null($tree)) {
-            $tree = self::tree();
-        }
-        $deep++;
-        foreach($tree as $list) {
-            $list['title'] = str_repeat($separator, $deep-1) . $list['title'];
-            $result[] = $list;
-            if (isset($list['_child'])) {
-                self::treeList($list['_child'], $result, $deep, $separator);
-            }
-        }
-        return $result;
-    }
-    /**
-     * 分类名下拉列表
-     */
-    public static function getDropDownlist($tree = [], &$result = [], $deep = 0, $separator = '--')
-    {
-        if (empty($tree)) {
-            $tree = self::tree();
-        }
         $deep++;
         foreach($tree as $list) {
             $result[$list['id']] = str_repeat($separator, $deep-1) . $list['title'];
-            if (isset($list['_child'])) {
-                self::getDropDownlist($list['_child'], $result, $deep);
+            if (isset($list['children'])) {
+                self::getDropDownList($list['children'], $result, $deep);
             }
         }
-        return ['无'] + $result;
+        return $result;
     }
 
     public function getCategoryNameById($id)
@@ -144,44 +154,55 @@ class Category extends \yii\db\ActiveRecord
         return isset($list[$id]) ? $list[$id] : null;
     }
 
-    public function getCategoryIdByName($name)
+    public static function getIdByName($name)
     {
-        $list = $this->lists();
+        $list = self::lists();
 
         return array_search($name, $list);
     }
 
-    /**
-     * 把返回的数据集转换成Tree
-     * @param $list
-     * @param string $pk
-     * @param string $pid
-     * @param string $child
-     * @param int $root
-     * @return array
-     */
-    public static function list2tree($list, $pk='id', $pid = 'pid', $child = '_child', $root = 0) {
-        // 创建Tree
-        $tree = array();
-        if(is_array($list)) {
-            // 创建基于主键的数组引用
-            $refer = array();
-            foreach ($list as $key => $data) {
-                $refer[$data[$pk]] =& $list[$key];
-            }
-            foreach ($list as $key => $data) {
-                // 判断是否存在parent
-                $parentId =  $data[$pid];
-                if ($root == $parentId) {
-                    $tree[] =& $list[$key];
-                }else{
-                    if (isset($refer[$parentId])) {
-                        $parent =& $refer[$parentId];
-                        $parent[$child][] =& $list[$key];
-                    }
-                }
-            }
+    public static function findByIdOrSlug($id)
+    {
+        if (intval($id) == 0) {
+            $condition = ["slug" => $id];
+        } else {
+            $condition = [
+                $id
+            ];
         }
-        return $tree;
+
+        return static::findOne($condition);
+    }
+
+    public static function getAllowPublishEnum()
+    {
+        return [
+            '不允许',
+            '只允许后台',
+            '允许前后台'
+        ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            $this->module = implode(',', $this->module);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->module = explode(',', $this->module);
+    }
+
+    public function renderModule($separator = ',')
+    {
+        return join($separator, array_map(function ($val) {
+            return array_get(ArticleModule::getTypeEnum(), $val);
+        }, $this->module));
     }
 }

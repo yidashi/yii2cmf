@@ -9,30 +9,9 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => [
-        'log',
-        \common\components\LoadPlugins::className(),
-        'events'
-    ],
-    'controllerMap'=>[
-        'file-manager-elfinder' => [
-            'class' => 'mihaildev\elfinder\Controller',
-            'disabledCommands' => ['netmount'],
-            'roots' => [
-                [
-                    'baseUrl' => '@static',
-                    'basePath' => '@staticroot',
-                    'path'   => '/',
-                ]
-            ]
-        ]
-    ],
     'components' => [
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'idParam' => '__idBackend',
-            'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
+        'request' => [
+            'csrfParam' => '_csrfBackend'
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -44,48 +23,37 @@ return [
             ],
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager',
+            'class' => 'rbac\components\DbManager',
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
         'formatter' => [
-            'booleanFormat' => ['<i class="fa fa-times"></i>', '<i class="fa fa-check"></i>']
+            'class' => 'backend\components\Formatter',
+            'booleanFormat' => ['<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1"/>', '<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1" checked/>'],
         ],
-        'i18n' => [
-            'translations' => [
-                'kvgrid' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@kvgrid/messages',
-                    'forceTranslation' => true,
-                ],
-            ],
+        'themeManager' => [
+            'class' => 'common\components\ThemeManager',
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
-        ],
-        'events' => \backend\components\Events::className()
     ],
     'modules' => [
-        'admin' => [
-            'class' => 'mdm\admin\Module',
+        'rbac' => [
+            'class' => 'rbac\Module',
         ],
-        'database' => [
-            'class' => 'backup\Module'
-        ]
+        'backup' => [
+            'class' => 'backup\Module',
+        ],
     ],
     'aliases' => [
-        '@mdm/admin' => '@backend/modules/mdmsoft/yii2-admin',
-        '@backup' => '@backend/modules/backup'
+        '@rbac' => '@backend/modules/rbac',
+        '@backup' => '@backend/modules/backup',
     ],
     'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
+        'class' => 'rbac\components\AccessControl',
         'allowActions' => [
-            'site/logout',
+            'user/admin/logout'
         ],
     ],
+    'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',
     'params' => $params,
 ];

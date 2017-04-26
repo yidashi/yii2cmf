@@ -1,19 +1,19 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tags';
+$this->title = '标签';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-index">
 
 
     <p>
-        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('创建标签', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
     </p>
 
     <div class="box box-primary">

@@ -7,18 +7,15 @@ use Yii;
 /**
  * This is the model class for table "{{%gather}}".
  *
- * @property int $id
- * @property string $name
- * @property string $category
- * @property string $url
+ * @property integer $id
  * @property string $url_org
- * @property string $res
- * @property string $result
+ * @property integer $created_at
+ * @property integer $updated_at
  */
 class Gather extends \yii\db\ActiveRecord
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public static function tableName()
     {
@@ -26,29 +23,26 @@ class Gather extends \yii\db\ActiveRecord
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['name', 'category', 'url', 'url_org', 'res', 'result'], 'required'],
-            [['name', 'category', 'url', 'url_org', 'res', 'result'], 'string', 'max' => 255],
+            [['url_org'], 'required'],
+            [['url_org'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'category' => Yii::t('app', 'Category'),
-            'url' => Yii::t('app', 'Url'),
-            'url_org' => Yii::t('app', 'Url Org'),
-            'res' => Yii::t('app', 'Res'),
-            'result' => Yii::t('app', 'Result'),
+            'id' => 'ID',
+            'url_org' => 'Url',
+            'created_at' => Yii::t('common', 'Created At'),
+            'updated_at' => Yii::t('common', 'Updated At'),
         ];
     }
 }

@@ -11,17 +11,19 @@ use yii\helpers\Url;
 
 class DanmuWidget extends \yii\base\Widget
 {
-    public $id;
+    public $entity;
+    public $entityId;
     public $listUrl = null;
     public function init()
     {
         parent::init();
-        $this->listUrl = $this->listUrl ?: Url::to(['/comment/dm']);
+        $this->listUrl = $this->listUrl ?: Url::to(['/danmu/index']);
     }
     public function run()
     {
         DanmuAsset::register($this->view);
-        $script = "initDm({$this->id}, '{$this->listUrl}');";
+        $this->entity = str_replace('\\', '\\\\', $this->entity);
+        $script = "initDm('{$this->entity}', {$this->entityId}, '{$this->listUrl}');";
         $this->view->registerJs($script);
     }
 

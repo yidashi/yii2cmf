@@ -8,8 +8,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="spider-form">
-
+<div class="box box-primary">
+    <div class="box-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -24,18 +24,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'time_dom')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'title_dom')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'content_dom')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'title_dom')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'target_category')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'target_category_url')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? '添加' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success btn-flat btn-block' : 'btn btn-primary btn-flat block']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

@@ -1,57 +1,85 @@
 {
-    "name": "yii2cmf",
+    "name": "yidashi/yii2cmf",
     "description": "yii2内容管理框架",
-    "keywords": ["yii2", "cmf"],
+    "keywords": ["yii2", "cmf", "yii2cmf"],
     "homepage": "http://www.51siyuan.cn/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
+        "issues": "https://github.com/yidashi/yii2cmf/issues?state=open",
+        "forum": "http://www.51siyuan.cn/suggest/",
+        "wiki": "http://www.51siyuan.cn/wiki/",
         "irc": "irc://irc.freenode.net/yii",
-        "source": "https://github.com/yiisoft/yii2"
+        "source": "https://github.com/yidashi/yii2cmf"
     },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4.0",
-        "yiisoft/yii2": ">=2.0.8",
+        "fxp/composer-asset-plugin":"^1.2.0",
+        "yiisoft/yii2": "2.0.9",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-authclient": "~2.1.0",
+        "yiisoft/yii2-redis": "*",
+        "yiisoft/yii2-imagine": "^2.0",
+        "aferrandini/PHPQRCode": "1.0.1",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "mihaildev/yii2-elfinder": "^1.0",
+        "omnilight/yii2-scheduling": "*",
+        "vlucas/phpdotenv": "^2.0",
+        "vova07/yii2-imperavi-widget": "*",
+        "2amigos/yii2-editable-widget": "0.1.*",
+        "raulfraile/distill": "@stable",
+        "fabpot/goutte": "^3.1",
+        "kartik-v/yii2-widget-select2": "*",
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
         "kartik-v/yii2-widget-datepicker": "^1.3",
-        "chrisboulton/php-resque": "*",
-        "fabpot/goutte": "^3.1",
-        "yiisoft/yii2-authclient": "^2.0",
-        "aferrandini/PHPQRCode": "1.0.1",
-        "yiisoft/yii2-redis": "*",
-        "mobiledetect/mobiledetectlib": "^2.8",
-        "dmstr/yii2-adminlte-asset": "*",
-        "yiisoft/yii2-composer": "2.0.4",
-        "yidashi/yii2-bootstrap-markdown": "2.0.1",
-        "yidashi/yii2-webuploader": "^1.4.2",
-        "yidashi/yii2-ueditor": "1.0.1",
-        "mihaildev/yii2-elfinder": "^1.0",
-        "qiniu/php-sdk": "^7.0",
-        "omnilight/yii2-scheduling": "*",
-        "vlucas/phpdotenv": "^2.0"
+        "udokmeci/yii2-beanstalk": "dev-master",
+        "hightman/xunsearch": "*@beta",
+        "bower-asset/blueimp-file-upload" : "*",
+        "bower-asset/font-awesome": "^4.0",
+        "bower-asset/editor.md": "*",
+        "creocoder/yii2-flysystem": "*",
+        "qiniu/php-sdk": "^7.1"
     },
     "require-dev": {
-        "yiisoft/yii2-codeception": "*",
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*",
-        "jamband/yii2-schemadump": "*"
+        "yiisoft/yii2-faker": "*"
     },
     "autoload": {
         "files": [
             "helpers.php"
         ]
     },
+    "scripts": {
+        "post-install-cmd": [
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\"",
+            "yii\\composer\\Installer::postCreateProject"
+        ],
+        "post-root-package-install" :[
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');@chmod('.env', 0766);\"",
+            "yii\\composer\\Installer::postCreateProject"
+        ]
+    },
     "config": {
         "process-timeout": 1800
     },
     "extra": {
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "cache": "0776",
+                    "web/assets": "0776",
+                    "web/storage": "0776",
+                    "web/admin/assets": "0776",
+                    "api/runtime": "0776",
+                    "backend/runtime": "0776",
+                    "frontend/runtime": "0776",
+                    "web/api/assets": "0776"
+                }
+            ]
+        },
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"

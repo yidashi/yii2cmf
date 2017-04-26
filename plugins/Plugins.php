@@ -8,6 +8,8 @@
 
 namespace plugins;
 
+use common\components\PackageInfo;
+use rbac\models\Menu;
 use Yii;
 use yii\helpers\Json;
 use yii\web\View;
@@ -15,74 +17,17 @@ use ReflectionClass;
 use yii\base\InvalidParamException;
 use common\models\Module;
 use yii\base\BootstrapInterface;
-use yii\base\Object;
-use mdm\admin\components\MenuHelper;
+use rbac\components\MenuHelper;
 
-abstract class Plugins extends Object implements BootstrapInterface
+abstract class Plugins extends PackageInfo implements BootstrapInterface
 {
-    private $_config = [];
 
-    public $info = [
-        'author' => '',
-        'version' => '',
-        'name' => '',
-        'title' => '',
-        'desc' => ''
-    ];
-
-    public $configFile = '';
-
-    public function init()
-    {
-        if (empty($this->configFile)) {
-            $class = new ReflectionClass($this);
-            $this->configFile = dirname($class->getFileName()) . DIRECTORY_SEPARATOR . 'config.php';
-
-        }
-    }
-    final public function checkInfo(){
-        $info_check_keys = ['name','title','desc','author','version'];
-        foreach ($info_check_keys as $value) {
-            if(!array_key_exists($value, $this->info))
-                return false;
-        }
-        return true;
-    }
-
+    public $aliases = [];
     /**
-     * 获取插件初始配置
-     * @return array|mixed
+     * @var string 模块所属应用ID(frontend,backend,wechat,api)
      */
-    final public function getInitConfig()
-    {
-        if (is_file($this->configFile)) {
-            $this->_config = include $this->configFile;
-        }
-        return $this->_config;
-    }
+    public $app = 'app-backend';
 
-    /**
-     * 获取插件当前配置
-     * @return array|mixed
-     */
-    final public function getConfig()
-    {
-        $cacheKey = 'pluginConfig-' . $this->info['name'];
-        $c = Yii::$app->cache->get($cacheKey);
-        if ($c === false) {
-            $name = $this->info['name'];
-            $model = Module::find()->where(['name' => $name])->one();
-            $configs = Json::decode($model->config);
-            $c = [];
-            if (!empty($configs)) {
-                foreach ($configs as $k => $config) {
-                    $c[$config['name']] = $config['value'];
-                }
-            }
-            Yii::$app->cache->set($cacheKey, $c);
-        }
-        return $c;
-    }
     /**
      * 在菜单插件管理下添加一个新菜单
      * @param $name
@@ -91,9 +36,12 @@ abstract class Plugins extends Object implements BootstrapInterface
      */
     public function addMenu($name, $route)
     {
-        $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件管理"')->queryScalar();
-        \Yii::$app->db->createCommand("INSERT INTO {{%menu}}(`name`,`parent`,`route`) VALUES ('{$name}','{$id}','{$route}')")->execute();
-        MenuHelper::invalidate();
+        $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件" AND `parent` IS NULL')->queryScalar();
+        $model = new Menu();
+        $model->name = $name;
+        $model->route = $route;
+        $model->parent = $id;
+        $model->save();
     }
 
     /**
@@ -104,35 +52,6 @@ abstract class Plugins extends Object implements BootstrapInterface
     public function deleteMenu($name)
     {
         \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
-        MenuHelper::invalidate();
-    }
-
-    /**
-     * 安装插件时候执行
-     * 比如后台添加菜单,建表等
-     */
-    public function install()
-    {
-        if ($this->checkInfo()) {
-            $model = Module::find()->where(['name' => $this->info['name']])->one();
-            if (empty($model)) {
-                $model = new Module();
-                $model->attributes = $this->info;
-                $model->config = Json::encode($this->getInitConfig());
-            } else {
-                $model->status = Module::STATUS_OPEN;
-            }
-            $model->save();
-        }
-    }
-
-    //卸载
-    public function uninstall()
-    {
-        $name = $this->info['name'];
-        $model = Module::find()->where(['name' => $name])->one();
-        $model->status = Module::STATUS_UNINSTALL;
-        $model->save();
     }
 
     /**

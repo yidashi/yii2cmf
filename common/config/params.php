@@ -1,12 +1,6 @@
 <?php
-
 return [
-    'adminEmail' => env('MAIL_USERNAME'),
-    'supportEmail' => env('MAIL_USERNAME'),
     'user.passwordResetTokenExpire' => 3600,
-    'availableLocales'=>[
-        'zh-CN' => '简体中文'
-    ],
     'webuploader_driver' => env('WEBUPLOADER_DRIVER', 'local'),
     'webuploader_qiniu_config' => [
         'domain' => env('WEBUPLOADER_QINIU_DOMAIN'),

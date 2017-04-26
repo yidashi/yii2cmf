@@ -1,7 +1,7 @@
 <?php
 
-use common\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\Article */
@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="article-index">
     <p>
         <?= Html::a('清空回收站', ['clear'], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger btn-flat',
             'data' => [
                 'ajax' => 1,
                 'confirm' => '确定要清空吗?',
@@ -51,13 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'data-ajax' => 1,
                                     'data-method' => 'post',
                                     'data-params' => ['id' => $model->id],
+                                    'data-refresh' => '1'
                                 ]);
                             },
                             'delete' => function($url, $model) {
                                 return Html::a('清除',['hard-delete'], [
+                                    'data-ajax' => 1,
+                                    'data-confirm' => '确定要彻底删除吗？不可恢复！',
                                     'data-params' => ['id' => $model->id],
                                     'data-method' => 'post',
-                                    'data-ajax' => 1,
+                                    'data-refresh' => '1'
                                 ]);
                             }
                         ]

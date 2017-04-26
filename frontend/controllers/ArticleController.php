@@ -6,11 +6,10 @@
  */
 namespace frontend\controllers;
 
-use common\events\ArticleEvent;
-use common\models\Comment;
-use frontend\models\Tag;
-use frontend\models\Article;
 use common\models\Category;
+use common\models\Comment;
+use frontend\models\Article;
+use frontend\models\Tag;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -19,19 +18,30 @@ class ArticleController extends Controller
 {
     /**
      * 分类文章列表
+     * @param mixed $cate
+     * @return mixed
+     * @throws NotFoundHttpException
      */
-    public function actionIndex($cate)
+    public function actionIndex($cate = null)
     {
-        $category = Category::find()->andWhere(['name' => $cate])->one();
-        if (empty($category)) {
-            throw new NotFoundHttpException('分类不存在');
+        $query = Article::find()->published();
+        $category = null;
+        if (!empty($cate)) {
+            $category = Category::findByIdOrSlug($cate);
+            if (empty($category)) {
+                throw new NotFoundHttpException('分类不存在');
+            }
+            $query = $query->andFilterWhere(['category_id' => $category->id]);
         }
-        $query = Article::find()->published()->andFilterWhere(['category_id' => $category->id]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
                 'defaultOrder' => [
                     'published_at' => SORT_DESC
+                ],
+                'attributes' => [
+                    'published_at',
+                    'view'
                 ]
             ]
         ]);
@@ -80,55 +90,22 @@ class ArticleController extends Controller
     public function actionView($id)
     {
         /* @var $model Article|null */
-        $model = Article::find()->where(['id' => $id])->published()->one();
+        $model = Article::find()->andWhere(['id' => $id])->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
-        ArticleEvent::trigger('common\models\Article', 'viewArticle', new ArticleEvent(['model' => $model]));
+        $model->addView();
 
         // sidebar
         $hots = Article::hots($model->category_id);
-        // 评论列表
-        $commentDataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->andWhere(['type' => 'article', 'type_id' => $id, 'parent_id' => 0]),
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'is_top' => SORT_DESC,
-                    'id' => SORT_DESC
-                ]
-            ]
-        ]);
-        $commentModels = $commentDataProvider->getModels();
-        $pages = $commentDataProvider->getPagination();
-        // 评论框
-        $commentModel = new Comment();
-        $commentModel->type = 'article';
-
-        return $this->render('view', [
+        // 上下一篇
+        $next = Article::find()->andWhere(['>', 'id', $id])->one();
+        $prev = Article::find()->andWhere(['<', 'id', $id])->orderBy('id desc')->one();
+        return $this->render($model->module . '/view', [
             'model' => $model,
-            'commentModel' => $commentModel,
-            'commentModels' => $commentModels,
-            'pages' => $pages,
             'hots' => $hots,
-            'commentDataProvider' => $commentDataProvider
+            'next' => $next,
+            'prev' => $prev
         ]);
-    }
-
-    /**
-     * @param $id
-     * @return Article|null
-     * @throws NotFoundHttpException
-     */
-    private function findModel($id)
-    {
-        /* @var $model Article|null */
-        $model = Article::find()->where(['id' => $id])->published()->one();
-        if ($model === null) {
-            throw new NotFoundHttpException('not found');
-        }
-        return $model;
     }
 }

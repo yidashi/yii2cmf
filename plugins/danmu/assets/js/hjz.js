@@ -195,7 +195,7 @@ DMRE.prototype._renderDM = function(dm){
         html.push('<a class="dm-wrap" href="http://news.jiecao.fm/art_cmt.htm?id=' + dm.id + '&amp;uid1=' + (dm.member_id || "") + '&amp;nickname=' + encodeURIComponent(dm.nickname) + '&amp;cmt_id=' + dm.id + '">');
     }*/
     if(dm.isRe){ //是否有@
-        html.push('<div class="avatar"><img src="' + dm.avatar + '" cc-username="'+ dm.nickname +'"><span>@</span><img src="' + dm.avatar + '" cc-username="'+ dm.nickname +'"></div>');
+        html.push('<div class="avatar"><img src="' + dm.avatar + '" cc-username="'+ dm.nickname +'"><span>@</span><img src="' + dm.re_avatar + '" cc-username="'+ dm.re_nickname +'"></div>');
     }else{
         html.push('<div class="avatar"><img src="' + dm.avatar + '" cc-username="'+ dm.nickname +'"></div>');
     }

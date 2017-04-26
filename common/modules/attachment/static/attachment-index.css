@@ -1,0 +1,60 @@
+/*------------------------------------*\
+    #左侧附件列表
+\*------------------------------------*/
+#attachment-list  .item {
+	position: relative;
+}
+
+#attachment-list .item a {
+	display: inline-block;
+}
+
+#attachment-list .item a img {
+	opacity: .8;
+	border: 4px solid #bbb;
+	height:125px;
+	width:100%;
+}
+
+#attachment-list .item a img:hover {
+	opacity: 1;
+}
+
+#attachment-list .item .checked {
+	display: none;
+	position: absolute;
+	top: 8px;
+	right: 32px;
+	font-size: 3em;
+	color: #605ca8;
+}
+
+#attachment-list .item.active a {
+	outline: 8px solid #605ca8 !important;
+	outline-offset: -8px;
+}
+
+#attachment-list .item.active img {
+	opacity: 1;
+}
+
+#attachment-list .item.active .checked {
+	display: inline-block;
+}
+
+
+/*------------------------------------*\
+    #AJAX图标
+\*------------------------------------*/
+#attachment-info .loading {
+
+	padding:8em 0;
+	text-align: center;
+	color: #605ca8;
+}
+
+
+
+
+
+

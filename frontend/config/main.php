@@ -8,20 +8,8 @@ $params = array_merge(
 return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => [
-        'log',
-        \common\components\LoadPlugins::className(),
-        'events'
-    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'on afterLogin' => function($event) {
-                $event->identity->touch('login_at');
-            }
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -34,26 +22,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-                [
-                    'pattern' => '<id:\d+>',
-                    'route' => 'article/view',
-                    'suffix' => '.html'
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath'=>'@common/messages',
+                    'fileMap' => ['app' => 'frontend.php'],
+                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
                 ],
-                'user/<id:\d+>' => '/user',
-                'tag/<name:\S+>' => '/article/tag',
-                '/' => '/site/index'
-            ],
-        ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\bootstrap\BootstrapAsset' => [
-                    'sourcePath' => '@frontend/components/bootstrap/dist'
-                ],
-            ],
+            ]
         ],
         'view' => [
             'on beginPage' => function($event){
@@ -64,8 +41,10 @@ return [
                 }
             }
         ],
-        'notify' => \frontend\components\notify\Handler::className(),
-        'events' => \frontend\components\Events::className()
+        'search' => [
+            'class' => 'frontend\\components\\Search',
+            'engine' => env('SEARCH_ENGINE', 'local')
+        ]
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),

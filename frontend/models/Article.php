@@ -2,29 +2,35 @@
 
 namespace frontend\models;
 
-use common\models\Category;
-use yii\behaviors\BlameableBehavior;
+use common\models\ArticleExhibition;
+use common\models\query\ArticleQuery;
 
-/**
- * This is the model class for table "{{%article}}".
- *
- * @property int $id
- * @property string $title
- * @property string $content
- * @property int $created_at
- * @property int $updated_at
- * @property int $status
- * @property string $cover
- */
+
 class Article extends \common\models\Article
 {
-    public static function hots($categoryId, $size = 10)
+
+    public static function find()
     {
-        return self::find()
-            ->where(['category_id' => $categoryId])
-            ->normal()
+        return parent::find()->published();
+    }
+
+    public static function hots($categoryId = null, $size = 10)
+    {
+        return static::find()
+            ->andFilterWhere(['category_id' => $categoryId])
+            ->published()
             ->limit($size)
-            ->orderBy('view desc')
+            ->orderBy('is_hot desc, view desc')
+            ->all();
+    }
+
+    public static function tops($categoryId = null, $size = 10)
+    {
+        return static::find()
+            ->andFilterWhere(['category_id' => $categoryId])
+            ->published()
+            ->limit($size)
+            ->orderBy('is_top desc, view desc')
             ->all();
     }
 }

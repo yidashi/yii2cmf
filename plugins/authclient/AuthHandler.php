@@ -8,8 +8,8 @@
 
 namespace plugins\authclient;
 
-use common\models\Auth;
-use common\models\User;
+use common\modules\user\models\Auth;
+use common\modules\user\models\User;
 use Yii;
 use yii\authclient\ClientInterface;
 use yii\helpers\ArrayHelper;
@@ -52,7 +52,8 @@ class AuthHandler
                 } else {
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
-                        'username' => $nickname,
+                        'scenario' => 'create',
+                        'username' => User::findByUsername($nickname) ? $nickname . '_' . mt_rand(1000, 9999) : $nickname,
                         'email' => $email,
                         'password' => $password,
                     ]);

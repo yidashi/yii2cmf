@@ -5,8 +5,8 @@
  * Date: 16/6/30
  * Time: 下午2:21
  */
-use common\helpers\Html;
-use common\helpers\Url;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 <div class="media-body">
@@ -17,6 +17,6 @@ use common\helpers\Url;
     </h4>
     <div class="media-action">
         <span class="views"><?= Html::icon('eye')?> 浏览 <?= $model->trueView?></span>
-        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $model->comment, ['article/view', 'id' => $model->id, '#' => 'comments'])?></span>
+        <span class="comments"><?= Html::a(Html::icon('comments-o') . '评论' . $model->commentTotal, ['article/view', 'id' => $model->id, '#' => 'comments'])?></span>
     </div>
 </div>

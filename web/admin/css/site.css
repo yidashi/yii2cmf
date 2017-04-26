@@ -1,5 +1,0 @@
-div.required label.control-label:after {
-     content: " *";
-     color: red;
- }
-td{word-break: break-all}

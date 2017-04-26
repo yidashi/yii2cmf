@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Page;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * PageController implements the CRUD actions for Page model.
@@ -21,19 +21,6 @@ class PageController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
-                ],
-            ],
-        ];
-    }
-    public function actions()
-    {
-        return [
-            'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    'imageUrlPrefix' => \Yii::getAlias('@static') . '/', //图片访问路径前缀
-                    'imageRootPath' => \Yii::getAlias('@staticroot').'/', //图片访问路径前缀
-                    'imagePathFormat' => 'upload/image/{yyyy}{mm}{dd}/{time}{rand:6}', //上传保存路径
                 ],
             ],
         ];
@@ -77,7 +64,8 @@ class PageController extends Controller
     public function actionCreate()
     {
         $model = new Page();
-
+        $editor = request('editor') ? : config('editor.type_page');
+        $model->markdown = $editor == 'markdown' ? 1 : 0;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {

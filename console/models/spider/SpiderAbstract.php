@@ -205,20 +205,19 @@ class SpiderAbstract extends Object
     public function insert($title, $content, $publish_at, $category = '', $cover = '')
     {
         //插入标签（搜索的分类）
-        $categoryId = (new Category())->getCategoryIdByName($category);
+        $categoryId = Category::getIdByName($category);
         if (!$categoryId) {
             throw new Exception('该分类不存在');
         }
         $article = new Article();
         $article->title = $title;
-        $article->author = '匿名';
         $article->status = 1;
         $article->category = $category;
         $article->category_id = $categoryId;
         $article->source = $this->config['domain'];
         $article->cover = $cover;
         $article->created_at = $publish_at;
-        $article->user_id = 0;
+        $article->user_id = 1;
         $res = $article->save(false);
         if ($res) {
             $articleData = new ArticleData();

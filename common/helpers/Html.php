@@ -6,25 +6,54 @@
  * Time: 下午6:28
  */
 
-namespace common\helpers;
+namespace yii\helpers;
 
-
-use rmrevin\yii\fontawesome\FA;
-
-class Html extends \yii\helpers\Html
+class Html extends BaseHtml
 {
-    public static function icon($name, $options = [])
+    public static function icon($name)
     {
-        return FA::i($name, $options);
+        $options = ['class' => 'fa'];
+        if (!StringHelper::startsWith($name, 'fa-')) {
+            $name = 'fa-' . $name;
+        }
+        self::addCssClass($options, $name);
+        return self::tag('i', '', $options);
     }
 
-    public static function img($src, $options = [])
+    public static function staticControl($value, $options = [])
     {
-        $options['src'] = Url::img($src);
-        if (!isset($options['alt'])) {
-            $options['alt'] = '';
+        static::addCssClass($options, 'form-control-static');
+        $value = (string) $value;
+        if (isset($options['encode'])) {
+            $encode = $options['encode'];
+            unset($options['encode']);
+        } else {
+            $encode = true;
         }
-        return static::tag('img', '', $options);
+        return static::tag('p', $encode ? static::encode($value) : $value, $options);
+    }
+
+    public static function activeStaticControl($model, $attribute, $options = [])
+    {
+        if (isset($options['value'])) {
+            $value = $options['value'];
+            unset($options['value']);
+        } else {
+            $value = static::getAttributeValue($model, $attribute);
+        }
+        return static::staticControl($value, $options);
+    }
+
+    public static function boolean($name, $checked = false, $options = [])
+    {
+        $options['data-toggle'] = 'switcher';
+        return static::booleanInput('checkbox', $name, $checked, $options);
+    }
+
+    public static function activeBoolean($model, $attribute, $options = [])
+    {
+        $options['data-toggle'] = 'switcher';
+        return static::activeBooleanInput('checkbox', $model, $attribute, $options);
     }
 
     /**

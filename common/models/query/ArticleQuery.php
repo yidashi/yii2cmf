@@ -16,32 +16,28 @@ class ArticleQuery extends ActiveQuery
 {
     /**
      * 被删除的
+     * @return $this
      */
     public function onlyTrashed()
     {
-        return $this->andWhere(['>', 'deleted_at', 0]);
+        return $this->andWhere(['not', ['deleted_at' => null]]);
     }
     /**
      * 未被删除的
+     * @return $this
      */
     public function notTrashed()
     {
-        return $this->andWhere(['=', 'deleted_at', 0]);
+        return $this->andWhere(['deleted_at' => null]);
     }
 
     /**
      * 待审核的
+     * @return $this
      */
     public function pending()
     {
-        return $this->andWhere(['status' => Article::STATUS_INIT]);
-    }
-    /**
-     * 拒绝的
-     */
-    public function refuse()
-    {
-        return $this->andWhere(['status' => Article::STATUS_REFUSE]);
+        return $this->andWhere(['status' => Article::STATUS_PENDING]);
     }
     /**
      * 审核通过的
@@ -52,6 +48,7 @@ class ArticleQuery extends ActiveQuery
     }
     /**
      * 未删除且审核通过的
+     * @return $this
      */
     public function normal()
     {
@@ -60,14 +57,19 @@ class ArticleQuery extends ActiveQuery
 
     /**
      * 已经发布的
+     * @return $this
      */
     public function published()
     {
         return $this->normal()->andWhere(['<', 'published_at', time()]);
     }
 
+    /**
+     * @return $this
+     */
     public function my()
     {
         return $this->andWhere(['user_id' => \Yii::$app->user->id]);
     }
+
 }

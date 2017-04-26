@@ -77,23 +77,54 @@ if (! function_exists('array_get')) {
      */
     function array_get($array, $key, $default = null)
     {
+        return \yii\helpers\ArrayHelper::getValue($array, $key, $default);
+    }
+}
+
+if (! function_exists('p')) {
+
+    function p($var, $die = true)
+    {
+        echo '<pre>' . print_r($var, true), '</pre>';
+        if ($die) {
+            die;
+        }
+    }
+}
+
+if (! function_exists('config')) {
+    /**
+     * `config()`获取config组件
+     * `config('key')` 获取配置key的值
+     * `config([key,value])` 设置配置key的值为value
+     * @param null $key
+     * @param null $default
+     * @return array|bool|\config\components\Config|mixed
+     */
+    function config($key = null, $default = null)
+    {
         if (is_null($key)) {
-            return $array;
+            return Yii::$app->config;
         }
 
-        if (isset($array[$key])) {
-            return $array[$key];
+        if (is_array($key)) {
+            return Yii::$app->config->set($key[0], $key[1]);
         }
 
-        foreach (explode('.', $key) as $segment) {
+        return Yii::$app->config->get($key, $default);
+    }
+}
 
-            if (isset($array[$segment])) {
-                $array = $array[$segment];
-            } else {
-                return value($default);
-            }
+if (! function_exists('request')) {
+
+    function request($name = null, $defaultValue = null)
+    {
+        if (is_null($name)) {
+            return Yii::$app->request;
         }
 
-        return $array;
+        $params = Yii::$app->request->getQueryParams() + Yii::$app->request->getBodyParams();
+
+        return isset($params[$name]) ? $params[$name] : $defaultValue;
     }
 }

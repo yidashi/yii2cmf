@@ -11,20 +11,25 @@ namespace plugins\danmu;
 
 use yii\base\BootstrapInterface;
 use yii\web\View;
+use yii\base\Event;
+use plugins\danmu\controllers\DefaultController;
 
 class Plugins extends \plugins\Plugins implements BootstrapInterface
 {
     public $info = [
         'author' => '易大师',
         'version' => 'v1.0',
-        'name' => 'danmu',
-        'title' => '弹幕',
-        'desc' => '文章评论弹幕'
+        'id' => 'danmu',
+        'name' => '弹幕',
+        'description' => '文章评论弹幕'
     ];
 
-    public function bootstrap($app)
+    public function frontend($app)
     {
-        $app->events->addListener(View::className(), 'afterArticleView', 'plugins\danmu\Danmu');
+        Event::on(View::className(), 'afterComment', ['plugins\danmu\Danmu', 'handle']);
+        $app->controllerMap['danmu'] = [
+            'class' => DefaultController::className(),
+        ];
     }
 
 }

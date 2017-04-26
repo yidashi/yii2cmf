@@ -1,7 +1,10 @@
 <?php
 
 namespace common\models;
+use common\behaviors\CommentBehavior;
+use common\behaviors\MetaBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%page}}".
@@ -10,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $use_layout
  * @property string $content
  * @property string $title
+ * @property integer $markdown
  */
 class Page extends \yii\db\ActiveRecord
 {
@@ -27,11 +31,26 @@ class Page extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content', 'title', 'name'], 'required'],
+            [['content', 'title', 'slug'], 'required'],
             [['content'], 'string'],
+            ['markdown', 'default', 'value' => $this->getIsMarkdown()],
             [['use_layout'], 'in', 'range' => [0, 1]],
-            [['title', 'name'], 'string', 'max' => 50],
+            [['title'], 'string', 'max' => 50],
         ];
+    }
+
+    /**
+     * 没有指定markdown情况下默认编辑器是否为markdown
+     * @return int
+     */
+    public function getIsMarkdown()
+    {
+        return \Yii::$app->config->get('editor.type_article') == 'markdown' ? 1 : 0;
+    }
+
+    public function getProcessedContent()
+    {
+        return $this->markdown ? \yii\helpers\Markdown::process($this->content) : $this->content;
     }
 
     /**
@@ -44,7 +63,7 @@ class Page extends \yii\db\ActiveRecord
             'use_layout' => '是否使用布局',
             'content' => '内容',
             'title' => '标题',
-            'name' => '标识'
+            'slug' => '标识'
         ];
     }
 
@@ -58,7 +77,24 @@ class Page extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => MetaBehavior::className(),
+            ],
+            [
+                'class' => CommentBehavior::className()
+            ]
         ];
+    }
+
+    public function getMetaData()
+    {
+        $model = $this->getMetaModel();
+
+        $title = $model->title ?  : $this->title;
+
+        $description = $model->description ?  : StringHelper::truncate(strip_tags($this->content), 150);
+
+        return [$title, $description, $model->keywords];
     }
 }

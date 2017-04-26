@@ -8,7 +8,6 @@ namespace common\behaviors;
 
 use common\models\Article;
 use yii\base\Behavior;
-use yii\helpers\Url;
 
 class PushBehavior extends Behavior
 {

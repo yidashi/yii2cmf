@@ -12,9 +12,9 @@ use yii\web\NotFoundHttpException;
 
 class PageController extends Controller
 {
-    public function actionIndex($name)
+    public function actionSlug($slug)
     {
-        $page = Page::find()->where(['name' => $name])->one();
+        $page = Page::find()->where(['slug' => $slug])->one();
         if (empty($page)) {
             throw new NotFoundHttpException('页面不存在');
         }

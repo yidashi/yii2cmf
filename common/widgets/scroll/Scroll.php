@@ -10,35 +10,53 @@ namespace common\widgets\scroll;
 
 
 use yii\base\Widget;
+use yii\helpers\Html;
 
 class Scroll extends Widget
 {
     public function run()
     {
-        $html = '<a class="back-to-top" style="display: none;"><span class="fa fa-arrow-up"></span></a>';
+        echo Html::beginTag('div', ['class' => 'fixed-btn']);
+        echo '<a class="back-to-top"><span class="fa fa-arrow-up"></span></a>';
+        echo '<a class="qrcode"><i class="fa fa-qrcode"></i></a>';
+        echo '<a class="app"><i class="fa fa-mobile-phone"></i></a>';
+        echo Html::endTag('div');
+        $this->registerClientScript();
+    }
+
+    public function registerClientScript()
+    {
         $this->view->registerCss(<<<CSS
-/* 回到顶部开始 */
-.back-to-top {
+.fixed-btn {
     position: fixed;
+    right: 2%;
     bottom: 100px;
-    right: 2px;
-    padding: 3px 8px;
+    width: 40px;
+    border: 1px solid #eeeeee;
+    background-color: white;
     font-size: 24px;
-    color: #666;
-    display: none;
-    background-color: #fff;
-    border:1px solid #ccc;
-    border-radius:4px;
-    cursor: pointer;
+    z-index: 1040;
+    -webkit-backface-visibility: hidden;
 }
-.back-to-top:hover {
-    border-color:#adadad;
+/* 回到顶部开始 */
+.fixed-btn a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+.back-to-top {display: none;}
+.fixed-btn a:hover {
+    border-color: #adadad;
     background-color: #e6e6e6;
-    color:#333;
+    color: #333;
+    cursor: pointer;
 }
 /* 回到顶部结束 */
 CSS
-);
+        );
+        $qrcode = \Yii::$app->config->get('wx.qrcode');
+        $app = \Yii::$app->config->get('app.download_qrcode');
         $this->view->registerJs(<<<JS
 // back-to-top
     $(window).scroll(function(){
@@ -52,8 +70,19 @@ CSS
         e.preventDefault();
         $("html, body").animate({ scrollTop: 0 }, "slow");
     });
+    $('.qrcode').popover({
+        placement:'left',
+        html:true,
+        title:'关注公众号',
+        content:'<img src="{$qrcode}" width="128" height="128">'
+    });
+    $('.app').popover({
+        placement:'left',
+        html:true,
+        title:'下载app',
+        content:'<img src="{$app}" width="128" height="128">'
+    });
 JS
         );
-        return $html;
     }
 }

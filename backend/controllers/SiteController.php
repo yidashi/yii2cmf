@@ -2,10 +2,8 @@
 
 namespace backend\controllers;
 
-use Yii;
-use yii\web\Controller;
-use common\models\LoginForm;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 /**
  * Site controller.
@@ -39,38 +37,17 @@ class SiteController extends Controller
             'demo' => [
                 'class' => 'yii\web\ViewAction',
             ],
-            'webupload' => [
-                'class' => \yidashi\webuploader\Action::className()
-            ],
         ];
     }
 
     public function actionIndex()
     {
+        $this->layout = false;
         return $this->render('index');
     }
 
-    public function actionLogin()
+    public function actionDashboard()
     {
-        $this->layout = 'main-login';
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        return $this->render('dashboard');
     }
 }

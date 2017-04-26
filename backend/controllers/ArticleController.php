@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\ArticleForm;
-use common\models\ArticleData;
-use common\models\ArticleTag;
-use yidashi\webuploader\WebuploaderAction;
-use Yii;
-use common\models\Article;
 use backend\models\search\Article as ArticleSearch;
-use yii\base\DynamicModel;
+use common\models\Article;
+use common\models\ArticleData;
+use common\models\ArticleModule;
+use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\Response;
 
 /**
@@ -36,15 +34,17 @@ class ArticleController extends Controller
     public function actions()
     {
         return [
-            'upload' => [
-                'class' => 'kucha\ueditor\UEditorAction',
-                'config' => [
-                    'imageUrlPrefix' => \Yii::getAlias('@static').'/', //图片访问路径前缀
-                    'imagePathFormat' => 'upload/image/{yyyy}{mm}{dd}/{time}{rand:6}', //上传保存路径
-                ],
+            'ajax-update-field' => [
+                'class' => 'common\\actions\\AjaxUpdateFieldAction',
+                'allowFields' => ['status', 'is_top', 'is_hot', 'is_best'],
+                'findModel' => [$this, 'findModel']
             ],
+            'switcher' => [
+                'class' => 'backend\widgets\grid\SwitcherAction'
+            ]
         ];
     }
+
     /**
      * Lists all Article models.
      *
@@ -52,6 +52,7 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember('', $this->id);
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -95,7 +96,7 @@ class ArticleController extends Controller
         if(!$model) {
             throw new NotFoundHttpException('文章不存在!');
         }
-        $model->reduction();
+        $model->restore();
         return [
             'message' => '操作成功'
         ];
@@ -146,18 +147,56 @@ class ArticleController extends Controller
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      *
+     * @param string $module 文章类型
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($module = 'base')
     {
-        $model = new ArticleForm();
-        if ($model->load(Yii::$app->request->post()) && $model->store()) {
+        $model = new Article();
+        $model->status = Article::STATUS_ACTIVE;
+        $model->module = $module;
+        $moduleModelClass = $model->findModuleClass($module);
+        $moduleModel = new $moduleModelClass;
+        if (Yii::$app->request->isPost) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try{
+                $model->load(Yii::$app->request->post());
+                $model->save();
+                if($model->hasErrors()) {
+                    throw new Exception('操作失败');
+                }
+                $moduleModel->load(Yii::$app->request->post());
+                $moduleModel->id = $model->id;
+                $moduleModel->save();
+                if($moduleModel->hasErrors()) {
+                    throw new Exception('操作失败');
+                }
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', '发布成功');
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
             return $this->redirect(['index']);
+        }
+
+        $articleModules = ArticleModule::find()->all();
+        $articleModuleItems = [];
+        foreach($articleModules as $articleModule) {
+            $articleModuleItem = [];
+            $articleModuleItem['label'] = $articleModule->title;
+            $articleModuleItem['url'] = ['/article/create', 'module' => $articleModule->name];
+            $articleModuleItem['active'] = $module == $articleModule->name;
+            $articleModuleItems[] = $articleModuleItem;
         }
         return $this->render('create', [
             'model' => $model,
+            'moduleModel' => $moduleModel,
+            'module' => $module,
+            'articleModuleItems' => $articleModuleItems
         ]);
     }
+
     /**
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -168,12 +207,35 @@ class ArticleController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = ArticleForm::findOne($id);
-        if ($model->load(Yii::$app->request->post()) && $model->update()) {
+        $model = Article::find()->where(['id' => $id])->with('data')->one();
+        $moduleModel = $model->data;
+        if (Yii::$app->request->isPost) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->load(Yii::$app->request->post());
+                $model->save();
+                if($model->hasErrors()) {
+                    throw new Exception('操作失败');
+                }
+                if ($moduleModel) {
+                    $moduleModel->load(Yii::$app->request->post());
+                    $moduleModel->save();
+                    if($moduleModel->hasErrors()) {
+                        throw new Exception('操作失败');
+                    }
+                }
+                $transaction->commit();
+                Yii::$app->session->setFlash('success', '操作成功');
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                Yii::$app->session->setFlash('error', $e->getMessage());
+            }
             return $this->redirect(['index']);
         }
         return $this->render('update', [
             'model' => $model,
+            'moduleModel' => $moduleModel,
+            'module' => $model->module
         ]);
     }
     /**
@@ -188,7 +250,7 @@ class ArticleController extends Controller
     {
         $this->findModel($id)->softDelete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(Url::previous($this->id));
     }
 
 
@@ -202,33 +264,12 @@ class ArticleController extends Controller
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Article::find()->where(['id' => $id])->notTrashed()->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
-    }
-
-    public function actionChangeStatus()
-    {
-        Yii::$app->response->format = 'json';
-        $id = Yii::$app->request->post('id');
-        $status = Yii::$app->request->post('status');
-        $formModel = DynamicModel::validateData(['id' => $id, 'status' => $status], [
-            [['id', 'status'], 'required']
-        ]);
-        if ($formModel->hasErrors()) {
-            return ['status' => 0, 'msg' => current($formModel->getFirstErrors())];
-        }
-        $model = $this->findModel($id);
-        if ($model->status == $status) {
-            $model->status = 1- intval($status);
-            $model->save();
-        }
-        return [
-            'status' => 1
-        ];
     }
 }

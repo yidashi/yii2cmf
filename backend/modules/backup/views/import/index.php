@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'a' => function ($url, $model, $key) {
                                 return Html::a('还原',
                                     ['init', 'time' => $model['time']],
-                                    ['class' => 'db-import']
+                                    ['class' => 'btn btn-default btn-xs db-import']
                                 );
                             },
                             'b' => function ($url, $model, $key) {
@@ -49,7 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data-method' => 'post',
                                         'data-ajax' => 1,
                                         'data-params' => ['time' => $model['time']],
-                                        'data-confirm' => '删除后不能恢复,确定要删除吗?'
+                                        'data-confirm' => '删除后不能恢复,确定要删除吗?',
+                                        'data-refresh' => '1',
+                                        'class' => 'btn btn-default btn-xs'
                                     ]
                                 );
                             }
@@ -64,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <script type="text/javascript">
         $(".db-import").click(function(){
             var self = this, status = ".";
-            $.get(self.href, success, "json");
+            $.post(self.href, success, "json");
             window.onbeforeunload = function(){ return "正在还原数据库，请不要关闭！" }
             return false;
 
@@ -80,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     $(self).parent().prev().text(data.info);
                     if(data.part){
-                        $.get('<?= \yii\helpers\Url::to(['start'])?>',
+                        $.post('<?= \yii\helpers\Url::to(['start'])?>',
                             {"part" : data.part, "start" : data.start},
                             success,
                             "json"
@@ -89,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         window.onbeforeunload = function(){ return null; }
                     }
                 } else {
-                    updateAlert(data.info,'alert-error');
+                    $.modal.error(data.info);
                 }
             }
         });

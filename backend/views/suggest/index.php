@@ -1,7 +1,7 @@
 <?php
 
-use common\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,7 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     'id',
-                    'content:ntext',
+                    [
+                        'attribute' => 'content',
+                        'options' => ['width' => '60%']
+                    ],
                     'created_at:datetime',
                     [
                         'attribute' => 'user_id',
@@ -33,7 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'ban' => function($url, $model, $key) {
                                 return Html::a(Html::icon('ban'),
                                     ['/user/ban'],
-                                    ['title' => '封禁用户', 'data-method' => 'post', 'data-params' => ['id' => $model->user_id]]
+                                    [
+                                        'title' => '封禁用户',
+                                        'data-method' => 'post',
+                                        'data-params' => ['id' => $model->user_id],
+                                        'class' => 'btn btn-default btn-xs'
+                                    ]
                                 );
                             }
                         ]

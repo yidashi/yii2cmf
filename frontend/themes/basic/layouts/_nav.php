@@ -6,45 +6,33 @@
  * Time: 上午12:06
  */
 /* @var $this \yii\web\View */
+use common\models\Nav as NavModel;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use common\helpers\Html;
+use yii\helpers\Html;
 
 ?>
-
+<?php \yii\widgets\Pjax::begin([
+    'id' => 'header-container',
+    'linkSelector' => false,
+    'formSelector' => false
+]) ?>
 <?php
 NavBar::begin([
-    'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 48, 'height' => 48]) : Yii::$app->config->get('SITE_NAME'),
+    'brandLabel' => Yii::$app->config->get('SITE_LOGO') ? Html::img(Yii::$app->config->get('SITE_LOGO'), ['width' => 62, 'height' => 30]) : Yii::$app->config->get('SITE_NAME'),
     'brandUrl' => Yii::$app->homeUrl,
     'options' => [
-        'class' => 'navbar-inverse navbar-static-top'
+        'class' => 'navbar-inverse'
     ],
 ]);
-$menuItems = [];
-$menuItems[] = ['label' => '首页', 'url' => Yii::$app->homeUrl, 'active' => \Yii::$app->controller->getRoute() == 'site/index'];
-// 暂只支持两级,多了也没意义
-foreach (\common\models\Category::tree(\common\models\Category::find()->where(['is_nav' => 1])->orderBy('sort asc')->asArray()->all()) as $nav) {
-    $firstItem = ['label' => $nav['title'], 'url' => ['/article/index', 'cate' => $nav['name']]];
-    if (isset($nav['_child'])) {
-        $secondItems = [];
-        foreach($nav['_child'] as $second) {
-            $secondItems[] = ['label' => $second['title'], 'url' => ['/article/index', 'cate' => $second['name']]];
-        }
-        $firstItem['items'] = $secondItems;
-    }
-    $menuItems[] = $firstItem;
-}
-$menuItems[] = ['label' => '留言', 'url' => ['/suggest'], 'active' => \Yii::$app->controller->getRoute() == 'suggest/index'];
-$this->params['leftMenuItems'] = $menuItems;
-// 挂个钩子,方便扩展导航
-$this->trigger('leftNav');
+$menuItems = NavModel::getItems('header');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
-    'items' => $this->params['leftMenuItems'],
+    'items' => $menuItems,
     'encodeLabels' => false
 ]);
-$searchUrl = url(['/search']);
-$q = Yii::$app->request->get('q', '搜索');
+$searchUrl = url(['/search/index']);
+$q = Yii::$app->request->get('q', '全站搜索');
 echo <<<SEARCH
 <form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
     <div class="input-group">
@@ -59,7 +47,7 @@ echo <<<SEARCH
 SEARCH;
 
 $rightMenuItems = [];
-$rightMenuItems[] = ['label' => '投稿', 'url' => ['/my/create-article']];
+$rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
 $noticeNums = Yii::$app->notify->getNoReadNums();
 if ($noticeNums > 0) {
     $rightMenuItems[] = [
@@ -67,68 +55,62 @@ if ($noticeNums > 0) {
         'items' => [
             [
                 'label' => $noticeNums . '条新消息',
-                'url' => ['/notice']
+                'url' => ['/user/default/notice']
             ]
         ]
     ];
 } else {
     $rightMenuItems[] = [
         'label' => '<i class="fa fa-bell"></i>',
-        'url' => ['/notice']
+        'url' => ['/user/default/notice']
     ];
 }
 if (Yii::$app->user->isGuest) {
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/site/login']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/user/registration/signup']];
+    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/user/security/login']];
 } else {
     $rightMenuItems[] = [
-        'label' => Html::img(Yii::$app->user->identity->profile->avatar, ['width' => 32, 'height' => 32]),
+        'label' => Html::img(Yii::$app->user->identity->getAvatar(32), ['width' => 32, 'height' => 32]),
         'linkOptions' => [
             'class' => 'avatar'
         ],
         'items' => [
             [
                 'label' => Html::icon('user') . ' 个人主页',
-                'url' => ['/user', 'id' => Yii::$app->user->id],
+                'url' => ['/user/default/index', 'id' => Yii::$app->user->id],
             ],
             [
                 'label' => Html::icon('cog') . ' 账户设置',
-                'url' => ['/my/profile'],
+                'url' => ['/user/settings/profile'],
             ],
             [
                 'label' => Html::icon('book') . ' 我的投稿',
-                'url' => ['/my/article-list'],
+                'url' => ['/user/default/article-list'],
             ],
             [
-                'label' => Html::icon('thumbs-up') . ' 我顶过的',
-                'url' => ['/my/up'],
+                'label' => Html::icon('thumbs-up') . ' 我赞过的',
+                'url' => ['/user/default/up'],
             ],
             [
                 'label' => Html::icon('star') . ' 我收藏的',
-                'url' => ['/my/favourite'],
+                'url' => ['/user/default/favourite'],
             ],
             [
                 'label' => Html::icon('sign-out') . ' 退出',
-                'url' => ['/site/logout'],
+                'url' => ['/user/security/logout'],
                 'linkOptions' => ['data-method' => 'post'],
             ]
         ]
     ];
 }
-$rightMenuItems[] = [
-    'label'=>Yii::t('frontend', 'Language'),
-    'items'=>array_map(function ($code) {
-        return [
-            'label' => Yii::$app->params['availableLocales'][$code],
-            'url' => ['/site/set-locale', 'locale'=>$code],
-            'active' => Yii::$app->language === $code
-        ];
-    }, array_keys(Yii::$app->params['availableLocales']))
-];
+
+$this->params['rightMenuItems'] = $rightMenuItems;
+$this->trigger('beforeRenderRightMenu');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav navbar-right'],
-    'items' => $rightMenuItems,
+    'items' => $this->params['rightMenuItems'],
     'encodeLabels' => false
 ]);
 NavBar::end();
 ?>
+<?php \yii\widgets\Pjax::end() ?>

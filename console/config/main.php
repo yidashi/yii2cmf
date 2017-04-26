@@ -8,18 +8,8 @@ $params = array_merge(
 return [
     'id' => 'app-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
     'controllerMap' => [
-        'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
-            'templateFile' => '@jamband/schemadump/template.php',
-            'useTablePrefix' => true,
-            'migrationPath' => '@database/migrations',
-        ],
-        'schemadump' => [
-            'class' => 'jamband\schemadump\SchemaDumpController',
-        ],
         'schedule' => [
             'class' => \omnilight\scheduling\ScheduleController::className(),
             'scheduleFile' => '@app/schedule.php'
@@ -30,6 +20,10 @@ return [
             'templatePath' => '@database/seeds/templates',
             'namespace' => 'database\seeds',
         ],
+        'serve' => [
+            'class' => 'yii\console\controllers\ServeController',
+            'docroot' => dirname(dirname(__DIR__)) . '/web'
+        ]
     ],
     'components' => [
         'log' => [

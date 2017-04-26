@@ -2,17 +2,18 @@
 
 namespace common\models;
 
-use common\models\behaviors\VoteBehavior;
+use common\behaviors\NotifyBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "{{%vote}}".
  *
  * @property int $id
- * @property string $type
+ * @property string $entity
  * @property int $user_id
  * @property int $created_at
  * @property int $updated_at
+ * @property string $action
  */
 class Vote extends \yii\db\ActiveRecord
 {
@@ -32,9 +33,9 @@ class Vote extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'user_id', 'type_id'], 'required'],
-            [['user_id', 'type_id'], 'integer'],
-            [['type', 'action'], 'string', 'max' => 20],
+            [['entity', 'user_id', 'entity_id'], 'required'],
+            [['user_id', 'entity_id'], 'integer'],
+            [['entity', 'action'], 'string', 'max' => 80],
             ['action', 'in', 'range' => ['up', 'down']],
         ];
     }
@@ -46,7 +47,7 @@ class Vote extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => 'Type',
+            'entity' => 'entity',
             'user_id' => 'User ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -59,13 +60,16 @@ class Vote extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            VoteBehavior::className()
+            [
+                'class' => NotifyBehavior::className(),
+                'entity' => __CLASS__
+            ]
         ];
     }
 
     public function getArticle()
     {
-        return $this->hasOne(Article::className(), ['id' => 'type_id']);
+        return $this->hasOne(Article::className(), ['id' => 'entity_id']);
     }
 
 }

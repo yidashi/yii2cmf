@@ -2,13 +2,19 @@
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
-    'runtimePath' => dirname(dirname(__DIR__)).'/runtime',
+    'runtimePath' => '@app/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',
-    'name' => env('APP_NAME'),
+    'bootstrap' => [
+        'log',
+        'common\\components\\LoadModule',
+        'common\\components\\LoadPlugins',
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+            'cachePath' => '@root/cache',
+            'dirMode' => 0777 // 防止console生成的目录导致web账户没写权限
         ],
         'formatter' => [
             'dateFormat' => 'yyyy-MM-dd',
@@ -21,33 +27,12 @@ return [
         'assetManager' => [
             'bundles' => [
                 'yii\web\YiiAsset' => [
-                    'sourcePath' => '@common/assets',
+                    'sourcePath' => '@common/static',
+                    'depends' => [
+                        'common\assets\ModalAsset'
+                    ]
                 ],
             ],
-        ],
-        'i18n' => [
-            'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath' => '@common/messages',
-                    'forceTranslation' => true,
-                ],
-                '*'=> [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    'basePath'=>'@common/messages',
-                    'fileMap'=>[
-                        'app'=>'app.php',
-                        'common'=>'common.php',
-                        'backend'=>'backend.php',
-                        'frontend'=>'frontend.php',
-                    ],
-                    'on missingTranslation' => ['\backend\modules\i18n\Module', 'missingTranslation']
-                ],
-            ],
-        ],
-        'config' => \common\components\Config::className(), //数据库动态配置
-        'queue' => [//队列组件化,方便替换
-            'class' => \common\components\Queue::className(),
         ],
         'log' => [
             'targets' => [
@@ -63,10 +48,13 @@ return [
                     'logTable'=>'{{%system_log}}'
                 ],
             ]
-        ]
+        ],
+        'notify' => 'common\components\notify\Handler',
+        'moduleManager' => [
+            'class' => 'common\\components\\ModuleManager'
+        ],
+        'pluginManager' => [
+            'class' => 'common\components\PluginManager',
+        ],
     ],
-    'as locale' => [
-        'class' => 'common\behaviors\LocaleBehavior',
-        'enablePreferredLanguage' => true
-    ]
 ];

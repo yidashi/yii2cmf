@@ -3,12 +3,20 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use common\helpers\Html;
+use frontend\themes\basic\assets\AppAsset;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
-use frontend\themes\basic\assets\AppAsset;
 
 AppAsset::register($this);
+$this->registerMetaTag([
+    'name' => 'keywords',
+    'content' => isset($this->params['SEO_SITE_KEYWORDS']) ? $this->params['SEO_SITE_KEYWORDS'] : Yii::$app->config->get('SEO_SITE_KEYWORDS')
+], 'keywords');
+$this->registerMetaTag([
+    'name' => 'description',
+    'content' => isset($this->params['SEO_SITE_DESCRIPTION']) ? $this->params['SEO_SITE_DESCRIPTION'] : Yii::$app->config->get('SEO_SITE_DESCRIPTION')
+], 'description');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -19,60 +27,37 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <link type="image/x-icon" href="<?= Yii::getAlias('@web') ?>favicon.ico" rel="shortcut icon">
-    <?php $this->registerMetaTag(['name' => 'keywords', 'content' => Yii::$app->config->get('SEO_SITE_KEYWORDS')]);?>
-    <?php $this->registerMetaTag(['name' => 'description', 'content' => Yii::$app->config->get('SEO_SITE_DESCRIPTION')]);?>
     <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';</script>
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-
-<div class="wrap">
+<?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
+<?= $this->render('_header') ?>
+<?php else: ?>
     <?= $this->render('_nav') ?>
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= \common\widgets\AlertPlus::widget()?>
-        <?= $content ?>
-    </div>
+<?php endif; ?>
+<div class="container content-wrapper">
+    <?php if (!(new \Detection\MobileDetect())->isMobile()): ?>
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?php endif; ?>
+    <?= \common\widgets\Alert::widget()?>
+    <?= $content ?>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <div class="footer-link">
-            <a href="<?= Url::to(['/page/index', 'name' => 'aboutus'])?>">关于我们</a>
-            <a href="<?= Url::to(['/page/index', 'name' => 'mianze'])?>">免责声明</a>
-            <a href="<?= Url::to(['/suggest'])?>" title="意见反馈">意见反馈</a>
-        </div>
-        <div class="friendly-link">
-            <span>友情链接：</span>
-            <?php if(Yii::$app->config->get('FRIENDLY_LINK')): ?>
-            <?php foreach(Yii::$app->config->get('FRIENDLY_LINK') as $k => $v): ?>
-            <a href="<?= $v ?>" target="_blank" title="<?= $k ?>"><?= $k ?></a>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </div>
-        <div class="footer-copyright">
-            <p>&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
-            <p><?= Yii::$app->config->get('SITE_ICP')?></p>
-        </div>
-    </div>
-</footer>
-<?php \yii\bootstrap\Modal::begin([
-    'id' => 'commonModal',
-    'header' => '<h4>提示</h4>',
-    'footer' => \common\helpers\Html::button('确定', ['class' => 'btn btn-info', 'data-dismiss' => 'modal'])
-])?>
-<?php \yii\bootstrap\Modal::end()?>
+<?= $this->render('_footer') ?>
+<?php if(Yii::$app->user->isGuest): ?>
+    <?= $this->render('_login') ?>
+<?php endif; ?>
 <!--回到顶部-->
 <?= \common\widgets\scroll\Scroll::widget()?>
-<?php if (YII_ENV_PROD):?>
-<!--页脚-->
 <?= Yii::$app->config->get('FOOTER')?>
-<?php endif; ?>
-<?php $this->trigger('footer'); ?>
+
 <?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage() ?>

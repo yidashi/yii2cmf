@@ -1,0 +1,135 @@
+@CHARSET "UTF-8";
+html, body {
+    margin: 0;
+    min-height: 100%;
+    font-size: 12px;
+}
+body {
+    background: -webkit-linear-gradient(top,#ccc,#fff);
+    background: -moz-linear-gradient(top,#ccc,#fff);
+    background: -o-linear-gradient(top,#ccc,#fff);
+    background: -ms-linear-gradient(top,#ccc,#fff);
+    background: linear-gradient(top,#ccc,#fff)
+}
+div.required label.control-label:after {
+    content: " *";
+    color: red;
+}
+#wrapper {
+    width: 800px;
+}
+
+#wrapper h2 {
+    font-size: 22px;
+    margin: 0 0 15px 0;
+    color: #ff9;
+    line-height: 1;
+}
+
+
+#wrapper  .desc {
+    padding: 10px 20px;
+    margin: 15px 0;
+    background: #555;
+    color: #fff;
+    line-height: 1.5;
+    border-radius: 5px;
+}
+
+#wrapper  .desc strong {
+    color: #F60;
+}
+#progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 219px;
+}
+.panel {
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+.panel-heading {
+    background: #444;
+    padding: 15px 20px;
+    color: #fff;
+    margin: 0 0 1px 0;
+}
+
+.panel-body {
+    padding: 0 0 0 220px;
+    position: relative;
+}
+
+.list-group-item {
+    border: none;
+    position: relative;
+    margin: 0 0 1px 0;
+    vertical-align: top;
+    color: #999;
+    text-indent: 30px;
+    background-color: #555;
+    background-image: url(../images/icoStatus.gif);
+    background-repeat: no-repeat;
+    background-position: 10px 0;
+    *zoom: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+    z-index: 2;
+    background-color: #666;
+    border-color: #fff;
+    background-position: 10px -82px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: -1px
+}
+
+.list-group-item.done {
+    background-position: 10px -40px
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+.list-group-item:last-child {
+    border-radius: 0 0 0 5px;
+}
+
+#content {
+    position: relative;
+    width: 550px;
+    min-height: 500px;
+    padding:40px;
+}
+
+/* Button Area */
+.ibtnArea {
+    position: absolute;
+    bottom: -61px;
+    left: 0;
+    width: 550px;
+    height: 60px;
+    margin: 1px 0 0 0;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 0 0 5px 5px
+}
+.ibtnArea:after {
+    content: "";
+    display: block;
+    clear: both
+}
+.ibtnArea .x_btn-inverse {
+    color: #fff !important
+}
+.ibtnArea .x_btn > i {
+    opacity: .75;
+    filter: alpha(opacity=75)
+}

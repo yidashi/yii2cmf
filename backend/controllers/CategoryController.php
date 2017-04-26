@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
 use common\models\Category;
+use Yii;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
+use yii\helpers\Url;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CaetgoryController implements the CRUD actions for Category model.
@@ -27,6 +27,15 @@ class CategoryController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'position' => [
+                'class' => 'backend\\actions\\Position',
+                'returnUrl' => Url::current()
+            ]
+        ];
+    }
     /**
      * Lists all Category models.
      *
@@ -34,13 +43,10 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => Category::treeList(null, $result, 0, '&nbsp;&nbsp;&nbsp;&nbsp;'),
-            'key' => 'id'
-        ]);
-
+        $dataProvider = new ActiveDataProvider(['query' => Category::find()]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'pagination' => false
         ]);
     }
     /**
@@ -63,10 +69,11 @@ class CategoryController extends Controller
      *
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id = 0)
     {
         $model = new Category();
-
+        $model->loadDefaultValues();
+        $model->pid = $id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
@@ -122,7 +129,7 @@ class CategoryController extends Controller
      *
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    public function findModel($id)
     {
         if (($model = Category::findOne($id)) !== null) {
             return $model;

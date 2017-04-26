@@ -7,7 +7,7 @@
  $('#dm').remove();
  // $('#dm-switch').remove();
 
-function start_sio(article_id, dm_mgr, cb){
+function start_sio(entity, entity_id, dm_mgr, cb){
   console.log('-->');
   delete localStorage.debug;
   //localStorage.debug='*,-engine.io*';
@@ -17,7 +17,7 @@ function start_sio(article_id, dm_mgr, cb){
     reconnectionDelay: 5000,
     reconnectionDelayMax: 10000,
     //transports: ['websocket', 'polling'],
-    query: 'art_id=' + article_id
+    query: 'entity_id=' + article_id + '&entity=' + entity
   };
   var socket = io.connect('ws://dm3.jiecao.fm/art', opts);
   window.__socket = socket;
@@ -39,7 +39,7 @@ function start_sio(article_id, dm_mgr, cb){
   }
 }
 
-function start(article_id, list_url){
+function start(entity, entity_id, list_url){
   // Get querystring from url
   function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -61,8 +61,9 @@ function start(article_id, list_url){
   jlog('art_id=' + article_id);*/
 
   var opt = {
-     art_id : article_id,
-    danmu_list_url : list_url
+     entity: entity,
+     entity_id : entity_id,
+     danmu_list_url : list_url
   };
 
   if(typeof(danmuListUrl) !== 'undefined'){
@@ -139,11 +140,11 @@ var DM_ToString = DM.prototype.toString = function(){
 };
 
 
-function initDm(article_id, list_url){
+function initDm(entity, entity_id, list_url){
   setTimeout(function(){
     // $('body').prepend('<div id="dm-switch"><div class="dm-switch-icon"></div></div>');
     $('body').prepend('<div id="dm"></div>');
-    start(article_id, list_url);
+    start(entity, entity_id, list_url);
     //点击每个弹幕块
     // var inputField = api.require('inputField');
     $('#dm').on('click','.dm-item',function(){

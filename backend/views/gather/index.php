@@ -1,35 +1,29 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Gathers';
+$this->title = '采集过的地址';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="gather-index">
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title ?>
+<?php $this->endBlock() ?>
 
-    <p>
-        <?= Html::a('Create Gather', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="box box-primary">
+        <div class="box-body">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    'id',
+                    'url_org:url',
+                    'created_at',
+                    'updated_at',
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'category',
-            'url:url',
-            'url_org:url',
-            // 'res',
-            // 'result',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-</div>
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
+        </div>
+    </div>

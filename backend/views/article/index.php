@@ -1,7 +1,7 @@
 <?php
 
-use common\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\Article */
@@ -10,13 +10,18 @@ use yii\grid\GridView;
 $this->title = '文章';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php $this->beginBlock('content-header') ?>
+<?= $this->title . ' ' . Html::a('发布文章', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?php $this->endBlock() ?>
 <div class="article-index">
     <div class="box box-primary">
         <div class="box-header"><h2 class="box-title">文章搜索</h2></div>
         <div class="box-body"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
     </div>
     <div class="box box-primary">
-        <div class="box-header"><h2 class="box-title">文章列表</h2></div>
+        <div class="box-header with-border">
+            <h2 class="box-title">文章列表</h2>
+        </div>
         <div class="box-body">
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
@@ -25,20 +30,33 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'title',
                         'value' => function($model) {
-                            return Html::a($model->title, env('FRONTEND_URL') . '/' . $model->id . '.html', ['target' => '_blank']);
+                            return Html::a($model->title, Yii::$app->config->get('SITE_URL') . '/' . $model->id . '.html', ['target' => '_blank', 'no-iframe' => '1']);
                         },
-                        'format' => 'raw'
+                        'format' => 'raw',
+                        'enableSorting' => false
+                    ],
+                    [
+                        'attribute' => 'module',
+                        'value' => function($model) {
+                            return array_get(\common\models\ArticleModule::getTypeEnum(), $model->module);
+                        },
+                        'enableSorting' => false
                     ],
                     'category',
+                    'trueView',
                     [
-                        'attribute' => 'status',
-                        'value' => function($model) {
-                            $arr = [0 => Html::icon('clock-o'), 1 => Html::icon('check'), 10 => Html::icon('times')];
-                            return $arr[$model->status];
-                        },
-                        'format' => 'raw'
+                        'class' => 'backend\widgets\grid\SwitcherColumn',
+                        'attribute' => 'is_top'
                     ],
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'backend\widgets\grid\SwitcherColumn',
+                        'attribute' => 'status'
+                    ],
+                    'user_id:admin',
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{update} {delete}'
+                    ],
                 ],
             ]); ?>
         </div>

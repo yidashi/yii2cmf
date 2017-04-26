@@ -1,54 +1,38 @@
 <?php
+use rbac\components\MenuHelper;
+use rbac\models\Menu;
+use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-use common\helpers\Url;
+/* @var $this \yii\web\View */
+/* @var $content string */
+/* @var $context \yii\web\Controller */
 
-$this->title = '控制面板';
+backend\assets\AppAsset::register($this);
+\backend\assets\IframeAsset::register($this);
 ?>
-<div class="site-index">
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?= Yii::$app->language ?>">
+<head>
+    <meta charset="<?= Yii::$app->charset ?>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <?= Html::csrfMetaTags() ?>
+    <title><?= Yii::$app->config->get('SITE_NAME') ?>管理后台</title>
+    <?php $this->head() ?>
+</head>
+<body class="hold-transition <?= Yii::$app->config->get('BACKEND_SKIN', 'skin-green') ?> sidebar-mini fixed">
+<?php $this->beginBody() ?>
+<div class="wrapper">
 
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3><?= \common\models\Article::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
-                        <p>当前内容(文章)</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-document"></i>
-                    </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-red">
-                    <div class="inner">
-                        <h3><?= \common\models\Article::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
-                        <p>待审内容(文章)</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-document"></i>
-                    </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3><?= \common\models\User::find()->count() ?><sup style="font-size: 20px">人</sup></h3>
-                        <p>当前注册用户</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-person-add"></i>
-                    </div>
-                    <a href="<?= Url::to(['/user/index']) ?>" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
-                </div>
-            </div><!-- ./col -->
-        </div><!-- /.row -->
-    </div>
+    <?= $this->render('header.php') ?>
+
+    <?= $this->render('content.php') ?>
 
 </div>
+<?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
+</body>
+</html>
+<?php $this->endPage() ?>

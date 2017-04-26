@@ -9,19 +9,21 @@
 namespace plugins\wxreply;
 
 
+use yii\base\Event;
+
 class Plugins extends \plugins\Plugins
 {
     public $info = [
         'author' => '易大师',
         'version' => 'v1.0',
-        'name' => 'wxreply',
-        'title' => '微信自动回复',
-        'desc' => '微信自动回复'
+        'id' => 'wxreply',
+        'name' => '微信自动回复',
+        'description' => '微信自动回复'
     ];
 
     public function wechat($app)
     {
-        $app->events->addListener('yii\web\Controller','afterAction', 'plugins\wxreply\ReplyListener');
+        Event::on('yii\web\Controller','afterAction', ['plugins\wxreply\ReplyListener', 'handle']);
     }
 
 }
