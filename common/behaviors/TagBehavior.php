@@ -64,24 +64,26 @@ class TagBehavior extends Behavior
             return;
         }
         $data = \Yii::$app->request->post($this->owner->formName());
-        if(isset($data[static::$formName]) && !empty($data[static::$formName])) {
+        if(isset($data[static::$formName])) {
             if(!$this->owner->isNewRecord) {
                 $this->beforeDelete();
             }
-            $tags = $data[static::$formName];
-            foreach($tags as $tag) {
-                $tagModel = Tag::findOne(['name' => $tag]);
-                if (empty($tagModel)) {
-                    $tagModel = new Tag();
-                    $tagModel->name = $tag;
-                    $tagModel->save();
+            if (!empty($data[static::$formName])) {
+                $tags = $data[static::$formName];
+                foreach ($tags as $tag) {
+                    $tagModel = Tag::findOne(['name' => $tag]);
+                    if (empty($tagModel)) {
+                        $tagModel = new Tag();
+                        $tagModel->name = $tag;
+                        $tagModel->save();
+                    }
+                    $articleTag = new ArticleTag();
+                    $articleTag->article_id = $this->owner->id;
+                    $articleTag->tag_id = $tagModel->id;
+                    $articleTag->save();
                 }
-                $articleTag = new ArticleTag();
-                $articleTag->article_id = $this->owner->id;
-                $articleTag->tag_id = $tagModel->id;
-                $articleTag->save();
+                Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
             }
-            Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
         }
     }
 
