@@ -21,6 +21,7 @@ class m161215_024158_create_book_table extends Migration
             'category_id' => $this->integer(11)->notNull()->comment('书分类'),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+            'view' => $this->integer()->notNull()->defaultValue(0)
         ]);
 
         $this->createTable('{{%book_chapter}}', [
