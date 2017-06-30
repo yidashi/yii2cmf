@@ -10,6 +10,7 @@ $logCount = \backend\models\SystemLog::find()->count();
 $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($menu){
     return [
         'id' => $menu['id'],
+        'icon' => $menu['icon'],
         'name' => $menu['name'],
     ];
 });
@@ -100,7 +101,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="navbar-nav nav">
                 <?php foreach ($menuGroups as $key => $menuGroup) : ?>
-                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><?= $menuGroup['name'] ?></a></li>
+                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><i class="fa <?= $menuGroup['icon'] ?>"></i><?= $menuGroup['name'] ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>
