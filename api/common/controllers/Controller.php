@@ -13,6 +13,10 @@ use yii\filters\Cors;
 
 class Controller extends \yii\rest\Controller
 {
+    /**
+     * 配置让dataProvider返回items
+     * @var array
+     */
     public $serializer = [
         'class' => 'yii\rest\Serializer',
         'collectionEnvelope' => 'items'

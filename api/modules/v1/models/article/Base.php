@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * Author: ljt
+ * Author: yidashi
  * DateTime: 2017/3/9 13:27
  * Description:
  */
@@ -14,6 +14,7 @@ class Base extends \common\models\article\Base
     public function fields()
     {
         return [
+            'markdown',
             'content' => function($model) {
                 $css = \Yii::$app->request->getHostInfo() . \Yii::$app->request->getBaseUrl() . '/article.css';
                 return <<<CONTENT

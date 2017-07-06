@@ -14,6 +14,11 @@ use yii\base\DynamicModel;
 use yii\validators\Validator;
 use yii\base\InvalidConfigException;
 
+/**
+ * 验证参数
+ * Class ValidateBehavior
+ * @package api\common\behaviors
+ */
 class ValidateBehavior extends Behavior
 {
 

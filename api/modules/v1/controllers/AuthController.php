@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * Author: ljt
+ * Author: yidashi
  * DateTime: 2017/3/8 14:30
  * Description:
  */
@@ -16,6 +16,16 @@ use api\common\models\User;
 
 class AuthController extends Controller
 {
+    /**
+     * @api {post} /v1/auth/login 登录
+     * @apiVersion 1.0.0
+     * @apiName login
+     * @apiGroup Auth
+     *
+     * @apiParam {String} username 用户名/邮箱
+     * @apiParam {String} password  密码
+     *
+     */
     public function  actionLogin()
     {
         $model = new LoginForm();
