@@ -106,13 +106,15 @@ div.required label.control-label:after {
     position: relative;
     width: 550px;
     min-height: 500px;
-    padding:40px;
+    background: #666;
+    color: #fff;
+    padding:40px 40px 100px 40px;
 }
 
 /* Button Area */
 .ibtnArea {
     position: absolute;
-    bottom: -61px;
+    bottom: 0;
     left: 0;
     width: 550px;
     height: 60px;
@@ -133,3 +135,4 @@ div.required label.control-label:after {
     opacity: .75;
     filter: alpha(opacity=75)
 }
+.has-success label,.has-error label {color: #fff!important;}

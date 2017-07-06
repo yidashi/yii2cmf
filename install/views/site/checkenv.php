@@ -1,3 +1,4 @@
+<h2>检查环境</h2>
 <?php foreach ($data["requirements"] as $requirement):?>
 
 <?php

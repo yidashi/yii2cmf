@@ -63,25 +63,24 @@ function creatIframe(href,titleName){
     var topWindow=$(window.parent.document),
         show_nav=topWindow.find('#min_title_list'),
         iframe_box=topWindow.find('#iframe_box'),
-        iframeBox=iframe_box.find('.show_iframe'),
-        $tabNav = topWindow.find(".acrossTab"),
-        $tabNavWp = topWindow.find(".tab-nav-wp"),
-        $tabNavmore =topWindow.find(".tab-nav-more");
-    var taballwidth=0;
+        iframeBox=iframe_box.find('.show_iframe');
 
     show_nav.find('li').removeClass("active");
     $li = $('<li>', {class:"active"});
     $li.append($('<span>', {"data-href": href}).text(titleName)).append('<i></i><em></em>');
     show_nav.append($li);
-
+    $li.contextmenu({
+        target:"#context-menu",
+        onItem:onItem
+    });
     iframeBox.hide();
     iframe_box.append('<div class="show_iframe"><div class="loading"></div><iframe frameborder="0" src='+href+'></iframe></div>');
     var showBox=iframe_box.find('.show_iframe:visible');
     showBox.find('iframe').load(function(){
         if (!titleName) {
-            var title = $('title', $(this.contentWindow.document)).text();
+            titleName = $('title', $(this.contentWindow.document)).text();
             var index = showBox.index();
-            show_nav.find('li').eq(index).find('span').text(title);
+            show_nav.find('li').eq(index).find('span').text(titleName);
         }
         tabNavallwidth();
         showBox.find('.loading').hide();
@@ -91,17 +90,28 @@ function creatIframe(href,titleName){
 
 
 /*关闭iframe*/
-function removeIframe(){
+function removeIframe(index){
     var topWindow = $(window.parent.document),
         iframe = topWindow.find('#iframe_box .show_iframe'),
-        tab = topWindow.find(".acrossTab li"),
-        showTab = topWindow.find(".acrossTab li.active"),
-        showBox=topWindow.find('.show_iframe:visible'),
-        i = showTab.index();
-    tab.eq(i-1).addClass("active");
-    tab.eq(i).remove();
-    iframe.eq(i-1).show();
-    iframe.eq(i).remove();
+        tab = topWindow.find(".acrossTab li");
+    tab.eq(index-1).addClass("active");
+    tab.eq(index).remove();
+    iframe.eq(index-1).show();
+    iframe.eq(index).remove();
+}
+/*关闭其他iframe*/
+function removeIframeOther(index){
+    var topWindow = $(window.parent.document),
+        iframe = topWindow.find('#iframe_box .show_iframe'),
+        tab = topWindow.find(".acrossTab li");
+    for(var i=0;i<tab.length;i++){
+        if(tab.eq(i).find("i").length>0 && i!=index){
+            tab.eq(i).remove();
+            iframe.eq(i).remove();
+        }
+    }
+    tab.eq(index).addClass("active");
+    iframe.eq(index).show();
 }
 
 /*关闭所有iframe*/
@@ -117,6 +127,18 @@ function removeIframeAll(){
     }
 }
 
+function onItem(context, e)
+{
+    var aIndex = $(e.target).parent('li').index();
+    var iframeIndex = $(context).index();
+    if (aIndex == 0) {
+        removeIframe(iframeIndex);
+    }else if (aIndex == 1) {
+        removeIframeOther(iframeIndex);
+    }else if (aIndex == 2) {
+        removeIframeAll();
+    }
+}
 $(function(){
     /*选项卡导航*/
     $(".main-sidebar").on("click",".sidebar a[href!='#']", function(){
@@ -172,4 +194,21 @@ $(function(){
     function toNavPos(){
         oUl.stop().animate({'left':-num*100},100);
     }
+    $('.acrossTab li').contextmenu({
+        target:"#context-menu",
+        onItem:onItem
+    });
+    /*var openedIframe = $.cookie('iframe') ? JSON.parse($.cookie('iframe')) : [];
+     $.removeCookie('iframe');
+     for (var i=0;i<openedIframe.length;i++) {
+     creatIframe(openedIframe[i].href, openedIframe[i].title);
+     }
+
+     window.onbeforeunload = function(event) {
+     var openedIframe = [];
+     $('#min_title_list li span').each(function (ele, index) {
+     openedIframe.push({title:$(ele).text(), href:$(ele).data('href')});
+     $.cookie('iframe', JSON.stringify(openedIframe));
+     })
+     }*/
 });

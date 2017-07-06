@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use common\models\Article;
 
 /* @var $this yii\web\View */
 
@@ -15,8 +16,7 @@ use yii\helpers\Url;
         ]) ?>
         <div class="row">
             <?php
-            if ($this->beginCache('category-article-list', ['duration' => 3600])):
-                ?>
+            if ($this->beginCache('category-article-list', ['duration' => 3600])): ?>
         <?php foreach ($categories as $category):?>
             <div class="col-md-6">
                 <div class="panel panel-default">
@@ -27,7 +27,7 @@ use yii\helpers\Url;
                     <div class="panel-body">
                         <ul class="category-article-list">
                             <?php
-                                $list = \frontend\models\Article::find()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
+                                $list = Article::find()->published()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
                             foreach ($list as $item) :
                             ?>
                                 <li><em><?= Yii::$app->formatter->asDate($item->published_at, 'php:m-d') ?></em> <a href="<?= Url::to(['/article/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
@@ -41,14 +41,6 @@ use yii\helpers\Url;
         </div>
     </div>
     <div class="col-md-3">
-        <div class="btn-group btn-group-justified">
-            <?php if(Yii::$app->user->isGuest || (!Yii::$app->user->isGuest && !Yii::$app->user->identity->isSign)): ?>
-            <a class="btn btn-success btn-registration" href="<?= Url::to(['/sign/index'])?>"><i class="fa fa-calendar-plus-o"></i> 点此处签到<br>签到有好礼</a>
-            <?php else: ?>
-            <a class="btn btn-success disabled" href="<?= Url::to(['/sign/index'])?>"><i class="fa fa-calendar-check-o"></i> 今日已签到<br>已连续<?= Yii::$app->user->identity->sign->continue_times ?>天</a>
-            <?php endif; ?>
-            <a class="btn btn-primary" href="<?= Url::to(['/sign/index'])?>"><?= date('Y年m月d日') ?><br>今日已有<?= Yii::$app->db->createCommand('SELECT COUNT(*) FROM {{%sign}} WHERE FROM_UNIXTIME(last_sign_at, "%Y%m%d") = "'. date('Ymd') . '"')->queryScalar() ?>人签到</a>
-        </div>
         <?= \common\modules\area\widgets\AreaWidget::widget([
             'slug' => 'site-index-sidebar',
             "blockClass"=>"panel panel-default",
@@ -86,7 +78,7 @@ use yii\helpers\Url;
             <div class="panel-body">
                 <ul class="post-list">
                     <?php
-                        $recommentList = \frontend\models\Article::tops();
+                        $recommentList = \frontend\services\ArticleService::tops();
                     foreach ($recommentList as $item):
                     ?>
                     <li><a href="<?= Url::to(['/article/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>

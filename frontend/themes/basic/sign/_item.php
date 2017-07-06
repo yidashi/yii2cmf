@@ -21,7 +21,7 @@ use yii\helpers\Url;
         <em>NO. <i><?= $index + 1 ?></i></em>
     </div>
     <div class="media-content">
-        签到时间：<i><?= Yii::$app->formatter->asTime($model->last_sign_at) ?></i><br />
-        连续签到：<i><?= $model->continue_times ?></i>天
+        签到时间：<i><?= Yii::$app->formatter->asTime($model->sign_at) ?></i><br />
+        连续签到：<i><?= $model->info->continue_times ?></i>天
     </div>
 </div>

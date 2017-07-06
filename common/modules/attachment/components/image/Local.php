@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * Author: ljt
+ * Author: yidashi
  * DateTime: 2017/2/24 17:40
  * Description:
  */
@@ -25,6 +25,9 @@ class Local extends Processor
 
     public function thumbnail($path, $width, $height)
     {
+        if (strpos($path, $this->baseUrl . '/') !== false) {
+            $path = substr($path, strlen($this->baseUrl . '/'));
+        }
         $pathinfo = pathinfo($path);
         $thumbFile = $pathinfo['dirname'] . '/' . $pathinfo['filename'] . strtr($this->thumbFileRule, ['{w}' => $width, '{h}' => $height]) . '.' . $pathinfo['extension'];
         $thumbPath = $this->path . '/' . $thumbFile;
@@ -34,6 +37,9 @@ class Local extends Processor
 
     public function crop($path, $width, $height, array $start = [0, 0])
     {
+        if (strpos($path, $this->baseUrl . '/') !== false) {
+            $path = substr($path, strlen($this->baseUrl . '/'));
+        }
         $pathinfo = pathinfo($path);
         $cropFile = $pathinfo['dirname'] . '/' . $pathinfo['filename'] . strtr($this->cropFileRule, ['{w}' => $width, '{h}' => $height, '{x}' => $start[0], '{y}' => $start[1]]) . '.' . $pathinfo['extension'];
         $cropPath = $this->path . '/' . $cropFile;

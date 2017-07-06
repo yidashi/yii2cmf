@@ -10,15 +10,15 @@ $logCount = \backend\models\SystemLog::find()->count();
 $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($menu){
     return [
         'id' => $menu['id'],
-        'icon' => $menu['icon'],
         'name' => $menu['name'],
+        'icon' => $menu['icon'],
     ];
 });
 ?>
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->config->get('SITE_NAME') . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->config->get('site_name') . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
 
     <nav class="navbar navbar-static-top" role="navigation">
 
@@ -73,22 +73,22 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                                 alt="User Image" />
 
                             <p>
-                                <?= Yii::$app->user->identity->username ?> - <?= current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))->description ?>
+                                <?= Yii::$app->user->identity->username ?> - <?= current(Yii::$app->authManager->getRolesByUser(Yii::$app->user->id))->name ?>
                                 <small>注册时间:<?= Yii::$app->formatter->asDate(Yii::$app->user->identity->created_at) ?></small>
                             </p></li>
 
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <?= Html::a('修改密码', ['/user/admin/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat', 'target' => '_blank', 'title' => '修改密码'])?>
+                                <?= Html::a('修改密码', ['/user/default/reset-password', 'id' => Yii::$app->user->id], ['class' => 'btn btn-default btn-flat', 'target' => '_blank', 'title' => '修改密码'])?>
                             </div>
                             <div class="pull-right">
-                                <?= Html::a('登出', ['/user/admin/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>
+                                <?= Html::a('登出', ['/user/default/logout' ], ['data-method' => 'post', 'class' => 'btn btn-default btn-flat'])?>
                             </div>
                         </li>
                     </ul>
                 </li>
-                <li><?= Html::a('<i class="fa  fa-sign-out"></i>', ['/user/admin/logout'], ['data-method' => 'post']) ?></li>
+                <li><?= Html::a('<i class="fa  fa-sign-out"></i>', ['/user/default/logout'], ['data-method' => 'post']) ?></li>
             </ul>
         </div>
         <div class="navbar-header">
@@ -101,7 +101,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="navbar-nav nav">
                 <?php foreach ($menuGroups as $key => $menuGroup) : ?>
-                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><i class="fa <?= $menuGroup['icon'] ?>"></i><?= $menuGroup['name'] ?></a></li>
+                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><?= Html::icon($menuGroup['icon']) ?> <?= $menuGroup['name'] ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

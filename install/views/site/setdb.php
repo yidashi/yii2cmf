@@ -8,7 +8,7 @@ $form = \yii\widgets\ActiveForm::begin([
 ]);
 ?>
 
-<h2>Input mysqli info</h2>
+<h2>填写数据库信息</h2>
 <?=$form->field($model, 'hostname')->textInput(['autofocus' => 'on','autocomplete' => 'off','class' => 'form-control'])?>
 <?=$form->field($model, 'port')->textInput(['autofocus' => 'on','autocomplete' => 'off','class' => 'form-control'])?>
 <?=$form->field($model, 'username')->textInput(['autocomplete' => 'off','class' => 'form-control'])?>

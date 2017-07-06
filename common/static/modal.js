@@ -5,59 +5,67 @@ $.extend({
     modal: {
         alert: function (message, type, callback) {
             if (type == undefined) {
-                type = 0;
+                type = "info";
             }
-            layer.alert(message, {icon: type, title:"提示"}, function (index) {
-                layer.close(index)
+            swal({
+                title: message,
+                type: type,
+                showConfirmButton: true,
+            },
+            function(){
                 if (callback) {
                     callback();
                 }
             });
         },
         info: function (message) {
-            this.alert(message, 0);
+            swal(message);
         },
         success: function (message) {
-            this.msg(message, 1);
+            this.notify(message, 'success');
         },
         error: function (message) {
-            this.msg(message, 0);
+            this.notify(message, 'error');
+        },
+        notify: function (message, type, callback) {
+            swal({
+                title: message,
+                type: type,
+                timer: 1500,
+                showConfirmButton: false,
+                animation: false
+            }, function () {
+                if (callback) {
+                    callback();
+                }
+                // 没callback时候不会关闭，应该是bug
+                swal.close();
+            });
         },
         confirm: function (message, ok, cancel) {
-            layer.confirm(message, {icon: 3, title:'提示'}, function(index){
+            swal({
+                title: message,
+                type: "warning",
+                showCancelButton: true,
+                cancelButtonText:"取消",
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+                closeOnConfirm: false,
+                animation: false,
+                showLoaderOnConfirm: true
+            },
+            function(){
                 ok();
-                layer.close(index);
             });
-        },
-        msg: function (message, success) {
-            layer.msg(message, {icon: success ? 1 : 2});
         },
         loading:function () {
-            return layer.load();
+            $("<div>", {id:"loading-global", class:"loading-global"}).appendTo('body');
         },
-        load: function (url, message, data) {
-            var loading = this.loading();
-            $.ajax({
-                url: url,
-                data:data,
-                type: data ? 'post' : 'get',
-                success: function (str) {
-                    layer.close(loading);
-                    index = layer.open({
-                        type: 1,
-                        title:message,
-                        area:['700px'],
-                        content: '<div class="container-fluid">' + str + '</div>',
-                    });
-                }
-            });
+        unloading:function () {
+            $("#loading-global").remove();
         },
         close: function (index) {
-            if (index != undefined) {
-                layer.close(index);
-            } else {
-                layer.closeAll();
-            }
+            swal.close();
         }
     }
 });

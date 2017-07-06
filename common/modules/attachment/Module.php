@@ -9,6 +9,7 @@
 
 namespace common\modules\attachment;
 
+use common\modules\attachment\actions\UploadController;
 use yii\base\BootstrapInterface;
 
 class Module extends \yii\base\Module implements BootstrapInterface
@@ -44,5 +45,6 @@ class Module extends \yii\base\Module implements BootstrapInterface
             }
         }
         $app->set('storage', $storage);
+        $app->controllerMap['upload'] = UploadController::className();
     }
 }

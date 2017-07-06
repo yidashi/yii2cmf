@@ -21,3 +21,10 @@
         </div>
     </div>
 </div>
+<div id="context-menu">
+    <ul class="dropdown-menu" role="menu">
+        <li><a tabindex="-1" href="javascript:;">关闭</a></li>
+        <li><a tabindex="-1" href="javascript:;">关闭其他</a></li>
+        <li><a tabindex="-1" href="javascript:;">关闭全部</a></li>
+    </ul>
+</div>

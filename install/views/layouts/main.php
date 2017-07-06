@@ -76,7 +76,7 @@ $this->beginPage();
                             ]
                         ],
                         [
-                            'label' => '检查安装条件',
+                            'label' => '检查环境',
                             "url" => [
                                 "site/check-env"
                             ],

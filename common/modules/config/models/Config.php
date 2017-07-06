@@ -36,8 +36,8 @@ class Config extends \yii\db\ActiveRecord
             [['name', 'group'], 'string', 'max' => 50],
             ['type', 'in', 'range' => array_keys(self::getTypeList())],
             ['value', 'filter', 'filter' => function ($val) {
-                if ($this->type == 'image') {
-                    return $val['id'];
+                if ($this->type == 'checkbox') {
+                    return serialize($val);
                 }
                 return $val;
             }, 'skipOnEmpty' => true],
@@ -48,8 +48,8 @@ class Config extends \yii\db\ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        if ($this->type == 'image' && !empty($this->value)) {
-            $this->value = Attachment::findOne($this->value);
+        if ($this->type == 'checkbox' && !empty($this->value)) {
+            $this->value = unserialize($this->value);
         }
     }
 
@@ -83,6 +83,6 @@ class Config extends \yii\db\ActiveRecord
 
     public static function getTypeList()
     {
-        return \Yii::$app->config->get('CONFIG_TYPE_LIST');
+        return \Yii::$app->config->get('config_type_list');
     }
 }

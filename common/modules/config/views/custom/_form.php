@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'group')->dropDownList(Yii::$app->config->get('CONFIG_GROUP')) ?>
+        <?= $form->field($model, 'group')->dropDownList(Yii::$app->config->get('config_group')) ?>
 
         <?= $form->field($model, 'type')->dropDownList($model->getTypeList()) ?>
 

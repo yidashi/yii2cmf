@@ -13,12 +13,11 @@ use yii\widgets\ActiveForm;
 AvatarUploadAsset::register($this);
 
 $this->registerJs("var uploadUrl='" . Url::to([
-    "/attachment/upload/avatar-upload",
+    "/upload/avatar-upload",
     'fileparam' => "avatar"
 ]) . "'", View::POS_HEAD);
 
 $this->title = '头像设置';
-$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
@@ -37,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<div class="col-md-6">
 							<div id="upload-avatar-wrapper">
 								<div class="avatar-item">
-									<?php echo Html::img($user->getAvatar(200),["class"=>"avatar-uploader"])?>
+									<?= Html::img($user->getAvatar(200), ['class' => 'avatar-uploader'])?>
 								</div>
 								<input type="hidden" name="cx" id="crop-x" /> <input
 									type="hidden" name="cy" id="crop-y" /> <input type="hidden"

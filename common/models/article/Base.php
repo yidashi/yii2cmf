@@ -54,7 +54,7 @@ class Base extends \yii\db\ActiveRecord
      */
     public function getIsMarkdown()
     {
-        return \Yii::$app->config->get('editor.type_article') == 'markdown' ? 1 : 0;
+        return \Yii::$app->config->get('article_editor_type') == 'markdown' ? 1 : 0;
     }
 
     public function getProcessedContent()
@@ -91,7 +91,7 @@ class Base extends \yii\db\ActiveRecord
                 'content' => [
                     'type' => 'editor',
                     'options' => function ($model) {
-                        return $model->isNewRecord ? ['type' => config('editor.type_article')] : ['isMarkdown' => $model->markdown];
+                        return ['widgetOptions' => $model->isNewRecord ? ['type' => config('article_editor_type')] : ['isMarkdown' => $model->markdown]];
                     }
                 ],
             ]

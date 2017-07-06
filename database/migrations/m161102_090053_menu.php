@@ -55,7 +55,6 @@ class m161102_090053_menu extends Migration
             ['49','导航','46','/nav/index','1','',''],
             ['50','区域','46','/area/area/index','2','',''],
             ['51','区块','46','/area/block/index','3','',''],
-            ['53','蜘蛛','39','/spider/index','8','',''],
             ['57','规则管理','33','/rbac/rule/index','5','','fa-sitemap'],
             ['58','权限管理','33','/rbac/permission/index','4','','fa-check-square'],
             ['66','群发站内信','24','/message/admin/create','4','','fa-comment-o'],

@@ -56,7 +56,7 @@ class Page extends \yii\db\ActiveRecord
      */
     public function getIsMarkdown()
     {
-        return \Yii::$app->config->get('editor.type_article') == 'markdown' ? 1 : 0;
+        return \Yii::$app->config->get('article_editor_type') == 'markdown' ? 1 : 0;
     }
 
     public function getProcessedContent()

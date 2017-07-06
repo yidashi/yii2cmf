@@ -17,7 +17,7 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $groups = Yii::$app->config->get('config_group');
         $group = Yii::$app->request->get('group', current(array_keys($groups)));
         $configModels = Config::find()->where(['group' => $group])->all();
         return $this->render('index', [
@@ -28,7 +28,7 @@ class DefaultController extends Controller
     }
     public function actionStore()
     {
-        $groups = Yii::$app->config->get('CONFIG_GROUP');
+        $groups = Yii::$app->config->get('config_group');
         $group = Yii::$app->request->get('group', current(array_keys($groups)));
         $configModels = Config::find()->where(['group' => $group])->all();
         if (Model::loadMultiple($configModels, \Yii::$app->request->post()) && Model::validateMultiple($configModels)) {

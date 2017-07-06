@@ -13,18 +13,17 @@ use yii\bootstrap\Nav;
         'options' => ['class' => 'm-sitenav clearfix']
     ]) ?>
         <div class="pull-left">
-            您好，欢迎来到 <?= Yii::$app->config->get('SITE_NAME') ?>
+            您好，欢迎来到 <?= Yii::$app->config->get('site_name') ?>
         </div>
             <?php
             $rightMenuItems = [];
-            $rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
-            $noticeNums = Yii::$app->notify->getNoReadNums();
-            if ($noticeNums > 0) {
+            $noticeNum = Yii::$app->notify->getNoReadNum();
+            if ($noticeNum > 0) {
                 $rightMenuItems[] = [
-                    'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNums . '</span>',
+                    'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNum . '</span>',
                     'items' => [
                         [
-                            'label' => $noticeNums . '条新消息',
+                            'label' => $noticeNum . '条新消息',
                             'url' => ['/user/default/notice']
                         ]
                     ]
@@ -58,11 +57,7 @@ use yii\bootstrap\Nav;
                             'url' => ['/user/default/article-list'],
                         ],
                         [
-                            'label' => Html::icon('thumbs-up') . ' 我赞过的',
-                            'url' => ['/user/default/up'],
-                        ],
-                        [
-                            'label' => Html::icon('star') . ' 我收藏的',
+                            'label' => Html::icon('star') . ' 我的收藏',
                             'url' => ['/user/default/favourite'],
                         ],
                         [
@@ -98,11 +93,13 @@ use yii\bootstrap\Nav;
     <nav class="m-nav clearfix">
         <?php
         $navItems = \common\models\Nav::getItems('header');
+        \yii\widgets\Spaceless::begin();
         echo \yii\widgets\Menu::widget([
             'items' => $navItems,
             'options' => ['class' => 'f-cb'],
             'activeCssClass' => 'crt'
-        ])
+        ]);
+        \yii\widgets\Spaceless::end();
         ?>
     </nav>
 

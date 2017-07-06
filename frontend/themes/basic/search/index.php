@@ -6,10 +6,10 @@
  * Time: 下午2:21
  */
 
-$this->title = '搜索_' . Yii::$app->request->get('q');
+$this->title = '搜索_' . $q;
 ?>
 <div class="page-header">
-    <h2>搜索 - <?= Yii::$app->request->get('q') ?></h2>
+    <h2>搜索 - <?= \yii\helpers\Html::encode($q) ?></h2>
     <em class="pull-right">共<?= $dataProvider->totalCount ?>条</em>
 </div>
 <?= \yii\widgets\ListView::widget([

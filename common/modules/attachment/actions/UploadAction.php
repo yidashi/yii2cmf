@@ -24,7 +24,7 @@ class UploadAction extends Action
     /**
      * @var string Path to directory where files will be uploaded
      */
-    public $path = '';
+    public $path;
 
     /**
      * @var string Validator name
@@ -52,7 +52,7 @@ class UploadAction extends Action
      */
     private $_validator = 'image';
 
-    public $deleteUrl = ['/attachment/upload/delete'];
+    public $deleteUrl = ['/upload/delete'];
 
     public $callback;
 
@@ -125,6 +125,7 @@ class UploadAction extends Action
                     'extension' => $attachment->extension,
                     'type' => $attachment->type,
                     'size' => $attachment->size,
+                    'title' => $attachment->title,
                     'deleteUrl' => Url::to(array_merge($this->deleteUrl, ['id' => $attachment->id]))
                 ];
                 if ($this->uploadOnlyImage !== true) {

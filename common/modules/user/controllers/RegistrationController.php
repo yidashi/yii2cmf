@@ -10,8 +10,10 @@ namespace common\modules\user\controllers;
 
 
 use common\modules\user\models\SignupForm;
+use common\modules\user\models\User;
 use Yii;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -43,4 +45,17 @@ class RegistrationController extends Controller
             'module' => $this->module
         ]);
     }
+
+    public function actionConfirm($id, $code)
+    {
+        $user = User::findIdentity($id);
+        if ($user === null || $this->module->enableConfirmation == false) {
+            throw new NotFoundHttpException();
+        }
+        list($success, $message) = $user->attemptConfirmation($code);
+        Yii::$app->session->setFlash($success ? 'success' : 'error', $message);
+        return $this->redirect(['settings/basic']);
+    }
+
+
 }

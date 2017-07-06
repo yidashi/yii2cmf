@@ -149,13 +149,19 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
 
-// sign 签到表
-        $this->createTable('{{%sign}}', [
+// sign_info 签到表
+        $this->createTable('{{%sign_info}}', [
             'id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'last_sign_at' => Schema::TYPE_INTEGER . "(10) NOT NULL COMMENT '上次签到时间'",
             'times' => Schema::TYPE_INTEGER . "(11) NOT NULL COMMENT '总签到次数'",
             'continue_times' => Schema::TYPE_INTEGER . "(11) NOT NULL COMMENT '连续签到次数'",
+        ], $this->tableOptions);
+// sign 签到表
+        $this->createTable('{{%sign}}', [
+            'id' => Schema::TYPE_PK,
+            'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'sign_at' => Schema::TYPE_INTEGER . "(10) NOT NULL COMMENT '签到时间'",
         ], $this->tableOptions);
 
 // spider
@@ -209,6 +215,7 @@ class m130524_201442_init extends Migration
             'down' => $this->integer(11)->notNull()->defaultValue('0')->comment('踩数'),
         ], $this->tableOptions);
         $this->createIndex('entity', '{{%vote_info}}', ['entity', 'entity_id']);
+
         $this->insert('{{%page}}', [
             'use_layout' => 1,
             'content' => '关于我们',

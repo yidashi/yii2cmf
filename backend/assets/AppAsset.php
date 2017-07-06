@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/app.js',
+        'js/drag.js',
         'plugins/slimScroll/jquery.slimscroll.min.js',
         'js/site.js'
     ];

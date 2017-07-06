@@ -130,12 +130,12 @@ class MediaItem
      */
     public function sizeToString()
     {
-        return  \Yii::$app->getFormatter()->asShortSize($this->size);;
+        return  \Yii::$app->getFormatter()->asShortSize($this->size);
     }
 
     public function getResolution()
     {
-        $size = getimagesize($this->path);
+        $size = getimagesize($this->publicUrl);
 
         return $size[0] . "x" . $size[1];
     }

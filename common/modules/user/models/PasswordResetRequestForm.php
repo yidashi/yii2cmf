@@ -52,9 +52,9 @@ class PasswordResetRequestForm extends Model
                 $mailer = \Yii::$app->mailer;
                 $mailer->viewPath = '@common/modules/user/mail';
                 return $mailer->compose(['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'], ['user' => $user])
-                    ->setFrom([\Yii::$app->config->get('MAIL_USERNAME') => \Yii::$app->config->get('SITE_NAME').' robot'])
+                    ->setFrom([\Yii::$app->config->get('MAIL_USERNAME') => \Yii::$app->config->get('site_name').' robot'])
                     ->setTo($this->email)
-                    ->setSubject('重置密码 -' . \Yii::$app->config->get('SITE_NAME'))
+                    ->setSubject('重置密码 -' . \Yii::$app->config->get('site_name'))
                     ->send();
             }
         }

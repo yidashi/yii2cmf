@@ -35,7 +35,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $source
  * @property string $description
  * @property int $view
- * @property string $published_at
+ * @property int $published_at
  * @property int $is_top
  * @property int $is_best
  * @property int $is_hot

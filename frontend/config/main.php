@@ -35,9 +35,9 @@ return [
         'view' => [
             'on beginPage' => function($event){
                 if ($event->sender->title) {
-                    $event->sender->title .= ' - ' . \Yii::$app->config->get('SITE_NAME');
+                    $event->sender->title .= ' - ' . \Yii::$app->config->get('site_name');
                 } else {
-                    $event->sender->title = \Yii::$app->config->get('SITE_NAME');
+                    $event->sender->title = \Yii::$app->config->get('site_name');
                 }
             }
         ],

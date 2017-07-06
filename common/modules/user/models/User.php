@@ -3,16 +3,12 @@
 namespace common\modules\user\models;
 
 use backend\models\search\SearchModelTrait;
-use common\models\Sign;
 use common\models\UserLevel;
-use common\modules\attachment\models\Attachment;
 use common\modules\attachment\models\AttachmentIndex;
 use common\modules\user\traits\ModuleTrait;
 use Yii;
-use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\imagine\Image;
 use yii\web\IdentityInterface;
 
 /**
@@ -295,6 +291,54 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return (bool)$this->updateAttributes(['blocked_at' => null]);
     }
+    public function sendConfirm($email)
+    {
+        $exist = User::find()->where(['<>', 'id', Yii::$app->user->id])->andWhere(['email' => $email])->exists();
+        $user = Yii::$app->user->identity;
+        if (!$exist && !$user->isConfirmed) {
+            /** @var Token $token */
+            $token = \Yii::createObject([
+                'class' => Token::className(),
+                'user_id' => $user->id,
+                'type' => Token::TYPE_CONFIRMATION,
+            ]);
+            $token->save(false);
+            $mailer = Yii::$app->mailer;
+            $mailer->viewPath = '@common/modules/user/mail';
+            try {
+                $mailer->compose(['html' => 'confirmation'], ['user' => $user, 'token' => $token])
+                    ->setFrom(\Yii::$app->config->get('MAIL_USERNAME'))
+                    ->setTo($email)
+                    ->setSubject(Yii::t('user', 'Confirm account on {0}', Yii::$app->config->get('SITE_NAME')))
+                    ->send();
+                return [true, null];
+            } catch(\Exception $e) {
+                return [false, '发送失败，请确认邮箱是否存在！'];
+            }
+        } else {
+            return [false, '邮箱已存在'];
+        }
+    }
+    public function attemptConfirmation($code)
+    {
+        if ($this->getIsConfirmed()) {
+            return [false, '该用户已验证邮箱'];
+        }
+        $token = Token::find()->where(['user_id' => $this->id, 'code' => $code, 'type' => Token::TYPE_CONFIRMATION])->one();
+        if ($token !== null && !$token->isExpired) {
+            $token->delete();
+            if (($success = $this->confirm())) {
+                $message = \Yii::t('user', 'Thank you, registration is now complete.');
+            } else {
+                $message = \Yii::t('user', 'Something went wrong and your account has not been confirmed.');
+            }
+        } else {
+            $success = false;
+            $message = \Yii::t('user', 'The confirmation link is invalid or expired. Please try requesting a new one.');
+        }
+        return [$success, $message];
+    }
+
     /**
      * Confirms the user by setting 'confirmed_at' field to current time.
      */
@@ -314,7 +358,7 @@ class User extends ActiveRecord implements IdentityInterface
             $height = $width;
         }
         if($this->profile->avatar) {
-            return $this->profile->avatar->getThumb($width, $height);
+            return Yii::$app->storage->thumbnail($this->profile->avatar, $width, $height);
         }
         return $this->getDefaultAvatar($width, $height);
     }
@@ -336,15 +380,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function saveAvatar($avatar)
     {
-        if ($this->profile->avatar) {
-            $this->profile->avatar->delete();
-        }
-        $attachmentIndex =   new AttachmentIndex();
-        $attachmentIndex->attachment_id = $avatar->primaryKey;
-        $attachmentIndex->entity = get_class($this->profile);
-        $attachmentIndex->entity_id = $this->primaryKey;
-        $attachmentIndex->attribute = "avatar";
-        $attachmentIndex->save();
+        $this->profile->updateAttributes(['avatar' => $avatar]);
     }
 
     public function init()
@@ -384,27 +420,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getIsBlocked()
     {
         return $this->blocked_at != null;
-    }
-
-    /**
-     * 今天是否已签到
-     * @return bool
-     */
-    public function getIsSign()
-    {
-        if (!empty($this->sign)) {
-            return date('Ymd', $this->sign->last_sign_at) == date('Ymd');
-        }
-        return false;
-    }
-
-    /**
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSign()
-    {
-        return $this->hasOne(Sign::className(), ['user_id' => 'id']);
     }
 
     /**

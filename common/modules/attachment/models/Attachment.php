@@ -5,6 +5,7 @@ namespace common\modules\attachment\models;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\helpers\FileHelper;
 use yii\helpers\StringHelper;
 use yii\imagine\Image;
 
@@ -227,29 +228,43 @@ class Attachment extends \yii\db\ActiveRecord
         return $attachment;
     }
 
-    public function makeCropStorage($width, $height, $x, $y)
+    /**
+     * 抓取远程图片
+     * @param $url
+     * @return array(Attachment|null|static, string|null)
+     */
+    public static function uploadFromUrl($path, $url)
     {
-        $url = Yii::$app->storage->crop($this->path, $width, $height, [$x, $y]);
         $hash = md5(file_get_contents($url));
         $attachment = static::findByHash($hash);
+        $tempFile = Yii::getAlias('@storagePath/upload/' . $hash);
+        file_put_contents($tempFile, file_get_contents($url));
+        $mimeType = FileHelper::getMimeType($tempFile);
+        $extension = current(FileHelper::getExtensionsByMimeType($mimeType, '@common/helpers/mimeTypes.php'));
         if (empty($attachment)) {
-            $fileName = $hash . '.' . $this->extension;
-            $path = trim(pathinfo($this->path, PATHINFO_DIRNAME), '.');
+            $fileName = $hash . '.' . $extension;
             $filePath = ($path ? ($path . '/') : '') . $fileName;
-            if (Yii::$app->storage->upload($filePath, $url)) {
+            $fileSize = filesize($tempFile);
+            if (Yii::$app->storage->upload($filePath, $tempFile)) {
+                @unlink($tempFile);
                 $attachment = new static();
                 $attachment->path = $filePath;
                 $attachment->name = $fileName;
-                $attachment->extension = $this->extension;
-                $attachment->type = $this->type;
-                $attachment->size = Yii::$app->storage->fs->getSize($filePath);
+                $attachment->extension = $extension;
+                $attachment->type = $mimeType;
+                $attachment->size = $fileSize;
                 $attachment->hash = $hash;
                 $attachment->save();
             } else {
-                throw new \Exception('上传失败');
+                return [null, '上传失败'];
             }
         }
-        return $attachment;
+        return [$attachment, null];
+    }
+    public function makeCropStorage($width, $height, $x, $y)
+    {
+        $url = Yii::$app->storage->crop($this->path, $width, $height, [$x, $y]);
+        return self::uploadFromUrl($this->path, $url);
     }
 
 

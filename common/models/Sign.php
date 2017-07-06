@@ -2,17 +2,18 @@
 
 namespace common\models;
 
-use common\behaviors\UserBehaviorBehavior;
 use common\modules\user\behaviors\UserBehavior;
+use Yii;
+use yii\db\Expression;
+use yii\db\Query;
 
 /**
- * This is the model class for table "pop_sign".
+ * This is the model class for table "{{%sign}}".
  *
  * @property integer $id
  * @property integer $user_id
- * @property integer $last_sign_at
- * @property integer $times
- * @property integer $continue_times
+ * @property integer $sign_at
+ * @property SignInfo $info
  */
 class Sign extends \yii\db\ActiveRecord
 {
@@ -30,9 +31,8 @@ class Sign extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'last_sign_at', 'times'], 'required'],
-            [['user_id', 'last_sign_at', 'times', 'continue_times'], 'integer'],
-            [['user_id'], 'unique']
+            [['user_id', 'sign_at'], 'required'],
+            [['user_id', 'sign_at'], 'integer'],
         ];
     }
 
@@ -43,33 +43,33 @@ class Sign extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => '会员号',
-            'last_sign_at' => '最后签到时间',
-            'times' => '总签到次数',
-            'continue_times' => '连续签到次数',
+            'user_id' => 'User ID',
+            'sign_at' => 'Sign At',
         ];
     }
 
     public function behaviors()
     {
         return [
-            UserBehavior::class,
-            [
-                'class' => UserBehaviorBehavior::className(),
-                'eventName' => [self::EVENT_AFTER_UPDATE, self::EVENT_AFTER_INSERT],
-                'name' => 'sign',
-                'rule' => [
-                    'cycle' => 24,
-                    'max' => 1,
-                    'counter' => 10,
-                ],
-                'content' => '{user.username}在{extra.time}签到',
-                'data' => [
-                    'extra' => [
-                        'time' => date('Y-m-d H:i:s')
-                    ]
-                ]
-            ]
+            UserBehavior::className(),
         ];
+    }
+
+    /**
+     * @return Query
+     */
+    public static function findToday()
+    {
+        return static::find()->where(new Expression('FROM_UNIXTIME(sign_at, "%Y%m%d") ="' . date('Ymd') . '"'));
+    }
+
+    public function getInfo()
+    {
+        return $this->hasOne(SignInfo::className(), ['user_id' => 'user_id']);
+    }
+
+    public static function isSign()
+    {
+        return static::findToday()->andWhere(['user_id' => Yii::$app->user->id])->exists();
     }
 }

@@ -14,9 +14,9 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-9">
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
         <?php if ($model->isNewRecord): ?>
-            <?= Html::dropDownList('choose-editor', request('editor') ? : config('editor.type_page'), config('editor.type_list'), ['id' => 'choose-editor']) ?>
+            <?= Html::dropDownList('choose-editor', request('editor') ? : config('page_editor_type'), config('editor_type_list'), ['id' => 'choose-editor']) ?>
         <?php endif; ?>
-        <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className(), $model->isNewRecord ? ['type' => request('editor') ? : config('editor.type_page')] : ['isMarkdown' => $model->markdown]) ?>
+        <?= $form->field($model, 'content')->widget(\common\widgets\EditorWidget::className(), $model->isNewRecord ? ['type' => request('editor') ? : config('page_editor_type')] : ['isMarkdown' => $model->markdown]) ?>
 
     </div>
     <div class="col-lg-3">

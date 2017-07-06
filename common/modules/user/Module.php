@@ -10,6 +10,7 @@ namespace common\modules\user;
 
 use common\behaviors\UserBehaviorBehavior;
 use Yii;
+use yii\authclient\clients\GitHub;
 use yii\base\BootstrapInterface;
 use yii\web\User;
 
@@ -103,6 +104,41 @@ class Module extends \yii\base\Module implements BootstrapInterface
                         ]
                     ]
                 ]
+            ]);
+            $config = $this->params;
+            $params = [
+                'qq' => [
+                    'class' => 'plugins\authclient\clients\QqAuth',
+                    'clientId' => $config['qq_client_id'],
+                    'clientSecret' => $config['qq_client_secret']
+                ],
+                'github' => [
+                    'class' => GitHub::className(),
+                    'clientId' => $config['github_client_id'],
+                    'clientSecret' => $config['github_client_secret']
+                ],
+                'weibo' => [
+                    'class' => 'plugins\authclient\clients\WeiboAuth',
+                    'clientId' => $config['weibo_client_id'],
+                    'clientSecret' => $config['weibo_client_secret']
+                ],
+                'weixin' => [
+                    'class' => 'plugins\authclient\clients\WeixinAuth',
+                    'clientId' => $config['weixin_client_id'],
+                    'clientSecret' => $config['weixin_client_secret']
+                ],
+            ];
+            $openClients = $config['open_client'];
+            $openParams = [];
+            if (!empty($openClients)) {
+                foreach ($openClients as $client) {
+                    $client = strtolower($client);
+                    $openParams[$client] = $params[$client];
+                }
+            }
+            $app->set('authClientCollection', [
+                'class' => 'yii\authclient\Collection',
+                'clients' => $openParams
             ]);
             $this->urlRules = [
                 '<id:\d+>' => 'default/index',

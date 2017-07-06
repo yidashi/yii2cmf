@@ -62,7 +62,7 @@ $(document).ready(function() {
                         src : file.url,
                         "class" : "avatar-uploader"
                     }));
-                    $(".avatar-item").append($('<input/>', {"name": 'avatar-path',"value": file.id, "type":"hidden"}))
+                    $(".avatar-item").append($('<input/>', {"name": 'avatar-path',"value": file.path, "type":"hidden"}))
                     avatarJcrop(false);
                 } else {
                     $.modal.error(file.errors)

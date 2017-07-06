@@ -10,6 +10,6 @@ class ModalAsset extends AssetBundle
         'modal.js'
     ];
     public $depends = [
-        'common\assets\LayerAsset',
+        'common\assets\SweetalertAsset',
     ];
 }

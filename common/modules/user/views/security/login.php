@@ -8,7 +8,6 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = Yii::t('common', 'Login');
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
 
@@ -42,7 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     &nbsp;&nbsp;还没有帐号? <?= Html::a('马上注册', ['/user/registration/signup']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
-            <?php $this->trigger('afterLogin'); ?>
+            <?= \common\modules\user\widgets\AuthChoice::widget([
+                'id' => 'auth-login',
+                'baseAuthUrl' => ['/user/security/auth'],
+                'popupMode' => true,
+            ]); ?>
         </div>
     </div>
 </div>

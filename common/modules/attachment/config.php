@@ -1,7 +1,7 @@
 <?php
 return [
     [
-        'name' => 'filesystem_type',
+        'name' => 'driver',
         'type' => 'radio',
         'value' => 'local',
         'desc' => '文件系统',
@@ -10,6 +10,24 @@ return [
             'qiniu' => '七牛',
 //            'aliyuncs' => '阿里云oss',
         ]
+    ],
+    [
+        'name' => 'local_root',
+        'type' => 'text',
+        'value' => '@storageroot/upload',
+        'desc' => '本地文件系统根目录',
+    ],
+    [
+        'name' => 'local_url',
+        'type' => 'text',
+        'value' => '@storageUrl/upload',
+        'desc' => '本地文件系统根地址',
+    ],
+    [
+        'name' => 'qiniu_access_key',
+        'type' => 'text',
+        'value' => '',
+        'desc' => '七牛access_key',
     ],
     [
         'name' => 'qiniu_access_key',

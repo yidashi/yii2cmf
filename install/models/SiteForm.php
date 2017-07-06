@@ -12,7 +12,13 @@ class SiteForm extends Model
     public $SITE_URL = 'http://';
 
     const CACHE_KEY = "install-site-form";
-    
+
+    public function init()
+    {
+        parent::init();
+        $this->SITE_URL = Yii::$app->request->getHostInfo();
+    }
+
     public function rules()
     {
         return [

@@ -48,13 +48,13 @@ SEARCH;
 
 $rightMenuItems = [];
 $rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
-$noticeNums = Yii::$app->notify->getNoReadNums();
-if ($noticeNums > 0) {
+$noticeNum = Yii::$app->notify->getNoReadNum();
+if ($noticeNum > 0) {
     $rightMenuItems[] = [
-        'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNums . '</span>',
+        'label' => '<i class="fa fa-bell"></i> <span class="badge">' . $noticeNum . '</span>',
         'items' => [
             [
-                'label' => $noticeNums . '条新消息',
+                'label' => $noticeNum . '条新消息',
                 'url' => ['/user/default/notice']
             ]
         ]
@@ -88,11 +88,7 @@ if (Yii::$app->user->isGuest) {
                 'url' => ['/user/default/article-list'],
             ],
             [
-                'label' => Html::icon('thumbs-up') . ' 我赞过的',
-                'url' => ['/user/default/up'],
-            ],
-            [
-                'label' => Html::icon('star') . ' 我收藏的',
+                'label' => Html::icon('star') . ' 我的收藏',
                 'url' => ['/user/default/favourite'],
             ],
             [

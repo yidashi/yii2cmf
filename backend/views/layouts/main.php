@@ -19,7 +19,7 @@ backend\assets\AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="hold-transition <?= Yii::$app->config->get('BACKEND_SKIN', 'skin-green') ?> ">
+<body class="hold-transition <?= Yii::$app->config->get('backend_skin', 'skin-green') ?> ">
 <?php $this->beginBody() ?>
 <style>
     .content-wrapper, .right-side, .main-footer {margin-left:0!important;}

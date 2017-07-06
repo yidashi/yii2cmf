@@ -21,7 +21,7 @@ $fieldOptions2 = [
 
 <div class="login-box">
     <div class="login-logo">
-        <a href="#"><b><?= Yii::$app->config->get('SITE_NAME') ?></b></a>
+        <a href="#"><b><?= Yii::$app->config->get('site_name') ?></b></a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">

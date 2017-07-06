@@ -15,7 +15,7 @@ class Yii extends \yii\BaseYii
 
     public static function getVersion()
     {
-        return '0.1.0';
+        return '1.0.0';
     }
     public static function powered()
     {
@@ -55,6 +55,7 @@ abstract class BaseApplication extends yii\base\Application
  * @property \common\components\PluginManager $pluginManager
  * @property \common\components\ModuleManager $moduleManager
  * @property \common\components\ThemeManager $themeManager
+ * @property User $user
  */
 class WebApplication extends yii\web\Application
 {
@@ -66,5 +67,13 @@ class WebApplication extends yii\web\Application
  *
  */
 class ConsoleApplication extends yii\console\Application
+{
+}
+
+/**
+ * Class User
+ * @property \common\modules\user\models\User $identity
+ */
+class User
 {
 }

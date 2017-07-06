@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\jui\JuiAsset;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 class MultipleWidget extends InputWidget
@@ -21,11 +22,11 @@ class MultipleWidget extends InputWidget
      */
     public $clientOptions = [];
 
-/*
- * ----------------------------------------------
- * 客户端选项,构成$clientOptions
- * ----------------------------------------------
- */
+    /*
+     * ----------------------------------------------
+     * 客户端选项,构成$clientOptions
+     * ----------------------------------------------
+     */
     /**
      *
      * @var array 上传url地址
@@ -48,7 +49,7 @@ class MultipleWidget extends InputWidget
      *
      * @var int 允许上传的最大文件数目
      */
-    public $maxNumberOfFiles = 10;
+    public $maxNumberOfFiles = 50;
 
     /**
      *
@@ -68,9 +69,11 @@ class MultipleWidget extends InputWidget
      * ----------------------------------------------
      */
 
-    public $deleteUrl = ["/attachment/upload/delete"];
+    public $deleteUrl = ["/upload/delete"];
 
     public $fileInputName;
+
+    public $onlyUrl = false;
     /**
      *
      * @throws \yii\base\InvalidConfigException
@@ -80,13 +83,17 @@ class MultipleWidget extends InputWidget
         parent::init();
         if (empty($this->url)) {
             if ($this->onlyImage === false) {
-                $this->url = $this->multiple ? ['/attachment/upload/files-upload'] : ['/attachment/upload/file-upload'];
-//                $this->acceptFileTypes = 'image/png, image/jpg, image/jpeg, image/gif, image/bmp, application/x-zip-compressed';
+                $this->url = $this->multiple ? ['/upload/files-upload'] : ['/upload/file-upload'];
             } else {
-                $this->url = $this->multiple ? ['/attachment/upload/images-upload'] : ['/attachment/upload/image-upload'];
-//                $this->acceptFileTypes = 'image/png, image/jpg, image/jpeg, image/gif, image/bmp';
+                $this->url = $this->multiple ? ['/upload/images-upload'] : ['/upload/image-upload'];
             }
         }
+        if (empty($this->acceptFileTypes)) {
+            if ($this->onlyImage === true) {
+                $this->acceptFileTypes = new JsExpression('/\.(gif|jpe?g|png)$/i');
+            }
+        }
+
         if ($this->hasModel()) {
             $this->name = $this->name ? : Html::getInputName($this->model, $this->attribute);
             $this->attribute = Html::getAttributeName($this->attribute);
@@ -146,12 +153,11 @@ class MultipleWidget extends InputWidget
     public function run()
     {
         $this->registerClientScript();
-        $content = Html::hiddenInput($this->name . ($this->multiple ? '[]' : ''), null);
+        $content = Html::hiddenInput($this->name . ($this->multiple ? '[]' : ''), null, $this->options);
         $content .= Html::beginTag('div',$this->wrapperOptions);
         $content .= Html::fileInput($this->fileInputName, null, [
             'id' => $this->fileInputName,
-            'multiple' => $this->multiple,
-            'accept' => $this->acceptFileTypes
+            'multiple' => $this->multiple
         ]);
         $content .= Html::endTag('div');
         return $content;
@@ -162,15 +168,15 @@ class MultipleWidget extends InputWidget
      */
     public function registerClientScript()
     {
-        Html::addCssClass($this->wrapperOptions, " upload-kit");
+        Html::addCssClass($this->wrapperOptions, "upload-kit");
 
         AttachmentUploadAsset::register($this->getView());
 
         if ($this->sortable) {
             JuiAsset::register($this->getView());
         }
-
-        $options = Json::encode($this->clientOptions);
+        $this->clientOptions['onlyUrl'] = $this->onlyUrl;
+        $options = Json::htmlEncode($this->clientOptions);
         $this->getView()->registerJs("jQuery('#{$this->fileInputName}').attachmentUpload({$options});");
     }
 }

@@ -6,8 +6,142 @@ $.extend($.modal, {
         $('#modal-login').modal('show');
     }
 });
+$.extend(yii, {
+    clickableSelector: 'a[data-ajax!=1], button, input[type="submit"], input[type="button"], input[type="reset"], ' +
+    'input[type="image"]',
+    confirm: function (message, ok, cancel) {
+        $.modal.confirm(message, ok, cancel);
+    }
+});
+var ajaxLink = function (options) {
+    options = $.extend({
+        method:$(this).data('method') || 'get',
+        action:$(this).data('action') || $(this).attr('href'),
+        refreshPjaxContainer: $(this).data('refresh-pjax-container') || null,
+        refresh: $(this).data('refresh') || false,
+        callback: $(this).data('callback') || null,
+        confirm: $(this).data('confirm') || null,
+        data: $(this).data('params') || {}
+    }, options);
+    var fn = function () {
+        $.modal.loading();
+        $.ajax({
+            url: options.action,
+            method: options.method,
+            data: options.data,
+            dataType: 'json',
+            success: function (res) {
+                if (res.status != undefined && res.status == 0) {
+                    $.modal.error(res.message || '操作失败');
+                    return;
+                }
+                if (!res.message) {
+                    res.message = '操作成功';
+                }
+                $.modal.notify(res.message, 'success', function () {
+                    if (options.refreshPjaxContainer) {
+                        $.pjax.reload({container:'#' + options.refreshPjaxContainer, timeout: 0});
+                    }
+                    if (res.redirect) {
+                        location.href = res.redirect;
+                    } else {
+                        if (options.refresh) {
+                            location.reload();
+                        }
+                        if (options.callback) {
+                            if ($.isFunction(options.callback)) {
+                                options.callback(res);
+                            } else if (typeof options.callback == 'string') {
+                                eval(options.callback);
+                            }
+                        }
+                    }
+                });
+            },
+            complete: function () {
+                $.modal.unloading();
+            }
+        });
+    }
+    if (options.confirm != null) {
+        $.modal.confirm(options.confirm, function () {
+            fn();
+        });
+    } else {
+        fn();
+    }
+    return false;
+}
+var ajaxSubmit = function (options) {
+    var $form = $(this);
+    options = $.extend({
+        method: $form.attr('method'),
+        action: $form.attr('action'),
+        refreshPjaxContainer: $form.data('refresh-pjax-container') || null,
+        refresh: $form.data('refresh') || false,
+        callback: $form.data('callback') || null,
+        confirm: $form.data('confirm') || null
+    }, options);
+    var method = options.method,
+        action = options.action,
+        refreshPjaxContainer = options.refreshPjaxContainer,
+        refresh = options.refresh,
+        callback = options.callback;
+    var fn = function () {
+        $.modal.loading();
+        $.ajax({
+            url: action,
+            method: method,
+            data: $form.serialize(),
+            dataType: 'json',
+            success: function (res) {
+                if (res.status != undefined && res.status == 0) {
+                    $.modal.error(res.message || '操作失败');
+                    return;
+                }
+                if (!res.message) {
+                    res.message = '操作成功';
+                }
+                $.modal.notify(res.message, 'success', function () {
+                    $form.trigger('reset');
+                    if (refreshPjaxContainer) {
+                        $.pjax.reload({container:'#' + refreshPjaxContainer, timeout: 0});
+                    }
+                    if (refresh) {
+                        location.reload();
+                    }
+                    if (callback) {
+                        if ($.isFunction(callback)) {
+                            callback(res);
+                        } else if (typeof callback == 'string') {
+                            eval(callback);
+                        }
+                    }
+                });
+            },
+            complete: function () {
+                $.modal.unloading();
+            }
+        });
+    }
+    if (options.confirm != null) {
+        $.modal.confirm(options.confirm, function () {
+            fn();
+        });
+    } else {
+        fn();
+    }
+    return false;
+}
 $(function(){
     $("[data-toggle=tooltip]").tooltip({container: 'body'});
+    $('.modal-dialog').drags({handle:".modal-header"});
+    $(document).on('click', 'a[data-ajax=1]', function () {
+        return ajaxLink.call(this);
+    });
+    $(document).on('beforeSubmit', 'form[data-ajax=1]', function () {
+        return ajaxSubmit.call(this);
+    });
     $(".content-wrapper").css("min-height", $(window).height()-$(".footer").outerHeight()-60);
     //投票
     $(document).on('click', '.vote a', function() {
@@ -66,24 +200,6 @@ $(function(){
                 $('.reply-form').find('textarea').val('');
             }
         }
-        return false;
-    });
-    // 签到
-    $(document).on('click', ".btn-registration", function(){
-        var button = $(this);
-        var url = button.attr('href');
-        var loading = $.modal.loading();
-        $.ajax({
-            url: url,
-            dataType: 'json',
-            method:'post',
-            success: function(html){
-                button.html("<i class=\"fa fa-calendar-check-o\"></i> 今日已签到<br />已连续" + html.days + "天").removeClass('btn-registration').addClass('disabled');
-            },
-            complete: function () {
-                $.modal.close(loading);
-            }
-        });
         return false;
     });
     $(document).on('click', '.follow', function() {

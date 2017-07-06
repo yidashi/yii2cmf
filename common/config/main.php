@@ -18,21 +18,11 @@ return [
         ],
         'formatter' => [
             'dateFormat' => 'yyyy-MM-dd',
-            'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
-            'timeFormat' => 'HH:mm:ss',
+            'datetimeFormat' => 'yyyy-MM-dd HH:mm',
+            'timeFormat' => 'HH:mm',
             'decimalSeparator' => '.',
             'thousandSeparator' => ' ',
             'currencyCode' => 'CNY',
-        ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\web\YiiAsset' => [
-                    'sourcePath' => '@common/static',
-                    'depends' => [
-                        'common\assets\ModalAsset'
-                    ]
-                ],
-            ],
         ],
         'log' => [
             'targets' => [

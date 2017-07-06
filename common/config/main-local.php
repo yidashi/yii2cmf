@@ -20,6 +20,10 @@ $config = [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
+            'messageConfig' => [
+                'charset' => 'UTF-8',
+                'from' => env('MAIL_USERNAME')
+            ],
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
@@ -37,14 +41,7 @@ $config = [
             'class' => 'hightman\xunsearch\Connection',
             'iniDirectory' => '@common/config',    // 搜索 ini 文件目录，默认：@vendor/hightman/xunsearch/app
             'charset' => 'utf-8',   // 指定项目使用的默认编码，默认即时 utf-8，可不指定
-        ],
-        'beanstalk'=>[
-            'class' => 'udokmeci\yii2beanstalk\Beanstalk',
-            'host'=> "127.0.0.1", // default host
-            'port'=>11300, //default port
-            'connectTimeout'=> 1,
-            'sleep' => false, // or int for usleep after every job
-        ],
+        ]
     ],
 ];
 return $config;

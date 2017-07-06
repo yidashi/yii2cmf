@@ -8,14 +8,13 @@
 
 namespace common\modules\user\controllers;
 
-
-use common\models\ArticleData;
 use common\models\Favourite;
-use common\models\Vote;
+use common\models\Sign;
 use common\modules\user\models\User;
-use frontend\models\Article;
+use common\models\Article;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -38,14 +37,34 @@ class DefaultController extends Controller
             ],
         ];
     }
+
     public function actionIndex($id)
     {
         $user = User::find()->where(['id' => $id])->one();
         if (empty($user)) {
             throw new NotFoundHttpException('用户不存在!');
         }
-        return $this->render('/index', [
-            'user' => $user
+
+        $monthStart = strtotime(date('Y-m-1'));
+        $monthEnd = strtotime("+1 month", $monthStart);
+        $signDays = Sign::find()->where(['user_id' => $id])->andWhere(['between', 'sign_at', $monthStart, $monthEnd])->select(new Expression('FROM_UNIXTIME(sign_at, "%d")'))->column();
+        $daysNum = date('t');
+        $year = date('Y');
+        $month = date('m');
+        $weeks = [];
+        $i = 0;
+        foreach (range(1, $daysNum) as $day) {
+            $w = date('w', strtotime($year . '-' . $month . '-' . $day));
+            $weeks[$i][$w]['day'] = $day;
+            $weeks[$i][$w]['sign'] = in_array($day, $signDays);
+            if ($w == 6) {
+                $i++;
+            }
+        }
+
+        return $this->render('index', [
+            'user' => $user,
+            'weeks' => $weeks
         ]);
     }
 
@@ -62,7 +81,7 @@ class DefaultController extends Controller
         ]);
         $pages = $dataProvider->getPagination();
         $models = $dataProvider->getModels();
-        return $this->render('/article/list', [
+        return $this->render('article/list', [
             'models' => $models,
             'pages' => $pages,
         ]);
@@ -80,7 +99,7 @@ class DefaultController extends Controller
             }
         }
 
-        return $this->render('/article/create', [
+        return $this->render('article/create', [
             'model' => $model,
             'moduleModel' => $moduleModel
         ]);
@@ -104,7 +123,7 @@ class DefaultController extends Controller
             return $this->redirect(['update-article', 'id' => $id]);
         }
 
-        return $this->render('/article/update', [
+        return $this->render('article/update', [
             'model' => $model,
             'moduleModel' => $moduleModel
         ]);
@@ -122,22 +141,6 @@ class DefaultController extends Controller
         }
     }
 
-    public function actionUp()
-    {
-        $userId = \Yii::$app->user->id;
-        $dataProvider = new ActiveDataProvider([
-            'query' => Vote::find()->where(['entity' => 'common\models\Article', 'user_id' => $userId, 'action' => 'up']),
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
-            ]
-        ]);
-        return $this->render('/up/index', [
-            'dataProvider' => $dataProvider
-        ]);
-    }
-
     public function actionFavourite()
     {
         $userId = \Yii::$app->user->id;
@@ -149,7 +152,7 @@ class DefaultController extends Controller
                 ]
             ]
         ]);
-        return $this->render('/favourite/index', [
+        return $this->render('favourite/index', [
             'dataProvider' => $dataProvider
         ]);
     }
@@ -158,7 +161,7 @@ class DefaultController extends Controller
     {
         Yii::$app->notify->readAll();
         $dataProvider = Yii::$app->notify->getDataProvider();
-        return $this->render('/notice/index', [
+        return $this->render('notice/index', [
             'dataProvider' => $dataProvider
         ]);
     }

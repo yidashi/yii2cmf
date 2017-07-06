@@ -87,7 +87,7 @@ class Handler extends Object
         return true;
     }
 
-    public function getNoReadNums()
+    public function getNoReadNum()
     {
         return $this->notify->find()->where(['to_uid' => $this->user->id, 'read' => 0])->count();
     }

@@ -8,6 +8,7 @@ use yii\helpers\Html;
 /* @var $context \yii\web\Controller */
 
 backend\assets\AppAsset::register($this);
+backend\assets\ContextAsset::register($this);
 \backend\assets\IframeAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -17,10 +18,10 @@ backend\assets\AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Yii::$app->config->get('SITE_NAME') ?>管理后台</title>
+    <title><?= Yii::$app->config->get('site_name') ?>管理后台</title>
     <?php $this->head() ?>
 </head>
-<body class="hold-transition <?= Yii::$app->config->get('BACKEND_SKIN', 'skin-green') ?> sidebar-mini fixed">
+<body class="hold-transition <?= Yii::$app->config->get('backend_skin', 'skin-green') ?> sidebar-mini fixed">
 <?php $this->beginBody() ?>
 <div class="wrapper">
 

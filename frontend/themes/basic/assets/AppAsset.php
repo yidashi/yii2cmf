@@ -12,6 +12,7 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'js/drag.js',
         'js/site.js',
     ];
     public $depends = [

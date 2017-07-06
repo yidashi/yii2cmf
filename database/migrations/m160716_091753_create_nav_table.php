@@ -44,6 +44,14 @@ class m160716_091753_create_nav_table extends Migration
             'order' => 1,
             'status' => 1
         ]);
+        $this->insert('{{%nav_item}}', [
+            'id' => 2,
+            'nav_id' => 1,
+            'title' => '签到',
+            'url' => '/sign/index',
+            'order' => 2,
+            'status' => 1
+        ]);
         $this->insert('{{%nav}}', [
             'id' => 2,
             'key' => 'friend-link',

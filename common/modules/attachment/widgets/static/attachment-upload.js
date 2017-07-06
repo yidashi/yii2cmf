@@ -142,25 +142,26 @@
                 if (options.multiple) {
                     name += '[' + index + ']';
                 }
-                var item = $('<li>', {"class": "upload-kit-item done"})
-                    .append($('<input/>', {"name": name + '[path]',"value": file.path, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[id]', "value": file.id, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[name]',"value": file.name, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[hash]',"value": file.hash, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[type]',"value": file.type, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[size]',"value": file.size, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[extension]',"value": file.extension, "type":"hidden"}))
-                    .append($('<input/>', {"name": name + '[order]',"data-role":"order", "value": file.order, "type":"hidden"}))
-                    .append($('<span/>', {"class": "glyphicon glyphicon-remove-circle remove", "data-url": file.deleteUrl}));
+                var item;
+                if (options.onlyUrl) {
+                    item = $('<li>', {"class": "upload-kit-item done"})
+                        .append($('<input/>', {"name": name,"value": file.url, "type":"hidden"}))
+                        .append($('<span/>', {"class": "fa fa-trash remove", "data-url": file.deleteUrl}));
+                } else {
+                    item = $('<li>', {"class": "upload-kit-item done"})
+                        .append($('<input/>', {"name": name + '[path]',"value": file.path, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[id]', "value": file.id, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[name]',"value": file.name, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[hash]',"value": file.hash, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[type]',"value": file.type, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[size]',"value": file.size, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[extension]',"value": file.extension, "type":"hidden"}))
+                        .append($('<input/>', {"name": name + '[order]',"data-role":"order", "value": file.order, "type":"hidden"}))
+                        .append($('<span/>', {"class": "fa fa-trash remove", "data-url": file.deleteUrl}));
+                }
                 if (!file.type || file.type.search(/image\/.*/g) !== -1) {
                     item.removeClass('not-image').addClass('image');
-                    item.prepend($('<a>', {
-                        "class":"fancybox",
-                        "href": file.url,
-                        "rel": "fancybox-button fancybox-thumb",
-                        "title": file.filename,
-                        "data-fancybox-group": options.id
-                    }).append($('<img/>', {src: file.url, width: 150, height: 150})));
+                    item.prepend($('<img/>', {src: file.url, width: 150, height: 150}));
                     item.find('span.type').text('');
                 } else {
                     item.removeClass('image').addClass('not-image');
