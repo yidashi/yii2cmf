@@ -18,7 +18,7 @@ $this->title = $model->book_name;
 $this->params['breadcrumbs'][] = ['label' => 'wiki', 'url' => ['/book/default/index']];
 $this->params['breadcrumbs'][] = Html::encode($model->book_name);
 ?>
-<?php $this->beginContent('@common/modules/book/views/default/_layout.php', ['book' => $model]) ?>
+<?php $this->beginContent(__DIR__ . '/_layout.php', ['book' => $model]) ?>
 <div class="view-title">
     <h1><?= Html::encode($model->book_name) ?></h1>
 </div>
