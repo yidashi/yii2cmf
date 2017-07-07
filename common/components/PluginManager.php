@@ -25,7 +25,6 @@ class PluginManager extends PackageManager
     {
         $model = $plugin->getModel();
         $model->attributes = $plugin->info;
-        $model->type = Module::TYPE_PLUGIN;
         $model->config = Json::encode($plugin->getInitConfig());
         $model->status = Module::STATUS_OPEN;
         return $model->save();

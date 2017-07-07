@@ -44,7 +44,7 @@ class DefaultController extends Controller
             if ($isRe > 0) {
                 $item['re_nickname'] = $matches[1];
                 $reUser = User::findByUsername($matches[1]);
-                $item['re_avatar'] = Url::to($reUser->getAvatar(96), true);
+                $item['re_avatar'] = $reUser !== null ? Url::to($reUser->getAvatar(96), true) : '';
             }
             return $item;
         }, $models);

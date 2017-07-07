@@ -20,7 +20,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         'author' => '易大师',
         'version' => 'v1.0',
         'id' => 'danmu',
-        'name' => '弹幕',
+        'name' => 'danmu',
         'description' => '文章评论弹幕'
     ];
 

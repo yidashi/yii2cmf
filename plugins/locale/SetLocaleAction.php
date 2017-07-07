@@ -63,7 +63,7 @@ class SetLocaleAction extends Action
 
     /**
      * @param $locale
-     * @return mixed|static
+     * @return mixed
      */
     public function run($locale)
     {

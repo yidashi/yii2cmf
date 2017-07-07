@@ -20,7 +20,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
 
     public static $language = [
         'zh-CN' => '简体中文',
-        'en' => 'English'
+        'en-US' => 'English'
     ];
 
     public $info = [
@@ -41,7 +41,7 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
         $config = $this->getConfig();
         $app->controllerMap['locale'] = [
             'class' => DefaultController::className(),
-            'locales' => $config['availableLocales']
+            'config' => $config
         ];
     }
 
@@ -50,11 +50,11 @@ class Plugins extends \plugins\Plugins implements BootstrapInterface
     {
         $config = $this->getConfig();
         $event->sender->params['rightMenuItems'][] = [
-            'label'=>Yii::t('frontend', 'Language'),
+            'label'=>Yii::t('app', 'Language'),
             'items'=>array_map(function ($code) use ($config) {
                 return [
                     'label' => self::$language[$code],
-                    'url' => ['/locale/set', 'locale'=>$code],
+                    'url' => ['/locale/set', 'locale' => $code],
                     'active' => Yii::$app->language === $code
                 ];
             }, $config['availableLocales'])

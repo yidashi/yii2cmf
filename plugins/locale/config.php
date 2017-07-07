@@ -12,7 +12,7 @@ return [
         'value' => ['zh-CN'],
         'extra' => [
             'zh-CN' => '简体中文',
-            'en' => 'English'
+            'en-US' => 'English'
         ],
         'desc' => '支持的语言',
     ]

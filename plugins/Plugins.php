@@ -9,15 +9,13 @@
 namespace plugins;
 
 use common\components\PackageInfo;
+use common\models\Plugin;
 use rbac\models\Menu;
-use Yii;
-use yii\helpers\Json;
-use yii\web\View;
 use ReflectionClass;
-use yii\base\InvalidParamException;
-use common\models\Module;
+use Yii;
 use yii\base\BootstrapInterface;
-use rbac\components\MenuHelper;
+use yii\base\InvalidParamException;
+use yii\web\View;
 
 abstract class Plugins extends PackageInfo implements BootstrapInterface
 {
@@ -27,6 +25,25 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
      * @var string 模块所属应用ID(frontend,backend,wechat,api)
      */
     public $app = 'app-backend';
+
+    private $_model;
+
+    /**
+     * @return Plugin
+     */
+    public function getModel()
+    {
+        if ($this->_model == null) {
+            $model = Plugin::findOne($this->getPackage());
+            if ($model == null) {
+                $model = new Plugin();
+                $model->loadDefaultValues();
+                $model->id = $this->getPackage();
+            }
+            $this->_model = $model;
+        }
+        return $this->_model;
+    }
 
     /**
      * 在菜单插件管理下添加一个新菜单
