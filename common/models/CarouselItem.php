@@ -61,12 +61,6 @@ class CarouselItem extends ActiveRecord
                         ];
                     }
                 ]
-            ],
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'image',
-                'multiple' => false,
-                'entity' => __CLASS__
             ]
         ];
     }

@@ -9,7 +9,7 @@
 
 namespace common\modules\book;
 
-class Module extends \yii\base\Module
+class Module extends \common\modules\Module
 {
 
 }

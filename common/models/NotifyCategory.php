@@ -11,6 +11,16 @@ namespace common\models;
  */
 class NotifyCategory extends \yii\db\ActiveRecord
 {
+    const REPLY = 1;
+    const SUGGEST = 2;
+    const COMMENT_ARTICLE = 3;
+    const FAVOURITE = 4;
+    const UP_ARTICLE = 5;
+    const MESSAGE = 6;
+    const REWARD = 7;
+    const FOLLOW = 8;
+    const UP_COMMENT = 9;
+    const COMMENT_SUGGEST = 10;
     /**
      * @inheritdoc
      */

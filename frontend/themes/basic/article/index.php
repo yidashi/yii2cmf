@@ -4,16 +4,14 @@
 /* @var $models array */
 /* @var $pages array */
 /* @var $hotTags array */
+/* @var $module string */
 if(isset($category)) {
     $this->title = $category->title;
-    $this->params['breadcrumbs'][] = $category->title;
     list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $category->getMetaData();
 } elseif (isset($tag)) {
     $this->title = $tag->name;
-    $this->params['breadcrumbs'][] = $tag->name;
 } else {
     $this->title = '文章';
-    $this->params['breadcrumbs'][] = $this->title;
 }
 
 ?>

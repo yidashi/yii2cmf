@@ -1,0 +1,11 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api接口",
+  "title": "api接口",
+  "url" : "http://www.51siyuan.cn/api",
+  "sampleUrl": "http://www.51siyuan.cn/api",
+  "template": {
+    "withGenerator": false
+  }
+}

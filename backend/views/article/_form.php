@@ -50,6 +50,8 @@ use common\modules\attachment\widgets\SingleWidget;
                     ) ?>
                     <?= $form->field($model, 'cover')->widget(SingleWidget::className()) ?>
 
+                    <?= $form->field($model, 'commentEnabled')->checkbox(['label' => '开启评论']) ?>
+
                     <?= $form->field($model, 'is_top')->checkbox() ?>
 
                     <?= $form->field($model, 'is_hot')->checkbox() ?>

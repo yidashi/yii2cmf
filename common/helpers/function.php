@@ -129,6 +129,15 @@ if (! function_exists('request')) {
     }
 }
 
+if (! function_exists('app')) {
+    function app($name = null)
+    {
+        if (is_null($name)) {
+            return Yii::$app;
+        }
+        return Yii::$app->get($name);
+    }
+}
 if (! function_exists('t')) {
     /**
      * @param $category

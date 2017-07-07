@@ -9,12 +9,15 @@
 namespace common\modules\user;
 
 use common\behaviors\UserBehaviorBehavior;
+use common\modules\user\clients\QqAuth;
+use common\modules\user\clients\WeiboAuth;
+use common\modules\user\clients\WeixinAuth;
 use Yii;
 use yii\authclient\clients\GitHub;
 use yii\base\BootstrapInterface;
 use yii\web\User;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public $enableGeneratingPassword = true;
 
@@ -60,15 +63,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
 
     public function bootstrap($app)
     {
-        if ($app->id == 'app-frontend') {
-            $this->attachBehavior('frontend', 'common\modules\user\filters\FrontendFilter');
-        }
-        if ($app->id == 'app-backend') {
-            $this->attachBehavior('backend', 'common\modules\user\filters\BackendFilter');
+        if ($app->id == 'backend') {
             Yii::$app->set('user', [
                 'class' => 'yii\web\User',
                 'identityClass' => 'common\modules\user\models\User',
-                'loginUrl' => ['/user/admin/login'],
+                'loginUrl' => ['/user/default/login'],
                 'enableAutoLogin' => true,
                 'on afterLogin' => function($event) {
                     $event->identity->touch('login_at');
@@ -77,7 +76,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
             ]);
             $app->urlManager->addRules([
-                'user/<action:\S+>' => 'user/admin/<action>',
+                'user/<action:\S+>' => 'user/default/<action>',
             ], false);
         } else {
             Yii::$app->set('user', [
@@ -108,7 +107,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
             $config = $this->params;
             $params = [
                 'qq' => [
-                    'class' => 'plugins\authclient\clients\QqAuth',
+                    'class' => QqAuth::className(),
                     'clientId' => $config['qq_client_id'],
                     'clientSecret' => $config['qq_client_secret']
                 ],
@@ -118,12 +117,12 @@ class Module extends \yii\base\Module implements BootstrapInterface
                     'clientSecret' => $config['github_client_secret']
                 ],
                 'weibo' => [
-                    'class' => 'plugins\authclient\clients\WeiboAuth',
+                    'class' => WeiboAuth::className(),
                     'clientId' => $config['weibo_client_id'],
                     'clientSecret' => $config['weibo_client_secret']
                 ],
                 'weixin' => [
-                    'class' => 'plugins\authclient\clients\WeixinAuth',
+                    'class' => WeixinAuth::className(),
                     'clientId' => $config['weixin_client_id'],
                     'clientSecret' => $config['weixin_client_secret']
                 ],

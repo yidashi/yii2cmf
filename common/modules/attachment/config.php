@@ -30,12 +30,6 @@ return [
         'desc' => '七牛access_key',
     ],
     [
-        'name' => 'qiniu_access_key',
-        'type' => 'text',
-        'value' => '',
-        'desc' => '七牛access_key',
-    ],
-    [
         'name' => 'qiniu_access_secret',
         'type' => 'text',
         'value' => '',

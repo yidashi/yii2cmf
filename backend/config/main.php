@@ -6,7 +6,7 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-backend',
+    'id' => 'backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'components' => [
@@ -30,7 +30,8 @@ return [
         ],
         'formatter' => [
             'class' => 'backend\components\Formatter',
-            'booleanFormat' => ['<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1"/>', '<input type="checkbox" data-toggle="switcher" data-switcher-disabled="1" checked/>'],
+            'nullDisplay' => '',
+            'booleanFormat' => ['<i class="fa fa-times text-danger"></i>', '<i class="fa fa-check text-success"></i>'],
         ],
         'themeManager' => [
             'class' => 'common\components\ThemeManager',
@@ -51,7 +52,7 @@ return [
     'as access' => [
         'class' => 'rbac\components\AccessControl',
         'allowActions' => [
-            'user/admin/logout'
+            'user/default/logout'
         ],
     ],
     'as adminLog' => 'backend\\behaviors\\AdminLogBehavior',

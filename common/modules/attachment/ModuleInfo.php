@@ -15,7 +15,7 @@ class ModuleInfo extends \common\modules\ModuleInfo
 
     public $info = [
         'author' => '易大师',
-        'bootstrap' => 'app-frontend|app-backend|app-api',
+        'bootstrap' => 'frontend|backend|api',
         'version' => 'v1.0',
         'id' => 'attachment',
         'name' => '附件',

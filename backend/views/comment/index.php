@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'label' => '源',
                         'value' => function ($model) {
-                            return $model->entity . ':' . $model->entity_id;
+                            return \common\helpers\Util::getEntityName($model->entity) . ':' . $model->entity_id;
                         }
                     ],
                     [

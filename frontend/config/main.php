@@ -6,7 +6,7 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-frontend',
+    'id' => 'frontend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
@@ -32,21 +32,11 @@ return [
                 ],
             ]
         ],
-        'view' => [
-            'on beginPage' => function($event){
-                if ($event->sender->title) {
-                    $event->sender->title .= ' - ' . \Yii::$app->config->get('site_name');
-                } else {
-                    $event->sender->title = \Yii::$app->config->get('site_name');
-                }
-            }
-        ],
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')
         ]
     ],
     'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
-    'as RouteBehavior' => \frontend\behaviors\RouteBehavior::className(),
     'params' => $params,
 ];

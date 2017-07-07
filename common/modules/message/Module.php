@@ -14,15 +14,12 @@ use yii\base\BootstrapInterface;
 use yii\base\Event;
 use yii\web\User;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public function bootstrap($app)
     {
-        Event::on(User::className(), 'afterLogin', [$this, 'afterLogin']);
-        if ($app->id == 'app-frontend') {
-            $this->attachBehavior('frontend', 'common\modules\message\filters\FrontendFilter');
-        } elseif ($app->id == 'app-backend') {
-            $this->attachBehavior('backend', 'common\modules\message\filters\BackendFilter');
+        if ($app->id == 'frontend') {
+            Event::on(User::className(), 'afterLogin', [$this, 'afterLogin']);
         }
     }
 

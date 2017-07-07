@@ -26,7 +26,6 @@ class m160622_073825_create_notify extends Migration
             'extra' => $this->text()->comment('附加信息'),
             'created_at' => $this->integer(10)->notNull(),
             'read' => $this->boolean()->notNull()->defaultValue(0),
-            'link' => $this->string(255)
         ], $tableOptions);
         $this->createIndex('notify_from_uid_index', '{{%notify}}', 'from_uid');
         $this->createIndex('notify_to_uid_index', '{{%notify}}', 'to_uid');
@@ -39,14 +38,15 @@ class m160622_073825_create_notify extends Migration
             'content' => $this->string(255),
         ], $tableOptions);
         $this->batchInsert('{{%notify_category}}', ['name', 'title', 'content'], [
-            ['reply', '{from.username} 回复了你的评论', '{extra.comment}'],
-            ['suggest', '{from.username} 给你留言了', '{extra.comment}'],
-            ['comment', '{from.username} 评论了你的文章 {extra.article_title}', '{extra.comment}'],
-            ['favourite', '{from.username} 收藏了你的文章 {extra.article_title}', null],
-            ['up_article', '{from.username} 赞了你的文章 {extra.article_title}', null],
-            ['message', '{from.username} 给你发了私信', '{extra.message}'],
-            ['reward', '{from.username} 打赏了你的文章 {extra.article_title}', '{extra.money} {extra.comment}'],
-            ['follow', '{from.username} 关注了你', null],
+            ['reply', '回复了你的评论', '{extra.comment}'],
+            ['suggest', '给你留言了', '{extra.title}'],
+            ['comment_article', '评论了你的文章 {extra.article_title}', '{extra.comment}'],
+            ['favourite', '收藏了你的文章 {extra.article_title}', null],
+            ['up_article', '赞了你的文章 {extra.article_title}', null],
+            ['message', '给你发了私信', '{extra.message}'],
+            ['reward', '打赏了你的文章 {extra.article_title}', '{extra.money} {extra.comment}'],
+            ['follow', '关注了你', null],
+            ['up_follow', '赞了你的评论', null],
         ]);
     }
 

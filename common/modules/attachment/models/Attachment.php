@@ -212,6 +212,7 @@ class Attachment extends \yii\db\ActiveRecord
                 $file->name = $hash . '.' . $file->extension;
             }
             $filePath = ($path ? ($path . '/') : '') . $file->name;
+//            p($file->tempName);
             if (Yii::$app->storage->upload($filePath, $file->tempName)) {
                 $attachment = new static();
                 $attachment->path = $filePath;

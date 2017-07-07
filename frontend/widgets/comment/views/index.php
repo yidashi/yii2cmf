@@ -8,7 +8,7 @@
 </style>
 <div id="comments">
     <h4>共 <span class="text-danger"><?= $commentTotal ?></span> 条<?= $listTitle ?></h4>
-    <?php \yii\widgets\Pjax::begin(['id' => 'comment-container']) ?>
+    <?php \yii\widgets\Pjax::begin(['id' => 'comment-container', 'linkSelector' => false]) ?>
     <?= \yii\widgets\ListView::widget([
         'dataProvider' => $dataProvider,
         'itemView' => '_item',

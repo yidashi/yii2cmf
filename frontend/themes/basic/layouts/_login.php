@@ -37,13 +37,3 @@ use yii\helpers\Html;
         'popupMode' => true,
     ]); ?>
 <?php \yii\bootstrap\Modal::end() ?>
-<?php $this->registerJs(<<<JS
-    $("#form-login").ajaxSubmit({
-        refreshPjaxContainer: "header-container",
-        refresh: false,
-        callback: function() {
-            $("#modal-login").modal("hide")
-        }
-    });
-JS
-) ?>

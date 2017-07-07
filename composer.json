@@ -35,7 +35,6 @@
         "kartik-v/yii2-widget-datepicker": "^1.3",
         "hightman/xunsearch": "*@beta",
         "bower-asset/blueimp-file-upload" : "*",
-        "bower-asset/font-awesome": "^4.0",
         "bower-asset/editor.md": "*",
         "creocoder/yii2-flysystem": "*",
         "qiniu/php-sdk": "^7.1"

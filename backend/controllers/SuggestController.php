@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use common\models\Comment;
+use common\models\Suggest;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -33,7 +33,7 @@ class SuggestController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find()->where(['entity' => 'suggest']),
+            'query' => Suggest::find(),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC
@@ -77,12 +77,12 @@ class SuggestController extends Controller
      * Finds the Suggest model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Comment the loaded model
+     * @return Suggest the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Comment::findOne($id)) !== null) {
+        if (($model = Suggest::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

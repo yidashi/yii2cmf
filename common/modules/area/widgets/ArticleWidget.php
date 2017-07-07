@@ -9,7 +9,7 @@
 namespace common\modules\area\widgets;
 
 
-use frontend\models\Article;
+use common\models\Article;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -19,12 +19,22 @@ class ArticleWidget extends Widget
 
     public function run()
     {
-        $template = $this->model->template;
-        $articles = Article::find()->filterWhere(['category_id' => $template['category']])->orderBy([$template['order'] => SORT_DESC])->limit($template['limit'])->all();
-        $items = [];
-        foreach ($articles as $article) {
-            $items[] = Html::a($article->title, ['/article/view', 'id' => $article->id]);
+        $html = \Yii::$app->cache->get([__CLASS__, $this->model->block_id]);
+        if (!$this->model->cache || $html === false) {
+            $template = $this->model->template;
+            $articles = Article::find()
+                ->filterWhere(['module' => $template['module']])
+                ->filterWhere(['category_id' => $template['category']])
+                ->orderBy([$template['order'] => SORT_DESC])
+                ->limit($template['limit'])
+                ->all();
+            $items = [];
+            foreach ($articles as $article) {
+                $items[] = Html::a($article->title, ['/article/view', 'id' => $article->id]);
+            }
+            $html = Html::ul($items, ['class' => 'post-list', 'encode' => false]);
+            \Yii::$app->cache->set([__CLASS__, $this->model->block_id], $html);
         }
-        return Html::ul($items, ['class' => 'post-list', 'encode' => false]);
+        return $html;
     }
 }

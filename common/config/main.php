@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
+    'vendorPath' => '@root/vendor',
     'runtimePath' => '@app/runtime',
     'timezone' => 'PRC',
     'language' => 'zh-CN',

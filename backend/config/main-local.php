@@ -7,7 +7,7 @@ $config = [
             'cookieValidationKey' => env('BACKEND_COOKIE_VALIDATION_KEY')
         ],
         'urlManager' => [
-            'enablePrettyUrl' => env('BACKEND_PRETTY_URL', false),
+            'enablePrettyUrl' => env('backend_enable_pretty_url', false),
             'showScriptName' => false,
         ],
     ],

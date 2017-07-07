@@ -6,13 +6,12 @@ use common\modules\i18n\models\I18nMessage;
 use common\modules\i18n\models\I18nSourceMessage;
 use yii\base\BootstrapInterface;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public $controllerNamespace = 'common\modules\i18n\controllers';
 
     public function bootstrap($app)
     {
-        list(, $appName) = explode('-', $app->id);
         $app->set('i18n', [
             'class' => 'yii\i18n\I18N',
             'translations' => [
@@ -29,7 +28,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'app*' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath'=>'@common/modules/i18n/messages',
-                    'fileMap' => ['app' => $appName . '.php'],
+                    'fileMap' => ['app' => $app->id . '.php'],
                     'on missingTranslation' => [$this, 'missingTranslation']
                 ],
                 /*'*'=> [

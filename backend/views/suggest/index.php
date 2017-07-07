@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     'id',
+                    'title',
                     [
                         'attribute' => 'content',
                         'options' => ['width' => '60%']
@@ -31,20 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{view} {delete} {ban}',
-                        'buttons' => [
-                            'ban' => function($url, $model, $key) {
-                                return Html::a(Html::icon('ban'),
-                                    ['/user/ban'],
-                                    [
-                                        'title' => '封禁用户',
-                                        'data-method' => 'post',
-                                        'data-params' => ['id' => $model->user_id],
-                                        'class' => 'btn btn-default btn-xs'
-                                    ]
-                                );
-                            }
-                        ]
+                        'template' => '{view} {delete}',
                     ],
                 ],
             ]); ?>

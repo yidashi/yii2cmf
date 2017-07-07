@@ -26,7 +26,7 @@ class m161102_090053_menu extends Migration
 
         /* Table yii2cmf_menu */
         $this->batchInsert('{{%menu}}',['id','name','parent','route','order','data','icon'],[
-            ['15','用户管理','33','/user/admin/index','1','','fa-user'],
+            ['15','用户管理','33','/user/default/index','1','','fa-user'],
             ['16','路由管理','33','/rbac/route/index','3','','fa-link'],
             ['17','角色管理','33','/rbac/role/index','2','','fa-user-md'],
             ['22','文章列表','39','/article/index','1','',''],
@@ -47,7 +47,7 @@ class m161102_090053_menu extends Migration
             ['42','评论管理','39','/comment/index','6','',''],
             ['43','留言板','39','/suggest/index','7','',''],
             ['44','插件','','','6','','fa-plug'],
-            ['45','插件管理','44','/plugins/index','','',''],
+            ['45','插件管理','44','/plugin/index','','',''],
             ['78','模块管理','44','/module/index','','',''],
             ['46','外观','','','3','','fa-desktop'],
             ['47','主题','46','/theme/index','4','',''],
@@ -57,7 +57,7 @@ class m161102_090053_menu extends Migration
             ['51','区块','46','/area/block/index','3','',''],
             ['57','规则管理','33','/rbac/rule/index','5','','fa-sitemap'],
             ['58','权限管理','33','/rbac/permission/index','4','','fa-check-square'],
-            ['66','群发站内信','24','/message/admin/create','4','','fa-comment-o'],
+            ['66','群发站内信','24','/message/default/create','4','','fa-comment-o'],
             ['67','错误日志','24','/log/index','5','','fa-warning'],
             ['68','控制面板','24','/site/dashboard','1','','fa-dashboard'],
             ['69','GII','24','/gii/default/index','6','',''],
@@ -66,7 +66,7 @@ class m161102_090053_menu extends Migration
             ['72','数据库配置','71','/config/default/database','3','',''],
             ['73','邮箱配置','71','/config/default/mail','4','',''],
             ['75','缓存','24','/cache/index','8','','fa-flash'],
-            ['76','附件','39','/attachment/admin/index','9','','fa-file-picture-o'],
+            ['76','附件','39','/attachment/default/index','9','','fa-file-picture-o'],
             ['77','标签','39','/tag/index','10','','fa-tags'],
         ]);
         $this->execute('SET foreign_key_checks = 1;');

@@ -4,7 +4,7 @@ $params = array_merge(
     require(__DIR__ . '/params.php')
 );
 return [
-    'id' => 'app-api',
+    'id' => 'api',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'api\common\controllers',
     'components' => [
@@ -21,6 +21,7 @@ return [
                         'v1/article',
                         'v1/nav',
                         'v1/user',
+                        'v1/comment',
                     ]
                 ],
             ],

@@ -3,7 +3,7 @@ namespace migration;
 
 use yii\base\BootstrapInterface;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public $migrationPath = "@database/migrations";
 

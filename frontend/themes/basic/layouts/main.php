@@ -11,11 +11,11 @@ use yii\widgets\Breadcrumbs;
 AppAsset::register($this);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => isset($this->params['seo_site_keywords']) ? $this->params['seo_site_keywords'] : Yii::$app->config->get('seo_site_keywords')
+    'content' => isset($this->params['SEO_SITE_KEYWORDS']) ? $this->params['SEO_SITE_KEYWORDS'] : Yii::$app->config->get('SEO_SITE_KEYWORDS')
 ], 'keywords');
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => isset($this->params['seo_site_description']) ? $this->params['seo_site_description'] : Yii::$app->config->get('seo_site_description')
+    'content' => isset($this->params['SEO_SITE_DESCRIPTION']) ? $this->params['SEO_SITE_DESCRIPTION'] : Yii::$app->config->get('SEO_SITE_DESCRIPTION')
 ], 'description');
 ?>
 <?php $this->beginPage() ?>
@@ -26,7 +26,7 @@ $this->registerMetaTag([
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="baidu-site-verification" content="MccTnGKbkm" />
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= $this->title ? Html::encode($this->title) . '-' . Yii::$app->config->get('site_name') : Yii::$app->config->get('site_name') ?></title>
     <link type="image/x-icon" href="<?= Yii::getAlias('@web') ?>favicon.ico" rel="shortcut icon">
     <script>var SITE_URL = '<?= Yii::$app->request->hostInfo . Yii::$app->request->baseUrl ?>';</script>
     <?php $this->head() ?>

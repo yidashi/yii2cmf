@@ -19,7 +19,7 @@ class Yii extends \yii\BaseYii
     }
     public static function powered()
     {
-        return 'Powered by ' . '<a href="http://www.51siyuan.cn/" rel="external">Yii2 CMF</a>';
+        return parent::powered() . ' & <a href="http://www.51siyuan.cn/" rel="external">Yii2 CMF</a>';
     }
 
 }
@@ -41,7 +41,7 @@ function checkInstalled()
  * Class BaseApplication
  * Used for properties that are identical for both WebApplication and ConsoleApplication
  * @property \common\modules\config\components\Config $config
- * @property \common\components\Storage $storage
+ * @property \common\modules\attachment\components\Storage $storage
  * @property \common\components\notify\Handler $notify
  */
 abstract class BaseApplication extends yii\base\Application

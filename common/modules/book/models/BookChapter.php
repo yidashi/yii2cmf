@@ -53,8 +53,9 @@ class BookChapter extends \yii\db\ActiveRecord
             'chapter_name' => '章节标题',
             'chapter_body' => '章节正文',
             'pid' => 'Pid',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => '创建于',
+            'updated_at' => '更新于',
+            'sort' => '排序'
         ];
     }
 

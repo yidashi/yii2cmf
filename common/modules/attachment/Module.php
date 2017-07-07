@@ -12,7 +12,7 @@ namespace common\modules\attachment;
 use common\modules\attachment\actions\UploadController;
 use yii\base\BootstrapInterface;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public function bootstrap($app)
     {
@@ -28,8 +28,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'path' => '@storagePath/upload',
             ]
         ];
-        if (isset($this->params['filesystem_type'])) {
-            switch ($this->params['filesystem_type']) {
+        if (isset($this->params['driver'])) {
+            switch ($this->params['driver']) {
                 case 'qiniu':
                     $storage['fs'] = [
                         'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',

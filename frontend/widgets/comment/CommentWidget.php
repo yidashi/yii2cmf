@@ -9,8 +9,9 @@
 namespace frontend\widgets\comment;
 
 
+use common\assets\LayerAsset;
 use common\models\Comment;
-use frontend\models\Article;
+use yii\base\InvalidParamException;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
@@ -31,6 +32,11 @@ class CommentWidget extends Widget
         if (isset($this->model)) {
             $this->entity = $this->model->getEntity();
             $this->entityId = $this->model->getEntityId();
+        } else if ($this->entity && $this->entityId) {
+            $entityClassName = $this->entity;
+            $this->model = $entityClassName::findOne($this->entityId);
+        } else {
+            throw new InvalidParamException('缺少model或者entity&&entityId');
         }
     }
     public function run()
@@ -58,7 +64,7 @@ class CommentWidget extends Widget
             $commentModel = new Comment();
             $commentModel->entity = $this->entity;
             $commentModel->entity_id = $this->entityId;
-
+            LayerAsset::register($this->view);
             return $this->render('index', [
                 'entity' => $this->entity,
                 'entityId' => $this->entityId,

@@ -369,9 +369,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
     public static function getDefaultAvatar($width, $height)
     {
-        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/static/avatars");
+        list ($basePath, $baseUrl) = \Yii::$app->getAssetManager()->publish("@common/static");
 
-        $name = "avatar_" . $width."x".$height. ".png";
+        $name = "avatars/avatar_" . $width."x".$height. ".png";
         if(file_exists($basePath . DIRECTORY_SEPARATOR . $name)) {
             return $baseUrl . "/" . $name;
         }

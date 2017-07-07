@@ -80,7 +80,7 @@ use yii\bootstrap\Nav;
     <?php \yii\widgets\Pjax::end() ?>
     <div class="m-header">
         <div class="wrap clearfix">
-            <div class="m-logo"><a href="<?= \yii\helpers\Url::home() ?>" title="<?= Yii::$app->config->get('SITE_NAME') ?>" style="background:url(<?= Yii::$app->config->get('SITE_LOGO') ?>) no-repeat;background-size: contain"><?= Yii::$app->config->get('SITE_NAME') ?><span></span></a></div>
+            <div class="m-logo"><a href="<?= \yii\helpers\Url::home() ?>" title="<?= Yii::$app->config->get('site_name') ?>" style="background:url(<?= Yii::$app->config->get('site_logo') ?>) no-repeat;background-size: contain"><?= Yii::$app->config->get('site_name') ?><span></span></a></div>
             <div class="u-search">
                 <form class="form" action="<?= url(['/search/index']) ?>" method="get">
                     <input type="text" id="dk-text" class="text" autocomplete="off" placeholder="<?= Yii::$app->request->get('q', '全站搜索'); ?>" name="q">

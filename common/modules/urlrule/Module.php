@@ -12,7 +12,7 @@ use yii\base\BootstrapInterface;
 use common\modules\urlrule\models\UrlRule;
 use Yii;
 
-class Module extends \yii\base\Module implements BootstrapInterface
+class Module extends \common\modules\Module implements BootstrapInterface
 {
     public function bootstrap($app)
     {
