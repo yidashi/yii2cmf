@@ -35,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         'class' => 'nav nav-pills nav-stacked',
                     ],
                     'items' => [
-                        ['label' => '<i class="fa fa-user"></i> '. Yii::t('app', 'Account details'), 'url' => ['/user/admin/update', 'id' => $user->id], 'encode' => false],
-                        ['label' => '<i class="fa fa-file-text-o"></i> '. Yii::t('app', 'Profile details'), 'url' => ['/user/admin/update-profile', 'id' => $user->id], 'encode' => false],
+                        ['label' => '<i class="fa fa-user"></i> '. Yii::t('app', 'Account details'), 'url' => ['/user/default/update', 'id' => $user->id], 'encode' => false],
+                        ['label' => '<i class="fa fa-file-text-o"></i> '. Yii::t('app', 'Profile details'), 'url' => ['/user/default/update-profile', 'id' => $user->id], 'encode' => false],
                         [
                             'label' => '<span class="glyphicon glyphicon-hand-left"></span> ' . Yii::t('app', 'Assignments'),
-                            'url' => ['/user/admin/assignments', 'id' => $user->id],
+                            'url' => ['/user/default/assignments', 'id' => $user->id],
                             'visible' => Yii::$app->getModule("rbac"),
                             'encode' => false
                         ],
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'items' => [
                         [
                             'label' => '<i class="fa fa-hand-paper-o"></i> '.Yii::t('app', 'Confirm'),
-                            'url'   => ['/user/admin/confirm', 'id' => $user->id],
+                            'url'   => ['/user/default/confirm', 'id' => $user->id],
                             'visible' => !$user->isConfirmed,
                             'linkOptions' => [
                                 'class' => 'text-success',
@@ -69,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'label' => '<i class="fa   fa-ban "></i> '.Yii::t('app', 'Block'),
-                            'url'   => ['/user/admin/block', 'id' => $user->id],
+                            'url'   => ['/user/default/block', 'id' => $user->id],
                             'visible' => !$user->isBlocked,
                             'linkOptions' => [
                                 'class' => 'text-danger',
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'label' => '<i class="fa fa-check"></i> '.Yii::t('app', 'Unblock'),
-                            'url'   => ['/user/admin/block', 'id' => $user->id],
+                            'url'   => ['/user/default/block', 'id' => $user->id],
                             'visible' => $user->isBlocked,
                             'linkOptions' => [
                                 'class' => 'text-success',
@@ -91,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                         [
                             'label' =>'<i class="fa fa-trash-o"></i> '. Yii::t('app', 'Delete'),
-                            'url'   => ['/user/admin/delete', 'id' => $user->id],
+                            'url'   => ['/user/default/delete', 'id' => $user->id],
                             'linkOptions' => [
                                 'class' => 'text-danger',
                                 'data-method' => 'post',

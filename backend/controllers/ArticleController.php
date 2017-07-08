@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\search\Article as ArticleSearch;
+use backend\models\search\ArticleSearch as ArticleSearch;
 use common\models\Article;
 use common\models\ArticleData;
 use common\models\ArticleModule;

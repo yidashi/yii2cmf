@@ -1,11 +1,8 @@
 <?php
-
 use yii\grid\GridView;
 use yii\helpers\Html;
-
 /* @var $this yii\web\View */
 /* @var $model common\models\Nav */
-
 $this->title = '修改导航: ' . $model->key;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Navs'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = '修改导航';
@@ -17,11 +14,11 @@ $this->params['breadcrumbs'][] = '修改导航';
         ]) ?>
     </div>
     <div class="col-md-8">
-    <p>
-            <?= Html::a(Yii::t('backend', 'Create {modelClass}', [
+        <p>
+            <?= Html::a(Yii::t('app', 'Create {modelClass}', [
                 'modelClass' => 'Nav Item',
             ]), ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
-    </p>
+        </p>
         <div class="box box-primary">
             <div class="box-body">
                 <?= GridView::widget([
@@ -32,7 +29,12 @@ $this->params['breadcrumbs'][] = '修改导航';
                         [
                             'class' => 'backend\widgets\grid\PositionColumn',
                             'attribute' => 'order',
-                            'route' => '/nav-item/position'
+                            'route' => ['/nav-item/position']
+                        ],
+                        [
+                            'class' => 'backend\widgets\grid\SwitcherColumn',
+                            'attribute' => 'status',
+                            'route' => ['/nav-item/switcher']
                         ],
                         [
                             'class' => 'yii\grid\ActionColumn',

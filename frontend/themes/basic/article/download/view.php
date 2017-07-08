@@ -13,7 +13,7 @@ use yii\helpers\Url;
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => $model->category, 'url' => ['/article/index', 'cate' => \common\models\Category::find()->where(['id' => $model->category_id])->select('slug')->scalar()]];
 $this->params['breadcrumbs'][] = Html::encode($model->title);
-list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_DESCRIPTION']) = $model->getMetaData();
+list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_description']) = $model->getMetaData();
 ?>
 
 <div class="col-lg-9">
@@ -101,14 +101,14 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     <a class="btn btn-primary btn-block" href="<?= url(['/user/default/update-article', 'id' => $model->id]) ?>"><i class="fa fa-pencil"></i> 修改</a>
     <?php endif; ?>
     <div class="panel panel-default">
-        <div class="panel-heading">带到手机上看</div>
+        <div class="panel-heading"><h5 class="panel-title">带到手机上看</h5></div>
         <div class="panel-body">
             <?= Html::img(Url::to(['/qrcode', 'text' => Yii::$app->request->absoluteUrl])) ?>
         </div>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            热门<?=$model->category?>
+            <h5 class="panel-title">热门<?=$model->category?></h5>
         </div>
         <div class="panel-body">
             <ul class="post-list">

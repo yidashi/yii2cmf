@@ -9,7 +9,7 @@ use rbac\widgets\Assignments;
 
 ?>
 
-<?php $this->beginContent('@common/modules/user/views/admin/update.php', ['user' => $user]) ?>
+<?php $this->beginContent(__DIR__ . '/update.php', ['user' => $user]) ?>
 
 <?= yii\bootstrap\Alert::widget([
     'options' => [

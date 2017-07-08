@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\search\CommentSearch;
 use common\models\Comment;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -32,17 +33,10 @@ class CommentController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comment::find(),
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC
-                ]
-            ]
-
-        ]);
-
+        $searchModel = new CommentSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

@@ -40,7 +40,7 @@ class AreaWidget extends Widget
         foreach ($blocks as $block) {
             $widget = $block["widget"];
 
-            $header = Html::tag("h3", $block->title);
+            $header = Html::tag("h5", $block->title, ['class' => 'panel-title']);
 
             $content = Html::tag("div", $header, [
                 "class" => $this->headerClass

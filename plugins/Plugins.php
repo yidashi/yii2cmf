@@ -87,12 +87,8 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        if ($app->id == 'app-backend' && $this->hasMethod('backend')) {
-            $this->backend($app);
-        } else if($app->id == 'app-frontend' && $this->hasMethod('frontend')){
-            $this->frontend($app);
-        } else if($app->id == 'app-wechat' && $this->hasMethod('wechat')){
-            $this->wechat($app);
+        if ($this->hasMethod($app->id)) {
+            call_user_func([$this, $app->id], $app);
         }
     }
 

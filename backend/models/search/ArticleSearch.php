@@ -2,14 +2,14 @@
 
 namespace backend\models\search;
 
-use common\models\Article as ArticleModel;
+use common\models\Article;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
  * Article represents the model behind the search form about `common\models\Article`.
  */
-class Article extends ArticleModel
+class ArticleSearch extends Article
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class Article extends ArticleModel
      */
     public function search($params)
     {
-        $query = ArticleModel::find()->notTrashed();
+        $query = Article::find()->notTrashed();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

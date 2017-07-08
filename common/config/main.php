@@ -8,7 +8,7 @@ return [
     'bootstrap' => [
         'log',
         'common\\components\\LoadModule',
-        'common\\components\\LoadPlugins',
+        'common\\components\\LoadPlugin',
     ],
     'components' => [
         'cache' => [

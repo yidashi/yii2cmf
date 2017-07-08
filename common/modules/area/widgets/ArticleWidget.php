@@ -22,9 +22,9 @@ class ArticleWidget extends Widget
         $html = \Yii::$app->cache->get([__CLASS__, $this->model->block_id]);
         if (!$this->model->cache || $html === false) {
             $template = $this->model->template;
-            $articles = Article::find()
-                ->filterWhere(['module' => $template['module']])
-                ->filterWhere(['category_id' => $template['category']])
+            $articles = Article::find()->published()
+                ->andFilterWhere(['module' => $template['module']])
+                ->andFilterWhere(['category_id' => $template['category']])
                 ->orderBy([$template['order'] => SORT_DESC])
                 ->limit($template['limit'])
                 ->all();

@@ -10,7 +10,21 @@
  * @var \yii\web\View $this
  * @var common\modules\book\models\BookChapter $model
  */
+use common\helpers\Tree;
 
+$chapters = $model->book->chapters;
+$items = [];
+foreach ($chapters as $chapter) {
+    $item = [];
+    $item['label'] = $chapter->chapter_name;
+    $item['url'] = ['update-chapter', 'id' => $chapter->id];
+    $item['active'] = (request('id') == $chapter->id && Yii::$app->controller->action->id == 'update-chapter') || (request('chapter_id') == $chapter->id && Yii::$app->controller->action->id == 'create-chapter');
+    $item['id'] = $chapter->id;
+    $item['pid'] = $chapter->pid;
+    $item['linkOptions'] = ['data-id' => $chapter->id, 'data-pid' => $chapter->pid];
+    $items[] = $item;
+}
+$menuItems = Tree::build($items, 'id', 'pid', 'items');
 ?>
 <style>
     .btn-operate-chapter {
@@ -32,7 +46,7 @@
 <div class="row">
     <div class="col-md-3">
         <?= \common\widgets\SideNavWidget::widget([
-            'items' => $model->book->getUpdateMenuItems()
+            'items' => $menuItems
         ]) ?>
 
         <?= \yii\helpers\Html::a('<i class="fa fa-plus"></i> 新增章节', ['/book/admin/create-chapter', 'id' => $model->book->id], ['class' => 'btn bg-maroon btn-sm']) ?>

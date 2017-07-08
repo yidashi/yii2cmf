@@ -21,7 +21,7 @@ use common\models\Article;
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><?= $category->title ?></h3>
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-right: 10px"></span><?= $category->title ?></h3>
                         <div class="pull-right"><a href="<?= Url::to(['/article/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
                     </div>
                     <div class="panel-body">
@@ -49,7 +49,7 @@ use common\models\Article;
         ])?>
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h5>热门教程</h5>
+                <h5 class="panel-title">热门教程</h5>
             </div>
             <div class="panel-body">
                 <ul class="post-list">
@@ -61,7 +61,7 @@ use common\models\Article;
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h5>热门标签</h5>
+                <h5 class="panel-title">热门标签</h5>
             </div>
             <div class="panel-body">
                 <ul class="tag-list list-inline">
@@ -73,7 +73,7 @@ use common\models\Article;
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h5>推荐内容</h5>
+                <h5 class="panel-title">推荐内容</h5>
             </div>
             <div class="panel-body">
                 <ul class="post-list">
@@ -88,7 +88,7 @@ use common\models\Article;
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h5>活跃用户</h5>
+                <h5 class="panel-title">活跃用户</h5>
             </div>
             <div class="panel-body">
                 <ul class="login-user-list">

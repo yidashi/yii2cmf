@@ -6,7 +6,7 @@ use common\models\Category;
 use common\helpers\Tree;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\search\Article */
+/* @var $model backend\models\search\ArticleSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

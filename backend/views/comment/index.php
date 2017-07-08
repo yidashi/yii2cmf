@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     .comment-index img{width:80px;height:80px;margin-right:10px;}
 </style>
 <div class="comment-index">
-
+    <?= $this->render('_search', ['model' => $searchModel]) ?>
     <div class="box box-primary">
         <div class="box-body">
             <?= GridView::widget([

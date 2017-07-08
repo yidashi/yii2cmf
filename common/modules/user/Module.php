@@ -75,9 +75,6 @@ class Module extends \common\modules\Module implements BootstrapInterface
                 'idParam' => '__idBackend',
                 'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
             ]);
-            $app->urlManager->addRules([
-                'user/<action:\S+>' => 'user/default/<action>',
-            ], false);
         } else {
             Yii::$app->set('user', [
                 'class' => 'yii\web\User',

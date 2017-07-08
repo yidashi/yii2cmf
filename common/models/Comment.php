@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\search\SearchModelTrait;
 use common\behaviors\NotifyBehavior;
 use common\behaviors\VoteBehavior;
 use common\modules\user\behaviors\UserBehavior;
@@ -27,6 +28,7 @@ use Yii;
  */
 class Comment extends \yii\db\ActiveRecord
 {
+    use SearchModelTrait;
     /**
      * {@inheritdoc}
      */
@@ -67,8 +69,8 @@ class Comment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'entity' => '类型',
-            'entity_id' => '目标',
+            'entity' => '来源',
+            'entity_id' => '来源ID',
             'user_id' => '评论人',
             'user_ip' => 'IP',
             'content' => '内容',

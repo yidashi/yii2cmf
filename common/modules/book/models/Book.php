@@ -94,41 +94,6 @@ class Book extends \yii\db\ActiveRecord
         return $this->hasMany(BookChapter::className(), ['book_id' => 'id'])->orderBy(['sort' => SORT_ASC]);
     }
 
-    public function getMenuItems()
-    {
-        $chapters = $this->chapters;
-        $items = [];
-        foreach ($chapters as $chapter) {
-            $item = [];
-            $item['label'] = $chapter->chapter_name;
-            $item['url'] = empty($chapter->chapter_body) ? '#' : ['chapter', 'id' => $chapter->id];
-            $item['active'] = request('id') == $chapter->id && Yii::$app->controller->action->id == 'chapter';
-            $item['id'] = $chapter->id;
-            $item['pid'] = $chapter->pid;
-            $items[] = $item;
-        }
-        $tree = Tree::build($items, 'id', 'pid', 'items');
-        return $tree;
-    }
-
-    public function getUpdateMenuItems()
-    {
-        $chapters = $this->chapters;
-        $items = [];
-        foreach ($chapters as $chapter) {
-            $item = [];
-            $item['label'] = $chapter->chapter_name;
-            $item['url'] = ['update-chapter', 'id' => $chapter->id];
-            $item['active'] = (request('id') == $chapter->id && Yii::$app->controller->action->id == 'update-chapter') || (request('chapter_id') == $chapter->id && Yii::$app->controller->action->id == 'create-chapter');
-            $item['id'] = $chapter->id;
-            $item['pid'] = $chapter->pid;
-            $item['linkOptions'] = ['data-id' => $chapter->id, 'data-pid' => $chapter->pid];
-            $items[] = $item;
-        }
-        $tree = Tree::build($items, 'id', 'pid', 'items');
-        return $tree;
-    }
-
     public function addView()
     {
         return $this->updateCounters(['view' => 1]);

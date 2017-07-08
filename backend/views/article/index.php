@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\Article */
+/* @var $searchModel backend\models\search\ArticleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '文章';

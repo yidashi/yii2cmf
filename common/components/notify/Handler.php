@@ -80,6 +80,9 @@ class Handler extends Object
     }
     public function send()
     {
+        if ($this->notify->to_uid == $this->notify->from_uid) {
+            return true;
+        }
         if ($this->notify->save() === false) {
             $this->_errors = $this->notify->errors;
             return false;

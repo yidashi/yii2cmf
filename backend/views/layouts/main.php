@@ -54,6 +54,7 @@ backend\assets\AppAsset::register($this);
 
         <?= \yii\widgets\Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'homeLink' => false
         ]) ?>
     </section>
 

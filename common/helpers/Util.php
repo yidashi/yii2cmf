@@ -39,14 +39,18 @@ class Util
         return $url;
     }
 
-    public static function getEntityName($entity)
+    public static function getEntityList()
     {
-        $entityList = [
+        return [
             'common\models\Suggest' => '留言',
             'common\models\Page' => '单页',
             'common\models\Article' => '文章',
             'common\modules\book\models\BookChapter' => '书章节',
         ];
+    }
+    public static function getEntityName($entity)
+    {
+        $entityList = self::getEntityList();
         return ArrayHelper::getValue($entityList, $entity, $entity);
     }
 }
