@@ -6,11 +6,13 @@
  * Time: 下午6:12
  */
 namespace common\components;
-use common\models\Plugin;
-use plugins\Plugins;
+
+use common\models\Plugin as PluginModel;
+use plugins\Plugin;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\base\Component;
+
 class LoadPlugin extends Component implements BootstrapInterface
 {
     public function bootstrap($app)
@@ -20,9 +22,9 @@ class LoadPlugin extends Component implements BootstrapInterface
             return;
         }
 
-        $models = Plugin::findOpenPlugins();
+        $models = PluginModel::findOpenPlugins();
         foreach ($models as $model) {
-            /* @var $plugins Plugins*/
+            /* @var $plugins Plugin*/
             $plugins = Yii::$app->pluginManager->findOne($model->id);
             if ($plugins instanceof BootstrapInterface) {
                 $plugins->bootstrap($app);

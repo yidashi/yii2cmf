@@ -10,7 +10,7 @@ namespace plugins\donation\controllers;
 
 
 use plugins\donation\models\Donation;
-use plugins\donation\Plugins;
+use plugins\donation\Plugin;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
@@ -18,7 +18,7 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        $plugins = new Plugins();
+        $plugins = new Plugin();
         $config = $plugins->getConfig();
         $query = Donation::find();
         $dataProvider = new ActiveDataProvider([

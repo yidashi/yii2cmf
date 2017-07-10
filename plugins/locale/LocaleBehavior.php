@@ -68,6 +68,6 @@ class LocaleBehavior extends Behavior
      */
     protected function getAvailableLocales()
     {
-        return array_keys(Plugins::$language);
+        return array_keys(Plugin::$language);
     }
 }

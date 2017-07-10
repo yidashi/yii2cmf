@@ -15,6 +15,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $signature
+ * @property string $qq
+ * @property string $phone
  * @property \common\modules\attachment\models\Attachment $avatar
  * @property integer $gender
  */

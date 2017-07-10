@@ -8,30 +8,28 @@ use yii\helpers\Html;
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="widget-carousel-item-form">
 
-    <?php $form = ActiveForm::begin(); ?>
-    <div class="row">
-        <div class="col-md-6">
-            <?php echo $form->errorSummary($model) ?>
+<?php $form = ActiveForm::begin(); ?>
+<div class="row">
+    <div class="col-md-6">
+        <?php echo $form->errorSummary($model) ?>
 
-            <?php echo $form->field($model, 'image')->widget(\common\modules\attachment\widgets\SingleWidget::className(), ['onlyUrl' => true]) ?>
+        <?php echo $form->field($model, 'image')->widget(\common\modules\attachment\widgets\SingleWidget::className(), ['onlyUrl' => true]) ?>
 
-        </div>
-        <div class="col-md-6">
-            <?php echo $form->field($model, 'order')->textInput() ?>
+    </div>
+    <div class="col-md-6">
 
-            <?php echo $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
+        <?php echo $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>
 
-            <?php echo $form->field($model, 'caption')->textarea() ?>
+        <?php echo $form->field($model, 'caption')->textarea() ?>
 
-            <?php echo $form->field($model, 'status')->checkbox() ?>
+        <?php echo $form->field($model, 'order')->textInput() ?>
 
-            <div class="form-group">
-                <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            </div>
+        <?php echo $form->field($model, 'status')->checkbox() ?>
+
+        <div class="form-group">
+            <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
-    <?php ActiveForm::end(); ?>
-
 </div>
+<?php ActiveForm::end(); ?>

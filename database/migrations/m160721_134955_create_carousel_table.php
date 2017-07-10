@@ -14,7 +14,8 @@ class m160721_134955_create_carousel_table extends Migration
 
         $this->createTable('{{%carousel}}', [
             'id' => $this->primaryKey(),
-            'key' => $this->string()->notNull(),
+            'key' => $this->string(128)->notNull(),
+            'title' => $this->string(255)->notNull(),
             'status' => $this->smallInteger()->defaultValue(0)
         ], $tableOptions);
 

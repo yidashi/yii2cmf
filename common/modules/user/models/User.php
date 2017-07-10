@@ -26,6 +26,7 @@ use yii\web\IdentityInterface;
  * @property int $updated_at
  * @property int $confirmed_at
  * @property int $blocked_at
+ * @property int $login_at
  * @property string $password write-only password
  * @property Profile $profile write-only password
  */

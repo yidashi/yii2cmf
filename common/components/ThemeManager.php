@@ -17,11 +17,11 @@ class ThemeManager extends PackageManager
 
     public function getDefaultTheme()
     {
-        return \Yii::$app->config->get('THEME_NAME');
+        return \Yii::$app->config->get('theme_name');
     }
 
     public function setDefaultTheme($id)
     {
-       return \Yii::$app->config->set('THEME_NAME', $id);
+       return \Yii::$app->config->set('theme_name', $id);
     }
 }

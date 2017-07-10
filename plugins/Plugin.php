@@ -9,7 +9,7 @@
 namespace plugins;
 
 use common\components\PackageInfo;
-use common\models\Plugin;
+use common\models\Plugin as PluginModel;
 use rbac\models\Menu;
 use ReflectionClass;
 use Yii;
@@ -17,7 +17,7 @@ use yii\base\BootstrapInterface;
 use yii\base\InvalidParamException;
 use yii\web\View;
 
-abstract class Plugins extends PackageInfo implements BootstrapInterface
+abstract class Plugin extends PackageInfo implements BootstrapInterface
 {
 
     public $aliases = [];
@@ -34,9 +34,9 @@ abstract class Plugins extends PackageInfo implements BootstrapInterface
     public function getModel()
     {
         if ($this->_model == null) {
-            $model = Plugin::findOne($this->getPackage());
+            $model = PluginModel::findOne($this->getPackage());
             if ($model == null) {
-                $model = new Plugin();
+                $model = new PluginModel();
                 $model->loadDefaultValues();
                 $model->id = $this->getPackage();
             }

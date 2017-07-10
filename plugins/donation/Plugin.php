@@ -14,7 +14,7 @@ use plugins\donation\controllers\DefaultController;
 use yii\web\View;
 use plugins\donation\migrations\Migrate;
 
-class Plugins extends \plugins\Plugins
+class Plugin extends \plugins\Plugin
 {
     public $info = [
         'author' => '易大师',

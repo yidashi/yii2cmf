@@ -6,11 +6,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Carousel */
 
-$this->title = Yii::t('backend', 'Update {modelClass}: ', [
-    'modelClass' => 'Carousel',
-]) . ' ' . $model->key;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Carousels'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
+$this->title = '更新幻灯片:' . $model->key;
+$this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="carousel-update">
     <div class="row">
@@ -21,9 +19,7 @@ $this->params['breadcrumbs'][] = Yii::t('backend', 'Update');
         </div>
         <div class="col-md-9">
             <p>
-                <?= Html::a(Yii::t('backend', 'Create {modelClass}', [
-                    'modelClass' => 'Carousel Item',
-                ]), ['/carousel-item/create', 'carousel_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
+                <?= Html::a('新幻灯片项', ['/carousel-item/create', 'carousel_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
             </p>
             <div class="box box-primary">
                 <div class="box-body">

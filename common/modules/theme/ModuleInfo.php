@@ -1,20 +1,24 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: yidashi
- * Date: 2017/3/6
- * Time: 下午9:50
+ * Author: ljt
+ * DateTime: 2017/2/17 12:04
+ * Description:
  */
-namespace common\modules\urlrule;
+
+namespace common\modules\theme;
+
 
 class ModuleInfo extends \common\modules\ModuleInfo
 {
+    public $isCore = 1;
+
     public $info = [
         'author' => '易大师',
         'bootstrap' => 'frontend',
         'version' => 'v1.0',
-        'id' => 'urlrule',
-        'name' => 'url规则',
-        'description' => 'url规则'
+        'id' => 'theme',
+        'name' => '网站主题',
+        'description' => '网站主题'
     ];
 }

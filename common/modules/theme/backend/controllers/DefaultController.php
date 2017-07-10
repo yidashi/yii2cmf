@@ -6,7 +6,7 @@
  * Time: 上午12:12
  */
 
-namespace backend\controllers;
+namespace common\modules\theme\backend\controllers;
 
 
 use backend\models\ThemezipForm;
@@ -17,7 +17,7 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
-class ThemeController extends Controller
+class DefaultController extends Controller
 {
     public function behaviors()
     {
@@ -33,7 +33,7 @@ class ThemeController extends Controller
 
     public function actionIndex()
     {
-        $packages = Yii::$app->get("themeManager")->findAll();
+        $packages = Yii::$app->themeManager->findAll();
         $dataProvider = new ArrayDataProvider([
             "allModels" => $packages,
         ]);
@@ -43,15 +43,14 @@ class ThemeController extends Controller
     }
     public function actionView($id)
     {
-        $theme = \Yii::$app->get("themeManager")->findOne($id);
+        $theme = \Yii::$app->themeManager->findOne($id);
         return $this->render("view", [
             "model" => $theme
         ]);
     }
     public function actionOpen($id)
     {
-        /** @var $themeManager \common\components\ThemeManager  */
-        $themeManager = \Yii::$app->get("themeManager");
+        $themeManager = \Yii::$app->themeManager;
         $theme = $themeManager->findOne($id);
         if ($theme != null) {
             if ($themeManager->setDefaultTheme($id) == true) {
@@ -67,7 +66,7 @@ class ThemeController extends Controller
     }
     public function actionDemo($id)
     {
-        $url = Yii::$app->config->get('FRONTEND_URL') . '?theme=' . $id;
+        $url = Yii::$app->config->get('site_url') . '?theme=' . $id;
         return $this->redirect($url);
     }
     public function actionCustom()

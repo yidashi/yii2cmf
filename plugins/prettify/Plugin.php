@@ -13,7 +13,7 @@ use yii\base\BootstrapInterface;
 use yii\web\View;
 use yii\base\Event;
 
-class Plugins extends \plugins\Plugins implements BootstrapInterface
+class Plugin extends \plugins\Plugin implements BootstrapInterface
 {
     public $info = [
         'author' => '易大师',

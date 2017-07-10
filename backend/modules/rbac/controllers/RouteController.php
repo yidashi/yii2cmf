@@ -216,7 +216,9 @@ class RouteController extends \yii\web\Controller
 
             $namespace = trim($module->controllerNamespace, '\\').'\\';
             $this->getControllerFiles($module, $namespace, '', $result);
-            $result[] = ($module->uniqueId === '' ? '' : '/'.$module->uniqueId).'/*';
+            if ($module->uniqueId === '') {
+                $result[] = '/*';
+            }
         } catch (\Exception $exc) {
             Yii::error($exc->getMessage(), __METHOD__);
         }
@@ -278,7 +280,7 @@ class RouteController extends \yii\web\Controller
             /* @var $controller \yii\base\Controller */
             $controller = Yii::createObject($type, [$id, $module]);
             $this->getActionRoutes($controller, $result);
-            $result[] = '/'.$controller->uniqueId.'/*';
+//            $result[] = '/'.$controller->uniqueId.'/*';
         } catch (\Exception $exc) {
             Yii::error($exc->getMessage(), __METHOD__);
         }

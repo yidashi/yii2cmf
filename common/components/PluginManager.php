@@ -10,7 +10,7 @@ namespace common\components;
 
 
 use common\models\Module;
-use plugins\Plugins;
+use plugins\Plugin;
 use yii\helpers\Json;
 
 class PluginManager extends PackageManager
@@ -19,9 +19,9 @@ class PluginManager extends PackageManager
 
     public $namespace = 'plugins\\';
 
-    public $infoClass = 'Plugins';
+    public $infoClass = 'Plugin';
 
-    public function install(Plugins $plugin)
+    public function install(Plugin $plugin)
     {
         $model = $plugin->getModel();
         $model->attributes = $plugin->info;
@@ -30,18 +30,18 @@ class PluginManager extends PackageManager
         return $model->save();
     }
 
-    public function uninstall(Plugins $plugin)
+    public function uninstall(Plugin $plugin)
     {
         $model = $plugin->getModel();
         return $model->delete();
     }
-    public function open(Plugins $plugin)
+    public function open(Plugin $plugin)
     {
         $model = $plugin->getModel();
         $model->status = 1;
         return $model->save();
     }
-    public function close(Plugins $plugin)
+    public function close(Plugin $plugin)
     {
         $model = $plugin->getModel();
         $model->status = 0;

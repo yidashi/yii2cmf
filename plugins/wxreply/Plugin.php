@@ -11,7 +11,7 @@ namespace plugins\wxreply;
 
 use yii\base\Event;
 
-class Plugins extends \plugins\Plugins
+class Plugin extends \plugins\Plugin
 {
     public $info = [
         'author' => '易大师',

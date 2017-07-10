@@ -7,6 +7,7 @@ use rbac\models\AuthItem;
 use rbac\models\searchs\AuthItem as AuthItemSearch;
 use Yii;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\rbac\Item;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,8 +62,20 @@ class RoleController extends Controller
     public function actionView($id)
     {
         $model = $this->findModel($id);
-
-        return $this->render('view', ['model' => $model]);
+        $permissions = Yii::$app->authManager->getPermissions();
+        unset($permissions['/*']);
+        $permissions = array_keys($permissions);
+        $routeGroups = [];
+        foreach ($permissions as $permission) {
+            $pos = strrpos($permission, '/');
+            $controller = substr($permission, 0, $pos);
+            $action = substr($permission, $pos+1);
+            $routeGroups[$controller][] = $action;
+        }
+        return $this->render('view', [
+            'model' => $model,
+            'routeGroups' => $routeGroups
+        ]);
     }
 
     /**

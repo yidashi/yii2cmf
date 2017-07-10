@@ -1,26 +1,28 @@
 <?php
 /**
- * author: yidashi
- * Date: 2015/11/30
- * Time: 17:30.
+ * Created by PhpStorm.
+ * Author: yidashi
+ * DateTime: 2017/7/10 13:46
+ * Description:
  */
-namespace frontend\behaviors;
+namespace common\modules\theme;
 
 use Detection\MobileDetect;
 use Yii;
-use yii\base\ActionFilter;
+use yii\base\BootstrapInterface;
 
-class ThemeBehavior extends ActionFilter
+class Module extends \common\modules\Module implements BootstrapInterface
 {
+    public function bootstrap($app)
+    {
+        if ($app->id == 'frontend') {
+            $themeName = $this->resolveTheme();
+            $this->setTheme($themeName);
+        }
+    }
     public $themeParam = 'theme';
 
     public $themeCookieName = 'localThemeName';
-    public function beforeAction($action)
-    {
-        $themeName = $this->resolveTheme();
-        $this->setTheme($themeName);
-        return true;
-    }
 
     public function resolveTheme()
     {
@@ -33,9 +35,9 @@ class ThemeBehavior extends ActionFilter
                 //最后读系统默认
                 $isMobile = (new MobileDetect())->isMobile();
                 if ($isMobile) {
-                    $themeName = \Yii::$app->config->get('MOBILE_THEME_NAME', 'basic');
+                    $themeName = \Yii::$app->config->get('mobile_theme_name', 'basic');
                 } else {
-                    $themeName = \Yii::$app->config->get('THEME_NAME', 'basic');
+                    $themeName = \Yii::$app->config->get('theme_name', 'basic');
                 }
             }
         }
@@ -56,9 +58,14 @@ class ThemeBehavior extends ActionFilter
                     '@frontend/themes/' . $themeName . '/widgets',
                     '@frontend/themes/basic/widgets'
                 ],
+                '@common/modules' => [
+                    '@frontend/themes/' . $themeName . '/modules',
+                    '@frontend/themes/basic/modules',
+                ],
             ],
         ];
         \Yii::$app->view->theme = \Yii::createObject($theme);
+//        p(\Yii::$app->view->theme);
         if (class_exists('frontend\\themes\\' . $themeName . '\\Theme')) {
             $themeClass = Yii::createObject('frontend\\themes\\' . $themeName . '\\Theme');
             if (method_exists($themeClass, 'bootstrap')) {

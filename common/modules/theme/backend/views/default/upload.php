@@ -3,6 +3,7 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 
+\common\modules\theme\backend\assets\ThemeAsset::register($this);
 $this->title = '添加主题';
 $this->params['breadcrumbs'][] = $this->title;
 

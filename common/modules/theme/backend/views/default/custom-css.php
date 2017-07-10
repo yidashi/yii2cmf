@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
+\common\modules\theme\backend\assets\ThemeAsset::register($this);
 /* @var $this yii\web\View */
 $this->title = '自定义css';
 $this->params['breadcrumbs'][] = $this->title;

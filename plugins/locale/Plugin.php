@@ -15,7 +15,7 @@ use yii\base\Event;
 use plugins\locale\controllers\DefaultController;
 use Yii;
 
-class Plugins extends \plugins\Plugins implements BootstrapInterface
+class Plugin extends \plugins\Plugin implements BootstrapInterface
 {
 
     public static $language = [

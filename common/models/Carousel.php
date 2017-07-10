@@ -11,6 +11,7 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property string $key
+ * @property string $title
  * @property integer $status
  *
  * @property CarouselItem[] $items
@@ -57,7 +58,7 @@ class Carousel extends ActiveRecord
             [['key'], 'required'],
             [['key'], 'unique'],
             [['status'], 'integer'],
-            [['key'], 'string', 'max' => 255]
+            [['key', 'title'], 'string', 'max' => 255]
         ];
     }
 
@@ -69,6 +70,7 @@ class Carousel extends ActiveRecord
         return [
             'id' => Yii::t('common', 'ID'),
             'key' => Yii::t('common', 'Key'),
+            'title' => '位置',
             'status' => Yii::t('common', 'Active'),
         ];
     }

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 
+\common\modules\theme\backend\assets\ThemeAsset::register($this);
 /* @var $theme \frontend\themes\Theme */
 $this->title = '主题';
 $this->params['breadcrumbs'][] = $this->title;
@@ -34,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             <h3 class="theme-name">
-                <span><?= $theme->isActive()?"默认:":"";?></span><?= $theme->getName()?>
+                <span><?= $theme->isActive() ? "默认:" : "";?></span><?= $theme->getName()?>
             </h3>
 
             <div class="theme-actions">

@@ -37,6 +37,5 @@ return [
             'engine' => env('SEARCH_ENGINE', 'local')
         ]
     ],
-    'as ThemeBehavior' => \frontend\behaviors\ThemeBehavior::className(),
     'params' => $params,
 ];

@@ -17,7 +17,6 @@ use backend\widgets\ActiveForm;
 
 $this->title = $model->chapter_name;
 $this->params['breadcrumbs'][] = ['label' => '书', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->book->book_name, 'url' => ['view', 'id' => $model->book->id]];
 $this->params['breadcrumbs'][] = Html::encode($model->chapter_name);
 ?>
 <?php $this->beginContent(__DIR__ . '/_layout.php', ['model' => $model]) ?>

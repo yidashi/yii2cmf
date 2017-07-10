@@ -20,24 +20,4 @@ class ModuleInfo extends \common\modules\ModuleInfo
         'name' => 'i18n',
         'description' => '国际化'
     ];
-
-    public function install()
-    {
-        return $this->addMenu('国际化源信息', '/i18n/i18n-source-message/index') && $this->addMenu('国际化信息', '/i18n/i18n-message/index');
-    }
-
-    public function uninstall()
-    {
-        return $this->deleteMenu('国际化源信息') && $this->deleteMenu('国际化信息');
-    }
-
-    public function open()
-    {
-        return $this->addMenu('国际化源信息', '/i18n/i18n-source-message/index') && $this->addMenu('国际化信息', '/i18n/i18n-message/index');
-    }
-
-    public function close()
-    {
-        return $this->deleteMenu('国际化源信息') && $this->deleteMenu('国际化信息');
-    }
 }
