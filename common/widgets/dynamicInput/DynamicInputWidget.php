@@ -120,16 +120,16 @@ class DynamicInputWidget extends InputWidget
                 return Html::radioList($this->name, $this->value, $this->data, $this->options);
                 break;
             case 'image': // 图片
-                return SingleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyUrl' => true]);
+                return SingleWidget::widget(ArrayHelper::merge(['name' => $this->name, 'value' => $this->value, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'images': // 图片
-                return MultipleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyUrl' => true]);
+                return MultipleWidget::widget(ArrayHelper::merge(['name' => $this->name, 'value' => $this->value, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'file': // 文件
-                return SingleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false, 'onlyUrl' => true]);
+                return SingleWidget::widget(ArrayHelper::merge(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'files': // 文件
-                return MultipleWidget::widget(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false, 'onlyUrl' => true]);
+                return MultipleWidget::widget(ArrayHelper::merge(['name' => $this->name, 'value' => $this->value, 'onlyImage' => false, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(ArrayHelper::merge([
@@ -209,16 +209,16 @@ class DynamicInputWidget extends InputWidget
                 return Html::activeRadioList($this->model, $this->attribute, $this->data, $this->options);
                 break;
             case 'image': // 图片
-                return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyUrl' => true]);
+                return SingleWidget::widget(ArrayHelper::merge(['model' => $this->model, 'attribute' => $this->attribute, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'images': // 图片
-                return MultipleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyUrl' => true]);
+                return MultipleWidget::widget(ArrayHelper::merge(['model' => $this->model, 'attribute' => $this->attribute, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'file': // 文件
-                return SingleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false, 'onlyUrl' => true]);
+                return SingleWidget::widget(ArrayHelper::merge(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'files': // 文件
-                return MultipleWidget::widget(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false, 'onlyUrl' => true]);
+                return MultipleWidget::widget(ArrayHelper::merge(['model' => $this->model, 'attribute' => $this->attribute, 'onlyImage' => false, 'onlyUrl' => true], $this->widgetOptions));
                 break;
             case 'editor': // 编辑器
                 return EditorWidget::widget(ArrayHelper::merge([

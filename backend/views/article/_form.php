@@ -11,10 +11,13 @@ use common\modules\attachment\widgets\SingleWidget;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
-/* @var $moduleModel common\models\ArticleExhibition */
+/* @var $moduleModel \common\models\article\Base */
 /* @var $form backend\widgets\ActiveForm */
 ?>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'enableClientValidation' => false,
+        'enableAjaxValidation' => true
+    ]); ?>
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">通用</a></li>

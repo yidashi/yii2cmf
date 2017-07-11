@@ -3,15 +3,14 @@
 namespace backend\controllers;
 
 use backend\models\search\ArticleSearch as ArticleSearch;
+use common\components\Controller;
 use common\models\Article;
-use common\models\ArticleData;
 use common\models\ArticleModule;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 
@@ -157,6 +156,8 @@ class ArticleController extends Controller
         $model->module = $module;
         $moduleModelClass = $model->findModuleClass($module);
         $moduleModel = new $moduleModelClass;
+        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($moduleModel);
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try{

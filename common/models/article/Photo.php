@@ -4,6 +4,7 @@ namespace common\models\article;
 
 use common\modules\attachment\behaviors\UploadBehavior;
 use common\modules\attachment\models\Attachment;
+use common\traits\EntityTrait;
 use Yii;
 use common\behaviors\DynamicFormBehavior;
 
@@ -15,6 +16,7 @@ use common\behaviors\DynamicFormBehavior;
  */
 class Photo extends \yii\db\ActiveRecord
 {
+    use EntityTrait;
     /**
      * @inheritdoc
      */
@@ -57,7 +59,11 @@ class Photo extends \yii\db\ActiveRecord
             [
                 'class' => DynamicFormBehavior::className(),
                 'formAttributes' => [
-                    'photos' => 'images',
+                    'photos' => [
+                        'type' => 'images',
+                        'options' => ['widgetOptions' => ['onlyUrl' => false]]
+                    ],
+
                 ]
             ]
         ];

@@ -22,11 +22,12 @@ class m160718_040058_create_article_module_table extends Migration
             'title' => $this->string(50),
         ], $tableOptions);
         $this->createTable('{{%article_exhibition}}', [
-            'id' => $this->integer(11)->unique(),
+            'id' => $this->integer(11),
             'start_at' => $this->dateTime()->comment('开始时间'),
             'end_at' => $this->dateTime()->comment('结束时间'),
             'city' => $this->string(50)->comment('举办城市'),
-            'address' => $this->string(255)->comment('举办地址')
+            'address' => $this->string(255)->comment('举办地址'),
+            'PRIMARY KEY (id)',
         ], $tableOptions);
         $moduleColumn = new \yii\db\ColumnSchemaBuilder('string');
         $moduleColumn->comment('文档类型');
@@ -34,11 +35,13 @@ class m160718_040058_create_article_module_table extends Migration
         $this->addColumn('{{%article}}', 'module', $moduleColumn);
         $this->addColumn('{{%category}}', 'module', $moduleColumn);
         $this->createTable('{{%article_download}}', [
-            'id' => $this->integer(11)->unique(),
+            'id' => $this->integer(11),
             'content' => $this->text(),
+            'PRIMARY KEY (id)',
         ], $tableOptions);
         $this->createTable('{{%article_photo}}', [
-            'id' => $this->integer(11)->unique(),
+            'id' => $this->integer(11),
+            'PRIMARY KEY (id)',
         ], $tableOptions);
         $this->insert('{{%article_module}}', [
             'name' => 'base',

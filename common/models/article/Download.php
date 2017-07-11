@@ -3,6 +3,7 @@
 namespace common\models\article;
 
 use common\modules\attachment\behaviors\UploadBehavior;
+use common\traits\EntityTrait;
 use Yii;
 use common\behaviors\DynamicFormBehavior;
 
@@ -14,6 +15,7 @@ use common\behaviors\DynamicFormBehavior;
  */
 class Download extends \yii\db\ActiveRecord
 {
+    use EntityTrait;
     /**
      * @inheritdoc
      */
@@ -56,7 +58,10 @@ class Download extends \yii\db\ActiveRecord
             [
                 'class' => DynamicFormBehavior::className(),
                 'formAttributes' => [
-                    'attachment' => 'file',
+                    'attachment' => [
+                        'type' => 'file',
+                        'options' => ['widgetOptions' => ['onlyUrl' => false]]
+                    ],
                     'content' => 'textarea'
                 ]
             ]

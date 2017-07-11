@@ -10,11 +10,24 @@ namespace backend\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\base\Model;
+use yii\helpers\Url;
 
 class ActiveForm extends \yii\widgets\ActiveForm
 {
     public $fieldClass = 'backend\widgets\ActiveField';
     public $boxFieldClass = '\backend\widgets\BoxField';
+
+    public function init()
+    {
+        parent::init();
+        if (!isset($this->validationUrl)) {
+            if (!empty($this->action)) {
+                $this->validationUrl = ArrayHelper::merge((array)$this->action, ['ajax-validate' => 1]);
+            } else {
+                $this->validationUrl = Url::current(['ajax-validate' => 1]);
+            }
+        }
+    }
 
     /**
      * 可折叠

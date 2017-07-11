@@ -9,6 +9,8 @@
 namespace common\components;
 
 use Yii;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class Controller extends \yii\web\Controller
 {
@@ -26,5 +28,16 @@ class Controller extends \yii\web\Controller
     public function flash($key, $value)
     {
         Yii::$app->session->setFlash($key, $value);
+    }
+
+    public function performAjaxValidation($model)
+    {
+        if (Yii::$app->request->isAjax && !Yii::$app->request->isPjax && Yii::$app->request->get('ajax-validate')) {
+            if ($model->load(Yii::$app->request->post())) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                echo json_encode(ActiveForm::validate($model));
+                Yii::$app->end();
+            }
+        }
     }
 }
