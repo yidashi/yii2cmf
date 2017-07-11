@@ -104,7 +104,7 @@ class Notify extends \yii\db\ActiveRecord
                 if ($extra['entity'] == 'common\\models\\Article') {
                     return Html::a($extra['comment_title'], ['/article/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']]);
                 } else {
-                    return Html::a($extra['comment_title'], ['/suggest/index', '#' => 'comment-' . $extra['comment_id']]);
+                    return Html::a($extra['comment_title'], ['/suggest/index', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']]);
                 }
                 break;
             case NotifyCategory::FAVOURITE:
@@ -158,7 +158,7 @@ class Notify extends \yii\db\ActiveRecord
                 }else if ($extra['entity'] == 'common\\modules\\book\\models\\BookChapter') {
                     return ['/book/chapter', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 } else if ($extra['entity'] == 'common\\models\\Suggest') {
-                    return ['/suggest/view', '#' => 'comment-' . $extra['comment_id']];
+                    return ['/suggest/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 }
                 break;
             default:

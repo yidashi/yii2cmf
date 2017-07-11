@@ -48,6 +48,7 @@ class UrlRule extends ActiveRecord
             [['pattern', 'route'], 'required'],
             [['mode', 'encodeParams', 'status'], 'integer'],
             [['name'], 'string', 'max' => 50],
+            [['defaults', 'verb', 'name', 'host'], 'default'],
             [['pattern', 'host', 'route', 'defaults', 'suffix', 'verb'], 'string', 'max' => 255],
         ];
     }

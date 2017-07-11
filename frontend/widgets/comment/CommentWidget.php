@@ -51,7 +51,7 @@ class CommentWidget extends Widget
                 'sort' => [
                     'defaultOrder' => [
                         'is_top' => SORT_DESC,
-                        'id' => SORT_DESC
+                        'id' => SORT_ASC
                     ]
                 ]
             ]);
