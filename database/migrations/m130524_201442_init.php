@@ -215,7 +215,13 @@ class m130524_201442_init extends Migration
             'down' => $this->integer(11)->notNull()->defaultValue('0')->comment('踩数'),
         ], $this->tableOptions);
         $this->createIndex('entity', '{{%vote_info}}', ['entity', 'entity_id']);
-
+// suggest
+        $this->createTable('{{%suggest}}', [
+            'title' => $this->string(128)->notNull(),
+            'content' => $this->string(1000)->notNull(),
+            'created_at' => $this->integer()->notNull(),
+            'user_id' => $this->integer(11)->notNull()
+        ]);
         $this->insert('{{%page}}', [
             'use_layout' => 1,
             'content' => '关于我们',
