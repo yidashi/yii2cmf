@@ -42,10 +42,11 @@ class QiniuAdapter extends AbstractAdapter
     /**
      * Constructor.
      */
-    public function __construct($ak, $sk, $bucket)
+    public function __construct($ak, $sk, $bucket, $domain)
     {
         $auth = new Auth($ak, $sk);
         $this->bucket = $bucket;
+        $this->domain = $domain;
         $this->token = $auth->uploadToken($bucket);
         $this->uploadManager = new UploadManager();
         $this->bucketManager = new BucketManager($auth);
@@ -61,13 +62,38 @@ class QiniuAdapter extends AbstractAdapter
         }
         return $ret;
     }
+
+    public function put($path, $contents, Config $config)
+    {
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $contents);
+        if ($error) {
+            return false;
+        }
+        return $ret;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function writeStream($path, $resource, Config $config)
     {
-        // @todo Sharding Upload
-        return false;
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $resource);
+        if ($error) {
+            return false;
+        }
+        return $ret;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function putStream($path, $resource, Config $config)
+    {
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $resource);
+        if ($error) {
+            return false;
+        }
+        return $ret;
     }
     /**
      * {@inheritdoc}
@@ -195,4 +221,8 @@ class QiniuAdapter extends AbstractAdapter
         );
     }
 
+    public function getUrl($path)
+    {
+        return $this->domain . '/' . $path;
+    }
 }

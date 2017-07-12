@@ -1,10 +1,10 @@
 <?php
 return [
     [
-        'name' => 'driver',
+        'name' => 'default_driver',
         'type' => 'radio',
         'value' => 'local',
-        'desc' => '文件系统',
+        'desc' => '默认文件存储',
         'extra' => [
             'local' => '本地',
             'qiniu' => '七牛',

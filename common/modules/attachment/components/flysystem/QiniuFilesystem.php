@@ -25,6 +25,8 @@ class QiniuFilesystem extends Filesystem
      * @var string
      */
     public $bucket;
+
+    public $domain;
     /**
      * @var array
      */
@@ -58,7 +60,8 @@ class QiniuFilesystem extends Filesystem
         return new QiniuAdapter(
             $this->access,
             $this->secret,
-            $this->bucket
+            $this->bucket,
+            $this->domain
         );
     }
 }

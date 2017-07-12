@@ -58,7 +58,7 @@ class UploadController extends Controller
             ],
             'avatar-upload' => [
                 'class' => UploadAction::className(),
-                'path' => 'avatar',
+                'path' => 'avatar/' . Yii::$app->user->id,
                 'validatorOptions' => ['minWidth' => 100, 'minHeight' => 100, 'underWidth' => '图片宽高不要小于100x100', 'underHeight' => '图片宽高不要小于100x100']
             ],
             'file-upload' => [

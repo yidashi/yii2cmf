@@ -16,7 +16,7 @@ use common\modules\attachment\models\Attachment;
 use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
-use yii\web\UploadedFile;
+use common\modules\attachment\components\UploadedFile;
 
 
 class UploadAction extends Action
@@ -35,6 +35,8 @@ class UploadAction extends Action
      * @var string Variable's name that Imperavi Redactor sent upon image/file upload.
      */
     public $uploadParam = 'file';
+
+    public $unique = true;
     /**
      * @var string 参数指定文件名
      */
@@ -115,7 +117,39 @@ class UploadAction extends Action
             if ($model->hasErrors()) {
                 throw new Exception($model->getFirstError('file'));
             } else {
-                $attachment = Attachment::uploadFromPost($this->path, $file);
+                if ($this->unique) {
+                    $fileHash = md5_file($file->tempName);
+                    $attachment = Attachment::findByHash($fileHash);
+                    if ($attachment === null) {
+                        $filePath = $file->store($this->path);
+                        $attachment = new Attachment();
+                        $attachment->attributes = [
+                            'name' => $file->name,
+                            'hash' => $file->getHashName(),
+                            'url' => Yii::$app->storage->getUrl($filePath),
+                            'path' => $filePath,
+                            'extension' => $file->extension,
+                            'type' => $file->type,
+                            'size' => $file->size,
+                            'disk' => Yii::$app->storage->defaultDriver
+                        ];
+                        $attachment->save();
+                    }
+                } else {
+                    $filePath = $file->store($this->path);
+                    $attachment = new Attachment();
+                    $attachment->attributes = [
+                        'name' => $file->name,
+                        'hash' => $file->getHashName(),
+                        'url' => Yii::$app->storage->getUrl($filePath),
+                        'path' => $filePath,
+                        'extension' => $file->extension,
+                        'type' => $file->type,
+                        'size' => $file->size,
+                        'disk' => Yii::$app->storage->defaultDriver
+                    ];
+                    $attachment->save();
+                }
                 $result = [
                     'id' => $attachment->id,
                     'name' => $attachment->name,
@@ -124,12 +158,10 @@ class UploadAction extends Action
                     'path' => $attachment->path,
                     'extension' => $attachment->extension,
                     'type' => $attachment->type,
-                    'size' => $attachment->size,
-                    'title' => $attachment->title,
-                    'deleteUrl' => Url::to(array_merge($this->deleteUrl, ['id' => $attachment->id]))
+                    'size' => $attachment->size
                 ];
                 if ($this->uploadOnlyImage !== true) {
-                    $result['filename'] = $attachment->name;
+                    $result['filename'] = $file->name;
                 }
             }
             if ($this->itemCallback instanceof \Closure) {
