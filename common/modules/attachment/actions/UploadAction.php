@@ -26,6 +26,8 @@ class UploadAction extends Action
      */
     public $path;
 
+    public $disk;
+
     /**
      * @var string Validator name
      */
@@ -71,6 +73,8 @@ class UploadAction extends Action
         if ($this->uploadOnlyImage !== true) {
             $this->_validator = 'file';
         }
+
+        $this->disk = $this->disk ?: Yii::$app->storage->defaultDriver;
     }
 
     /**
@@ -119,24 +123,24 @@ class UploadAction extends Action
             } else {
                 if ($this->unique) {
                     $fileHash = md5_file($file->tempName);
-                    $attachment = Attachment::findByHash($fileHash);
+                    $attachment = Attachment::findByHash($fileHash, $this->disk);
                     if ($attachment === null) {
-                        $filePath = $file->store($this->path);
+                        $filePath = $file->store($this->path, $this->disk);
                         $attachment = new Attachment();
                         $attachment->attributes = [
                             'name' => $file->name,
-                            'hash' => $file->getHashName(),
+                            'hash' => $fileHash,
                             'url' => Yii::$app->storage->getUrl($filePath),
                             'path' => $filePath,
                             'extension' => $file->extension,
                             'type' => $file->type,
                             'size' => $file->size,
-                            'disk' => Yii::$app->storage->defaultDriver
+                            'disk' => $this->disk
                         ];
                         $attachment->save();
                     }
                 } else {
-                    $filePath = $file->store($this->path);
+                    $filePath = $file->store($this->path, $this->disk);
                     $attachment = new Attachment();
                     $attachment->attributes = [
                         'name' => $file->name,
@@ -146,7 +150,7 @@ class UploadAction extends Action
                         'extension' => $file->extension,
                         'type' => $file->type,
                         'size' => $file->size,
-                        'disk' => Yii::$app->storage->defaultDriver
+                        'disk' => $this->disk
                     ];
                     $attachment->save();
                 }

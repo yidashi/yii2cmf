@@ -89,6 +89,9 @@ class Attachment extends \yii\db\ActiveRecord
         ]);
     }
 
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return Yii::$app->storage->getUrl($this->path);
@@ -111,92 +114,29 @@ class Attachment extends \yii\db\ActiveRecord
     {
         $width = (int) $width;
         $height = (int) $height;
-        return Yii::$app->storage->thumbnail($this->path, $width, $height);
-        $options = $this->getDefaultThumbOptions($options);
-        $thumbFile = $this->getThumbFilename($width, $height, $options);
-        $thumbPath = pathinfo($this->path, PATHINFO_DIRNAME) . '/' . $thumbFile;
-
-        if (!\Yii::$app->storage->fs->has($thumbPath)) {
-            Yii::$app->storage->thumbnail($this->path, $thumbPath, $width, $height, $options);
-        }
-        return \Yii::$app->storage->getUrl($thumbPath);
+        return Yii::$app->storage->disk($this->disk)->thumbnail($this->path, $width, $height);
     }
 
-
-    protected function getThumbFilename($width, $height, $options)
-    {
-        return 'thumb_' . $this->primaryKey . '_' . $width . 'x' . $height . '_' . $options['offset'][0] . '_' . $options['offset'][1] . '_' . $options['mode'] . '.' . $options['extension'];
-    }
-
-    protected function getDefaultThumbOptions($overrideOptions = [])
-    {
-        $defaultOptions = [
-            'mode' => 'auto',
-            'offset' => [
-                0,
-                0
-            ],
-            'quality' => 95,
-            'extension' => 'jpg'
-        ];
-
-        if (! is_array($overrideOptions)) {
-            $overrideOptions = [
-                'mode' => $overrideOptions
-            ];
-        }
-
-        $options = array_merge($defaultOptions, $overrideOptions);
-
-        $options['mode'] = strtolower($options['mode']);
-
-        if ((strtolower($options['extension'])) == 'auto') {
-            $options['extension'] = strtolower($this->extension);
-        }
-
-        return $options;
-    }
-
-    public function deleteThumbs()
-    {
-        $collection = $this->getThumbs();
-        if (!empty($collection)) {
-            foreach ($collection as $item) {
-                Yii::$app->storage->fs->delete($item);
-            }
-        }
-    }
-
-    public function getThumbs()
-    {
-        $pattern = 'thumb_' . $this->primaryKey . '_';
-
-        $allFiles = \Yii::$app->storage->fs->listContents();
-
-        $collection = [];
-        foreach ($allFiles as $file) {
-            if (StringHelper::startsWith($file['basename'], $pattern)) {
-                $collection[] = $file['path'];
-            }
-        }
-        return $collection;
-    }
     public function afterDelete()
     {
         parent::afterDelete();
         // 文件删了
-        if (Yii::$app->storage->fs->has($this->path)) {
-            Yii::$app->storage->fs->delete($this->path);
+        if (Yii::$app->storage->disk($this->disk)->has($this->path)) {
+            Yii::$app->storage->disk($this->disk)->delete($this->path);
         }
     }
 
     /**
      * @param $hash
+     * @param $disk
      * @return static|null
      */
-    public static function findByHash($hash)
+    public static function findByHash($hash, $disk = null)
     {
-        return static::findOne(['hash' => $hash, 'disk' => Yii::$app->storage->defaultDriver]);
+        if ($disk === null) {
+            $disk = Yii::$app->storage->defaultDriver;
+        }
+        return static::findOne(['hash' => $hash, 'disk' => $disk]);
     }
 
     /**
@@ -240,8 +180,7 @@ class Attachment extends \yii\db\ActiveRecord
     {
         $hash = md5(file_get_contents($url));
         $attachment = static::findByHash($hash);
-        $tempFile = Yii::getAlias('@storagePath/upload/' . $hash);
-        file_put_contents($tempFile, file_get_contents($url));
+        $tempFile = Yii::$app->storage->disk('local')->put($path, file_get_contents($url));
         $mimeType = FileHelper::getMimeType($tempFile);
         $extension = current(FileHelper::getExtensionsByMimeType($mimeType, '@common/helpers/mimeTypes.php'));
         if (empty($attachment)) {

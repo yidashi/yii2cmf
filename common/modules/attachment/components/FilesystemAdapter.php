@@ -5,31 +5,30 @@ namespace common\modules\attachment\components;
 use common\modules\attachment\components\contracts\Cloud as CloudFilesystemContract;
 use common\modules\attachment\components\contracts\FileNotFoundException as ContractFileNotFoundException;
 use common\modules\attachment\components\contracts\Filesystem as FilesystemContract;
+use common\modules\attachment\components\contracts\ImageProcessor as ImageContract;
 use common\modules\attachment\components\flysystem\QiniuAdapter;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
+use creocoder\flysystem\Filesystem;
 use InvalidArgumentException;
 use League\Flysystem\Adapter\Local as LocalAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\FileNotFoundException;
 use RuntimeException;
 
-class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
+class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract, ImageContract
 {
     /**
      * The Flysystem filesystem implementation.
      *
-     * @var \creocoder\flysystem\Filesystem
+     * @var Filesystem
      */
     protected $driver;
 
     /**
      * Create a new filesystem adapter instance.
      *
-     * @param  \creocoder\flysystem\Filesystem  $driver
-     * @return void
+     * @param  Filesystem  $driver
      */
-    public function __construct(\creocoder\flysystem\Filesystem $driver)
+    public function __construct(Filesystem $driver)
     {
         $this->driver = $driver;
     }
@@ -312,75 +311,31 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
      */
     protected function getLocalUrl($path)
     {
-        $config = $this->driver->getConfig();
+        $url = $this->driver->url;
+        return rtrim($url, '/').'/'.ltrim($path, '/');
 
-        // If an explicit base URL has been set on the disk configuration then we will use
-        // it as the base URL instead of the default path. This allows the developer to
-        // have full control over the base path for this filesystem's generated URLs.
-        if ($config->has('url')) {
-            return rtrim($config->get('url'), '/').'/'.ltrim($path, '/');
-        }
+    }
 
-        $path = '/storage/'.$path;
+    public function thumbnail($path, $width, $height)
+    {
+        $adapter = $this->driver->getAdapter();
 
-        // If the path contains "storage/public", it probably means the developer is using
-        // the default disk to generate the path instead of the "public" disk like they
-        // are really supposed to use. We will remove the public from this path here.
-        if (Str::contains($path, '/storage/public/')) {
-            return Str::replaceFirst('/public/', '/', $path);
+        if (method_exists($adapter, 'thumbnail')) {
+            return $adapter->thumbnail($path, $width, $height);
         } else {
-            return $path;
+            throw new RuntimeException('This driver does not support thumbnail');
         }
     }
 
-    /**
-     * Get an array of all files in a directory.
-     *
-     * @param  string|null  $directory
-     * @param  bool  $recursive
-     * @return array
-     */
-    public function files($directory = null, $recursive = false)
+    public function crop($path, $width, $height, array $start = [0, 0])
     {
-        $contents = $this->driver->listContents($directory, $recursive);
+        $adapter = $this->driver->getAdapter();
 
-        return $this->filterContentsByType($contents, 'file');
-    }
-
-    /**
-     * Get all of the files from the given directory (recursive).
-     *
-     * @param  string|null  $directory
-     * @return array
-     */
-    public function allFiles($directory = null)
-    {
-        return $this->files($directory, true);
-    }
-
-    /**
-     * Get all of the directories within a given directory.
-     *
-     * @param  string|null  $directory
-     * @param  bool  $recursive
-     * @return array
-     */
-    public function directories($directory = null, $recursive = false)
-    {
-        $contents = $this->driver->listContents($directory, $recursive);
-
-        return $this->filterContentsByType($contents, 'dir');
-    }
-
-    /**
-     * Get all (recursive) of the directories within a given directory.
-     *
-     * @param  string|null  $directory
-     * @return array
-     */
-    public function allDirectories($directory = null)
-    {
-        return $this->directories($directory, true);
+        if (method_exists($adapter, 'crop')) {
+            return $adapter->crop($path, $width, $height, $start);
+        } else {
+            throw new RuntimeException('This driver does not support crop');
+        }
     }
 
     /**
@@ -408,28 +363,13 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
     /**
      * Get the Flysystem driver.
      *
-     * @return \League\Flysystem\FilesystemInterface
+     * @return Filesystem
      */
     public function getDriver()
     {
         return $this->driver;
     }
 
-    /**
-     * Filter directory contents by type.
-     *
-     * @param  array  $contents
-     * @param  string  $type
-     * @return array
-     */
-    protected function filterContentsByType($contents, $type)
-    {
-        return Collection::make($contents)
-            ->where('type', $type)
-            ->pluck('path')
-            ->values()
-            ->all();
-    }
 
     /**
      * Parse the given visibility value.
@@ -453,18 +393,6 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract
         }
 
         throw new InvalidArgumentException('Unknown visibility: '.$visibility);
-    }
-
-    public function thumbnail($path, $width, $height)
-    {
-//        return $this->imageProcessor->thumbnail($path, $width, $height);
-        return '';
-    }
-
-    public function crop($path, $width, $height, $start = [0, 0])
-    {
-//        return $this->imageProcessor->crop($path, $width, $height, $start);
-        return '';
     }
 
     /**

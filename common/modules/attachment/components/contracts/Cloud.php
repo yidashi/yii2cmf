@@ -10,5 +10,5 @@ interface Cloud extends Filesystem
      * @param  string  $path
      * @return string
      */
-    public function url($path);
+    public function getUrl($path);
 }

@@ -13,6 +13,7 @@ use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 use Qiniu\Auth;
+use Qiniu\Processing\ImageUrlBuilder;
 use Qiniu\Storage\UploadManager;
 use Qiniu\Storage\BucketManager;
 
@@ -224,5 +225,28 @@ class QiniuAdapter extends AbstractAdapter
     public function getUrl($path)
     {
         return $this->domain . '/' . $path;
+    }
+
+    public function thumbnail($path, $width, $height)
+    {
+        $imageBuilder = new ImageUrlBuilder();
+
+        if (strpos($path, $this->domain . '/') !== false) {
+            $path = substr($path, strlen($this->domain . '/'));
+        }
+        return $imageBuilder->thumbnail($this->domain . '/' . $path, 1, $width, $height);
+    }
+
+    public function crop($path, $width, $height, array $start = [0, 0])
+    {
+        if (strpos($path, $this->domain . '/') !== false) {
+            $path = substr($path, strlen($this->domain . '/'));
+        }
+        return $this->domain . '/' . $path . '?imageMogr2/crop/!' . $width . 'x' . $height . 'a' . $start[0] . 'a' . $start[1];
+    }
+
+    public function water()
+    {
+        // TODO: Implement water() method.
     }
 }

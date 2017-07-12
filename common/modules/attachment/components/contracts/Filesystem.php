@@ -124,40 +124,6 @@ interface Filesystem
     public function lastModified($path);
 
     /**
-     * Get an array of all files in a directory.
-     *
-     * @param  string|null  $directory
-     * @param  bool  $recursive
-     * @return array
-     */
-    public function files($directory = null, $recursive = false);
-
-    /**
-     * Get all of the files from the given directory (recursive).
-     *
-     * @param  string|null  $directory
-     * @return array
-     */
-    public function allFiles($directory = null);
-
-    /**
-     * Get all of the directories within a given directory.
-     *
-     * @param  string|null  $directory
-     * @param  bool  $recursive
-     * @return array
-     */
-    public function directories($directory = null, $recursive = false);
-
-    /**
-     * Get all (recursive) of the directories within a given directory.
-     *
-     * @param  string|null  $directory
-     * @return array
-     */
-    public function allDirectories($directory = null);
-
-    /**
      * Create a directory.
      *
      * @param  string  $path

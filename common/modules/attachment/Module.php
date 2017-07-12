@@ -21,11 +21,9 @@ class Module extends \common\modules\Module implements BootstrapInterface
             'defaultDriver' => $this->params['default_driver'],
             'disks' => [
                 'local' => [
-                    'class' => 'creocoder\flysystem\LocalFilesystem',
+                    'class' => 'common\\modules\\attachment\\components\\flysystem\\LocalFilesystem',
                     'path' => '@storagePath/upload',
-                    'config' => [
-                        'url' => \Yii::getAlias('@storageUrl/upload')
-                    ]
+                    'url' => \Yii::getAlias('@storageUrl/upload')
                 ],
                 'qiniu' => [
                     'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',

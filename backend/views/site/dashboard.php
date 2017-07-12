@@ -52,7 +52,7 @@ $this->title = '控制面板';
                 <!-- small box -->
                 <div class="small-box bg-purple">
                     <div class="inner">
-                        <h3><?= \common\models\Comment::find()->where(['entity' => 'suggest'])->count() ?></h3>
+                        <h3><?= \common\models\Suggest::find()->count() ?></h3>
                         <p>留言</p>
                     </div>
                     <div class="icon">
