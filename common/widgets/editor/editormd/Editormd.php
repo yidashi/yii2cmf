@@ -24,7 +24,10 @@ class Editormd extends InputWidget
      */
     public $clientOptions = [];
 
-    public $imageUploadRoute = [];
+    public $imageUploadRoute = [
+        '/attachment/upload/md-image-upload',
+        'fileparam' => 'editormd-image-file'
+    ];
 
     public $mode = 'full';
 
