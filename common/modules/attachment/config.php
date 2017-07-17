@@ -14,7 +14,7 @@ return [
     [
         'name' => 'local_root',
         'type' => 'text',
-        'value' => '@storageroot/upload',
+        'value' => '@storagePath/upload',
         'desc' => '本地文件系统根目录',
     ],
     [

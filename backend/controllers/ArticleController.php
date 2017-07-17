@@ -210,6 +210,8 @@ class ArticleController extends Controller
     {
         $model = Article::find()->where(['id' => $id])->with('data')->one();
         $moduleModel = $model->data;
+        $this->performAjaxValidation($model);
+        $this->performAjaxValidation($moduleModel);
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try {

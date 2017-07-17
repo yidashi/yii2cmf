@@ -4,7 +4,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Nav */
 $this->title = '修改导航: ' . $model->key;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Navs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '导航', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '修改导航';
 ?>
 <div class="row">
@@ -15,9 +15,7 @@ $this->params['breadcrumbs'][] = '修改导航';
     </div>
     <div class="col-md-8">
         <p>
-            <?= Html::a(Yii::t('app', 'Create {modelClass}', [
-                'modelClass' => 'Nav Item',
-            ]), ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
+            <?= Html::a('新导航项', ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
         </p>
         <div class="box box-primary">
             <div class="box-body">

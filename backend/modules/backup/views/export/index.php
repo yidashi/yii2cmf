@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="box box-primary">
         <div class="box-body">
             <?= GridView::widget([
+                'id' => 'grid',
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     [
@@ -95,6 +96,10 @@ $this->params['breadcrumbs'][] = $this->title;
         });
 
         $export.click(function(){
+            if ($('#grid').yiiGridView('getSelectedRows').length <= 0) {
+                $.modal.error('请选择要备份的表');
+                return false;
+            }
             $export.parent().children().addClass("disabled");
             $export.html("正在发送备份请求...");
             var that = this;
