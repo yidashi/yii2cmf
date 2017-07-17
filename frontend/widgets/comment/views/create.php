@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 <!--    <h4>--><?//= $createTitle ?><!--</h4>-->
 
     <?php $form = ActiveForm::begin(['action' => Url::to(['/comment/create'])]); ?>
-    <?= $form->field($model, 'content')->label(false)->widget(\common\widgets\editormd\Editormd::className(), ['mode' => 'mini']); ?>
+    <?= $form->field($model, 'content')->label(false)->widget(\common\widgets\editor\editormd\Editormd::className(), ['mode' => 'mini']); ?>
     <?= $form->field($model, 'entity')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'entity_id')->hiddenInput()->label(false) ?>
     <div class="form-group">
