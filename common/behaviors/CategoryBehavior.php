@@ -18,7 +18,7 @@ class CategoryBehavior extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_DELETE => [$this, 'afterDeleteInternal'],
+//            ActiveRecord::EVENT_AFTER_DELETE => [$this, 'afterDeleteInternal'],
             SoftDeleteBehavior::EVENT_AFTER_SOFT_DELETE => [$this, 'afterSoftDeleteInternal'],
             SoftDeleteBehavior::EVENT_AFTER_RESTORE => [$this, 'afterRestoreInternal'],
             ActiveRecord::EVENT_AFTER_INSERT => [$this, 'afterInsertInternal'],

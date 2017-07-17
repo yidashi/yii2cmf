@@ -13,6 +13,7 @@ use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 use Qiniu\Auth;
+use Qiniu\Processing\ImageUrlBuilder;
 use Qiniu\Storage\UploadManager;
 use Qiniu\Storage\BucketManager;
 
@@ -42,10 +43,11 @@ class QiniuAdapter extends AbstractAdapter
     /**
      * Constructor.
      */
-    public function __construct($ak, $sk, $bucket)
+    public function __construct($ak, $sk, $bucket, $domain)
     {
         $auth = new Auth($ak, $sk);
         $this->bucket = $bucket;
+        $this->domain = $domain;
         $this->token = $auth->uploadToken($bucket);
         $this->uploadManager = new UploadManager();
         $this->bucketManager = new BucketManager($auth);
@@ -61,13 +63,38 @@ class QiniuAdapter extends AbstractAdapter
         }
         return $ret;
     }
+
+    public function put($path, $contents, Config $config)
+    {
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $contents);
+        if ($error) {
+            return false;
+        }
+        return $ret;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function writeStream($path, $resource, Config $config)
     {
-        // @todo Sharding Upload
-        return false;
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $resource);
+        if ($error) {
+            return false;
+        }
+        return $ret;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function putStream($path, $resource, Config $config)
+    {
+        list($ret, $error) = $this->uploadManager->put($this->token, $path, $resource);
+        if ($error) {
+            return false;
+        }
+        return $ret;
     }
     /**
      * {@inheritdoc}
@@ -195,4 +222,31 @@ class QiniuAdapter extends AbstractAdapter
         );
     }
 
+    public function getUrl($path)
+    {
+        return $this->domain . '/' . $path;
+    }
+
+    public function thumbnail($path, $width, $height)
+    {
+        $imageBuilder = new ImageUrlBuilder();
+
+        if (strpos($path, $this->domain . '/') !== false) {
+            $path = substr($path, strlen($this->domain . '/'));
+        }
+        return $imageBuilder->thumbnail($this->domain . '/' . $path, 1, $width, $height);
+    }
+
+    public function crop($path, $width, $height, array $start = [0, 0])
+    {
+        if (strpos($path, $this->domain . '/') !== false) {
+            $path = substr($path, strlen($this->domain . '/'));
+        }
+        return $this->domain . '/' . $path . '?imageMogr2/crop/!' . $width . 'x' . $height . 'a' . $start[0] . 'a' . $start[1];
+    }
+
+    public function water()
+    {
+        // TODO: Implement water() method.
+    }
 }

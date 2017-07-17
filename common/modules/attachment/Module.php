@@ -17,33 +17,32 @@ class Module extends \common\modules\Module implements BootstrapInterface
     public function bootstrap($app)
     {
         $storage = [
-            'class' => 'common\modules\attachment\components\Storage',
-            'fs' => [
-                'class' => 'creocoder\flysystem\LocalFilesystem',
-                'path' => '@storagePath/upload',
+            'class' => 'common\modules\attachment\components\FilesystemManager',
+            'defaultDriver' => $this->params['default_driver'],
+            'disks' => [
+                'local' => [
+                    'class' => 'common\\modules\\attachment\\components\\flysystem\\LocalFilesystem',
+                    'path' => '@storagePath/upload',
+                    'url' => \Yii::getAlias('@storageUrl/upload')
+                ],
+                'qiniu' => [
+                    'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',
+                    'access' => $this->params['qiniu_access_key'],
+                    'secret' => $this->params['qiniu_access_secret'],
+                    'bucket' => $this->params['qiniu_bucket'],
+                    'domain' => $this->params['qiniu_domain']
+                ]
             ],
-            'baseUrl' => '@storageUrl/upload',
-            'imageProcessor' => [
-                'class' => 'common\modules\attachment\components\image\Local',
-                'path' => '@storagePath/upload',
+            'imageProcessors' => [
+                'local' => [
+                    'class' => 'common\modules\attachment\components\image\Local',
+                    'path' => '@storagePath/upload',
+                ],
+                'qiniu' => [
+                    'class' => 'common\\modules\\attachment\\components\\image\\Qiniu'
+                ]
             ]
         ];
-        if (isset($this->params['driver'])) {
-            switch ($this->params['driver']) {
-                case 'qiniu':
-                    $storage['fs'] = [
-                        'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',
-                        'access' => $this->params['qiniu_access_key'],
-                        'secret' => $this->params['qiniu_access_secret'],
-                        'bucket' => $this->params['qiniu_bucket'],
-                    ];
-                    $storage['baseUrl'] = $this->params['qiniu_domain'];
-                    $storage['imageProcessor'] = [
-                        'class' => 'common\\modules\\attachment\\components\\image\\Qiniu'
-                    ];
-                    break;
-            }
-        }
         $app->set('storage', $storage);
         $app->controllerMap['upload'] = UploadController::className();
     }
