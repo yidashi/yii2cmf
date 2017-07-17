@@ -83,11 +83,6 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            [
-                'class' => UploadBehavior::className(),
-                'attribute' => 'avatar',
-                'entity' => __CLASS__
-            ]
         ];
     }
 

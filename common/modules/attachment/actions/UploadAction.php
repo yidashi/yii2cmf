@@ -8,15 +8,14 @@
 
 namespace common\modules\attachment\actions;
 
+use common\modules\attachment\components\UploadedFile;
+use common\modules\attachment\models\Attachment;
 use Yii;
 use yii\base\Action;
 use yii\base\DynamicModel;
 use yii\base\Exception;
-use common\modules\attachment\models\Attachment;
-use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Response;
-use common\modules\attachment\components\UploadedFile;
 
 
 class UploadAction extends Action
@@ -25,8 +24,6 @@ class UploadAction extends Action
      * @var string Path to directory where files will be uploaded
      */
     public $path;
-
-    public $disk;
 
     /**
      * @var string Validator name
@@ -38,7 +35,6 @@ class UploadAction extends Action
      */
     public $uploadParam = 'file';
 
-    public $unique = true;
     /**
      * @var string 参数指定文件名
      */
@@ -73,8 +69,6 @@ class UploadAction extends Action
         if ($this->uploadOnlyImage !== true) {
             $this->_validator = 'file';
         }
-
-        $this->disk = $this->disk ?: Yii::$app->storage->defaultDriver;
     }
 
     /**
@@ -121,39 +115,7 @@ class UploadAction extends Action
             if ($model->hasErrors()) {
                 throw new Exception($model->getFirstError('file'));
             } else {
-                if ($this->unique) {
-                    $fileHash = md5_file($file->tempName);
-                    $attachment = Attachment::findByHash($fileHash, $this->disk);
-                    if ($attachment === null) {
-                        $filePath = $file->store($this->path, $this->disk);
-                        $attachment = new Attachment();
-                        $attachment->attributes = [
-                            'name' => $file->name,
-                            'hash' => $fileHash,
-                            'url' => Yii::$app->storage->getUrl($filePath),
-                            'path' => $filePath,
-                            'extension' => $file->extension,
-                            'type' => $file->type,
-                            'size' => $file->size,
-                            'disk' => $this->disk
-                        ];
-                        $attachment->save();
-                    }
-                } else {
-                    $filePath = $file->store($this->path, $this->disk);
-                    $attachment = new Attachment();
-                    $attachment->attributes = [
-                        'name' => $file->name,
-                        'hash' => $file->getHashName(),
-                        'url' => Yii::$app->storage->getUrl($filePath),
-                        'path' => $filePath,
-                        'extension' => $file->extension,
-                        'type' => $file->type,
-                        'size' => $file->size,
-                        'disk' => $this->disk
-                    ];
-                    $attachment->save();
-                }
+                $attachment = Attachment::uploadFromPost($this->path, $file);
                 $result = [
                     'id' => $attachment->id,
                     'name' => $attachment->name,

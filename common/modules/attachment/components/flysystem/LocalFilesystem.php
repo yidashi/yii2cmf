@@ -13,6 +13,12 @@ class LocalFilesystem extends \creocoder\flysystem\LocalFilesystem
 {
     public $url;
 
+    public function init()
+    {
+        parent::init();
+        $this->url = \Yii::getAlias($this->url);
+    }
+
     protected function prepareAdapter()
     {
         return new LocalAdapter($this->path, $this->url);

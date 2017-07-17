@@ -22,7 +22,6 @@ use yii\helpers\StringHelper;
  * @property string $hash
  * @property integer $size
  * @property string $type
- * @property string $disk
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $url
@@ -47,7 +46,6 @@ class Attachment extends \yii\db\ActiveRecord
             [['user_id', 'size'], 'integer'],
             [['name', 'title', 'description', 'type', 'extension'], 'string', 'max' => 255],
             [['hash'], 'string', 'max' => 64],
-            [['disk'], 'string', 'max' => 50]
         ];
     }
 
@@ -65,7 +63,6 @@ class Attachment extends \yii\db\ActiveRecord
             'hash' => 'Hash',
             'size' => 'Size',
             'type' => 'Type',
-            'disk' => '文件存储驱动',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -97,46 +94,30 @@ class Attachment extends \yii\db\ActiveRecord
         return Yii::$app->storage->getUrl($this->path);
     }
 
-    public function getAbsolutePath()
-    {
-        return Yii::$app->storage->fs->getAdapter()->applyPathPrefix($this->path);
-    }
-
-    /**
-     * @return \League\Flysystem\Handler
-     */
-    public function getFile()
-    {
-        return Yii::$app->storage->fs->get($this->path);
-    }
 
     public function getThumb($width, $height, $options = [])
     {
         $width = (int) $width;
         $height = (int) $height;
-        return Yii::$app->storage->disk($this->disk)->thumbnail($this->path, $width, $height);
+        return Yii::$app->storage->thumbnail($this->path, $width, $height);
     }
 
     public function afterDelete()
     {
         parent::afterDelete();
         // 文件删了
-        if (Yii::$app->storage->disk($this->disk)->has($this->path)) {
-            Yii::$app->storage->disk($this->disk)->delete($this->path);
+        if (Yii::$app->storage->has($this->path)) {
+            Yii::$app->storage->delete($this->path);
         }
     }
 
     /**
      * @param $hash
-     * @param $disk
      * @return static|null
      */
-    public static function findByHash($hash, $disk = null)
+    public static function findByHash($hash)
     {
-        if ($disk === null) {
-            $disk = Yii::$app->storage->defaultDriver;
-        }
-        return static::findOne(['hash' => $hash, 'disk' => $disk]);
+        return static::findOne(['hash' => $hash]);
     }
 
     /**
@@ -180,14 +161,15 @@ class Attachment extends \yii\db\ActiveRecord
     {
         $hash = md5(file_get_contents($url));
         $attachment = static::findByHash($hash);
-        $tempFile = Yii::$app->storage->disk('local')->put($path, file_get_contents($url));
+        $tempFile = Yii::getAlias('@storagePath/upload/' . $hash);
+        file_put_contents($tempFile, file_get_contents($url));
         $mimeType = FileHelper::getMimeType($tempFile);
         $extension = current(FileHelper::getExtensionsByMimeType($mimeType, '@common/helpers/mimeTypes.php'));
         if (empty($attachment)) {
             $fileName = $hash . '.' . $extension;
             $filePath = ($path ? ($path . '/') : '') . $fileName;
             $fileSize = filesize($tempFile);
-            if (Yii::$app->storage->upload($filePath, $tempFile)) {
+            if (Yii::$app->storage->put($filePath, file_get_contents($tempFile))) {
                 @unlink($tempFile);
                 $attachment = new static();
                 $attachment->path = $filePath;

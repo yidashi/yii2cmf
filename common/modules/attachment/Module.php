@@ -22,8 +22,8 @@ class Module extends \common\modules\Module implements BootstrapInterface
             'disks' => [
                 'local' => [
                     'class' => 'common\\modules\\attachment\\components\\flysystem\\LocalFilesystem',
-                    'path' => '@storagePath/upload',
-                    'url' => \Yii::getAlias('@storageUrl/upload')
+                    'path' => \Yii::getAlias($this->params['local_root']),
+                    'url' => \Yii::getAlias($this->params['local_url']),
                 ],
                 'qiniu' => [
                     'class' => 'common\\modules\\attachment\\components\\flysystem\\QiniuFilesystem',
@@ -31,15 +31,6 @@ class Module extends \common\modules\Module implements BootstrapInterface
                     'secret' => $this->params['qiniu_access_secret'],
                     'bucket' => $this->params['qiniu_bucket'],
                     'domain' => $this->params['qiniu_domain']
-                ]
-            ],
-            'imageProcessors' => [
-                'local' => [
-                    'class' => 'common\modules\attachment\components\image\Local',
-                    'path' => '@storagePath/upload',
-                ],
-                'qiniu' => [
-                    'class' => 'common\\modules\\attachment\\components\\image\\Qiniu'
                 ]
             ]
         ];

@@ -71,7 +71,7 @@ class SettingsController extends Controller
             //再传一次裁剪后的图片
             list($cropAttachment, $error) = Attachment::uploadFromUrl('avatar/' . $user->id, $cropUrl);
             if ($error == null) {
-                $user->saveAvatar($cropAttachment);
+                $user->saveAvatar($cropAttachment->url);
 
                 Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
                 $result = [

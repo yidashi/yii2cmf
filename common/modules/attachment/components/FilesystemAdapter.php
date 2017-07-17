@@ -321,7 +321,11 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract, 
         $adapter = $this->driver->getAdapter();
 
         if (method_exists($adapter, 'thumbnail')) {
-            return $adapter->thumbnail($path, $width, $height);
+            try {
+                return $adapter->thumbnail($path, $width, $height);
+            } catch(\Exception $e) {
+                return $path;
+            }
         } else {
             throw new RuntimeException('This driver does not support thumbnail');
         }
@@ -332,7 +336,11 @@ class FilesystemAdapter implements FilesystemContract, CloudFilesystemContract, 
         $adapter = $this->driver->getAdapter();
 
         if (method_exists($adapter, 'crop')) {
-            return $adapter->crop($path, $width, $height, $start);
+            try {
+                return $adapter->crop($path, $width, $height, $start);
+            } catch(\Exception $e) {
+                return $path;
+            }
         } else {
             throw new RuntimeException('This driver does not support crop');
         }

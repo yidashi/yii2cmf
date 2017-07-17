@@ -23,7 +23,7 @@ $this->title = '个人中心';
                 <p><?= $user->profile->signature?></p>
                 <div class="button">
                     <a class="follow btn btn-xs <?php if((new \common\models\Friend())->isFollow($user->id)): ?>btn-danger <?php else: ?>btn-success <?php endif; ?> <?php if ($user->id == Yii::$app->user->id): ?>disabled<?php endif; ?>" href="<?= Url::to(['/friend/follow', 'id' => $user->id]) ?>"><?php if (!(new \common\models\Friend())->isFollow($user->id)): ?><i class="fa fa-plus"></i> 关注Ta <?php else: ?>取消关注 <?php endif; ?></a>
-                    <a class="btn btn-xs btn-primary<?php if ($user->id == Yii::$app->user->id):?> disabled<?php endif; ?>" href="<?= Url::to(['/message/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
+                    <a class="btn btn-xs btn-primary<?php if ($user->id == Yii::$app->user->id):?> disabled<?php endif; ?>" href="<?= Url::to(['/message/default/create', 'id' => $user->id]) ?>"><i class="fa fa-envelope"></i> 发私信</a>
                 </div>
                 <ul class="stat">
                     <li>金钱<h3><?= $user->profile->money ?></h3></li>

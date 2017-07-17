@@ -8,6 +8,7 @@
 
 namespace common\modules\attachment\components;
 
+use common\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -24,24 +25,9 @@ class UploadedFile extends \yii\web\UploadedFile
             $path = rtrim($path, '/').'/';
         }
 
-        $hash = self::random(40);
+        $hash = StringHelper::random(40);
 
         return $path.$hash.'.'.$this->getExtension();
-    }
-
-    public static function random($length = 16)
-    {
-        $string = '';
-
-        while (($len = strlen($string)) < $length) {
-            $size = $length - $len;
-
-            $bytes = random_bytes($size);
-
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
-        }
-
-        return $string;
     }
 
     public function store($path, $options = [])

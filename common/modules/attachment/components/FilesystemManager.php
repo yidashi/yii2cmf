@@ -26,11 +26,6 @@ class FilesystemManager extends Component implements Factory
      */
     public $disks = [];
 
-    /**
-     * @var array|string|Processor
-     */
-    public $imageProcessors;
-
 
     /**
      * Get a filesystem instance.

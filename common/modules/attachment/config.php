@@ -14,13 +14,13 @@ return [
     [
         'name' => 'local_root',
         'type' => 'text',
-        'value' => '@storagePath/upload',
+        'value' => Yii::getAlias('@storagePath/upload'),
         'desc' => '本地文件系统根目录',
     ],
     [
         'name' => 'local_url',
         'type' => 'text',
-        'value' => '@storageUrl/upload',
+        'value' => Yii::getAlias('@storageUrl/upload'),
         'desc' => '本地文件系统根地址',
     ],
     [
