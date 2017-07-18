@@ -308,9 +308,8 @@ class User extends ActiveRecord implements IdentityInterface
             $mailer->viewPath = '@common/modules/user/mail';
             try {
                 $mailer->compose(['html' => 'confirmation'], ['user' => $user, 'token' => $token])
-                    ->setFrom(\Yii::$app->config->get('MAIL_USERNAME'))
                     ->setTo($email)
-                    ->setSubject(Yii::t('user', 'Confirm account on {0}', Yii::$app->config->get('SITE_NAME')))
+                    ->setSubject(Yii::t('user', 'Confirm account on {0}', Yii::$app->config->get('site_name')))
                     ->send();
                 return [true, null];
             } catch(\Exception $e) {
