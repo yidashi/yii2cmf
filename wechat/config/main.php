@@ -52,9 +52,6 @@ return [
                 ]
             ]
         ],
-        'pluginManager' => [
-            'class' => 'common\components\PluginManager',
-        ],
     ],
     'params' => $params,
 ];
