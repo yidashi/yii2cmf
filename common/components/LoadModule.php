@@ -35,7 +35,11 @@ class LoadModule extends Component implements BootstrapInterface
                 'params' => $modulePackage->getConfig()
             ];
             $this->setModule($model->id, $class);
-            $bootstraps = explode("|", $model->bootstrap);
+            if ($model->bootstrap == '*') {
+                $bootstraps = ['frontend', 'backend', 'api', 'wechat', 'console'];
+            } else {
+                $bootstraps = explode("|", $model->bootstrap);
+            }
             if (in_array($bootstrapType, $bootstraps)) {
                 $module = \Yii::$app->getModule($model->id);
                 if ($module instanceof BootstrapInterface) {

@@ -8,16 +8,13 @@
 
 namespace common\modules\config;
 
-
-use common\components\PackageInfo;
-
 class ModuleInfo extends \common\modules\ModuleInfo
 {
     public $isCore = 1;
 
     public $info = [
         'author' => '易大师',
-        'bootstrap' => 'frontend|backend|app-console|api',
+        'bootstrap' => 'frontend|backend|console|api|wechat',
         'version' => 'v1.0',
         'id' => 'config',
         'name' => '动态配置',

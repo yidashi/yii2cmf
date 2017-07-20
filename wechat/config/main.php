@@ -6,11 +6,12 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-wechat',
+    'id' => 'wechat',
     'basePath' => dirname(__DIR__),
     'bootstrap' => [
         'log',
-        \common\components\LoadPlugins::className(),
+        \common\components\LoadPlugin::className(),
+        \common\components\LoadModule::className(),
     ],
     'controllerNamespace' => 'wechat\controllers',
     'components' => [
