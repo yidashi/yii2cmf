@@ -60,17 +60,4 @@ class Message extends \yii\db\ActiveRecord
     {
         return $this->hasOne(MessageData::className(), ['id' => 'message_id']);
     }
-
-    public function afterSave($insert, $changedAttributes)
-    {
-        parent::afterSave($insert, $changedAttributes);
-        if ($insert) {
-            Yii::$app->notify->category('message')
-                ->from($this->from_uid)
-                ->to($this->to_uid)
-                ->extra(['message' => $this->data->content])
-                ->link(['/message/default/index'])
-                ->send();
-        }
-    }
 }

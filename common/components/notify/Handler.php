@@ -67,12 +67,6 @@ class Handler extends Object
         return $this;
     }
 
-    public function link($link)
-    {
-        $this->notify->link = Url::to($link);
-        return $this;
-    }
-
     public function extra($extra)
     {
         $this->notify->extra = Json::encode($extra);
