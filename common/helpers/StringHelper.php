@@ -15,16 +15,8 @@ class StringHelper extends BaseStringHelper
 {
     public static function random($length = 16)
     {
-        $string = '';
+        $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-        while (($len = strlen($string)) < $length) {
-            $size = $length - $len;
-
-            $bytes = random_bytes($size);
-
-            $string .= substr(str_replace(['/', '+', '='], '', base64_encode($bytes)), 0, $size);
-        }
-
-        return $string;
+        return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
     }
 }
