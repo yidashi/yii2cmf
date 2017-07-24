@@ -25,7 +25,7 @@ class UploadedFile extends \yii\web\UploadedFile
             $path = rtrim($path, '/').'/';
         }
 
-        $hash = StringHelper::random(40);
+        $hash = \Yii::$app->security->generateRandomString(40);
 
         return $path.$hash.'.'.$this->getExtension();
     }

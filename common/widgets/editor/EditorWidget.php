@@ -121,10 +121,9 @@ class EditorWidget extends InputWidget
             'toolbars' => [
                 [
                     'fullscreen', 'source', 'undo', 'redo', '|',
-                    'fontsize',
-                    'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
+                    'fontsize', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat',
                     'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', 'simpleupload', 'insertimage', '|',
-                    'forecolor', 'backcolor', '|',
+                    'insertorderedlist', 'insertunorderedlist', 'link', 'forecolor', 'backcolor', '|',
                     'lineheight', '|',
                     'indent', '|'
                 ],
