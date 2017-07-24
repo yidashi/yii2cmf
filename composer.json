@@ -37,6 +37,7 @@
         "bower-asset/blueimp-file-upload" : "*",
         "bower-asset/editor.md": "*",
         "creocoder/yii2-flysystem": "*",
+        "paragonie/random_compat": "^2.0",
         "qiniu/php-sdk": "^7.1"
     },
     "require-dev": {
