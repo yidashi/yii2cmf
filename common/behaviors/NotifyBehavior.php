@@ -12,6 +12,7 @@ namespace common\behaviors;
 use common\models\Article;
 use common\models\Comment;
 use common\models\Suggest;
+use common\modules\message\models\Message;
 use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
@@ -19,6 +20,8 @@ use yii\db\ActiveRecord;
 use yii\helpers\Markdown;
 use yii\helpers\StringHelper;
 use common\models\Vote;
+use yii\web\Application;
+use yii\web\Request;
 
 class NotifyBehavior extends Behavior
 {
@@ -29,7 +32,6 @@ class NotifyBehavior extends Behavior
             ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
         ];
     }
-
     public function afterInsert($event)
     {
         // TODO entity
@@ -148,7 +150,7 @@ class NotifyBehavior extends Behavior
                     ->extra($extra)
                     ->send();
                 break;
-            case 'common\\models\\Message':
+            case 'common\\modules\\message\\models\\Message':
                 Yii::$app->notify->category('message')
                     ->from($event->sender->from_uid)
                     ->to($event->sender->to_uid)

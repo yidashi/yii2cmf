@@ -173,7 +173,6 @@ class Notify extends \yii\db\ActiveRecord
         if ($insert) {
             if ($this->to->isConfirmed) {
                 \Yii::$app->mailer->compose()
-                    ->setFrom(\Yii::$app->config->get('MAIL_USERNAME'))
                     ->setTo($this->to->email)
                     ->setSubject($this->from->username . ' ' . $this->getTitle())
                     ->setTextBody($this->getContent())
