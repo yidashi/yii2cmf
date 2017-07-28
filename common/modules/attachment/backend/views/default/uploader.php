@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = ['label' => '附件首页', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 AttachmentUploadAsset::register($this);
 
-$this->registerJs("var uploadUrl='".Url::to(["/attachment/upload/backend-files-upload",'fileparam'=>"attachments"])."'",View::POS_HEAD)
+$this->registerJs("var uploadUrl='".Url::to(["/upload/backend-files-upload",'fileparam'=>"attachments"])."'",View::POS_HEAD)
 ?>
 
 <form action="" class="media-upload-form">
