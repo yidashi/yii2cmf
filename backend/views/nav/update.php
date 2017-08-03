@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = '修改导航';
                         [
                             'class' => 'backend\widgets\grid\PositionColumn',
                             'attribute' => 'order',
-                            'route' => ['/nav-item/position']
+                            'route' => '/nav-item/position'
                         ],
                         [
                             'class' => 'backend\widgets\grid\SwitcherColumn',
