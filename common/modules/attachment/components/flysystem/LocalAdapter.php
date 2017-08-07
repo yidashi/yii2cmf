@@ -34,7 +34,9 @@ class LocalAdapter extends Local
         $pathinfo = pathinfo($path);
         $thumbFile = $pathinfo['dirname'] . '/' . $pathinfo['filename'] . strtr($this->thumbFileRule, ['{w}' => $width, '{h}' => $height]) . '.' . $pathinfo['extension'];
         $thumbPath = $this->pathPrefix . $thumbFile;
-        Image::thumbnail($this->pathPrefix . $path, $width, $height)->save($thumbPath);
+        if (!is_file($thumbPath)) {
+            Image::thumbnail($this->pathPrefix . $path, $width, $height)->save($thumbPath);
+        }
         return $this->urlPrefix . '/' . $thumbFile;
     }
 
@@ -46,6 +48,9 @@ class LocalAdapter extends Local
         $pathinfo = pathinfo($path);
         $cropFile = $pathinfo['dirname'] . '/' . $pathinfo['filename'] . strtr($this->cropFileRule, ['{w}' => $width, '{h}' => $height, '{x}' => $start[0], '{y}' => $start[1]]) . '.' . $pathinfo['extension'];
         $cropPath = $this->pathPrefix .  $cropFile;
+        if (!is_file($cropPath)) {
+            Image::thumbnail($this->pathPrefix . $path, $width, $height)->save($cropPath);
+        }
         Image::crop($this->pathPrefix . $path, $width, $height, $start)->save($cropPath);
         return $this->urlPrefix . '/' . $cropFile;
     }
