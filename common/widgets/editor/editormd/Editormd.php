@@ -25,7 +25,7 @@ class Editormd extends InputWidget
     public $clientOptions = [];
 
     public $imageUploadRoute = [
-        '/attachment/upload/md-image-upload',
+        '/upload/md-image-upload',
         'fileparam' => 'editormd-image-file'
     ];
 
