@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="theme <?= $theme->isActive()?"active":"";?>">
 
 
-            <?php if(!empty($screenshot = $theme->getScreenshot())):?>
+            <?php $screenshot = $theme->getScreenshot();if(!empty($screenshot)):?>
                 <div class="theme-screenshot">
                     <a href="<?= Url::to(["view","id"=>$theme->getPackage()])?>"> <img
                             src="<?= $screenshot ?>" alt="" /> <span

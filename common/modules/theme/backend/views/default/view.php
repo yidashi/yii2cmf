@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = [
 
 
 
-	              <?php if(!empty($screenshot = $model->getScreenshot())):?>
+        <?php $screenshot = $model->getScreenshot();if(!empty($screenshot)):?>
 		<div class="screenshot">
 			<img src="<?= $screenshot?>" alt="">
 		</div>
