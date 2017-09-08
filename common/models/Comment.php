@@ -3,7 +3,6 @@
 namespace common\models;
 
 use backend\models\search\SearchModelTrait;
-use common\behaviors\NotifyBehavior;
 use common\behaviors\VoteBehavior;
 use common\modules\user\behaviors\UserBehavior;
 use common\modules\user\models\User;
@@ -97,10 +96,6 @@ class Comment extends \yii\db\ActiveRecord
             ],
             VoteBehavior::className(),
             UserBehavior::className(),
-            [
-                'class' => NotifyBehavior::className(),
-                'entity' => __CLASS__
-            ],
             [
                 'class' => UserBehaviorBehavior::className(),
                 'eventName' => [self::EVENT_AFTER_INSERT],

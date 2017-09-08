@@ -32,10 +32,14 @@ return [
                 ],
             ]
         ],
+        'assetManager' => [
+            'bundles' => require(__DIR__ . '/' . (YII_ENV_PROD ? 'assets-prod.php' : 'assets-dev.php')),
+        ],
         'search' => [
             'class' => 'frontend\\components\\Search',
             'engine' => env('SEARCH_ENGINE', 'local')
         ]
     ],
+    'as notify' => \common\behaviors\NotifyBehavior::className(),
     'params' => $params,
 ];

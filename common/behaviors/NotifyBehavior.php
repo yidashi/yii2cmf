@@ -11,31 +11,35 @@ namespace common\behaviors;
 
 use common\models\Article;
 use common\models\Comment;
+use common\models\Reward;
 use common\models\Suggest;
-use common\modules\message\models\Message;
+use common\models\Vote;
 use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
+use yii\base\Event;
 use yii\db\ActiveRecord;
 use yii\helpers\Markdown;
 use yii\helpers\StringHelper;
-use common\models\Vote;
 use yii\web\Application;
-use yii\web\Request;
 
 class NotifyBehavior extends Behavior
 {
-    use EntityTrait;
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_INSERT => 'afterInsert',
+            Application::EVENT_BEFORE_REQUEST => 'bindEvent',
         ];
     }
+
+    public function bindEvent($event)
+    {
+        Event::on(ActiveRecord::className(), 'afterInsert', [$this, 'afterInsert']);
+    }
+
     public function afterInsert($event)
     {
-        // TODO entity
-        $entity = $this->getEntity();
+        $entity = get_class($event->sender);
         switch ($entity) {
             case 'common\models\Comment':
                 $fromUid = $event->sender->user_id;

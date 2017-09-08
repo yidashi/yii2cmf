@@ -2,7 +2,6 @@
 
 namespace common\modules\message\models;
 
-use common\behaviors\NotifyBehavior;
 use common\modules\user\behaviors\UserBehavior;
 use common\traits\EntityTrait;
 use Yii;
@@ -56,7 +55,6 @@ class Message extends \yii\db\ActiveRecord
     {
         return [
             UserBehavior::className(),
-            NotifyBehavior::className()
         ];
     }
 

@@ -3,7 +3,6 @@
 namespace common\models;
 
 use common\behaviors\CommentBehavior;
-use common\behaviors\NotifyBehavior;
 use common\modules\user\models\User;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -70,9 +69,6 @@ class Suggest extends \yii\db\ActiveRecord
             [
                 'class' => CommentBehavior::className()
             ],
-            [
-                'class' => NotifyBehavior::className(),
-            ]
         ];
     }
 

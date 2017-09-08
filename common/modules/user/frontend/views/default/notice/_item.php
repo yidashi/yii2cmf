@@ -25,7 +25,7 @@ use yii\helpers\Url;
     </div>
     <div class="media-action">
         <span><?= Yii::$app->formatter->asRelativeTime($model->created_at) ?></span>
-        <?php if (!empty($model->getLink())): ?>
+        <?php $link = $model->getLink();if (!empty($link)): ?>
         <span class="pull-right"><a href="<?= Url::to($model->getLink()) ?>">查看</a></span>
         <?php endif; ?>
     </div>

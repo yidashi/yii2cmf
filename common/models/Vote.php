@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use common\behaviors\NotifyBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -60,10 +59,6 @@ class Vote extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            [
-                'class' => NotifyBehavior::className(),
-                'entity' => __CLASS__
-            ]
         ];
     }
 
