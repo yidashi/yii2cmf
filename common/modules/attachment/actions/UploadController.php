@@ -147,7 +147,7 @@ class UploadController extends Controller
                     return !isset($result['files'][0]['error']) ? [
                         'state' => 'SUCCESS',
                         'url' => $result['files'][0]['url'],
-                        'title' => $result['files'][0]['title'],
+                        'title' => $result['files'][0]['name'],
                         'original' => $result['files'][0]['name'],
                         'type' => $result['files'][0]['type'],
                         'size' => $result['files'][0]['size'],
