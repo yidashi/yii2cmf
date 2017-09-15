@@ -33,7 +33,7 @@ $this->registerJs("var updateBlocksUrl = '".Url::to(["update-blocks"])."'",View:
 <?php foreach ($blocks as $block):?>
     <li data-block="<?= $block->primaryKey; ?>" class="clearfix">
         <span class="pull-left"><?= $block->title?></span>
-        <span class="pull-right"><a href="<?= Url::to(["/block/update", "id" => $block->primaryKey])?>"><i class="fa fa-pencil"></i></a></span>
+        <span class="pull-right"><a href="<?= Url::to(["/area/block/update", "id" => $block->primaryKey])?>"><i class="fa fa-pencil"></i></a></span>
     </li>
 <?php endforeach;?>
 </ul>
