@@ -7,7 +7,6 @@ use yii\helpers\Html;
 /* @var $content string */
 /* @var $context \yii\web\Controller */
 
-backend\assets\AppAsset::register($this);
 backend\assets\ContextAsset::register($this);
 \backend\assets\IframeAsset::register($this);
 ?>

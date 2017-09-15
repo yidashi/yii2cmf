@@ -43,7 +43,7 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider(['query' => Category::find()]);
+        $dataProvider = new ActiveDataProvider(['query' => Category::find()->orderBy('sort asc')]);
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'pagination' => false
@@ -66,7 +66,7 @@ class CategoryController extends Controller
     /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionCreate($id = 0)

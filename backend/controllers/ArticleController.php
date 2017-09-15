@@ -51,7 +51,7 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
-        Url::remember('', $this->id);
+        Url::remember();
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -178,7 +178,7 @@ class ArticleController extends Controller
                 $transaction->rollBack();
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
-            return $this->redirect(['index']);
+            return $this->goBack();
         }
 
         $articleModules = ArticleModule::find()->all();
@@ -233,7 +233,7 @@ class ArticleController extends Controller
                 $transaction->rollBack();
                 Yii::$app->session->setFlash('error', $e->getMessage());
             }
-            return $this->redirect(['index']);
+            return $this->goBack();
         }
         return $this->render('update', [
             'model' => $model,
@@ -252,8 +252,8 @@ class ArticleController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->softDelete();
-
-        return $this->redirect(Url::previous($this->id));
+        Yii::$app->session->setFlash('success', '操作成功');
+        return $this->goBack();
     }
 
 

@@ -22,6 +22,7 @@ a:hover{text-decoration: none;}
 .article-item img{position:absolute;left:0;top:0;width:100%;height:100%;}
 .article-title{text-align:center;-webkit-line-clamp:2;display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;height:50px;line-height: 25px;font-size: 16px}
 .view-title{border-bottom: 1px solid #F2F2F2;  padding-bottom: 5px;margin-bottom: 10px;}
+.view-description{margin-top:10px;}
 .view-content img{max-width: 95%!important;display: block;margin:10px auto!important;}
 .view-content p{line-height: 1.8}
 .view-content ul {list-style-type: disc}
@@ -230,7 +231,7 @@ h4 { font-size: 16px; }
 /* 首页结束 */
 
 /* 详细页开始 */
-.action { border-bottom: #eee solid 1px; padding-bottom: 10px; margin-bottom: 20px; color: #999; }
+.action { border-bottom: #eee solid 1px; padding-bottom: 10px; margin-bottom: 10px; color: #999; }
 .action a { color: #999; text-decoration: none; }
 .action em {font-style: normal;}
 .action .user, .action .time, .action .views, .action .favourites, .action .comments, .action .answers, .action .replies { margin-right:15px; }

@@ -2,6 +2,7 @@
 
 use yii\grid\GridView;
 use yii\helpers\Html;
+use common\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\search\ArticleSearch */
@@ -15,17 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->endBlock() ?>
 <div class="article-index">
     <div class="box box-primary">
-        <div class="box-header"><h2 class="box-title">文章搜索</h2></div>
         <div class="box-body"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
     </div>
     <div class="box box-primary">
-        <div class="box-header with-border">
-            <h2 class="box-title">文章列表</h2>
-        </div>
         <div class="box-body">
             <?= GridView::widget([
+                'id' => 'article-grid',
                 'dataProvider' => $dataProvider,
                 'columns' => [
+                    ['class' => \yii\grid\CheckboxColumn::className()],
                     'id',
                     [
                         'attribute' => 'title',
@@ -43,6 +42,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         'enableSorting' => false
                     ],
                     'category',
+                    [
+                        'label' => '标签',
+                        'value' => function ($model) {
+                            $html = '';
+                            foreach ($model->tags as $tag) {
+                                $html .= ' <span class="label label-' . $tag->level . '">' . $tag->name . '</span>';
+                            }
+                            return $html;
+                        },
+                        'format' => 'raw'
+                    ],
                     'trueView',
                     [
                         'class' => 'backend\widgets\grid\SwitcherColumn',
