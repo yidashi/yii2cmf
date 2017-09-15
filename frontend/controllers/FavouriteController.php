@@ -3,7 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Favourite;
-use frontend\models\Article;
+use common\models\Article;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;

@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\WidgetCarousel */
+/* @var $model common\models\Carousel */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -14,10 +14,12 @@ use yii\helpers\Html;
 
     <?php echo $form->field($model, 'key')->textInput(['maxlength' => 1024]) ?>
 
+    <?php echo $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+
     <?php echo $form->field($model, 'status')->checkbox() ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => 'btn btn-primary btn-flat']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

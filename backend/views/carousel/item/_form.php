@@ -23,7 +23,7 @@ use yii\helpers\Html;
 
         <?php echo $form->field($model, 'caption')->textarea() ?>
 
-        <?php echo $form->field($model, 'order')->textInput() ?>
+        <?php echo $form->field($model, 'sort')->textInput() ?>
 
         <?php echo $form->field($model, 'status')->checkbox() ?>
 

@@ -3,8 +3,9 @@
 namespace frontend\controllers;
 
 use common\models\Category;
-use frontend\models\Article;
-use frontend\models\Tag;
+use common\models\Article;
+use common\models\Tag;
+use frontend\services\TagService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
@@ -64,8 +65,8 @@ class SiteController extends Controller
                 ]
             ]
         ]);
-        $categories = Category::find()->all();
-        $hotTags = Tag::hot();
+        $categories = Category::find()->orderBy('sort asc')->all();
+        $hotTags = TagService::hot();
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'categories' => $categories,

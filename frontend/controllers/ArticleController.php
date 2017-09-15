@@ -7,9 +7,10 @@
 namespace frontend\controllers;
 
 use common\models\Category;
-use common\models\Comment;
-use frontend\models\Article;
-use frontend\models\Tag;
+use common\models\Article;
+use common\models\Tag;
+use frontend\services\ArticleService;
+use frontend\services\TagService;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -19,10 +20,11 @@ class ArticleController extends Controller
     /**
      * 分类文章列表
      * @param mixed $cate
+     * @param mixed $module
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionIndex($cate = null)
+    public function actionIndex($cate = null, $module = null)
     {
         $query = Article::find()->published();
         $category = null;
@@ -33,6 +35,7 @@ class ArticleController extends Controller
             }
             $query = $query->andFilterWhere(['category_id' => $category->id]);
         }
+        $query->andFilterWhere(['module' => $module]);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -46,7 +49,7 @@ class ArticleController extends Controller
             ]
         ]);
         // 热门标签
-        $hotTags = Tag::hot();
+        $hotTags = TagService::hot();
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'category' => $category,
@@ -89,15 +92,14 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
-        /* @var $model Article|null */
-        $model = Article::find()->andWhere(['id' => $id])->one();
+        $model = Article::find()->published()->andWhere(['id' => $id])->one();
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
         $model->addView();
 
         // sidebar
-        $hots = Article::hots($model->category_id);
+        $hots = ArticleService::hots($model->category_id);
         // 上下一篇
         $next = Article::find()->andWhere(['>', 'id', $id])->one();
         $prev = Article::find()->andWhere(['<', 'id', $id])->orderBy('id desc')->one();

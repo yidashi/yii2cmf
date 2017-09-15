@@ -45,9 +45,6 @@ class Comment extends \yii\db\ActiveRecord
             [['entity', 'entity_id', 'content'], 'required'],
             [['entity_id', 'user_id', 'parent_id', 'is_top', 'parent_id', 'reply_uid'], 'integer'],
             [['content'], 'string'],
-            ['parent_id', function($attribute){
-                $this->reply_uid = $this->parent->user_id;
-            }],
             ['content', 'setReplyUid'],
         ];
     }
@@ -152,6 +149,9 @@ class Comment extends \yii\db\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if ($insert == true) {
+                if ($this->parent_id) {
+                    $this->reply_uid = $this->parent->user_id;
+                }
                 $this->user_ip = Yii::$app->getRequest()->getUserIP();
                 return true;
             }

@@ -15,11 +15,10 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property integer $carousel_id
  * @property string $image
- * @property string $imageUrl
  * @property string $url
  * @property string $caption
  * @property integer $status
- * @property integer $order
+ * @property integer $sort
  *
  * @property Carousel $carousel
  */
@@ -48,7 +47,7 @@ class CarouselItem extends ActiveRecord
             TimestampBehavior::className(),
             [
                 'class' => PositionBehavior::className(),
-                'positionAttribute' => 'order',
+                'positionAttribute' => 'sort',
                 'groupAttributes' => ['carousel_id']
             ],
             'cacheInvalidate' => [
@@ -72,7 +71,7 @@ class CarouselItem extends ActiveRecord
     {
         return [
             [['carousel_id'], 'required'],
-            [['carousel_id', 'status', 'order'], 'integer'],
+            [['carousel_id', 'status', 'sort'], 'integer'],
             [['url', 'caption'], 'string', 'max' => 1024],
             ['image', 'safe']
         ];
@@ -89,8 +88,8 @@ class CarouselItem extends ActiveRecord
             'image' => Yii::t('common', 'Image'),
             'url' => Yii::t('common', 'Url'),
             'caption' => Yii::t('common', 'Caption'),
-            'status' => Yii::t('common', 'Status'),
-            'order' => Yii::t('common', 'Order')
+            'status' => '是否启用',
+            'sort' => '排序'
         ];
     }
 

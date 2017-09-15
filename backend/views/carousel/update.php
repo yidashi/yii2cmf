@@ -5,6 +5,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Carousel */
+/* @var $carouselItemsProvider \yii\data\ActiveDataProvider */
 
 $this->title = '更新幻灯片:' . $model->key;
 $this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => [
                             [
                                 'class' => 'backend\widgets\grid\PositionColumn',
-                                'attribute' => 'order',
+                                'attribute' => 'sort',
                                 'route' => '/carousel-item/position'
                             ],
                             [

@@ -80,7 +80,7 @@ class CarouselController extends Controller
         $model = $this->findModel($id);
 
         $carouselItemsProvider = new ActiveDataProvider([
-            'query' => CarouselItem::find()->where(['carousel_id'=>$model->id])->orderBy('order')
+            'query' => CarouselItem::find()->where(['carousel_id'=>$model->id])->orderBy('sort')
         ]);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

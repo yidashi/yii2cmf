@@ -24,8 +24,9 @@ class m160721_134955_create_carousel_table extends Migration
             'carousel_id' => $this->integer()->notNull(),
             'url' => $this->string(1024),
             'caption' => $this->string(1024),
+            'image' => $this->string(255),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
-            'order' => $this->integer()->defaultValue(0),
+            'sort' => $this->integer()->defaultValue(0),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ], $tableOptions);

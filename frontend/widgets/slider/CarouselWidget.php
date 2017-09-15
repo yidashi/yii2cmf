@@ -53,7 +53,7 @@ class CarouselWidget extends Carousel
                     '{{%carousel}}.status' => CarouselModel::STATUS_ACTIVE,
                     '{{%carousel}}.key' => $this->key,
                 ])
-                ->orderBy(['order' => SORT_ASC]);
+                ->orderBy(['sort' => SORT_ASC]);
             foreach ($query->all() as $k => $item) {
                 /** @var $item \common\models\CarouselItem */
                 $items[$k]['content'] = Html::img($item->image);

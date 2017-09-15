@@ -11,16 +11,19 @@
 $this->title = '留言';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-    <div class="clearfix">
-        <a href="<?= \yii\helpers\Url::to(['create']) ?>" class="pull-right btn btn-primary">留言</a>
-    </div>
-        <?= \yii\widgets\ListView::widget([
-            'dataProvider' => $dataProvider,
-            'itemView' => '_item',
-            'layout' => "{items}",
-            'options' => ['class' => 'article-list'],
-            'itemOptions' => ['class' => 'media']
-        ]) ?>
-        <?= \yii\widgets\LinkPager::widget([
-                'pagination' => $dataProvider->getPagination()
-        ]) ?>
+<h3>
+    <a href="<?= \yii\helpers\Url::to(['create']) ?>" class="btn btn-primary">留言</a>
+</h3>
+<div>
+    <?= \yii\widgets\ListView::widget([
+        'dataProvider' => $dataProvider,
+        'itemView' => '_item',
+        'layout' => "{items}",
+        'options' => ['class' => 'article-list'],
+        'itemOptions' => ['class' => 'media']
+    ]) ?>
+    <?= \yii\widgets\LinkPager::widget([
+        'pagination' => $dataProvider->getPagination()
+    ]) ?>
+</div>
+
