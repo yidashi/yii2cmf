@@ -13,6 +13,13 @@ ul {list-style: none;}
 }
 .editormd-fullscreen {z-index:99999!important;}
 a:hover{text-decoration: none;}
+/* 面板开始 */
+.panel .panel-heading { background: #FCFCFC; border-bottom: #eee solid 1px; }
+.panel .panel-heading .panel-title { margin: 0; font-size: 14px; display: inline; }
+.panel .panel-heading .pull-right { font-size: 12px; margin:0; padding:0; }
+.panel  ul { padding: 0; margin: 0; }
+.panel  ul li:last-child { border-bottom: none; }
+/* 面板结束 */
 .article-list .media{padding-top:15px;border-top:1px dashed #d9d9d9;}
 .article-list .media:first-child{padding-top:0;border-top:0;}
 .article-list em{color:#999;font-style: normal}
@@ -25,7 +32,7 @@ a:hover{text-decoration: none;}
 .view-description{margin-top:10px;}
 .view-content img{max-width: 95%!important;display: block;margin:10px auto!important;}
 .view-content p{line-height: 1.8}
-.view-content ul {list-style-type: disc}
+.view-content ul {list-style-type: disc;padding-left:40px;}
 .top-label {
     font-size: 12px;
     background: #5bc0de none repeat scroll 0 0;
@@ -173,17 +180,6 @@ h4 { font-size: 16px; }
 .media-list .media-action a { color: #666; }
 .media-list .media-action .dot { margin: 0 10px; }
 /* 列表页结束 */
-
-/* 会员面板开始 */
-/* 会员面板结束 */
-
-/* 面板开始 */
-.panel .panel-heading { background: #FCFCFC; border-bottom: #eee solid 1px; }
-.panel .panel-heading .panel-title { margin: 0; font-size: 14px; display: inline; }
-.panel .panel-heading .pull-right { font-size: 12px; margin:0; padding:0; }
-.panel  ul { padding: 0; margin: 0; }
-.panel  ul li:last-child { border-bottom: none; }
-/* 面板结束 */
 
 /* 标签开始 */
 .tag-list { padding: 0; }
