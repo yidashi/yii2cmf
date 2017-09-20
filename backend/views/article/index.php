@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'id' => 'article-grid',
                 'dataProvider' => $dataProvider,
                 'columns' => [
-                    ['class' => \yii\grid\CheckboxColumn::className()],
                     'id',
                     [
                         'attribute' => 'title',

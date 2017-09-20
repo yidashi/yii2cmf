@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'class' => 'backend\widgets\grid\SwitcherColumn',
                                 'attribute' => 'status',
-                                'route' => '/carousel-item/switcher'
+                                'route' => ['/carousel-item/switcher']
                             ],
 
                             [

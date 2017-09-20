@@ -65,7 +65,7 @@ class CarouselItemController extends Controller
         $model->carousel_id =  $carousel->id;
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->getSession()->setFlash('success', Yii::t('common', 'created success'));
+                Yii::$app->getSession()->setFlash('success', '操作成功');
                 return $this->redirect(['/carousel/update', 'id' => $model->carousel_id]);
             }
         }
@@ -86,7 +86,7 @@ class CarouselItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('success', Yii::t('backend', 'Carousel slide was successfully saved'));
+            Yii::$app->getSession()->setFlash('success', '操作成功');
             return $this->redirect(['/carousel/update', 'id' => $model->carousel_id]);
         }
         return $this->render('update', [
