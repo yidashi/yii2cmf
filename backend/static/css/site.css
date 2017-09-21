@@ -1,8 +1,11 @@
-html {
+html{
     background-color: #ecf0f5;
 }
 body {
     font-size:14px;
+}
+.login-page{
+    background-color: #ecf0f5;
 }
 div.required label.control-label:after {
      content: " *";
