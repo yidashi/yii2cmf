@@ -8,7 +8,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * This is the model class for table "{{%profile}}".
+ * This is the model class for table "{{%user_profile}}".
  *
  * @property integer $id
  * @property integer $money
@@ -27,7 +27,7 @@ class Profile extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%profile}}';
+        return '{{%user_profile}}';
     }
 
     /**

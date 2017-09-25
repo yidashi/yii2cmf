@@ -33,8 +33,8 @@ echo Nav::widget([
 ]);
 $searchUrl = url(['/search/index']);
 $q = Yii::$app->request->get('q', '全站搜索');
-echo <<<SEARCH
-<form class="navbar-form visible-lg-inline-block" action="{$searchUrl}" method="get">
+?>
+<?php $form = \yii\widgets\ActiveForm::begin(['action' => $searchUrl, 'method' => 'get', 'options' => ['class' => 'navbar-form visible-lg-inline-block']]) ?>
     <div class="input-group">
         <input type="text" class="form-control" name="q" placeholder="{$q}">
         <span class="input-group-btn">
@@ -43,9 +43,8 @@ echo <<<SEARCH
             </button>
         </span>
     </div>
-</form>
-SEARCH;
-
+<?php \yii\widgets\ActiveForm::end() ?>
+<?php
 $rightMenuItems = [];
 $rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
 $noticeNum = Yii::$app->notify->getNoReadNum();

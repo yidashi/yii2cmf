@@ -34,7 +34,7 @@ class m160726_093217_create_user_table extends Migration
             'expired_at' => $this->integer()->null()
         ], $tableOptions);
         // profile
-        $this->createTable('{{%profile}}', [
+        $this->createTable('{{%user_profile}}', [
             'user_id' => Schema::TYPE_PK,
             'money' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT 0",
             'avatar' => $this->string(255)->notNull()->defaultValue(''),
@@ -74,6 +74,6 @@ class m160726_093217_create_user_table extends Migration
     public function down()
     {
         $this->dropTable('{{%user}}');
-        $this->dropTable('{{%profile}}');
+        $this->dropTable('{{%user_profile}}');
     }
 }
