@@ -17,7 +17,7 @@ class m130524_201442_init extends Migration
             'description' => Schema::TYPE_TEXT . " NULL",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'user_id' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
-            'ip' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
+            'ip' => Schema::TYPE_STRING . "(20) NOT NULL DEFAULT '0'",
         ], $this->tableOptions);
 
 // article
