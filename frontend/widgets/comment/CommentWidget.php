@@ -75,5 +75,6 @@ class CommentWidget extends Widget
                 'createTitle' => $this->createTitle,
             ]);
         }
+        return '';
     }
 }
