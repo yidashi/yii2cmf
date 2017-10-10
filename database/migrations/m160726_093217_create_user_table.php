@@ -60,7 +60,7 @@ class m160726_093217_create_user_table extends Migration
             'login_at' => '1441766741',
             'confirmed_at' => '1441766741'
         ]);
-        $this->insert('{{%profile}}', [
+        $this->insert('{{%user_profile}}', [
             'user_id' => 1,
             'locale' => 'zh-CN',
             'created_at' => 1441766741,
