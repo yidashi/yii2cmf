@@ -11,11 +11,11 @@ use yii\widgets\Breadcrumbs;
 AppAsset::register($this);
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => isset($this->params['SEO_SITE_KEYWORDS']) ? $this->params['SEO_SITE_KEYWORDS'] : Yii::$app->config->get('SEO_SITE_KEYWORDS')
+    'content' => isset($this->params['seo_site_keywords']) ? $this->params['seo_site_keywords'] : Yii::$app->config->get('seo_site_keywords')
 ], 'keywords');
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => isset($this->params['SEO_SITE_DESCRIPTION']) ? $this->params['SEO_SITE_DESCRIPTION'] : Yii::$app->config->get('SEO_SITE_DESCRIPTION')
+    'content' => isset($this->params['seo_site_description']) ? $this->params['seo_site_description'] : Yii::$app->config->get('seo_site_description')
 ], 'description');
 ?>
 <?php $this->beginPage() ?>
