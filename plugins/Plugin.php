@@ -24,7 +24,7 @@ abstract class Plugin extends PackageInfo implements BootstrapInterface
     /**
      * @var string 模块所属应用ID(frontend,backend,wechat,api)
      */
-    public $app = 'app-backend';
+    public $app = 'backend';
 
     private $_model;
 
@@ -54,6 +54,14 @@ abstract class Plugin extends PackageInfo implements BootstrapInterface
     public function addMenu($name, $route)
     {
         $id = \Yii::$app->db->createCommand('SELECT `id` FROM {{%menu}} WHERE `name`="插件" AND `parent` IS NULL')->queryScalar();
+        if (!$id) {
+            $model = new Menu();
+            $model->name = '插件';
+            $model->route = '';
+            $model->parent = 24;
+            $model->save();
+            $id = $model->id;
+        }
         $model = new Menu();
         $model->name = $name;
         $model->route = $route;
@@ -71,6 +79,15 @@ abstract class Plugin extends PackageInfo implements BootstrapInterface
         \Yii::$app->db->createCommand("DELETE FROM {{%menu}} WHERE `name`='{$name}'")->execute();
     }
 
+    public function install()
+    {
+        return true;
+    }
+
+    public function uninstall()
+    {
+        return true;
+    }
     /**
      * 各插件在系统bootstrap阶段执行,前台执行frontend方法,后台执行backend方法.
      * 比如插件要在后台添加一个控制器,则可以这样写

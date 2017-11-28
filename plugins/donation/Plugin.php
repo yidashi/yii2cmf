@@ -42,18 +42,23 @@ class Plugin extends \plugins\Plugin
 
     public function install()
     {
-        parent::install();
-        $class = new Migrate();
-        $class->up();
-        $this->addMenu('捐赠', '/donation/index');
-
+        if (parent::install()) {
+            $class = new Migrate();
+            $class->up();
+            $this->addMenu('捐赠', '/donation/index');
+            return true;
+        }
+        return false;
     }
 
     public function uninstall()
     {
-        parent::uninstall();
-        $class = new Migrate();
-        $class->down();
-        $this->deleteMenu('捐赠');
+        if (parent::uninstall()) {
+            $class = new Migrate();
+            $class->down();
+            $this->deleteMenu('捐赠');
+            return true;
+        }
+        return false;
     }
 }

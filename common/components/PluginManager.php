@@ -23,17 +23,31 @@ class PluginManager extends PackageManager
 
     public function install(Plugin $plugin)
     {
-        $model = $plugin->getModel();
-        $model->attributes = $plugin->info;
-        $model->config = Json::encode($plugin->getInitConfig());
-        $model->status = Module::STATUS_OPEN;
-        return $model->save();
+        try {
+            if ($plugin->install()) {
+                $model = $plugin->getModel();
+                $model->attributes = $plugin->info;
+                $model->config = Json::encode($plugin->getInitConfig());
+                $model->status = Module::STATUS_OPEN;
+                return $model->save();
+            }
+            return false;
+        } catch(\Exception $e) {
+            return false;
+        }
     }
 
     public function uninstall(Plugin $plugin)
     {
-        $model = $plugin->getModel();
-        return $model->delete();
+        try {
+            if ($plugin->uninstall()) {
+                $model = $plugin->getModel();
+                return $model->delete();
+            }
+            return false;
+        } catch(\Exception $e) {
+            return false;
+        }
     }
     public function open(Plugin $plugin)
     {
