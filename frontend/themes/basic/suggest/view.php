@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $model->title;
     <h1><?= Html::encode($model->title) ?></h1>
 </div>
 <div class="action">
-    <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
+    <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= Html::encode($model->user->username) ?></a></span>
     <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d', $model->created_at) ?></span>
 </div>
 <div class="view-content"><?= \yii\helpers\HtmlPurifier::process(\yii\helpers\Markdown::process($model->content)) ?></div>

@@ -18,7 +18,7 @@ $this->title = '个人中心';
                 <a href="<?= Url::to(['/user/settings/avatar']) ?>" title="" data-toggle="tooltip" data-original-title="点击修改头像">
                     <?= Html::img($user->getAvatar(96), ['class' => 'avatar']) ?>
                 </a>
-                <h1><?= $user->username?></h1>
+                <h1><?= Html::encode($user->username) ?></h1>
                 <span class="label label-primary"><?= $user->getLevel()['nick'] ?></span>
                 <p><?= $user->profile->signature?></p>
                 <div class="button">
