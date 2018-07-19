@@ -5,4 +5,10 @@
  * @version 2017-08-03 18:49:43
  */
 return [
+    'yii\web\JqueryAsset' => [
+        'sourcePath' => null,
+        'js' => [
+            '//cdn.bootcss.com/jquery/1.9.1/jquery.min.js '
+        ]
+    ],
 ];
