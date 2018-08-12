@@ -62,7 +62,7 @@ class AuthItem extends \yii\base\Model
                 'range' => array_keys(Yii::$app->authManager->getRules()),
                 'message' => 'Rule not exists', ],
             [['name', 'type'], 'required'],
-            [['name'], 'unique', 'when' => function () {
+            [['name'], 'unique2', 'when' => function () {//Yii2新版本修改了Validator createValidator方法，导致inlineValidator无法和自带验证器重名
                 return $this->isNewRecord || ($this->_item->name != $this->name);
             }],
             [['type'], 'integer'],
@@ -71,7 +71,7 @@ class AuthItem extends \yii\base\Model
         ];
     }
 
-    public function unique()
+    public function unique2()
     {
         $authManager = Yii::$app->authManager;
         $value = $this->name;
