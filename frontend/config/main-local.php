@@ -14,4 +14,9 @@ $config = [
         ]
     ],
 ];
+/*$config['bootstrap'][] = 'debug';
+$config['modules']['debug'] = [
+    'class' => 'yii\debug\Module',
+    'allowedIPs' => ['39.155.165.2'],
+];*/
 return $config;

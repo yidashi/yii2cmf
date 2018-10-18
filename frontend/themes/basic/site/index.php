@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use common\models\Article;
 
 /* @var $this yii\web\View */
 
@@ -15,21 +14,21 @@ use common\models\Article;
             ],
         ]) ?>
         <div class="row">
-            <?php if ($this->beginCache('category-article-list', ['dependency' => ['class' => 'yii\caching\DbDependency', 'sql' => "SELECT MAX(updated_at) FROM {{%article}}"]])): ?>
+            <?php if ($this->beginCache('category-article-list', ['duration' => 3600, 'dependency' => ['class' => 'yii\caching\DbDependency', 'sql' => "SELECT MAX(updated_at) FROM {{%document}}"]])): ?>
         <?php foreach ($categories as $category):?>
             <div class="col-md-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-right: 10px"></span><?= $category->title ?></h3>
-                        <div class="pull-right"><a href="<?= Url::to(['/article/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
+                        <div class="pull-right"><a href="<?= Url::to(['/document/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
                     </div>
                     <div class="panel-body">
                         <ul class="category-article-list">
                             <?php
-                                $list = Article::find()->published()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
+                                $list = \common\models\Document::find()->published()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
                             foreach ($list as $item) :
                             ?>
-                                <li><em><?= Yii::$app->formatter->asDate($item->published_at, 'php:m-d') ?></em> <a href="<?= Url::to(['/article/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
+                                <li><em><?= Yii::$app->formatter->asDate($item->published_at, 'php:m-d') ?></em> <a href="<?= Url::to(['/document/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
                                 <?php endforeach; ?>
                         </ul>
                     </div>
@@ -65,7 +64,7 @@ use common\models\Article;
             <div class="panel-body">
                 <ul class="tag-list list-inline">
                     <?php foreach($hotTags as $tag): ?>
-                        <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['article/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+                        <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['document/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -77,10 +76,10 @@ use common\models\Article;
             <div class="panel-body">
                 <ul class="post-list">
                     <?php
-                        $recommentList = \frontend\services\ArticleService::tops();
+                        $recommentList = \frontend\services\DocumentService::tops();
                     foreach ($recommentList as $item):
                     ?>
-                    <li><a href="<?= Url::to(['/article/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
+                    <li><a href="<?= Url::to(['/document/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -91,7 +90,7 @@ use common\models\Article;
             </div>
             <div class="panel-body">
                 <ul class="login-user-list">
-                    <?php $users = \common\modules\user\models\User::find()->orderBy('login_at desc')->limit(6)->all();foreach($users as $user): ?>
+                    <?php $users = \common\modules\user\models\User::find()->with('profile')->orderBy('login_at desc')->limit(6)->all();foreach($users as $user): ?>
                         <li class="col-md-4 col-xs-4 mb15">
                             <a href="<?= Url::to(['/user/default/index', 'id' => $user->id]) ?>">
                                 <img src="<?= $user->getAvatar(64) ?>" alt="<?= $user->username ?>">

@@ -13,7 +13,7 @@ use yii\caching\TagDependency;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "{{%article}}".
+ * This is the model class for table "{{%category}}".
  *
  * @property int $id
  * @property int $pid
@@ -202,7 +202,7 @@ class Category extends \yii\db\ActiveRecord
     public function renderModule($separator = ',')
     {
         return join($separator, array_map(function ($val) {
-            return array_get(ArticleModule::getTypeEnum(), $val);
+            return array_get(DocumentModule::getTypeEnum(), $val);
         }, $this->module));
     }
 }

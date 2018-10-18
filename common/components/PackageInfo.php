@@ -12,6 +12,7 @@ namespace common\components;
 use common\models\Module;
 use yii\base\Object;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -147,7 +148,8 @@ abstract class PackageInfo extends Object
     public function getModel()
     {
         if ($this->_model == null) {
-            $model = Module::findOne($this->getPackage());
+            $models = Module::findOpenModules(Module::TYPE_CORE);
+            $model = ArrayHelper::getValue($models, $this->getPackage());
             if ($model == null) {
                 $model = new Module();
                 $model->loadDefaultValues();
@@ -157,6 +159,7 @@ abstract class PackageInfo extends Object
         }
         return $this->_model;
     }
+
     public function getInstall()
     {
         return $this->getModel()->getInstall();

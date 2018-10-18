@@ -3,8 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Category;
-use common\models\Article;
-use common\models\Tag;
+use common\models\Document;
 use frontend\services\TagService;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -57,7 +56,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->published(),
+            'query' => Document::find()->published(),
             'sort' => [
                 'defaultOrder' => [
                     'is_top' => SORT_DESC,
