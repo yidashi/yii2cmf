@@ -149,7 +149,7 @@ class DocumentController extends Controller
      * @param string $module 文章类型
      * @return mixed
      */
-    public function actionCreate($module = 'base')
+    public function actionCreate($module = 'article')
     {
         $model = new Document();
         $model->status = Document::STATUS_ACTIVE;
@@ -186,7 +186,7 @@ class DocumentController extends Controller
         foreach($articleModules as $articleModule) {
             $articleModuleItem = [];
             $articleModuleItem['label'] = $articleModule->title;
-            $articleModuleItem['url'] = ['/article/create', 'module' => $articleModule->name];
+            $articleModuleItem['url'] = ['/document/create', 'module' => $articleModule->name];
             $articleModuleItem['active'] = $module == $articleModule->name;
             $articleModuleItems[] = $articleModuleItem;
         }

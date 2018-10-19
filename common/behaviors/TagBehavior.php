@@ -63,6 +63,7 @@ class TagBehavior extends Behavior
         if (\Yii::$app->request->isConsoleRequest ) {
             return;
         }
+        //TODO 这里不应该直接用$_POST
         $data = \Yii::$app->request->post($this->owner->formName());
         if(isset($data[static::$formName])) {
             if(!$this->owner->isNewRecord) {

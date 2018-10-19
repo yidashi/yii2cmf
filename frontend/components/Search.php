@@ -9,7 +9,7 @@
 namespace frontend\components;
 
 
-use common\models\Article;
+use common\models\Document;
 use common\models\Search as SearchModel;
 use yii\base\Component;
 use yii\data\ActiveDataProvider;
@@ -32,7 +32,7 @@ class Search extends Component
     public function local($q)
     {
         return new ActiveDataProvider([
-            'query' => Article::find()->published()->andWhere(['like', 'title', $q])
+            'query' => Document::find()->published()->andWhere(['like', 'title', $q])
         ]);
     }
 }
