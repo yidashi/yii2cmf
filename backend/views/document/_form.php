@@ -10,14 +10,11 @@ use common\helpers\Tree;
 use common\modules\attachment\widgets\SingleWidget;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Article */
-/* @var $moduleModel \common\models\article\Article */
+/* @var $model common\models\Document */
+/* @var $moduleModel \common\models\document\Article */
 /* @var $form backend\widgets\ActiveForm */
 ?>
-    <?php $form = ActiveForm::begin([
-        'enableClientValidation' => false,
-        'enableAjaxValidation' => true
-    ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">通用</a></li>
@@ -27,8 +24,6 @@ use common\modules\attachment\widgets\SingleWidget;
                 <div class="tab-pane active" id="tab_1">
 
                     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-                    <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists($model->module)))) ?>
 
                     <?= $form->field($model, 'description')->textarea()?>
 

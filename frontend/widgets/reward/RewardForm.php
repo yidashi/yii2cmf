@@ -9,40 +9,40 @@
 namespace frontend\widgets\reward;
 
 
-use common\models\Article;
+use common\models\Document;
 use common\models\Reward;
 use yii\base\Exception;
 use yii\base\Model;
 
 class RewardForm extends Model
 {
-    public $article_id;
+    public $document_id;
     public $money;
     public $comment;
 
     public function rules()
     {
         $rules = [
-            [['article_id', 'money'], 'required'],
+            [['document_id', 'money'], 'required'],
             ['comment', 'string', 'max' => 255],
             ['money', 'compare', 'compareValue' => 0, 'operator' => '>', 'message' => '打赏额必须大于0'],
         ];
         if (!\Yii::$app->user->isGuest) {
             $rules[] = ['money', 'compare', 'compareValue' => \Yii::$app->user->identity->profile->money, 'operator' => '<=', 'message' => '打赏额不能大于自身账户余额'];
-            $rules[] = ['article_id', 'checkIsAuthor'];
+            $rules[] = ['document_id', 'checkIsAuthor'];
         }
         return $rules;
     }
 
     public function checkIsAuthor($attribute)
     {
-        $article = Article::findOne($this->$attribute);
-        if ($article == null) {
-            $this->addError($attribute, '文章不存在');
+        $document = Document::findOne($this->$attribute);
+        if ($document == null) {
+            $this->addError($attribute, '内容不存在');
             return false;
         }
-        if ($article->user_id == \Yii::$app->user->id) {
-            $this->addError($attribute, '不能给自己的文章打赏');
+        if ($document->user_id == \Yii::$app->user->id) {
+            $this->addError($attribute, '不能给自己的内容打赏');
             return false;
         }
         return true;
@@ -76,10 +76,10 @@ class RewardForm extends Model
                     throw new Exception('打赏失败');
                 }
                 // 作者加钱
-                $article = Article::find()->where(['id' => $this->article_id])->one();
-                $article->user->profile->updateCounters(['money' => $this->money]);
+                $document = Document::find()->where(['id' => $this->document_id])->one();
+                $document->user->profile->updateCounters(['money' => $this->money]);
                 $reward = new Reward();
-                $reward->article_id = $this->article_id;
+                $reward->document_id = $this->document_id;
                 $reward->money = $this->money;
                 $reward->comment = $this->comment;
                 if($reward->save() === false) {

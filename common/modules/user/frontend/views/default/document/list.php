@@ -11,9 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <ul class="post-list">
-    <?php foreach ($models as $key => $item):?>
+    <?php foreach ($models as $key => $item): ?>
         <li>
-            <a href="<?php if ($item->status == 1):?><?=\yii\helpers\Url::to(['/article/view', 'id' => $item->id])?><?php else:?><?=\yii\helpers\Url::to(['/user/default/update-article', 'id' => $item->id])?><?php endif;?>"><?=$item->title?></a>
+            <a href="<?php if ($item->status == 1):?><?=\yii\helpers\Url::to(['/document/view', 'id' => $item->id])?><?php else:?><?=\yii\helpers\Url::to(['/user/default/update-article', 'id' => $item->id])?><?php endif;?>"><?=$item->title?></a>
             <div class="pull-right">
                 <?php if ($item->status == 1):?>
                     审核通过

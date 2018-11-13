@@ -3,7 +3,7 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation for table `{{%article_module}}`.
+ * Handles the creation for table `{{%document_module}}`.
  */
 class m160718_040058_create_document_module_table extends Migration
 {
@@ -16,12 +16,12 @@ class m160718_040058_create_document_module_table extends Migration
         if ($this->db->driverName === 'mysql') {
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('{{%article_module}}', [
+        $this->createTable('{{%document_module}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string(50),
             'title' => $this->string(50),
         ], $tableOptions);
-        $this->createTable('{{%article_exhibition}}', [
+        $this->createTable('{{%document_exhibition}}', [
             'id' => $this->integer(11),
             'start_at' => $this->dateTime()->comment('开始时间'),
             'end_at' => $this->dateTime()->comment('结束时间'),
@@ -66,11 +66,11 @@ class m160718_040058_create_document_module_table extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%article_module}}');
-        $this->dropTable('{{%article_exhibition}}');
-        $this->dropTable('{{%article_download}}');
-        $this->dropTable('{{%article_photo}}');
-        $this->dropColumn('{{%article}}', 'module');
+        $this->dropTable('{{%document_module}}');
+        $this->dropTable('{{%document_exhibition}}');
+        $this->dropTable('{{%document_download}}');
+        $this->dropTable('{{%document_photo}}');
+        $this->dropColumn('{{%document}}', 'module');
         $this->dropColumn('{{%category}}', 'module');
     }
 }

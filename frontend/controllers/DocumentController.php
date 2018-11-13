@@ -67,7 +67,7 @@ class DocumentController extends Controller
         if (empty($tag)) {
             throw new NotFoundHttpException('标签不存在');
         }
-        $query = $tag->getArticles();
+        $query = $tag->getDocuments();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -77,7 +77,7 @@ class DocumentController extends Controller
             ]
         ]);
         // 热门标签
-        $hotTags = Tag::find()->orderBy('article desc')->all();
+        $hotTags = Tag::find()->orderBy('document desc')->all();
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'tag' => $tag,

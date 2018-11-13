@@ -9,12 +9,10 @@
 namespace common\behaviors;
 
 
-use common\models\Article;
 use common\models\Comment;
-use common\models\Reward;
+use common\models\Document;
 use common\models\Suggest;
 use common\models\Vote;
-use common\traits\EntityTrait;
 use Yii;
 use yii\base\Behavior;
 use yii\base\Event;
@@ -55,16 +53,16 @@ class NotifyBehavior extends Behavior
                     ];
                 } else {
                     switch ($event->sender->entity) {
-                        case 'common\models\Article':
+                        case 'common\models\Document':
                             $category = 'comment_article';
-                            $article = Article::findOne($event->sender->entity_id);
-                            $toUid = $article->user_id;
+                            $document = Document::findOne($event->sender->entity_id);
+                            $toUid = $document->user_id;
                             $extra = [
                                 'comment' => $this->generateMsgContent($event->sender->content),
                                 'comment_id' => $event->sender->id,
                                 'entity' => $event->sender->entity,
-                                'entity_title' => $article->title,
-                                'entity_id' => $article->id
+                                'entity_title' => $document->title,
+                                'entity_id' => $document->id
                             ];
                             break;
                         case 'common\models\Suggest':
@@ -109,13 +107,13 @@ class NotifyBehavior extends Behavior
                 if ($event->sender->action == Vote::ACTION_UP) {
                     $fromUid = $event->sender->user_id;
                     switch ($event->sender->entity) {
-                        case 'common\models\Article':
+                        case 'common\models\Document':
                             $category = 'up_article';
-                            $article = Article::findOne($event->sender->entity_id);
-                            $toUid = $article->user_id;
+                            $document = Document::findOne($event->sender->entity_id);
+                            $toUid = $document->user_id;
                             $extra = [
-                                'entity_title' => $article->title,
-                                'entity_id' => $article->id
+                                'entity_title' => $document->title,
+                                'entity_id' => $document->id
                             ];
                             break;
                         case 'common\models\Comment':
@@ -141,12 +139,12 @@ class NotifyBehavior extends Behavior
                 }
                 break;
             case 'common\models\Favourite':
-                $article = $event->sender->article;
+                $document = $event->sender->document;
                 $fromUid = $event->sender->user_id;
-                $toUid = $article->user_id;
+                $toUid = $document->user_id;
                 $extra = [
-                    'entity_title' => $article->title,
-                    'entity_id' => $article->id
+                    'entity_title' => $document->title,
+                    'entity_id' => $document->id
                 ];
                 Yii::$app->notify->category('favourite')
                     ->from($fromUid)
@@ -162,13 +160,13 @@ class NotifyBehavior extends Behavior
                     ->send();
                 break;
             case 'common\\models\\Reward':
-                $article = $event->sender->article;
+                $document = $event->sender->document;
                 Yii::$app->notify->category('reward')
                     ->from($event->sender->user_id)
-                    ->to($article->user_id)
+                    ->to($document->user_id)
                     ->extra([
-                        'article_title' => $article->title,
-                        'article_id' => $article->id,
+                        'article_title' => $document->title,
+                        'article_id' => $document->id,
                         'money' => $event->sender->money,
                         'comment' => $event->sender->comment
                     ])

@@ -75,9 +75,8 @@ class Document extends \yii\db\ActiveRecord
             }, 'skipOnEmpty' => true],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_PENDING]],
-            [['category_id'], 'setCategory'],
             ['category_id', 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id'],
-            [['title', 'category'], 'string', 'max' => 50],
+            [['title'], 'string', 'max' => 50],
             [['source'], 'string', 'max' => 255],
             [['description'], 'string'],
             [['category_id', 'status', 'view'], 'filter', 'filter' => 'intval'],
@@ -85,9 +84,9 @@ class Document extends \yii\db\ActiveRecord
             ['cover', 'safe']
         ];
     }
-    public function setCategory($attribute, $params)
+    public function getCategory()
     {
-        $this->category = Category::find()->where(['id' => $this->$attribute])->select('title')->scalar();
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     public static function getStatusList()
@@ -122,7 +121,7 @@ class Document extends \yii\db\ActiveRecord
             'is_top' => '置顶',
             'is_hot' => '热门',
             'is_best' => '精华',
-            'module' => '文档类型',
+            'module' => '内容模型',
             'content' => '内容'
         ];
     }
@@ -264,7 +263,7 @@ class Document extends \yii\db\ActiveRecord
     {
         if (!Yii::$app->user->isGuest) {
             $userId = Yii::$app->user->id;
-            $favourite = Favourite::find()->where(['article_id' => $this->id, 'user_id' => $userId])->one();
+            $favourite = Favourite::find()->where(['document_id' => $this->id, 'user_id' => $userId])->one();
             if ($favourite) {
                 return true;
             }

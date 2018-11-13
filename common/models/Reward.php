@@ -11,7 +11,7 @@ use yii\helpers\Html;
  * This is the model class for table "pop_reward".
  *
  * @property integer $id
- * @property integer $article_id
+ * @property integer $document_id
  * @property integer $user_id
  * @property integer $money
  * @property string $comment
@@ -34,8 +34,8 @@ class Reward extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['article_id', 'money'], 'required'],
-            [['article_id', 'money'], 'integer'],
+            [['document_id', 'money'], 'required'],
+            [['document_id', 'money'], 'integer'],
             ['comment', 'string', 'max' => 50],
             ['money', 'compare', 'operator' => '>', 'compareValue' => 0]
         ];
@@ -48,7 +48,7 @@ class Reward extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'article_id' => 'Article ID',
+            'document_id' => 'Document ID',
             'user_id' => 'User ID',
             'money' => 'Money',
             'created_at' => 'Created At',
@@ -68,9 +68,9 @@ class Reward extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getArticle()
+    public function getDocument()
     {
-        return $this->hasOne(Article::className(), ['id' => 'article_id']);
+        return $this->hasOne(Document::className(), ['id' => 'document_id']);
     }
 
 }

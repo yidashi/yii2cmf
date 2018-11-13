@@ -7,6 +7,7 @@ namespace common\models;
  *
  * @property integer $id
  * @property string $name
+ * @property integer $document
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -40,7 +41,7 @@ class Tag extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '标签名',
-            'article' => '该标签文章数'
+            'document' => '该标签文章数'
         ];
     }
 
@@ -51,17 +52,17 @@ class Tag extends \yii\db\ActiveRecord
     public function getLevel()
     {
         $level = 'default';
-        if ($this->article > self::LEVEL_SUCCESS && $this->article < self::LEVEL_PRIMARY) {
+        if ($this->document > self::LEVEL_SUCCESS && $this->document < self::LEVEL_PRIMARY) {
             $level = 'success';
-        } elseif ($this->article >= self::LEVEL_PRIMARY && $this->article < self::LEVEL_DANGER) {
+        } elseif ($this->document >= self::LEVEL_PRIMARY && $this->document < self::LEVEL_DANGER) {
             $level = 'primary';
-        } elseif ($this->article >= self::LEVEL_DANGER) {
+        } elseif ($this->document >= self::LEVEL_DANGER) {
             $level = 'danger';
         }
         return $level;
     }
 
-    public function getArticles()
+    public function getDocuments()
     {
         return $this->hasMany(Document::className(), ['id' => 'article_id'])
             ->viaTable('{{%article_tag}}', ['tag_id' => 'id'])->published();
@@ -79,6 +80,6 @@ class Tag extends \yii\db\ActiveRecord
      */
     public function afterDeleteInternal($event)
     {
-        ArticleTag::deleteAll(['tag_id' => $event->sender->id]);
+        DocumentTag::deleteAll(['tag_id' => $event->sender->id]);
     }
 }

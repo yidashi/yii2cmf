@@ -4,6 +4,8 @@ namespace backend\controllers;
 
 use backend\models\search\DocumentSearch;
 use common\components\Controller;
+use common\helpers\Tree;
+use common\models\Category;
 use common\models\Document;
 use common\models\DocumentModule;
 use Yii;
@@ -142,22 +144,15 @@ class DocumentController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Article model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param string $module 文章类型
-     * @return mixed
-     */
-    public function actionCreate($module = 'article')
+    public function actionCreate($cid = 1)
     {
         $model = new Document();
         $model->status = Document::STATUS_ACTIVE;
-        $model->module = $module;
-        $moduleModelClass = $model->findModuleClass($module);
+        $category = Category::findByIdOrSlug($cid);
+        $model->module = $module = $category->module;
+        $model->category_id = $category->id;
+        $moduleModelClass = $model->findModuleClass();
         $moduleModel = new $moduleModelClass;
-        $this->performAjaxValidation($model);
-        $this->performAjaxValidation($moduleModel);
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try{
@@ -181,37 +176,26 @@ class DocumentController extends Controller
             return $this->goBack();
         }
 
-        $articleModules = DocumentModule::find()->all();
-        $articleModuleItems = [];
-        foreach($articleModules as $articleModule) {
-            $articleModuleItem = [];
-            $articleModuleItem['label'] = $articleModule->title;
-            $articleModuleItem['url'] = ['/document/create', 'module' => $articleModule->name];
-            $articleModuleItem['active'] = $module == $articleModule->name;
-            $articleModuleItems[] = $articleModuleItem;
-        }
+        $categories = Category::lists();
+        $categories = array_map(function ($item) use ($cid) {
+            $item['label'] = $item['title'];
+            $item['url'] = empty($item['sons']) ? \url(['/document/create', 'cid' => $item['id']]) : '#';
+            $item['active'] = $cid == $item['id'];
+            return $item;
+        }, $categories);
+        $categories = Tree::build($categories, 'id', 'pid', 'items');
         return $this->render('create', [
             'model' => $model,
             'moduleModel' => $moduleModel,
             'module' => $module,
-            'articleModuleItems' => $articleModuleItems
+            'categories' => $categories,
         ]);
     }
 
-    /**
-     * Updates an existing Article model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
         $model = Document::find()->where(['id' => $id])->with('data')->one();
         $moduleModel = $model->data;
-        $this->performAjaxValidation($model);
-        $this->performAjaxValidation($moduleModel);
         if (Yii::$app->request->isPost) {
             $transaction = Yii::$app->db->beginTransaction();
             try {
@@ -241,14 +225,7 @@ class DocumentController extends Controller
             'module' => $model->module
         ]);
     }
-    /**
-     * Deletes an existing Article model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
-     * @return mixed
-     */
+
     public function actionDelete($id)
     {
         $this->findModel($id)->softDelete();

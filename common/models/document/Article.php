@@ -93,11 +93,11 @@ class Article extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        $article = Article::findOne(['id' => $this->id]);
-        if (!empty($article)) {
-            if (empty($article->description)) {
-                $article->description = $this->generateDesc($this->getProcessedContent());
-                $article->save();
+        $document = Document::findOne(['id' => $this->id]);
+        if (!empty($document)) {
+            if (empty($document->description)) {
+                $document->description = $this->generateDesc($this->getProcessedContent());
+                $document->save();
             }
         }
     }

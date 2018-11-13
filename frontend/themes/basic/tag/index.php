@@ -4,7 +4,7 @@
         <br>
         <div class="entry-content clearfix">
             <?php foreach ($hotModels as  $model) : ?>
-                <a class="btn btn-default" style="margin: 0 20px 20px 0;" href="<?= \yii\helpers\Url::to(['/article/tag', 'name' => $model->name]) ?>"><?= $model->name ?></a>
+                <a class="btn btn-default" style="margin: 0 20px 20px 0;" href="<?= \yii\helpers\Url::to(['/document/tag', 'name' => $model->name]) ?>"><?= $model->name ?></a>
             <?php endforeach; ?>
         </div>
         <br>
@@ -12,7 +12,7 @@
         <br>
         <div class="entry-content clearfix">
             <?php foreach ($models as  $model) : ?>
-            <a class="btn btn-default" style="margin: 0 20px 20px 0;" href="<?= \yii\helpers\Url::to(['/article/tag', 'name' => $model->name]) ?>"><?= $model->name ?></a>
+            <a class="btn btn-default" style="margin: 0 20px 20px 0;" href="<?= \yii\helpers\Url::to(['/document/tag', 'name' => $model->name]) ?>"><?= $model->name ?></a>
             <?php endforeach; ?>
         </div>
     </main>

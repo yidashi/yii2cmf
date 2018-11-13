@@ -2,8 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\Document;
 use common\models\Favourite;
-use common\models\Article;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -28,13 +28,13 @@ class FavouriteController extends \yii\web\Controller
     public function actionIndex()
     {
         \Yii::$app->response->format = 'json';
-        $articleId = \Yii::$app->request->post('id', 0);
-        if (empty($articleId)) {
+        $documentId = \Yii::$app->request->post('id', 0);
+        if (empty($documentId)) {
             throw new InvalidParamException('参数不合法');
         }
-        $article = Article::find()->where(['id' => $articleId])->normal()->one();
-        $favourite = Favourite::find()->where(['user_id' => \Yii::$app->user->id, 'article_id' => $articleId])->one();
-        if (empty($article)) {
+        $document = Document::find()->where(['id' => $documentId])->normal()->one();
+        $favourite = Favourite::find()->where(['user_id' => \Yii::$app->user->id, 'document_id' => $documentId])->one();
+        if (empty($document)) {
             if (!empty($favourite)) {
                 $favourite->delete();
             }
@@ -43,19 +43,19 @@ class FavouriteController extends \yii\web\Controller
         if (empty($favourite)) {
             $favourite = new Favourite();
             $favourite->user_id = \Yii::$app->user->id;
-            $favourite->article_id = $articleId;
+            $favourite->document_id = $documentId;
             $favourite->save();
-            $article->updateCounters(['favourite' => 1]);
+            $document->updateCounters(['favourite' => 1]);
             return [
                 'action' => 'create',
-                'count' => $article->favourite,
+                'count' => $document->favourite,
             ];
         } else {
             $favourite->delete();
-            $article->updateCounters(['favourite' => -1]);
+            $document->updateCounters(['favourite' => -1]);
             return [
                 'action' => 'cancel',
-                'count' => $article->favourite,
+                'count' => $document->favourite,
             ];
         }
     }

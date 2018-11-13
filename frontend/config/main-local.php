@@ -8,6 +8,12 @@ $config = [
         ],
         'urlManager' => [
             'rules' => [
+                [
+                    'class' => 'frontend\components\DocumentUrlRule',
+                ],
+                [
+                    'class' => 'frontend\components\PageRule',
+                ],
                 '/' => 'site/index',
                 '<controller:\w+>' => '<controller>/index',
             ]

@@ -8,11 +8,11 @@ use common\models\Category;
 /* @var $searchModel backend\models\search\DocumentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '文章';
+$this->title = '内容管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->beginBlock('content-header') ?>
-<?= $this->title . ' ' . Html::a('发布文章', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?= $this->title . ' ' . Html::a('发布内容', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
 <?php $this->endBlock() ?>
 <div class="article-index">
     <div class="box box-primary">
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         },
                         'enableSorting' => false
                     ],
-                    'category',
+                    'category.title:text:分类',
                     [
                         'label' => '标签',
                         'value' => function ($model) {

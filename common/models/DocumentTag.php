@@ -3,19 +3,19 @@
 namespace common\models;
 
 /**
- * This is the model class for table "pop_article_tag".
+ * This is the model class for table "{{%document_tag}}".
  *
- * @property integer $article_id
+ * @property integer $document_id
  * @property integer $tag_id
  */
-class ArticleTag extends \yii\db\ActiveRecord
+class DocumentTag extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%article_tag}}';
+        return '{{%document_tag}}';
     }
 
     /**
@@ -24,7 +24,7 @@ class ArticleTag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['article_id', 'tag_id'], 'integer']
+            [['document_id', 'tag_id'], 'integer']
         ];
     }
 
@@ -34,7 +34,7 @@ class ArticleTag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'article_id' => '文章',
+            'document_id' => '内容',
             'tag_id' => '标签',
         ];
     }

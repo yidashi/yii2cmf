@@ -1,10 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 /* @var $commentModel common\models\Comment */
-/* @var $hots common\models\Article */
-/* @var $model common\models\Article */
-/* @var $next common\models\Article */
-/* @var $prev common\models\Article */
+/* @var $hots common\models\Document[] */
+/* @var $model common\models\Document */
+/* @var $next common\models\Document */
+/* @var $prev common\models\Document */
 /* @var $commentModels common\models\Comment */
 /* @var $pages yii\data\Pagination */
 use yii\helpers\Html;
@@ -34,10 +34,10 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
             ])?>
         </span>
         <!--   打赏作者     -->
-        <?= \frontend\widgets\reward\RewardWidget::widget(['articleId' => $model->id])?>
+        <?= \frontend\widgets\reward\RewardWidget::widget(['documentId' => $model->id])?>
         <span class="vote">
-            <a class="up" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?=$model->upTotal?></em></a>
-            <a class="down" href="<?= Url::to(['/vote', 'id' => $model->id, 'type' => 'article', 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->isDown ? 'thumbs-down' : 'thumbs-o-down')?> <em><?= $model->downTotal ?></em></a></span>
+            <a class="up" href="<?= Url::to(['/vote/index', 'id' => $model->id, 'entity' => $model->getEntity(), 'action' => 'up'])?>" title="" data-toggle="tooltip" data-original-title="顶"><?= Html::icon($model->isUp ? 'thumbs-up' : 'thumbs-o-up')?> <em><?= $model->upTotal ?></em></a>
+                <a class="down" href="<?= Url::to(['/vote/index', 'id' => $model->id, 'entity' => $model->getEntity(), 'action' => 'down'])?>" title="" data-toggle="tooltip" data-original-title="踩"><?= Html::icon($model->isDown ? 'thumbs-down' : 'thumbs-o-down')?> <em><?=$model->downTotal?></em></a></span>
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>

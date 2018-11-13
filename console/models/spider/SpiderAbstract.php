@@ -2,9 +2,9 @@
 
 namespace console\models\spider;
 
-use common\models\Article;
-use common\models\ArticleData;
 use common\models\Category;
+use common\models\Document;
+use common\models\document\Article;
 use common\models\Gather;
 use common\models\Spider;
 use yii\base\Exception;
@@ -209,21 +209,21 @@ class SpiderAbstract extends Object
         if (!$categoryId) {
             throw new Exception('该分类不存在');
         }
-        $article = new Article();
-        $article->title = $title;
-        $article->status = 1;
-        $article->category = $category;
-        $article->category_id = $categoryId;
-        $article->source = $this->config['domain'];
-        $article->cover = $cover;
-        $article->created_at = $publish_at;
-        $article->user_id = 1;
-        $res = $article->save(false);
+        $document = new Document();
+        $document->title = $title;
+        $document->status = 1;
+        $document->category = $category;
+        $document->category_id = $categoryId;
+        $document->source = $this->config['domain'];
+        $document->cover = $cover;
+        $document->created_at = $publish_at;
+        $document->user_id = 1;
+        $res = $document->save(false);
         if ($res) {
-            $articleData = new ArticleData();
-            $articleData->id = $article->id;
-            $articleData->content = $content;
-            $res = $articleData->save(false);
+            $article = new Article();
+            $article->id = $document->id;
+            $article->content = $content;
+            $res = $article->save(false);
         }
 
         return $res ? 1 : 0;

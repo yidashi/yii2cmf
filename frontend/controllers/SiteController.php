@@ -5,7 +5,6 @@ namespace frontend\controllers;
 use common\models\Category;
 use common\models\Document;
 use frontend\services\TagService;
-use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -83,10 +82,10 @@ class SiteController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
         \Yii::$container->set('yii\web\XmlResponseFormatter', ['rootTag' => 'urlset', 'itemTag' => 'url']);
         $urls = [];
-        $models = Article::find()->published()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
+        $models = Document::find()->published()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
         foreach ($models as $model) {
             $url = [];
-            $url['loc'] = Url::to(['/article/view', 'id' => $model->id], true);
+            $url['loc'] = Url::to(['/document/view', 'id' => $model->id], true);
             $urls[] = $url;
         }
 
