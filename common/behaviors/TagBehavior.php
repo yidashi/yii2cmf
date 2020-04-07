@@ -9,13 +9,18 @@
 namespace common\behaviors;
 
 
-use common\models\ArticleTag;
+use common\models\DocumentTag;
 use common\models\Tag;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 class TagBehavior extends Behavior
 {
+    /**
+     * @var ActiveRecord
+     */
+    public $owner;
+
     private $_tags;
 
     public static $formName = "tagItems";
@@ -36,10 +41,11 @@ class TagBehavior extends Behavior
     {
 
     }
+
     public function getTags()
     {
         return $this->owner->hasMany(Tag::className(), ['id' => 'tag_id'])
-            ->viaTable('{{%article_tag}}', ['article_id' => 'id']);
+            ->viaTable('{{%document_tag}}', ['document_id' => 'id']);
     }
 
     public function getTagItems()
@@ -53,6 +59,11 @@ class TagBehavior extends Behavior
         return $this->_tags;
     }
 
+    public function setTagItems($value)
+    {
+        $this->_tags = $value;
+    }
+
     public function getTagNames()
     {
         return join(' ', $this->getTagItems());
@@ -63,27 +74,24 @@ class TagBehavior extends Behavior
         if (\Yii::$app->request->isConsoleRequest ) {
             return;
         }
-        $data = \Yii::$app->request->post($this->owner->formName());
-        if(isset($data[static::$formName])) {
+        if ($this->_tags) {
             if(!$this->owner->isNewRecord) {
                 $this->beforeDelete();
             }
-            if (!empty($data[static::$formName])) {
-                $tags = $data[static::$formName];
-                foreach ($tags as $tag) {
-                    $tagModel = Tag::findOne(['name' => $tag]);
-                    if (empty($tagModel)) {
-                        $tagModel = new Tag();
-                        $tagModel->name = $tag;
-                        $tagModel->save();
-                    }
-                    $articleTag = new ArticleTag();
-                    $articleTag->article_id = $this->owner->id;
-                    $articleTag->tag_id = $tagModel->id;
-                    $articleTag->save();
+            $tags = $this->_tags;
+            foreach ($tags as $tag) {
+                $tagModel = Tag::findOne(['name' => $tag]);
+                if (empty($tagModel)) {
+                    $tagModel = new Tag();
+                    $tagModel->name = $tag;
+                    $tagModel->save();
                 }
-                Tag::updateAllCounters(['article' => 1], ['name' => $tags]);
+                $articleTag = new DocumentTag();
+                $articleTag->document_id = $this->owner->id;
+                $articleTag->tag_id = $tagModel->id;
+                $articleTag->save();
             }
+            Tag::updateAllCounters(['document' => 1], ['name' => $tags]);
         }
     }
 
@@ -96,9 +104,9 @@ class TagBehavior extends Behavior
         }
 
         if (count($pks)) {
-            Tag::updateAllCounters(['article' => -1], ['in', 'id', $pks]);
+            Tag::updateAllCounters(['document' => -1], ['in', 'id', $pks]);
         }
-        Tag::deleteAll(['article' => 0]);
-        ArticleTag::deleteAll(['article_id' => $this->owner->id]);
+        Tag::deleteAll(['document' => 0]);
+        DocumentTag::deleteAll(['document_id' => $this->owner->id]);
     }
 }

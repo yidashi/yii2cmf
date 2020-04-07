@@ -29,7 +29,7 @@ class BaseAttachAttribute extends Behavior
     public function events()
     {
         return [
-            ActiveRecord::EVENT_AFTER_FIND => 'afterFind'
+//            ActiveRecord::EVENT_AFTER_FIND => 'afterFind'
         ];
     }
 
@@ -52,7 +52,7 @@ class BaseAttachAttribute extends Behavior
     public function __get($name)
     {
         if ($name == $this->attribute) {
-            return $this->value;
+            return $this->getValue();
         }
         return parent::__get($name);
 

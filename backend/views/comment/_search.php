@@ -6,7 +6,7 @@ use common\models\Category;
 use common\helpers\Tree;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\search\ArticleSearch */
+/* @var $model backend\models\search\DocumentSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <div class="box box-primary">

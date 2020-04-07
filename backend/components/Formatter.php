@@ -27,4 +27,12 @@ class Formatter extends \yii\i18n\Formatter
         }
         return Html::tag('span', $value, ['class' => 'text-' . $color]);
     }
+
+    public function asUnit($value, $unit = '')
+    {
+        if ($value === null) {
+            return $this->nullDisplay;
+        }
+        return $value . $unit;
+    }
 }

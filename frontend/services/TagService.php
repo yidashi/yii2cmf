@@ -13,6 +13,6 @@ class TagService
 {
     public static function hot()
     {
-        return \common\models\Tag::find()->orderBy('article desc')->limit(20)->all();
+        return \common\models\Tag::find()->orderBy('document desc')->limit(20)->all();
     }
 }

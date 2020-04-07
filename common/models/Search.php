@@ -16,7 +16,7 @@ class Search extends ActiveRecord
 {
     public function getArticle()
     {
-        return Article::findOne($this->id);
+        return Document::findOne($this->id);
     }
     public function getTrueView()
     {

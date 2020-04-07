@@ -20,8 +20,8 @@ class m130524_201442_init extends Migration
             'ip' => Schema::TYPE_BIGINT . "(20) NOT NULL DEFAULT '0'",
         ], $this->tableOptions);
 
-// article
-        $this->createTable('{{%article}}', [
+// document
+        $this->createTable('{{%document}}', [
             'id' => Schema::TYPE_PK,
             'title' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '标题'",
             'category' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '分类'",
@@ -40,18 +40,18 @@ class m130524_201442_init extends Migration
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
-        $this->createIndex('index_published_at', '{{%article}}', 'published_at');
-// article_data
-        $this->createTable('{{%article_data}}', [
+        $this->createIndex('index_published_at', '{{%document}}', 'published_at');
+// document_article
+        $this->createTable('{{%document_article}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL",
             'markdown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
             'PRIMARY KEY (id)',
         ], $this->tableOptions);
 
-// article_tag
-        $this->createTable('{{%article_tag}}', [
-            'article_id' => Schema::TYPE_INTEGER . "(10) NOT NULL",
+// document_tag
+        $this->createTable('{{%document_tag}}', [
+            'document_id' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'tag_id' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
 // meta
@@ -80,7 +80,7 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
             'slug' => Schema::TYPE_STRING . "(20) NOT NULL",
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
-            'article' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
+            'document' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'allow_publish' => $this->smallInteger(1)->defaultValue('1')->comment('是否允许发布内容')
         ], $this->tableOptions);
@@ -114,7 +114,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%favourite}}', [
             'id' => Schema::TYPE_PK,
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
-            'article_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'document_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'created_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
 
@@ -141,7 +141,7 @@ class m130524_201442_init extends Migration
 // reward
         $this->createTable('{{%reward}}', [
             'id' => Schema::TYPE_PK,
-            'article_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'document_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'user_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'money' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'comment' => $this->string(50)->defaultValue('')->comment('留言'),
@@ -193,7 +193,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%tag}}', [
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . "(100) NOT NULL",
-            'article' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的文章数'",
+            'document' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的文章数'",
         ], $this->tableOptions);
 
 // vote
@@ -245,9 +245,9 @@ class m130524_201442_init extends Migration
     {
         $this->execute('SET foreign_key_checks = 0');
         $this->dropTable('{{%admin_log}}');
-        $this->dropTable('{{%article}}');
-        $this->dropTable('{{%article_data}}');
-        $this->dropTable('{{%article_tag}}');
+        $this->dropTable('{{%document}}');
+        $this->dropTable('{{%document_article}}');
+        $this->dropTable('{{%document_tag}}');
         $this->dropTable('{{%meta}}');
         $this->dropTable('{{%auth}}');
         $this->dropTable('{{%category}}');

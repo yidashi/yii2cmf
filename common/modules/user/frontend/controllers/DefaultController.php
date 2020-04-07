@@ -8,10 +8,10 @@
 
 namespace common\modules\user\frontend\controllers;
 
+use common\models\Document;
 use common\models\Favourite;
 use common\models\Sign;
 use common\modules\user\models\User;
-use common\models\Article;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\Expression;
@@ -70,7 +70,7 @@ class DefaultController extends Controller
 
     public function actionArticleList()
     {
-        $query = Article::find()->my()->notTrashed();
+        $query = Document::find()->my()->notTrashed();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
@@ -81,14 +81,14 @@ class DefaultController extends Controller
         ]);
         $pages = $dataProvider->getPagination();
         $models = $dataProvider->getModels();
-        return $this->render('article/list', [
+        return $this->render('document/list', [
             'models' => $models,
             'pages' => $pages,
         ]);
     }
     public function actionCreateArticle($module = 'base')
     {
-        $model = new Article(['module' => $module]);
+        $model = new Document(['module' => $module]);
         $moduleClass = $model->findModuleClass();
         $moduleModel = new $moduleClass();
         if ($model->load(\Yii::$app->request->post()) && $moduleModel->load(\Yii::$app->request->post()) && $model->validate() && $moduleModel->validate() && $model->save(false)) {
@@ -99,14 +99,14 @@ class DefaultController extends Controller
             }
         }
 
-        return $this->render('article/create', [
+        return $this->render('document/create', [
             'model' => $model,
             'moduleModel' => $moduleModel
         ]);
     }
     public function actionUpdateArticle($id)
     {
-        $model = Article::find()->where(['id' => $id])->my()->with('data')->one();
+        $model = Document::find()->where(['id' => $id])->my()->with('data')->one();
         if ($model == null) {
             throw new NotFoundHttpException('文章不存在或者不属于你');
         }
@@ -123,7 +123,7 @@ class DefaultController extends Controller
             return $this->redirect(['update-article', 'id' => $id]);
         }
 
-        return $this->render('article/update', [
+        return $this->render('document/update', [
             'model' => $model,
             'moduleModel' => $moduleModel
         ]);
@@ -131,7 +131,7 @@ class DefaultController extends Controller
 
     public function actionDeleteArticle($id)
     {
-        $model = Article::find()->where(['id' => $id])->my()->one();
+        $model = Document::find()->where(['id' => $id])->my()->one();
         if ($model == null) {
             throw new NotFoundHttpException('文章不存在或者不属于你');
         }

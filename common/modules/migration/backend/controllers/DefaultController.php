@@ -27,22 +27,21 @@ class DefaultController extends Controller
         $upStr = new OutputString();
         $downStr = new OutputString();
 
-        if ($model->load(\Yii::$app->getRequest()
-            ->post())) {
-            if (! empty($model->tableSchemas)) {
-                list ($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption);
+        if ($model->load(\Yii::$app->getRequest()->post())) {
+            if (!empty($model->tableSchemas)) {
+                list($up, $down) = $this->generalTableSchemas($model->tableSchemas, $model->tableOption);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
             
-            if (! empty($model->tableDatas)) {
+            if (!empty($model->tableDatas)) {
                 list ($up, $down) = $this->generalTableDatas($model->tableDatas);
                 $upStr->outputStringArray = array_merge($upStr->outputStringArray, $up->outputStringArray);
                 $downStr->outputStringArray = array_merge($downStr->outputStringArray, $down->outputStringArray);
             }
             
             $path = Yii::getAlias($model->migrationPath);
-            if (! is_dir($path)) {
+            if (!is_dir($path)) {
                 FileHelper::createDirectory($path);
             }
             

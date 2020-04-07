@@ -15,14 +15,14 @@ use yii\helpers\Html;
     'header' => '<h2>您的支持将鼓励作者继续创作</h2>'
 ])?>
 <?php $form = \yii\widgets\ActiveForm::begin(['action' => ['/reward/index']])?>
-<?= $form->field($model, 'article_id')->hiddenInput()->label(false) ?>
+<?= $form->field($model, 'document_id')->hiddenInput()->label(false) ?>
 <?= $form->field($model, 'money')?>
 <?= $form->field($model, 'comment')?>
 <div class="clearfix">
     <div class="pull-right">
         <?= Html::button('取消打赏', ['class' => 'btn btn-default', 'data-dismiss' => 'modal'])?>
         <?php if(Yii::$app->user->isGuest) : ?>
-        <?= Html::a('登录', ['/site/login'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('登录', ['/user/security/login'], ['class' => 'btn btn-primary']) ?>
         <?php  else: ?>
         <?= Html::submitButton('确认打赏', ['class' => 'btn btn-primary'])?>
         <?php endif; ?>

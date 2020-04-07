@@ -95,23 +95,23 @@ class Notify extends \yii\db\ActiveRecord
         $extra = Json::decode($this->extra);
         switch ($this->category_id) {
             case NotifyCategory::REWARD:
-                return Html::a($extra['article_title'], ['/article/view', 'id' => $extra['article_id']]);
+                return Html::a($extra['article_title'], ['/document/view', 'id' => $extra['article_id']]);
                 break;
             case NotifyCategory::UP_ARTICLE:
-                return Html::a($extra['entity_title'], ['/article/view', 'id' => $extra['entity_id']]);
+                return Html::a($extra['entity_title'], ['/document/view', 'id' => $extra['entity_id']]);
                 break;
             case NotifyCategory::UP_COMMENT:
-                if ($extra['entity'] == 'common\\models\\Article') {
-                    return Html::a($extra['comment_title'], ['/article/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']]);
+                if ($extra['entity'] == 'common\\models\\Document') {
+                    return Html::a($extra['comment_title'], ['/document/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']]);
                 } else {
                     return Html::a($extra['comment_title'], ['/suggest/index', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']]);
                 }
                 break;
             case NotifyCategory::FAVOURITE:
-                return Html::a($extra['entity_title'], ['/article/view', 'id' => $extra['entity_id']]);
+                return Html::a($extra['entity_title'], ['/document/view', 'id' => $extra['entity_id']]);
                 break;
             case NotifyCategory::COMMENT_ARTICLE:
-                return Html::a($extra['entity_title'], ['/article/view', 'id' => $extra['entity_id']]);
+                return Html::a($extra['entity_title'], ['/document/view', 'id' => $extra['entity_id']]);
                 break;
             case NotifyCategory::COMMENT_SUGGEST:
                 return Html::a($extra['entity_title'], ['/suggest/view', 'id' => $extra['entity_id']]);
@@ -145,14 +145,14 @@ class Notify extends \yii\db\ActiveRecord
                 return ['/message/index'];
                 break;
             case NotifyCategory::COMMENT_ARTICLE:
-                return ['/article/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
+                return ['/document/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 break;
             case NotifyCategory::COMMENT_SUGGEST:
                 return ['/suggest/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 break;
             case NotifyCategory::REPLY:
-                if ($extra['entity'] == 'common\\models\\Article') {
-                    return ['/article/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
+                if ($extra['entity'] == 'common\\models\\Document') {
+                    return ['/document/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 }else if ($extra['entity'] == 'common\\modules\\book\\models\\Book') {
                     return ['/book/view', 'id' => $extra['entity_id'], '#' => 'comment-' . $extra['comment_id']];
                 }else if ($extra['entity'] == 'common\\modules\\book\\models\\BookChapter') {

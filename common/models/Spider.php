@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\models\document\Article;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;
@@ -9,7 +10,7 @@ use yii\bootstrap\Html;
 use yii\helpers\FileHelper;
 
 /**
- * This is the model class for table "pop_spider".
+ * This is the model class for table "{{%spider}}".
  *
  * @property integer $id
  * @property string $name
@@ -101,13 +102,13 @@ class Spider extends \yii\db\ActiveRecord
                         return Html::img(Yii::$app->storage->path2url($imgPath));
                     }
                 }, $content);
-                $article = new Article();
+                $article = new Document();
                 $article->title = $title;
-                $article->status = Article::STATUS_ACTIVE;
+                $article->status = Document::STATUS_ACTIVE;
                 $article->category_id = $category->id;
                 $article->source = $spider->domain;
                 $article->save();
-                $articleData = new ArticleData();
+                $articleData = new Article();
                 $articleData->content = $content;
                 $articleData->markdown = 0;
                 $article->link('data', $articleData);

@@ -11,7 +11,7 @@ namespace api\modules\v1\models;
 
 use yii\helpers\ArrayHelper;
 
-class Article extends \common\models\Article
+class Document extends \common\models\Document
 {
     public function fields()
     {

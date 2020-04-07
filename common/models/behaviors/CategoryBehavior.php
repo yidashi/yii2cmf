@@ -8,8 +8,7 @@
 
 namespace common\models\behaviors;
 
-
-use common\models\Article;
+use common\models\Document;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
@@ -27,7 +26,7 @@ class CategoryBehavior extends Behavior
         // 如果修改了分类名,更新文章表分类名冗余字段
         $changedAttributes = $event->changedAttributes;
         if (isset($changedAttributes['title'])) {
-            Article::updateAll(['category' => $event->sender->title], ['category_id' => $event->sender->id]);
+            Document::updateAll(['category' => $event->sender->title], ['category_id' => $event->sender->id]);
         }
     }
 }
