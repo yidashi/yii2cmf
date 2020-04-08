@@ -24,7 +24,6 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%document}}', [
             'id' => Schema::TYPE_PK,
             'title' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '标题'",
-            'category' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '分类'",
             'category_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'status' => Schema::TYPE_BOOLEAN . " NOT NULL COMMENT '状态'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
@@ -45,7 +44,8 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%document_article}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL",
-            'markdown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
+            'markdown' => Schema::TYPE_TEXT . " NOT NULL",
+            'is_markdown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
             'PRIMARY KEY (id)',
         ], $this->tableOptions);
 
@@ -82,7 +82,9 @@ class m130524_201442_init extends Migration
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
             'document' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
-            'allow_publish' => $this->smallInteger(1)->defaultValue('1')->comment('是否允许发布内容')
+            'allow_publish' => $this->smallInteger(1)->defaultValue('1')->comment('是否允许发布内容'),
+            'list_template' => $this->string(50)->defaultValue('default'),
+            'content_template' => $this->string(50)->defaultValue('default'),
         ], $this->tableOptions);
 
 // comment

@@ -82,13 +82,17 @@ if (! function_exists('array_get')) {
 }
 
 if (! function_exists('p')) {
-
-    function p($var, $die = true)
+    function p()
     {
-        echo '<pre>' . print_r($var, true), '</pre>';
-        if ($die) {
-            die;
-        }
+        array_map(function ($var) {
+            if (!class_exists('Symfony\Component\VarDumper\VarDumper') || PHP_SAPI == 'cli' || strpos($_SERVER['HTTP_USER_AGENT'], 'Apache-HttpClient') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'curl') !== false || strpos($_SERVER['HTTP_USER_AGENT'], 'HTTPie') !== false) {
+                print_r($var);
+                echo PHP_EOL;
+            } else {
+                \Symfony\Component\VarDumper\VarDumper::dump($var);
+            }
+        }, func_get_args());
+        die(1);
     }
 }
 

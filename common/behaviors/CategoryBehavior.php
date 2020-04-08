@@ -31,21 +31,21 @@ class CategoryBehavior extends Behavior
      */
     public function afterSoftDeleteInternal($event)
     {
-        Category::updateAllCounters(['article' => -1], ['id' => $event->sender->category_id]);
+        Category::updateAllCounters(['document' => -1], ['id' => $event->sender->category_id]);
     }
     /**
      * 软删除文章还原后（更新分类文章数)
      */
     public function afterRestoreInternal($event)
     {
-        Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
+        Category::updateAllCounters(['document' => 1], ['id' => $event->sender->category_id]);
     }
     /**
      * 发布新文章后（更新分类文章数)
      */
     public function afterInsertInternal($event)
     {
-        Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
+        Category::updateAllCounters(['document' => 1], ['id' => $event->sender->category_id]);
     }
     /**
      * 修改文章后（如果修改了分类,更新分类文章数)
@@ -53,8 +53,8 @@ class CategoryBehavior extends Behavior
     public function afterUpdateInternal($event) {
         $changedAttributes = $event->changedAttributes;
         if (isset($changedAttributes['category_id'])) {
-            Category::updateAllCounters(['article' => 1], ['id' => $event->sender->category_id]);
-            Category::updateAllCounters(['article' => -1], ['id' => $changedAttributes['category_id']]);
+            Category::updateAllCounters(['document' => 1], ['id' => $event->sender->category_id]);
+            Category::updateAllCounters(['document' => -1], ['id' => $changedAttributes['category_id']]);
         }
     }
 }

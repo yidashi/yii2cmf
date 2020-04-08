@@ -22,7 +22,7 @@ abstract class Plugin extends PackageInfo implements BootstrapInterface
 
     public $aliases = [];
     /**
-     * @var string 模块所属应用ID(frontend,backend,wechat,api)
+     * @var string 模块所属应用ID(frontend,backend,api)
      */
     public $app = 'backend';
 

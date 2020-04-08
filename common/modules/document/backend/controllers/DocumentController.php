@@ -1,13 +1,12 @@
 <?php
 
-namespace backend\controllers;
+namespace common\modules\document\backend\controllers;
 
 use backend\models\search\DocumentSearch;
 use common\components\Controller;
 use common\helpers\Tree;
-use common\models\Category;
-use common\models\Document;
-use common\models\DocumentModule;
+use common\modules\document\models\Category;
+use common\modules\document\models\Document;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;

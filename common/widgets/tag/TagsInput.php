@@ -15,7 +15,7 @@ class TagsInput extends Select2
         'maximumInputLength' => 10
     ];
 
-    public $data;
+    public $data = [];
 
     public $ajaxUrl = ['/tag/search'];
 
