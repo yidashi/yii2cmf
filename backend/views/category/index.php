@@ -1,5 +1,6 @@
 <?php
 
+use common\models\DocumentModule;
 use yii\grid\GridView;
 use yii\helpers\Html;
 
@@ -26,11 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 'title',
                 'slug',
-                'article',
+                'document',
                 [
                     'attribute' => 'module',
                     'value' => function($model) {
-                        return $model->renderModule();
+                        return \yii\helpers\ArrayHelper::getValue(DocumentModule::getTypeEnum(), $model->module);
                     }
                 ],
                 [

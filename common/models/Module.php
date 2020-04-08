@@ -88,8 +88,8 @@ class Module extends \yii\db\ActiveRecord
         $modules = Yii::$app->cache->get(['modules', $type]);
         if ($modules === false) {
             $query = static::find();
-            $modules = $query->where(['status' => self::STATUS_OPEN])->andFilterWhere(['type' => $type])->all();
-            Yii::$app->cache->set(['modules', $type], $modules, 0);
+            $modules = $query->where(['status' => self::STATUS_OPEN])->andFilterWhere(['type' => $type])->indexBy('id')->all();
+            Yii::$app->cache->set(['modules', $type], $modules, 60*60*24);
         }
         return $modules;
     }

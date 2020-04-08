@@ -72,6 +72,7 @@ class Module extends \common\modules\Module implements BootstrapInterface
                 'on afterLogin' => function($event) {
                     $event->identity->touch('login_at');
                 },
+                'returnUrlParam' => '__returnUrlBackend',
                 'idParam' => '__idBackend',
                 'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
             ]);

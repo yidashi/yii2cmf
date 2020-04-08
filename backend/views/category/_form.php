@@ -24,7 +24,7 @@ use common\models\Category;
 
         <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'module')->checkboxList(\common\models\ArticleModule::getTypeEnum()) ?>
+        <?= $form->field($model, 'module')->dropDownList(\common\models\DocumentModule::getTypeEnum(), ['prompt' => '请选择']) ?>
 
         <?= $form->field($model, 'allow_publish')->radioList($model::getAllowPublishEnum()) ?>
 

@@ -13,26 +13,26 @@ $this->title = '控制面板';
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3><?= \common\models\Article::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
+                        <h3><?= \common\models\Document::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
                         <p>当前内容(文章)</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" target="_blank">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/document/index']) ?>" class="small-box-footer" target="_blank">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3><?= \common\models\Article::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
+                        <h3><?= \common\models\Document::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
                         <p>待审内容(文章)</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <a href="<?= Url::to(['/article/index']) ?>" class="small-box-footer" target="_blank">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="<?= Url::to(['/document/index']) ?>" class="small-box-footer" target="_blank">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div><!-- ./col -->
             <div class="col-md-3 col-xs-6">

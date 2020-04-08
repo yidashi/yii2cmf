@@ -6,7 +6,7 @@
  */
 namespace common\behaviors;
 
-use common\models\Article;
+use common\models\Document;
 use yii\base\Behavior;
 
 class PushBehavior extends Behavior
@@ -15,7 +15,7 @@ class PushBehavior extends Behavior
     {
         if (YII_ENV_PROD) {
             return [
-                Article::EVENT_AFTER_INSERT => [$this, 'pushBaidu'],
+                Document::EVENT_AFTER_INSERT => [$this, 'pushBaidu'],
             ];
         }
 

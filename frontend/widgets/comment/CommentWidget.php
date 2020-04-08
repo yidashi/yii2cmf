@@ -17,7 +17,7 @@ use yii\data\ActiveDataProvider;
 
 class CommentWidget extends Widget
 {
-    public $entity = 'common\models\Article';
+    public $entity = 'common\models\Document';
     public $entityId;
     /**
      * @var \yii\db\ActiveRecord

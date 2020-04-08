@@ -10,7 +10,7 @@ namespace api\modules\v1\controllers;
 
 
 use api\common\controllers\Controller;
-use api\modules\v1\models\Article;
+use api\modules\v1\models\Document;
 use common\models\Carousel;
 use common\models\CarouselItem;
 use yii\data\ActiveDataProvider;
@@ -33,7 +33,7 @@ class SiteController extends Controller
             $carousels[$k]['image'] = $item->image->url;
         }
         $dataProvider = new ActiveDataProvider([
-            'query' => Article::find()->published(),
+            'query' => Document::find()->published(),
             'sort' => [
                 'defaultOrder' => [
                     'id' => SORT_DESC

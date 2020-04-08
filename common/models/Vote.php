@@ -62,9 +62,9 @@ class Vote extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getArticle()
+    public function getDocument()
     {
-        return $this->hasOne(Article::className(), ['id' => 'entity_id']);
+        return $this->hasOne(Document::className(), ['id' => 'entity_id']);
     }
 
 }

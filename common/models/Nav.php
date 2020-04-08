@@ -51,21 +51,26 @@ class Nav extends \yii\db\ActiveRecord
 
     public static function getItems($key)
     {
-        $nav = self::find()->where(['key' => $key])->one();
-        if ($nav == null) {
-            return [];
-        }
-        $items = NavItem::find()->select('title label, url, target')
-            ->where(['nav_id' => $nav->id, 'status' => 1])
-            ->orderBy(['order' => SORT_ASC])
-            ->asArray()->all();
-        return array_map(function($value){
-            $value['url'] = Util::parseUrl($value['url']);
-            if ($value['target'] == 1) {
-                $value['linkOptions'] = ['target' => '_blank'];
+        $items = Yii::$app->cache->get('nav_' . $key);
+        if ($items === false) {
+            $nav = self::find()->where(['key' => $key])->one();
+            if ($nav == null) {
+                return [];
             }
-            return $value;
-        }, $items);
+            $items = NavItem::find()->select('title label, url, target')
+                ->where(['nav_id' => $nav->id, 'status' => 1])
+                ->orderBy(['order' => SORT_ASC])
+                ->asArray()->all();
+            $items = array_map(function($value){
+                $value['url'] = Util::parseUrl($value['url']);
+                if ($value['target'] == 1) {
+                    $value['linkOptions'] = ['target' => '_blank'];
+                }
+                return $value;
+            }, $items);
+            Yii::$app->cache->set('nav_' . $key, $items, 60*60*24);
+        }
+        return $items;
     }
 
 }

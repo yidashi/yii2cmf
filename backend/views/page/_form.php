@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'use_layout')->checkbox() ?>
 
         <?= $form->field($model, 'slug')->textInput(['maxlength' => true]) ?>
-
+        <?= $form->field($model, 'commentEnabled')->checkbox(['label' => '开启评论']) ?>
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => 'btn btn-flat bg-maroon btn-block']) ?>
         </div>

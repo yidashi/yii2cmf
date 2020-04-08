@@ -8,10 +8,21 @@ $config = [
         ],
         'urlManager' => [
             'rules' => [
+                [
+                    'class' => 'frontend\components\DocumentUrlRule',
+                ],
+                [
+                    'class' => 'frontend\components\PageRule',
+                ],
                 '/' => 'site/index',
                 '<controller:\w+>' => '<controller>/index',
             ]
         ]
     ],
 ];
+/*$config['bootstrap'][] = 'debug';
+$config['modules']['debug'] = [
+    'class' => 'yii\debug\Module',
+    'allowedIPs' => ['39.155.165.2'],
+];*/
 return $config;

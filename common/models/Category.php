@@ -13,7 +13,7 @@ use yii\caching\TagDependency;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "{{%article}}".
+ * This is the model class for table "{{%category}}".
  *
  * @property int $id
  * @property int $pid
@@ -42,7 +42,7 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
+            [['title', 'module'], 'required'],
             //中文没法自动生成slug，又没必要必填
             ['slug', 'default', 'value' => function ($model) {
                 return $model->title;
@@ -68,7 +68,7 @@ class Category extends \yii\db\ActiveRecord
             'description' => '分类介绍',
             'article' => '文章数', //冗余字段,方便查询
             'sort' => '排序',
-            'module' => '支持的文档类型',
+            'module' => '绑定的内容模型',
             'allow_publish' => '是否允许发布内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
@@ -127,7 +127,7 @@ class Category extends \yii\db\ActiveRecord
         if ($list === false) {
             $query = static::find();
             if ($module) {
-                $query->where(new Expression("FIND_IN_SET('{$module}', module) "));
+                $query->where(['module' => $module]);
             }
             $list = $query->asArray()->all();
             Yii::$app->cache->set(['categoryList', $module], $list, 0, new TagDependency(['tags' => ['categoryList']]));
@@ -183,26 +183,8 @@ class Category extends \yii\db\ActiveRecord
         ];
     }
 
-    public function beforeSave($insert)
+    public function __toString()
     {
-        if (parent::beforeSave($insert)) {
-            $this->module = implode(',', $this->module);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public function afterFind()
-    {
-        parent::afterFind();
-        $this->module = explode(',', $this->module);
-    }
-
-    public function renderModule($separator = ',')
-    {
-        return join($separator, array_map(function ($val) {
-            return array_get(ArticleModule::getTypeEnum(), $val);
-        }, $this->module));
+        return $this->title;
     }
 }
