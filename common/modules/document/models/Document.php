@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\modules\document\models;
 
 use common\behaviors\CategoryBehavior;
 use common\behaviors\CommentBehavior;
@@ -9,10 +9,9 @@ use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
 use common\behaviors\TagBehavior;
 use common\behaviors\VoteBehavior;
-use common\models\document\Article;
-use common\models\document\Exhibition;
-use common\models\query\DocumentQuery;
+use common\models\Favourite;
 use common\modules\attachment\behaviors\UploadBehavior;
+use common\modules\document\models\query\DocumentQuery;
 use common\modules\user\behaviors\UserBehavior;
 use Yii;
 use yii\base\InvalidParamException;
@@ -30,7 +29,6 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  * @property int $status
  * @property int $category_id
- * @property string $category
  * @property string $cover
  * @property string $source
  * @property string $description
@@ -43,7 +41,7 @@ use yii\behaviors\TimestampBehavior;
  * @property boolean $isUp read-only
  * @property boolean $isDown read-only
  * @property boolean $isFavourite read-only
- * @property Article|Exhibition $data
+ * @property Category $category
  */
 class Document extends \yii\db\ActiveRecord
 {

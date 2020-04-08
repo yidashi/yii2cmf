@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\modules\document\models;
 
 use common\behaviors\PositionBehavior;
 use common\behaviors\CacheInvalidateBehavior;
@@ -23,6 +23,8 @@ use yii\db\Expression;
  * @property int $created_at
  * @property int $updated_at
  * @property string $module
+ * @property string $list_template
+ * @property string $content_template
  * @property string $cover
  * @property int $allow_publish
  */
@@ -47,7 +49,7 @@ class Category extends \yii\db\ActiveRecord
             ['slug', 'default', 'value' => function ($model) {
                 return $model->title;
             }],
-            ['module', 'safe'],
+            [['module', 'list_template', 'content_template'], 'string'],
             [['pid', 'sort', 'allow_publish'], 'integer'],
             ['pid', 'default', 'value' => 0],
             [['sort'], 'default', 'value' => 0]
@@ -69,6 +71,8 @@ class Category extends \yii\db\ActiveRecord
             'article' => '文章数', //冗余字段,方便查询
             'sort' => '排序',
             'module' => '绑定的内容模型',
+            'list_template' => '列表模板',
+            'content_template' => '内容模板',
             'allow_publish' => '是否允许发布内容',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
@@ -98,7 +102,6 @@ class Category extends \yii\db\ActiveRecord
                 'tags' => [
                     'categoryList'
                 ]
-
             ]
         ];
     }

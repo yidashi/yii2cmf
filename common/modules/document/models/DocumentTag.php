@@ -1,6 +1,6 @@
 <?php
 
-namespace common\models;
+namespace common\modules\document\models;
 
 /**
  * This is the model class for table "{{%document_tag}}".

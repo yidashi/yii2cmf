@@ -111,7 +111,7 @@ class Block extends \yii\db\ActiveRecord
     {
         return [
             'text' => '文本块',
-            'article' => '文章块'
+            'document' => '内容块'
         ];
     }
 }

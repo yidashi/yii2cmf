@@ -6,9 +6,9 @@
  * Time: 上午10:19
  */
 
-namespace common\models\query;
+namespace common\modules\document\models\query;
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use yii\db\ActiveQuery;
 
 class DocumentQuery extends ActiveQuery

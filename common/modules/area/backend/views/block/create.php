@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     'items' => [
                         ['label' => '文本块', 'url' => ['create', 'type' => 'text'], 'active' => $model->type == 'text'],
-                        ['label' => '文章块', 'url' => ['create', 'type' => 'article'], 'active' => $model->type == 'article'],
+                        ['label' => '内容块', 'url' => ['create', 'type' => 'document'], 'active' => $model->type == 'document'],
                     ],
                 ]) ?>
             </div>

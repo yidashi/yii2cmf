@@ -1,6 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
+
+use common\modules\document\models\Document;
 use yii\helpers\Url;
 
 $this->title = '控制面板';
@@ -13,7 +15,7 @@ $this->title = '控制面板';
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3><?= \common\models\Document::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
+                        <h3><?= Document::find()->count() ?><sup style="font-size: 20px">篇</sup></h3>
                         <p>当前内容(文章)</p>
                     </div>
                     <div class="icon">
@@ -26,7 +28,7 @@ $this->title = '控制面板';
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3><?= \common\models\Document::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
+                        <h3><?= Document::find()->pending()->count() ?><sup style="font-size: 20px">篇</sup></h3>
                         <p>待审内容(文章)</p>
                     </div>
                     <div class="icon">

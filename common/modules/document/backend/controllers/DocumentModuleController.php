@@ -1,59 +1,52 @@
 <?php
 
-namespace backend\controllers;
+namespace common\modules\document\backend\controllers;
 
-use common\models\Category;
+use common\modules\document\models\DocumentModule;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\Url;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- * CaetgoryController implements the CRUD actions for Category model.
+ * ArticleModuleController implements the CRUD actions for ArticleModule model.
  */
-class CategoryController extends Controller
+class DocumentModuleController extends Controller
 {
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
         ];
     }
 
-    public function actions()
-    {
-        return [
-            'position' => [
-                'class' => 'backend\\actions\\Position',
-                'returnUrl' => Url::current()
-            ]
-        ];
-    }
     /**
-     * Lists all Category models.
-     *
+     * Lists all ArticleModule models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider(['query' => Category::find()->orderBy('sort asc')]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => DocumentModule::find(),
+        ]);
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'pagination' => false
         ]);
     }
+
     /**
-     * Displays a single Category model.
-     *
-     * @param int $id
-     *
+     * Displays a single ArticleModule model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -64,18 +57,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * Creates a new Category model.
+     * Creates a new ArticleModule model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
      * @return mixed
      */
-    public function actionCreate($id = 0)
+    public function actionCreate()
     {
-        $model = new Category();
-        $model->loadDefaultValues();
-        $model->pid = $id;
+        $model = new DocumentModule();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -84,11 +75,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Updates an existing Category model.
+     * Updates an existing ArticleModule model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
@@ -96,7 +85,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -105,11 +94,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Deletes an existing Category model.
+     * Deletes an existing ArticleModule model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     *
-     * @param int $id
-     *
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -120,18 +107,15 @@ class CategoryController extends Controller
     }
 
     /**
-     * Finds the Category model based on its primary key value.
+     * Finds the ArticleModule model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     *
-     * @param int $id
-     *
-     * @return Category the loaded model
-     *
+     * @param integer $id
+     * @return DocumentModule the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function findModel($id)
+    protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
+        if (($model = DocumentModule::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

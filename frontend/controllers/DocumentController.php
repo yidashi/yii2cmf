@@ -24,16 +24,17 @@ class DocumentController extends Controller
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionIndex($cate = null, $module = null)
+    public function actionIndex($cate, $module = null)
     {
         $query = Document::find()->published();
         $category = null;
-        if (!empty($cate)) {
-            $category = Category::findByIdOrSlug($cate);
-            if (empty($category)) {
-                throw new NotFoundHttpException('分类不存在');
-            }
-            $query = $query->andFilterWhere(['category_id' => $category->id]);
+        $category = Category::findByIdOrSlug($cate);
+        if (empty($category)) {
+            throw new NotFoundHttpException('分类不存在');
+        }
+        $query = $query->andFilterWhere(['category_id' => $category->id]);
+        if (empty($module)) {
+            $module = $category->module;
         }
         $query->andFilterWhere(['module' => $module]);
         $dataProvider = new ActiveDataProvider([
@@ -50,7 +51,8 @@ class DocumentController extends Controller
         ]);
         // 热门标签
         $hotTags = TagService::hot();
-        return $this->render('index', [
+        $template = $module . '/' . $category->list_template . '/index';
+        return $this->render($template, [
             'dataProvider' => $dataProvider,
             'category' => $category,
             'hotTags' => $hotTags
@@ -103,7 +105,8 @@ class DocumentController extends Controller
         // 上下一篇
         $next = Document::find()->andWhere(['>', 'id', $id])->one();
         $prev = Document::find()->andWhere(['<', 'id', $id])->orderBy('id desc')->one();
-        return $this->render($model->module . '/view', [
+        $template = $model->module . '/' . $model->category->content_template . '/view';
+        return $this->render($template, [
             'model' => $model,
             'hots' => $hots,
             'next' => $next,

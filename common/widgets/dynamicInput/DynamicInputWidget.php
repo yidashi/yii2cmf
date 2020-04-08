@@ -67,7 +67,6 @@ class DynamicInputWidget extends InputWidget
 
     public function run()
     {
-
         if ($this->hasModel()) {
             return $this->parseActive();
         } else {
@@ -78,6 +77,7 @@ class DynamicInputWidget extends InputWidget
     private function parse()
     {
         switch ($this->type) {
+            default:
             case 'text': // 文本框
                 $options = array_merge($this->inputOptions, $this->options);
                 return Html::textInput($this->name, $this->value, $options);
@@ -167,6 +167,7 @@ class DynamicInputWidget extends InputWidget
     private function parseActive()
     {
         switch ($this->type) {
+            default:
             case 'text': // 文本框
                 $options = array_merge($this->inputOptions, $this->options);
                 return Html::activeTextInput($this->model, $this->attribute, $options);
