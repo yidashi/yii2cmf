@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Category */
+/* @var $model \common\modules\document\models\Category */
 
 $this->title = '添加分类';
 $this->params['breadcrumbs'][] = ['label' => '分类', 'url' => ['index']];

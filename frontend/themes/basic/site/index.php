@@ -76,8 +76,8 @@ use yii\helpers\Url;
             <div class="panel-body">
                 <ul class="post-list">
                     <?php
-                        $recommentList = \frontend\services\DocumentService::tops();
-                    foreach ($recommentList as $item):
+                        $recommendList = \frontend\services\DocumentService::tops();
+                    foreach ($recommendList as $item):
                     ?>
                     <li><a href="<?= Url::to(['/document/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
                     <?php endforeach; ?>

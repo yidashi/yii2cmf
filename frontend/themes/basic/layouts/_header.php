@@ -2,6 +2,8 @@
 /**
  * @var \yii\web\View $this
  */
+
+use common\services\NavService;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 ?>
@@ -92,7 +94,7 @@ use yii\bootstrap\Nav;
     </div>
     <nav class="m-nav clearfix">
         <?php
-        $navItems = \common\models\Nav::getItems('header');
+        $navItems = NavService::getItems('header');
         \yii\widgets\Spaceless::begin();
         echo \yii\widgets\Menu::widget([
             'items' => $navItems,

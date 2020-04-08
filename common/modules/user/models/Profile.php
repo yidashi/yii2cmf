@@ -2,7 +2,7 @@
 
 namespace common\modules\user\models;
 
-use common\models\City;
+use common\modules\city\models\City;
 use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;

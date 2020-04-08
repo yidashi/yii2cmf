@@ -3,15 +3,15 @@
 use backend\widgets\ActiveForm;
 use backend\widgets\meta\MetaForm;
 use common\behaviors\TagBehavior;
+use common\widgets\dynamicInput\DynamicInputWidget;
 use common\widgets\tag\TagsInput;
 use yii\helpers\Html;
-use common\models\Category;
 use common\helpers\Tree;
 use common\modules\attachment\widgets\SingleWidget;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
-/* @var $moduleModel \common\models\document\Article */
+/* @var $model \common\modules\document\models\Document */
+/* @var $moduleModel \common\modules\document\models\document\Article */
 /* @var $form backend\widgets\ActiveForm */
 ?>
     <?php $form = ActiveForm::begin(); ?>
@@ -28,7 +28,7 @@ use common\modules\attachment\widgets\SingleWidget;
                     <?= $form->field($model, 'description')->textarea()?>
 
                     <?php foreach ($moduleModel->formAttributes() as $attribute): ?>
-                        <?= $form->field($moduleModel, $attribute)->widget(\common\widgets\dynamicInput\DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
+                        <?= $form->field($moduleModel, $attribute)->widget(DynamicInputWidget::className(), ['type' => $moduleModel->getAttributeType($attribute), 'data' => $moduleModel->getAttributeItems($attribute), 'options' => $moduleModel->getAttributeOptions($attribute)]) ?>
                     <?php endforeach; ?>
 
                     <?= $form->boxField($model, 'meta', ["collapsed" => true])->widget(MetaForm::className())->header("SEO"); ?>

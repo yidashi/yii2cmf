@@ -2,8 +2,6 @@
 
 namespace common\modules\document\models;
 
-use common\behaviors\CategoryBehavior;
-use common\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use common\behaviors\PushBehavior;
 use common\behaviors\SoftDeleteBehavior;
@@ -11,6 +9,7 @@ use common\behaviors\TagBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\Favourite;
 use common\modules\attachment\behaviors\UploadBehavior;
+use common\modules\document\behaviors\CategoryBehavior;
 use common\modules\document\models\query\DocumentQuery;
 use common\modules\user\behaviors\UserBehavior;
 use Yii;

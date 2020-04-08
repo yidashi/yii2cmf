@@ -6,7 +6,8 @@
  * Time: 上午12:06
  */
 /* @var $this \yii\web\View */
-use common\models\Nav as NavModel;
+
+use common\services\NavService;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\helpers\Html;
@@ -25,7 +26,7 @@ NavBar::begin([
         'class' => 'navbar-inverse'
     ],
 ]);
-$menuItems = NavModel::getItems('header');
+$menuItems = NavService::getItems('header');
 echo Nav::widget([
     'options' => ['class' => 'navbar-nav'],
     'items' => $menuItems,

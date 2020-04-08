@@ -1,9 +1,10 @@
 <?php
 
+use common\helpers\Tree;
+use common\modules\document\models\Category;
+use common\modules\document\models\Document;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Category;
-use common\helpers\Tree;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\search\DocumentSearch */
@@ -26,9 +27,7 @@ use common\helpers\Tree;
 
     <?= $form->field($model, 'category_id')->dropDownList(Category::getDropDownList(Tree::build(Category::lists())), ['prompt' => '全部']) ?>
 
-    <?= $form->field($model, 'status')->dropDownList($model->getStatusList(), ['prompt' => '全部']) ?>
-
-    <?= $form->field($model, 'module')->dropDownList(\common\models\DocumentModule::getTypeEnum(), ['prompt' => '全部']) ?>
+    <?= $form->field($model, 'status')->dropDownList(Document::getStatusList(), ['prompt' => '全部']) ?>
 
     <?= Html::submitButton(Html::icon('search'), ['class' => 'btn btn-primary btn-flat']) ?>
     <div class="error-summary hide"><ul></ul></div>

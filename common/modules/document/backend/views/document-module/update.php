@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Html;
+use common\modules\document\models\DocumentModule;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\DocumentModule */
+/* @var $model DocumentModule */
 
-$this->title = 'Update Article Module: ' . ' ' . $model->name;
+$this->title = '修改内容模型: ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Article Modules', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

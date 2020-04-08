@@ -8,13 +8,13 @@
 
 namespace frontend\widgets\slider;
 
-
 use common\helpers\Util;
 use common\models\Carousel as CarouselModel;
 use common\models\CarouselItem;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
+use Yii;
 
 class CarouselWidget extends Carousel
 {
@@ -43,7 +43,7 @@ class CarouselWidget extends Carousel
             CarouselModel::className(),
             $this->key
         ];
-        $items = \Yii::$app->cache->get($cacheKey);
+        $items = Yii::$app->cache->get($cacheKey);
         if ($items === false) {
             $items = [];
             $query = CarouselItem::find()
@@ -58,14 +58,14 @@ class CarouselWidget extends Carousel
                 /** @var $item \common\models\CarouselItem */
                 $items[$k]['content'] = Html::img($item->image);
                 if ($item->url) {
-                    $items[$k]['content'] = Html::a($items[$k]['content'], Util::parseUrl($item->url), ['target'=>'_blank']);
+                    $items[$k]['content'] = Html::a($items[$k]['content'], Util::parseUrl($item->url), ['target' => '_blank']);
                 }
 
                 if ($item->caption) {
                     $items[$k]['caption'] = $item->caption;
                 }
             }
-            \Yii::$app->cache->set($cacheKey, $items, 60*60*24*365);
+            Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24 * 365);
         }
         $this->items = $items;
         parent::init();
@@ -77,7 +77,6 @@ class CarouselWidget extends Carousel
     public function run()
     {
         if (!empty($this->items)) {
-            $content = '';
             $this->registerPlugin('carousel');
             $content = implode("\n", [
                 $this->renderIndicators(),

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model common\models\DocumentModule */
+/* @var $model \common\modules\document\models\DocumentModule */
 
 $this->title = 'Create Article Module';
 $this->params['breadcrumbs'][] = ['label' => 'Article Modules', 'url' => ['index']];

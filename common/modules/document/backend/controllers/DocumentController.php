@@ -2,11 +2,11 @@
 
 namespace common\modules\document\backend\controllers;
 
-use backend\models\search\DocumentSearch;
 use common\components\Controller;
 use common\helpers\Tree;
 use common\modules\document\models\Category;
 use common\modules\document\models\Document;
+use common\modules\document\models\DocumentSearch;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
@@ -107,6 +107,7 @@ class DocumentController extends Controller
      * @return array
      * @throws NotFoundHttpException
      * @throws \Exception
+     * @throws \Throwable
      */
     public function actionHardDelete()
     {

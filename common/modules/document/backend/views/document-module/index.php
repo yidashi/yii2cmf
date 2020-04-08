@@ -10,7 +10,7 @@ $this->title = 'Article Modules';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->beginBlock('content-header') ?>
-<?= $this->title . ' ' . Html::a('Create Article Module', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?= $this->title . ' ' . Html::a('新增内容模型', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
 <?php $this->endBlock() ?>
 
     <div class="box box-primary">

@@ -2,11 +2,12 @@
 
 use backend\widgets\ActiveForm;
 use backend\widgets\meta\MetaForm;
+use common\modules\document\models\Category;
+use common\modules\document\models\DocumentModule;
 use yii\helpers\Html;
-use common\models\Category;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Category */
+/* @var $model Category */
 /* @var $form backend\widgets\ActiveForm */
 ?>
 
@@ -28,7 +29,7 @@ use common\models\Category;
 
             <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'module')->dropDownList(\common\models\DocumentModule::getTypeEnum(), ['prompt' => '请选择']) ?>
+            <?= $form->field($model, 'module')->dropDownList(DocumentModule::getTypeEnum(), ['prompt' => '请选择']) ?>
         </div>
 
         <div class="tab-pane" id="tab_2">

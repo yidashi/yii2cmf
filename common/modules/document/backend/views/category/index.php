@@ -1,7 +1,6 @@
 <?php
 
-use common\models\DocumentModule;
-use yii\grid\GridView;
+use common\modules\document\models\DocumentModule;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */

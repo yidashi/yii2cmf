@@ -8,8 +8,7 @@
 
 namespace common\modules\city\controllers;
 
-
-use common\models\City;
+use common\modules\city\models\City;
 use yii\web\Controller;
 
 class DefaultController extends Controller

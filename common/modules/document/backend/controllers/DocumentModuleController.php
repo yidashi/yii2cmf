@@ -5,9 +5,9 @@ namespace common\modules\document\backend\controllers;
 use common\modules\document\models\DocumentModule;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ArticleModuleController implements the CRUD actions for ArticleModule model.

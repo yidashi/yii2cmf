@@ -8,13 +8,12 @@
 
 namespace common\modules\city\widgets;
 
-
-use common\models\City;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\widgets\InputWidget;
+use common\modules\city\models\City;
 
 class CityWidget extends InputWidget
 {

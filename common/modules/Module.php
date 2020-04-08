@@ -26,6 +26,8 @@ class Module extends \yii\base\Module
         } elseif (Yii::$app->id == 'backend') {
             $this->controllerNamespace = $class->getNamespaceName() . '\\backend\\controllers';
             $this->viewPath = $this->basePath . '/backend/views';
+        } elseif (Yii::$app->id == 'console') {
+            $this->controllerNamespace = $class->getNamespaceName() . '\\console\\controllers';
         }
     }
 }
