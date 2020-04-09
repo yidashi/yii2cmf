@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
+/* @var $model common\modules\document\models\Document */
 /* @var $moduleModel yii\db\ActiveRecord */
 
 $this->title = '更新内容';

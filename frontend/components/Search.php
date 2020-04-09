@@ -9,7 +9,7 @@
 namespace frontend\components;
 
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use common\models\Search as SearchModel;
 use yii\base\Component;
 use yii\data\ActiveDataProvider;

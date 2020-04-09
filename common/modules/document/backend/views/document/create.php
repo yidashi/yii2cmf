@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
-/* @var $model common\models\Document */
+/* @var $model common\modules\document\models\Document */
+/* @var $model common\modules\document\models\Document */
 /* @var $module string */
 
 $this->title = '发布内容';

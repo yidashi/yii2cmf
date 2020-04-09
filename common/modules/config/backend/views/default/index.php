@@ -5,7 +5,7 @@
  * Time: 18:01.
  */
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use backend\widgets\ActiveForm;
 
 $this->title = '网站设置';
 $this->params['breadcrumbs'][] = $this->title;

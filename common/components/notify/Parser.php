@@ -9,10 +9,10 @@
 namespace common\components\notify;
 
 
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\StringHelper;
 
-class Parser extends Object
+class Parser extends BaseObject
 {
     /**
      * Regex to get values between curly bracket {$value}.

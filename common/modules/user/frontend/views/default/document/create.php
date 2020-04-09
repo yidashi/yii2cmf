@@ -6,7 +6,7 @@
  */
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
+/* @var $model common\modules\document\models\Document */
 
 $this->title = '投稿';
 $this->params['breadcrumbs'][] = $this->title;

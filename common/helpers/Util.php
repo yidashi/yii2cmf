@@ -44,7 +44,7 @@ class Util
         return [
             'common\models\Suggest' => '留言',
             'common\models\Page' => '单页',
-            'common\models\Document' => '内容',
+            'common\modules\document\models\Document' => '内容',
             'common\modules\book\models\Book' => '书',
             'common\modules\book\models\BookChapter' => '书章节',
         ];

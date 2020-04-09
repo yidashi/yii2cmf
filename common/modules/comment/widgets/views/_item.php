@@ -35,7 +35,7 @@ use yii\helpers\HtmlPurifier;
                     <a href="<?= Url::to(['/user/default/index', 'id' => $son->user_id])?>" rel="author" data-original-title="<?= Html::encode($son->user->username) ?>" title=""><?= Html::encode($son->user->username) ?></a> 回复于 <?=date('Y-m-d H:i', $son->created_at)?>
                     <span class="pull-right"><a class="reply-btn j_replayAt" href="javascript:;">回复</a></span>
                 </div>
-                <div class="media-content" id="suggest-<?= $son->id ?>"><?= HtmlPurifier::process(Markdown::process(\common\models\Comment::process($son->content))) ?></div>
+                <div class="media-content" id="suggest-<?= $son->id ?>"><?= HtmlPurifier::process(Markdown::process(\common\modules\comment\models\Comment::process($son->content))) ?></div>
             </div>
         </div>
     <?php endforeach;?>

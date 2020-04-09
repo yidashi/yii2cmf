@@ -1,11 +1,10 @@
 <?php
 
-
 use kartik\select2\Select2;
 use rbac\models\Assignment;
 use yii\bootstrap\Alert;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use backend\widgets\ActiveForm;
 
 /**
  * @var $model Assignment

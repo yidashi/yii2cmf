@@ -3,6 +3,7 @@
 namespace common\modules\document\backend\controllers;
 
 use common\modules\document\models\Category;
+use Overtrue\Pinyin\Pinyin;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
@@ -136,5 +137,11 @@ class CategoryController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionGenerateSlug($title)
+    {
+        $pinyin = new Pinyin();
+        return $pinyin->permalink($title);
     }
 }

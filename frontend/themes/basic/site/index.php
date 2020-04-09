@@ -1,5 +1,7 @@
 <?php
 
+use common\modules\document\models\Document;
+use common\modules\document\services\DocumentService;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -20,15 +22,15 @@ use yii\helpers\Url;
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><span class="glyphicon glyphicon-list" aria-hidden="true" style="margin-right: 10px"></span><?= $category->title ?></h3>
-                        <div class="pull-right"><a href="<?= Url::to(['/document/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
+                        <div class="pull-right"><a href="<?= Url::to(['/document/default/index', 'cate' => $category->slug]) ?>" target="_blank">更多 >></a></div>
                     </div>
                     <div class="panel-body">
                         <ul class="category-article-list">
                             <?php
-                                $list = \common\models\Document::find()->published()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
+                                $list = Document::find()->published()->andWhere(['category_id' => $category->id])->orderBy('id desc')->limit(5)->all();
                             foreach ($list as $item) :
                             ?>
-                                <li><em><?= Yii::$app->formatter->asDate($item->published_at, 'php:m-d') ?></em> <a href="<?= Url::to(['/document/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
+                                <li><em><?= Yii::$app->formatter->asDate($item->published_at, 'php:m-d') ?></em> <a href="<?= Url::to(['/document/default/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
                                 <?php endforeach; ?>
                         </ul>
                     </div>
@@ -76,10 +78,10 @@ use yii\helpers\Url;
             <div class="panel-body">
                 <ul class="post-list">
                     <?php
-                        $recommendList = \frontend\services\DocumentService::tops();
+                        $recommendList = DocumentService::tops();
                     foreach ($recommendList as $item):
                     ?>
-                    <li><a href="<?= Url::to(['/document/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
+                    <li><a href="<?= Url::to(['/document/default/view', 'id' => $item->id]) ?>" title="<?= $item->title ?>" target="_blank"><?= $item->title ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

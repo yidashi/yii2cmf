@@ -8,7 +8,7 @@
 
 namespace common\modules\user\frontend\controllers;
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use common\models\Favourite;
 use common\models\Sign;
 use common\modules\user\models\User;

@@ -6,7 +6,7 @@
  */
 namespace frontend\controllers;
 
-use common\models\Comment;
+use common\modules\comment\models\Comment;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\helpers\Url;

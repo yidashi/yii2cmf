@@ -2,10 +2,8 @@
 /* @var $this yii\web\View */
 /* @var $model common\models\Carousel */
 
-$this->title = Yii::t('backend', 'Create {modelClass}', [
-    'modelClass' => 'Carousel',
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Carousels'), 'url' => ['index']];
+$this->title = '新建幻灯片';
+$this->params['breadcrumbs'][] = ['label' => '幻灯片', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="carousel-create">

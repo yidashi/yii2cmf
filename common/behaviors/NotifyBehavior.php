@@ -9,8 +9,8 @@
 namespace common\behaviors;
 
 
-use common\models\Comment;
-use common\models\Document;
+use common\modules\comment\models\Comment;
+use common\modules\document\models\Document;
 use common\models\Suggest;
 use common\models\Vote;
 use Yii;
@@ -39,7 +39,7 @@ class NotifyBehavior extends Behavior
     {
         $entity = get_class($event->sender);
         switch ($entity) {
-            case 'common\models\Comment':
+            case 'common\modules\comment\models\Comment':
                 $fromUid = $event->sender->user_id;
                 // 如果是回复,发站内信,通知什么的
                 if ($event->sender->parent_id > 0) {
@@ -53,7 +53,7 @@ class NotifyBehavior extends Behavior
                     ];
                 } else {
                     switch ($event->sender->entity) {
-                        case 'common\models\Document':
+                        case 'common\modules\document\models\Document':
                             $category = 'comment_article';
                             $document = Document::findOne($event->sender->entity_id);
                             $toUid = $document->user_id;
@@ -107,7 +107,7 @@ class NotifyBehavior extends Behavior
                 if ($event->sender->action == Vote::ACTION_UP) {
                     $fromUid = $event->sender->user_id;
                     switch ($event->sender->entity) {
-                        case 'common\models\Document':
+                        case 'common\modules\document\models\Document':
                             $category = 'up_article';
                             $document = Document::findOne($event->sender->entity_id);
                             $toUid = $document->user_id;
@@ -116,7 +116,7 @@ class NotifyBehavior extends Behavior
                                 'entity_id' => $document->id
                             ];
                             break;
-                        case 'common\models\Comment':
+                        case 'common\modules\comment\models\Comment':
                             $category = 'up_comment';
                             $comment = Comment::findOne($event->sender->entity_id);
                             $toUid = $comment->user_id;

@@ -1,11 +1,11 @@
 <?php
 
+use common\modules\document\models\DocumentModule;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use common\models\Category;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\search\DocumentSearch */
+/* @var $searchModel \common\modules\document\models\DocumentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '内容管理';
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'module',
                         'value' => function($model) {
-                            return array_get(\common\models\DocumentModule::getTypeEnum(), $model->module);
+                            return array_get(DocumentModule::getTypeEnum(), $model->module);
                         },
                         'enableSorting' => false
                     ],

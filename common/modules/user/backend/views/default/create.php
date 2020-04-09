@@ -1,21 +1,12 @@
 <?php
 
-/*
- * This file is part of the Dektrium project.
- *
- * (c) Dektrium project <http://github.com/dektrium>
- *
- * For the full copyright and license information, please view the LICENSE.md
- * file that was distributed with this source code.
- */
-
-use yii\bootstrap\ActiveForm;
+use backend\widgets\ActiveForm;
 use yii\bootstrap\Nav;
 use yii\helpers\Html;
 
 /**
  * @var yii\web\View 				$this
- * @var dektrium\user\models\User 	$user
+ * @var \common\modules\user\models\User 	$user
  */
 
 $this->title = '新建用户';

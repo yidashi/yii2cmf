@@ -4,14 +4,13 @@ use rbac\AutocompleteAsset;
 use rbac\models\Menu;
 use yii\helpers\Html;
 use yii\helpers\Json;
-use yii\widgets\ActiveForm;
+use backend\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model rbac\models\Menu */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
-
     <div class="box box-primary">
         <div class="box-body">
             <?php $form = ActiveForm::begin(); ?>

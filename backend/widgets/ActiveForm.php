@@ -12,14 +12,17 @@ use yii\helpers\ArrayHelper;
 use yii\base\Model;
 use yii\helpers\Url;
 
-class ActiveForm extends \yii\widgets\ActiveForm
+class ActiveForm extends \yii\bootstrap\ActiveForm
 {
+    public $layout = 'horizontal';
+
     public $fieldClass = 'backend\widgets\ActiveField';
     public $boxFieldClass = '\backend\widgets\BoxField';
 
     public function init()
     {
         parent::init();
+        $this->view->registerCss('.horizontal-form-hint {margin:5px 0 10px;color:#737373}');
         if (!isset($this->validationUrl)) {
             if (!empty($this->action)) {
                 $this->validationUrl = ArrayHelper::merge((array)$this->action, ['ajax-validate' => 1]);

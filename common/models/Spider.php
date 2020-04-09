@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use common\models\document\Article;
+use common\modules\document\models\Document\Article;
 use Goutte\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Yii;

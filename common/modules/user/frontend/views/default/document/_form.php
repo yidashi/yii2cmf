@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
+/* @var $model common\modules\document\models\Document */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,7 +19,7 @@ use yii\widgets\ActiveForm;
     <div class="col-lg-9">
         <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'category_id')->dropDownList(\common\models\Category::find()->where(['allow_publish' => 2])->select('title')->indexBy('id')->column()) ?>
+        <?= $form->field($model, 'category_id')->dropDownList(\common\modules\document\models\Category::find()->where(['allow_publish' => 2])->select('title')->indexBy('id')->column()) ?>
 
         <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 

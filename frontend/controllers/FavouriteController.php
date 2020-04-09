@@ -2,7 +2,7 @@
 
 namespace frontend\controllers;
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use common\models\Favourite;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;

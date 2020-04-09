@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'columns' => [
                 'id',
                 'name',
+                'description',
                 [
                     'attribute' => 'type',
                     'value' => function ($model) {

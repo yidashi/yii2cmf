@@ -12,7 +12,7 @@ return [
     'controllerMap' => [
         'schedule' => [
             'class' => \omnilight\scheduling\ScheduleController::className(),
-            'scheduleFile' => '@app/schedule.php'
+            'scheduleFile' => '@common/modules/schedule/schedule.php'
         ],
         'seed' => [
             'class' => 'yii\faker\FixtureController',

@@ -1,4 +1,4 @@
-<a href="<?=\yii\helpers\Url::to(['/document/view', 'id' => $model->document->id])?>"><?=$model->document->title?></a>
+<a href="<?=\yii\helpers\Url::to(['/document/default/view', 'id' => $model->document->id])?>"><?=$model->document->title?></a>
 <?= \yii\helpers\Html::a('取消', ['/favourite'], [
     'data' => [
         'method' => 'post',

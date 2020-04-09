@@ -6,10 +6,10 @@
  */
 namespace frontend\controllers;
 
-use common\models\Comment;
+use common\modules\comment\models\Comment;
 use common\models\Vote;
 use common\models\VoteInfo;
-use common\models\Document;
+use common\modules\document\models\Document;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -40,7 +40,7 @@ class VoteController extends Controller
         \Yii::$app->response->format = Response::FORMAT_JSON;
         $userId = \Yii::$app->user->id;
         $id = \Yii::$app->request->get('id');
-        $entity = \Yii::$app->request->get('entity', 'common\models\Document');
+        $entity = \Yii::$app->request->get('entity', 'common\modules\document\models\Document');
         $action = \Yii::$app->request->get('action', 'up');
         $actions = ['up', 'down'];
         array_splice($actions, array_search($action, $actions), 1);

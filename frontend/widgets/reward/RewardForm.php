@@ -9,7 +9,7 @@
 namespace frontend\widgets\reward;
 
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use common\models\Reward;
 use yii\base\Exception;
 use yii\base\Model;

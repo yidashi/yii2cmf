@@ -2,9 +2,9 @@
 
 namespace common\helpers;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
-class Dsn extends Object {
+class Dsn extends BaseObject {
 
     public $dsn;
 

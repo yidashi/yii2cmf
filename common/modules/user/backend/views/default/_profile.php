@@ -1,7 +1,7 @@
 <?php
 
 use common\modules\city\widgets\CityWidget;
-use yii\bootstrap\ActiveForm;
+use backend\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /**

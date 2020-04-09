@@ -9,7 +9,7 @@
 namespace common\modules\area\widgets;
 
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -30,7 +30,7 @@ class ArticleWidget extends Widget
                 ->all();
             $items = [];
             foreach ($articles as $article) {
-                $items[] = Html::a($article->title, ['/document/view', 'id' => $article->id]);
+                $items[] = Html::a($article->title, ['/document/default/view', 'id' => $article->id]);
             }
             $html = Html::ul($items, ['class' => 'post-list', 'encode' => false]);
             \Yii::$app->cache->set([__CLASS__, $this->model->block_id], $html);

@@ -36,8 +36,8 @@ class DocumentModule extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'title' => 'Title',
+            'name' => '标识',
+            'title' => '名称',
         ];
     }
 

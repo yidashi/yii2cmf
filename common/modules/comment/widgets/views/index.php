@@ -2,7 +2,8 @@
 /**
  * @var $this yii\web\View
  */
-?>
+
+use common\modules\comment\widgets\CommentEvent; ?>
 <style>
     .media-content img{width:80px;height:80px;margin-right:10px;}
 </style>
@@ -36,4 +37,4 @@
     })
 </script>
 <?php $this->endBlock() ?>
-<?php $this->trigger('afterComment', new \frontend\widgets\comment\CommentEvent(['entity' => $entity, 'entityId' => $entityId])) ?>
+<?php $this->trigger('afterComment', new CommentEvent(['entity' => $entity, 'entityId' => $entityId])) ?>

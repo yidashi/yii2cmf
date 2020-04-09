@@ -36,7 +36,8 @@ return [
                     'except'=>['yii\web\HttpException:*', 'yii\i18n\I18N\*'],
                     'prefix'=>function () {
                         $url = !Yii::$app->request->isConsoleRequest ? Yii::$app->request->getUrl() : null;
-                        return sprintf('[%s][%s]', Yii::$app->id, $url);
+                        $route = Yii::$app->requestedRoute;
+                        return sprintf('[%s][%s][%s]', Yii::$app->id, $route, $url);
                     },
                     'logVars'=>[],
                     'logTable'=>'{{%system_log}}'

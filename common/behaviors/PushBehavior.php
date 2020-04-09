@@ -6,7 +6,7 @@
  */
 namespace common\behaviors;
 
-use common\models\Document;
+use common\modules\document\models\Document;
 use yii\base\Behavior;
 
 class PushBehavior extends Behavior

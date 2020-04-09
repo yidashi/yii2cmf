@@ -9,7 +9,7 @@
 namespace plugins\danmu\controllers;
 
 use common\components\Controller;
-use common\models\Comment;
+use common\modules\comment\models\Comment;
 use common\modules\user\models\User;
 use yii\data\Pagination;
 use yii\helpers\HtmlPurifier;

@@ -2,9 +2,9 @@
 
 namespace frontend\controllers;
 
-use common\models\Category;
-use common\models\Document;
-use frontend\services\TagService;
+use common\modules\document\models\Category;
+use common\modules\document\models\Document;
+use common\modules\document\services\TagService;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -85,7 +85,7 @@ class SiteController extends Controller
         $models = Document::find()->published()->select('id')->orderBy(['id' => SORT_DESC])->each(20);
         foreach ($models as $model) {
             $url = [];
-            $url['loc'] = Url::to(['/document/view', 'id' => $model->id], true);
+            $url['loc'] = Url::to(['/document/default/view', 'id' => $model->id], true);
             $urls[] = $url;
         }
 

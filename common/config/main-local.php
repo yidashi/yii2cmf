@@ -36,11 +36,6 @@ $config = [
                 'port' => env('MAIL_PORT'),
                 'encryption' => env('MAIL_ENCRYPTION')
             ],
-        ],
-        'xunsearch' => [
-            'class' => 'hightman\xunsearch\Connection',
-            'iniDirectory' => '@common/config',    // 搜索 ini 文件目录，默认：@vendor/hightman/xunsearch/app
-            'charset' => 'utf-8',   // 指定项目使用的默认编码，默认即时 utf-8，可不指定
         ]
     ],
 ];

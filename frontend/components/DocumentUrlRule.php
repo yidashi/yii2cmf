@@ -8,16 +8,15 @@
 
 namespace frontend\components;
 
-
-use common\models\Category;
-use common\models\DocumentModule;
-use yii\base\Object;
+use common\modules\document\models\Category;
+use common\modules\document\models\DocumentModule;
+use yii\base\BaseObject;
 use yii\helpers\ArrayHelper;
 use yii\web\Request;
 use yii\web\UrlManager;
 use yii\web\UrlRuleInterface;
 
-class DocumentUrlRule extends Object implements UrlRuleInterface
+class DocumentUrlRule extends BaseObject implements UrlRuleInterface
 {
     /**
      * Parses the given request and returns the corresponding route and parameters.
@@ -44,11 +43,11 @@ class DocumentUrlRule extends Object implements UrlRuleInterface
                 }
                 $params['cate'] = $matches[3];
             }
-            return ['document/index', $params];
+            return ['document/document/index', $params];
             // 检查 $matches[1] 和 $matches[3]
             // 确认是否匹配到一个数据库中保存的模型和分类。
             // 如果匹配，设置参数 $params['module'] 和 / 或 $params['cate']
-            // 返回 ['document/index', $params]
+            // 返回 ['document/default/index', $params]
         }
         return false; // 本规则不会起作用
     }
@@ -62,7 +61,7 @@ class DocumentUrlRule extends Object implements UrlRuleInterface
      */
     public function createUrl($manager, $route, $params)
     {
-        if ($route === 'document/index') {
+        if ($route === 'document/document/index') {
             $url = '';
             if (isset($params['module'], $params['cate'])) {
                 $url = $params['module'] . '/' . $params['cate'];

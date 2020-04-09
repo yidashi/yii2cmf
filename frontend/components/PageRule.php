@@ -10,12 +10,12 @@ namespace frontend\components;
 
 
 use common\models\Page;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\web\Request;
 use yii\web\UrlManager;
 use yii\web\UrlRuleInterface;
 
-class PageRule extends Object implements UrlRuleInterface
+class PageRule extends BaseObject implements UrlRuleInterface
 {
     /**
      * Parses the given request and returns the corresponding route and parameters.
@@ -38,7 +38,7 @@ class PageRule extends Object implements UrlRuleInterface
             // 检查 $matches[1] 和 $matches[3]
             // 确认是否匹配到一个数据库中保存的模型和分类。
             // 如果匹配，设置参数 $params['module'] 和 / 或 $params['cate']
-            // 返回 ['document/index', $params]
+            // 返回 ['document/default/index', $params]
         }
         return false; // 本规则不会起作用
     }

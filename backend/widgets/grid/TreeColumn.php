@@ -5,7 +5,7 @@ namespace backend\widgets\grid;
 use Closure;
 use Yii;
 use yii\base\Model;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQueryInterface;
 use yii\helpers\ArrayHelper;
@@ -18,7 +18,7 @@ use yii\helpers\Inflector;
  *
  * @author Leandro Gehlen <leandrogehlen@gmail.com>
  */
-class TreeColumn extends Object
+class TreeColumn extends BaseObject
 {
     /**
      * @var TreeGrid the grid view object that owns this column.

@@ -25,6 +25,7 @@ class m130524_201442_init extends Migration
             'id' => Schema::TYPE_PK,
             'title' => Schema::TYPE_STRING . "(50) NOT NULL COMMENT '标题'",
             'category_id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
+            'module' => $this->string(50)->notNull()->comment('内容模型'),
             'status' => Schema::TYPE_BOOLEAN . " NOT NULL COMMENT '状态'",
             'view' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0'",
             'is_top' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否置顶'),
@@ -40,12 +41,36 @@ class m130524_201442_init extends Migration
             'updated_at' => Schema::TYPE_INTEGER . "(10) NOT NULL",
         ], $this->tableOptions);
         $this->createIndex('index_published_at', '{{%document}}', 'published_at');
+        //document_module
+        $this->createTable('{{%document_module}}', [
+            'id' => $this->primaryKey(),
+            'name' => $this->string(50),
+            'title' => $this->string(50),
+        ], $this->tableOptions);
+
 // document_article
         $this->createTable('{{%document_article}}', [
             'id' => Schema::TYPE_INTEGER . "(11) NOT NULL",
             'content' => Schema::TYPE_TEXT . " NOT NULL",
             'markdown' => Schema::TYPE_TEXT . " NOT NULL",
             'is_markdown' => $this->smallInteger(1)->notNull()->defaultValue(0)->comment('是否markdown格式'),
+            'PRIMARY KEY (id)',
+        ], $this->tableOptions);
+        $this->createTable('{{%document_exhibition}}', [
+            'id' => $this->integer(11),
+            'start_at' => $this->dateTime()->comment('开始时间'),
+            'end_at' => $this->dateTime()->comment('结束时间'),
+            'city' => $this->string(50)->comment('举办城市'),
+            'address' => $this->string(255)->comment('举办地址'),
+            'PRIMARY KEY (id)',
+        ], $this->tableOptions);
+        $this->createTable('{{%document_download}}', [
+            'id' => $this->integer(11),
+            'content' => $this->text(),
+            'PRIMARY KEY (id)',
+        ], $this->tableOptions);
+        $this->createTable('{{%document_photo}}', [
+            'id' => $this->integer(11),
             'PRIMARY KEY (id)',
         ], $this->tableOptions);
 
@@ -81,6 +106,7 @@ class m130524_201442_init extends Migration
             'slug' => Schema::TYPE_STRING . "(20) NOT NULL",
             'description' => Schema::TYPE_STRING . "(1000) NOT NULL DEFAULT ''",
             'document' => Schema::TYPE_INTEGER . "(10) NOT NULL DEFAULT '0'",
+            'module' => $this->string(50)->notNull()->comment('内容模型'),
             'sort' => Schema::TYPE_BOOLEAN . " NOT NULL DEFAULT '0'",
             'allow_publish' => $this->smallInteger(1)->defaultValue('1')->comment('是否允许发布内容'),
             'list_template' => $this->string(50)->defaultValue('default'),
@@ -195,7 +221,7 @@ class m130524_201442_init extends Migration
         $this->createTable('{{%tag}}', [
             'id' => Schema::TYPE_PK,
             'name' => Schema::TYPE_STRING . "(100) NOT NULL",
-            'document' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的文章数'",
+            'document' => Schema::TYPE_INTEGER . "(11) NOT NULL DEFAULT '0' COMMENT '有该标签的内容数'",
         ], $this->tableOptions);
 
 // vote
@@ -224,6 +250,14 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'user_id' => $this->integer(11)->notNull()
         ]);
+//schedule
+        $this->createTable('{{%schedule}}', [
+            'cron' => $this->string(255)->notNull()->comment('crontab表达式'),
+            'job' => $this->string(255)->notNull()->comment('命令'),
+            'created_at' => $this->integer()->notNull(),
+            'updated_at' => $this->integer()->notNull(),
+        ]);
+
         $this->insert('{{%page}}', [
             'use_layout' => 1,
             'content' => '关于我们',
@@ -240,6 +274,24 @@ class m130524_201442_init extends Migration
             'created_at' => time(),
             'updated_at' => time()
         ]);
+
+        $this->insert('{{%document_module}}', [
+            'name' => 'article',
+            'title' => '文章',
+        ]);
+        $this->insert('{{%document_module}}', [
+            'name' => 'exhibition',
+            'title' => '展会',
+        ]);
+        $this->insert('{{%document_module}}', [
+            'name' => 'download',
+            'title' => '下载',
+        ]);
+        $this->insert('{{%document_module}}', [
+            'name' => 'photo',
+            'title' => '相册',
+        ]);
+
         $this->execute('SET foreign_key_checks = 1');
     }
 
@@ -249,6 +301,10 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%admin_log}}');
         $this->dropTable('{{%document}}');
         $this->dropTable('{{%document_article}}');
+        $this->dropTable('{{%document_module}}');
+        $this->dropTable('{{%document_exhibition}}');
+        $this->dropTable('{{%document_download}}');
+        $this->dropTable('{{%document_photo}}');
         $this->dropTable('{{%document_tag}}');
         $this->dropTable('{{%meta}}');
         $this->dropTable('{{%auth}}');
@@ -265,6 +321,7 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%tag}}');
         $this->dropTable('{{%vote}}');
         $this->dropTable('{{%vote_info}}');
+        $this->dropTable('{{%schedule}}');
         $this->execute('SET foreign_key_checks = 1');
     }
 }

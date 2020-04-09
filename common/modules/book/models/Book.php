@@ -4,7 +4,7 @@ namespace common\modules\book\models;
 
 use common\behaviors\CommentBehavior;
 use common\helpers\Tree;
-use common\models\Comment;
+use common\modules\comment\models\Comment;
 use common\modules\attachment\behaviors\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;

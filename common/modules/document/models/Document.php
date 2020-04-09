@@ -9,6 +9,7 @@ use common\behaviors\TagBehavior;
 use common\behaviors\VoteBehavior;
 use common\models\Favourite;
 use common\modules\attachment\behaviors\UploadBehavior;
+use common\modules\comment\behaviors\CommentBehavior;
 use common\modules\document\behaviors\CategoryBehavior;
 use common\modules\document\models\query\DocumentQuery;
 use common\modules\user\behaviors\UserBehavior;

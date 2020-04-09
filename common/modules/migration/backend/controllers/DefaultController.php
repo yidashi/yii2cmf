@@ -7,7 +7,7 @@ namespace migration\backend\controllers;
 use migration\AppUtility;
 use migration\models\MigrationUtility;
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\FileHelper;
 use yii\web\Controller;
 
@@ -227,7 +227,7 @@ class DefaultController extends Controller
  *        
  * @package c006\utility\migration\controllers
  */
-class OutputString extends Object
+class OutputString extends BaseObject
 {
 
     /**

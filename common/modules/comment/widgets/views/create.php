@@ -5,7 +5,7 @@
  * Time: 10:57.
  */
 /* @var $this yii\web\View */
-/* @var $model common\models\Document */
+/* @var $model common\modules\document\models\Document */
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

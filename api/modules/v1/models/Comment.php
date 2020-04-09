@@ -12,7 +12,7 @@ namespace api\modules\v1\models;
 use api\common\models\User;
 use yii\helpers\ArrayHelper;
 
-class Comment extends \common\models\Comment
+class Comment extends \common\modules\comment\models\Comment
 {
     public function getAuthor()
     {

@@ -2,15 +2,14 @@
 
 namespace common\modules\document\models;
 
-use common\behaviors\PositionBehavior;
 use common\behaviors\CacheInvalidateBehavior;
 use common\behaviors\MetaBehavior;
-use common\helpers\Tree;
-use common\models\behaviors\CategoryBehavior;
+use common\behaviors\PositionBehavior;
+use common\modules\document\behaviors\CategoryBehavior;
+use Overtrue\Pinyin\Pinyin;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\caching\TagDependency;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -68,7 +67,7 @@ class Category extends \yii\db\ActiveRecord
             'pid' => '上级分类',
             'ptitle' => '上级分类', // 非表字段,方便后台显示
             'description' => '分类介绍',
-            'article' => '文章数', //冗余字段,方便查询
+            'document' => '内容数', //冗余字段,方便查询
             'sort' => '排序',
             'module' => '绑定的内容模型',
             'list_template' => '列表模板',
@@ -89,7 +88,6 @@ class Category extends \yii\db\ActiveRecord
             [
                 'class' => MetaBehavior::className(),
             ],
-            CategoryBehavior::className(),
             'positionBehavior' => [
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'sort',
@@ -189,5 +187,17 @@ class Category extends \yii\db\ActiveRecord
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (empty($this->slug)) {
+                $pinyin = new Pinyin();
+                $this->slug = $pinyin->permalink($this->title);
+            }
+            return true;
+        }
+        return false;
     }
 }

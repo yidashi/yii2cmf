@@ -13,12 +13,12 @@ namespace common\components\notify;
 use common\models\Notify;
 use common\models\NotifyCategory;
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-class Handler extends Object
+class Handler extends BaseObject
 {
 
     public $notify;

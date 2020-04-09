@@ -10,7 +10,7 @@ namespace migration\console;
 
 use migration\models\MigrationUtility;
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Console;
 use yii\helpers\FileHelper;
 use migration\AppUtility;
@@ -230,7 +230,7 @@ class MigrateController extends \yii\console\controllers\MigrateController
  *
  * @package c006\utility\migration\controllers
  */
-class OutputString extends Object
+class OutputString extends BaseObject
 {
 
     /**
