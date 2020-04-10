@@ -44,12 +44,12 @@ class SystemLog extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'level' => Yii::t('app', 'Level'),
-            'category' => Yii::t('app', 'Category'),
-            'log_time' => Yii::t('app', 'Log Time'),
-            'prefix' => Yii::t('app', 'Prefix'),
-            'message' => Yii::t('app', 'Message'),
+            'id' => 'ID',
+            'level' => '日志级别',
+            'category' => '日志分类',
+            'log_time' => '日志时间',
+            'prefix' => '日志前缀',
+            'message' => '日志内容',
         ];
     }
 }

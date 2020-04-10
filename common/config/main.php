@@ -12,7 +12,7 @@ return [
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'cache' => [
@@ -30,17 +30,20 @@ return [
         ],
         'log' => [
             'targets' => [
-                'db'=>[
+                'db' => [
                     'class' => 'yii\log\DbTarget',
                     'levels' => ['warning', 'error'],
-                    'except'=>['yii\web\HttpException:*', 'yii\i18n\I18N\*'],
-                    'prefix'=>function () {
+                    'except' => [
+                        'yii\web\HttpException:4*',
+                        'yii\i18n\*'
+                    ],
+                    'prefix' => function () {
                         $url = !Yii::$app->request->isConsoleRequest ? Yii::$app->request->getUrl() : null;
                         $route = Yii::$app->requestedRoute;
                         return sprintf('[%s][%s][%s]', Yii::$app->id, $route, $url);
                     },
-                    'logVars'=>[],
-                    'logTable'=>'{{%system_log}}'
+                    'logVars' => [],
+                    'logTable' => '{{%system_log}}'
                 ],
             ]
         ],

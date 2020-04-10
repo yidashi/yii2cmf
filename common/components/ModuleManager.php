@@ -43,7 +43,6 @@ class ModuleManager extends PackageManager
         }
         $model = $module->getModel();
         $model->attributes = $module->info;
-        $model->type = Module::TYPE_CORE;
         $model->config = Json::encode($module->getInitConfig());
         $model->status = Module::STATUS_OPEN;
         return $model->save();

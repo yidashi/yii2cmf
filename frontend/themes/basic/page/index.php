@@ -21,7 +21,7 @@ list($this->title, $this->params['SEO_SITE_KEYWORDS'], $this->params['SEO_SITE_D
     <div class="page-content">
         <?= $page->getProcessedContent()?>
     </div>
-    <?= \frontend\widgets\comment\CommentWidget::widget([
+    <?= \common\modules\comment\widgets\CommentWidget::widget([
         'model' => $page
     ]) ?>
 </div>

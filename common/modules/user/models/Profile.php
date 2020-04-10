@@ -63,12 +63,12 @@ class Profile extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'money' => Yii::t('app', 'Money'),
-            'created_at' => Yii::t('app', 'Created At'),
-            'updated_at' => Yii::t('app', 'Updated At'),
-            'signature' => Yii::t('app', 'Signature'),
-            'avatar' => Yii::t('app', 'Avatar'),
-            'gender' => Yii::t('app', 'Gender'),
+            'money' => '积分',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
+            'signature' => '个性签名',
+            'avatar' => '头像',
+            'gender' => '性别',
             'locale' => '语言',
             'qq' => 'QQ',
             'phone' => '手机',
@@ -88,7 +88,7 @@ class Profile extends \yii\db\ActiveRecord
 
     public static function getGenderList()
     {
-        return [Yii::t('app', 'Male'), Yii::t('app', 'Famale')];
+        return ['男', '女'];
     }
 
     public static function getLocaleList()

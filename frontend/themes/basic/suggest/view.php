@@ -23,6 +23,6 @@ $this->params['breadcrumbs'][] = $model->title;
     <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d', $model->created_at) ?></span>
 </div>
 <div class="view-content"><?= \yii\helpers\HtmlPurifier::process(\yii\helpers\Markdown::process($model->content)) ?></div>
-<?= \frontend\widgets\comment\CommentWidget::widget([
+<?= \common\modules\comment\widgets\CommentWidget::widget([
     'model' => $model
 ]) ?>

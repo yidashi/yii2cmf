@@ -26,6 +26,6 @@ $this->params['breadcrumbs'][] = Html::encode($model->book_name);
 <!--分享-->
 <?= \common\widgets\share\Share::widget()?>
 <!-- 评论   -->
-<?= \frontend\widgets\comment\CommentWidget::widget(['model' => $model]) ?>
+<?= \common\modules\comment\widgets\CommentWidget::widget(['model' => $model]) ?>
 <?php $this->endContent() ?>
 <?php $this->registerJs("$('.view-content a').attr('target', '_blank');") ?>

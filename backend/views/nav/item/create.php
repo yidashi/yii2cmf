@@ -4,10 +4,8 @@
  * @var $nav common\models\Nav
  */
 
-$this->title = Yii::t('app', 'Create {modelClass}', [
-    'modelClass' => 'Nav Item',
-]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Nav Items'), 'url' => ['index']];
+$this->title = '新增导航项';
+$this->params['breadcrumbs'][] = ['label' => '导航项', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $nav->key, 'url' => ['update', 'id' => $nav->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Create');
 ?>

@@ -5,12 +5,12 @@
  * @version 2017-08-03 19:03:53
  */
 return [
-    'yii\bootstrap\BootstrapAsset' => [
+    /*'yii\bootstrap\BootstrapAsset' => [
         'sourcePath' => null,
         'css'=>[
             'http://image.51siyuan.cn/static/css/bootstrap.min.css'
         ]
-    ],
+    ],*/
     'yii\bootstrap\BootstrapPluginAsset' => [
         'sourcePath' => null,
         'js' => [

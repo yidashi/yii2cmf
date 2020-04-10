@@ -24,7 +24,7 @@ $form = ActiveForm::begin([
 
 <?= $form->field($model, 'template[category]')->label('分类')->dropDownList(\common\modules\document\models\Category::getDropDownList(), ['prompt' => '选择分类']) ?>
 
-<?=$form->field($model, 'template[order]')->label('排序')->radioList(['published_at' => '发布时间', 'view' => '点击量', 'favourite' => '收藏最多', 'is_hot' => '热门', 'is_top' => '置顶']) ?>
+<?=$form->field($model, 'template[order]')->label('排序')->radioList(['published_at' => '发布时间', 'view' => '点击量', 'favourite' => '收藏量', 'is_hot' => '热门', 'is_top' => '置顶']) ?>
 
 <?=$form->field($model, 'template[limit]')->label('数量')->textInput(['value' => 10]) ?>
 

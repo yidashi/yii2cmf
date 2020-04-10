@@ -34,6 +34,11 @@ abstract class Theme extends PackageInfo
         return dirname($class->getFileName());
     }
 
+    public function getModel()
+    {
+        // TODO: Implement getModel() method.
+    }
+
     public function bootstrap()
     {
     }

@@ -36,13 +36,13 @@
         "creocoder/yii2-flysystem": "*",
         "qiniu/php-sdk": "^7.1",
         "phpoffice/phpword": "^0.17.0",
-        "overtrue/pinyin": "^4.0"
+        "overtrue/pinyin": "^4.0",
+        "symfony/var-dumper": "^3.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
-        "yiisoft/yii2-faker": "*",
-        "symfony/var-dumper": "^3.4"
+        "yiisoft/yii2-faker": "*"
     },
     "autoload": {
         "files": [
