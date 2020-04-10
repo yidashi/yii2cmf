@@ -70,9 +70,9 @@ class BlockController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('common', 'updated success'));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'updated success'));
             } else {
-                Yii::$app->session->setFlash('error', Yii::t('common', 'updated error. {0}', $model->formatErrors()));
+                Yii::$app->session->setFlash('error', Yii::t('app', 'updated error. {0}', $model->formatErrors()));
             }
             return  $this->refresh();
         }

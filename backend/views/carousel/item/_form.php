@@ -8,7 +8,6 @@ use yii\helpers\Html;
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-
 <?php $form = ActiveForm::begin(); ?>
 <div class="row">
     <div class="col-md-6">
@@ -28,7 +27,7 @@ use yii\helpers\Html;
         <?= $form->field($model, 'status')->checkbox() ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton('保存', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
     </div>
 </div>

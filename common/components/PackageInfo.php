@@ -8,11 +8,7 @@
 
 namespace common\components;
 
-
-use common\models\Module;
 use yii\base\BaseObject;
-use Yii;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 /**
@@ -34,10 +30,11 @@ abstract class PackageInfo extends BaseObject
         'desc' => ''
     ];
 
-    final public function checkInfo(){
-        $info_check_keys = ['id','name','description','author','version'];
+    final public function checkInfo()
+    {
+        $info_check_keys = ['id', 'name', 'description', 'author', 'version'];
         foreach ($info_check_keys as $value) {
-            if(!array_key_exists($value, $this->info))
+            if (!array_key_exists($value, $this->info))
                 return false;
         }
         return true;
@@ -93,19 +90,23 @@ abstract class PackageInfo extends BaseObject
         $class = new \ReflectionClass($this);
         return dirname($class->getFileName());
     }
+
     public function getNamespace()
     {
         $class = new \ReflectionClass($this);
         return $class->getNamespaceName();
     }
+
     public function getPackage()
     {
         return $this->info['id'];
     }
+
     public function getName()
     {
         return isset($this->info['name']) ? $this->info['name'] : '';
     }
+
     public function getBootstrap()
     {
         return isset($this->info['bootstrap']) ? $this->info['bootstrap'] : '';
@@ -115,10 +116,12 @@ abstract class PackageInfo extends BaseObject
     {
         return isset($this->info['author']) ? $this->info['author'] : '';
     }
+
     public function getVersion()
     {
         return isset($this->info['version']) ? $this->info['version'] : '';
     }
+
     public function getDescription()
     {
         return isset($this->info['description']) ? $this->info['description'] : '';
@@ -128,6 +131,7 @@ abstract class PackageInfo extends BaseObject
     {
         return isset($this->info['keywords']) ? $this->info['keywords'] : '';
     }
+
     public function getScreenshot()
     {
         $class = new \ReflectionClass($this);
@@ -140,34 +144,19 @@ abstract class PackageInfo extends BaseObject
         return $url;
     }
 
-    private $_model;
 
-    /**
-     * @return Module
-     */
-    public function getModel()
-    {
-        if ($this->_model == null) {
-            $models = Module::findOpenModules(Module::TYPE_CORE);
-            $model = ArrayHelper::getValue($models, $this->getPackage());
-            if ($model == null) {
-                $model = new Module();
-                $model->loadDefaultValues();
-                $model->id = $this->getPackage();
-            }
-            $this->_model = $model;
-        }
-        return $this->_model;
-    }
+    abstract public function getModel();
 
     public function getInstall()
     {
         return $this->getModel()->getInstall();
     }
+
     public function getOpen()
     {
         return $this->getModel()->getOpen();
     }
+
     public function canUninstall()
     {
         return $this->getModel()->install === true;
@@ -177,5 +166,4 @@ abstract class PackageInfo extends BaseObject
     {
         return $this->getModel()->is_core == false;
     }
-
 }

@@ -26,9 +26,6 @@ class Module extends \yii\db\ActiveRecord
     const STATUS_OPEN = 1;
     const STATUS_CLOSE = 0;
 
-    const TYPE_CORE = 1;
-    const TYPE_PLUGIN = 2;
-
     /**
      * @inheritdoc
      */
@@ -45,7 +42,7 @@ class Module extends \yii\db\ActiveRecord
         return [
             [['id', 'name'], 'required'],
             [['status', 'type'], 'integer'],
-            [['type'], 'in', 'range' => [1,2]],
+            [['type'], 'in', 'range' => [1, 2]],
             [['name'], 'string', 'max' => 50],
             [['bootstrap'], 'string', 'max' => 128],
             [['config'], 'string'],
@@ -53,6 +50,7 @@ class Module extends \yii\db\ActiveRecord
             [['id'], 'unique'],
         ];
     }
+
     /**
      * @inheritdoc
      */
@@ -76,20 +74,33 @@ class Module extends \yii\db\ActiveRecord
             [
                 'class' => CacheInvalidateBehavior::className(),
                 'keys' => [
-                    ['modules', self::TYPE_CORE],
-                    ['modules', self::TYPE_PLUGIN],
+                    'modules',
+                    'openModules',
                 ]
             ]
         ];
     }
 
-    public static function findOpenModules($type = null)
+    public static function findAllModules()
     {
-        $modules = Yii::$app->cache->get(['modules', $type]);
+        $cacheKey = 'modules';
+        $modules = Yii::$app->cache->get($cacheKey);
         if ($modules === false) {
             $query = static::find();
-            $modules = $query->where(['status' => self::STATUS_OPEN])->andFilterWhere(['type' => $type])->indexBy('id')->all();
-            Yii::$app->cache->set(['modules', $type], $modules, 60*60*24);
+            $modules = $query->indexBy('id')->all();
+            Yii::$app->cache->set($cacheKey, $modules, 60 * 60 * 24);
+        }
+        return $modules;
+    }
+
+    public static function findOpenModules()
+    {
+        $cacheKey = 'openModules';
+        $modules = Yii::$app->cache->get($cacheKey);
+        if ($modules === false) {
+            $query = static::find();
+            $modules = $query->where(['status' => self::STATUS_OPEN])->indexBy('id')->all();
+            Yii::$app->cache->set($cacheKey, $modules, 60 * 60 * 24);
         }
         return $modules;
     }
@@ -99,6 +110,7 @@ class Module extends \yii\db\ActiveRecord
     {
         return $this->isNewRecord ? false : true;
     }
+
     public function getOpen()
     {
         return $this->status == self::STATUS_OPEN;

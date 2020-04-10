@@ -13,12 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="carousel-update">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <?= $this->render('_form', [
                 'model' => $model,
             ]) ?>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <p>
                 <?= Html::a('新幻灯片项', ['/carousel-item/create', 'carousel_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
             </p>

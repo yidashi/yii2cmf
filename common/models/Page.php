@@ -1,7 +1,8 @@
 <?php
 
 namespace common\models;
-use common\behaviors\CommentBehavior;
+
+use common\modules\comment\behaviors\CommentBehavior;
 use common\behaviors\MetaBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\HtmlPurifier;

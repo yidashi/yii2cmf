@@ -8,7 +8,7 @@
 
 namespace common\actions;
 
-use common\models\Tag;
+use common\modules\document\models\Tag;
 use yii\base\Action;
 
 class TagSearchAction extends Action

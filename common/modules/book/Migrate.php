@@ -1,16 +1,17 @@
 <?php
+namespace common\modules\book;
 
 use yii\db\Migration;
 
 /**
  * Handles the creation for table `{{%book}}`.
  */
-class m161215_024158_create_book_table extends Migration
+class migrate extends Migration
 {
     /**
      * @inheritdoc
      */
-    public function up()
+    public function safeUp()
     {
         $this->createTable('{{%book}}', [
             'id' => $this->primaryKey(),
@@ -45,7 +46,7 @@ class m161215_024158_create_book_table extends Migration
     /**
      * @inheritdoc
      */
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%book}}');
         $this->dropTable('{{%book_chapter}}');

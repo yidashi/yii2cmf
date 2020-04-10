@@ -83,11 +83,11 @@ class CarouselItem extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'carousel_id' => Yii::t('common', 'Carousel ID'),
-            'image' => Yii::t('common', 'Image'),
-            'url' => Yii::t('common', 'Url'),
-            'caption' => Yii::t('common', 'Caption'),
+            'id' => 'ID',
+            'carousel_id' => Yii::t('app', 'Carousel ID'),
+            'image' => '图片',
+            'url' => '链接',
+            'caption' => '字幕',
             'status' => '是否启用',
             'sort' => '排序'
         ];

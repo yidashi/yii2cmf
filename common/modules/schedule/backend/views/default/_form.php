@@ -11,6 +11,7 @@ use backend\widgets\ActiveForm;
 <div class="box box-primary">
     <div class="box-body">
         <?php $form = ActiveForm::begin(); ?>
+        <?= $form->field($model, 'name')->textInput() ?>
         <?= $form->field($model, 'cron')->textInput(['placeholder' => '分 时 天 月 周']) ?>
         <?= $form->field($model, 'job') ?>
         <div class="form-group">

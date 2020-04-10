@@ -41,8 +41,8 @@ class Gather extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'url_org' => 'Url',
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 }

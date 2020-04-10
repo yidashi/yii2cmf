@@ -68,10 +68,10 @@ class Carousel extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
+            'id' => 'ID',
+            'key' => '标识',
             'title' => '位置',
-            'status' => Yii::t('common', 'Active'),
+            'status' => '状态',
         ];
     }
 

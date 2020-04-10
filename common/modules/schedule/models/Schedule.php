@@ -9,9 +9,12 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "{{%schedule}}".
  *
  * @property integer $id
+ * @property string $name
  * @property string $cron
  * @property string $job
+ * @property integer $status
  * @property integer $created_at
+ * @property integer $updated_at
  */
 class Schedule extends \yii\db\ActiveRecord
 {
@@ -29,8 +32,9 @@ class Schedule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cron', 'job'], 'required'],
+            [['cron', 'job', 'name'], 'required'],
             [['cron', 'job'], 'string', 'max' => 255],
+            ['status', 'default', 'value' => 1]
         ];
     }
 
@@ -41,8 +45,10 @@ class Schedule extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'name' => '任务名称',
             'cron' => 'crontab表达式',
-            'job' => '任务',
+            'job' => '命令',
+            'status' => '状态',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];

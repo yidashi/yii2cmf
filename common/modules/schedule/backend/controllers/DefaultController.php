@@ -26,6 +26,15 @@ class DefaultController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'switcher' => [
+                'class' => 'backend\widgets\grid\SwitcherAction'
+            ]
+        ];
+    }
+
     /**
      * Lists all Schedule models.
      * @return mixed

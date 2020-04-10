@@ -27,15 +27,15 @@ class Config extends Component
     public function init()
     {
         parent::init();
-        $this->localConfigFile = \Yii::getAlias($this->localConfigFile);
+        $this->localConfigFile = Yii::getAlias($this->localConfigFile);
     }
 
     public function get($name, $default = '')
     {
-        $configs = \Yii::$app->cache->get($this->cacheKey);
+        $configs = Yii::$app->cache->get($this->cacheKey);
         if ($configs === false) {
             $configs = ConfigModel::find()->indexBy('name')->all();
-            \Yii::$app->cache->set($this->cacheKey, $configs, 60 * 60, new TagDependency(['tags' => $this->cacheTag]));
+            Yii::$app->cache->set($this->cacheKey, $configs, 60 * 60, new TagDependency(['tags' => $this->cacheTag]));
         }
         if (isset($configs[$name])) {
             $config = $configs[$name];
@@ -51,7 +51,7 @@ class Config extends Component
             if ($result === false) {
                 return false;
             }
-            TagDependency::invalidate(\Yii::$app->cache, $this->cacheTag);
+            TagDependency::invalidate(Yii::$app->cache, $this->cacheTag);
         } else {
             $this->setEnv($name, $value);
         }

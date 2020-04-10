@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\modules\user\models\Profile */
 /* @var $form ActiveForm */
-$this->title = Yii::t('common', 'Profile');
+$this->title = Yii::t('app', 'Profile');
 ?>
 <div class="container profile">
     <div class="row">

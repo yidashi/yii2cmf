@@ -12,7 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * CaetgoryController implements the CRUD actions for Category model.
+ * CategoryController implements the CRUD actions for Category model.
  */
 class CategoryController extends Controller
 {

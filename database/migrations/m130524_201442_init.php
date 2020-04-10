@@ -250,13 +250,6 @@ class m130524_201442_init extends Migration
             'created_at' => $this->integer()->notNull(),
             'user_id' => $this->integer(11)->notNull()
         ]);
-//schedule
-        $this->createTable('{{%schedule}}', [
-            'cron' => $this->string(255)->notNull()->comment('crontab表达式'),
-            'job' => $this->string(255)->notNull()->comment('命令'),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
-        ]);
 
         $this->insert('{{%page}}', [
             'use_layout' => 1,
@@ -321,7 +314,6 @@ class m130524_201442_init extends Migration
         $this->dropTable('{{%tag}}');
         $this->dropTable('{{%vote}}');
         $this->dropTable('{{%vote_info}}');
-        $this->dropTable('{{%schedule}}');
         $this->execute('SET foreign_key_checks = 1');
     }
 }

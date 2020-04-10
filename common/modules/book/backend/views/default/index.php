@@ -14,9 +14,9 @@
 $this->title = '书';
 $this->params['breadcrumbs'][] = '书';
 ?>
-<p>
-    <?= \yii\helpers\Html::a('新建书', 'create', ['class' => 'btn btn-primary btn-sm']) ?>
-</p>
+<?php $this->beginBlock('content-header') ?>
+    <?= $this->title . ' ' . \yii\helpers\Html::a('新建书', ['create'], ['class' => 'btn btn-primary btn-xs']) ?>
+<?php $this->endBlock() ?>
 <div class="box box-solid">
     <div class="box-body">
         <?= \yii\grid\GridView::widget([

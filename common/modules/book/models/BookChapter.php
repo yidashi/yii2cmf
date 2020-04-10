@@ -2,7 +2,7 @@
 
 namespace common\modules\book\models;
 
-use common\behaviors\CommentBehavior;
+use common\modules\comment\behaviors\CommentBehavior;
 use common\behaviors\PositionBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;

@@ -8,9 +8,6 @@
 
 namespace common\modules\book;
 
-
-use common\components\PackageInfo;
-
 class ModuleInfo extends \common\modules\ModuleInfo
 {
     public $info = [
@@ -18,7 +15,23 @@ class ModuleInfo extends \common\modules\ModuleInfo
         'bootstrap' => '',
         'version' => 'v1.0',
         'id' => 'book',
-        'name' => '文档wiki',
-        'description' => '文档wiki'
+        'name' => '书籍',
+        'description' => '书籍'
     ];
+
+    public function install()
+    {
+        $migrate = new Migrate();
+        $migrate->up();
+        $this->addMenu('书籍', '/book/default/index', 39);
+        return true;
+    }
+
+    public function uninstall()
+    {
+        $migrate = new Migrate();
+        $migrate->down();
+        $this->deleteMenu('书籍');
+        return true;
+    }
 }

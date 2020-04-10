@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Carousel');
+$this->title = '幻灯片';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->beginBlock('content-header') ?>
@@ -19,7 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php echo GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
-
         'id',
         'key',
         'title',

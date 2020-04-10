@@ -51,7 +51,7 @@ class DefaultController extends Controller
         $model = new Book();
         if ($model->load(request()->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', '保存成功');
-            return $this->redirect('index');
+            return $this->redirect(['index']);
         }
         return $this->render('create', [
             'model' => $model
@@ -79,7 +79,7 @@ class DefaultController extends Controller
         $model = Book::findOne($id);
         if ($model->load(request()->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', '保存成功');
-            return $this->redirect('index');
+            return $this->redirect(['index']);
         }
         return $this->render('update', [
             'model' => $model

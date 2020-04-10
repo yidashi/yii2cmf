@@ -100,10 +100,8 @@ class Document extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
+            'id' => 'ID',
             'title' => '标题',
-            'created_at' => Yii::t('common', 'Created At'),
-            'updated_at' => Yii::t('common', 'Updated At'),
             'deleted_at' => '删除时间',
             'published_at' => '发布时间',
             'status' => '状态',
@@ -120,7 +118,8 @@ class Document extends \yii\db\ActiveRecord
             'is_hot' => '热门',
             'is_best' => '精华',
             'module' => '内容模型',
-            'content' => '内容'
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
     public function attributeHints()

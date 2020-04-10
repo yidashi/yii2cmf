@@ -20,7 +20,7 @@ use yii\helpers\Html;
             <?= $form->field($model, 'status')->checkbox() ?>
 
             <div class="form-group">
-                <?= Html::submitButton($model->isNewRecord ? Yii::t('backend', 'Create') : Yii::t('backend', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
             </div>
         </div>
     <?php ActiveForm::end(); ?>

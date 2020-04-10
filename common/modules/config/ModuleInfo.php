@@ -14,7 +14,7 @@ class ModuleInfo extends \common\modules\ModuleInfo
 
     public $info = [
         'author' => '易大师',
-        'bootstrap' => 'frontend|backend|console|api|wechat',
+        'bootstrap' => 'frontend|backend|console|api',
         'version' => 'v1.0',
         'id' => 'config',
         'name' => '动态配置',

@@ -41,13 +41,13 @@ class NavItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'nav_id' => Yii::t('common', 'NAV ID'),
-            'title' => Yii::t('common', 'Title'),
-            'url' => Yii::t('common', 'Url'),
+            'id' => Yii::t('app', 'ID'),
+            'nav_id' => Yii::t('app', 'NAV ID'),
+            'title' => Yii::t('app', 'Title'),
+            'url' => Yii::t('app', 'Url'),
             'target' => '是否新窗口打开',
-            'status' => Yii::t('common', 'Status'),
-            'order' => Yii::t('common', 'Order'),
+            'status' => Yii::t('app', 'Status'),
+            'order' => Yii::t('app', 'Order'),
         ];
     }
 

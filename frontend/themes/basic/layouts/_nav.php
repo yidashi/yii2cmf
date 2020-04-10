@@ -66,8 +66,8 @@ if ($noticeNum > 0) {
     ];
 }
 if (Yii::$app->user->isGuest) {
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Signup'), 'url' => ['/user/registration/signup']];
-    $rightMenuItems[] = ['label' => Yii::t('common', 'Login'), 'url' => ['/user/security/login']];
+    $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/user/registration/signup']];
+    $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/user/security/login']];
 } else {
     $rightMenuItems[] = [
         'label' => Html::img(Yii::$app->user->identity->getAvatar(32), ['width' => 32, 'height' => 32]),

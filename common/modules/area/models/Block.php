@@ -91,12 +91,12 @@ class Block extends \yii\db\ActiveRecord
             'block_id' => 'ID',
             'title' => '区块名',
             'slug' => '标识',
-            'config' => Yii::t('backend', 'Config'),
-            'template' => Yii::t('backend', 'Template'),
+            'config' => Yii::t('app', 'Config'),
+            'template' => Yii::t('app', 'Template'),
             'cache' => '是否缓存',
             "type" => '类型',
-            'used' => Yii::t('backend', 'used'),
-            'widget' => Yii::t('backend', 'Widget'),
+            'used' => Yii::t('app', 'used'),
+            'widget' => Yii::t('app', 'Widget'),
         ];
     }
 

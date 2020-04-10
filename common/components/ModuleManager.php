@@ -36,18 +36,17 @@ class ModuleManager extends PackageManager
 
     public function install(ModuleInfo $module)
     {
+        if (method_exists($module, 'install')) {
+            if (!call_user_func([$module, 'install'])) {
+                return false;
+            }
+        }
         $model = $module->getModel();
         $model->attributes = $module->info;
         $model->type = Module::TYPE_CORE;
         $model->config = Json::encode($module->getInitConfig());
         $model->status = Module::STATUS_OPEN;
-        if ($model->save()) {
-            if (method_exists($module, 'install')) {
-                return call_user_func([$module, 'install']);
-            }
-            return true;
-        }
-        return false;
+        return $model->save();
     }
 
     public function uninstall(ModuleInfo $module)
@@ -55,15 +54,15 @@ class ModuleManager extends PackageManager
         if ($module->isCore) {
             return false;
         }
-        $model = $module->getModel();
-        if ($model->delete()) {
-            if (method_exists($module, 'uninstall')) {
-                call_user_func([$module, 'uninstall']);
+        if (method_exists($module, 'uninstall')) {
+            if (!call_user_func([$module, 'uninstall'])) {
+                return false;
             }
-            return true;
         }
-        return false;
+        $model = $module->getModel();
+        return $model->delete() !== false;
     }
+
     public function open(ModuleInfo $module)
     {
         $model = $module->getModel();

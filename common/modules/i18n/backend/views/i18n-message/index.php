@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $searchModel common\modules\i18n\models\search\I18nMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'I18n Messages');
+$this->title = Yii::t('app', 'I18n Messages');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->beginBlock('content-header') ?>

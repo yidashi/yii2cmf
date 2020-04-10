@@ -6,7 +6,7 @@
  */
 namespace common\modules\document\frontend\controllers;
 
-use common\models\Tag;
+use common\modules\document\models\Tag;
 use common\modules\document\models\Category;
 use common\modules\document\models\Document;
 use common\modules\document\services\DocumentService;

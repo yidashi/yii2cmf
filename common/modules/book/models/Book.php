@@ -2,11 +2,8 @@
 
 namespace common\modules\book\models;
 
-use common\behaviors\CommentBehavior;
-use common\helpers\Tree;
-use common\modules\comment\models\Comment;
 use common\modules\attachment\behaviors\UploadBehavior;
-use Yii;
+use common\modules\comment\behaviors\CommentBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**

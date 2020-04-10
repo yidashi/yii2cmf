@@ -12,8 +12,8 @@ use common\modules\schedule\models\Schedule;
 
 class ScheduleService
 {
-    public static function getAllJobs()
+    public static function getAllEnableJobs()
     {
-        return Schedule::find()->all();
+        return Schedule::find()->where(['status' => 1])->all();
     }
 }

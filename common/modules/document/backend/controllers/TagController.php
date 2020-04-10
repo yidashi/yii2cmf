@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use common\models\Tag;
+use common\modules\document\models\Tag;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;

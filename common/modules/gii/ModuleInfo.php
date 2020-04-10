@@ -17,6 +17,6 @@ class ModuleInfo extends \common\modules\ModuleInfo
         'version' => 'v1.0',
         'id' => 'gii',
         'name' => 'gii',
-        'description' => 'gii'
+        'description' => 'gii,开发人员适用'
     ];
 }

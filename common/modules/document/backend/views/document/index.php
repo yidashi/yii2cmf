@@ -33,13 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'format' => 'raw',
                         'enableSorting' => false
                     ],
-                    [
-                        'attribute' => 'module',
-                        'value' => function($model) {
-                            return array_get(DocumentModule::getTypeEnum(), $model->module);
-                        },
-                        'enableSorting' => false
-                    ],
                     'category.title:text:分类',
                     [
                         'label' => '标签',

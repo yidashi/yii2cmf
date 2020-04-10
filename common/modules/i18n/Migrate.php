@@ -1,11 +1,13 @@
 <?php
 
+namespace common\modules\i18n;
+
 use yii\db\Schema;
 use yii\db\Migration;
 
-class m160721_151110_create_i18n_table extends Migration
+class migrate extends Migration
 {
-    public function up()
+    public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -27,7 +29,7 @@ class m160721_151110_create_i18n_table extends Migration
         $this->addPrimaryKey('i18n_message_pk', '{{%i18n_message}}', ['id', 'language']);
     }
 
-    public function down()
+    public function safeDown()
     {
         $this->dropTable('{{%i18n_message}}');
         $this->dropTable('{{%i18n_source_message}}');

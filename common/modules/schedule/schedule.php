@@ -17,7 +17,7 @@
 
 // $schedule->exec('composer self-update')->daily();
 
-$jobs = \common\modules\schedule\services\ScheduleService::getAllJobs();
+$jobs = \common\modules\schedule\services\ScheduleService::getAllEnableJobs();
 
 foreach ($jobs as $job) {
     $schedule->command($job->job)->cron($job->cron);

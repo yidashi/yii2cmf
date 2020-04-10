@@ -8,7 +8,7 @@
 
 namespace common\modules\document\services;
 
-use common\models\Tag;
+use common\modules\document\models\Tag;
 
 class TagService
 {

@@ -37,9 +37,9 @@ class Nav extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('common', 'ID'),
-            'key' => Yii::t('common', 'Key'),
-            'title' => Yii::t('common', 'Title'),
+            'id' => Yii::t('app', 'ID'),
+            'key' => Yii::t('app', 'Key'),
+            'title' => Yii::t('app', 'Title'),
         ];
     }
 

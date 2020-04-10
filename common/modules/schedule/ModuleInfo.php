@@ -10,7 +10,7 @@ namespace common\modules\schedule;
 
 class ModuleInfo extends \common\modules\ModuleInfo
 {
-    public $isCore = 1;
+    public $isCore = 0;
 
     public $info = [
         'author' => '易大师',
@@ -20,4 +20,21 @@ class ModuleInfo extends \common\modules\ModuleInfo
         'name' => '任务调度',
         'description' => '任务调度'
     ];
+
+
+    public function install()
+    {
+        $migrate = new Migrate();
+        $migrate->up();
+        $this->addMenu('任务调度', '/schedule/default/index', 24);
+        return true;
+    }
+
+    public function uninstall()
+    {
+        $migrate = new Migrate();
+        $migrate->down();
+        $this->deleteMenu('任务调度');
+        return true;
+    }
 }

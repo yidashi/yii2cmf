@@ -8,6 +8,8 @@ use Symfony\Component\DomCrawler\Crawler;
 use Yii;
 use yii\bootstrap\Html;
 use yii\helpers\FileHelper;
+use common\modules\document\models\Category;
+use common\modules\document\models\Document;
 
 /**
  * This is the model class for table "{{%spider}}".

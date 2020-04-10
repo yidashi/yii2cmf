@@ -42,7 +42,7 @@
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-gii": "*",
         "yiisoft/yii2-faker": "*",
-        "symfony/var-dumper": "^5.0"
+        "symfony/var-dumper": "^3.4"
     },
     "autoload": {
         "files": [

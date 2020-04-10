@@ -9,8 +9,8 @@
 namespace common\behaviors;
 
 
-use common\models\DocumentTag;
-use common\models\Tag;
+use common\modules\document\models\DocumentTag;
+use common\modules\document\models\Tag;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
