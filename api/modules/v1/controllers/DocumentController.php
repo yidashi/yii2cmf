@@ -42,7 +42,7 @@ class DocumentController extends Controller
         return $dataProvider;
     }
     /**
-     * @api {get} /v1/articles/id:\d+ 文章内容
+     * @api {get} /v1/articles/id:\d+
      * @apiVersion 1.0.0
      * @apiName view
      * @apiGroup Document

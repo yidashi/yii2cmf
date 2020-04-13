@@ -18,7 +18,7 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => [
-                        'v1/article',
+                        'v1/document',
                         'v1/nav',
                         'v1/user',
                         'v1/comment',

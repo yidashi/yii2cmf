@@ -47,6 +47,7 @@ use yii\helpers\Url;
             "headerClass"=>"panel-heading",
             "bodyClass"=>"panel-body",
         ])?>
+        <?php if (Yii::$app->moduleManager->findOne('book')->getOpen()): ?>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h5 class="panel-title">热门教程</h5>
@@ -59,6 +60,7 @@ use yii\helpers\Url;
                 </ul>
             </div>
         </div>
+        <?php endif; ?>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h5 class="panel-title">热门标签</h5>

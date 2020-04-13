@@ -255,6 +255,7 @@ class User extends ActiveRecord implements IdentityInterface
         $this->access_token = null;
         $this->expired_at = null;
     }
+
     public function create()
     {
         if ($this->getIsNewRecord() == false) {
@@ -277,6 +278,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
         return parent::beforeSave($insert);
     }
+
     public function block()
     {
         return (bool)$this->updateAttributes([

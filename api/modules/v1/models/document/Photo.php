@@ -9,7 +9,7 @@
 namespace api\modules\v1\models\article;
 
 
-class Photo extends \common\models\article\Photo
+class Photo extends \common\modules\document\models\document\Photo
 {
     public function fields()
     {

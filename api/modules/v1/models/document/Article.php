@@ -6,10 +6,10 @@
  * Description:
  */
 
-namespace api\modules\v1\models\article;
+namespace api\modules\v1\models\document;
 
 
-class Document extends \common\models\article\Document
+class Article extends \common\modules\document\models\document\Article
 {
     public function fields()
     {
