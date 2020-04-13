@@ -37,8 +37,8 @@ use yii\bootstrap\Nav;
                 ];
             }
             if (Yii::$app->user->isGuest) {
-                $rightMenuItems[] = ['label' => Yii::t('app', 'Signup'), 'url' => ['/user/registration/signup']];
-                $rightMenuItems[] = ['label' => Yii::t('app', 'Login'), 'url' => ['/user/security/login']];
+                $rightMenuItems[] = ['label' => '注册', 'url' => ['/user/registration/signup']];
+                $rightMenuItems[] = ['label' => '登录', 'url' => ['/user/security/login']];
             } else {
                 $rightMenuItems[] = [
                     'label' => Html::img(Yii::$app->user->identity->getAvatar(32), ['width' => 32, 'height' => 32]),

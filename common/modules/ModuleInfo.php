@@ -65,13 +65,14 @@ class ModuleInfo extends PackageInfo
     /**
      * 删除一个插件管理下的子菜单
      * @param $name
+     * @param null $parent
      * @return bool
      * @throws \Throwable
-     * @throws \yii\db\Exception
+     * @throws \yii\db\StaleObjectException
      */
-    protected function deleteMenu($name)
+    protected function deleteMenu($name, $parent = null)
     {
-        $menu = Menu::find()->andWhere(['name' => $name])->one();
+        $menu = Menu::find()->andWhere(['name' => $name])->andFilterWhere(['parent' => $parent])->one();
         if ($menu === null) {
             return true;
         }

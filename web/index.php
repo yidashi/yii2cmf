@@ -9,7 +9,7 @@ require __DIR__.'/../frontend/config/bootstrap.php';
 
 //
 if (!checkInstalled()) {
-    header("Location:install.php");
+    header("Location:/install.php");
     die;
 }
 

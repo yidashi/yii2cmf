@@ -19,4 +19,16 @@ class ModuleInfo extends \common\modules\ModuleInfo
         'name' => 'gii',
         'description' => 'gii,开发人员适用'
     ];
+
+    public function install()
+    {
+        $this->addMenu('GII', 'gii/default/index', 24);
+        return true;
+    }
+
+    public function uninstall()
+    {
+        $this->deleteMenu('GII', 24);
+        return true;
+    }
 }

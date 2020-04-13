@@ -264,6 +264,8 @@ class m130524_201442_init extends Migration
             'slug' => 'default',
             'title' => '默认',
             'allow_publish' => '2',
+            'module' => 'article',
+            'sort' => 1,
             'created_at' => time(),
             'updated_at' => time()
         ]);
