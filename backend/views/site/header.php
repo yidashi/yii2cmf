@@ -61,8 +61,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                     </ul>
                 </li>
                 <li class="dropdown user user-menu">
-                    <a href="#"
-                                                       class="dropdown-toggle" data-toggle="dropdown"> <img
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img
                             src="<?= Yii::$app->user->identity->getAvatar(96) ;?>" class="user-image"
                             alt="User Image" /> <span class="hidden-xs"><?= Yii::$app->user->identity->username ?></span>
                     </a>

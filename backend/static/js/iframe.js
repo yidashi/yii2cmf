@@ -194,7 +194,7 @@ $(function(){
     function toNavPos(){
         oUl.stop().animate({'left':-num*100},100);
     }
-    $('.acrossTab li').contextmenu({
+    $('.acrossTab li:not(:first-child)').contextmenu({
         target:"#context-menu",
         onItem:onItem
     });

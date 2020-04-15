@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $context \yii\web\Controller */
 
 backend\assets\ContextAsset::register($this);
-\backend\assets\IframeAsset::register($this);
+backend\assets\IframeAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
