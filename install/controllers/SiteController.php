@@ -204,6 +204,8 @@ class SiteController extends Controller
     {
         $moduleManager = new ModuleManager();
         $modules = $moduleManager->findAll();
+        $cores = $moduleManager->findCore();
+        $uncores = array_diff_key($modules, $cores);
         if (Yii::$app->request->isPost) {
             ob_start();
             $installModules = Yii::$app->request->post('modules', []);
@@ -212,7 +214,6 @@ class SiteController extends Controller
                 $moduleManager->install($installModuleInfo);
             }
             // 安装核心模块
-            $cores = $moduleManager->findCore();
             foreach ($cores as $core) {
                 $moduleManager->install($core);
             }
@@ -224,7 +225,9 @@ class SiteController extends Controller
             return $this->renderJson(true);
         }
         return $this->render('selectmodule', [
-            "modules" => $modules
+            "modules" => $modules,
+            "cores" => $cores,
+            "uncores" => $uncores,
         ]);
     }
     /**
