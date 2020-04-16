@@ -19,7 +19,6 @@ class m161102_090053_menu extends Migration
         ], "CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB");
 
         $this->createIndex('parent','{{%menu}}','parent',0);
-        $this->addForeignKey('pop_menu_ibfk_1', '{{%menu}}', 'parent', '{{%menu}}', 'id', 'SET NULL', 'CASCADE' );
 
         $this->execute('SET foreign_key_checks = 1;');
         $this->execute('SET foreign_key_checks = 0');
