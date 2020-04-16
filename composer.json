@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-authclient": "~2.1.0",
         "yiisoft/yii2-imagine": "^2.0",
-        "aferrandini/PHPQRCode": "1.0.1",
+        "aferrandini/phpqrcode": "1.0.1",
         "mobiledetect/mobiledetectlib": "^2.8",
         "omnilight/yii2-scheduling": "*",
         "vlucas/phpdotenv": "^2.0",
@@ -77,8 +77,7 @@
                     "api/runtime": "0777",
                     "backend/runtime": "0777",
                     "frontend/runtime": "0777",
-                    "web/api/assets": "0777",
-                    "wechat/runtime": "0777"
+                    "web/api/assets": "0777"
                 }
             ]
         }

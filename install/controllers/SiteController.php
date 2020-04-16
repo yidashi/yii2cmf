@@ -205,6 +205,7 @@ class SiteController extends Controller
         $moduleManager = new ModuleManager();
         $modules = $moduleManager->findAll();
         if (Yii::$app->request->isPost) {
+            ob_start();
             $installModules = Yii::$app->request->post('modules', []);
             foreach ($installModules as $installModule) {
                 $installModuleInfo = $moduleManager->findOne($installModule);
@@ -219,6 +220,7 @@ class SiteController extends Controller
             \Yii::$app->getCache()->flush();
             //安装完成
             Yii::$app->setInstalled();
+            ob_end_clean();
             return $this->renderJson(true);
         }
         return $this->render('selectmodule', [
