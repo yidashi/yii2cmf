@@ -9,13 +9,10 @@
 namespace frontend\widgets\slider;
 
 use common\helpers\Util;
-use common\models\Carousel as CarouselModel;
-use common\models\CarouselItem;
 use common\services\CarouselService;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
-use Yii;
 
 class CarouselWidget extends Carousel
 {
