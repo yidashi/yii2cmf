@@ -11,6 +11,7 @@ namespace frontend\widgets\slider;
 use common\helpers\Util;
 use common\models\Carousel as CarouselModel;
 use common\models\CarouselItem;
+use common\services\CarouselService;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
@@ -18,6 +19,14 @@ use Yii;
 
 class CarouselWidget extends Carousel
 {
+    protected $carouselService;
+
+    public function __construct(CarouselService $carouselService, $config = [])
+    {
+        $this->carouselService = $carouselService;
+        parent::__construct($config);
+    }
+
     /**
      * @var
      */
@@ -39,33 +48,18 @@ class CarouselWidget extends Carousel
         if (!$this->key) {
             throw new InvalidConfigException;
         }
-        $cacheKey = [
-            CarouselModel::className(),
-            $this->key
-        ];
-        $items = Yii::$app->cache->get($cacheKey);
-        if ($items === false) {
-            $items = [];
-            $query = CarouselItem::find()
-                ->joinWith('carousel')
-                ->where([
-                    '{{%carousel_item}}.status' => 1,
-                    '{{%carousel}}.status' => CarouselModel::STATUS_ACTIVE,
-                    '{{%carousel}}.key' => $this->key,
-                ])
-                ->orderBy(['sort' => SORT_ASC]);
-            foreach ($query->all() as $k => $item) {
-                /** @var $item \common\models\CarouselItem */
-                $items[$k]['content'] = Html::img($item->image);
-                if ($item->url) {
-                    $items[$k]['content'] = Html::a($items[$k]['content'], Util::parseUrl($item->url), ['target' => '_blank']);
-                }
 
-                if ($item->caption) {
-                    $items[$k]['caption'] = $item->caption;
-                }
+        $items = [];
+        foreach ($this->carouselService->findByKey($this->key) as $k => $item) {
+            /** @var $item \common\models\CarouselItem */
+            $items[$k]['content'] = Html::img($item['image']);
+            if ($item['url']) {
+                $items[$k]['content'] = Html::a($items[$k]['content'], Util::parseUrl($item['url']), ['target' => '_blank']);
             }
-            Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24 * 365);
+
+            if ($item['caption']) {
+                $items[$k]['caption'] = $item['caption'];
+            }
         }
         $this->items = $items;
         parent::init();
@@ -85,5 +79,6 @@ class CarouselWidget extends Carousel
             ]);
             return Html::tag('div', $content, $this->options);
         }
+        return '';
     }
 }

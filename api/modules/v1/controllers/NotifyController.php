@@ -8,8 +8,7 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
+use api\common\components\Controller;
 use api\modules\v1\models\Notify;
 use yii\data\ActiveDataProvider;
 use yii\filters\auth\QueryParamAuth;
@@ -17,15 +16,6 @@ use yii\helpers\ArrayHelper;
 
 class NotifyController extends Controller
 {
-    public function behaviors()
-    {
-        return ArrayHelper::merge(parent::behaviors(), [
-            [
-                'class' => QueryParamAuth::className(),
-                'tokenParam' => 'access_token',
-            ]
-        ]);
-    }
     public function actionIndex()
     {
         return new ActiveDataProvider([

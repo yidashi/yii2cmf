@@ -8,23 +8,10 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
-use yii\filters\auth\QueryParamAuth;
-use yii\helpers\ArrayHelper;
+use api\common\components\Controller;
 
 class UserController extends Controller
 {
-    public function behaviors()
-    {
-        return ArrayHelper::merge(parent::behaviors(), [
-            [
-                'class' => QueryParamAuth::className(),
-                'tokenParam' => 'access_token',
-            ]
-        ]);
-    }
-
     public function actionInfo()
     {
         $user = \Yii::$app->user->identity;

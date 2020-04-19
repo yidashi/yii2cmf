@@ -8,29 +8,35 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
+use api\common\components\Controller;
 use api\modules\v1\models\Document;
 use common\models\Carousel;
 use common\models\CarouselItem;
+use common\services\CarouselService;
 use yii\data\ActiveDataProvider;
 
 class SiteController extends Controller
 {
+    protected function authOptional()
+    {
+        return ['*'];
+    }
+
+    protected $carouselService;
+
+    public function __construct($id, $module, CarouselService $carouselService, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+        $this->carouselService = $carouselService;
+    }
+
     public function actionIndex()
     {
-        $query = CarouselItem::find()
-            ->joinWith('carousel')
-            ->where([
-                '{{%carousel_item}}.status' => 1,
-                '{{%carousel}}.status' => Carousel::STATUS_ACTIVE,
-                '{{%carousel}}.key' => 'index',
-            ])
-            ->orderBy(['order' => SORT_ASC]);
+        $carouselItems = $this->carouselService->findByKey('index');
         $carousels = [];
-        foreach ($query->all() as $k => $item) {
-            $carousels[$k]['title'] = $item->caption;
-            $carousels[$k]['image'] = $item->image->url;
+        foreach ($carouselItems as $k => $item) {
+            $carousels[$k]['title'] = $item['caption'];
+            $carousels[$k]['image'] = $item['image'];
         }
         $dataProvider = new ActiveDataProvider([
             'query' => Document::find()->published(),

@@ -8,14 +8,18 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
+use api\common\components\Controller;
 use api\modules\v1\models\Document;
 use yii\data\ActiveDataProvider;
 use yii\web\NotFoundHttpException;
 
 class DocumentController extends Controller
 {
+    protected function authOptional()
+    {
+        return ['*'];
+    }
+
     /**
      * @api {get} /v1/articles 文章列表
      * @apiVersion 1.0.0
@@ -58,4 +62,5 @@ class DocumentController extends Controller
         $model->addView();
         return $model;
     }
+
 }

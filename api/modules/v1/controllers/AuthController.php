@@ -8,14 +8,18 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
+use api\common\components\Controller;
 use api\modules\v1\models\LoginForm;
 use api\common\models\User;
 
 
 class AuthController extends Controller
 {
+    protected function authOptional()
+    {
+        return ['*'];
+    }
+
     /**
      * @api {post} /v1/auth/login 登录
      * @apiVersion 1.0.0
@@ -47,9 +51,8 @@ class AuthController extends Controller
 
     }
 
-    public function  actionLoginout()
+    public function  actionLogout()
     {
-
         if (\Yii::$app->user->logout()) {
             return [];
         }

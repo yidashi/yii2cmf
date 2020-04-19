@@ -8,8 +8,7 @@
 
 namespace api\modules\v1\controllers;
 
-
-use api\common\controllers\Controller;
+use api\common\components\Controller;
 use api\modules\v1\models\Comment;
 use yii\data\ActiveDataProvider;
 

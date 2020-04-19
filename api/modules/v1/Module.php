@@ -28,22 +28,25 @@ class Module extends \yii\base\Module
                         $result = $response->data;
                         if ($response->statusCode == 422) {
                             $response->data = [
-                                'errcode' => $response->statusCode,
-                                'errmsg' => $result[0]['message'],
+                                'code' => $response->statusCode,
+                                'msg' => $result[0]['message'],
+                                'data' => null,
                             ];
                         } else {
                             $response->data = [
-                                'errcode' => isset($result['status']) ? $result['status'] : $response->statusCode,
-                                'errmsg' => $result['message'],
+                                'code' => isset($result['status']) ? $result['status'] : $response->statusCode,
+                                'msg' => $result['message'],
+                                'data' => null,
                             ];
                         }
                         $response->statusCode = 200;
                     } else {
                         $result = $response->data;
-                        $response->data = array_merge([
-                            'errcode' => 0,
-                            'errmsg' => 'ok',
-                        ], $result);
+                        $response->data = [
+                            'code' => 0,
+                            'msg' => 'ok',
+                            'data' => $result,
+                        ];
 
                     }
                 }

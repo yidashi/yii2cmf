@@ -14,17 +14,6 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => [
-                        'v1/document',
-                        'v1/nav',
-                        'v1/user',
-                        'v1/comment',
-                    ]
-                ],
-            ],
         ],
         'request' => [
             'enableCookieValidation' => false
@@ -33,9 +22,6 @@ return [
     'modules' => [
         'v1' => [
             'class' => '\api\modules\v1\Module'
-        ],
-        'v2' => [
-            'class' => '\api\modules\v2\Module'
         ],
     ],
     'params' => $params
