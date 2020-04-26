@@ -247,7 +247,8 @@ class TreeGrid extends Widget
         Html::addCssClass($options, "treegrid-$id");
 
         $parentId = ArrayHelper::getValue($model, $this->parentColumnName);
-        if ($parentId) {
+
+        if ($parentId && $parentId != $this->parentRootValue) {
             if(ArrayHelper::getValue($this->pluginOptions, 'initialState') == 'collapsed'){
                 Html::addCssStyle($options, 'display: none;');
             }
@@ -396,10 +397,12 @@ class TreeGrid extends Widget
      */
     protected function normalizeData(array $data, $parentId = null) {
         $result = [];
+//        p($data);
         foreach ($data as $element) {
             if (ArrayHelper::getValue($element, $this->parentColumnName) === $parentId) {
                 $result[] = $element;
                 $children = $this->normalizeData($data, ArrayHelper::getValue($element, $this->keyColumnName));
+//                p($children);
                 if ($children) {
                     $result = array_merge($result, $children);
                 }

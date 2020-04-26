@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'initialState' => 'expanded',
             ],
             'columns' => [
+                'id',
                 'title',
                 'slug',
                 'document',

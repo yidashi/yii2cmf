@@ -3,6 +3,7 @@
 namespace common\modules\document\backend\controllers;
 
 use common\modules\document\models\Category;
+use common\modules\document\models\CategorySearch;
 use Overtrue\Pinyin\Pinyin;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -44,10 +45,12 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider(['query' => Category::find()->orderBy('sort asc')]);
+        $searchModel = new CategorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'pagination' => false
+            'pagination' => false,
+            'searchModel' => $searchModel,
         ]);
     }
     /**
