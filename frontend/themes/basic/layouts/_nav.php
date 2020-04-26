@@ -47,7 +47,6 @@ $q = Yii::$app->request->get('q', '全站搜索');
 <?php \yii\widgets\ActiveForm::end() ?>
 <?php
 $rightMenuItems = [];
-$rightMenuItems[] = ['label' => '投稿', 'url' => ['/user/default/create-article']];
 $noticeNum = Yii::$app->notify->getNoReadNum();
 if ($noticeNum > 0) {
     $rightMenuItems[] = [
