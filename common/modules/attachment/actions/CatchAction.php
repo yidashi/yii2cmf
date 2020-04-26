@@ -23,7 +23,7 @@ class CatchAction extends Action
         \Yii::$app->response->format = 'json';
         $fieldName = $this->catcherFieldName;
         /* 抓取远程图片 */
-        $list = array();
+        $list = [];
         $source = request($fieldName);
         foreach ($source as $imgUrl) {
             list($attachment, $error) = Attachment::uploadFromUrl($this->path, $imgUrl);

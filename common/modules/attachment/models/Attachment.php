@@ -67,6 +67,7 @@ class Attachment extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
     public function behaviors()
     {
         return [
@@ -97,8 +98,8 @@ class Attachment extends \yii\db\ActiveRecord
 
     public function getThumb($width, $height, $options = [])
     {
-        $width = (int) $width;
-        $height = (int) $height;
+        $width = (int)$width;
+        $height = (int)$height;
         return Yii::$app->storage->thumbnail($this->path, $width, $height);
     }
 
@@ -159,10 +160,22 @@ class Attachment extends \yii\db\ActiveRecord
      */
     public static function uploadFromUrl($path, $url)
     {
-        $hash = md5(file_get_contents($url));
+        //简单破下防盗链
+        $urlComponents = parse_url($url);
+        $referer = $urlComponents['schema'] . '//' . $urlComponents['host'];
+        $opts = [
+            'http' => [
+                'method' => "GET",
+                'header' => "Referer: {$referer}\r\n"
+            ]
+        ];
+
+        $context = stream_context_create($opts);
+        $urlContent = file_get_contents($url, false, $context);
+        $hash = md5($urlContent);
         $attachment = static::findByHash($hash);
         $tempFile = Yii::getAlias('@storagePath/upload/' . $hash);
-        file_put_contents($tempFile, file_get_contents($url));
+        file_put_contents($tempFile, $urlContent);
         $mimeType = FileHelper::getMimeType($tempFile);
         $extension = current(FileHelper::getExtensionsByMimeType($mimeType, '@common/helpers/mimeTypes.php'));
         if (empty($attachment)) {
@@ -185,6 +198,7 @@ class Attachment extends \yii\db\ActiveRecord
         }
         return [$attachment, null];
     }
+
     public function makeCropStorage($width, $height, $x, $y)
     {
         $url = Yii::$app->storage->crop($this->path, $width, $height, [$x, $y]);
