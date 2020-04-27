@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\Nav;
 use common\models\NavItem;
+use common\services\NavService;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
@@ -33,6 +35,7 @@ class NavController extends Controller
      */
     public function actionIndex()
     {
+        Url::remember();
         $dataProvider = new ActiveDataProvider([
             'query' => Nav::find()
         ]);
@@ -111,5 +114,13 @@ class NavController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionRefresh($id)
+    {
+        $model = $this->findModel($id);
+        NavService::flushCache($model->key);
+        Yii::$app->session->setFlash('success', '操作成功');
+        return $this->goBack();
     }
 }

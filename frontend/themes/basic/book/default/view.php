@@ -10,6 +10,7 @@
  * @var \common\modules\book\models\Book $model
  */
 
+use common\modules\comment\widgets\CommentWidget;
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
 use yii\helpers\Markdown;
@@ -23,9 +24,7 @@ $this->params['breadcrumbs'][] = Html::encode($model->book_name);
     <h1><?= Html::encode($model->book_name) ?></h1>
 </div>
 <div class="view-content"><?= HtmlPurifier::process(Markdown::process($model->book_description)) ?></div>
-<!--分享-->
-<?= \common\widgets\share\Share::widget()?>
 <!-- 评论   -->
-<?= \frontend\widgets\comment\CommentWidget::widget(['model' => $model]) ?>
+<?= CommentWidget::widget(['model' => $model]) ?>
 <?php $this->endContent() ?>
 <?php $this->registerJs("$('.view-content a').attr('target', '_blank');") ?>

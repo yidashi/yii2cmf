@@ -8,8 +8,8 @@ use yii\helpers\Html;
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
-<div class="widget-Nav-form">
-
+<div class="panel panel-primary">
+    <div class="panel-body">
     <?php $form = ActiveForm::begin(); ?>
 
     <?php echo $form->field($model, 'key')->textInput(['maxlength' => 1024]) ?>
@@ -21,5 +21,5 @@ use yii\helpers\Html;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+    </div>
 </div>

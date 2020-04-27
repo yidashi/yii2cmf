@@ -69,7 +69,9 @@ class Book extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'attribute' => 'book_cover'
             ],
-            CommentBehavior::className()
+            [
+                'class' => CommentBehavior::className(),
+            ],
         ];
     }
 

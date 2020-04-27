@@ -64,8 +64,8 @@ class Tag extends \yii\db\ActiveRecord
 
     public function getDocuments()
     {
-        return $this->hasMany(Document::className(), ['id' => 'article_id'])
-            ->viaTable('{{%article_tag}}', ['tag_id' => 'id'])->published();
+        return $this->hasMany(Document::className(), ['id' => 'document_id'])
+            ->viaTable('{{%document_tag}}', ['tag_id' => 'id'])->published();
     }
 
     public function init()

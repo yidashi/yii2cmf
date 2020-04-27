@@ -80,7 +80,7 @@ class DefaultController extends Controller
         ]);
         // 热门标签
         $hotTags = Tag::find()->orderBy('document desc')->all();
-        return $this->render('index', [
+        return $this->render('tag', [
             'dataProvider' => $dataProvider,
             'tag' => $tag,
             'hotTags' => $hotTags

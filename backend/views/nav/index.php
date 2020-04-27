@@ -14,21 +14,22 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php $this->endBlock() ?>
 <div class="box box-primary">
     <div class="box-body">
-
-
-<?php echo GridView::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => [
-
-        'id',
-        'key',
-        'title',
-
-        [
-            'class' => 'yii\grid\ActionColumn',
-            'template'=>'{update} {delete}'
-        ],
-    ],
-]); ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'columns' => [
+                'id',
+                'key',
+                'title',
+                [
+                    'class' => 'yii\grid\ActionColumn',
+                    'template' => '{refresh} {update} {delete}',
+                    'buttons' => [
+                        'refresh' => function ($url, $model, $key) {
+                            return Html::a('刷新', $url, ['class' => 'btn btn-primary btn-xs']);
+                        }
+                    ]
+                ],
+            ],
+        ]); ?>
     </div>
 </div>

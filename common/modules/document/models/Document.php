@@ -150,21 +150,17 @@ class Document extends \yii\db\ActiveRecord
             CategoryBehavior::className(),
             [
                 'class' => MetaBehavior::className(),
-                'entity' => __CLASS__
             ],
             [
                 'class' => VoteBehavior::className(),
-                'entity' => __CLASS__
             ],
             TagBehavior::className(),
             [
                 'class' => CommentBehavior::className(),
-                'entity' => __CLASS__
             ],
             [
                 'class' => UploadBehavior::className(),
                 'attribute' => 'cover',
-                'entity' => __CLASS__
             ],
             UserBehavior::className()
         ];

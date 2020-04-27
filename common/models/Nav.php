@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $key
+ * @property string $title
  */
 class Nav extends \yii\db\ActiveRecord
 {
@@ -37,9 +38,9 @@ class Nav extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'key' => Yii::t('app', 'Key'),
-            'title' => Yii::t('app', 'Title'),
+            'id' => 'id',
+            'key' => 'key',
+            'title' => '标题',
         ];
     }
 

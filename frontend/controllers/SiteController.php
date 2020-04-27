@@ -54,19 +54,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Document::find()->published(),
-            'sort' => [
-                'defaultOrder' => [
-                    'is_top' => SORT_DESC,
-                    'published_at' => SORT_DESC
-                ]
-            ]
-        ]);
         $categories = Category::find()->orderBy('sort asc')->all();
         $hotTags = TagService::hot();
         return $this->render('index', [
-            'dataProvider' => $dataProvider,
             'categories' => $categories,
             'hotTags' => $hotTags
         ]);

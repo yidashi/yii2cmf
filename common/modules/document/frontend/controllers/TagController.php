@@ -6,10 +6,10 @@
  * Time: 下午5:41
  */
 
-namespace frontend\controllers;
+namespace common\modules\document\frontend\controllers;
 
-
-use frontend\models\Tag;
+use common\modules\document\models\Tag;
+use common\modules\document\services\TagService;
 use yii\web\Controller;
 
 class TagController extends Controller
@@ -23,7 +23,7 @@ class TagController extends Controller
 
     public function actionIndex()
     {
-        $hotModels = Tag::hot();
+        $hotModels = TagService::hot();
         $models = Tag::find()->all();
         return $this->render('index', [
             'models' => $models,

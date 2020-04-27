@@ -42,11 +42,11 @@ class NavItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nav_id' => Yii::t('app', 'NAV ID'),
+            'nav_id' => 'nav_id',
             'title' => '名称',
             'url' => '链接',
             'target' => '是否新窗口打开',
-            'status' => '状态',
+            'status' => '是否开启',
             'order' => '排序',
         ];
     }

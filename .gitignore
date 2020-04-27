@@ -29,6 +29,6 @@ phpunit.phar
 # redis
 dump.rdb
 
-
+composer.lock
 # env
 /.env

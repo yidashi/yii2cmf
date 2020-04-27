@@ -16,7 +16,7 @@ use common\modules\comment\models\Comment;
 
 class CommentWidget extends Widget
 {
-    public $entity = 'common\modules\document\models\Document';
+    public $entity = 'document';
 
     public $entityId;
     /**

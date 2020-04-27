@@ -45,7 +45,7 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
     <div class="view-content"><?= $model->data->content ?></div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>
-            <li><a class="label label-primary" href="<?= Url::to(['document/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+            <li><a class="label label-primary" href="<?= Url::to(['document/default/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
         <?php endforeach; ?>
     </ul>
     <?php if (!empty($model->source)):?><div class="well well-sm">原文链接: <?= $model->source?></div><?php endif;?>
@@ -63,10 +63,8 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
             <?php endif; ?>
         </ul>
     </nav>
-    <!--分享-->
-    <?= \common\widgets\share\Share::widget()?>
     <!-- 评论   -->
-    <?= \common\modules\comment\widgets\CommentWidget::widget(['entityId' => $model->id]) ?>
+    <?= \common\modules\comment\widgets\CommentWidget::widget(['model' => $model]) ?>
 </div>
 <div class="col-lg-3">
     <div class="well">

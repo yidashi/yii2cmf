@@ -12,12 +12,13 @@ use common\helpers\Util;
 use common\models\Nav;
 use common\models\NavItem;
 use Yii;
+use yii\caching\DbDependency;
 
 class NavService
 {
     public static function getItems($key)
     {
-        $cacheKey = 'nav_' . $key;
+        $cacheKey = self::getCacheKey($key);
         $items = Yii::$app->cache->get($cacheKey);
         if ($items === false) {
             $nav = Nav::find()->where(['key' => $key])->one();
@@ -38,5 +39,16 @@ class NavService
             Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24);
         }
         return $items;
+    }
+
+    public static function flushCache($key)
+    {
+        $cacheKey = self::getCacheKey($key);
+        return Yii::$app->cache->delete($cacheKey);
+    }
+
+    private static function getCacheKey($key)
+    {
+        return $cacheKey = 'nav_' . $key;
     }
 }

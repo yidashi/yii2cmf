@@ -53,7 +53,7 @@ if(isset($category)) {
         <div class="panel-body">
             <ul class="tag-list list-inline">
                 <?php foreach($hotTags as $tag): ?>
-                    <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['document/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+                    <li><a class="label label-<?= $tag->level ?>" href="<?= \yii\helpers\Url::to(['/document/default/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </div>

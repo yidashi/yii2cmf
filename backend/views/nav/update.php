@@ -3,7 +3,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Nav */
-$this->title = '修改导航: ' . $model->key;
+$this->title = '修改导航: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => '导航', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '修改导航';
 ?>

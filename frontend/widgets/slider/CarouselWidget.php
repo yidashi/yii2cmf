@@ -29,6 +29,8 @@ class CarouselWidget extends Carousel
      */
     public $key;
 
+    public $cacheDuration = 3600;
+
     /**
      * @var array
      */
@@ -47,7 +49,7 @@ class CarouselWidget extends Carousel
         }
 
         $items = [];
-        foreach ($this->carouselService->findByKey($this->key) as $k => $item) {
+        foreach ($this->carouselService->findByKey($this->key, $this->cacheDuration) as $k => $item) {
             /** @var $item \common\models\CarouselItem */
             $items[$k]['content'] = Html::img($item['image']);
             if ($item['url']) {
