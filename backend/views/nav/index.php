@@ -10,7 +10,7 @@ $this->title = '导航';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->beginBlock('content-header') ?>
-<?= $this->title . ' ' . Html::a('新导航', ['create'], ['class' => 'btn btn-primary btn-flat btn-xs']) ?>
+<?= $this->title . ' ' . Html::a('新导航', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
 <?php $this->endBlock() ?>
 <div class="box box-primary">
     <div class="box-body">

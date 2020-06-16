@@ -41,7 +41,7 @@ class Tag extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => '标签名',
-            'document' => '该标签文章数'
+            'document' => '该标签内容数'
         ];
     }
 

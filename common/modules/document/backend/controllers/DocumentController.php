@@ -10,6 +10,7 @@ use common\modules\document\models\DocumentSearch;
 use Yii;
 use yii\base\Exception;
 use yii\data\ActiveDataProvider;
+use yii\filters\PageCache;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
@@ -179,7 +180,7 @@ class DocumentController extends Controller
         $categories = Category::lists();
         $categories = array_map(function ($item) use ($cid) {
             $item['label'] = $item['title'];
-            $item['url'] = empty($item['sons']) ? \url(['/document/create', 'cid' => $item['id']]) : '#';
+            $item['url'] = empty($item['sons']) ? \url(['/document/document/create', 'cid' => $item['id']]) : '#';
             $item['active'] = $cid == $item['id'];
             return $item;
         }, $categories);
@@ -233,7 +234,21 @@ class DocumentController extends Controller
         return $this->goBack();
     }
 
+    public function actionRefresh($id)
+    {
+        $model = $this->findModel($id);
+        $pageCacheKey = $this->calculatePageCacheKey($id);
+        Yii::$app->cache->delete($pageCacheKey);
+        Yii::$app->session->setFlash('success', '操作成功');
+        return $this->goBack();
+    }
 
+    protected function calculatePageCacheKey($id)
+    {
+        $key = [PageCache::class];
+        $key[] = 'document/default/view';
+        return array_merge($key, [$id]);
+    }
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

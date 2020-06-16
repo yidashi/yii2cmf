@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\modules\document\models\Document;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -28,8 +29,8 @@ class Favourite extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'article_id'], 'required'],
-            [['user_id', 'article_id'], 'integer']
+            [['user_id', 'document_id'], 'required'],
+            [['user_id', 'document_id'], 'integer']
         ];
     }
 

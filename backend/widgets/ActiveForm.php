@@ -23,13 +23,6 @@ class ActiveForm extends \yii\bootstrap\ActiveForm
     {
         parent::init();
         $this->view->registerCss('.horizontal-form-hint {margin:5px 0 10px;color:#737373}');
-        if (!isset($this->validationUrl)) {
-            if (!empty($this->action)) {
-                $this->validationUrl = ArrayHelper::merge((array)$this->action, ['ajax-validate' => 1]);
-            } else {
-                $this->validationUrl = Url::current(['ajax-validate' => 1]);
-            }
-        }
     }
 
     /**

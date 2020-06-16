@@ -4,7 +4,8 @@ namespace backend\assets;
 
 class HtmlSortableAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/static';
     public $js = [
         'js/html.sortable.js'
     ];

@@ -14,7 +14,7 @@
   },
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.4.0",
+    "php": ">=5.5",
     "yiisoft/yii2": ">=2.0.9",
     "yiisoft/yii2-bootstrap": "*",
     "yiisoft/yii2-swiftmailer": "*",
@@ -35,9 +35,9 @@
     "bower-asset/editor.md": "*",
     "creocoder/yii2-flysystem": "*",
     "qiniu/php-sdk": "^7.1",
-    "phpoffice/phpword": "^0.17.0",
     "overtrue/pinyin": "^4.0",
-    "symfony/var-dumper": "^3.4"
+    "symfony/var-dumper": "^3.4",
+    "2amigos/yii2-date-picker-widget": "^1.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "*",

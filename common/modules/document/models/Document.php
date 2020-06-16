@@ -65,10 +65,10 @@ class Document extends \yii\db\ActiveRecord
             [['title', 'category_id'], 'required'],
             [['title'], 'trim'],
             [['status', 'category_id', 'view', 'is_top', 'is_hot', 'is_best'], 'integer'],
-            ['published_at', 'default', 'value' => function(){
+            ['published_at', 'default', 'value' => function () {
                 return date('Y-m-d H:i:s', time());
             }],
-            ['published_at', 'filter', 'filter' => function($value) {
+            ['published_at', 'filter', 'filter' => function ($value) {
                 return is_numeric($value) ? $value : strtotime($value);
             }, 'skipOnEmpty' => true],
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
@@ -82,6 +82,7 @@ class Document extends \yii\db\ActiveRecord
             ['cover', 'safe']
         ];
     }
+
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
@@ -94,6 +95,7 @@ class Document extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => '通过',
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -122,6 +124,7 @@ class Document extends \yii\db\ActiveRecord
             'updated_at' => '更新时间',
         ];
     }
+
     public function attributeHints()
     {
         return [
@@ -140,7 +143,9 @@ class Document extends \yii\db\ActiveRecord
             [
                 'class' => SoftDeleteBehavior::className(),
                 'softDeleteAttributeValues' => [
-                    'deleted_at' => function ($model) {return time();}
+                    'deleted_at' => function ($model) {
+                        return time();
+                    }
                 ],
                 'restoreAttributeValues' => [
                     'deleted_at' => null
@@ -205,11 +210,11 @@ class Document extends \yii\db\ActiveRecord
 
     public function getMetaData()
     {
-        $model =  $this->getMetaModel();
+        $model = $this->getMetaModel();
 
-        $title = $model->title ? : $this->title;
-        $keywords = $model->keywords ? : $this->getTagNames(',');
-        $description =$model->description ? : $this->description;
+        $title = $model->title ?: $this->title;
+        $keywords = $model->keywords ?: $this->getTagNames(',');
+        $description = $model->description ?: $this->description;
 
         return [$title, $keywords, $description];
     }
@@ -225,7 +230,7 @@ class Document extends \yii\db\ActiveRecord
      */
     public function getTrueView()
     {
-        return $this->view + \Yii::$app->cache->get('article:view:' . $this->id);
+        return $this->view + \Yii::$app->cache->get('document:view:' . $this->id);
     }
 
     /**
@@ -234,18 +239,19 @@ class Document extends \yii\db\ActiveRecord
     public function addView()
     {
         $cache = \Yii::$app->cache;
-        $key = 'article:view:'.$this->id;
+        $key = 'document:view:' . $this->id;
         $view = $cache->get($key);
         if ($view !== false) {
             if ($view >= 20) {
                 $this->updateCounters(['view' => $view + 1]);
-                $cache->delete($key);
+                $cache->set($key, 0);
             } else {
-                $cache->set($key, ++$view);
+                $cache->set($key, $view + 1);
             }
         } else {
             $cache->set($key, 1);
         }
+        return (int)$view + 1;
     }
 
     /**

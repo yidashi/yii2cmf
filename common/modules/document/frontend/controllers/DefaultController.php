@@ -12,11 +12,26 @@ use common\modules\document\models\Document;
 use common\modules\document\services\DocumentService;
 use common\modules\document\services\TagService;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            /*'pageCache' => [
+                'class' => 'yii\filters\PageCache',
+                'only' => ['view'],
+                'duration' => 60 * 60 *24 * 365,
+                'variations' => [
+                    \Yii::$app->request->get('id')
+                ]
+            ]*/
+        ];
+    }
+
     /**
      * 分类文章列表
      * @param mixed $cate
@@ -98,7 +113,6 @@ class DefaultController extends Controller
         if ($model === null) {
             throw new NotFoundHttpException('not found');
         }
-        $model->addView();
 
         // sidebar
         $hots = DocumentService::hots($model->category_id);
@@ -112,5 +126,17 @@ class DefaultController extends Controller
             'next' => $next,
             'prev' => $prev
         ]);
+    }
+
+    public function actionAddView($id)
+    {
+        \Yii::$app->response->format = 'raw';
+        $model = Document::find()->published()->andWhere(['id' => $id])->one();
+        if ($model === null) {
+            throw new NotFoundHttpException('not found');
+        }
+        $model->addView();
+        $trueView = $model->getTrueView();
+        return "document.write({$trueView})";
     }
 }

@@ -1,4 +1,5 @@
 <?php
+defined('YII_DEBUG') or define('YII_DEBUG', true);
 require __DIR__.'/../../vendor/autoload.php';
 
 require __DIR__.'/../../Yii.php';
