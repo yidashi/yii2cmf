@@ -8,6 +8,7 @@
 
 namespace common\services;
 
+use common\helpers\Tree;
 use common\helpers\Util;
 use common\models\Nav;
 use common\models\NavItem;
@@ -25,7 +26,7 @@ class NavService
             if ($nav == null) {
                 return [];
             }
-            $items = NavItem::find()->select('title label, url, target')
+            $items = NavItem::find()->select('id,parent_id,title label, url, target')
                 ->where(['nav_id' => $nav->id, 'status' => 1])
                 ->orderBy(['order' => SORT_ASC])
                 ->asArray()->all();
@@ -36,6 +37,7 @@ class NavService
                 }
                 return $value;
             }, $items);
+            $items = Tree::build($items, 'id', 'parent_id');
             Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24);
         }
         return $items;

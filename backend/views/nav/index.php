@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'buttons' => [
                         'refresh' => function ($url, $model, $key) {
                             return Html::a('刷新', $url, ['class' => 'btn btn-primary btn-xs']);
-                        }
+                        },
                     ]
                 ],
             ],

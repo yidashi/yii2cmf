@@ -19,8 +19,14 @@ $this->params['breadcrumbs'][] = '修改导航';
         </p>
         <div class="box box-primary">
             <div class="box-body">
-                <?= GridView::widget([
+                <?= \backend\widgets\grid\TreeGrid::widget([
                     'dataProvider' => $navItemsProvider,
+                    'keyColumnName' => 'id',
+                    'parentColumnName' => 'parent_id',
+                    'parentRootValue' => 0, //first parentId value
+                    'pluginOptions' => [
+//                        'initialState' => 'collapse',
+                    ],
                     'columns' => [
                         'title',
                         'url',
@@ -37,7 +43,12 @@ $this->params['breadcrumbs'][] = '修改导航';
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'controller' => '/nav-item',
-                            'template' => '{update} {delete}'
+                            'template' => ' {create} {update} {delete}',
+                            'buttons' => [
+                                'create' => function ($url, $itemModel, $key) use ($model){
+                                    return Html::a(Html::icon('plus'), ['/nav-item/create', 'parent_id' => $key, 'nav_id' => $model->id], ['class' => 'btn btn-default btn-xs btn-flat']);
+                                }
+                            ]
                         ],
                     ],
                 ]); ?>
