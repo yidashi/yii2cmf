@@ -23,7 +23,7 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
     <div class="action">
         <span class="user"><a href="<?= Url::to(['/user/default/index', 'id' => $model->user_id]) ?>"><?= Html::icon('user')?> <?= $model->user->username?></a></span>
         <span class="time"><?= Html::icon('clock-o')?> <?= date('Y-m-d', $model->created_at) ?></span>
-        <span class="views"><?= Html::icon('eye')?> <?= $model->trueView?>次浏览</span>
+        <span class="views"><?= Html::icon('eye')?> <script src="<?= Url::to(['add-view', 'id' => $model->id]) ?>"></script>次浏览</span>
         <span class="comments"><a href="#comments"><?= Html::icon('comments-o')?> <?= $model->commentTotal ?>条评论</a></span>
         <span class="favourites"><?= Html::a(Html::icon($model->isFavourite ? 'star' : 'star-o') . ' <em>' . $model->favourite . '</em>', ['/favourite'], [
                 'data-params' => [
@@ -41,7 +41,7 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
     </div>
     <ul class="tag-list list-inline">
         <?php foreach($model->tags as $tag): ?>
-            <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['document/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
+            <li><a class="label label-<?= $tag->level ?>" href="<?= Url::to(['document/default/tag', 'name' => $tag->name])?>"><?= $tag->name ?></a></li>
         <?php endforeach; ?>
     </ul>
     <!--内容-->
@@ -67,10 +67,8 @@ list($this->title, $this->params['seo_site_keywords'], $this->params['seo_site_d
             <?php endif; ?>
         </ul>
     </nav>
-    <!--分享-->
-    <?= \common\widgets\share\Share::widget()?>
     <!-- 评论   -->
-    <?= \common\modules\comment\widgets\CommentWidget::widget(['entityId' => $model->id]) ?>
+    <?= \common\modules\comment\widgets\CommentWidget::widget(['model' => $model]) ?>
 </div>
 <div class="col-lg-3">
     <div class="panel panel-default">

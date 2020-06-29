@@ -7,13 +7,6 @@ use yii\helpers\Url;
 /* @var $content string */
 
 $logCount = \backend\models\SystemLog::find()->count();
-$menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($menu){
-    return [
-        'id' => $menu['id'],
-        'name' => $menu['name'],
-        'icon' => $menu['icon'],
-    ];
-});
 ?>
 
 <header class="main-header">
@@ -56,7 +49,7 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                             </ul>
                         </li>
                         <li class="footer">
-                            <?= Html::a('查看全部', ['/log/index'], ['target' => '_blank', 'title' => '错误日志']) ?>
+                            <?= Html::a('查看全部', ['/log/index'], ['title' => '错误日志']) ?>
                         </li>
                     </ul>
                 </li>
@@ -96,28 +89,16 @@ $menuGroups = MenuHelper::getAssignedMenu(Yii::$app->user->id, null, function ($
                 <span class="caret"></span>
             </button>
         </div>
-
-        <div class="navbar-collapse collapse" role="navigation">
-            <ul class="navbar-nav nav">
-                <?php foreach ($menuGroups as $key => $menuGroup) : ?>
-                    <li <?php if ($key == 0) {echo 'class="active"';} ?>><a href="#menu-group-<?= $menuGroup['id'] ?> " data-toggle="tab"><?= Html::icon($menuGroup['icon']) ?> <?= $menuGroup['name'] ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
     </nav>
 </header>
 <aside class="main-sidebar">
     <section class="sidebar">
         <div class="tab-content">
 
-        <?php foreach ($menuGroups as $key => $menuGroup): ?>
-        <div class="tab-pane <?php if ($key == 0) {echo 'active';} ?>" id="menu-group-<?= $menuGroup['id'] ?>">
             <?= \backend\widgets\Menu::widget([
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
             ]) ?>
-        </div>
-        <?php endforeach; ?>
 
         </div>
     </section>

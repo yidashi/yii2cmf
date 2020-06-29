@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use common\modules\document\models\Document;
 use common\models\Favourite;
-use yii\base\InvalidParamException;
+use InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 
@@ -30,7 +30,7 @@ class FavouriteController extends \yii\web\Controller
         \Yii::$app->response->format = 'json';
         $documentId = \Yii::$app->request->post('id', 0);
         if (empty($documentId)) {
-            throw new InvalidParamException('参数不合法');
+            throw new InvalidArgumentException('参数不合法');
         }
         $document = Document::find()->where(['id' => $documentId])->normal()->one();
         $favourite = Favourite::find()->where(['user_id' => \Yii::$app->user->id, 'document_id' => $documentId])->one();

@@ -17,7 +17,7 @@ class TagsInput extends Select2
 
     public $data = [];
 
-    public $ajaxUrl = ['/tag/search'];
+    public $ajaxUrl = ['/document/tag/search'];
 
     public $toggleAllSettings= [
         'selectLabel' => '',

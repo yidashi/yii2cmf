@@ -5,7 +5,8 @@ use yii\web\AssetBundle;
 
 class AttachmentUploadAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/static';
     public $css = [
         'attachment-upload.css',
     ];

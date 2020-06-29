@@ -8,8 +8,14 @@
 
 namespace backend\widgets;
 
+use common\modules\attachment\widgets\SingleWidget;
+use dosamigos\datepicker\DateRangePicker;
+use kartik\date\DatePicker;
+use kartik\datetime\DateTimePicker;
+use kartik\depdrop\DepDrop;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 class ActiveField extends \yii\bootstrap\ActiveField
 {
@@ -114,4 +120,102 @@ class ActiveField extends \yii\bootstrap\ActiveField
         return parent::textInput($options);
     }
 
+    public function select2($items, $config = [])
+    {
+        $placeholder = ArrayHelper::remove($config, 'prompt', '请选择');
+        $config['data'] = $items;
+        $config['placeholder'] = $placeholder;
+        return $this->widget(Select2Widget::className(), $config);
+    }
+
+    public function multiple($items, $config = [])
+    {
+        $config['multiple'] = true;
+        return $this->select2($items, $config);
+    }
+
+    public function image($config = [])
+    {
+        return $this->widget(SingleWidget::className(), $config);
+    }
+
+    public function file($config = [])
+    {
+        $config = ArrayHelper::merge($config, ['onlyImage' => false]);
+        return $this->widget(SingleWidget::className(), $config);
+    }
+
+    public function date($config = [])
+    {
+        return $this->widget(DatePicker::className(), $config);
+    }
+
+    public function datetime($config = [])
+    {
+        return $this->widget(DateTimePicker::className(), $config);
+    }
+
+    public function daterange($attributeTo, $config = [])
+    {
+        $config['attributeTo'] = $attributeTo;
+        $config['options']['autocomplete'] = 'off';
+        $config['optionsTo'] = $config['options'];
+        return $this->widget(DateRangePicker::className(), $config);
+    }
+
+    public function datetimerange($attributeTo, $config = [])
+    {
+        $config['attributeTo'] = $attributeTo;
+        $config['options']['autocomplete'] = 'off';
+        $config['optionsTo'] = $config['options'];
+        return $this->widget(DateTimeRangePicker::className(), $config);
+    }
+
+    public function monthrange($attributeTo, $config = [])
+    {
+        $config['attributeTo'] = $attributeTo;
+        $config['options']['autocomplete'] = 'off';
+        $config['optionsTo'] = $config['options'];
+        $config['clientOptions']['startView'] = 1;
+        $config['clientOptions']['minViewMode'] = 1;
+        $config['clientOptions']['format'] = 'yyyy-mm';
+        $config['clientOptions']['autoclose'] = true;
+        return $this->widget(DateRangePicker::className(), $config);
+    }
+
+    public function range($attributeTo, $config = [])
+    {
+        $config['attributeTo'] = $attributeTo;
+        $config['options']['autocomplete'] = 'off';
+        $config['optionsTo'] = $config['options'];
+        return $this->widget(RangeWidget::class, $config);
+    }
+
+    public function city($cityAttribute, $config = [])
+    {
+        $config['attributeTo'] = $cityAttribute;
+        return $this->widget(CityWidget::class, $config);
+    }
+
+    public function bool()
+    {
+        return parent::inline()->radioList(['否', '是']);
+    }
+
+    public function depdrop($data, $ajaxUrl, $depends, $options = [])
+    {
+        $placeholder = ArrayHelper::remove($options, 'prompt', '请选择');
+        $options['prompt'] = $placeholder;
+        return $this->widget(DepDrop::class, [
+            'data' => $data,
+            'value' => $this->model->getAttribute($this->attribute),
+            'type' => 2,
+            'options' => $options,
+            'pluginOptions' => [
+                'depends' => $depends,
+                'placeholder' => $placeholder,
+                'url' => Url::to($ajaxUrl),
+            ]
+        ]);
+    }
 }

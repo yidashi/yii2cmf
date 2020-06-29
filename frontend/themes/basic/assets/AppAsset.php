@@ -7,7 +7,8 @@ use yii\web\AssetBundle;
 
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@frontend/themes/basic/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/themes/basic';
     public $css = [
         'css/site.css',
     ];

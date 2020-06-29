@@ -24,9 +24,10 @@ class Theme extends \frontend\themes\Theme
     public function bootstrap()
     {
         Yii::$container->set('yii\bootstrap\BootstrapAsset', [
-            'sourcePath' => '@frontend/themes/basic/static',
+            'sourcePath' => null,
+            'baseUrl' => '@web/themes/basic',
             'css' => [
-                YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
+                'css/bootstrap.min.css',
             ]
         ]);
     }

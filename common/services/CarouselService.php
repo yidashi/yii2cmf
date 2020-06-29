@@ -16,9 +16,10 @@ class CarouselService
 {
     /**
      * @param $key
+     * @param int $duration
      * @return array|mixed|CarouselItem[]
      */
-    public function findByKey($key)
+    public function findByKey($key, $duration = 3600)
     {
         $cacheKey = [
             CarouselModel::className(),
@@ -37,7 +38,7 @@ class CarouselService
                 ->asArray()
                 ->all();
 //            p($items);
-            Yii::$app->cache->set($cacheKey, $items, 60 * 60 * 24);
+            Yii::$app->cache->set($cacheKey, $items, $duration);
         }
         return $items;
     }

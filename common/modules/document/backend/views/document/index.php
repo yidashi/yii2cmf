@@ -57,7 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'user_id:admin',
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template' => '{update} {delete}'
+                        'template' => '{update} {delete} {refresh}',
+                        'buttons' => [
+                            'refresh' => function ($url, $model, $key) {
+                                return Html::a('刷新', $url, ['class' => 'btn btn-primary btn-xs']);
+                            }
+                        ]
                     ],
                 ],
             ]); ?>

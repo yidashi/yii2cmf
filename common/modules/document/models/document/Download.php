@@ -15,7 +15,6 @@ use common\behaviors\DynamicFormBehavior;
  */
 class Download extends \yii\db\ActiveRecord
 {
-    use EntityTrait;
     /**
      * @inheritdoc
      */
@@ -53,7 +52,7 @@ class Download extends \yii\db\ActiveRecord
         return [
             [
                 'class' => UploadBehavior::className(),
-                'attribute' => 'attachment'
+                'attribute' => 'attachment',
             ],
             [
                 'class' => DynamicFormBehavior::className(),

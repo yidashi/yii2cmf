@@ -15,7 +15,6 @@ use common\traits\EntityTrait;
  */
 class Photo extends \yii\db\ActiveRecord
 {
-    use EntityTrait;
     /**
      * @inheritdoc
      */
@@ -30,7 +29,7 @@ class Photo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'photos'], 'required'],
+            [['id'], 'required'],
             [['id'], 'integer'],
         ];
     }
@@ -53,7 +52,6 @@ class Photo extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::className(),
                 'multiple' => true,
                 'attribute' => 'photos',
-                'entity' => __CLASS__
             ],
             [
                 'class' => DynamicFormBehavior::className(),

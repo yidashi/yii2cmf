@@ -1,6 +1,6 @@
 <?php
 
-use yii\bootstrap\ActiveForm;
+use backend\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -11,6 +11,10 @@ use yii\helpers\Html;
 
 <div class="panel panel-primary">
     <div class="panel-body">
+        <?= $form->field($model, 'id')->label('导航')->staticControl(['value' => $model->nav->title]) ?>
+
+        <?= $form->field($model, 'parent_id') ?>
+
         <?= $form->field($model, 'title') ?>
 
         <?= $form->field($model, 'url')->textarea(['maxlength' => 1024]) ?>

@@ -4,6 +4,19 @@ html{
 body {
     font-size:14px;
 }
+
+.sidebar-menu .treeview-menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 20px;
+}
+.sidebar-menu .treeview-menu>li>a {
+    padding: 10px 5px 10px 15px;
+    display: block;
+    font-size: 13px;
+}
 .login-page{
     background-color: #ecf0f5;
 }

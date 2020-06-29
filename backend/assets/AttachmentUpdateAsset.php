@@ -5,7 +5,8 @@ use yii\web\AssetBundle;
 
 class AttachmentUpdateAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/static';
     public $css = [
         'attachment-update.css',
         'attachment-info.css'

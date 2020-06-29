@@ -18,8 +18,8 @@ use yii\helpers\Url;
             <?php endforeach; ?>
         </div>
         <div class="footer-copyright">
-            <p>&copy; <?= Yii::$app->config->get('SITE_NAME').' '.date('Y') ?></p>
-            <p><?= Yii::$app->config->get('SITE_ICP')?></p>
+            <p>&copy; <?= Yii::$app->config->get('site_name').' '.date('Y') ?></p>
+            <p><?= Yii::$app->config->get('site_icp')?></p>
         </div>
     </div>
 </footer>

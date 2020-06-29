@@ -94,7 +94,7 @@ class Page extends \yii\db\ActiveRecord
                 'class' => MetaBehavior::className(),
             ],
             [
-                'class' => CommentBehavior::className()
+                'class' => CommentBehavior::className(),
             ]
         ];
     }

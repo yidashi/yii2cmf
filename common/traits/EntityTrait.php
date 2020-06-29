@@ -19,7 +19,8 @@ trait EntityTrait
     public function getEntity()
     {
         if ($this->entity == null) {
-            $this->entity = get_class($this->owner);
+            $class = new \ReflectionClass($this->owner);
+            $this->entity = lcfirst($class->getShortName());
         }
 
         return ltrim($this->entity,"\\");

@@ -4,8 +4,7 @@ use yii\helpers\Html;
 ?>
 <div class="media-body">
     <h4 class="media-heading">
-        <a href="<?= Url::to(['document/default/view', 'id' => $model->id])?>"><?= $model->title?></a>
-        <em>[<?= $model->category ?>]</em>
+        <a href="<?= Url::to(['/document/default/view', 'id' => $model->id])?>"><?= $model->title?></a>
     </h4>
     <div class="media-content">
         <?php foreach ($model->data->photos as $k => $photo): ?>

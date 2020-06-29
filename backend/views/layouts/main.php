@@ -19,21 +19,9 @@ backend\assets\AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="hold-transition <?= Yii::$app->config->get('backend_skin', 'skin-green') ?> ">
+<body class="hold-transition <?= Yii::$app->config->get('backend_skin', 'skin-green') ?> fixed">
 <?php $this->beginBody() ?>
-<style>
-    .content-wrapper, .right-side, .main-footer {margin-left:0!important;}
-    .btn-refresh {
-        position: fixed;
-        bottom: 100px;
-        right: 2px;
-        padding: 3px 8px;
-        font-size: 24px;
-        border:1px solid #ccc;
-        border-radius:4px;
-        cursor: pointer;
-    }
-</style>
+<?= $this->render('_header') ?>
 <div class="content-wrapper">
     <section class="content-header">
         <?php if (isset($this->blocks['content-header'])) { ?>
@@ -63,7 +51,6 @@ backend\assets\AppAsset::register($this);
         <?= $content ?>
     </section>
 </div>
-<?= Html::a(Html::icon('refresh'), 'javascript:;', ['class' => 'btn btn-success btn-refresh', 'onclick' => 'location.reload()']) ?>
 <?php $this->endBody() ?>
 <?php if (isset($this->blocks['js'])): ?>
     <?= $this->blocks['js'] ?>

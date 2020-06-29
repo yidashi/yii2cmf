@@ -23,8 +23,6 @@ $this->params['breadcrumbs'][] = Html::encode($model->book_name);
     <h1><?= Html::encode($model->book_name) ?></h1>
 </div>
 <div class="view-content"><?= HtmlPurifier::process(Markdown::process($model->book_description)) ?></div>
-<!--分享-->
-<?= \common\widgets\share\Share::widget()?>
 <!-- 评论   -->
 <?= \common\modules\comment\widgets\CommentWidget::widget(['model' => $model]) ?>
 <?php $this->endContent() ?>

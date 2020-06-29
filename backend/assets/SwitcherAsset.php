@@ -3,7 +3,8 @@ namespace backend\assets;
 
 class SwitcherAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/static';
 
     public $js = [
         'plugins/switchery/switchery.min.js'

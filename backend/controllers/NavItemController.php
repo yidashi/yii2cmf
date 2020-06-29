@@ -40,17 +40,14 @@ class NavItemController extends Controller
             ],
         ];
     }
-    /**
-     * Creates a new NavItem model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate($nav_id)
+
+    public function actionCreate($nav_id, $parent_id = 0)
     {
         $model = new NavItem();
+        $model->loadDefaultValues();
         $nav = Nav::findOne($nav_id);
         if (!$nav) {
-            throw new HttpException(400);
+            throw new NotFoundHttpException('导航不存在');
         }
         $model->nav_id =  $nav->id;
         if ($model->load(Yii::$app->request->post())) {

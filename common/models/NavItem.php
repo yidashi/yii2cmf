@@ -9,9 +9,13 @@ use Yii;
  * This is the model class for table "{{%nav_item}}".
  *
  * @property integer $id
+ * @property integer $nav_id
  * @property string $title
  * @property string $url
  * @property integer $status
+ * @property integer $parent_id
+ * @property Nav $nav
+ * @property NavItem $parent
  */
 class NavItem extends \yii\db\ActiveRecord
 {
@@ -32,6 +36,8 @@ class NavItem extends \yii\db\ActiveRecord
             [['title', 'url'], 'required'],
             [['status', 'nav_id', 'order', 'target'], 'integer'],
             [['title', 'url'], 'string', 'max' => 128],
+            ['parent_id', 'default', 'value' => 0],
+            ['status', 'default', 'value' => 1],
         ];
     }
 
@@ -42,11 +48,11 @@ class NavItem extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nav_id' => Yii::t('app', 'NAV ID'),
+            'nav_id' => 'nav_id',
             'title' => '名称',
             'url' => '链接',
             'target' => '是否新窗口打开',
-            'status' => '状态',
+            'status' => '是否开启',
             'order' => '排序',
         ];
     }
@@ -65,7 +71,8 @@ class NavItem extends \yii\db\ActiveRecord
                 'class' => PositionBehavior::className(),
                 'positionAttribute' => 'order',
                 'groupAttributes' => [
-                    'nav_id'
+                    'nav_id',
+                    'parent_id'
                 ],
             ],
         ];
@@ -74,5 +81,10 @@ class NavItem extends \yii\db\ActiveRecord
     public function getNav()
     {
         return $this->hasOne(Nav::className(), ['id' => 'nav_id']);
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'parent_id']);
     }
 }

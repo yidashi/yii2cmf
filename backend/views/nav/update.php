@@ -3,7 +3,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model common\models\Nav */
-$this->title = '修改导航: ' . $model->key;
+$this->title = '修改导航: ' . $model->title;
 $this->params['breadcrumbs'][] = ['label' => '导航', 'url' => ['index']];
 $this->params['breadcrumbs'][] = '修改导航';
 ?>
@@ -15,12 +15,18 @@ $this->params['breadcrumbs'][] = '修改导航';
     </div>
     <div class="col-md-8">
         <p>
-            <?= Html::a('新导航项', ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-success btn-flat']) ?>
+            <?= Html::a('新导航项', ['/nav-item/create', 'nav_id'=>$model->id], ['class' => 'btn btn-primary btn-flat']) ?>
         </p>
         <div class="box box-primary">
             <div class="box-body">
-                <?= GridView::widget([
+                <?= \backend\widgets\grid\TreeGrid::widget([
                     'dataProvider' => $navItemsProvider,
+                    'keyColumnName' => 'id',
+                    'parentColumnName' => 'parent_id',
+                    'parentRootValue' => 0, //first parentId value
+                    'pluginOptions' => [
+//                        'initialState' => 'collapse',
+                    ],
                     'columns' => [
                         'title',
                         'url',
@@ -37,7 +43,12 @@ $this->params['breadcrumbs'][] = '修改导航';
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'controller' => '/nav-item',
-                            'template' => '{update} {delete}'
+                            'template' => ' {create} {update} {delete}',
+                            'buttons' => [
+                                'create' => function ($url, $itemModel, $key) use ($model){
+                                    return Html::a(Html::icon('plus'), ['/nav-item/create', 'parent_id' => $key, 'nav_id' => $model->id], ['class' => 'btn btn-default btn-xs btn-flat']);
+                                }
+                            ]
                         ],
                     ],
                 ]); ?>

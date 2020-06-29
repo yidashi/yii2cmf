@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('创建标签', ['create'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a('创建标签', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
     </p>
 
     <div class="box box-primary">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     'id',
                     'name',
-                    'article',
+                    'document',
 
                     ['class' => 'yii\grid\ActionColumn', 'template' => '{update} {delete}'],
                 ],

@@ -6,7 +6,8 @@ use yii\web\AssetBundle;
 
 class AttachmentIndexAsset extends AssetBundle
 {
-    public $sourcePath = '@backend/static';
+    public $sourcePath = null;
+    public $baseUrl = '@web/static';
     public $css = [
         'attachment-index.css',
         'attachment-info.css'
