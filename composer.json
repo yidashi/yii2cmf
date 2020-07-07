@@ -37,7 +37,8 @@
     "qiniu/php-sdk": "^7.1",
     "overtrue/pinyin": "^4.0",
     "symfony/var-dumper": "^3.4",
-    "2amigos/yii2-date-picker-widget": "^1.0"
+    "2amigos/yii2-date-picker-widget": "^1.0",
+    "phpoffice/phpword": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "*",

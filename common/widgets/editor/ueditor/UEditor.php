@@ -18,7 +18,7 @@ class UEditor extends InputWidget
     //默认配置
     protected $_options;
 
-    public $saveUrl = [];
+    public $saveUrl = ['/upload/ueditor'];
     /**
      * @throws \yii\base\InvalidConfigException
      */
@@ -46,7 +46,7 @@ class UEditor extends InputWidget
         if ($this->hasModel()) {
             return Html::activeTextarea($this->model, $this->attribute, ['id' => $this->id]);
         } else {
-            return Html::textarea($this->id, $this->value, ['id' => $this->id]);
+            return Html::textarea($this->name, $this->value, ['id' => $this->id]);
         }
     }
 

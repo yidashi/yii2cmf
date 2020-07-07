@@ -8,8 +8,8 @@
 
 namespace common\modules\attachment\components;
 
-use common\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 
 /**
  * Class UploadedFile
@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
  */
 class UploadedFile extends \yii\web\UploadedFile
 {
+    public $stream;
 
     public function getHashName($path = null)
     {
@@ -53,5 +54,38 @@ class UploadedFile extends \yii\web\UploadedFile
         }
 
         return $options;
+    }
+
+    public static function getInstanceByStream($stream)
+    {
+        $mimeType = 'image/jpeg';
+        $extensions = FileHelper::getExtensionsByMimeType($mimeType);
+        $extension = current($extensions);
+        return new static([
+            'extension' => $extension,
+            'stream' => $stream,
+            'type' => $mimeType,
+        ]);
+    }
+
+    public function getStream()
+    {
+        return $this->stream ?: file_get_contents($this->tempName);
+    }
+
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
+    }
+
+    public function getExtension()
+    {
+        if ($this->extension === null) {
+            $this->extension = parent::getExtension();
+        }
+        if (empty($this->extension)) {
+            $this->extension = 'jpg';
+        }
+        return $this->extension;
     }
 }
