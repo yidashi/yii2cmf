@@ -84,7 +84,7 @@ class PaperDoc
             } else {
                 $result[] = [
                     'type' => 'text',
-                    'content' => $item
+                    'content' => str_replace('&nbsp;', ' ', $item),
                 ];
             }
         }
