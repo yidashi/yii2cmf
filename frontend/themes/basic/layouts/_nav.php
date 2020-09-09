@@ -33,7 +33,7 @@ echo Nav::widget([
     'encodeLabels' => false
 ]);
 $searchUrl = url(['/search/index']);
-$q = Yii::$app->request->get('q', '全站搜索');
+$q = HTML::encode(Yii::$app->request->get('q', '全站搜索'));
 ?>
 <?php $form = \yii\widgets\ActiveForm::begin(['action' => $searchUrl, 'method' => 'get', 'options' => ['class' => 'navbar-form visible-lg-inline-block']]) ?>
     <div class="input-group">
