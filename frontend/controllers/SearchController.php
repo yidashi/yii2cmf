@@ -35,7 +35,7 @@ class SearchController extends Controller
         ]));
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-            'q' => $q
+            'q' => htmlentities($q, ENT_QUOTES, 'UTF-8')
         ]);
     }
 }
