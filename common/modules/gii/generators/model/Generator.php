@@ -111,7 +111,7 @@ class Generator extends \yii\gii\generators\model\Generator
     }
     public function formView()
     {
-        $class = new ReflectionClass(get_parent_class());
+        $class = new ReflectionClass(get_parent_class($this));
 
         return dirname($class->getFileName()) . '/form.php';
     }
